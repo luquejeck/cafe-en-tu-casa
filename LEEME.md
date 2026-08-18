@@ -137,7 +137,7 @@ Y listo: Vercel publica solo en unos segundos.
 
 ### Cuando sepas la URL definitiva
 
-Reemplazá `https://cafeentucasa.vercel.app` por la URL real (o tu dominio propio) en:
+Reemplazá `https://cafe-en-tu-casa.vercel.app` por la URL real (o tu dominio propio) en:
 
 - `assets/js/productos.js` → campo `url` de `TIENDA`
 - `index.html`, `magnifica-s.html`, `krups-roma.html`, `dedica.html` → el `<link rel="canonical">`

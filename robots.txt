@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cafeentucasa.vercel.app/sitemap.xml
+Sitemap: https://cafe-en-tu-casa.vercel.app/sitemap.xml

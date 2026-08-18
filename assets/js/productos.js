@@ -18,7 +18,7 @@ const TIENDA = {
   email: 'stokedstay@gmail.com',
   descuentoTransferencia: 0.20,       // 20% OFF
   garantiaMeses: 12,
-  url: 'https://cafeentucasa.vercel.app'
+  url: 'https://cafe-en-tu-casa.vercel.app'
 };
 
 const PRODUCTOS = [
