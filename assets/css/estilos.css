@@ -1,0 +1,712 @@
+/* ============================================================
+   CAFÉ EN TU CASA — Sistema de diseño
+   Estética Apple (aire, tipografía grande, foco en el producto)
+   + patrones de Mercado Libre (buy box, precios, cuotas, envío)
+   ============================================================ */
+
+/* ---------- 1. Tokens ---------- */
+:root {
+  --ink:        #1d1d1f;   /* casi negro Apple */
+  --ink-2:      #6e6e73;   /* gris secundario  */
+  --ink-3:      #86868b;   /* gris terciario   */
+  --bg:         #ffffff;
+  --bg-2:       #f5f5f7;   /* gris claro Apple */
+  --bg-3:       #fafafa;
+  --dark:       #101012;
+  --line:       rgba(0, 0, 0, .10);
+  --line-2:     rgba(0, 0, 0, .06);
+
+  --brand:      #5b6e32;   /* oliva de la marca */
+  --brand-dark: #455426;
+  --wa:         #25d366;
+  --wa-dark:    #1eb457;
+  --ml:         #3483fa;   /* azul Mercado Libre */
+  --ml-dark:    #2968c8;
+  --verde:      #00a650;   /* verde "sin interés" de ML */
+  --rojo:       #d92d20;
+
+  --r-sm: 10px;
+  --r:    16px;
+  --r-lg: 22px;
+  --r-xl: 30px;
+
+  --sombra:    0 2px 10px rgba(0, 0, 0, .05);
+  --sombra-md: 0 8px 30px rgba(0, 0, 0, .08);
+  --sombra-lg: 0 18px 60px rgba(0, 0, 0, .12);
+
+  --ancho: 1120px;
+  --ancho-ancho: 1400px;
+  --nav-h: 52px;
+
+  --ease: cubic-bezier(.28, .11, .32, 1);
+}
+
+/* ---------- 2. Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 20px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+               'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'cv11' 1;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+ul, ol { list-style: none; }
+
+:focus-visible {
+  outline: 2px solid var(--ml);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.solo-lectores {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- 3. Tipografía ---------- */
+h1, h2, h3, h4 {
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.022em;
+}
+
+.t-display { font-size: clamp(2.75rem, 7vw, 5rem);  letter-spacing: -.035em; }
+.t-1       { font-size: clamp(2.1rem, 5vw, 3.4rem); letter-spacing: -.03em;  }
+.t-2       { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
+.t-3       { font-size: clamp(1.25rem, 2.2vw, 1.6rem); }
+
+.plomo {
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.45;
+  color: var(--ink-2);
+  font-weight: 400;
+}
+
+.epigrafe {
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.chico  { font-size: .875rem; color: var(--ink-2); }
+.mini   { font-size: .75rem;  color: var(--ink-3); }
+.centro { text-align: center; }
+
+/* ---------- 4. Layout ---------- */
+.envoltorio { width: 100%; max-width: var(--ancho); margin-inline: auto; padding-inline: 24px; }
+.envoltorio-ancho { width: 100%; max-width: var(--ancho-ancho); margin-inline: auto; padding-inline: 24px; }
+
+.seccion       { padding-block: clamp(64px, 9vw, 120px); }
+.seccion-chica { padding-block: clamp(44px, 6vw, 72px); }
+.gris  { background: var(--bg-2); }
+.negro { background: var(--dark); color: #f5f5f7; }
+.negro .plomo, .negro .chico { color: #a1a1a6; }
+
+/* ---------- 5. Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 14px 26px;
+  border-radius: 980px;              /* píldora Apple */
+  font-size: .9375rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  transition: background .25s var(--ease), color .25s var(--ease),
+              transform .18s var(--ease), box-shadow .25s var(--ease),
+              border-color .25s var(--ease);
+}
+.btn:active { transform: scale(.975); }
+.btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.btn-primario  { background: var(--ink); color: #fff; }
+.btn-primario:hover { background: #000; }
+
+.btn-fantasma  { background: transparent; color: var(--ink); border: 1px solid rgba(0, 0, 0, .22); }
+.btn-fantasma:hover { border-color: var(--ink); background: rgba(0, 0, 0, .03); }
+
+.btn-wa { background: var(--wa); color: #fff; }
+.btn-wa:hover { background: var(--wa-dark); box-shadow: 0 6px 20px rgba(37, 211, 102, .32); }
+
+.btn-ml { background: var(--ml); color: #fff; }
+.btn-ml:hover { background: var(--ml-dark); box-shadow: 0 6px 20px rgba(52, 131, 250, .28); }
+
+.btn-bloque { width: 100%; padding-block: 16px; font-size: 1rem; }
+.btn-lg     { padding: 17px 34px; font-size: 1.0625rem; }
+
+/* Link azul estilo Apple */
+.enlace {
+  color: var(--ml);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.enlace:hover { text-decoration: underline; }
+.enlace::after { content: '›'; font-size: 1.25em; line-height: 1; transition: transform .2s var(--ease); }
+.enlace:hover::after { transform: translateX(3px); }
+
+/* ---------- 6. Barra de anuncio ---------- */
+.anuncio {
+  background: var(--dark);
+  color: #f5f5f7;
+  text-align: center;
+  font-size: .8125rem;
+  padding: 10px 20px;
+  letter-spacing: -.01em;
+}
+.anuncio b { color: #fff; font-weight: 600; }
+.anuncio .punto { color: var(--ink-3); margin-inline: 8px; }
+
+/* ---------- 7. Navegación (glass Apple) ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  height: var(--nav-h);
+  background: rgba(255, 255, 255, .72);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--line-2);
+}
+.nav-in {
+  height: 100%;
+  max-width: var(--ancho-ancho);
+  margin-inline: auto;
+  padding-inline: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.marca {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.marca-punto {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--brand); flex-shrink: 0;
+}
+.nav-links { display: flex; align-items: center; gap: 30px; }
+.nav-links a {
+  font-size: .8125rem;
+  color: var(--ink);
+  opacity: .82;
+  transition: opacity .2s var(--ease);
+}
+.nav-links a:hover { opacity: 1; }
+.nav-wa {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .8125rem; font-weight: 500; color: var(--ink);
+}
+.nav-wa svg { width: 15px; height: 15px; fill: var(--wa); }
+.nav-burger { display: none; padding: 6px; }
+.nav-burger span {
+  display: block; width: 18px; height: 1.5px;
+  background: var(--ink); border-radius: 2px;
+  transition: transform .3s var(--ease), opacity .2s var(--ease);
+}
+.nav-burger span + span { margin-top: 5px; }
+.nav-burger[aria-expanded='true'] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-burger[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+.nav-burger[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Contenedores de iconos inyectados por JS (data-ico) */
+[data-ico] { display: inline-flex; align-items: center; flex-shrink: 0; }
+[data-ico] > svg { width: 1em; height: 1em; }
+.pildora [data-ico] > svg { width: 15px; height: 15px; fill: currentColor; }
+
+.menu-movil {
+  position: fixed;
+  top: 88px; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, .96);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  z-index: 890;
+  padding: 20px 28px;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+.menu-movil.abierto { display: flex; }
+.menu-movil a {
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-2);
+}
+
+/* ---------- 8. Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: center;
+  gap: 0;
+  min-height: min(88vh, 780px);
+  background: var(--bg-2);
+}
+.hero-texto { padding: clamp(48px, 6vw, 80px) clamp(28px, 6vw, 90px); }
+.hero-texto h1 { margin: 18px 0 22px; }
+.hero-texto .plomo { max-width: 44ch; margin-bottom: 34px; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 26px; align-items: center; }
+.hero-img { position: relative; height: 100%; min-height: 420px; }
+.hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: 55% center; }
+
+.hero-sellos {
+  display: flex; flex-wrap: wrap; gap: 10px 22px;
+  margin-top: 36px; padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+.sello { display: flex; align-items: center; gap: 7px; font-size: .8125rem; color: var(--ink-2); }
+.sello svg { width: 16px; height: 16px; stroke: var(--brand); fill: none; stroke-width: 1.8; }
+
+/* ---------- 9. Píldora de descuento ---------- */
+.pildora {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(91, 110, 50, .1);
+  color: var(--brand-dark);
+  border-radius: 980px;
+  padding: 6px 14px;
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+.pildora-wa { background: rgba(37, 211, 102, .12); color: #128c43; }
+
+/* ---------- 10. Tiles de producto (grilla Apple) ---------- */
+.tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.tile-ancho { grid-column: 1 / -1; }
+
+.tile {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.tile:hover { transform: translateY(-4px); box-shadow: var(--sombra-lg); }
+.tile-oscuro { background: var(--dark); color: #f5f5f7; }
+
+.tile-cab { padding: clamp(32px, 4vw, 48px) clamp(28px, 4vw, 48px) 0; text-align: center; }
+.tile-etiqueta {
+  font-size: .75rem; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--brand); margin-bottom: 10px;
+}
+.tile-oscuro .tile-etiqueta { color: #a3c26a; }
+.tile-cab h3 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); margin-bottom: 8px; }
+.tile-cab p  { font-size: 1rem; color: var(--ink-2); max-width: 34ch; margin-inline: auto; }
+.tile-oscuro .tile-cab p { color: #a1a1a6; }
+
+.tile-precio { margin-top: 16px; font-size: .9375rem; color: var(--ink-2); }
+.tile-precio b { color: var(--ink); font-weight: 600; }
+.tile-oscuro .tile-precio { color: #a1a1a6; }
+.tile-oscuro .tile-precio b { color: #fff; }
+.tile-precio .cuota { color: var(--verde); font-weight: 600; }
+
+.tile-acciones { display: flex; justify-content: center; gap: 24px; margin-top: 18px; flex-wrap: wrap; }
+.tile-oscuro .enlace { color: #4aa3ff; }
+
+.tile-img {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 26px clamp(28px, 4vw, 48px) 0;
+  min-height: 240px;
+}
+.tile-img img {
+  max-height: 340px;
+  width: auto;
+  object-fit: contain;
+  transition: transform .6s var(--ease);
+}
+.tile:hover .tile-img img { transform: scale(1.035); }
+.tile-ancho .tile-img { min-height: 300px; }
+.tile-ancho .tile-img img { max-height: 400px; }
+
+.tile-cinta {
+  position: absolute; top: 20px; left: 20px;
+  background: var(--rojo); color: #fff;
+  font-size: .6875rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 5px 11px; border-radius: 6px;
+}
+
+/* ---------- 11. Selector de pago (el corazón) ---------- */
+.pagos { display: grid; gap: 12px; }
+.pagos-2 { grid-template-columns: 1fr 1fr; }
+
+/* Dentro del buy box (columna angosta) las opciones van apiladas, como en ML */
+.compra-caja .pagos-2 { grid-template-columns: 1fr; gap: 18px; }
+
+.pago {
+  position: relative;
+  min-width: 0;
+  color: var(--ink);   /* la tarjeta es blanca aunque esté dentro de una sección negra */
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 22px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .3s var(--ease), box-shadow .3s var(--ease), transform .3s var(--ease);
+}
+.pago:hover { border-color: rgba(0, 0, 0, .25); }
+
+.pago-destacado {
+  border-color: var(--wa);
+  box-shadow: 0 0 0 4px rgba(37, 211, 102, .1);
+}
+.pago-destacado:hover { border-color: var(--wa-dark); }
+
+.pago-tag {
+  position: absolute; top: -11px; left: 20px;
+  background: var(--wa); color: #fff;
+  font-size: .6875rem; font-weight: 700; letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 4px 11px; border-radius: 980px;
+}
+.pago-tag-ml { background: var(--ml); }
+
+.pago-titulo {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .8125rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ink-2); margin-bottom: 12px;
+}
+.pago-titulo svg { width: 16px; height: 16px; }
+
+.pago-monto {
+  font-size: clamp(1.75rem, 3.4vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+}
+.pago-tachado {
+  font-size: .9375rem; color: var(--ink-3);
+  text-decoration: line-through; margin-bottom: 2px;
+}
+.pago-sub { font-size: .875rem; color: var(--ink-2); margin-top: 6px; }
+.pago-sub .verde { color: var(--verde); font-weight: 600; }
+.pago-ahorro {
+  display: inline-block; margin-top: 10px;
+  background: rgba(0, 166, 80, .1); color: #04794b;
+  font-size: .8125rem; font-weight: 600;
+  padding: 4px 10px; border-radius: 8px;
+}
+.pago-detalle { margin-top: 12px; font-size: .8125rem; color: var(--ink-2); line-height: 1.5; }
+.pago .btn { margin-top: auto; }
+.pago-cta { margin-top: 18px; }
+
+/* ---------- 12. Buy box / ficha de producto (estilo ML) ---------- */
+.miga {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  font-size: .8125rem; color: var(--ink-3);
+  padding-block: 18px;
+}
+.miga a:hover { color: var(--ink); text-decoration: underline; }
+.miga span { opacity: .5; }
+
+.pdp {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+.galeria { position: sticky; top: calc(var(--nav-h) + 20px); }
+.galeria-marco {
+  background: #fff;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-xl);
+  aspect-ratio: 1 / 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(28px, 5vw, 64px);
+  overflow: hidden;
+}
+.galeria-marco img {
+  max-height: 100%; width: auto; object-fit: contain;
+  transition: transform .5s var(--ease);
+}
+.galeria-marco:hover img { transform: scale(1.04); }
+.galeria-miniaturas { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+.galeria-miniaturas button {
+  width: 66px; height: 66px;
+  border-radius: var(--r-sm);
+  background: #fff;
+  border: 1.5px solid var(--line-2);
+  padding: 8px;
+  transition: border-color .2s var(--ease);
+}
+.galeria-miniaturas button[aria-selected='true'] { border-color: var(--ink); }
+.galeria-miniaturas img { width: 100%; height: 100%; object-fit: contain; }
+
+.compra { position: sticky; top: calc(var(--nav-h) + 20px); }
+.compra-caja {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 26px;
+  background: #fff;
+  box-shadow: var(--sombra);
+}
+.compra-tipo { font-size: .8125rem; color: var(--ink-3); margin-bottom: 6px; }
+.compra-caja h1 { font-size: 1.75rem; letter-spacing: -.03em; margin-bottom: 6px; }
+.compra-tagline { font-size: .9375rem; color: var(--ink-2); margin-bottom: 18px; }
+
+.estado-stock {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .8125rem; font-weight: 600; color: var(--verde);
+  margin-bottom: 16px;
+}
+.estado-stock::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--verde);
+}
+.estado-stock.agotado { color: var(--rojo); }
+.estado-stock.agotado::before { background: var(--rojo); }
+
+.beneficios-lista { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line-2); display: grid; gap: 11px; }
+.beneficio { display: flex; gap: 10px; align-items: flex-start; font-size: .875rem; }
+.beneficio svg { width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px; stroke: var(--verde); fill: none; stroke-width: 1.9; }
+.beneficio b { font-weight: 600; }
+.beneficio span { color: var(--ink-2); }
+
+.destacados { display: grid; gap: 10px; margin-top: 22px; }
+.destacado { display: flex; gap: 10px; font-size: .9375rem; color: var(--ink-2); }
+.destacado::before { content: '✓'; color: var(--brand); font-weight: 700; flex-shrink: 0; }
+
+/* Tabla de especificaciones estilo ML */
+.tabla-specs { width: 100%; border-collapse: collapse; font-size: .9375rem; }
+.tabla-specs tr:nth-child(odd) { background: var(--bg-2); }
+.tabla-specs th, .tabla-specs td { padding: 13px 18px; text-align: left; vertical-align: top; }
+.tabla-specs th { font-weight: 500; color: var(--ink-2); width: 42%; }
+.tabla-specs td { font-weight: 500; }
+.tabla-specs tr:first-child th { border-top-left-radius: var(--r-sm); }
+.tabla-specs tr:first-child td { border-top-right-radius: var(--r-sm); }
+
+.descripcion p { color: var(--ink-2); margin-bottom: 18px; max-width: 68ch; line-height: 1.6; }
+.descripcion p:last-child { margin-bottom: 0; }
+
+/* Barra móvil de compra */
+.barra-movil {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 880;
+  background: rgba(255, 255, 255, .93);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--line);
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  display: none;
+  align-items: center;
+  gap: 12px;
+}
+.barra-movil-precio { flex-shrink: 0; line-height: 1.2; }
+.barra-movil-precio b { display: block; font-size: 1.125rem; font-weight: 600; letter-spacing: -.02em; }
+.barra-movil-precio small { font-size: .6875rem; color: var(--verde); font-weight: 600; }
+.barra-movil .btn { flex: 1; padding: 12px 16px; font-size: .875rem; }
+
+/* ---------- 13. Comparativa ---------- */
+.comparativa-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+.comparativa {
+  width: 100%; min-width: 660px;
+  border-collapse: separate; border-spacing: 0;
+  font-size: .9375rem;
+}
+.comparativa th, .comparativa td {
+  padding: 16px 18px; text-align: left;
+  border-bottom: 1px solid var(--line-2);
+  vertical-align: middle;
+}
+.comparativa thead th {
+  font-size: 1rem; font-weight: 600;
+  border-bottom: 1px solid var(--line);
+  vertical-align: bottom;
+}
+.comparativa thead th:first-child { color: var(--ink-3); font-size: .8125rem; font-weight: 500; }
+.comparativa tbody th { font-weight: 400; color: var(--ink-2); width: 26%; }
+.comparativa td { font-weight: 500; }
+.comparativa .fila-precio td { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; }
+.comparativa tr:last-child td, .comparativa tr:last-child th { border-bottom: 0; }
+.comparativa-mini { display: block; font-size: .75rem; color: var(--ink-3); font-weight: 400; margin-top: 2px; }
+
+/* ---------- 14. Beneficios en franja ---------- */
+.franja { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.franja-item {
+  background: #fff;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  padding: 30px 26px;
+}
+.gris .franja-item { background: #fff; }
+.franja-item svg { width: 26px; height: 26px; stroke: var(--brand); fill: none; stroke-width: 1.6; margin-bottom: 14px; }
+.franja-item h3 { font-size: 1.0625rem; margin-bottom: 7px; }
+.franja-item p { font-size: .9375rem; color: var(--ink-2); }
+
+/* ---------- 15. Pasos ---------- */
+.pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); counter-reset: paso; }
+.paso { counter-increment: paso; }
+.paso::before {
+  content: counter(paso);
+  display: flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--ink); color: #fff;
+  font-size: .9375rem; font-weight: 600;
+  margin-bottom: 16px;
+}
+.negro .paso::before { background: #fff; color: var(--dark); }
+.paso h3 { font-size: 1.125rem; margin-bottom: 8px; }
+.paso p { font-size: .9375rem; color: var(--ink-2); }
+.negro .paso p { color: #a1a1a6; }
+
+/* ---------- 16. FAQ ---------- */
+.faq { max-width: 780px; margin-inline: auto; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 22px 40px 22px 0;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  letter-spacing: -.015em;
+  position: relative;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: '+';
+  position: absolute; right: 4px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.6rem; font-weight: 300; color: var(--ink-3);
+  transition: transform .3s var(--ease);
+  line-height: 1;
+}
+.faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.faq details p { padding: 0 40px 24px 0; color: var(--ink-2); font-size: .9375rem; line-height: 1.6; }
+.faq details p + p { padding-top: 0; }
+
+/* ---------- 17. CTA final ---------- */
+.cta-final { text-align: center; max-width: 660px; margin-inline: auto; }
+.cta-final h2 { margin-bottom: 16px; }
+.cta-final .plomo { margin-bottom: 32px; }
+.cta-botones { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ---------- 18. Footer ---------- */
+.pie { background: var(--bg-2); font-size: .8125rem; color: var(--ink-2); padding-block: 44px 30px; }
+.pie-cols { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 32px; padding-bottom: 30px; }
+.pie h4 { font-size: .8125rem; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+.pie ul { display: grid; gap: 9px; }
+.pie a:hover { color: var(--ink); text-decoration: underline; }
+.pie-marca { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.pie-legal {
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+  display: flex; flex-wrap: wrap; gap: 10px 24px;
+  justify-content: space-between;
+  font-size: .75rem; color: var(--ink-3);
+}
+
+/* ---------- 19. Botón flotante WhatsApp ---------- */
+.wa-flotante {
+  position: fixed; right: 22px; bottom: 22px;
+  z-index: 870;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: var(--wa);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, .2);
+  transition: transform .25s var(--ease);
+}
+.wa-flotante:hover { transform: scale(1.07); }
+.wa-flotante svg { width: 28px; height: 28px; fill: #fff; }
+
+/* ---------- 20. Animaciones de scroll ---------- */
+.aparece {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+  will-change: opacity, transform;
+}
+.aparece.visible { opacity: 1; transform: none; }
+.aparece[data-retraso='1'] { transition-delay: .1s; }
+.aparece[data-retraso='2'] { transition-delay: .2s; }
+.aparece[data-retraso='3'] { transition-delay: .3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .aparece { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* ---------- 21. Responsive ---------- */
+@media (max-width: 1040px) {
+  .pdp { grid-template-columns: 1fr; }
+  .galeria, .compra { position: static; }
+  .compra-caja { border: 0; box-shadow: none; padding: 0; }
+}
+
+@media (max-width: 900px) {
+  body { font-size: 16px; }
+  .nav-links { display: none; }
+  .nav-burger { display: block; }
+  .marca { white-space: nowrap; font-size: 1rem; }
+  .nav-wa [data-slot='wa-visible'] { display: none; }   /* en móvil queda solo el ícono */
+  .nav-wa [data-ico] > svg { width: 20px; height: 20px; }
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .hero-texto { padding: 44px 24px 40px; order: 2; }
+  .hero-img { order: 1; min-height: 340px; height: 46vh; }
+  .tiles { grid-template-columns: 1fr; }
+  .tile { min-height: 460px; }
+  .franja, .pasos { grid-template-columns: 1fr; }
+  .pie-cols { grid-template-columns: 1fr 1fr; gap: 26px; }
+  .barra-movil { display: flex; }
+  .wa-flotante { display: none; }
+  body.tiene-barra { padding-bottom: 78px; }
+}
+
+@media (max-width: 620px) {
+  .pagos-2 { grid-template-columns: 1fr; gap: 16px; }
+  .envoltorio, .envoltorio-ancho, .nav-in { padding-inline: 18px; }
+  .tile-img img { max-height: 260px; }
+  .pie-cols { grid-template-columns: 1fr; }
+  .hero-ctas { gap: 16px; }
+  .hero-ctas .btn { width: 100%; }
+}
+
+/* ---------- 22. Impresión ---------- */
+@media print {
+  .nav, .anuncio, .barra-movil, .wa-flotante, .menu-movil { display: none !important; }
+  .aparece { opacity: 1; transform: none; }
+}

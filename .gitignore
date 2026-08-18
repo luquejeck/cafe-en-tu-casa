@@ -1,0 +1,14 @@
+# Dependencias y builds
+node_modules/
+.vercel/
+.netlify/
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
