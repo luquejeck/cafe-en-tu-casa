@@ -133,15 +133,51 @@ El sitio se publica desde GitHub: cada vez que subas un cambio, Vercel lo public
    *Build Command* y *Output Directory* — este sitio no se compila, son archivos sueltos.
 5. *Deploy*. En menos de un minuto tenés la URL.
 
-### Cada vez que cambies algo
+### Cada vez que quieras actualizar el sitio
+
+Hay tres formas. Todas terminan igual: Vercel detecta el cambio y republica solo
+en unos segundos. **No hace falta volver a entrar a Vercel nunca más.**
+
+#### A. Desde el navegador — la más fácil, funciona hasta desde el celular
+
+Para cambiar un precio no necesitás ni prender la computadora:
+
+1. Entrá a [github.com/luquejeck/cafe-en-tu-casa](https://github.com/luquejeck/cafe-en-tu-casa)
+2. Abrí la carpeta `assets` → `js` → cliqueá `productos.js`
+3. Apretá el **lápiz** (arriba a la derecha, dice *Edit this file*)
+4. Cambiá el número que necesites
+5. Bajá hasta el final y apretá el botón verde **Commit changes**
+
+En un minuto ya se ve online. Sirve igual para marcar `stock: false` o cambiar un link de ML.
+
+> Si usás esta vía y después vas a editar desde la computadora, primero corré `git pull`
+> en esta carpeta para bajarte lo que cambiaste en la web. `publicar.bat` ya lo hace solo.
+
+#### B. Doble clic en `publicar.bat` — desde la computadora
+
+Editás los archivos con el editor que quieras (Bloc de notas sirve), guardás,
+y hacés **doble clic en `publicar.bat`**.
+
+El script te muestra qué archivos cambiaron, te pide una descripción corta
+(podés apretar Enter y listo) y lo sube. Si algo falla te lo dice en castellano.
+
+Es la vía recomendada cuando cambiás varias cosas a la vez o agregás fotos.
+
+#### C. Comandos, si preferís la terminal
 
 ```bash
-git add -A
-git commit -m "Actualizo precios"
-git push
+git add -A && git commit -m "Actualizo precios" && git push
 ```
 
-Y listo: Vercel publica solo en unos segundos.
+### ¿Cómo sé que se publicó bien?
+
+Entrá a [vercel.com](https://vercel.com) → tu proyecto → pestaña **Deployments**.
+Cada cambio aparece como una línea: **Ready** en verde es que salió bien,
+**Error** en rojo es que algo falló (y el sitio sigue mostrando la versión anterior,
+no se rompe).
+
+> Si hiciste un cambio y no lo ves, antes de asustarte recargá con **Ctrl+Shift+R**:
+> puede ser el caché de tu navegador y no el sitio.
 
 ### Cuando sepas la URL definitiva
 
@@ -194,6 +230,7 @@ assets/css/estilos.css    Todo el diseño (comentado por secciones)
 assets/js/productos.js    ← DATOS: precios, specs, links. Es el que vas a tocar
 assets/js/app.js          Lógica: arma las páginas con esos datos
 
+publicar.bat          Doble clic para publicar los cambios
 vercel.json           Cache y cabeceras de seguridad
 .gitignore            Que no subir al repositorio
 robots.txt            Permisos para Google

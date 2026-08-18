@@ -47,6 +47,11 @@ if errorlevel 1 goto error
 git commit -m "%MENSAJE%"
 if errorlevel 1 goto error
 
+rem Traigo lo que haya cambiado en la nube (por ejemplo si editaste desde
+rem la web de GitHub) antes de subir, asi el push no rebota.
+git pull --rebase
+if errorlevel 1 goto conflicto
+
 git push
 if errorlevel 1 goto error
 
@@ -62,6 +67,22 @@ echo   ================================================
 echo.
 if "%~1"=="" pause
 exit /b 0
+
+:conflicto
+echo.
+echo   ================================================
+echo    CHOCARON DOS CAMBIOS
+echo.
+echo    Editaste el mismo archivo aca y en la web de
+echo    GitHub. Nada se perdio, pero hay que resolverlo
+echo    a mano. Pedile ayuda a Claude y mostrale esto.
+echo.
+echo    Para volver atras y no romper nada:
+echo      git rebase --abort
+echo   ================================================
+echo.
+if "%~1"=="" pause
+exit /b 1
 
 :error
 echo.
