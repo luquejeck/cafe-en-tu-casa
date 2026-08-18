@@ -44,7 +44,7 @@ function pagosHTML(p) {
     <article class="pago">
       <span class="pago-tag pago-tag-ml">Cuotas</span>
       <h3 class="pago-titulo">${ICO.tarjeta} Tarjeta en Mercado Libre</h3>
-      <div class="pago-tachado">${P.tieneOferta(p) ? fmt(p.precioLista) : '&nbsp;'}</div>
+      ${P.tieneOferta(p) ? `<div class="pago-tachado">${fmt(p.precioLista)}</div>` : ''}
       <div class="pago-monto">${fmt(p.precioML)}</div>
       <p class="pago-sub"><span class="verde">${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))}</span></p>
       <ul class="pago-lista">
