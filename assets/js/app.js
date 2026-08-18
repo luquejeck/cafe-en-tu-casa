@@ -30,8 +30,10 @@ function pagosHTML(p) {
       <div class="pago-tachado">${fmt(p.precioML)}</div>
       <div class="pago-monto">${fmt(transf)}</div>
       <div class="pago-ahorro">Ahorrás ${fmt(P.ahorro(p))}</div>
-      <p class="pago-detalle">Coordinás por WhatsApp, te pasamos los datos bancarios
-      y despachamos el mismo día hábil.</p>
+      <ul class="pago-lista">
+        <li>Coordinás por WhatsApp</li>
+        <li>Despachamos el mismo día hábil</li>
+      </ul>
       <a class="btn btn-wa btn-bloque pago-cta" href="${waProducto(p)}"
          target="_blank" rel="noopener"
          data-evento="wa-comprar" data-producto="${p.id}">
@@ -45,8 +47,10 @@ function pagosHTML(p) {
       <div class="pago-tachado">${P.tieneOferta(p) ? fmt(p.precioLista) : '&nbsp;'}</div>
       <div class="pago-monto">${fmt(p.precioML)}</div>
       <p class="pago-sub"><span class="verde">${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))}</span></p>
-      <p class="pago-detalle">Pagás con débito, crédito o dinero en cuenta.
-      Compra Protegida y envío por Mercado Envíos.</p>
+      <ul class="pago-lista">
+        <li>Débito, crédito o dinero en cuenta</li>
+        <li>Con Compra Protegida</li>
+      </ul>
       <a class="btn btn-ml btn-bloque pago-cta" href="${p.linkML}"
          target="_blank" rel="noopener"
          data-evento="ml-comprar" data-producto="${p.id}">

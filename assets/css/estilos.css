@@ -428,6 +428,21 @@ h1, h2, h3, h4 {
   padding: 4px 10px; border-radius: 8px;
 }
 .pago-detalle { margin-top: 12px; font-size: .8125rem; color: var(--ink-2); line-height: 1.5; }
+
+/* Viñetas cortas en lugar de un párrafo: se leen de un vistazo */
+.pago-lista { display: grid; gap: 9px; margin-top: 16px; }
+.pago-lista li {
+  display: flex; gap: 9px; align-items: flex-start;
+  font-size: .875rem; color: var(--ink-2); line-height: 1.4;
+}
+.pago-lista li::before {
+  content: '✓';
+  color: var(--brand);
+  font-weight: 700;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+.pago-destacado .pago-lista li::before { color: var(--wa-dark); }
 .pago .btn { margin-top: auto; }
 .pago-cta { margin-top: 18px; }
 
