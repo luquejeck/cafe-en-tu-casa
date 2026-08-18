@@ -12,3 +12,6 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# Fotos originales sin procesar (no se publican)
+fuentes/

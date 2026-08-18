@@ -37,7 +37,13 @@ const PRODUCTOS = [
     stock: true,
     color: 'Negro',
     linkML: 'https://www.mercadolibre.com.ar/cafetera-delonghi-ecam11112b-magnifica-s-super-auto/up/MLAU3558782080?pdp_filters=item_id:MLA2561979252',
-    imgs: ['assets/img/magnifica-s.webp'],
+    imgs: [
+      'assets/img/magnifica-s-1.webp',   // frente
+      'assets/img/magnifica-s-2.webp',   // sirviendo cafe
+      'assets/img/magnifica-s-3.webp',   // espumador de leche
+      'assets/img/magnifica-s-4.webp',   // panel de control
+      'assets/img/magnifica-s.webp'      // foto oficial De'Longhi (borrala si no te gusta)
+    ],
     highlights: [
       'Muele el grano en el momento, en cada taza',
       'Molinillo cónico de acero con 13 niveles de molienda',
