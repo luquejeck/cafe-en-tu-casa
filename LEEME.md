@@ -86,6 +86,14 @@ Con dos o más fotos aparece sola la galería con miniaturas clickeables.
 
 **Recomendación:** fotos cuadradas, mínimo 1000×1000, fondo blanco.
 
+### Las imágenes de preview (cuando compartís el link)
+
+`assets/img/og.jpg` y `og-*.jpg` son las que se ven al pegar el link en WhatsApp,
+Instagram o Facebook. Están armadas a 1200×630, que es la medida que esas apps esperan.
+
+A propósito **no llevan precios**: si los tuvieran, cada cambio de precio te obligaría a
+rehacer las 4 imágenes o quedarían mostrando un valor viejo en cada link que compartas.
+
 ---
 
 ## 3. Agregar un producto nuevo
