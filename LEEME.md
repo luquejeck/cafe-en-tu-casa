@@ -1,7 +1,7 @@
 # Café en tu Casa
 
 Sitio de venta de cafeteras. HTML + CSS + JavaScript puro, sin build ni dependencias:
-se arrastra la carpeta a Netlify y funciona.
+se publica en Vercel desde GitHub, sin paso de compilación.
 
 ---
 
@@ -103,18 +103,60 @@ El home, la tabla comparativa y la sección "Otros modelos" se actualizan solas.
 
 ---
 
-## 4. Publicar en Netlify
+## 4. Publicar en Vercel
 
-**Opción rápida:** entrá a [app.netlify.com/drop](https://app.netlify.com/drop) y arrastrá
-la carpeta entera. Listo.
+El sitio se publica desde GitHub: cada vez que subas un cambio, Vercel lo publica solo.
 
-**Opción para el sitio actual:** en tu proyecto de Netlify → *Deploys* → arrastrá la carpeta
-sobre la zona de "Drag and drop your site output folder here". Reemplaza lo que había.
+### Una sola vez: conectar el proyecto
 
-Después de publicar, cambiá `https://cafeentucasa.netlify.app` por tu dominio real en:
-- `assets/js/productos.js` (campo `url` de `TIENDA`)
-- los `<link rel="canonical">` y las etiquetas `og:image` de los 4 HTML
+1. Creá un repositorio vacío en [github.com/new](https://github.com/new).
+   Ponele `cafe-en-tu-casa`, dejalo **privado** si querés, y **no** marques ninguna opción de
+   "Add a README" ni "Add .gitignore" (el repo local ya los tiene).
+2. Copiá la URL que te da GitHub y desde esta carpeta corré:
+
+   ```bash
+   git remote add origin https://github.com/TU-USUARIO/cafe-en-tu-casa.git
+   git push -u origin main
+   ```
+
+3. Entrá a [vercel.com/new](https://vercel.com/new), elegí *Import Git Repository* y
+   seleccioná el repo.
+4. Vercel te va a preguntar el framework: elegí **Other**. Dejá vacíos los campos de
+   *Build Command* y *Output Directory* — este sitio no se compila, son archivos sueltos.
+5. *Deploy*. En menos de un minuto tenés la URL.
+
+### Cada vez que cambies algo
+
+```bash
+git add -A
+git commit -m "Actualizo precios"
+git push
+```
+
+Y listo: Vercel publica solo en unos segundos.
+
+### Cuando sepas la URL definitiva
+
+Reemplazá `https://cafeentucasa.vercel.app` por la URL real (o tu dominio propio) en:
+
+- `assets/js/productos.js` → campo `url` de `TIENDA`
+- `index.html`, `magnifica-s.html`, `krups-roma.html`, `dedica.html` → el `<link rel="canonical">`
+  y la etiqueta `og:image` de cada uno
 - `robots.txt` y `sitemap.xml`
+
+Son 14 lugares en total. Si me pasás la URL lo hago de una.
+
+> **Importante:** hasta que eso esté corregido, cuando compartas el link por WhatsApp la vista
+> previa no va a mostrar la imagen, porque apunta a un dominio que todavía no existe.
+
+### Dar de baja el sitio de Netlify
+
+Como Vercel lo reemplaza, conviene que el viejo no quede online con el mismo contenido:
+Google lo lee como contenido duplicado y puede perjudicar a los dos.
+
+En [app.netlify.com](https://app.netlify.com) → tu sitio → *Site configuration* → abajo de todo
+*Delete this site*. Si preferís no borrarlo, al menos entrá a *Build & deploy* → *Post processing*
+y poné el sitio en modo privado con contraseña.
 
 ---
 
@@ -144,7 +186,8 @@ assets/css/estilos.css    Todo el diseño (comentado por secciones)
 assets/js/productos.js    ← DATOS: precios, specs, links. Es el que vas a tocar
 assets/js/app.js          Lógica: arma las páginas con esos datos
 
-netlify.toml          Cache y cabeceras de seguridad
+vercel.json           Cache y cabeceras de seguridad
+.gitignore            Que no subir al repositorio
 robots.txt            Permisos para Google
 sitemap.xml           Mapa del sitio para Google
 ```
