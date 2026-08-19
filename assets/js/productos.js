@@ -18,6 +18,12 @@ const TIENDA = {
   email: 'stokedstay@gmail.com',
   descuentoTransferencia: 0.20,       // 20% OFF
   garantiaMeses: 12,
+
+  // Para la calculadora de amortizacion. Actualizalos cuando cambien.
+  precioCafeAfuera: 3500,   // lo que sale un cafe en un bar, en pesos
+  precioKiloCafe: 18000,    // lo que te sale 1 kg de cafe en grano
+  cafesPorKilo: 130,        // tazas que salen de 1 kg (aprox 7,5 g por taza)
+
   url: 'https://cafe-en-tu-casa.vercel.app'
 };
 
@@ -36,6 +42,7 @@ const PRODUCTOS = [
     cuotas: 9,
     stock: true,
     color: 'Negro',
+    medidas: { ancho: 24, profundidad: 44, alto: 36 },
     linkML: 'https://www.mercadolibre.com.ar/cafetera-delonghi-ecam11112b-magnifica-s-super-auto/up/MLAU3558782080?pdp_filters=item_id:MLA2561979252',
     imgs: [
       'assets/img/magnifica-s-1.webp',   // frente
@@ -55,6 +62,7 @@ const PRODUCTOS = [
       ['Presión', '15 bares'],
       ['Potencia', '1450 W'],
       ['Molinillo', 'Cónico de acero, 13 niveles de molienda'],
+      ['Medidas (an x prof x alto)', '24 x 44 x 36 cm'],
       ['Depósito de agua', '1,8 L extraíble'],
       ['Contenedor de granos', '250 g'],
       ['Café admitido', 'Grano entero y pre-molido'],
@@ -80,6 +88,7 @@ const PRODUCTOS = [
     cuotas: 6,
     stock: true,
     color: 'Negro',
+    medidas: { ancho: 24.5, profundidad: 36.5, alto: 33 },
     linkML: 'https://www.mercadolibre.com.ar/cafetera-krups-roma-ea8105-full-auto-negra-220v/up/MLAU3507170292',
     imgs: ['assets/img/krups-roma.webp'],
     highlights: [
@@ -93,6 +102,7 @@ const PRODUCTOS = [
       ['Presión', '15 bares'],
       ['Potencia', '1450 W'],
       ['Molinillo', 'Cónico, 3 niveles de molienda'],
+      ['Medidas (an x prof x alto)', '24,5 x 36,5 x 33 cm'],
       ['Depósito de agua', '1,7 L'],
       ['Café admitido', 'Grano entero'],
       ['Sistema de leche', 'Boquilla de vapor lateral orientable'],
@@ -117,6 +127,7 @@ const PRODUCTOS = [
     cuotas: 9,
     stock: true,
     color: 'Acero inoxidable',
+    medidas: { ancho: 14.9, profundidad: 33, alto: 30.4 },
     linkML: 'https://www.mercadolibre.com.ar/cafetera-express-delonghi-dedica-ec-685-acero-15-bares-color-metal/p/MLA69097041',
     imgs: ['assets/img/dedica.webp'],
     highlights: [
@@ -128,7 +139,7 @@ const PRODUCTOS = [
     specs: [
       ['Tipo de cafetera', 'Espresso manual con portafiltro'],
       ['Presión', '15 bares'],
-      ['Ancho', '15 cm'],
+      ['Medidas (an x prof x alto)', '14,9 x 33 x 30,4 cm'],
       ['Material', 'Acero inoxidable'],
       ['Depósito de agua', '1,1 L extraíble'],
       ['Café admitido', 'Molido y cápsulas E.S.E.'],

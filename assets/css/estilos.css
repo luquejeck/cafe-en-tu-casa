@@ -723,6 +723,194 @@ h1, h2, h3, h4 {
   .hero-ctas .btn { width: 100%; }
 }
 
+/* ============================================================
+   23. Recomendador, calculadora y medidas (elegir.html)
+   ============================================================ */
+.quiz-envoltorio { max-width: 760px; }
+
+/* --- Progreso --- */
+.quiz-progreso { display: flex; gap: 6px; margin-bottom: 30px; }
+.quiz-progreso span {
+  flex: 1; height: 3px; border-radius: 3px;
+  background: rgba(0, 0, 0, .1);
+  transition: background .4s var(--ease);
+}
+.quiz-progreso .hecho  { background: var(--brand); }
+.quiz-progreso .activo { background: var(--ink); }
+
+.quiz-paso   { font-size: .8125rem; color: var(--ink-3); margin-bottom: 10px; }
+.quiz-titulo { margin-bottom: 8px; }
+.quiz-ayuda  { font-size: .9375rem; color: var(--ink-2); margin-bottom: 28px; }
+
+/* --- Opciones --- */
+.quiz-opciones { display: grid; gap: 10px; }
+.quiz-opcion {
+  display: flex; flex-direction: column; gap: 3px;
+  text-align: left;
+  padding: 18px 22px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--r);
+  background: #fff;
+  transition: border-color .2s var(--ease), background .2s var(--ease), transform .15s var(--ease);
+}
+.quiz-opcion:hover  { border-color: var(--ink); background: var(--bg-3); }
+.quiz-opcion:active { transform: scale(.99); }
+.quiz-opcion.elegida { border-color: var(--brand); background: rgba(91, 110, 50, .05); }
+.quiz-opcion-txt { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.01em; }
+.quiz-opcion-pie { font-size: .875rem; color: var(--ink-2); }
+
+.quiz-atras, .quiz-rehacer {
+  margin-top: 24px; font-size: .9375rem; color: var(--ink-2);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.quiz-atras:hover, .quiz-rehacer:hover { color: var(--ink); }
+.quiz-rehacer { display: block; margin-inline: auto; margin-top: 34px; }
+
+/* --- Resultado --- */
+.quiz-ganadora-titulo { margin: 12px 0 8px; }
+.quiz-ganadora-bajada { margin-bottom: 32px; }
+
+.ganadora {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  padding: 28px;
+  background: #fff;
+  box-shadow: var(--sombra-md);
+}
+.ganadora-img { display: flex; align-items: center; justify-content: center; }
+.ganadora-img img { max-height: 300px; width: auto; object-fit: contain; }
+.ganadora-porque { font-size: .9375rem; color: var(--ink-2); margin-bottom: 4px; }
+
+.ganadora-precio { margin: 22px 0 18px; display: grid; gap: 2px; }
+.ganadora-transf { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
+.ganadora-etiqueta { font-size: .8125rem; font-weight: 600; color: #04794b; }
+.ganadora-cuotas   { font-size: .875rem; color: var(--ink-2); }
+.ganadora-botones  { display: grid; gap: 10px; }
+
+/* --- Segunda opción --- */
+.segunda { margin-top: 34px; }
+.segunda-titulo {
+  font-size: .75rem; font-weight: 600; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 12px;
+}
+.segunda-caja {
+  display: flex; align-items: center; gap: 18px;
+  border: 1px solid var(--line); border-radius: var(--r-lg);
+  padding: 16px 20px; background: #fff;
+  transition: border-color .2s var(--ease), transform .2s var(--ease);
+}
+.segunda-caja:hover { border-color: var(--ink); transform: translateY(-2px); }
+.segunda-caja img { width: 74px; height: 74px; object-fit: contain; flex-shrink: 0; }
+.segunda-datos { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.segunda-tagline { font-size: .875rem; color: var(--ink-2); }
+.segunda-precio  { font-size: .875rem; font-weight: 600; color: #04794b; }
+.segunda-flecha  { font-size: 1.6rem; color: var(--ink-3); flex-shrink: 0; }
+
+.quiz-nota {
+  margin-top: 26px; padding: 16px 20px;
+  background: var(--bg-2); border-radius: var(--r);
+  font-size: .875rem; color: var(--ink-2); line-height: 1.5;
+}
+
+/* --- Calculadora --- */
+.calculadora h2 { margin-bottom: 6px; }
+.calc-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0 22px; }
+.calc-campo { display: grid; gap: 7px; }
+.calc-campo > span { font-size: .875rem; color: var(--ink-2); }
+.calc-campo input {
+  font: inherit; font-weight: 600; font-size: 1.125rem;
+  padding: 13px 16px;
+  border: 1.5px solid var(--line); border-radius: var(--r-sm);
+  background: #fff; color: var(--ink);
+  width: 100%;
+}
+.calc-campo input:focus { outline: none; border-color: var(--ink); }
+
+.calc-resultado {
+  display: grid; gap: 18px;
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: 24px;
+}
+.calc-numero { text-align: center; }
+.calc-numero-grande {
+  display: block;
+  font-size: clamp(2rem, 6vw, 3rem); font-weight: 600;
+  letter-spacing: -.035em; line-height: 1.05; color: var(--brand-dark);
+}
+.calc-numero-pie { display: block; font-size: .9375rem; color: var(--ink-2); margin-top: 6px; }
+.calc-detalle {
+  display: grid; gap: 8px;
+  border-top: 1px solid var(--line-2); padding-top: 18px;
+  font-size: .9375rem; color: var(--ink-2);
+}
+.calc-detalle b { color: var(--ink); font-weight: 600; }
+.calc-ahorro b { color: #04794b; }
+.calc-vacio { font-size: .9375rem; color: var(--ink-3); text-align: center; }
+.calc-letra { margin-top: 16px; line-height: 1.5; }
+
+/* --- Medidas --- */
+.medidas { display: grid; gap: 22px; }
+.medida-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+.medida-cab span { font-size: .875rem; font-weight: 600; color: var(--brand-dark); white-space: nowrap; }
+.medida-barra { height: 30px; background: var(--bg-2); border-radius: 6px; overflow: hidden; }
+.medida-relleno {
+  height: 100%; background: var(--ink); border-radius: 6px;
+  transition: width .7s var(--ease);
+}
+.medida p { margin-top: 7px; }
+.medida-ref {
+  font-size: .875rem; color: var(--ink-2);
+  border-top: 1px solid var(--line-2); padding-top: 18px; line-height: 1.5;
+}
+
+/* --- Banda que lleva al recomendador (home) --- */
+.banda-quiz {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 26px; flex-wrap: wrap;
+  background: var(--bg-2);
+  border-radius: var(--r-xl);
+  padding: clamp(26px, 3.5vw, 40px);
+  transition: background .3s var(--ease), transform .3s var(--ease);
+}
+.banda-quiz:hover { background: #eeeef1; transform: translateY(-2px); }
+.banda-quiz-texto { display: grid; gap: 8px; max-width: 56ch; }
+.banda-quiz-titulo { font-weight: 600; letter-spacing: -.02em; line-height: 1.1; }
+.banda-quiz-btn { flex-shrink: 0; }
+
+/* --- Confianza (reputación y opiniones) --- */
+.confianza { display: grid; grid-template-columns: 320px 1fr; gap: clamp(20px, 3vw, 40px); align-items: start; }
+.reputacion {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: 26px;
+}
+.reputacion-barra { display: flex; gap: 4px; margin-bottom: 14px; }
+.reputacion-barra span { flex: 1; height: 7px; border-radius: 4px; background: rgba(0, 0, 0, .1); }
+.reputacion-barra span.on { background: var(--verde); }
+.reputacion h3 { font-size: 1.0625rem; margin-bottom: 6px; }
+.reputacion p { font-size: .875rem; color: var(--ink-2); }
+.reputacion-datos { display: grid; gap: 10px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line-2); }
+.reputacion-dato { display: flex; justify-content: space-between; font-size: .875rem; gap: 12px; }
+.reputacion-dato b { font-weight: 600; }
+
+.opiniones { display: grid; gap: 14px; }
+.opinion {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: 22px 24px;
+}
+.opinion-estrellas { color: #f5a623; font-size: .9375rem; letter-spacing: 2px; margin-bottom: 8px; }
+.opinion p { font-size: 1.0625rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.opinion-pie { font-size: .8125rem; color: var(--ink-3); }
+
+@media (max-width: 760px) {
+  .ganadora { grid-template-columns: 1fr; padding: 22px; }
+  .ganadora-img img { max-height: 220px; }
+  .calc-campos { grid-template-columns: 1fr; }
+  .confianza { grid-template-columns: 1fr; }
+  .segunda-caja img { width: 58px; height: 58px; }
+}
+
 /* ---------- 22. Impresión ---------- */
 @media print {
   .nav, .anuncio, .barra-movil, .wa-flotante, .menu-movil { display: none !important; }
