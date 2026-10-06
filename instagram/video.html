@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Video — Café en tu Casa</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Videos verticales 1080 x 1920. Mismos colores y tipografía que el sitio,
+   con más movimiento: fondos que derivan, palabras que entran de a una,
+   contadores, diales, vasos que se llenan y recorridos.
+   Todo lo que se lee queda entre los 300 y los 1500 px de alto: arriba y
+   abajo Instagram pone sus botones. */
+:root { --brand: #5b6e32; --brand-dark: #455426; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #101012; }
+body { font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+#video { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+
+.esc { position: absolute; inset: 0; overflow: hidden; background: var(--fondo); color: var(--ink);
+  --fondo: #fff; --ink: #1d1d1f; --ink-2: #6e6e73; --acento: #5b6e32; --acento-suave: rgba(91, 110, 50, .12);
+  --tarjeta: #f5f5f7; --linea: rgba(0, 0, 0, .12); --orbe: rgba(91, 110, 50, .16); }
+.esc.gris   { --fondo: #f5f5f7; --tarjeta: #fff; }
+.esc.oscuro { --fondo: #101012; --ink: #f5f5f7; --ink-2: #a1a1a6; --acento: #a3c26a; --acento-suave: rgba(163, 194, 106, .18);
+  --tarjeta: #1c1c1f; --linea: rgba(255, 255, 255, .18); --orbe: rgba(163, 194, 106, .2); }
+.esc.oliva  { --fondo: #455426; --ink: #fff; --ink-2: #dbe6c3; --acento: #dcecb8; --acento-suave: rgba(255, 255, 255, .16);
+  --tarjeta: rgba(255, 255, 255, .1); --linea: rgba(255, 255, 255, .28); --orbe: rgba(255, 255, 255, .12); }
+
+/* fondo en movimiento */
+.orbe { position: absolute; border-radius: 50%; background: var(--orbe); filter: blur(70px); }
+.orbe.o1 { width: 760px; height: 760px; left: -260px; top: 120px; }
+.orbe.o2 { width: 620px; height: 620px; right: -220px; bottom: 260px; }
+.aro { position: absolute; border-radius: 50%; border: 3px solid var(--linea); width: 900px; height: 900px; right: -420px; top: -200px; }
+
+.cont { position: absolute; inset: 0; padding: 300px 84px 420px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.marca { position: absolute; top: 250px; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 16px; font-size: 36px; font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
+.marca i { width: 15px; height: 15px; border-radius: 50%; background: var(--acento); }
+
+.ep { font-size: 31px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--acento); margin-bottom: 26px; }
+h1 { font-size: 112px; font-weight: 600; line-height: 1.04; letter-spacing: -.035em; }
+h1.m { font-size: 96px; } h1.s { font-size: 84px; }
+h1 .w { display: inline-block; white-space: pre; }
+h1 em { font-style: normal; color: var(--acento); }
+.sub { margin-top: 30px; font-size: 46px; line-height: 1.3; color: var(--ink-2); max-width: 19ch; text-wrap: balance; }
+.sub.ancha { max-width: 24ch; }
+.boton { margin-top: 56px; display: inline-block; background: var(--ink); color: var(--fondo); border-radius: 980px; padding: 30px 64px; font-size: 42px; font-weight: 600; }
+.chips { margin-top: 48px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+.chip { background: var(--acento-suave); color: var(--ink); border-radius: 980px; padding: 24px 42px; font-size: 44px; font-weight: 600; letter-spacing: -.01em; }
+.num { font-size: 380px; font-weight: 600; line-height: .92; letter-spacing: -.06em; font-variant-numeric: tabular-nums; }
+.num small { font-size: 110px; letter-spacing: -.03em; margin-left: 12px; }
+.paso-n { font-size: 34px; font-weight: 700; color: var(--acento); background: var(--acento-suave); border-radius: 980px; padding: 12px 30px; margin-bottom: 30px; font-variant-numeric: tabular-nums; }
+
+/* ---- lo que cambia de un video a otro: fondo, alineación y cómo entra cada escena ---- */
+.esc .orbe, .esc .aro { display: none; }
+.f-orbes .orbe, .f-orbes .aro { display: block; }
+.puntos { position: absolute; inset: -220px; background-image: radial-gradient(var(--linea) 5px, transparent 6px); background-size: 74px 74px; }
+.anillo { position: absolute; left: 50%; top: 46%; border-radius: 50%; border: 4px solid var(--linea); margin: -450px 0 0 -450px; width: 900px; height: 900px; }
+.banda { position: absolute; left: -30%; width: 160%; background: var(--acento-suave); transform: rotate(-12deg); }
+.banda.b1 { top: 200px; height: 250px; } .banda.b2 { bottom: 330px; height: 130px; }
+.gigante { position: absolute; right: 10px; top: 520px; font-size: 1000px; font-weight: 700; line-height: 1; letter-spacing: -.06em; color: transparent; -webkit-text-stroke: 5px var(--linea); font-variant-numeric: tabular-nums; }
+.cinta { position: absolute; left: 0; bottom: 440px; white-space: nowrap; font-size: 150px; font-weight: 700; letter-spacing: -.03em; color: transparent; -webkit-text-stroke: 3px var(--linea); }
+.marca { z-index: 3; }
+.al-izq .cont { align-items: flex-start; text-align: left; }
+.al-izq .marca { justify-content: flex-start; left: 84px; }
+.al-izq .sub { max-width: 21ch; }
+.al-izq .chips { justify-content: flex-start; }
+.al-izq .paso-n { align-self: flex-start; }
+
+/* pantalla partida en dos */
+.mitades { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.mitad { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 84px; text-align: left; }
+.mitad.a { background: #101012; color: #f5f5f7; padding-top: 300px; }
+.mitad.b { background: #f5f5f7; color: #1d1d1f; padding-bottom: 380px; }
+.mitad .ep { font-size: 30px; margin-bottom: 16px; color: #5b6e32; }
+.mitad.a .ep { color: #a3c26a; }
+.mitad b { font-size: 118px; font-weight: 600; letter-spacing: -.035em; line-height: 1.02; }
+.mitad span { margin-top: 20px; font-size: 44px; line-height: 1.3; opacity: .72; max-width: 20ch; }
+
+/* foto de producto */
+.foto { width: 100%; flex: 1; min-height: 0; max-height: 820px; margin-top: 44px; background: #fff; border-radius: 56px; padding: 40px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; box-shadow: 0 30px 80px rgba(0, 0, 0, .12); }
+.foto img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.foto.alta { max-height: 980px; }
+.flota { position: absolute; background: #1d1d1f; color: #fff; border-radius: 980px; padding: 18px 34px; font-size: 34px; font-weight: 600; box-shadow: 0 12px 30px rgba(0, 0, 0, .25); white-space: nowrap; }
+
+/* pasos con línea que se dibuja */
+.pasos { width: 100%; margin-top: 60px; position: relative; text-align: left; padding-left: 130px; display: flex; flex-direction: column; gap: 76px; }
+.pasos .linea { position: absolute; left: 43px; top: 30px; bottom: 60px; width: 6px; border-radius: 3px; background: var(--acento); transform-origin: top; }
+.pasos .p { position: relative; }
+.pasos .p > i { position: absolute; left: -130px; top: -6px; width: 92px; height: 92px; border-radius: 50%; background: var(--acento); color: var(--fondo); font-style: normal; font-weight: 700; font-size: 42px; display: flex; align-items: center; justify-content: center; }
+.pasos b { display: block; font-size: 62px; font-weight: 600; letter-spacing: -.025em; line-height: 1.12; }
+.pasos span { display: block; margin-top: 12px; font-size: 42px; line-height: 1.3; color: var(--ink-2); }
+.pasos .viajero { position: absolute; left: 26px; top: 14px; width: 40px; height: 40px; border-radius: 50%; background: var(--fondo); border: 8px solid var(--ink); z-index: 2; }
+
+/* dos tarjetas */
+.duo { width: 100%; margin-top: 56px; display: flex; flex-direction: column; gap: 26px; }
+.tarjeta { background: var(--tarjeta); border-radius: 48px; padding: 46px 50px; text-align: left; }
+.tarjeta.fuerte { background: var(--ink); color: var(--fondo); }
+.tarjeta .ep { font-size: 26px; margin-bottom: 12px; }
+.tarjeta.fuerte .ep { color: #a3c26a; }
+.tarjeta b { display: block; font-size: 78px; font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
+.tarjeta span { display: block; margin-top: 16px; font-size: 42px; line-height: 1.3; opacity: .72; }
+
+/* lista con tildes que se dibujan */
+.checks { width: 100%; margin-top: 56px; display: flex; flex-direction: column; gap: 22px; text-align: left; }
+.check { display: flex; align-items: center; gap: 30px; background: var(--tarjeta); border-radius: 36px; padding: 36px 40px; font-size: 52px; font-weight: 600; letter-spacing: -.02em; line-height: 1.15; }
+.check svg { width: 70px; height: 70px; flex: none; }
+.check circle { fill: var(--acento); } .check path { fill: none; stroke: var(--fondo); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; }
+
+/* dial de molienda */
+.dial { width: 620px; height: 620px; margin: 30px 0 10px; position: relative; }
+.dial svg { width: 100%; height: 100%; overflow: visible; }
+.dial .tick { stroke: var(--linea); stroke-width: 8; stroke-linecap: round; }
+.dial .tick.on { stroke: var(--acento); }
+.dial .perilla { fill: var(--tarjeta); stroke: var(--linea); stroke-width: 4; }
+.dial .aguja { transform-origin: 310px 310px; }
+.dial .aguja line { stroke: var(--ink); stroke-width: 14; stroke-linecap: round; }
+.dial .centro { fill: var(--ink); }
+.dial-extremos { width: 620px; display: flex; justify-content: space-between; font-size: 32px; font-weight: 600; color: var(--ink-2); letter-spacing: .06em; text-transform: uppercase; }
+
+/* vasos que se llenan */
+.vaso-fila { display: flex; align-items: flex-end; justify-content: center; gap: 50px; margin-top: 50px; }
+.vaso { width: 440px; height: 600px; border: 8px solid var(--ink); border-top: 0; border-radius: 0 0 70px 70px; overflow: hidden; display: flex; flex-direction: column-reverse; background: rgba(255, 255, 255, .5); }
+.capa { width: 100%; flex: none; }
+.capa.espresso { background: #3a2317; } .capa.leche { background: #e6d5bd; } .capa.espuma { background: #fbf6ec; }
+.leyenda { text-align: left; display: flex; flex-direction: column; gap: 30px; font-size: 44px; font-weight: 600; }
+.leyenda div { display: flex; align-items: center; gap: 18px; }
+.leyenda i { width: 34px; height: 34px; border-radius: 10px; border: 2px solid var(--linea); flex: none; }
+</style>
+</head>
+<body>
+<div id="video"></div>
+<script src="../assets/js/productos.js"></script>
+<script src="videos.js"></script>
+<script>
+  const FPS = 30;
+  const SUAVE = 'cubic-bezier(.2,.7,.2,1)';
+  const ENTRADAS = {
+    sube: [{ opacity: 0, transform: 'translateY(60px)' }, { opacity: 1, transform: 'none' }],
+    pop:  [{ opacity: 0, transform: 'scale(.8)' }, { opacity: 1, transform: 'scale(1.04)', offset: .7 }, { opacity: 1, transform: 'scale(1)' }],
+    izq:  [{ opacity: 0, transform: 'translateX(-140px)' }, { opacity: 1, transform: 'none' }],
+    der:  [{ opacity: 0, transform: 'translateX(140px)' }, { opacity: 1, transform: 'none' }]
+  };
+  let contadores = [];
+
+  async function listo() {
+    await document.fonts.ready;
+    await Promise.all([...document.images].map(i => i.complete ? null : new Promise(r => { i.onload = i.onerror = r; })));
+  }
+
+  /** Arma el video y devuelve cuántos cuadros tiene. */
+  window.prepararVideo = async id => {
+    const v = VIDEOS.find(x => x.id === id);
+    const root = document.getElementById('video');
+    contadores = [];
+    const est = { fondo: 'orbes', entrada: 'sube', alinea: 'centro', ...v.estilo };
+    const FONDOS = {
+      orbes:   () => `<div class="orbe o1" data-deriva="140,-220"></div><div class="orbe o2" data-deriva="-160,180"></div><div class="aro" data-deriva="-90,120"></div>`,
+      puntos:  () => `<div class="puntos" data-deriva="-120,-150"></div>`,
+      aros:    () => [.55, 1, 1.5].map((s, n) => `<div class="anillo" data-pulso="${s}" data-n="${n}"></div>`).join(''),
+      bandas:  () => `<div class="banda b1" data-deriva="160,-40"></div><div class="banda b2" data-deriva="-200,50"></div>`,
+      numero:  e => e.n ? `<div class="gigante" data-deriva="-60,0">${e.n}</div>` : `<div class="puntos" data-deriva="-120,-150"></div>`,
+      liso:    () => ''
+    };
+    root.innerHTML = v.escenas.map(e => `<div class="esc ${e.tono || ''} f-${est.fondo} al-${est.alinea}">
+      ${FONDOS[est.fondo](e)}<div class="marca"><i></i> Café en tu Casa</div><div class="cont">${e.html}</div></div>`).join('');
+
+    const total = v.escenas.reduce((t, e) => t + e.d, 0), T = total * 1000;
+    const o = s => Math.min(1, Math.max(0, s / total));
+    let ini = 0;
+
+    [...root.children].forEach((div, i) => {
+      const e = v.escenas[i], fin = ini + e.d, ultima = i === v.escenas.length - 1, ms = ini * 1000;
+
+      // la escena entera: aparece, y al irse la anterior queda tapada
+      // (se queda un rato más de lo que dura, para que la siguiente la tape al entrar)
+      const funde = est.entrada === 'sube' || est.entrada === 'zoom';
+      const kf = [{ opacity: 0, offset: 0 }, { opacity: 0, offset: o(ini) }, { opacity: 1, offset: o(ini + (i && funde ? .32 : .001)) }, { opacity: 1, offset: o(fin + .7) }];
+      if (!ultima) kf.push({ opacity: 0, offset: o(fin + .701) });
+      kf.push({ opacity: ultima ? 1 : 0, offset: 1 });
+      div.animate(kf, { duration: T, fill: 'both' });
+      const cont = div.querySelector('.cont'), entra = { delay: ms, duration: 800, fill: 'both', easing: SUAVE };
+      if (est.entrada === 'lado') {
+        if (i) div.animate([{ transform: 'translateX(100%)' }, { transform: 'none' }], { ...entra, duration: 600, easing: 'cubic-bezier(.6,0,.2,1)' });
+        cont.animate([{ transform: 'translateX(120px)' }, { transform: 'none' }], { ...entra, delay: ms + 150 });
+      } else if (est.entrada === 'cortina') {
+        if (i) div.animate([{ clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { ...entra, duration: 650, easing: 'cubic-bezier(.6,0,.2,1)' });
+        cont.animate([{ transform: 'translateY(140px)' }, { transform: 'none' }], { ...entra, delay: ms + 100 });
+      } else if (est.entrada === 'zoom') {
+        cont.animate([{ transform: 'scale(1.16)' }, { transform: 'none' }], entra);
+      } else {
+        cont.animate([{ transform: 'translateY(90px)' }, { transform: 'none' }], entra);
+      }
+      for (const el of div.querySelectorAll('[data-pulso]')) {
+        const s = +el.dataset.pulso;
+        el.animate([{ transform: `scale(${s * .8})`, opacity: .2 }, { transform: `scale(${s * 1.15})`, opacity: 1 }], { delay: ms, duration: e.d * 1000, fill: 'both', easing: 'ease-out' });
+      }
+
+      for (const el of div.querySelectorAll('[data-deriva]')) {
+        const [x, y] = el.dataset.deriva.split(',');
+        el.animate([{ transform: 'translate(0,0) scale(1)' }, { transform: `translate(${x}px,${y}px) scale(1.15)` }], { delay: ms, duration: e.d * 1000, fill: 'both', easing: 'ease-in-out' });
+      }
+
+      let k = 0;
+      for (const el of div.querySelectorAll('[data-a]')) {
+        const tipo = el.dataset.a;
+        const desde = ms + (el.dataset.t !== undefined ? +el.dataset.t : .25 + (k++) * .2) * 1000;
+        const dur = +(el.dataset.dur || .75) * 1000;
+        const tiempo = { delay: desde, duration: dur, fill: 'both', easing: SUAVE };
+
+        if (tipo === 'palabras') {                      // el título entra palabra por palabra
+          const partes = el.innerHTML.split(/(<em>.*?<\/em>|<br>|\s+)/).filter(Boolean);
+          el.innerHTML = partes.map(p => /^\s+$/.test(p) ? ' ' : p === "<br>" ? p : `<span class="w">${p}</span>`).join('');
+          el.querySelectorAll('.w').forEach((w, n) => w.animate(ENTRADAS.sube, { ...tiempo, delay: desde + n * 85, duration: 620 }));
+        } else if (tipo === 'crece-y' || tipo === 'crece-x') {
+          const eje = tipo.endsWith('y') ? 'scaleY' : 'scaleX';
+          el.animate([{ transform: `${eje}(0)` }, { transform: `${eje}(1)` }], { ...tiempo, easing: 'cubic-bezier(.4,0,.2,1)' });
+        } else if (tipo === 'gira') {
+          el.animate([{ transform: `rotate(${el.dataset.desde}deg)` }, { transform: `rotate(${el.dataset.hasta}deg)` }], { ...tiempo, easing: 'cubic-bezier(.5,0,.2,1)' });
+        } else if (tipo === 'llena') {
+          el.animate([{ height: '0%' }, { height: el.dataset.h + '%' }], { ...tiempo, easing: 'cubic-bezier(.4,0,.2,1)' });
+        } else if (tipo === 'baja') {
+          el.animate([{ top: '14px' }, { top: `calc(100% - ${el.dataset.resto || 110}px)` }], { ...tiempo, easing: 'cubic-bezier(.45,0,.3,1)' });
+        } else if (tipo === 'corre') {
+          el.animate([{ transform: 'translateX(120px)' }, { transform: 'translateX(-760px)' }], { delay: ms, duration: e.d * 1000 + 700, fill: 'both', easing: 'linear' });
+        } else if (tipo === 'trazo') {
+          el.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], tiempo);
+        } else if (tipo === 'acerca') {
+          el.animate([{ transform: 'scale(1)' }, { transform: `scale(${el.dataset.hasta || 1.1})` }], { delay: ms, duration: e.d * 1000, fill: 'both', easing: 'linear' });
+        } else if (tipo === 'cuenta') {
+          contadores.push({ el, desde, dur, n: +el.dataset.n });
+          el.animate(ENTRADAS.pop, { ...tiempo, duration: 600 });
+        } else {
+          el.animate(ENTRADAS[tipo] || ENTRADAS.sube, tiempo);
+        }
+      }
+      ini = fin;
+    });
+
+    await listo();
+    return Math.round(total * FPS);
+  };
+
+  /** Deja todo en el cuadro f. */
+  window.cuadro = f => {
+    const ms = (f * 1000) / FPS;
+    for (const a of document.getAnimations()) { a.pause(); a.currentTime = ms; }
+    for (const c of contadores) {
+      const p = Math.min(1, Math.max(0, (ms - c.desde) / c.dur));
+      c.el.firstChild.textContent = Math.round(c.n * (1 - Math.pow(1 - p, 3)));
+    }
+  };
+
+  // Para mirar un cuadro suelto: video.html?id=<video>&f=60
+  const q = new URLSearchParams(location.search);
+  if (q.get('id')) prepararVideo(q.get('id')).then(() => cuadro(+q.get('f') || 45));
+</script>
+</body>
+</html>

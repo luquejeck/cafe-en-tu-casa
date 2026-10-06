@@ -1,0 +1,481 @@
+<title>Café en tu Casa · Manual de marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;800&family=Outfit:wght@300;600&family=Sora:wght@600&family=Plus+Jakarta+Sans:wght@600;700&display=swap">
+<style>
+/* El manual se muestra con la propia marca: mucho aire, tipografía grande
+   y cada regla al lado de su ejemplo real. Una columna, secciones anchas. */
+:root {
+  --bg: #ffffff;
+  --bg-2: #f5f5f7;
+  --papel: #ffffff;
+  --ink: #1d1d1f;
+  --ink-2: #6e6e73;
+  --linea: rgba(0, 0, 0, .10);
+  --oliva: #5b6e32;
+  --oliva-fuerte: #455426;
+  --oliva-suave: rgba(91, 110, 50, .12);
+  --si: #00a650;
+  --no: #d92d20;
+  --enlace: #00376b;
+  --texto: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+  --r: 22px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101012; --bg-2: #1c1c1f; --papel: #1c1c1f; --ink: #f5f5f7; --ink-2: #a1a1a6; --linea: rgba(255, 255, 255, .14);
+    --oliva: #a3c26a; --oliva-fuerte: #c5dd96; --oliva-suave: rgba(163, 194, 106, .16); --si: #4cc38a; --no: #ff8a80; --enlace: #8ab4f8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101012; --bg-2: #1c1c1f; --papel: #1c1c1f; --ink: #f5f5f7; --ink-2: #a1a1a6; --linea: rgba(255, 255, 255, .14);
+  --oliva: #a3c26a; --oliva-fuerte: #c5dd96; --oliva-suave: rgba(163, 194, 106, .16); --si: #4cc38a; --no: #ff8a80; --enlace: #8ab4f8;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--texto); font-size: 17px; line-height: 1.5; margin: 0; -webkit-font-smoothing: antialiased; }
+.ancho { max-width: 1040px; margin: 0 auto; padding-inline: 22px; padding-block: 44px 100px; }
+h1, h2, h3, p, ul, figure { margin: 0; }
+h1, h2, h3 { font-weight: 600; text-wrap: balance; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--oliva); outline-offset: 3px; border-radius: 6px; }
+
+.epi { font-size: 13px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--oliva); }
+.portada h1 { font-size: clamp(44px, 9vw, 92px); line-height: 1.02; letter-spacing: -.035em; margin-top: 14px; }
+.portada p { margin-top: 20px; font-size: clamp(18px, 2.4vw, 22px); color: var(--ink-2); max-width: 56ch; }
+.indice { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; padding: 0; list-style: none; }
+.indice a { display: block; text-decoration: none; color: var(--oliva-fuerte); background: var(--oliva-suave); padding: 8px 16px; border-radius: 980px; font-size: 14px; font-weight: 600; }
+
+section { margin-top: 84px; }
+section > h2 { font-size: clamp(30px, 5vw, 46px); letter-spacing: -.03em; line-height: 1.07; margin-top: 10px; }
+section > .bajada { margin-top: 14px; color: var(--ink-2); max-width: 62ch; }
+h3 { font-size: 20px; letter-spacing: -.02em; }
+.nota { margin-top: 18px; background: var(--oliva-suave); border-radius: 14px; padding: 14px 18px; font-size: 15px; max-width: 70ch; }
+
+.grilla { margin-top: 28px; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.caja { background: var(--bg-2); border-radius: var(--r); padding: 26px; min-width: 0; display: grid; gap: 10px; align-content: start; }
+.caja p, .caja li { color: var(--ink-2); font-size: 15.5px; }
+.caja ul { padding-left: 18px; display: grid; gap: 6px; }
+.caja li::marker { color: var(--oliva); }
+.caja strong { color: var(--ink); font-weight: 600; }
+
+/* ---------------------------------------------------------------- logo */
+.logos { margin-top: 28px; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.lienzo-logo { border-radius: var(--r); min-height: 190px; display: grid; place-items: center; padding: 30px; position: relative; border: 1px solid var(--linea); }
+.lienzo-logo small { position: absolute; left: 18px; top: 14px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .6; }
+.marca { display: flex; align-items: center; gap: .5em; font-size: clamp(22px, 3.2vw, 30px); font-weight: 600; letter-spacing: -.02em; white-space: nowrap; }
+.marca i { width: .42em; height: .42em; border-radius: 50%; flex: none; }
+.sobre-blanco { background: #ffffff; color: #1d1d1f; } .sobre-blanco i { background: #5b6e32; }
+.sobre-gris   { background: #f5f5f7; color: #1d1d1f; } .sobre-gris i { background: #5b6e32; }
+.sobre-negro  { background: #101012; color: #f5f5f7; } .sobre-negro i { background: #a3c26a; }
+.sobre-oliva  { background: #455426; color: #ffffff; } .sobre-oliva i { background: #dcecb8; }
+.mal { background: #f5f5f7; color: #1d1d1f; }
+.mal .marca { opacity: .9; }
+.veredicto { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; margin-top: 10px; }
+.veredicto.no { color: var(--no); } .veredicto.si { color: var(--si); }
+
+/* ---------------------------------------------------------------- redes */
+.selector { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px; }
+.selector button { border: 1px solid var(--linea); background: transparent; border-radius: 980px; padding: 9px 18px; font-size: 14.5px; font-weight: 600; cursor: pointer; }
+.selector button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.redes { margin-top: 26px; display: grid; grid-template-columns: minmax(0, 390px) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 860px) { .redes { grid-template-columns: 1fr; } }
+.av { border-radius: 50%; display: grid; place-items: center; flex: none; overflow: hidden; }
+.av svg { width: 70%; height: 70%; display: block; }
+.av.cuadrado { border-radius: 22%; }
+.mono { font-family: var(--texto); font-weight: 600; letter-spacing: -.04em; color: #f5f5f7; line-height: 1; display: flex; align-items: baseline; }
+.mono i { width: .2em; height: .2em; border-radius: 50%; background: #a3c26a; margin-left: .06em; }
+
+/* el perfil de Instagram, dibujado como se ve en el celular */
+.ig { background: var(--papel); border: 1px solid var(--linea); border-radius: 30px; padding: 18px 16px 16px; font-size: 14px; line-height: 1.4; min-width: 0; }
+.ig-barra { display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 19px; letter-spacing: -.01em; padding-inline: 4px; }
+.ig-barra span { font-size: 20px; letter-spacing: .1em; color: var(--ink-2); }
+.ig-cabeza { margin-top: 16px; display: flex; align-items: center; gap: 22px; }
+.aro-historia { padding: 3px; border-radius: 50%; background: conic-gradient(#f9ce34, #ee2a7b, #6228d7, #f9ce34); flex: none; }
+.aro-historia > div { padding: 3px; border-radius: 50%; background: var(--papel); }
+.ig-cifras { flex: 1; display: flex; justify-content: space-around; text-align: center; font-size: 13px; color: var(--ink); min-width: 0; }
+.ig-cifras b { display: block; font-size: 17px; font-weight: 700; color: var(--ink-2); }
+.ig-bio { margin-top: 12px; padding-inline: 4px; }
+.ig-bio b { font-weight: 600; }
+.ig-bio .enlace { color: var(--enlace); font-weight: 600; overflow-wrap: anywhere; }
+.ig-botones { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.ig-botones span { border-radius: 9px; padding: 8px; text-align: center; font-weight: 600; background: var(--bg-2); }
+.ig-botones span:first-child { background: #0095f6; color: #fff; }
+.ig-destacadas { margin-top: 16px; display: flex; gap: 14px; overflow-x: auto; padding-bottom: 4px; }
+.ig-destacadas figure { display: grid; justify-items: center; gap: 6px; font-size: 12px; flex: none; }
+.ig-destacadas .tapa { width: 62px; height: 62px; border-radius: 50%; border: 1px solid var(--linea); padding: 3px; }
+.ig-destacadas .tapa > div { width: 100%; height: 100%; border-radius: 50%; display: grid; place-items: center; }
+.ig-destacadas svg { width: 26px; height: 26px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ig-grilla { margin-top: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-radius: 6px; overflow: hidden; }
+.ig-grilla img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; background: var(--bg-2); }
+
+.superficies { display: grid; gap: 16px; min-width: 0; }
+.sup { background: var(--bg-2); border-radius: var(--r); padding: 22px; display: grid; gap: 14px; min-width: 0; }
+.sup h3 { font-size: 17px; }
+.sup p { font-size: 14.5px; color: var(--ink-2); }
+.tamanos { display: flex; align-items: flex-end; gap: 22px; flex-wrap: wrap; }
+.tamanos figure { display: grid; justify-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-2); }
+.tira-chat { display: flex; align-items: center; gap: 12px; background: #075e54; color: #fff; border-radius: 14px; padding: 12px 14px; min-width: 0; }
+.tira-chat b { display: block; font-weight: 600; font-size: 15.5px; }
+.tira-chat small { font-size: 12.5px; opacity: .8; }
+.fb { border-radius: 14px; overflow: hidden; background: var(--papel); border: 1px solid var(--linea); }
+.fb .tapa-fb { height: 110px; display: grid; place-items: center; }
+.fb .pie-fb { display: flex; align-items: center; gap: 12px; padding: 0 14px 14px; margin-top: -26px; }
+.fb .pie-fb .av { border: 4px solid var(--papel); }
+.fb .pie-fb b { font-size: 17px; font-weight: 700; margin-top: 26px; }
+.ml { display: flex; align-items: center; gap: 12px; background: #fff159; color: #1d1d1f; border-radius: 14px; padding: 12px 14px; }
+.ml b { display: block; font-weight: 600; font-size: 15px; } .ml small { font-size: 12.5px; opacity: .75; }
+.firma { display: flex; align-items: center; gap: 14px; min-height: 64px; flex-wrap: wrap; }
+.firma > div { border-radius: 14px; padding: 16px 22px; }
+.firma .clara { background: #fff; border: 1px solid var(--linea); }
+
+/* -------------------------------------------------------------- colores */
+.colores { margin-top: 28px; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+.color { border: 0; padding: 0; background: var(--bg-2); border-radius: var(--r); overflow: hidden; text-align: left; cursor: pointer; display: grid; min-width: 0; }
+.color .muestra { height: 108px; border-bottom: 1px solid var(--linea); }
+.color .datos { padding: 14px 16px 16px; display: grid; gap: 2px; }
+.color b { font-size: 16px; font-weight: 600; }
+.color code { font-family: var(--mono); font-size: 13.5px; color: var(--ink-2); }
+.color span { font-size: 13.5px; color: var(--ink-2); line-height: 1.35; margin-top: 4px; }
+.proporcion { margin-top: 24px; display: flex; height: 56px; border-radius: 14px; overflow: hidden; border: 1px solid var(--linea); }
+.proporcion div { display: grid; place-items: center; font-size: 12px; font-weight: 600; min-width: 0; }
+
+/* ----------------------------------------------------------- tipografía */
+.escala { margin-top: 28px; display: grid; gap: 0; }
+.escala .fila { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 20px; align-items: baseline; padding-block: 20px; border-top: 1px solid var(--linea); }
+.escala .fila:last-child { border-bottom: 1px solid var(--linea); }
+.escala dt { font-size: 13.5px; color: var(--ink-2); line-height: 1.4; }
+.escala dt b { display: block; color: var(--ink); font-weight: 600; font-size: 15px; }
+.escala dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.t-titulo { font-size: clamp(34px, 6vw, 64px); font-weight: 600; line-height: 1.05; letter-spacing: -.035em; }
+.t-sub { font-size: clamp(22px, 3.4vw, 32px); font-weight: 600; line-height: 1.1; letter-spacing: -.025em; }
+.t-plomo { font-size: clamp(18px, 2.2vw, 21px); color: var(--ink-2); line-height: 1.45; }
+.t-cuerpo { font-size: 17px; line-height: 1.5; }
+@media (max-width: 560px) { .escala .fila { grid-template-columns: 1fr; gap: 8px; } }
+
+/* ----------------------------------------------------------- componentes */
+.piezas { margin-top: 28px; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.pieza { background: var(--bg-2); border-radius: var(--r); padding: 26px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.pieza .demo { background: var(--papel); border: 1px solid var(--linea); border-radius: 16px; min-height: 120px; display: grid; place-items: center; padding: 22px; text-align: center; }
+.pieza p { font-size: 15px; color: var(--ink-2); }
+.pildora { background: var(--oliva-suave); color: var(--oliva-fuerte); border-radius: 980px; padding: 8px 18px; font-size: 14px; font-weight: 600; }
+.boton { background: var(--ink); color: var(--bg); border-radius: 980px; padding: 12px 26px; font-size: 16px; font-weight: 600; }
+.numero { font-size: 72px; font-weight: 600; letter-spacing: -.05em; line-height: 1; }
+.numero small { font-size: 26px; letter-spacing: -.02em; margin-left: 4px; }
+
+/* -------------------------------------------------------------- formatos */
+.formatos { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 26px; align-items: flex-end; }
+.formato { display: grid; gap: 10px; justify-items: center; font-size: 14px; color: var(--ink-2); text-align: center; }
+.formato .hoja { background: var(--bg-2); border: 1px solid var(--linea); border-radius: 12px; position: relative; overflow: hidden; }
+.formato .hoja u { position: absolute; left: 0; right: 0; background: var(--oliva-suave); display: grid; place-items: center; font-size: 11px; font-weight: 600; color: var(--oliva-fuerte); text-decoration: none; }
+.formato b { color: var(--ink); font-weight: 600; font-size: 15px; }
+
+/* ------------------------------------------------------------------- voz */
+.pares { margin-top: 28px; display: grid; gap: 14px; }
+.par { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.par > div { border-radius: 16px; padding: 18px 20px; background: var(--bg-2); font-size: 16px; min-width: 0; }
+.par small { display: block; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+.par .asi small { color: var(--si); } .par .no small { color: var(--no); }
+@media (max-width: 560px) { .par { grid-template-columns: 1fr; } }
+
+.aviso { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 12px 20px; border-radius: 980px; font-size: 14px; font-weight: 500; z-index: 10; }
+footer { margin-top: 90px; padding-top: 24px; border-top: 1px solid var(--linea); color: var(--ink-2); font-size: 14px; }
+</style>
+
+<div class="ancho">
+  <header class="portada">
+    <span class="epi">Manual de marca</span>
+    <h1>Café en tu Casa</h1>
+    <p>Cómo se ve y cómo habla la marca en el sitio, en Instagram y en cualquier pieza nueva. Sale de lo que ya está publicado en cafe-en-tu-casa.vercel.app.</p>
+    <ul class="indice">
+      <li><a href="#esencia">Esencia</a></li>
+      <li><a href="#logo">Logo</a></li>
+      <li><a href="#redes">En redes</a></li>
+      <li><a href="#color">Color</a></li>
+      <li><a href="#tipografia">Tipografía</a></li>
+      <li><a href="#componentes">Componentes</a></li>
+      <li><a href="#fotografia">Fotografía</a></li>
+      <li><a href="#voz">Voz</a></li>
+      <li><a href="#instagram">Instagram</a></li>
+      <li><a href="#reglas">Reglas rápidas</a></li>
+    </ul>
+  </header>
+
+  <section id="esencia">
+    <span class="epi">1 · Esencia</span>
+    <h2>Café de cafetería, en tu casa.</h2>
+    <p class="bajada">Café en tu Casa vende cafeteras espresso y superautomáticas De'Longhi y Krups. La marca tiene que verse más cuidada que una publicación de Mercado Libre, y ser igual de clara a la hora de comprar.</p>
+    <div class="grilla">
+      <div class="caja"><h3>Sobria</h3><p>Pocas palabras, mucho aire y el producto como protagonista. Nada de estallidos, sellos ni signos de exclamación en fila.</p></div>
+      <div class="caja"><h3>Clara</h3><p>Siempre se entiende qué se vende, cuánto sale y cómo se paga. Las dos formas de pago van juntas: transferencia con descuento y cuotas sin interés.</p></div>
+      <div class="caja"><h3>Cercana</h3><p>Habla de vos, como un vendedor que sabe y no apura. Ayuda a elegir antes que a cerrar la venta.</p></div>
+    </div>
+  </section>
+
+  <section id="logo">
+    <span class="epi">2 · Logo</span>
+    <h2>El punto y el nombre</h2>
+    <p class="bajada">Hoy la marca se firma con un punto oliva seguido del nombre en Inter seminegrita. El punto mide un poco menos de la mitad de la altura de la letra y va siempre a la izquierda.</p>
+    <div class="logos">
+      <figure class="lienzo-logo sobre-blanco"><small>Sobre blanco</small><div class="marca"><i></i>Café en tu Casa</div></figure>
+      <figure class="lienzo-logo sobre-gris"><small>Sobre gris</small><div class="marca"><i></i>Café en tu Casa</div></figure>
+      <figure class="lienzo-logo sobre-negro"><small>Sobre negro</small><div class="marca"><i></i>Café en tu Casa</div></figure>
+      <figure class="lienzo-logo sobre-oliva"><small>Sobre oliva</small><div class="marca"><i></i>Café en tu Casa</div></figure>
+    </div>
+    <div class="grilla">
+      <div class="caja"><h3>Cómo se escribe</h3><ul><li><strong>Café en tu Casa</strong>, con mayúscula en Café y en Casa.</li><li>En Instagram, <strong>@cafentucasa</strong>.</li><li>Nunca todo en mayúsculas ni abreviado.</li></ul></div>
+      <div class="caja"><h3>Aire y tamaño</h3><ul><li>Alrededor, un espacio libre igual a la altura de la letra «C».</li><li>En pantalla, nunca más chico que <strong>14 px</strong> de alto de letra.</li><li>En piezas de Instagram va arriba, centrado o a la izquierda.</li></ul></div>
+      <div class="caja"><h3>El punto</h3><ul><li>Oliva <strong>#5B6E32</strong> sobre fondos claros.</li><li>Oliva claro <strong>#A3C26A</strong> sobre negro.</li><li>Nunca de otro color ni reemplazado por un ícono.</li></ul></div>
+    </div>
+    <div class="logos">
+      <figure><div class="lienzo-logo mal"><div class="marca" style="letter-spacing:.2em;text-transform:uppercase;font-size:18px"><i style="background:#5b6e32"></i>Café en tu Casa</div></div><p class="veredicto no">No: en mayúsculas ni espaciado</p></figure>
+      <figure><div class="lienzo-logo mal"><div class="marca"><i style="background:#d92d20"></i>Café en tu Casa</div></div><p class="veredicto no">No: el punto de otro color</p></figure>
+      <figure><div class="lienzo-logo mal" style="background:linear-gradient(135deg,#c9d6a8,#f0d9b5)"><div class="marca"><i style="background:#5b6e32"></i>Café en tu Casa</div></div><p class="veredicto no">No: sobre degradados o fotos</p></figure>
+    </div>
+    <p class="nota">Hay cuatro propuestas de logo con símbolo (Refugio, Grano hogar, Doble pico y La taza) que todavía no se aplicaron en el sitio ni en Instagram. Cuando se elija una, esta sección se actualiza con el símbolo, sus versiones y la foto de perfil.</p>
+  </section>
+
+  <section id="redes">
+    <span class="epi">3 · En redes</span>
+    <h2>El logo aplicado al perfil</h2>
+    <p class="bajada">Así se ve la marca en Instagram y en el resto de las redes. Elegí un logo y cambia en todos lados a la vez: la versión actual y las cuatro propuestas con símbolo.</p>
+    <div class="selector" id="selector" role="group" aria-label="Logo a aplicar"></div>
+    <p class="nota" id="nota-logo"></p>
+    <div class="redes">
+      <div class="ig" aria-label="Vista del perfil de Instagram">
+        <div class="ig-barra"><div>cafentucasa</div><span aria-hidden="true">•••</span></div>
+        <div class="ig-cabeza">
+          <div class="aro-historia"><div><div data-av="86"></div></div></div>
+          <div class="ig-cifras"><div><b>—</b>publicaciones</div><div><b>—</b>seguidores</div><div><b>—</b>seguidos</div></div>
+        </div>
+        <div class="ig-bio">
+          <b>Café en tu Casa</b><br>
+          Cafeteras espresso y superautomáticas De'Longhi y Krups<br>
+          20% OFF por transferencia · Cuotas sin interés<br>
+          Envío gratis a todo el país<br>
+          <span class="enlace">cafe-en-tu-casa.vercel.app</span>
+        </div>
+        <div class="ig-botones"><span>Seguir</span><span>Mensaje</span></div>
+        <div class="ig-destacadas" id="destacadas"></div>
+        <div class="ig-grilla">
+          <img src="media/g1.jpg" alt="Carrusel: tres cafeteras, una es la tuya"><img src="media/g2.jpg" alt="Magnifica S"><img src="media/g3.jpg" alt="Carrusel: dos formas de pagar"><img src="media/g4.jpg" alt="Magnifica S, a fondo"><img src="media/g5.jpg" alt="13 niveles de molienda"><img src="media/g6.jpg" alt="Krups Roma"><img src="media/g7.jpg" alt="Superautomática o espresso manual"><img src="media/g8.jpg" alt="Dedica"><img src="media/g9.jpg" alt="Magnifica S sirviendo café">
+        </div>
+      </div>
+
+      <div class="superficies">
+        <div class="sup"><h3>Foto de perfil</h3>
+          <div class="tamanos"><figure><div data-av="110"></div>Perfil · 110 px</figure><figure><div data-av="64"></div>Historias · 64 px</figure><figure><div data-av="32"></div>Comentarios · 32 px</figure></div>
+          <p>Se sube cuadrada, de 1080 × 1080 px. Instagram la recorta en círculo desde el centro, así que el símbolo ocupa el 70% del ancho y nada toca el borde.</p></div>
+        <div class="sup"><h3>Firma con nombre</h3><div class="firma" id="firma"></div>
+          <p>Para el sitio, las piezas, las etiquetas de las cajas y la firma de mail.</p></div>
+        <div class="sup"><h3>WhatsApp</h3><div class="tira-chat"><div data-av="42"></div><div><b>Café en tu Casa</b><small>Cuenta de empresa</small></div></div>
+          <p>La misma foto de perfil que en Instagram, para que quien llega desde el link reconozca la cuenta.</p></div>
+        <div class="sup"><h3>Facebook</h3><div class="fb"><div class="tapa-fb" id="tapa-fb"></div><div class="pie-fb"><div data-av="72"></div><b>Café en tu Casa</b></div></div>
+          <p>Portada de un solo color con la firma centrada, y la misma foto de perfil.</p></div>
+        <div class="sup"><h3>Mercado Libre</h3><div class="ml"><div data-av="44" data-forma="cuadrado"></div><div><b>Café en tu Casa</b><small>Perfil del vendedor</small></div></div>
+          <p>El logo va en un cuadrado de bordes redondeados, sobre el mismo fondo oscuro.</p></div>
+      </div>
+    </div>
+    <div class="grilla">
+      <div class="caja"><h3>Destacadas</h3><p>Cinco tapas con el mismo fondo que la foto de perfil y un ícono de línea: Cafeteras, Comprar, Envíos, Tips y Test.</p></div>
+      <div class="caja"><h3>Biografía</h3><p>Qué vendés, las dos formas de pago y el envío, en tres líneas. El enlace lleva siempre al sitio.</p></div>
+      <div class="caja"><h3>La grilla</h3><p>Se alternan fondos blancos, grises, negros y oliva para que el perfil no quede de un solo tono. Las portadas llevan poco texto, porque en la grilla se ven chicas.</p></div>
+    </div>
+  </section>
+
+  <section id="color">
+    <span class="epi">4 · Color</span>
+    <h2>Blanco, negro y un solo acento</h2>
+    <p class="bajada">La marca vive en neutros. El oliva es el único color propio y se usa poco: el punto, los epígrafes y las píldoras. Tocá un color para copiar su código.</p>
+    <div class="colores" id="colores"></div>
+    <div class="proporcion" aria-label="Proporción de uso de los colores">
+      <div style="flex:55;background:#ffffff;color:#1d1d1f">Blanco y gris · 55%</div>
+      <div style="flex:30;background:#101012;color:#f5f5f7">Negro · 30%</div>
+      <div style="flex:15;background:#5b6e32;color:#ffffff">Oliva · 15%</div>
+    </div>
+    <div class="grilla">
+      <div class="caja"><h3>Colores de función</h3><ul><li><strong>Verde WhatsApp #25D366</strong>: solo en el botón de comprar por WhatsApp.</li><li><strong>Azul Mercado Libre #3483FA</strong>: solo en el botón de cuotas.</li><li><strong>Verde cuotas #00A650</strong>: solo en «sin interés».</li><li><strong>Rojo #D92D20</strong>: solo en la cinta de oferta.</li></ul></div>
+      <div class="caja"><h3>Cómo combinarlos</h3><ul><li>Texto casi negro sobre blanco o gris; texto blanco sobre negro u oliva oscuro.</li><li>Sobre negro, el oliva pasa a su versión clara.</li><li>Un solo fondo por pieza. Sin degradados.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="tipografia">
+    <span class="epi">5 · Tipografía</span>
+    <h2>Inter, grande y apretada</h2>
+    <p class="bajada">Una sola familia: Inter, de Google Fonts, en los pesos 400, 500, 600 y 700. Los títulos van en 600 con las letras un poco juntas; el cuerpo, en 400.</p>
+    <dl class="escala">
+      <div class="fila"><dt><b>Título</b>600 · interletra −3,5% · interlínea 1,05</dt><dd class="t-titulo">Café en grano, recién molido.</dd></div>
+      <div class="fila"><dt><b>Subtítulo</b>600 · interletra −2,5%</dt><dd class="t-sub">Tres cafeteras. Una es la tuya.</dd></div>
+      <div class="fila"><dt><b>Bajada</b>400 · gris #6E6E73</dt><dd class="t-plomo">Contanos cómo tomás el café y te decimos cuál te conviene.</dd></div>
+      <div class="fila"><dt><b>Cuerpo</b>400 · 17 px · interlínea 1,5</dt><dd class="t-cuerpo">Despachamos el mismo día hábil si el pago se acredita antes de las 15 h.</dd></div>
+      <div class="fila"><dt><b>Epígrafe</b>600 · mayúsculas · interletra +9% · oliva</dt><dd><span class="epi">Más vendida</span></dd></div>
+    </dl>
+    <div class="grilla">
+      <div class="caja"><h3>Reglas</h3><ul><li>Punto final en los títulos que son una frase.</li><li>Como mucho dos tamaños de texto por pieza, más el epígrafe.</li><li>Los números y precios, en el mismo Inter: sin tipografías de «oferta».</li></ul></div>
+      <div class="caja"><h3>Si Inter no está</h3><p>En orden: la tipografía del sistema (San Francisco, Segoe UI, Roboto), Helvetica o Arial. Nunca una con serifas ni manuscrita.</p></div>
+    </div>
+  </section>
+
+  <section id="componentes">
+    <span class="epi">6 · Componentes</span>
+    <h2>Las piezas que se repiten</h2>
+    <p class="bajada">Son las mismas en el sitio y en Instagram. Todas tienen bordes muy redondeados y ninguna lleva sombra dura ni borde de color.</p>
+    <div class="piezas">
+      <div class="pieza"><div class="demo"><span class="epi">Ultracompacta</span></div><h3>Epígrafe</h3><p>Una o dos palabras arriba del título. Dice qué es lo que viene: la etiqueta del producto o el tema.</p></div>
+      <div class="pieza"><div class="demo"><span class="pildora">20% OFF por transferencia · 9 cuotas sin interés</span></div><h3>Píldora</h3><p>Para las dos formas de pago y para datos cortos. Fondo oliva al 12% y texto oliva oscuro.</p></div>
+      <div class="pieza"><div class="demo"><span class="boton">Link en la bio</span></div><h3>Botón</h3><p>Negro sobre claro, blanco sobre oscuro, forma de píldora. Uno solo por pieza, con la acción escrita.</p></div>
+      <div class="pieza"><div class="demo"><span class="numero">15<small>cm</small></span></div><h3>Dato grande</h3><p>Un número enorme con su unidad chica al lado y una línea que lo explica. Uno por placa.</p></div>
+    </div>
+    <div class="grilla">
+      <div class="caja"><h3>Radios</h3><p>10 px en elementos chicos, 16 px en tarjetas, 22 a 30 px en tiles y fotos. Los botones y píldoras, completamente redondos.</p></div>
+      <div class="caja"><h3>Aire</h3><p>Los márgenes son generosos: en una placa de 1080 px de ancho, al menos 76 px a cada lado. Si algo no entra, se saca texto antes que achicar el margen.</p></div>
+    </div>
+  </section>
+
+  <section id="fotografia">
+    <span class="epi">7 · Fotografía</span>
+    <h2>El producto, solo y de frente</h2>
+    <p class="bajada">Las fotos son de la cafetera real que se vende, sobre fondo blanco, enteras y sin recortar.</p>
+    <div class="grilla">
+      <div class="caja"><h3>Sí</h3><ul><li>Fondo blanco, luz pareja, la máquina entera.</li><li>Sobre fondos gris, negro u oliva, la foto va dentro de una tarjeta blanca redondeada.</li><li>Detalles reales: el café cayendo, el espumador, el panel.</li></ul></div>
+      <div class="caja"><h3>No</h3><ul><li>Fotos de banco de imágenes de otras cafeteras.</li><li>Recortar la máquina o taparla con texto.</li><li>Filtros, marcos, stickers o fondos de colores.</li></ul></div>
+      <div class="caja"><h3>Lo que falta</h3><p>La Magnifica S tiene cinco fotos; la Krups Roma y la Dedica, una sola cada una. Sumar fotos propias de esas dos es lo que más mejoraría las piezas.</p></div>
+    </div>
+  </section>
+
+  <section id="voz">
+    <span class="epi">8 · Voz</span>
+    <h2>Habla de vos, y habla poco</h2>
+    <p class="bajada">Español rioplatense, frases cortas y concretas. Primero el beneficio, después el dato. Un emoji como mucho por texto, y ninguno dentro de las imágenes.</p>
+    <div class="pares">
+      <div class="par"><div class="asi"><small>Así</small>Café en grano, recién molido, con un botón.</div><div class="no"><small>Así no</small>¡¡La MEJOR cafetera del mercado, no te la podés perder!!</div></div>
+      <div class="par"><div class="asi"><small>Así</small>Solo 15 cm de ancho. Todo el ritual.</div><div class="no"><small>Así no</small>Cafetera ultra compacta de diseño premium e innovador.</div></div>
+      <div class="par"><div class="asi"><small>Así</small>Escribinos por WhatsApp desde el link de la bio.</div><div class="no"><small>Así no</small>Contáctenos para más información.</div></div>
+      <div class="par"><div class="asi"><small>Así</small>20% OFF por transferencia o 9 cuotas sin interés.</div><div class="no"><small>Así no</small>Súper promo imperdible por tiempo limitado.</div></div>
+    </div>
+    <div class="grilla">
+      <div class="caja"><h3>Palabras de la casa</h3><ul><li><strong>Transferencia</strong> y <strong>cuotas sin interés</strong>, siempre las dos juntas.</li><li><strong>Link en la bio</strong> para mandar al sitio.</li><li><strong>Superautomática</strong> y <strong>espresso manual</strong> para los dos tipos de cafetera.</li></ul></div>
+      <div class="caja"><h3>Solo lo que es cierto</h3><ul><li>Las características salen de la ficha del producto: no se inventan.</li><li>Los precios se confirman en el sitio el mismo día.</li><li>En los videos no se menciona garantía oficial ni servicio técnico.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="instagram">
+    <span class="epi">9 · Instagram</span>
+    <h2>Cómo se arma cada pieza</h2>
+    <p class="bajada">Todas las piezas llevan la marca arriba, un solo fondo y una idea por pantalla.</p>
+    <div class="formatos">
+      <div class="formato"><div class="hoja" style="width:144px;height:180px"></div><b>Post y carrusel</b>1080 × 1350 px (4:5)</div>
+      <div class="formato"><div class="hoja" style="width:144px;height:256px"><u style="top:0;height:40px">libre</u><u style="bottom:0;height:56px">libre</u></div><b>Historia y reel</b>1080 × 1920 px (9:16)</div>
+    </div>
+    <div class="grilla">
+      <div class="caja"><h3>Zona segura</h3><p>En historias y reels, todo lo que se lee queda entre los 300 y los 1500 px de alto. Arriba y abajo Instagram pone sus botones y el texto.</p></div>
+      <div class="caja"><h3>Fondos</h3><p>Cuatro: blanco, gris claro, negro y oliva oscuro. Dentro de un carrusel o un video se alternan para dar ritmo; la portada y el cierre suelen ir en negro u oliva.</p></div>
+      <div class="caja"><h3>Precios</h3><p>En pesos, solo en el texto de la publicación y en las historias. En las imágenes del perfil va «20% OFF por transferencia» y la cantidad de cuotas, sin montos.</p></div>
+      <div class="caja"><h3>Carruseles</h3><p>Portada con una frase, una idea por placa, y cierre con la acción. Abajo, los puntitos de avance; en la primera, «Deslizá».</p></div>
+      <div class="caja"><h3>Videos</h3><p>De 14 a 25 segundos, sin música incorporada. Cada video usa un recurso propio (números gigantes, pantalla partida, dial, vasos) para que no se vean todos iguales.</p></div>
+      <div class="caja"><h3>Cierres</h3><p>Siempre mandan a un lugar: «Link en la bio», «Hacé el test de 4 preguntas» o «Escribinos por WhatsApp».</p></div>
+    </div>
+  </section>
+
+  <section id="reglas">
+    <span class="epi">10 · Reglas rápidas</span>
+    <h2>Si hay que acordarse de cinco cosas</h2>
+    <div class="grilla">
+      <div class="caja"><h3>1. Un solo acento</h3><p>Blanco, gris, negro y oliva. Nada más.</p></div>
+      <div class="caja"><h3>2. Una idea por pantalla</h3><p>Título, una línea de apoyo y aire.</p></div>
+      <div class="caja"><h3>3. El producto real</h3><p>La foto de la cafetera que se vende, entera y sobre blanco.</p></div>
+      <div class="caja"><h3>4. Las dos formas de pago</h3><p>Transferencia con descuento y cuotas sin interés, siempre juntas.</p></div>
+      <div class="caja"><h3>5. Solo lo cierto</h3><p>Datos de la ficha y precios del día. Sin promesas que no se puedan cumplir.</p></div>
+    </div>
+  </section>
+
+  <footer>Café en tu Casa · Manual de marca · Octubre de 2026</footer>
+</div>
+<div class="aviso" id="aviso" hidden role="status"></div>
+
+<script>
+(() => {
+  const COLORES = [
+    ["Tinta", "#1D1D1F", "Texto y botones sobre fondos claros."],
+    ["Gris texto", "#6E6E73", "Bajadas y textos secundarios."],
+    ["Blanco", "#FFFFFF", "Fondo principal."],
+    ["Gris claro", "#F5F5F7", "Fondo alterno y tarjetas."],
+    ["Negro", "#101012", "Fondo oscuro: portadas y cierres."],
+    ["Oliva", "#5B6E32", "El punto, epígrafes y acentos."],
+    ["Oliva oscuro", "#455426", "Fondo oliva y texto de píldoras."],
+    ["Oliva claro", "#A3C26A", "El acento cuando el fondo es negro."]
+  ];
+  const aviso = document.getElementById("aviso");
+  let reloj;
+  const decir = (t) => { aviso.textContent = t; aviso.hidden = false; clearTimeout(reloj); reloj = setTimeout(() => (aviso.hidden = true), 2200); };
+
+  document.getElementById("colores").innerHTML = COLORES.map(([nombre, hex, uso]) =>
+    `<button class="color" data-hex="${hex}" aria-label="Copiar ${nombre}, ${hex}"><div class="muestra" style="background:${hex}"></div>
+     <div class="datos"><b>${nombre}</b><code>${hex}</code><span>${uso}</span></div></button>`).join("");
+
+  /* ---------------------------------------------- el logo aplicado a redes */
+  const LOGOS = {
+    actual: { nombre: "Actual · punto y nombre", fondo: "#101012", tinta: "#f5f5f7", sobreClaro: "#1d1d1f",
+      nota: "Es lo que hoy está en el sitio y en las piezas. Para la foto de perfil, donde el nombre entero no se lee, se abrevia en una C con el punto oliva: esa abreviatura es nueva y la propongo acá.",
+      simbolo: (t) => `<div class="mono" style="font-size:${Math.round(t * .56)}px">C<i></i></div>`,
+      firma: (c) => `<div class="marca" style="color:${c}"><i style="background:${c === "#1d1d1f" ? "#5b6e32" : "#a3c26a"}"></i>Café en tu Casa</div>` },
+    refugio: { nombre: "1 · Refugio", fondo: "#151412", tinta: "#F3EEE5",
+      nota: "Propuesta 1: un techo sobre la taza. Paleta carbón, champagne y marfil; tipografía Manrope.",
+      svg: '<svg viewBox="0 0 100 100" fill="none"><path d="M16 46 L50 16 L84 46" stroke="#F3EEE5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 30 C45.5 34 54.5 38 50 43" stroke="#CDAE70" stroke-width="4.5" stroke-linecap="round"/><path d="M30 52 H70 V60 C70 73 61 82 50 82 C39 82 30 73 30 60 Z" stroke="#F3EEE5" stroke-width="6" stroke-linejoin="round"/><path d="M70 57 H75 A7.5 7.5 0 0 1 75 72 H68" stroke="#F3EEE5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      firma: (c) => `<div style="font-family:Manrope,sans-serif;font-size:28px;letter-spacing:-.025em;color:${c};white-space:nowrap"><span style="font-weight:800">café</span> <span style="font-weight:400">en tu casa</span></div>` },
+    grano: { nombre: "2 · Grano hogar", fondo: "#2A1C15", tinta: "#F4EDE4",
+      nota: "Propuesta 2: una casa dentro de un grano de café. Paleta espresso, cobre y crema; tipografía Outfit.",
+      svg: '<svg viewBox="0 0 100 100" fill="none"><ellipse cx="50" cy="50" rx="31" ry="41" transform="rotate(-18 50 50)" fill="#C4834B"/><path d="M50 33 L66 47 V67 H34 V47 Z" fill="#2A1C15" stroke="#2A1C15" stroke-width="2" stroke-linejoin="round"/><path d="M46 68 V59 A4 4 0 0 1 54 59 V68 Z" fill="#C4834B"/><path d="M40 15 C44 22 50 26 50 33" stroke="#2A1C15" stroke-width="3.5" stroke-linecap="round"/><path d="M50 73 C51 77 56 80 60 84" stroke="#2A1C15" stroke-width="3.5" stroke-linecap="round"/></svg>',
+      firma: (c) => `<div style="font-family:Outfit,sans-serif;font-size:20px;letter-spacing:.16em;color:${c};white-space:nowrap"><span style="font-weight:600">CAFÉ</span> <span style="font-weight:300">EN TU CASA</span></div>` },
+    doblepico: { nombre: "3 · Doble pico", fondo: "#1D1D1F", tinta: "#F5F5F7",
+      nota: "Propuesta 3: el pico doble de la cafetera sobre la taza. Usa el mismo grafito y gris claro que el sitio, con caramelo de acento; tipografía Sora.",
+      svg: '<svg viewBox="10 10 80 80" fill="none"><rect x="31" y="20" width="38" height="10" rx="5" fill="#F5F5F7"/><rect x="39" y="28" width="6" height="8" rx="2" fill="#F5F5F7"/><rect x="55" y="28" width="6" height="8" rx="2" fill="#F5F5F7"/><rect x="40.5" y="39" width="3" height="14" rx="1.5" fill="#D4914F"/><rect x="56.5" y="39" width="3" height="14" rx="1.5" fill="#D4914F"/><path d="M31 57 H69 V62 C69 72.5 60.5 80 50 80 C39.5 80 31 72.5 31 62 Z" fill="#F5F5F7"/><path d="M69 60.5 H72 A6 6 0 0 1 72 72.5 H67" stroke="#F5F5F7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      firma: (c) => `<div style="font-family:Sora,sans-serif;font-size:26px;font-weight:600;letter-spacing:-.035em;color:${c};white-space:nowrap">café en tu casa</div>` },
+    taza: { nombre: "4 · La taza", fondo: "#1F3A32", tinta: "#F4F1EA",
+      nota: "Propuesta 4: la taza vista desde arriba, con una C adentro. Paleta verde inglés, arena y marfil; tipografía Plus Jakarta Sans.",
+      svg: '<svg viewBox="0 0 100 100" fill="none"><circle cx="45" cy="50" r="31" stroke="#D6C3A0" stroke-width="6"/><path d="M77 50 H86" stroke="#D6C3A0" stroke-width="9" stroke-linecap="round"/><circle cx="45" cy="50" r="21" fill="#D6C3A0"/><path d="M51.4 42.3 A10 10 0 1 0 51.4 57.7" stroke="#1F3A32" stroke-width="4.5" stroke-linecap="round"/></svg>',
+      firma: (c) => `<div style="font-family:'Plus Jakarta Sans',sans-serif;color:${c};display:grid;gap:5px"><span style="font-size:34px;font-weight:700;letter-spacing:-.04em;line-height:.9">café</span><span style="font-size:9px;font-weight:600;letter-spacing:.4em">EN TU CASA</span></div>` }
+  };
+  const ICONOS = {
+    Cafeteras: '<path d="M6 4h12v5a6 6 0 0 1-12 0zM4 20h16M12 15v5"/>',
+    Comprar: '<path d="M5 8h14l-1.4 11H6.4zM9 8a3 3 0 0 1 6 0"/>',
+    "Envíos": '<path d="M3 7h11v9H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>',
+    Tips: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.800 1-2.500A6 6 0 0 0 12 3z"/>',
+    Test: '<path d="M5 6h14M5 12h14M5 18h8M17 17l2 2 3-4"/>'
+  };
+  function aplicar(id) {
+    const L = LOGOS[id] || LOGOS.actual;
+    document.querySelectorAll("#selector button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.logo === id)));
+    document.getElementById("nota-logo").textContent = L.nota;
+    document.querySelectorAll("[data-av]").forEach((el) => {
+      const t = +el.dataset.av;
+      el.className = "av" + (el.dataset.forma === "cuadrado" ? " cuadrado" : "");
+      el.style.cssText = `width:${t}px;height:${t}px;background:${L.fondo}`;
+      el.innerHTML = L.svg || L.simbolo(t);
+    });
+    document.getElementById("firma").innerHTML = `<div class="clara">${L.firma(L.sobreClaro || L.fondo)}</div><div style="background:${L.fondo}">${L.firma(L.tinta)}</div>`;
+    const tapa = document.getElementById("tapa-fb"); tapa.style.background = L.fondo; tapa.innerHTML = L.firma(L.tinta);
+    document.getElementById("destacadas").innerHTML = Object.entries(ICONOS).map(([n, p]) =>
+      `<figure><div class="tapa"><div style="background:${L.fondo}"><svg viewBox="0 0 24 24" stroke="${L.tinta}">${p}</svg></div></div>${n}</figure>`).join("");
+    try { localStorage.setItem("logo-elegido", id); } catch {}
+  }
+  document.getElementById("selector").innerHTML = Object.entries(LOGOS).map(([id, L]) => `<button data-logo="${id}" aria-pressed="false">${L.nombre}</button>`).join("");
+  document.getElementById("selector").addEventListener("click", (ev) => { const b = ev.target.closest("[data-logo]"); if (b) aplicar(b.dataset.logo); });
+  let inicial = "actual";
+  try { inicial = localStorage.getItem("logo-elegido") || "actual"; } catch {}
+  aplicar(LOGOS[inicial] ? inicial : "actual");
+
+  document.addEventListener("click", async (ev) => {
+    const b = ev.target.closest("[data-hex]");
+    if (!b) return;
+    try { await navigator.clipboard.writeText(b.dataset.hex); decir(`${b.dataset.hex} copiado`); }
+    catch {
+      const r = document.createRange(); r.selectNodeContents(b.querySelector("code")); const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      decir("Quedó seleccionado: copialo");
+    }
+  });
+})();
+</script>

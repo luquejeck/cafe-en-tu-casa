@@ -3,6 +3,8 @@
 //
 //   node instagram/filmar.mjs                 todos
 //   node instagram/filmar.mjs s2-             solo los que empiezan con "s2-"
+//   node instagram/filmar.mjs --videos        los videos de videos.js (con su portada)
+//   node instagram/filmar.mjs --videos v03    solo los que empiezan con "v03"
 //
 // Sale 1080x1920 a 30 cuadros, H.264 y con una pista de audio muda: sin
 // audio, algunas versiones de Instagram no dejan agregarle música.
@@ -27,17 +29,20 @@ function traer(nombre) {
 const { chromium } = traer("playwright");
 const ffmpeg = traer("ffmpeg-static");
 
-const filtro = process.argv[2] || "";
+const args = process.argv.slice(2);
+const modoVideos = args.includes("--videos");
+const filtro = args.find((a) => !a.startsWith("--")) || "";
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
 page.on("pageerror", (e) => console.error("ERROR en la página:", e.message));
-await page.goto(pathToFileURL(path.join(aqui, "reel.html")).href);
-const reels = await page.evaluate(() => PIEZAS.filter((p) => p.tipo === "reel").map((p) => p.id));
+await page.goto(pathToFileURL(path.join(aqui, modoVideos ? "video.html" : "reel.html")).href);
+const reels = await page.evaluate((v) => (v ? VIDEOS : PIEZAS.filter((p) => p.tipo === "reel")).map((p) => p.id), modoVideos);
+const preparar = modoVideos ? "prepararVideo" : "prepararReel";
 const marco = { x: 0, y: 0, width: 1080, height: 1920 };
 fs.mkdirSync(salida, { recursive: true });
 
 for (const id of reels.filter((r) => r.startsWith(filtro))) {
-  const total = await page.evaluate((id) => window.prepararReel(id), id);
+  const total = await page.evaluate(([fn, id]) => window[fn](id), [preparar, id]);
   console.log(id, total, "cuadros =", (total / 30).toFixed(1), "s");
 
   const destino = path.join(salida, `${id}.mp4`);
@@ -59,6 +64,11 @@ for (const id of reels.filter((r) => r.startsWith(filtro))) {
   }
   ff.stdin.end();
   await new Promise((res) => ff.on("close", res));
+  if (modoVideos) {
+    // La portada: el final de la primera escena, con todo ya en su lugar
+    await page.evaluate((f) => window.cuadro(f), 66);
+    await page.screenshot({ path: path.join(salida, `${id}-portada.jpg`), type: "jpeg", quality: 92, clip: marco });
+  }
   console.log("  →", path.relative(path.join(aqui, ".."), destino));
 }
 await browser.close();

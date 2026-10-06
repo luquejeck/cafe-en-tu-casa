@@ -75,7 +75,7 @@ button { font: inherit; color: inherit; }
 .semana header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-bottom: 14px; }
 .semana header h2 { font-size: 26px; letter-spacing: -.025em; }
 .semana header span { color: var(--ink-2); font-size: 15px; }
-.dias { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+.dias { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
 .dia { min-width: 0; }
 .dia > button { width: 100%; height: 100%; text-align: left; border: 0; background: var(--papel); border-radius: var(--r); box-shadow: var(--sombra); padding: 12px; cursor: pointer; display: flex; flex-direction: column; gap: 10px; transition: transform .3s cubic-bezier(.28, .11, .32, 1), box-shadow .3s; }
 .dia > button:hover { transform: translateY(-3px); box-shadow: var(--sombra-alta); }
@@ -89,7 +89,7 @@ button { font: inherit; color: inherit; }
 .que { font-size: 14px; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; }
 .hora { font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
 
-@media (max-width: 860px) { .dias { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
 @media (max-width: 560px) {
   .cabecera { grid-template-columns: 1fr; }
   .proxima { max-width: none; }
@@ -101,6 +101,16 @@ button { font: inherit; color: inherit; }
   .que { font-size: 16px; }
 }
 @media (min-width: 561px) { .formato-txt { display: none; } }
+
+/* ---------------------------------------------------------------- videos */
+.videos-grilla { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.videos-grilla .miniatura { aspect-ratio: 9 / 16; }
+@media (max-width: 860px) { .videos-grilla { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .videos-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .videos-grilla .dia > button { flex-direction: column; align-items: stretch; }
+  .videos-grilla .dia .miniatura { width: 100%; }
+}
 
 /* ------------------------------------------------------------------ notas */
 .notas { margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; }
@@ -154,6 +164,8 @@ button { font: inherit; color: inherit; }
     </div>
     <aside class="proxima" id="proxima" aria-live="polite"></aside>
   </header>
+
+  <section id="videos" aria-label="Videos nuevos"></section>
 
   <main id="calendario"></main>
 
@@ -252,7 +264,7 @@ button { font: inherit; color: inherit; }
 
   /* ---------------------------------------------------------- cabecera */
   const cuenta = (t) => D.piezas.filter((p) => p.tipo === t).length;
-  $("#cifras").innerHTML = `<li><b>${D.piezas.length}</b> publicaciones</li><li><b>${cuenta("carrusel")}</b> carruseles</li><li><b>${cuenta("reel")}</b> reels</li><li><b>${cuenta("historia")}</b> historias</li><li><b>${cuenta("post")}</b> post</li>`;
+  $("#cifras").innerHTML = `<li><b>${D.piezas.length}</b> publicaciones</li><li><b>${cuenta("carrusel")}</b> carruseles</li><li><b>${cuenta("reel")}</b> reels y videos</li><li><b>${cuenta("historia")}</b> historias</li><li><b>${cuenta("post")}</b> post</li>`;
   const hoy = iso(new Date());
   const proxima = D.piezas.find((p) => p.fecha >= hoy);
   $("#proxima").innerHTML = proxima
@@ -261,7 +273,7 @@ button { font: inherit; color: inherit; }
 
   /* -------------------------------------------------------- calendario */
   $("#calendario").innerHTML = D.semanas.map((s, i) => `
-    <div class="semana"><header><h2>Semana ${i + 1} · ${esc(s.tema)}</h2><span>${esc(s.bajada)}</span></header><ol class="dias">
+    <div class="semana"><header><h2>${esc(s.tema)}</h2><span>${esc(s.bajada)}</span></header><ol class="dias">
     ${D.piezas.filter((p) => p.semana === i + 1).map((p) => {
       const d = fecha(p.fecha);
       return `<li class="dia${p.fecha === hoy ? " hoy" : ""}"><button data-abrir="${p.id}" aria-label="${esc(largo(p.fecha))}: ${esc(p.titulo)}">
@@ -270,9 +282,17 @@ button { font: inherit; color: inherit; }
         <div class="cuerpo-dia"><span class="que">${esc(p.titulo)}</span><span class="hora">${p.hora}<span class="formato-txt"> · ${esc(etiqueta(p))}</span></span></div></button></li>`;
     }).join("")}</ol></div>`).join("");
 
+  /* ------------------------------------------------------------ videos */
+  const VIDEOS = D.videos || [];
+  if (VIDEOS.length) $("#videos").innerHTML = `
+    <div class="semana"><header><h2>${VIDEOS.length} videos nuevos</h2><span>Todavía sin fecha: miralos y decidí cuáles van. Salen como reel y se comparten en historias.</span></header>
+    <ol class="videos-grilla">${VIDEOS.map((p) => `<li class="dia"><button data-abrir="${p.id}" aria-label="Video: ${esc(p.titulo)}">
+      <div class="miniatura"><img src="${p.tapa}" alt="" loading="lazy"><span class="formato">▶ Video</span></div>
+      <div class="cuerpo-dia"><span class="que">${esc(p.titulo)}</span><span class="hora">${esc(p.tema)}</span></div></button></li>`).join("")}</ol></div>`;
+
   /* -------------------------------------------------------------- hoja */
   function abrir(id, empujar = true) {
-    const p = D.piezas.find((x) => x.id === id);
+    const p = D.piezas.find((x) => x.id === id) || VIDEOS.find((x) => x.id === id);
     if (!p) return;
     const hoja = $("#hoja");
     const vertical = p.tipo === "historia" || p.tipo === "reel";
@@ -292,9 +312,9 @@ button { font: inherit; color: inherit; }
           <figcaption><span>${String(i + 1).padStart(2, "0")}</span><button class="boton suave" data-bajar="${pl.src}" data-nombre="${pl.nombre}">${icono.bajar}Descargar</button></figcaption></figure>`).join("")}</div>
         <p class="ayuda">Si el botón no descarga en tu celular, mantené apretada la imagen y elegí «Guardar imagen».</p></div>`;
     }
-    hoja.innerHTML = `<div class="hoja-cabeza"><div><span class="epigrafe-marca">${largo(p.fecha)} · ${p.hora}</span><h2 id="hoja-titulo">${esc(p.titulo)}</h2></div>
+    hoja.innerHTML = `<div class="hoja-cabeza"><div><span class="epigrafe-marca">${p.fecha ? `${largo(p.fecha)} · ${p.hora}` : "Video nuevo · para aprobar"}</span><h2 id="hoja-titulo">${esc(p.titulo)}</h2></div>
         <button class="cerrar" data-cerrar aria-label="Cerrar">${icono.cerrar}</button></div>
-      <div class="datos"><span class="chip fuerte">${esc(etiqueta(p))}</span><span class="chip">Semana ${p.semana} · ${esc(D.semanas[p.semana - 1].tema)}</span></div>
+      <div class="datos"><span class="chip fuerte">${esc(etiqueta(p))}</span><span class="chip">${p.semana ? `Semana ${p.semana} · ${esc(D.semanas[p.semana - 1].tema)}` : esc(p.tema)}</span></div>
       ${p.nota ? `<div class="bloque"><p class="nota">${esc(p.nota)}</p></div>` : ""}
       ${medios}
       ${p.texto ? `<div class="bloque"><h3><span>Texto para pegar</span><button class="boton" data-copiar-texto>${icono.copiar}Copiar texto</button></h3><pre class="texto-post" id="texto-post">${esc(p.texto)}</pre></div>` : ""}`;
@@ -354,6 +374,6 @@ button { font: inherit; color: inherit; }
   document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && !$("#hoja").hidden) cerrar(); });
 
   const h = location.hash.slice(1);
-  if (D.piezas.some((p) => p.id === h)) abrir(h, false);
+  if (D.piezas.some((p) => p.id === h) || (D.videos || []).some((p) => p.id === h)) abrir(h, false);
 })();
 </script>
