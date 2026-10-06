@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Reel — Café en tu Casa</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pieza.css">
+<style>
+  /* Las placas del reel, apiladas: se van fundiendo una sobre otra. */
+  #reel { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #101012; }
+  #reel .lienzo { position: absolute; inset: 0; }
+  .barra u { transform-origin: left center; }
+</style>
+</head>
+<body>
+<div id="reel"></div>
+<script src="../assets/js/productos.js"></script>
+<script src="contenido.js"></script>
+<script src="pieza.js"></script>
+<script>
+  /* Cada placa de un reel es una escena. Lo que tiene adentro entra de a
+     uno (sube y aparece); las fotos se acercan despacio y las barras
+     crecen. filmar.mjs pide los cuadros uno por uno con cuadro(f). */
+  const FPS = 30;
+  const FUNDIDO = 0.35;
+  const SUBE = [{ opacity: 0, transform: 'translateY(46px)' }, { opacity: 1, transform: 'none' }];
+  const POP  = [{ opacity: 0, transform: 'scale(.86)' }, { opacity: 1, transform: 'scale(1)' }];
+  const SUAVE = 'cubic-bezier(.2,.7,.2,1)';
+
+  // Tiempo para leer: una base más un poco por cada cosa que aparece
+  const duracion = (placa, cosas) => placa.d || Math.min(5.5, 1.9 + cosas * 0.42);
+
+  async function listo() {
+    await document.fonts.ready;
+    await Promise.all([...document.images].map(i => i.complete ? null : new Promise(r => { i.onload = i.onerror = r; })));
+  }
+
+  /** Arma el reel y devuelve cuántos cuadros tiene. */
+  window.prepararReel = async id => {
+    const pieza = PIEZAS.find(p => p.id === id);
+    const root = document.getElementById('reel');
+    root.innerHTML = pieza.placas.map((_, n) => placaHTML(pieza, n)).join('');
+
+    const escenas = [...root.children].map((div, i) => {
+      const cosas = [...div.querySelectorAll('main > *, .lista li, .col, .barra, .opciones > div')]
+        .filter(el => !el.matches('.lista, .cols, .barras, .opciones'));
+      return { div, cosas, d: duracion(pieza.placas[i], cosas.length) };
+    });
+    const total = escenas.reduce((t, e) => t + e.d, 0);
+    const T = total * 1000;
+    const o = s => Math.min(1, Math.max(0, s / total));
+
+    let ini = 0;
+    escenas.forEach((e, i) => {
+      const fin = ini + e.d, ultima = i === escenas.length - 1;
+      const kf = [{ opacity: 0, offset: 0 }, { opacity: 0, offset: o(ini) }, { opacity: 1, offset: o(ini + (i ? FUNDIDO : 0)) }, { opacity: 1, offset: o(fin) }];
+      if (!ultima) kf.push({ opacity: 0, offset: o(fin + .001) });
+      kf.push({ opacity: ultima ? 1 : 0, offset: 1 });
+      e.div.animate(kf, { duration: T, fill: 'both' });
+
+      e.div.querySelector('.marca').animate(SUBE, { delay: ini * 1000, duration: 600, fill: 'both', easing: SUAVE });
+      e.cosas.forEach((el, k) => {
+        const desde = (ini + 0.2 + k * 0.16) * 1000;
+        const grande = el.matches('.num, .foto, .boton, .col');
+        el.animate(grande ? POP : SUBE, { delay: desde, duration: 700, fill: 'both', easing: SUAVE });
+        const barra = el.querySelector(':scope > u');
+        if (barra) barra.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { delay: desde + 200, duration: 1100, fill: 'both', easing: 'cubic-bezier(.4,0,.2,1)' });
+      });
+      for (const foto of e.div.querySelectorAll('.foto img'))
+        foto.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.07)' }], { delay: ini * 1000, duration: e.d * 1000, fill: 'both', easing: 'linear' });
+      ini = fin;
+    });
+
+    await listo();
+    return Math.round(total * FPS);
+  };
+
+  /** Deja todo en el cuadro f. */
+  window.cuadro = f => {
+    for (const a of document.getAnimations()) { a.pause(); a.currentTime = (f * 1000) / FPS; }
+  };
+
+  // Para mirar un cuadro suelto: reel.html?id=<pieza>&f=60
+  const q = new URLSearchParams(location.search);
+  if (q.get('id')) prepararReel(q.get('id')).then(() => cuadro(+q.get('f') || 45));
+</script>
+</body>
+</html>

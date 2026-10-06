@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Pieza de Instagram — Café en tu Casa</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pieza.css">
+</head>
+<body>
+<script src="../assets/js/productos.js"></script>
+<script src="contenido.js"></script>
+<script src="pieza.js"></script>
+<script>
+  // pieza.html?id=<pieza>&n=<placa, desde 0>
+  const q = new URLSearchParams(location.search);
+  const pieza = PIEZAS.find(x => x.id === q.get('id')) || PIEZAS[0];
+  document.body.innerHTML = placaHTML(pieza, +q.get('n') || 0);
+</script>
+</body>
+</html>

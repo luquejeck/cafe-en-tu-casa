@@ -1,0 +1,359 @@
+<title>Café en tu Casa en Instagram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* La vidriera del sitio, hecha agenda: cuatro semanas en fila, cada día
+   con su pieza como un tile, y el detalle se abre como una hoja al costado.
+   Los colores y la tipografía son los de cafe-en-tu-casa.vercel.app. */
+:root {
+  --bg: #f5f5f7;
+  --papel: #ffffff;
+  --hundido: #ececf0;
+  --linea: rgba(0, 0, 0, .10);
+  --ink: #1d1d1f;
+  --ink-2: #6e6e73;
+  --oliva: #5b6e32;
+  --oliva-fuerte: #455426;
+  --oliva-suave: rgba(91, 110, 50, .12);
+  --boton: #1d1d1f;
+  --sobre-boton: #ffffff;
+  --sombra: 0 2px 10px rgba(0, 0, 0, .05);
+  --sombra-alta: 0 18px 60px rgba(0, 0, 0, .14);
+  --velo: rgba(0, 0, 0, .42);
+  --texto: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --r: 22px;
+  --r-chico: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101012; --papel: #1c1c1f; --hundido: #26262a; --linea: rgba(255, 255, 255, .14);
+    --ink: #f5f5f7; --ink-2: #a1a1a6; --oliva: #a3c26a; --oliva-fuerte: #c5dd96; --oliva-suave: rgba(163, 194, 106, .16);
+    --boton: #f5f5f7; --sobre-boton: #1d1d1f;
+    --sombra: 0 2px 10px rgba(0, 0, 0, .4); --sombra-alta: 0 18px 60px rgba(0, 0, 0, .6); --velo: rgba(0, 0, 0, .62);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101012; --papel: #1c1c1f; --hundido: #26262a; --linea: rgba(255, 255, 255, .14);
+  --ink: #f5f5f7; --ink-2: #a1a1a6; --oliva: #a3c26a; --oliva-fuerte: #c5dd96; --oliva-suave: rgba(163, 194, 106, .16);
+  --boton: #f5f5f7; --sobre-boton: #1d1d1f;
+  --sombra: 0 2px 10px rgba(0, 0, 0, .4); --sombra-alta: 0 18px 60px rgba(0, 0, 0, .6); --velo: rgba(0, 0, 0, .62);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--texto); font-size: 16px; line-height: 1.5; margin: 0; -webkit-font-smoothing: antialiased; }
+.envoltura { max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 36px 90px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2 { font-weight: 600; text-wrap: balance; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--oliva); outline-offset: 3px; border-radius: 6px; }
+
+.epigrafe-marca { font-size: 13px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--oliva); display: flex; align-items: center; gap: 10px; }
+.epigrafe-marca::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--oliva); }
+
+/* ------------------------------------------------------------ cabecera */
+.cabecera { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 40px; align-items: end; }
+.cabecera h1 { font-size: clamp(38px, 7vw, 72px); line-height: 1.04; letter-spacing: -.035em; margin-top: 14px; }
+.cabecera .plomo { margin-top: 16px; color: var(--ink-2); font-size: 18px; max-width: 58ch; }
+.cifras { display: flex; flex-wrap: wrap; gap: 6px 26px; margin: 20px 0 0; padding: 0; list-style: none; color: var(--ink-2); font-size: 15px; }
+.cifras b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.proxima { background: var(--papel); border-radius: var(--r); box-shadow: var(--sombra); padding: 20px 22px; min-width: 0; max-width: 340px; display: grid; gap: 4px; }
+.proxima small { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--oliva); }
+.proxima strong { font-weight: 600; font-size: 18px; letter-spacing: -.01em; }
+.proxima span { color: var(--ink-2); font-size: 14px; }
+.proxima .boton { justify-self: start; margin-top: 10px; }
+
+.boton { display: inline-flex; align-items: center; gap: 8px; border: 0; background: var(--boton); color: var(--sobre-boton); padding: 10px 18px; border-radius: 980px; font-weight: 600; font-size: 14px; cursor: pointer; }
+.boton.suave { background: var(--oliva-suave); color: var(--oliva-fuerte); }
+.boton:disabled { opacity: .6; cursor: default; }
+.boton svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; flex: none; }
+
+/* ------------------------------------------------------------ calendario */
+.semana { margin-top: 48px; }
+.semana header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-bottom: 14px; }
+.semana header h2 { font-size: 26px; letter-spacing: -.025em; }
+.semana header span { color: var(--ink-2); font-size: 15px; }
+.dias { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+.dia { min-width: 0; }
+.dia > button { width: 100%; height: 100%; text-align: left; border: 0; background: var(--papel); border-radius: var(--r); box-shadow: var(--sombra); padding: 12px; cursor: pointer; display: flex; flex-direction: column; gap: 10px; transition: transform .3s cubic-bezier(.28, .11, .32, 1), box-shadow .3s; }
+.dia > button:hover { transform: translateY(-3px); box-shadow: var(--sombra-alta); }
+.dia.hoy > button { box-shadow: 0 0 0 2px var(--oliva), var(--sombra); }
+.fecha { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; color: var(--ink-2); }
+.fecha b { font-size: 20px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.miniatura { position: relative; aspect-ratio: 4 / 5; border-radius: var(--r-chico); overflow: hidden; background: var(--hundido); max-width: 100%; }
+.miniatura img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.formato { position: absolute; left: 6px; bottom: 6px; background: rgba(16, 16, 18, .78); color: #f5f5f7; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 980px; }
+.cuerpo-dia { display: grid; gap: 3px; min-width: 0; }
+.que { font-size: 14px; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; }
+.hora { font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 860px) { .dias { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .cabecera { grid-template-columns: 1fr; }
+  .proxima { max-width: none; }
+  .dias { grid-template-columns: 1fr; gap: 8px; }
+  .dia > button { flex-direction: row; align-items: center; gap: 14px; }
+  .dia .fecha { flex-direction: column; align-items: center; width: 44px; flex: none; }
+  .dia .miniatura { width: 72px; flex: none; }
+  .dia .formato { display: none; }
+  .que { font-size: 16px; }
+}
+@media (min-width: 561px) { .formato-txt { display: none; } }
+
+/* ------------------------------------------------------------------ notas */
+.notas { margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; }
+.notas article { background: var(--papel); border-radius: var(--r); box-shadow: var(--sombra); padding: 24px 26px; min-width: 0; }
+.notas h3 { font-size: 20px; font-weight: 600; letter-spacing: -.02em; margin-bottom: 10px; }
+.notas ul { margin: 0; padding-left: 18px; display: grid; gap: 7px; color: var(--ink-2); font-size: 15px; }
+.notas li::marker { color: var(--oliva); }
+.notas strong { color: var(--ink); font-weight: 600; }
+
+/* ------------------------------------------------------------------ hoja */
+.velo { position: fixed; inset: 0; background: var(--velo); z-index: 20; }
+.hoja { position: fixed; z-index: 21; top: 0; right: 0; bottom: 0; width: min(760px, 100%); background: var(--bg); overflow-y: auto; overscroll-behavior: contain;
+  padding: calc(env(safe-area-inset-top, 0px) + 22px) 20px calc(env(safe-area-inset-bottom, 0px) + 44px); box-shadow: var(--sombra-alta); }
+.hoja-cabeza { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.cerrar { border: 0; background: var(--hundido); width: 42px; height: 42px; border-radius: 50%; cursor: pointer; flex: none; display: grid; place-items: center; }
+.cerrar svg { width: 18px; height: 18px; stroke: var(--ink); stroke-width: 2; fill: none; }
+.hoja h2 { font-size: clamp(28px, 6vw, 42px); line-height: 1.07; letter-spacing: -.03em; margin-top: 10px; }
+.datos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.chip { font-size: 13px; font-weight: 500; padding: 5px 12px; border-radius: 980px; background: var(--hundido); color: var(--ink-2); }
+.chip.fuerte { background: var(--oliva-suave); color: var(--oliva-fuerte); font-weight: 600; }
+.bloque { margin-top: 30px; }
+.bloque > h3 { font-size: 12px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--oliva); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.tira { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; }
+.tira figure { margin: 0; flex: none; width: min(280px, 72vw); scroll-snap-align: start; display: grid; gap: 8px; }
+.tira.vertical figure { width: min(240px, 64vw); }
+.tira img { width: 100%; height: auto; border-radius: var(--r-chico); box-shadow: var(--sombra); display: block; background: var(--hundido); }
+.tira figcaption { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.video { display: grid; grid-template-columns: minmax(0, 290px) minmax(0, 1fr); gap: 20px; align-items: start; }
+.video video { width: 100%; aspect-ratio: 9 / 16; border-radius: var(--r); background: #101012; display: block; }
+.estado-video { margin-top: 10px; font-size: 14px; color: var(--ink-2); }
+.video .acciones { display: grid; gap: 10px; justify-items: start; align-content: start; }
+.video .acciones img { width: 120px; height: auto; border-radius: 10px; box-shadow: var(--sombra); }
+@media (max-width: 560px) { .video { grid-template-columns: 1fr; } .video .reproductor { max-width: 290px; } }
+.texto-post { white-space: pre-wrap; background: var(--papel); border-radius: var(--r); box-shadow: var(--sombra); padding: 18px 20px; font: inherit; font-size: 15px; line-height: 1.55; margin: 0; overflow-wrap: anywhere; }
+.nota { background: var(--oliva-suave); color: var(--ink); border-radius: var(--r-chico); padding: 14px 18px; font-size: 15px; }
+.ayuda { font-size: 13px; color: var(--ink-2); margin-top: 10px; max-width: 60ch; }
+
+.aviso { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); transform: translateX(-50%); background: var(--boton); color: var(--sobre-boton); padding: 12px 20px; border-radius: 980px; font-size: 14px; font-weight: 500; z-index: 40; box-shadow: var(--sombra-alta); max-width: calc(100% - 32px); text-align: center; }
+@media (prefers-reduced-motion: no-preference) { .hoja { animation: entra .22s ease-out; } @keyframes entra { from { transform: translateX(24px); opacity: .6; } } }
+@media (prefers-reduced-motion: reduce) { .dia > button { transition: none; } }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<div class="envoltura">
+  <header class="cabecera">
+    <div>
+      <span class="epigrafe-marca">Café en tu Casa · Instagram</span>
+      <h1>Un mes de contenido, día por día</h1>
+      <p class="plomo">Lo que se publica cada día en @cafentucasa. Tocá un día para ver las placas o el video, copiar el texto y descargar los archivos.</p>
+      <ul class="cifras" id="cifras"></ul>
+    </div>
+    <aside class="proxima" id="proxima" aria-live="polite"></aside>
+  </header>
+
+  <main id="calendario"></main>
+
+  <section class="notas" aria-label="Cómo subir cada cosa">
+    <article>
+      <h3>Al subir cada cosa</h3>
+      <ul>
+        <li><strong>Carrusel</strong>: elegí las placas en orden (01, 02…). Instagram respeta el orden en que las tocás.</li>
+        <li><strong>Reel</strong>: va sin música; se agrega en Instagram (Agregar audio). La portada se elige en Editar portada → Agregar desde la galería.</li>
+        <li><strong>Historia con pregunta</strong>: sumale el sticker de encuesta o de preguntas desde Instagram.</li>
+      </ul>
+    </article>
+    <article>
+      <h3>Antes de publicar</h3>
+      <ul>
+        <li>Los <strong>precios</strong> van en los textos y en las historias. Confirmalos en el sitio el mismo día.</li>
+        <li>El <strong>link de la bio</strong> tiene que llevar al sitio: casi todas las piezas terminan ahí.</li>
+        <li>Si cambia un precio o una cuota, se regeneran las piezas y esta página se actualiza.</li>
+      </ul>
+    </article>
+    <article>
+      <h3>Horarios</h3>
+      <ul>
+        <li><strong>Carruseles, post y reels</strong>: 10:00, el mejor horario de la cuenta de lunes a viernes.</li>
+        <li><strong>Historias</strong>: a la mañana, y volvé a mirarlas a la tarde para responder mensajes.</li>
+        <li>Los domingos descansa la cuenta.</li>
+      </ul>
+    </article>
+  </section>
+</div>
+
+<div class="velo" id="velo" hidden></div>
+<aside class="hoja" id="hoja" hidden role="dialog" aria-modal="true" aria-labelledby="hoja-titulo"></aside>
+<div class="aviso" id="aviso" hidden role="status"></div>
+
+<script type="application/json" id="datos">__DATOS__</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById("datos").textContent);
+  const $ = (s, r = document) => r.querySelector(s);
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+  const CORTO = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+  const MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+  const fecha = (iso) => new Date(iso + "T12:00:00");
+  const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  const largo = (s) => { const d = fecha(s); return `${DIAS[d.getDay()]} ${d.getDate()} de ${MESES[d.getMonth()]}`; };
+  const NOMBRE = { carrusel: "Carrusel", post: "Post", historia: "Historia", reel: "Reel" };
+  const etiqueta = (p) => p.tipo === "reel" ? "▶ Reel" : p.tipo === "carrusel" ? `Carrusel · ${p.placas.length}` : NOMBRE[p.tipo];
+  const icono = {
+    bajar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    copiar: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/></svg>',
+    cerrar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>',
+  };
+
+  let reloj;
+  function aviso(txt) { const a = $("#aviso"); a.textContent = txt; a.hidden = false; clearTimeout(reloj); reloj = setTimeout(() => (a.hidden = true), 2600); }
+
+  /* -------------------------------------------------------- descargas */
+  let descargas = null;
+  if (window.claude?.use) window.claude.use("downloads").then((d) => { descargas = d; }).catch(() => {});
+
+  async function bajar(boton, url, nombre) {
+    if (!descargas) return aviso("Mantené apretada la imagen y elegí «Guardar»");
+    const antes = boton.innerHTML;
+    boton.disabled = true; boton.textContent = "Preparando…";
+    try {
+      const blob = await (await fetch(url)).blob();
+      const r = await descargas.save({ filename: nombre, data: blob });
+      if (r?.status === "saved") aviso("Listo, descargado");
+    } catch (e) {
+      if (e?.code === "rate_limited") aviso("Esperá a que termine la descarga anterior");
+      else if (e?.code !== "declined") aviso("No se pudo descargar acá. Probá mantener apretada la imagen.");
+    } finally { boton.disabled = false; boton.innerHTML = antes; }
+  }
+  async function bajarZip(boton, p) {
+    if (!descargas || !window.JSZip) return aviso("Descargá las placas de a una");
+    const antes = boton.innerHTML;
+    boton.disabled = true; boton.textContent = "Armando el zip…";
+    try {
+      const zip = new JSZip();
+      for (const pl of p.placas) zip.file(pl.nombre, await (await fetch(pl.src)).blob());
+      const blob = await zip.generateAsync({ type: "blob" });
+      await descargas.save({ filename: `${p.archivo}.zip`, data: blob });
+    } catch (e) {
+      if (e?.code !== "declined") aviso("El zip no se pudo bajar acá: descargá las placas de a una");
+    } finally { boton.disabled = false; boton.innerHTML = antes; }
+  }
+  async function copiar(texto, nodo) {
+    try { await navigator.clipboard.writeText(texto); aviso("Texto copiado"); }
+    catch {
+      const r = document.createRange(); r.selectNodeContents(nodo); const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      aviso("Quedó seleccionado: tocá Copiar");
+    }
+  }
+
+  /* ---------------------------------------------------------- cabecera */
+  const cuenta = (t) => D.piezas.filter((p) => p.tipo === t).length;
+  $("#cifras").innerHTML = `<li><b>${D.piezas.length}</b> publicaciones</li><li><b>${cuenta("carrusel")}</b> carruseles</li><li><b>${cuenta("reel")}</b> reels</li><li><b>${cuenta("historia")}</b> historias</li><li><b>${cuenta("post")}</b> post</li>`;
+  const hoy = iso(new Date());
+  const proxima = D.piezas.find((p) => p.fecha >= hoy);
+  $("#proxima").innerHTML = proxima
+    ? `<small>${proxima.fecha === hoy ? "Hoy se publica" : "Próxima publicación"}</small><strong>${esc(proxima.titulo)}</strong><span>${largo(proxima.fecha)} · ${proxima.hora} · ${esc(etiqueta(proxima))}</span><button class="boton" data-abrir="${proxima.id}">Ver qué subir</button>`
+    : `<small>Mes terminado</small><strong>Ya se publicó todo</strong><span>Toca armar el mes que sigue.</span>`;
+
+  /* -------------------------------------------------------- calendario */
+  $("#calendario").innerHTML = D.semanas.map((s, i) => `
+    <div class="semana"><header><h2>Semana ${i + 1} · ${esc(s.tema)}</h2><span>${esc(s.bajada)}</span></header><ol class="dias">
+    ${D.piezas.filter((p) => p.semana === i + 1).map((p) => {
+      const d = fecha(p.fecha);
+      return `<li class="dia${p.fecha === hoy ? " hoy" : ""}"><button data-abrir="${p.id}" aria-label="${esc(largo(p.fecha))}: ${esc(p.titulo)}">
+        <div class="fecha"><span>${CORTO[d.getDay()]}</span><b>${d.getDate()}</b></div>
+        <div class="miniatura"><img src="${p.tapa}" alt="" loading="lazy"><span class="formato">${esc(etiqueta(p))}</span></div>
+        <div class="cuerpo-dia"><span class="que">${esc(p.titulo)}</span><span class="hora">${p.hora}<span class="formato-txt"> · ${esc(etiqueta(p))}</span></span></div></button></li>`;
+    }).join("")}</ol></div>`).join("");
+
+  /* -------------------------------------------------------------- hoja */
+  function abrir(id, empujar = true) {
+    const p = D.piezas.find((x) => x.id === id);
+    if (!p) return;
+    const hoja = $("#hoja");
+    const vertical = p.tipo === "historia" || p.tipo === "reel";
+    let medios;
+    if (p.video) {
+      medios = `<div class="bloque"><h3>El video</h3><div class="video">
+        <div class="reproductor" data-video="${p.video.src}"><video controls playsinline preload="metadata" poster="${p.video.portada}"></video><p class="estado-video" hidden></p></div>
+        <div class="acciones">
+          <button class="boton" data-bajar="${p.video.src}" data-nombre="${p.video.nombre}">${icono.bajar}Descargar el video</button>
+          <img src="${p.video.portada}" alt="Portada del reel">
+          <button class="boton suave" data-bajar="${p.video.portada}" data-nombre="${p.video.portadaNombre}">${icono.bajar}Descargar la portada</button>
+        </div></div></div>`;
+    } else {
+      medios = `<div class="bloque"><h3><span>${p.placas.length === 1 ? "La imagen" : `Las ${p.placas.length} placas, en orden`}</span>
+        ${p.placas.length > 1 ? `<button class="boton suave" data-zip="${p.id}">${icono.bajar}Todas (.zip)</button>` : ""}</h3>
+        <div class="tira${vertical ? " vertical" : ""}">${p.placas.map((pl, i) => `<figure><img src="${pl.src}" alt="Placa ${i + 1} de ${p.placas.length}" loading="lazy">
+          <figcaption><span>${String(i + 1).padStart(2, "0")}</span><button class="boton suave" data-bajar="${pl.src}" data-nombre="${pl.nombre}">${icono.bajar}Descargar</button></figcaption></figure>`).join("")}</div>
+        <p class="ayuda">Si el botón no descarga en tu celular, mantené apretada la imagen y elegí «Guardar imagen».</p></div>`;
+    }
+    hoja.innerHTML = `<div class="hoja-cabeza"><div><span class="epigrafe-marca">${largo(p.fecha)} · ${p.hora}</span><h2 id="hoja-titulo">${esc(p.titulo)}</h2></div>
+        <button class="cerrar" data-cerrar aria-label="Cerrar">${icono.cerrar}</button></div>
+      <div class="datos"><span class="chip fuerte">${esc(etiqueta(p))}</span><span class="chip">Semana ${p.semana} · ${esc(D.semanas[p.semana - 1].tema)}</span></div>
+      ${p.nota ? `<div class="bloque"><p class="nota">${esc(p.nota)}</p></div>` : ""}
+      ${medios}
+      ${p.texto ? `<div class="bloque"><h3><span>Texto para pegar</span><button class="boton" data-copiar-texto>${icono.copiar}Copiar texto</button></h3><pre class="texto-post" id="texto-post">${esc(p.texto)}</pre></div>` : ""}`;
+    hoja.hidden = false; $("#velo").hidden = false;
+    document.body.style.overflow = "hidden";
+    hoja.scrollTop = 0;
+    prepararVideo(hoja);
+    $(".cerrar", hoja).focus();
+    if (empujar) history.replaceState(null, "", "#" + id);
+  }
+
+  /* El video, con plan B: si el celular no lo reproduce por dirección
+     (Safari del iPhone lo pide en pedazos), se baja entero y se
+     reproduce desde la memoria. */
+  function prepararVideo(raiz) {
+    const caja = raiz.querySelector("[data-video]");
+    if (!caja) return;
+    const v = caja.querySelector("video"), estado = caja.querySelector(".estado-video"), url = caja.dataset.video;
+    let planB = false, espera = null;
+    const decir = (t) => { estado.textContent = t; estado.hidden = !t; };
+    async function entero() {
+      if (planB) return;
+      planB = true; clearTimeout(espera);
+      decir("Cargando el video…");
+      try {
+        const r = await fetch(url);
+        if (!r.ok) throw new Error(String(r.status));
+        v.src = URL.createObjectURL(new Blob([await r.blob()], { type: "video/mp4" }));
+        v.load(); decir("");
+        v.play().catch(() => decir("Listo: tocá ▶ para verlo."));
+      } catch { decir("Este dispositivo no puede reproducir el video acá. Descargalo con el botón."); }
+    }
+    v.addEventListener("error", () => { if (!planB) entero(); else decir("Este dispositivo no puede reproducir el video acá. Descargalo con el botón."); });
+    v.addEventListener("loadeddata", () => clearTimeout(espera));
+    v.addEventListener("play", () => {
+      if (planB || v.readyState >= 2) return;
+      clearTimeout(espera);
+      espera = setTimeout(() => { if (v.readyState < 2) entero(); }, 5000);
+    });
+    v.src = url;
+  }
+  function cerrar() {
+    const v = $("#hoja video");
+    if (v) { v.pause(); if (v.src.startsWith("blob:")) URL.revokeObjectURL(v.src); }
+    $("#hoja").hidden = true; $("#velo").hidden = true; document.body.style.overflow = "";
+    history.replaceState(null, "", "#");
+  }
+
+  document.addEventListener("click", (ev) => {
+    const t = ev.target;
+    const ab = t.closest("[data-abrir]"); if (ab) return abrir(ab.dataset.abrir);
+    if (t.closest("[data-cerrar]") || t.id === "velo") return cerrar();
+    const b = t.closest("[data-bajar]"); if (b) return bajar(b, b.dataset.bajar, b.dataset.nombre);
+    const z = t.closest("[data-zip]"); if (z) return bajarZip(z, D.piezas.find((p) => p.id === z.dataset.zip));
+    if (t.closest("[data-copiar-texto]")) return copiar($("#texto-post").textContent, $("#texto-post"));
+  });
+  document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && !$("#hoja").hidden) cerrar(); });
+
+  const h = location.hash.slice(1);
+  if (D.piezas.some((p) => p.id === h)) abrir(h, false);
+})();
+</script>

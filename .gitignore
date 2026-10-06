@@ -15,3 +15,8 @@ desktop.ini
 
 # Fotos originales sin procesar (no se publican)
 fuentes/
+
+# Skills de Claude instaladas con "npx skills" (no se publican)
+.agents/
+.claude/skills/
+skills-lock.json

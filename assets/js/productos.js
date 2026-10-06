@@ -37,8 +37,8 @@ const PRODUCTOS = [
     etiqueta: 'Más vendida',
     tagline: 'Café en grano, recién molido, con un botón.',
     resumen: 'La compañera perfecta para llevar la experiencia del barista a tu casa. Diseñada en Italia, extrae el máximo aroma del grano apretando un solo botón.',
-    precioLista: 1500000,
-    precioML:    1500000,
+    precioLista: 1586212,
+    precioML:    1506901,
     cuotas: 9,
     stock: true,
     color: 'Negro',
@@ -83,8 +83,8 @@ const PRODUCTOS = [
     etiqueta: 'Mejor precio',
     tagline: 'Superautomática, compacta, sin vueltas.',
     resumen: 'Elegancia compacta y rendimiento superior, diseñada en Francia para los que buscan un espresso intenso y equilibrado todos los días.',
-    precioLista: 1150000,
-    precioML:    1150000,
+    precioLista: 1145299,
+    precioML:    1145299,
     cuotas: 6,
     stock: true,
     color: 'Negro',
@@ -122,17 +122,17 @@ const PRODUCTOS = [
     etiqueta: 'Ultracompacta',
     tagline: 'Solo 15 cm de ancho. Todo el ritual.',
     resumen: 'El estándar en diseño ultracompacto para quienes disfrutan el ritual manual del café de especialidad.',
-    precioLista: 730000,
-    precioML:    730000,
+    precioLista: 790000,
+    precioML:    790000,
     cuotas: 9,
     stock: true,
-    color: 'Acero inoxidable',
+    color: '',                          // no se indica el color
     medidas: { ancho: 14.9, profundidad: 33, alto: 30.4 },
     linkML: 'https://www.mercadolibre.com.ar/cafetera-express-delonghi-dedica-ec-685-acero-15-bares-color-metal/p/MLA69097041',
     imgs: ['assets/img/dedica.webp'],
     highlights: [
       'Solo 15 cm de ancho: entra en cualquier mesada',
-      'Chasis íntegro de acero inoxidable',
+      'Depósito de agua extraíble de 1,1 L',
       'Lista en unos 40 segundos gracias al Thermoblock',
       'Portafiltro profesional y Cappuccino System regulable'
     ],
@@ -140,7 +140,6 @@ const PRODUCTOS = [
       ['Tipo de cafetera', 'Espresso manual con portafiltro'],
       ['Presión', '15 bares'],
       ['Medidas (an x prof x alto)', '14,9 x 33 x 30,4 cm'],
-      ['Material', 'Acero inoxidable'],
       ['Depósito de agua', '1,1 L extraíble'],
       ['Café admitido', 'Molido y cápsulas E.S.E.'],
       ['Filtros', 'Presurizados de 1 y 2 tazas'],
@@ -149,7 +148,7 @@ const PRODUCTOS = [
       ['Programación', '3 botones: espresso, doble y vapor'],
       ['Tensión', '220 V']
     ],
-    descripcion: 'La Dedica EC685 es para el que disfruta el proceso: dosificar, tampear, colocar el portafiltro y ver caer el espresso. Con 15 cm de ancho es una de las espresso más finas del mercado, y el chasis completo de acero inoxidable la hace ver mucho más cara de lo que es.\n\nEl Thermoblock la deja lista en unos 40 segundos, sin la espera larga de las máquinas con caldera. Los tres botones frontales manejan espresso simple, doble y vapor, y las dos primeras se pueden reprogramar al volumen exacto que te guste.\n\nEl Cappuccino System se regula entre leche caliente y cappuccino, así que podés hacer microespuma para cortados y lattes sin técnica de barista. Acepta café molido y también cápsulas E.S.E. si querés la vía rápida.'
+    descripcion: 'La Dedica EC685 es para el que disfruta el proceso: dosificar, tampear, colocar el portafiltro y ver caer el espresso. Con 15 cm de ancho es una de las espresso más finas del mercado.\n\nEl Thermoblock la deja lista en unos 40 segundos, sin la espera larga de las máquinas con caldera. Los tres botones frontales manejan espresso simple, doble y vapor, y las dos primeras se pueden reprogramar al volumen exacto que te guste.\n\nEl Cappuccino System se regula entre leche caliente y cappuccino, así que podés hacer microespuma para cortados y lattes sin técnica de barista. Acepta café molido y también cápsulas E.S.E. si querés la vía rápida.'
   }
 ];
 
