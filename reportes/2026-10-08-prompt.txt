@@ -1,0 +1,33 @@
+Plan de Instagram para la semana del 9 al 18 de octubre (@cafentucasa)
+
+Contexto: el reporte semanal de métricas (Metricool, marca luquejeck, brandId 7276711) dice lo siguiente:
+- Reel Magnifica S (7/10): 135 vistas, 79 personas alcanzadas (10% de los 817 seguidores), 11 likes, 0 guardados, 0 compartidos, 0 comentarios. Tiempo medio de visualización: 7 s sobre ~14 s. Arranca con el nombre del modelo y el precio recién aparece en el cierre.
+- Mejor horario: lunes a viernes a las 10:00. El fin de semana la audiencia activa es la mitad.
+- Audiencia: 56% hombres, 76% de 25 a 54 años, 39% en CABA.
+- El domingo 18/10 es el Día de la Madre y no hay nada programado para eso.
+
+Antes de empezar, leé reportes/APRENDIZAJES.md del repo cafe-en-tu-casa: son las reglas que salen de los datos y se suman al manual de marca. Si algo choca con el manual, gana APRENDIZAJES.md.
+
+1) Nuevas piezas para el Día de la Madre (con las reglas de siempre: manual de marca, Inter, oliva, producto real sobre blanco, transferencia y cuotas juntas)
+- Carrusel "Tres cafeteras. Una es la de mamá." Adaptá el carrusel s1-mar-carrusel-las-tres: cada placa responde "¿cómo toma el café ella?" (varios por día y con leche → Magnifica S; mesada chica → Krups Roma; le gusta prepararlo → Dedica). Cierre: "Envío gratis a todo el país · link en la bio".
+- Reel de 10 a 12 s "¿Todavía no tenés el regalo de mamá?". Ese texto va en el primer segundo. Antes del segundo 5: las tres cafeteras con "20% OFF por transferencia". Cierre: "Mandáselo a tus hermanos" + link en la bio. Usá un recurso visual que no se haya usado en los otros videos.
+- Historia del sábado 17 con cuenta regresiva al domingo (la subo yo desde el celular con el sticker; vos dejame la placa 1080x1920).
+- En los textos podés decir "En AMBA llega en 24 a 72 h". Antes de poner una fecha límite de compra para que llegue el domingo, confirmala conmigo.
+
+2) Cambios a lo que ya está programado en Metricool
+- Vie 9: Reel "Cortado, cappuccino o latte" → pasalo de las 11:30 a las 10:00. En el texto, cambiá el cierre por: "¿Vos sos de cortado, cappuccino o latte? Guardalo para tu próximo café."
+- Dom 11: Reel "Comprar en tres pasos" → sacalo de esta semana (domingo y tema repetido). Guardalo para más adelante.
+- Lun 12: Reel "Molienda fina o gruesa" → pasalo de las 18:00 a las 10:00. Cierre: "¿Fina o gruesa? Contanos cómo te gusta. Guardalo para cuando ajustes tu molinillo."
+- Mar 13: Carrusel "Tres cafeteras" → reemplazalo por el carrusel del Día de la Madre a las 10:00.
+- Mié 14: Reel "¿Transferencia o cuotas?" → reemplazalo por el reel del Día de la Madre a las 10:00. Pasá "Transferencia o cuotas" a la semana del 19.
+- Jue 15: Carrusel "Dos formas de pagar" queda a las 10:00. Reel "3 hábitos para un café mejor": pasalo del viernes 16 a las 18:00 al jueves 15 a las 18:00.
+- Vie 16: Reel "Del grano a la taza" (Magnifica S) → pasalo del domingo 18 al viernes 16 a las 10:00, con el texto en ángulo regalo ("El regalo que usa todos los días").
+- Sáb 17: historia con cuenta regresiva. Dom 18: nada.
+
+3) Cambio de fórmula para los reels que vienen (del 19 en adelante)
+- Gancho en el primer segundo: precio, pregunta o beneficio. No arrancar con el nombre del modelo solo.
+- El dato que vende antes del segundo 6. Duración de 9 a 12 s.
+- Cierre con un pedido de guardar o compartir, más una pregunta en el texto.
+- Aplicalo en instagram/videos.js y volvé a filmar los reels de la semana del 19 antes de reprogramarlos.
+
+Cuando termines, pasame una tabla con: día, hora, formato, pieza y qué cambió. Actualizá también el artifact "Café en tu Casa en Instagram" para que el calendario coincida con Metricool.
