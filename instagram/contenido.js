@@ -25,6 +25,10 @@ const precios = p =>
 const pagoCta = p => `${OFF}% OFF por transferencia<br>o ${p.cuotas} cuotas sin interés`;
 const lema = p => p.tagline.replace('. ', '.<br>');
 const CIERRE = 'Escribinos por WhatsApp desde el link de la bio.';
+/* Desde el 12/10 los textos de feed cierran pidiendo guardar o compartir, más
+   una pregunta fácil (reportes/APRENDIZAJES.md). El WhatsApp va en el cuerpo. */
+const cierre = (pide, pregunta) => `${pide}\n\n${pregunta}`;
+const WA = `Consultas por WhatsApp al ${TIENDA.whatsappVisible}.`;
 
 /* La cuenta del café (mismos números que la calculadora del sitio) */
 const costoCasa   = TIENDA.precioKiloCafe / TIENDA.cafesPorKilo;
@@ -54,8 +58,9 @@ const PIEZAS = [
       `Krups Roma: la superautomática más accesible, y entra en mesadas justas.\n` +
       `Dedica: 15 cm de ancho para los que disfrutan preparar el espresso a mano.\n\n` +
       `Las tres con ${OFF}% OFF por transferencia o cuotas sin interés, envío gratis y ${TIENDA.garantiaMeses} meses de garantía oficial.\n\n` +
-      '¿No sabés cuál? Hacé el test de 4 preguntas desde el link de la bio.\n\n' +
-      '#cafeencasa #cafetera #espresso #delonghi #krups',
+      '¿No sabés cuál? El test de 4 preguntas del sitio te recomienda una.\n\n' +
+      cierre('Guardalo para cuando te decidas, o compartilo con quien está buscando cafetera.', '¿Cuál te llevarías vos?') +
+      '\n\n#cafeencasa #cafetera #espresso #delonghi #krups',
     placas: [
       { t: 'portada', ep: 'Elegí la tuya', h: 'Tres cafeteras. Una es la tuya.', sub: 'Te las presentamos en un minuto.' },
       { t: 'foto', tono: 'gris', ep: M.etiqueta, h: M.modelo, sub: lema(M), img: M.imgs[0] },
@@ -87,7 +92,8 @@ const PIEZAS = [
       `2) Cuotas sin interés con tarjeta, desde nuestra publicación oficial en Mercado Libre.\n\n` +
       'El descuento por transferencia no se combina con las cuotas.\n' +
       `En los dos casos: envío gratis, máquina nueva y sellada, y ${TIENDA.garantiaMeses} meses de garantía oficial.\n\n` +
-      CIERRE,
+      WA + '\n\n' +
+      cierre('Guardalo para cuando vayas a comprar, o compartilo con quien está por hacerlo.', '¿Vos pagarías por transferencia o en cuotas?'),
     placas: [
       { t: 'portada', ep: 'Cómo comprar', h: 'Dos formas de pagar.', sub: 'Las dos con envío gratis y garantía oficial.' },
       { t: 'dos', tono: 'gris', h: 'Vos elegís',
@@ -126,14 +132,16 @@ const PIEZAS = [
     caption:
       'Del grano a la taza, con un botón. ☕\n\n' +
       `La ${P.nombre(M)} muele en el momento, prepara el espresso y espuma la leche para el cappuccino.\n\n` +
-      precios(M) + '\n\n' + CIERRE + '\n\n#cafeencasa #cafetera #delonghi #magnificas #espresso',
+      precios(M) + '\n\n' + WA + '\n\n' +
+      cierre('Guardalo, o compartilo con quien toma café de cafetería todos los días.', '¿Vos cuántos cafés tomás por día?') +
+      '\n\n#cafeencasa #cafetera #delonghi #magnificas #espresso',
+    /* 10,2 s (antes ~21): el precio aparece a los 2,4 s */
     placas: [
-      { t: 'portada', tono: 'oscuro', ep: M.modelo, h: 'Del grano a la taza.', sub: 'Con un botón.' },
-      { t: 'foto', tono: 'gris', ep: 'Paso 1', h: 'Cargás el grano', sub: 'Lo muele en el momento, en cada taza.', img: M.imgs[0] },
-      { t: 'foto', tono: 'gris', ep: 'Paso 2', h: 'Apretás un botón', sub: 'Sin menús ni pantallas.', img: M.imgs[3] },
-      { t: 'foto', tono: 'gris', ep: 'Paso 3', h: 'Sale el espresso', sub: 'Simple o doble.', img: M.imgs[1] },
-      { t: 'foto', tono: 'gris', ep: 'Paso 4', h: 'Espumás la leche', sub: 'Para cappuccino y latte.', img: M.imgs[2] },
-      { t: 'cta', tono: 'oscuro', ep: P.nombre(M), h: 'Café de cafetería, en tu casa.', sub: pagoCta(M), boton: 'Link en la bio' }
+      { t: 'portada', tono: 'oscuro', ep: M.modelo, h: 'Del grano a la taza.', sub: 'Con un botón.', d: 1.8 },
+      { t: 'foto', tono: 'gris', ep: 'Muele en el momento', h: 'Un botón por taza', img: M.imgs[1],
+        pildora: `${fmt(P.transferencia(M))} por transferencia · ${OFF}% OFF`, d: 3.2 },
+      { t: 'foto', tono: 'gris', ep: 'Y espuma la leche', h: 'Cappuccino y latte', img: M.imgs[2], d: 2.6 },
+      { t: 'cta', tono: 'oscuro', ep: P.nombre(M), h: '¿Cuántos cafés tomás por día?', sub: pagoCta(M), boton: 'Guardalo · Compartilo', d: 2.6 }
     ]
   },
 
@@ -153,7 +161,9 @@ const PIEZAS = [
     caption:
       `${P.nombre(M)}: la superautomática más vendida, por algo. 👇\n\n` +
       M.highlights.map(h => '· ' + h).join('\n') + '\n\n' +
-      precios(M) + '\n\n' + CIERRE + '\n\n#delonghi #magnificas #cafeencasa #cafetera #cafeengrano',
+      precios(M) + '\n\n' + WA + '\n\n' +
+      cierre('Guardalo para comparar, o compartilo con quien está buscando cafetera.', '¿Qué es lo primero que te fijás en una cafetera?') +
+      '\n\n#delonghi #magnificas #cafeencasa #cafetera #cafeengrano',
     placas: [
       { t: 'portada', ep: M.etiqueta, h: M.modelo, sub: lema(M), img: M.imgs[0] },
       { t: 'foto', tono: 'gris', ep: 'Molinillo integrado', h: 'Muele en el momento', sub: 'El aroma no se pierde en un paquete abierto.', img: M.imgs[1] },
@@ -203,7 +213,9 @@ const PIEZAS = [
       'Hacé la cuenta. 🧮\n\n' +
       `Dos cafés por día en un bar son unos ${fmt(mesAfuera)} por mes. Los mismos dos cafés, hechos en casa con grano, salen cerca de ${fmt(mesCasa)}.\n\n` +
       `Con esa diferencia, la ${M.modelo} por transferencia se paga sola en unos ${mesesAmort} meses.\n\n` +
-      'Los valores son aproximados: en el sitio tenés la calculadora para poner tus números. Link en la bio.\n\n#cafeencasa #cafetera #ahorro',
+      'Los valores son aproximados: en el sitio tenés la calculadora para poner tus números.\n\n' +
+      cierre('Guardalo para hacer tu cuenta, o compartilo con quien vive en el bar.', '¿Cuántos cafés tomás afuera por semana?') +
+      '\n\n#cafeencasa #cafetera #ahorro',
     placas: [
       { t: 'portada', tono: 'oscuro', ep: 'Hacé la cuenta', h: '¿Cuánto gastás en café por mes?', sub: `Con ${CAFES_DIA} cafés por día.` },
       { t: 'dato', tono: 'gris', ep: 'En un bar', num: fmt(TIENDA.precioCafeAfuera), sub: 'cada café, aproximadamente' },
@@ -392,6 +404,52 @@ const PIEZAS = [
       { t: 'texto', tono: 'gris', ep: 'Pregunta 3', h: '¿Cuánto lugar libre tenés en la mesada?', p: 'Medí el ancho disponible.' },
       { t: 'texto', tono: 'gris', ep: 'Pregunta 4', h: '¿Apretar un botón o prepararlo vos?', p: 'No hay respuesta correcta.' },
       { t: 'cta', tono: 'oscuro', ep: 'Test de 4 preguntas', h: 'Te decimos cuál es la tuya.', sub: 'Un minuto, desde el sitio.', boton: 'Link en la bio' }
+    ]
+  },
+
+  /* ================= DÍA DE LA MADRE (domingo 18/10) =================
+     Se le habla al que compra el regalo. Las fechas de entrega NO se
+     prometen acá: se confirman con Lucas y se contestan por WhatsApp. */
+  {
+    id: 'dm-mar-carrusel-regalo-mama', semana: 1, dia: 'Martes', tipo: 'carrusel', fecha: '2026-10-13',
+    titulo: 'El regalo que mamá usa todos los días',
+    caption:
+      'El regalo que mamá usa todos los días. ☕\n\n' +
+      'Para el Día de la Madre (domingo 18/10), tres cafeteras:\n\n' +
+      PRODUCTOS.map(p => `${p.modelo}: ${fmt(P.transferencia(p))} por transferencia (${OFF}% OFF) o ${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))} en Mercado Libre.`).join('\n') + '\n\n' +
+      `Las tres con envío gratis a todo el país y ${TIENDA.garantiaMeses} meses de garantía oficial. Nuevas y selladas de fábrica.\n\n` +
+      WA + '\n\n' +
+      cierre('Guardalo para regalar, o compartilo con quien lo va a regalar con vos.', '¿Quién es la mamá cafetera de tu casa? 👇') +
+      '\n\n#diadelamadre #regalodiadelamadre #cafeencasa #cafetera #delonghi #krups',
+    placas: [
+      { t: 'portada', ep: 'Día de la Madre · domingo 18/10', h: 'El regalo que mamá usa todos los días.', sub: 'Tres cafeteras para regalar.', img: M.imgs[1] },
+      ...PRODUCTOS.map(p => ({ t: 'foto', tono: 'gris', ep: `${p.modelo} · ${OFF}% OFF`, h: fmt(P.transferencia(p)),
+        sub: `por transferencia, o ${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))} en Mercado Libre.`, img: p.imgs[0] })),
+      { t: 'lista', tono: 'gris', ep: 'Para regalar tranquilo', h: 'Las tres, con todo',
+        items: [['Envío gratis a todo el país', 'Con número de seguimiento.'],
+                [`${TIENDA.garantiaMeses} meses de garantía oficial`, 'Con servicio técnico en el país.'],
+                ['Nueva y sellada de fábrica', 'Lista para envolver.']] },
+      { t: 'cta', tono: 'oscuro', ep: 'Guardalo para regalar', h: '¿Quién es la mamá cafetera de tu casa?', sub: 'Contanos en los comentarios.', boton: 'Guardalo · Compartilo' }
+    ]
+  },
+  {
+    id: 'dm-sab-historia-manana', semana: 1, dia: 'Sábado', tipo: 'historia', fecha: '2026-10-17',
+    titulo: 'Mañana es el Día de la Madre',
+    caption: '',
+    nota: 'Al publicarla: sticker de preguntas ("¿Qué le regalás a mamá?") o encuesta (¿Magnifica, Krups o Dedica?) en el espacio libre, y sticker de link a WhatsApp.',
+    placas: [
+      { t: 'texto', tono: 'oscuro', ep: 'Mañana es el Día de la Madre', h: '¿Ya tenés el regalo?',
+        p: 'Dejanos tu pregunta acá abajo o escribinos por WhatsApp: te ayudamos a elegir.', pildora: `WhatsApp ${TIENDA.whatsappVisible}` }
+    ]
+  },
+  {
+    id: 'dm-dom-historia-feliz-dia', semana: 1, dia: 'Domingo', tipo: 'historia', fecha: '2026-10-18',
+    titulo: 'Feliz Día de la Madre',
+    caption: '',
+    nota: 'Al publicarla: sticker de link a WhatsApp (wa.me/' + TIENDA.whatsapp + ').',
+    placas: [
+      { t: 'cta', tono: 'oscuro', ep: 'Domingo 18 de octubre', h: 'Feliz día, mamá. ☕',
+        sub: '¿Consultas? Escribinos por WhatsApp, también hoy.', boton: `WhatsApp ${TIENDA.whatsappVisible}` }
     ]
   }
 ];

@@ -31,6 +31,21 @@ Firmeza: **señal** (1–2 piezas) · **probado** (3+ piezas o 3+ semanas) · **
 | Sábado y domingo: solo historias. Los domingos descansa la cuenta. | La audiencia activa del finde es la mitad. Ya estaba en el manual de marca. | probado |
 | Una pieza de feed por día, como máximo. | Que no compitan entre sí. | regla |
 
+## Qué se mide (semana del 12 al 18/10)
+
+Primera semana con la fórmula nueva aplicada. Por pieza, **guardados y compartidos** (`IGRE12`, `IGRE21`, `IGPO13`/`IGPO15`) son lo que más pesa; después tiempo medio de vista de reels (`IGRE24`) y comentarios.
+
+| Pieza | Formato | Duración | Dato que vende |
+|---|---|---|---|
+| Molienda fina o gruesa (lun 12) | reel | 11,6 s | 13 niveles a los 2 s, precio a los 3 s |
+| El regalo que mamá usa todos los días (mar 13) | carrusel 6 | — | precio en las láminas 2 a 4 |
+| ¿Qué le regalás a mamá? (mié 14) | reel | 10 s | Magnifica S + precio con 20% OFF a los 2,8 s |
+| Dos formas de pagar (jue 15) | carrusel 6 | — | — |
+| 3 hábitos (vie 16) | reel | 10,6 s | los 3 hábitos antes del segundo 6; precio en el cierre (8 s) |
+| Cortado, cappuccino o latte (vie 9) | reel | 11,8 s | precio a los 2,8 s |
+
+Preguntas que tiene que contestar el reporte: ¿sube el tiempo medio de vista con reels de 10-12 s? ¿Aparecen los primeros guardados y compartidos? ¿Los tips (molienda, hábitos) se guardan más que los de producto?
+
 ## Audiencia
 
 - 56% hombres, 28% mujeres. 76% tiene entre 25 y 54 años; el grupo más grande es hombres de 45–54.
@@ -44,4 +59,4 @@ Firmeza: **señal** (1–2 piezas) · **probado** (3+ piezas o 3+ semanas) · **
 - Diciembre: Navidad y Reyes.
 
 ---
-Última actualización: 8/10/2026 (reporte de prueba, 1 reel medido).
+Última actualización: 8/10/2026 (reporte de prueba, 1 reel medido). Semana del 12/10 programada con la fórmula nueva.

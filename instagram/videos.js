@@ -5,15 +5,21 @@
    Lo que lleva data-a entra animado, en el orden en que aparece;
    data-t fija el momento (segundos desde que arranca la escena).
    Se filman con:   node instagram/filmar.mjs --videos
-   Los precios NO van en el video: van en el texto de la publicación.
+   Fórmula (reportes/APRENDIZAJES.md): 9 a 12 s en total, gancho en el
+   primer segundo y el dato que vende (con el precio) antes del segundo 6.
+   El precio sale de productos.js: si cambia, hay que volver a filmar.
+   El texto cierra pidiendo guardar o compartir, más una pregunta.
    ============================================================ */
 
 const VM = getProducto('magnifica-s');
+const VD = getProducto('dedica');   // la más barata: el "desde"
 const V_OFF = TIENDA.descuentoTransferencia * 100;
 const vPrecios = p =>
   `💸 ${fmt(P.transferencia(p))} por transferencia (${V_OFF}% OFF)\n` +
   `💳 o ${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))} en Mercado Libre\n` +
   `📦 Envío gratis a todo el país`;
+/* Cierre de los textos: guardar o compartir, y una pregunta fácil */
+const vCierre = (pide, pregunta) => `${pide}\n\n${pregunta}`;
 
 /* ---------- Piezas que se repiten ---------- */
 const V = {
@@ -21,6 +27,7 @@ const V = {
   titulo: (t, tam = '', x = '') => `<h1 class="${tam}" data-a="palabras" ${x}>${t}</h1>`,
   sub:    (t, x = '') => `<p class="sub" data-a="sube" ${x}>${t}</p>`,
   boton:  (t, x = '') => `<p class="boton" data-a="pop" ${x}>${t}</p>`,
+  precio: (p, t = 1, antes = '') => `<p class="precio" data-a="pop" data-t="${t}">${antes}<b>${fmt(P.transferencia(p))}</b> por transferencia · ${V_OFF}% OFF</p>`,
   chips:  (lista, t0 = .9) => `<div class="chips">${lista.map((c, i) => `<span class="chip" data-a="pop" data-t="${(t0 + i * .22).toFixed(2)}">${c}</span>`).join('')}</div>`,
   foto:   (src, flotan = [], clase = '') => `<div class="foto ${clase}" data-a="pop"><img src="../${src}" data-a="acerca" alt="">${flotan.map(f =>
             `<span class="flota" data-a="pop" data-t="${f.t}" style="${f.pos}">${f.txt}</span>`).join('')}</div>`,
@@ -43,10 +50,10 @@ const V = {
             <circle class="centro" cx="310" cy="310" r="26"/></svg></div>
             <div class="dial-extremos" data-a="sube"><span>Fina</span><span>Gruesa</span></div>`,
   /* vaso: capas de abajo hacia arriba, en % del alto */
-  vaso:   capas => { let t = .6; return `<div class="vaso-fila"><div class="vaso" data-a="pop" data-t=".2">
-            ${capas.map(c => { const s = `<div class="capa ${c[0]}" data-a="llena" data-h="${c[1]}" data-t="${t.toFixed(2)}" data-dur=".8"></div>`; t += .7; return s; }).join('')}</div>
-            <div class="leyenda">${[...capas].reverse().map((c, i) => `<div data-a="der" data-t="${(.6 + (capas.length - 1 - i) * .7).toFixed(2)}"><i class="capa ${c[0]}"></i>${c[2]}</div>`).join('')}</div></div>`; },
-  cierre: ({ ep = 'Café en tu Casa', h, sub, boton = 'Link en la bio', tono = 'oscuro', d = 3.4 }) => ({ d, tono,
+  vaso:   (capas, paso = .7) => { let t = .6; return `<div class="vaso-fila"><div class="vaso" data-a="pop" data-t=".2">
+            ${capas.map(c => { const s = `<div class="capa ${c[0]}" data-a="llena" data-h="${c[1]}" data-t="${t.toFixed(2)}" data-dur=".8"></div>`; t += paso; return s; }).join('')}</div>
+            <div class="leyenda">${[...capas].reverse().map((c, i) => `<div data-a="der" data-t="${(.6 + (capas.length - 1 - i) * paso).toFixed(2)}"><i class="capa ${c[0]}"></i>${c[2]}</div>`).join('')}</div></div>`; },
+  cierre: ({ ep = 'Café en tu Casa', h, sub, boton = 'Guardalo · Compartilo', tono = 'oscuro', d = 2.4 }) => ({ d, tono,
             html: `${V.ep(ep)}${V.titulo(h, 'm')}${sub ? V.sub(sub) : ''}${V.boton(boton)}` })
 };
 
@@ -66,39 +73,43 @@ const VIDEOS = [
   {
     id: 'v01-comprar-en-3-pasos', titulo: 'Comprar tu cafetera, en 3 pasos', tema: 'Cómo se compra',
     estilo: { fondo: 'puntos', entrada: 'lado', alinea: 'izq' },
+    /* 10,2 s · el precio (desde, por transferencia) a los 4,7 s */
     caption:
       'Comprar tu cafetera lleva tres pasos. 👇\n\n' +
       '1. Elegís la tuya en el sitio, con medidas y ficha completa.\n' +
-      `2. Elegís cómo pagar: transferencia con ${V_OFF}% OFF o cuotas sin interés.\n` +
+      `2. Elegís cómo pagar: transferencia con ${V_OFF}% OFF (desde ${fmt(P.transferencia(VD))}) o cuotas sin interés en Mercado Libre.\n` +
       '3. Te llega a tu casa, con envío gratis y número de seguimiento.\n\n' +
-      'Todas son nuevas y vienen selladas de fábrica.\n\n' +
-      'Mirá las tres desde el link de la bio.\n\n#cafeencasa #cafetera #espresso #comprasonline',
+      `Todas son nuevas, vienen selladas de fábrica y tienen ${TIENDA.garantiaMeses} meses de garantía oficial.\n\n` +
+      vCierre('Guardalo para cuando te decidas, o compartilo con quien está por comprar una.', '¿Vos pagarías por transferencia o en cuotas?') +
+      '\n\n#cafeencasa #cafetera #espresso #comprasonline',
     escenas: [
-      { d: 2.8, tono: 'oscuro', html: `${V.ep('Cómo comprar')}${V.titulo('Tu cafetera, en <em>3 pasos.</em>')}` },
-      { d: 5.4, tono: 'gris', html: `${V.titulo('Así de simple', 's')}${V.pasos([
+      { d: 1.8, tono: 'oscuro', html: `${V.ep('Cómo comprar')}${V.titulo('Tu cafetera, en <em>3 pasos.</em>')}` },
+      { d: 3.6, tono: 'gris', html: `${V.pasos([
           ['Elegís tu cafetera', 'En el sitio, con medidas y ficha completa.'],
           ['Elegís cómo pagar', `Transferencia con ${V_OFF}% OFF o cuotas sin interés.`],
-          ['Te llega a tu casa', 'Envío gratis, con seguimiento.']])}` },
-      { d: 4.2, tono: 'oliva', html: `${V.ep('Siempre')}${V.titulo('Nueva y sellada de fábrica.', 'm')}${V.chips(['Envío gratis', 'Con seguimiento', '30 días para devolverla'], 1.3)}` },
-      V.cierre({ h: 'Mirá las tres en el sitio.' })
+          ['Te llega a tu casa', 'Envío gratis, con seguimiento.']])}${V.precio(VD, 2.9, 'Desde ')}` },
+      { d: 2.4, tono: 'oliva', html: `${V.ep('Siempre')}${V.titulo('Nueva y sellada de fábrica.', 'm')}${V.chips(['Envío gratis', `${TIENDA.garantiaMeses} meses de garantía`], .7)}` },
+      V.cierre({ h: '¿Transferencia o cuotas?', sub: 'Guardalo para cuando te decidas.' })
     ]
   },
   {
     id: 'v02-transferencia-o-cuotas', titulo: '¿Transferencia o cuotas?', tema: 'Cómo se compra',
     estilo: { fondo: 'liso', entrada: 'cortina', alinea: 'centro' },
+    /* 9,8 s · los dos precios a los 2,15 s y 2,6 s */
     caption:
       '¿Transferencia o cuotas? Vos elegís. 👇\n\n' +
-      `Transferencia o efectivo: ${V_OFF}% OFF. Nos escribís por WhatsApp, te confirmamos stock y despachamos apenas se acredita.\n` +
-      'Cuotas sin interés: con tarjeta, desde nuestra publicación en Mercado Libre.\n\n' +
+      `Transferencia o efectivo: ${V_OFF}% OFF. La ${VM.modelo} queda en ${fmt(P.transferencia(VM))}. Nos escribís por WhatsApp, te confirmamos stock y despachamos apenas se acredita.\n` +
+      `Cuotas sin interés: ${VM.cuotas} de ${fmt(P.cuota(VM))} con tarjeta, desde nuestra publicación en Mercado Libre.\n\n` +
       'El descuento no se combina con las cuotas. En los dos casos, el envío es gratis.\n\n' +
-      'Elegí la tuya desde el link de la bio.\n\n#cafeencasa #cafetera #cuotassininteres',
+      vCierre('Guardalo para hacer la cuenta, o compartilo con quien está por comprar.', '¿Vos de qué lado estás: transferencia o cuotas?') +
+      '\n\n#cafeencasa #cafetera #cuotassininteres',
     escenas: [
-      { d: 2.6, tono: 'oliva', html: `${V.ep('Formas de pago')}${V.titulo('¿Transferencia o cuotas?')}` },
-      { d: 5.0, tono: 'oscuro', html: V.mitades(
-          ['Mejor precio', `${V_OFF}% OFF`, 'Transferencia o efectivo, por WhatsApp.'],
-          ['Financiado', 'Cuotas sin interés', 'Con tarjeta, en Mercado Libre.']) },
-      { d: 3.2, html: `${V.ep('En los dos casos')}${V.titulo('Envío <em>gratis</em> a todo el país.', 'm')}` },
-      V.cierre({ h: 'Elegí la tuya en el sitio.', tono: 'oliva' })
+      { d: 1.8, tono: 'oliva', html: `${V.ep('Formas de pago')}${V.titulo('¿Transferencia o cuotas?')}` },
+      { d: 3.4, tono: 'oscuro', html: V.mitades(
+          [`Transferencia · ${V_OFF}% OFF`, fmt(P.transferencia(VM)), `${VM.modelo}, por WhatsApp.`],
+          ['Mercado Libre', `${VM.cuotas} × ${fmt(P.cuota(VM))}`, 'Cuotas sin interés, con tarjeta.']) },
+      { d: 2.2, html: `${V.ep('En los dos casos')}${V.titulo('Envío <em>gratis</em> a todo el país.', 'm')}` },
+      V.cierre({ h: '¿Vos de qué lado estás?', sub: 'Guardalo para hacer la cuenta.', tono: 'oliva' })
     ]
   },
   {
@@ -122,10 +133,10 @@ const VIDEOS = [
     ]
   },
   {
-    id: 'v04-magnifica-s-en-15-segundos', titulo: 'Magnifica S en 15 segundos', tema: 'Producto',
+    id: 'v04-magnifica-s-en-15-segundos', titulo: 'La Magnifica S, en segundos', tema: 'Producto',
     estilo: { fondo: 'liso', entrada: 'zoom', alinea: 'izq' },
     caption:
-      `${P.nombre(VM)}, en 15 segundos. ☕\n\n` +
+      `${P.nombre(VM)}, en pocas palabras. ☕\n\n` +
       VM.highlights.map(h => '· ' + h).join('\n') + '\n\n' +
       vPrecios(VM) + '\n\n' +
       'Conocela desde el link de la bio.\n\n#delonghi #magnificas #cafeencasa #cafetera #espresso',
@@ -166,36 +177,40 @@ const VIDEOS = [
   {
     id: 'v06-molienda-fina-o-gruesa', titulo: '¿Molienda fina o gruesa?', tema: 'Tips de café',
     estilo: { fondo: 'aros', entrada: 'sube', alinea: 'centro' },
+    /* 11,5 s · "13 niveles en la Magnifica S" a los 2 s y el precio a los 3 s */
     caption:
       '¿Molienda fina o gruesa? Cambia la taza. ☕\n\n' +
       'Más fina: el café sale con más cuerpo y más intenso.\n' +
       'Más gruesa: sale más suave y liviano.\n\n' +
-      `No hay una correcta: es a tu gusto. La ${VM.modelo} tiene 13 niveles para encontrarlo.\n\n` +
-      'Más sobre ella en el link de la bio.\n\n#cafeencasa #molienda #espresso #barista',
+      `No hay una correcta: es a tu gusto. La ${VM.modelo} tiene 13 niveles para encontrarlo, y sale ${fmt(P.transferencia(VM))} por transferencia (${V_OFF}% OFF).\n\n` +
+      vCierre('Guardalo para tu próximo café, o compartilo con alguien que lo toma muy fuerte.', '¿Vos lo preferís con cuerpo o suave?') +
+      '\n\n#cafeencasa #molienda #espresso #barista',
     escenas: [
-      { d: 2.8, tono: 'oliva', html: `${V.ep('Tip de café')}${V.titulo('¿Molienda fina o <em>gruesa?</em>')}` },
-      { d: 4.0, tono: 'gris', html: `${V.titulo('Más fina', 'm')}${V.dial(60, -100)}${V.sub('Más cuerpo, más intenso.', 'data-t="1.6"')}` },
-      { d: 4.0, tono: 'oscuro', html: `${V.titulo('Más gruesa', 'm')}${V.dial(-100, 100)}${V.sub('Más suave, más liviano.', 'data-t="1.6"')}` },
-      { d: 3.6, tono: 'oliva', html: `${V.numero(13)}${V.sub('niveles de molienda en la Magnifica S', 'data-t="1"')}` },
-      V.cierre({ h: 'Encontrá tu punto.', sub: 'Lo elegís vos, con un dial.' })
+      { d: 1.8, tono: 'oliva', html: `${V.ep('Tip de café')}${V.titulo('¿Molienda fina o <em>gruesa?</em>')}` },
+      { d: 2.8, tono: 'oscuro', html: `${V.numero(13)}${V.sub('niveles de molienda en la Magnifica S', 'data-t=".2"')}${V.precio(VM, 1.2)}` },
+      { d: 2.3, tono: 'gris', html: `${V.titulo('Más fina', 'm')}${V.dial(60, -100)}${V.sub('Más cuerpo, más intenso.', 'data-t="1.1"')}` },
+      { d: 2.3, tono: 'oscuro', html: `${V.titulo('Más gruesa', 'm')}${V.dial(-100, 100)}${V.sub('Más suave, más liviano.', 'data-t="1.1"')}` },
+      V.cierre({ h: '¿Con cuerpo o suave?', sub: 'Guardalo para tu próximo café.' })
     ]
   },
   {
     id: 'v07-cortado-cappuccino-o-latte', titulo: 'Cortado, cappuccino o latte', tema: 'Tips de café',
     estilo: { fondo: 'puntos', entrada: 'cortina', alinea: 'centro' },
+    /* 11,8 s · el primer vaso al segundo 2,4 y el precio a los 2,8 s */
     caption:
       'Cortado, cappuccino o latte: ¿qué lleva cada uno? ☕\n\n' +
       'Cortado: espresso con un poco de leche.\n' +
       'Cappuccino: espresso, leche y espuma en partes parecidas.\n' +
       'Latte: espresso con mucha leche y una capa fina de espuma.\n\n' +
-      'Los tres salen del mismo espresso y de un buen espumador.\n\n' +
-      'Mirá las cafeteras que lo hacen desde el link de la bio.\n\n#cafeencasa #cappuccino #latte #cortado',
+      `Los tres salen del mismo espresso y de un buen espumador. La ${VM.modelo} trae los dos: ${fmt(P.transferencia(VM))} por transferencia (${V_OFF}% OFF).\n\n` +
+      vCierre('Guardalo para la próxima vez que pidas en un bar, o compartilo con quien siempre pide lo mismo.', '¿Vos sos de cortado, cappuccino o latte?') +
+      '\n\n#cafeencasa #cappuccino #latte #cortado',
     escenas: [
-      { d: 3.0, html: `${V.ep('Tip de café')}${V.titulo('Cortado, cappuccino o latte.', 'm')}${V.sub('¿Qué lleva cada uno?')}` },
-      { d: 4.0, tono: 'gris', html: `${V.titulo('Cortado', 'm')}${V.vaso([['espresso', 55, 'Espresso'], ['leche', 22, 'Un poco de leche']])}` },
-      { d: 4.4, html: `${V.titulo('Cappuccino', 'm')}${V.vaso([['espresso', 30, 'Espresso'], ['leche', 30, 'Leche'], ['espuma', 30, 'Espuma']])}` },
-      { d: 4.4, tono: 'gris', html: `${V.titulo('Latte', 'm')}${V.vaso([['espresso', 22, 'Espresso'], ['leche', 58, 'Mucha leche'], ['espuma', 10, 'Poca espuma']])}` },
-      V.cierre({ h: 'Hacelos en tu casa.', sub: 'Los tres salen del mismo espresso.', tono: 'oliva' })
+      { d: 1.8, html: `${V.ep('Tip de café')}${V.titulo('Cortado, cappuccino o latte.', 'm')}` },
+      { d: 2.4, tono: 'gris', html: `${V.titulo('Cortado', 'm')}${V.vaso([['espresso', 55, 'Espresso'], ['leche', 22, 'Un poco de leche']], .45)}${V.precio(VM, 1)}` },
+      { d: 2.6, html: `${V.titulo('Cappuccino', 'm')}${V.vaso([['espresso', 30, 'Espresso'], ['leche', 30, 'Leche'], ['espuma', 30, 'Espuma']], .45)}` },
+      { d: 2.6, tono: 'gris', html: `${V.titulo('Latte', 'm')}${V.vaso([['espresso', 22, 'Espresso'], ['leche', 58, 'Mucha leche'], ['espuma', 10, 'Poca espuma']], .45)}` },
+      V.cierre({ h: '¿Vos de cuál sos?', sub: 'Guardalo para la próxima.', tono: 'oliva' })
     ]
   },
   {
@@ -219,18 +234,20 @@ const VIDEOS = [
   {
     id: 'v09-3-habitos-para-un-cafe-mejor', titulo: '3 hábitos para un café mejor', tema: 'Tips de café',
     estilo: { fondo: 'numero', entrada: 'cortina', alinea: 'izq' },
+    /* 10,6 s · los tres hábitos antes del segundo 6 (1,6 · 3,6 · 5,6); el precio va en el cierre */
     caption:
       '3 hábitos para un café mejor en casa. ☕\n\n' +
       '1. Guardá el café en un frasco hermético, lejos de la luz y el calor.\n' +
       '2. Precalentá la taza: el espresso se enfría rápido.\n' +
       '3. Mantené limpia la cafetera: los restos de café viejo cambian el sabor.\n\n' +
-      'Guardalo para tenerlo a mano.\n\n#cafeencasa #tipsdecafe #espresso #barista',
+      vCierre('Guardalo para tenerlo a mano, o compartilo con quien te hace el café.', '¿Cuál de los tres ya hacías?') +
+      '\n\n#cafeencasa #tipsdecafe #espresso #barista',
     escenas: [
-      { d: 2.8, tono: 'oliva', html: `${V.numero(3)}${V.sub('hábitos para un café mejor en casa', 'data-t=".9"')}` },
-      { d: 3.8, n: 1, tono: 'oscuro', html: `${V.titulo('Guardá el café en un frasco hermético', 'm')}${V.sub('Lejos de la luz y el calor.')}` },
-      { d: 3.6, n: 2, tono: 'gris', html: `${V.titulo('Precalentá la taza', 'm')}${V.sub('El espresso se enfría rápido.')}` },
-      { d: 3.8, n: 3, tono: 'oscuro', html: `${V.titulo('Mantené limpia la cafetera', 'm')}${V.sub('El café viejo cambia el sabor.')}` },
-      V.cierre({ tono: 'oliva', h: 'Café de cafetería, en tu casa.', boton: 'Link en la bio' })
+      { d: 1.6, tono: 'oliva', html: `${V.numero(3)}${V.sub('hábitos para un café mejor en casa', 'data-t=".5"')}` },
+      { d: 2.0, n: 1, tono: 'oscuro', html: `${V.titulo('Guardá el café en un frasco hermético', 'm')}${V.sub('Lejos de la luz y el calor.', 'data-t=".7"')}` },
+      { d: 2.0, n: 2, tono: 'gris', html: `${V.titulo('Precalentá la taza', 'm')}${V.sub('El espresso se enfría rápido.', 'data-t=".6"')}` },
+      { d: 2.2, n: 3, tono: 'oscuro', html: `${V.titulo('Mantené limpia la cafetera', 'm')}${V.sub('El café viejo cambia el sabor.', 'data-t=".7"')}` },
+      V.cierre({ tono: 'oliva', h: '¿Cuál ya hacías?', sub: `${VM.modelo}: ${fmt(P.transferencia(VM))} por transferencia.`, d: 2.8 })
     ]
   },
   {
@@ -252,6 +269,26 @@ const VIDEOS = [
           `Tenés ${String(VM.medidas.ancho).replace('.', ',')} cm de mesada`], .6, .8)}` },
       { d: 2.8, tono: 'oliva', html: `${V.titulo('Entonces <em>sí.</em>')}` },
       V.cierre({ ep: '¿Todavía dudás?', h: 'Hacé el test de 4 preguntas.', sub: 'Te recomendamos una y te contamos por qué.' })
+    ]
+  },
+
+  /* ================= FECHAS ================= */
+  {
+    id: 'v11-que-le-regalas-a-mama', titulo: '¿Qué le regalás a mamá?', tema: 'Día de la Madre',
+    estilo: { fondo: 'orbes', entrada: 'zoom', alinea: 'centro' },
+    /* 10 s · gancho en 0-1 s; Magnifica S + precio con 20% OFF a los 2,8 s */
+    caption:
+      '¿Qué le regalás a mamá este domingo? ☕\n\n' +
+      `La ${P.nombre(VM)}: del grano a la taza con un botón. Muele en el momento, prepara el espresso y espuma la leche para el cappuccino.\n\n` +
+      vPrecios(VM) + ` · ${TIENDA.garantiaMeses} meses de garantía oficial\n\n` +
+      'Para consultas y fechas de entrega, escribinos por WhatsApp.\n\n' +
+      vCierre('Compartilo con quien la va a regalar.', '¿Para quién sería: tu mamá, tu suegra o tu abuela?') +
+      '\n\n#diadelamadre #regalodiadelamadre #cafeencasa #delonghi #magnificas',
+    escenas: [
+      { d: 1.8, tono: 'oscuro', html: `${V.ep('Día de la Madre · 18/10')}${V.titulo('¿Qué le regalás a <em>mamá?</em>')}` },
+      { d: 3.4, tono: 'gris', html: `${V.ep(VM.modelo, 'data-t=".05"')}${V.titulo('Del grano a la taza con un botón.', 's', 'data-t=".1"')}${V.foto(VM.imgs[1])}${V.precio(VM, 1)}` },
+      { d: 2.2, html: `${V.ep('Para regalar tranquilo')}${V.chips([`${VM.cuotas} cuotas sin interés`, 'Envío gratis', `${TIENDA.garantiaMeses} meses de garantía`], .3)}` },
+      V.cierre({ ep: 'Día de la Madre', h: 'Compartilo con quien la va a regalar.', sub: '¿Para quién sería?', boton: 'Compartilo', d: 2.6 })
     ]
   }
 ];

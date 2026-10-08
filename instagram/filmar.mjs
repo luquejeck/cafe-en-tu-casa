@@ -66,7 +66,8 @@ for (const id of reels.filter((r) => r.startsWith(filtro))) {
   await new Promise((res) => ff.on("close", res));
   if (modoVideos) {
     // La portada: el final de la primera escena, con todo ya en su lugar
-    await page.evaluate((f) => window.cuadro(f), 66);
+    const fin1 = await page.evaluate((id) => Math.round(VIDEOS.find((v) => v.id === id).escenas[0].d * 30) - 3, id);
+    await page.evaluate((f) => window.cuadro(f), fin1);
     await page.screenshot({ path: path.join(salida, `${id}-portada.jpg`), type: "jpeg", quality: 92, clip: marco });
   }
   console.log("  →", path.relative(path.join(aqui, ".."), destino));
