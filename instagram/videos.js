@@ -121,7 +121,8 @@ const VIDEOS = [
       'Te pasamos el número de seguimiento apenas sale.\n' +
       'Llega en 24 a 72 h en AMBA y en hasta 5 días hábiles en el interior.\n\n' +
       'El envío es gratis a todo el país, por Mercado Envíos.\n\n' +
-      'Todo el detalle está en el sitio: link en la bio.\n\n#cafeencasa #cafetera #enviogratis',
+      vCierre('Guardalo para cuando compres, o compartilo con quien está esperando un envío.', '¿Desde qué ciudad nos leés?') +
+      '\n\n#cafeencasa #cafetera #enviogratis',
     escenas: [
       { d: 2.6, tono: 'oscuro', html: `${V.titulo('Pagaste.<br>¿Y <em>ahora?</em>')}` },
       { d: 6.2, tono: 'oscuro', html: `${V.ep('El recorrido')}${V.pasos([
@@ -161,7 +162,8 @@ const VIDEOS = [
       '4. Espuma la leche para cappuccino y latte.\n' +
       '5. Acepta grano entero o café ya molido.\n\n' +
       vPrecios(VM) + '\n\n' +
-      'La ficha completa está en el link de la bio.\n\n#delonghi #magnificas #cafeencasa #cafetera',
+      vCierre('Guardalo para comparar, o compartilo con quien está buscando cafetera.', '¿Cuál de las cinco es la que más te importa?') +
+      '\n\n#delonghi #magnificas #cafeencasa #cafetera',
     escenas: [
       { d: 2.8, tono: 'oscuro', html: `${V.numero(5)}${V.sub('cosas que hace la Magnifica S', 'data-t=".9"')}` },
       { d: 3.6, n: 1, tono: 'gris', html: `${V.titulo('Muele el grano en el momento', 's')}${V.foto(VM.imgs[1])}` },
@@ -221,7 +223,8 @@ const VIDEOS = [
       'El café empieza a perder aroma apenas se muele. Por eso el grano entero, molido en el momento, llega más fresco a la taza.\n' +
       'El café ya molido es más práctico: conviene comprar de a poco y usarlo pronto.\n\n' +
       `La ${VM.modelo} muele el grano en cada taza, y también acepta café molido.\n\n` +
-      'Conocela desde el link de la bio.\n\n#cafeencasa #cafeengrano #espresso',
+      vCierre('Guardalo para tu próxima compra de café, o compartilo con quien compra siempre molido.', '¿Vos comprás en grano o molido?') +
+      '\n\n#cafeencasa #cafeengrano #espresso',
     escenas: [
       { d: 3.2, tono: 'oliva', html: `${V.ep('Tip de café')}${V.titulo('El café pierde aroma apenas se muele.', 'm')}` },
       { d: 5.0, tono: 'oscuro', html: V.mitades(
