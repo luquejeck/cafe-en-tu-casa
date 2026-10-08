@@ -135,13 +135,13 @@ const PIEZAS = [
       precios(M) + '\n\n' + WA + '\n\n' +
       cierre('Guardalo, o compartilo con quien toma café de cafetería todos los días.', '¿Vos cuántos cafés tomás por día?') +
       '\n\n#cafeencasa #cafetera #delonghi #magnificas #espresso',
-    /* 10,2 s (antes ~21): el precio aparece a los 2,4 s */
+    /* 10,2 s (antes ~21): 20% OFF y cuotas a los 2,4 s. Sin montos: van en el texto */
     placas: [
       { t: 'portada', tono: 'oscuro', ep: M.modelo, h: 'Del grano a la taza.', sub: 'Con un botón.', d: 1.8 },
       { t: 'foto', tono: 'gris', ep: 'Muele en el momento', h: 'Un botón por taza', img: M.imgs[1],
-        pildora: `${fmt(P.transferencia(M))} por transferencia · ${OFF}% OFF`, d: 3.2 },
+        pildora: `${OFF}% OFF por transferencia · ${M.cuotas} cuotas sin interés`, d: 3.2 },
       { t: 'foto', tono: 'gris', ep: 'Y espuma la leche', h: 'Cappuccino y latte', img: M.imgs[2], d: 2.6 },
-      { t: 'cta', tono: 'oscuro', ep: P.nombre(M), h: '¿Cuántos cafés tomás por día?', sub: pagoCta(M), boton: 'Guardalo · Compartilo', d: 2.6 }
+      { t: 'cta', tono: 'oscuro', ep: P.nombre(M), h: '¿Cuántos cafés tomás por día?', sub: 'Café de cafetería, en tu casa.', boton: 'Guardalo · Compartilo', d: 2.6 }
     ]
   },
 
@@ -216,13 +216,13 @@ const PIEZAS = [
       'Los valores son aproximados: en el sitio tenés la calculadora para poner tus números.\n\n' +
       cierre('Guardalo para hacer tu cuenta, o compartilo con quien vive en el bar.', '¿Cuántos cafés tomás afuera por semana?') +
       '\n\n#cafeencasa #cafetera #ahorro',
+    /* 11,4 s · sin montos en el video (quedan viejos): los números van en el texto */
     placas: [
-      { t: 'portada', tono: 'oscuro', ep: 'Hacé la cuenta', h: '¿Cuánto gastás en café por mes?', sub: `Con ${CAFES_DIA} cafés por día.` },
-      { t: 'dato', tono: 'gris', ep: 'En un bar', num: fmt(TIENDA.precioCafeAfuera), sub: 'cada café, aproximadamente' },
-      { t: 'dato', tono: 'gris', ep: 'En tu casa, con grano', num: fmt(costoCasa), sub: 'cada café, aproximadamente' },
-      { t: 'barras', ep: 'Por mes', h: `${CAFES_DIA} cafés por día`,
-        items: [['Afuera', fmt(mesAfuera), mesAfuera, true], ['En casa', fmt(mesCasa), mesCasa]] },
-      { t: 'dato', tono: 'oscuro', ep: `${M.modelo} por transferencia`, num: mesesAmort, unidad: 'meses', sub: 'y se pagó sola.', p: 'Calculá tu caso en el sitio · link en la bio' }
+      { t: 'portada', tono: 'oscuro', ep: 'Hacé la cuenta', h: '¿Cuánto gastás en café por mes?', sub: `Con ${CAFES_DIA} cafés por día.`, d: 1.8 },
+      { t: 'dato', tono: 'gris', ep: 'Afuera', num: CAFES_DIA * 30, unidad: 'cafés', sub: 'por mes, pagados en un bar.', d: 2.4 },
+      { t: 'texto', tono: 'gris', ep: 'En tu casa, con grano', h: 'Cada taza sale una fracción.', p: 'Recién molida, como en la cafetería.', d: 2.4 },
+      { t: 'texto', tono: 'oscuro', ep: `Con la ${M.modelo}`, h: 'La diferencia paga la cafetera.', p: 'Hacé tu cuenta con la calculadora del sitio.', d: 2.4 },
+      { t: 'cta', tono: 'oscuro', ep: 'Hacé la cuenta', h: '¿Cuántos cafés tomás afuera por semana?', boton: 'Guardalo · Compartilo', d: 2.4 }
     ]
   },
 
