@@ -64,6 +64,9 @@ V.mitades = (a, b) => `<div class="mitades">
   <div class="mitad a" data-a="izq" data-t=".35"><p class="ep">${a[0]}</p><b>${a[1]}</b><span>${a[2]}</span></div>
   <div class="mitad b" data-a="der" data-t=".8"><p class="ep">${b[0]}</p><b>${b[1]}</b><span>${b[2]}</span></div></div>`;
 V.cinta = t => `<div class="cinta" data-a="corre">${(t + ' · ').repeat(4)}</div>`;
+/* Monto en pesos: SOLO en reels de un día (v12, pedido del reporte del 12/10).
+   Se filma con el precio del sitio y hay que volver a filmarlo si cambia. */
+V.precio = (monto, linea, cuando) => `<div class="precio" data-a="pop" data-t="${cuando}"><b>${monto}</b><span>${linea}</span></div>`;
 
 /* Cada video tiene su `estilo`, para que no se vean todos iguales:
      fondo:   orbes | puntos | aros | bandas | numero (usa la `n` de cada escena) | liso
@@ -300,6 +303,28 @@ const VIDEOS = [
       { d: 3.4, tono: 'gris', html: `${V.ep(VM.modelo, 'data-t=".05"')}${V.titulo('Del grano a la taza con un botón.', 's', 'data-t=".1"')}${V.foto(VM.imgs[1])}${V.pastilla(`${V_OFF}% OFF por transferencia`, 1)}` },
       { d: 2.2, html: `${V.ep('Para regalar tranquilo')}${V.chips([`${VM.cuotas} cuotas sin interés`, 'Envío gratis', `${TIENDA.garantiaMeses} meses de garantía`], .3)}` },
       V.cierre({ ep: 'Día de la Madre', h: 'Compartilo con quien la va a regalar.', sub: '¿Para quién sería?', boton: 'Compartilo', d: 2.6 })
+    ]
+  },
+  {
+    id: 'v12-ultimo-dia-regalo-mama', titulo: 'Último día para regalarle a mamá', tema: 'Día de la Madre',
+    estilo: { fondo: 'bandas', entrada: 'cortina', alinea: 'centro' },
+    /* 10,4 s · gancho en 0-1 s; Magnifica S a los 1,7 s, precio por transferencia a los 2,1 s y
+       cuotas a los 2,6 s (antes del segundo 4); cierre guardar/compartir + pregunta en los últimos 2,6 s.
+       Lleva el monto en pesos por pedido del reporte: se publica una sola vez (vie 16/10).
+       No promete fecha de entrega: "consultá la fecha de entrega por WhatsApp". */
+    caption:
+      '¿Todavía no tenés regalo para mamá? ☕\n\n' +
+      `La ${P.nombre(VM)}: del grano a la taza con un botón. Muele en el momento, prepara el espresso y espuma la leche para el cappuccino.\n\n` +
+      vPrecios(VM) + ` · ${TIENDA.garantiaMeses} meses de garantía oficial\n\n` +
+      'Consultá la fecha de entrega por WhatsApp antes de comprar.\n\n' +
+      vCierre('Guardalo, o compartilo con quien la va a regalar.', '¿Para quién sería: tu mamá, tu suegra o tu abuela?') +
+      '\n\n#diadelamadre #regalodiadelamadre #cafeencasa #delonghi #magnificas',
+    escenas: [
+      { d: 1.5, tono: 'oscuro', html: `${V.ep('Domingo 18 · Día de la Madre', 'data-t="0"')}${V.titulo('¿Todavía no tenés regalo para <em>mamá?</em>', 'm', 'data-t="0"')}` },
+      { d: 3.6, tono: 'gris', html: `${V.ep(P.nombre(VM), 'data-t=".05"')}${V.foto(VM.imgs[0], [], 'baja')}` +
+          `${V.precio(fmt(P.transferencia(VM)), `por transferencia · ${V_OFF}% OFF`, .6)}${V.pastilla(`o ${VM.cuotas} cuotas sin interés de ${fmt(P.cuota(VM))}`, 1.1)}` },
+      { d: 2.7, tono: 'oliva', html: `${V.ep('Antes de comprar')}${V.titulo('Consultá la fecha de entrega por WhatsApp.', 's')}${V.chips(['Envío gratis', `${TIENDA.garantiaMeses} meses de garantía`], .8)}` },
+      V.cierre({ ep: 'Día de la Madre', h: 'Guardalo o compartilo con quien la va a regalar.', sub: '¿Para quién sería?', boton: 'Guardalo · Compartilo', d: 2.6 })
     ]
   }
 ];

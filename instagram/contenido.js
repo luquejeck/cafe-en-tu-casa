@@ -95,7 +95,8 @@ const PIEZAS = [
       WA + '\n\n' +
       cierre('Guardalo para cuando vayas a comprar, o compartilo con quien está por hacerlo.', '¿Vos pagarías por transferencia o en cuotas?'),
     placas: [
-      { t: 'portada', ep: 'Cómo comprar', h: 'Dos formas de pagar.', sub: 'Las dos con envío gratis y garantía oficial.' },
+      { t: 'portada', ep: 'Cómo comprar', h: 'Dos formas de pagar.', sub: 'Las dos con envío gratis y garantía oficial.',
+        pildora: 'Para el Día de la Madre:<br>consultá la fecha de entrega por WhatsApp' },
       { t: 'dos', tono: 'gris', h: 'Vos elegís',
         cols: [
           { destacada: true, ep: 'Mejor precio', h: `${OFF}% OFF`, items: ['Transferencia o efectivo', 'Se coordina por WhatsApp'] },
@@ -430,6 +431,18 @@ const PIEZAS = [
                 [`${TIENDA.garantiaMeses} meses de garantía oficial`, 'Con servicio técnico en el país.'],
                 ['Nueva y sellada de fábrica', 'Lista para envolver.']] },
       { t: 'cta', tono: 'oscuro', ep: 'Guardalo para regalar', h: '¿Quién es la mamá cafetera de tu casa?', sub: 'Contanos en los comentarios.', boton: 'Guardalo · Compartilo' }
+    ]
+  },
+  {
+    /* Jue 15/10 9:00, autopublicada desde Metricool: por API no se puede poner el
+       sticker de preguntas, así que la placa pide responder la historia (llega por DM). */
+    id: 'dm-jue-historia-para-quien', semana: 1, dia: 'Jueves', tipo: 'historia', fecha: '2026-10-15',
+    titulo: '¿Para quién es la cafetera?',
+    caption: '',
+    nota: 'Si la subís a mano, sumale el sticker de preguntas ("¿Para quién es la cafetera?") en el espacio libre.',
+    placas: [
+      { t: 'texto', tono: 'gris', ep: 'Día de la Madre · domingo 18', h: '¿Para quién es la cafetera?',
+        p: 'Contanos y te recomendamos una.', pildora: 'Respondé esta historia' }
     ]
   },
   {

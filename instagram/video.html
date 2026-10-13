@@ -47,6 +47,11 @@ h1 em { font-style: normal; color: var(--acento); }
 /* pastilla: un dato corto (20% OFF, cuotas). Sin montos en pesos. */
 .pastilla { margin-top: 40px; display: inline-block; white-space: nowrap; background: var(--ink); color: var(--fondo); border-radius: 980px; padding: 22px 44px; font-size: 40px; font-weight: 600; letter-spacing: -.01em; }
 .al-izq .pastilla { align-self: flex-start; }
+/* precio: solo en reels de un día (v12), con el monto del sitio del día en que se filma */
+.precio { margin-top: 34px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.precio b { font-size: 112px; font-weight: 600; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.precio span { font-size: 40px; font-weight: 600; color: var(--acento); letter-spacing: -.01em; }
+.foto.baja { max-height: 640px; }
 .chips { margin-top: 48px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
 .chip { background: var(--acento-suave); color: var(--ink); border-radius: 980px; padding: 24px 42px; font-size: 44px; font-weight: 600; letter-spacing: -.01em; }
 .num { font-size: 380px; font-weight: 600; line-height: .92; letter-spacing: -.06em; font-variant-numeric: tabular-nums; }
