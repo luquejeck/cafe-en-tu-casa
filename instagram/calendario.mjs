@@ -27,26 +27,29 @@ const NOTAS = {
 };
 
 /* Lo que está programado en Metricool (manda sobre semana/día). Actualizado
-   el 8/10 con los cambios de la semana del 12 al 18 de octubre. */
-/* Créditos de Metricool: 20 publicaciones por mes. Octubre: 1 ya usada (7/10)
-   + 16 de feed = 17. Las historias se suben a mano y en Metricool quedan en
+   el 13/10 con el reporte de la semana del 5 al 11 de octubre. */
+/* Créditos de Metricool: 20 publicaciones por mes. Octubre (13/10): 17 de feed
+   (4 publicadas + 13 programadas) + 2 historias autopublicadas (jue 15 y sáb 17)
+   = 19. El resto de las historias se suben a mano y en Metricool quedan en
    borrador como recordatorio. */
+const AUTOPUBLICADA = "Historia autopublicada desde Metricool (gasta 1 crédito). Va sin sticker: la placa pide responder la historia.";
 const HISTORIA_A_MANO = "Historia: se sube a mano desde Instagram (no gasta créditos de Metricool). En Metricool queda en borrador como recordatorio.";
 const AGENDA = {
   "v04-magnifica-s-en-15-segundos": ["2026-10-07", "Publicado"],
   "v07-cortado-cappuccino-o-latte": ["2026-10-09", "10:00"],
-  "s1-lun-historia-test": ["2026-10-12", "09:30", HISTORIA_A_MANO],
-  "v06-molienda-fina-o-gruesa": ["2026-10-12", "10:00"],
-  "dm-mar-carrusel-regalo-mama": ["2026-10-13", "10:00"],
+  "s1-lun-historia-test": ["2026-10-12", "No salió", "Quedó en borrador en Metricool y no se subió a mano."],
+  "v06-molienda-fina-o-gruesa": ["2026-10-12", "Publicado"],
+  "dm-mar-carrusel-regalo-mama": ["2026-10-13", "Publicado"],
   "s1-mie-historia-como-tomas": ["2026-10-14", "09:00", HISTORIA_A_MANO],
   "v11-que-le-regalas-a-mama": ["2026-10-14", "10:00"],
-  "s1-jue-carrusel-como-comprar": ["2026-10-15", "10:00"],
+  "dm-jue-historia-para-quien": ["2026-10-15", "09:00", AUTOPUBLICADA],
+  "s1-jue-carrusel-como-comprar": ["2026-10-15", "10:00", "Lámina 1 con «Para el Día de la Madre: consultá la fecha de entrega por WhatsApp» (13/10)."],
   "s1-vie-historia-20-off": ["2026-10-16", "09:00", HISTORIA_A_MANO],
-  "v09-3-habitos-para-un-cafe-mejor": ["2026-10-16", "10:00"],
-  "dm-sab-historia-manana": ["2026-10-17", "10:00", HISTORIA_A_MANO],
+  "v12-ultimo-dia-regalo-mama": ["2026-10-16", "10:00", "Lleva el precio en pesos del 13/10: si cambia en el sitio antes del viernes, volver a filmarlo (node instagram/filmar.mjs --videos v12) y reemplazarlo en Metricool."],
+  "dm-sab-historia-manana": ["2026-10-17", "09:00", AUTOPUBLICADA],
   "dm-dom-historia-feliz-dia": ["2026-10-18", "10:00", HISTORIA_A_MANO],
   "s2-lun-historia-magnifica": ["2026-10-19", "09:00", HISTORIA_A_MANO],
-  "v01-comprar-en-3-pasos": ["2026-10-19", "10:00"],
+  "v09-3-habitos-para-un-cafe-mejor": ["2026-10-19", "10:00"],
   "s1-mar-carrusel-las-tres": ["2026-10-20", "10:00"],
   "s2-mie-historia-13-niveles": ["2026-10-21", "09:00", HISTORIA_A_MANO],
   "v08-grano-entero-o-molido": ["2026-10-21", "10:00"],
@@ -54,6 +57,7 @@ const AGENDA = {
   "s2-jue-post-magnifica": ["2026-10-22", "Sin programar", "No está en Metricool: ese día va el reel de la Magnifica S."],
   "s2-vie-historia-grano-o-molido": ["2026-10-23", "09:00", HISTORIA_A_MANO],
   "s2-sab-reel-la-cuenta-del-cafe": ["2026-10-23", "10:00"],
+  "v01-comprar-en-3-pasos": ["2026-10-23", "En borrador", "En Metricool quedó en borrador el vie 23: ese día ya sale La cuenta del café (una pieza de feed por día). Lucas elige cuál sale."],
   "v10-la-magnifica-s-es-para-vos": ["2026-10-26", "10:00"],
   "v02-transferencia-o-cuotas": ["2026-10-27", "10:00"],
   "s3-mar-carrusel-krups-a-fondo": ["2026-10-27", "Sin programar", "No está en Metricool."],
@@ -116,6 +120,7 @@ const FECHAS_VIDEOS = {
   "v03-pagaste-y-ahora": "2026-10-23",
   "v10-la-magnifica-s-es-para-vos": "2026-10-26",
   "v11-que-le-regalas-a-mama": "2026-10-14",
+  "v12-ultimo-dia-regalo-mama": "2026-10-16",
 };
 const videos = VIDEOS.map((v) => {
   const fecha = FECHAS_VIDEOS[v.id];
