@@ -15,6 +15,11 @@ const M = getProducto('magnifica-s');
 const K = getProducto('krups-roma');
 const D = getProducto('dedica');
 
+// Solo las que tienen stock: las piezas que muestran "todas" usan esta lista
+const DISP = PRODUCTOS.filter(p => p.stock);
+const CUANTAS = ['Una', 'Dos', 'Tres', 'Cuatro'][DISP.length - 1];
+const SUPER = DISP.filter(p => p.tipo === 'Superautomática');
+
 const OFF = TIENDA.descuentoTransferencia * 100;
 const cm  = n => String(n).replace('.', ',') + ' cm';
 const pagoCorto = p => `${OFF}% OFF por transferencia · ${p.cuotas} cuotas sin interés`;
@@ -47,21 +52,20 @@ const PIEZAS = [
   },
   {
     id: 's1-mar-carrusel-las-tres', semana: 1, dia: 'Martes', tipo: 'carrusel',
-    titulo: 'Tres cafeteras. Una es la tuya.',
+    titulo: `${CUANTAS} cafeteras. Una es la tuya.`,
     caption:
-      'Tres cafeteras. Una es la tuya. ☕\n\n' +
-      `Magnifica S: muele el grano en el momento y hace todo con un botón.\n` +
-      `Krups Roma: la superautomática más accesible, y entra en mesadas justas.\n` +
-      `Dedica: 15 cm de ancho para los que disfrutan preparar el espresso a mano.\n\n` +
-      `Las tres con ${OFF}% OFF por transferencia o cuotas sin interés, envío gratis y ${TIENDA.garantiaMeses} meses de garantía oficial.\n\n` +
+      `${CUANTAS} cafeteras. Una es la tuya. ☕\n\n` +
+      DISP.map(p => ({
+        'magnifica-s': 'Magnifica S: muele el grano en el momento y hace todo con un botón.',
+        'krups-roma':  'Krups Roma: la superautomática más accesible, y entra en mesadas justas.',
+        'dedica':      'Dedica: 15 cm de ancho para los que disfrutan preparar el espresso a mano.' })[p.id]).join('\n') + '\n\n' +
+      `${DISP.length === 2 ? 'Las dos' : 'Todas'} con ${OFF}% OFF por transferencia o cuotas sin interés, y envío gratis.\n\n` +
       '¿No sabés cuál? Hacé el test de 4 preguntas desde el link de la bio.\n\n' +
-      '#cafeencasa #cafetera #espresso #delonghi #krups',
+      '#cafeencasa #cafetera #espresso #delonghi' + (K.stock ? ' #krups' : ''),
     placas: [
-      { t: 'portada', ep: 'Elegí la tuya', h: 'Tres cafeteras. Una es la tuya.', sub: 'Te las presentamos en un minuto.' },
-      { t: 'foto', tono: 'gris', ep: M.etiqueta, h: M.modelo, sub: lema(M), img: M.imgs[0] },
-      { t: 'foto', tono: 'gris', ep: K.etiqueta, h: K.modelo, sub: lema(K), img: K.imgs[0] },
-      { t: 'foto', tono: 'gris', ep: D.etiqueta, h: D.modelo, sub: lema(D), img: D.imgs[0] },
-      { t: 'trio', h: '¿Para quién es cada una?',
+      { t: 'portada', ep: 'Elegí la tuya', h: `${CUANTAS} cafeteras. Una es la tuya.`, sub: 'Te las presentamos en un minuto.' },
+      ...DISP.map(p => ({ t: 'foto', tono: 'gris', ep: p.etiqueta, h: p.modelo, sub: lema(p), img: p.imgs[0] })),
+      { t: 'trio', h: '¿Para quién es cada una?', productos: DISP,
         linea: p => ({ 'magnifica-s': 'Varios cafés por día y lugar en la mesada.',
                        'krups-roma':  'Uno o dos cafés por día, sin vueltas.',
                        'dedica':      'Poco espacio y ganas de prepararlo vos.' })[p.id] },
@@ -264,7 +268,7 @@ const PIEZAS = [
       '¿Superautomática o espresso manual? No hay una mejor: son dos formas distintas de tomar café. 👇\n\n' +
       'Superautomática: cargás granos y apretás un botón. Ideal si tomás varios cafés por día o si en tu casa toman varios.\n' +
       'Espresso manual: dosificás, tampeás y extraés vos. Ideal si disfrutás el proceso y tenés poco espacio.\n\n' +
-      `Tenemos las dos: ${M.modelo} y ${K.modelo} (superautomáticas) y ${D.modelo} (manual).\n\n` +
+      `Tenemos las dos: ${SUPER.map(p => p.modelo).join(' y ')} (${SUPER.length > 1 ? 'superautomáticas' : 'superautomática'}) y ${D.modelo} (manual).\n\n` +
       '¿Dudás? El test de 4 preguntas está en el link de la bio.\n\n#cafeencasa #espresso #cafetera #barista',
     placas: [
       { t: 'portada', ep: 'Guía rápida', h: '¿Superautomática o espresso manual?', sub: 'Dos formas distintas de tomar café.' },
@@ -277,7 +281,7 @@ const PIEZAS = [
         items: [['Tomás varios cafés por día', ''], ['Querés el café listo en un minuto', ''], ['En tu casa toman varios', '']] },
       { t: 'lista', ep: 'Espresso manual', h: 'Es para vos si…',
         items: [['Disfrutás el ritual de prepararlo', ''], ['Tenés poco lugar en la mesada', ''], ['Tomás uno o dos cafés por día', '']] },
-      { t: 'trio', tono: 'gris', h: 'Tenemos las dos', linea: p => p.tipo },
+      { t: 'trio', tono: 'gris', h: 'Tenemos las dos', linea: p => p.tipo, productos: DISP },
       { t: 'cta', tono: 'oscuro', ep: '¿Seguís dudando?', h: 'El test te lo resuelve.', sub: '4 preguntas, un minuto.', boton: 'Link en la bio' }
     ]
   },
@@ -295,12 +299,12 @@ const PIEZAS = [
     titulo: '¿Entra en tu mesada?',
     caption:
       '¿Entra en tu mesada? Medí antes de comprar. 📏\n\n' +
-      PRODUCTOS.map(p => `${p.modelo}: ${cm(p.medidas.ancho)} de ancho`).join('\n') + '\n\n' +
+      DISP.map(p => `${p.modelo}: ${cm(p.medidas.ancho)} de ancho`).join('\n') + '\n\n' +
       'El ancho es lo que más devoluciones evita. Las medidas completas están en cada ficha del sitio. Link en la bio.\n\n#cafeencasa #cafetera #cocina',
     placas: [
       { t: 'portada', tono: 'oscuro', ep: 'Antes de comprar', h: '¿Entra en tu mesada?', sub: 'Medí el ancho libre que tenés.' },
-      { t: 'barras', ep: 'Ancho de cada una', h: 'Las tres, lado a lado',
-        items: PRODUCTOS.map(p => [p.modelo, cm(p.medidas.ancho), p.medidas.ancho]) },
+      { t: 'barras', ep: 'Ancho de cada una', h: 'Lado a lado',
+        items: DISP.map(p => [p.modelo, cm(p.medidas.ancho), p.medidas.ancho]) },
       { t: 'foto', tono: 'gris', ep: D.etiqueta, h: cm(D.medidas.ancho), sub: `La ${D.modelo} entra donde no entra nada.`, img: D.imgs[0] },
       { t: 'texto', tono: 'gris', ep: 'Un consejo', h: 'Dejá aire arriba.', p: 'Para cargar el agua y los granos necesitás abrir la tapa superior.' },
       { t: 'cta', tono: 'oscuro', h: 'Las medidas completas están en el sitio.', sub: 'Ancho, fondo y alto de cada modelo.', boton: 'Link en la bio' }

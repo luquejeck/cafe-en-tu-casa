@@ -14,7 +14,7 @@ const CUERPO = {
   dato:    s => `${ep(s.ep)}<p class="num">${s.num}${s.unidad ? `<small>${s.unidad}</small>` : ''}</p>${sub(s.sub)}${par(s.p)}`,
   lista:   s => `${ep(s.ep)}<h2>${s.h}</h2><ul class="lista">${s.items.map((it, i) =>
              `<li><i>${s.numerada ? i + 1 : '✓'}</i><div><b>${it[0]}</b>${it[1] ? `<span>${it[1]}</span>` : ''}</div></li>`).join('')}</ul>`,
-  trio:    s => `${ep(s.ep)}<h2>${s.h}</h2><div class="cols">${PRODUCTOS.map(p =>
+  trio:    s => `${ep(s.ep)}<h2>${s.h}</h2><div class="cols">${(s.productos || PRODUCTOS).map(p =>
              `<div class="col"><div class="mini">${img(p.imgs[0])}</div><p class="ep">${p.etiqueta}</p><h3>${p.modelo}</h3><p>${s.linea(p)}</p>${s.pie ? `<p class="g">${s.pie(p)}</p>` : ''}</div>`).join('')}</div>`,
   dos:     s => `${ep(s.ep)}<h2>${s.h}</h2><div class="cols dos">${s.cols.map(c =>
              `<div class="col ${c.destacada ? 'destacada' : ''}">${ep(c.ep)}<h3>${c.h}</h3>${c.items.map(t => `<p>${t}</p>`).join('')}</div>`).join('')}</div>`,
