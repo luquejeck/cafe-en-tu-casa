@@ -172,8 +172,7 @@ function renderPDP(id) {
 
       <div class="beneficios-lista">
         <div class="beneficio">${ICO.camion}<span><b>Envío gratis a todo el país.</b> Por Mercado Envíos, con seguimiento.</span></div>
-        <div class="beneficio">${ICO.escudo}<span><b>${TIENDA.garantiaMeses} meses de garantía oficial.</b> Producto nuevo, sellado de fábrica.</span></div>
-        <div class="beneficio">${ICO.cambio}<span><b>Devolución gratis.</b> Tenés 30 días desde que la recibís.</span></div>
+        <div class="beneficio">${ICO.escudo}<span><b>Compra Protegida en Mercado Libre.</b> Garantía y devoluciones según la publicación.</span></div>
       </div>
 
       <div class="destacados">
