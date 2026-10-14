@@ -86,7 +86,7 @@ const PRODUCTOS = [
     precioLista: 1145299,
     precioML:    1145299,
     cuotas: 6,
-    stock: true,
+    stock: false,
     color: 'Negro',
     medidas: { ancho: 24.5, profundidad: 36.5, alto: 33 },
     linkML: 'https://www.mercadolibre.com.ar/cafetera-krups-roma-ea8105-full-auto-negra-220v/up/MLAU3507170292',
