@@ -365,6 +365,14 @@ h1, h2, h3, h4 {
   padding: 5px 11px; border-radius: 6px;
 }
 
+/* Sin stock: se ve con transparencia */
+.tile-cinta-agotado { background: var(--ink); z-index: 1; }
+.tile.sin-stock .tile-img,
+.tile.sin-stock .tile-cab > :not(.tile-acciones),
+.galeria-marco.sin-stock img,
+.pagos.sin-stock { opacity: .45; }
+.pagos.sin-stock + .pago-cta { margin-top: 14px; }
+
 /* ---------- 11. Selector de pago (el corazón) ---------- */
 .pagos { display: grid; gap: 12px; }
 .pagos-2 { grid-template-columns: 1fr 1fr; }

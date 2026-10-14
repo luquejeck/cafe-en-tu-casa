@@ -21,6 +21,24 @@ function pagosHTML(p) {
   const transf = P.transferencia(p);
   const off = TIENDA.descuentoTransferencia * 100;
 
+  if (!p.stock) return `
+  <div class="pagos pagos-2 sin-stock">
+    <article class="pago pago-destacado">
+      <h3 class="pago-titulo">${ICO.banco} Transferencia o efectivo</h3>
+      <div class="pago-monto">${fmt(transf)}</div>
+    </article>
+    <article class="pago">
+      <h3 class="pago-titulo">${ICO.tarjeta} Tarjeta en Mercado Libre</h3>
+      <div class="pago-monto">${fmt(p.precioML)}</div>
+      <p class="pago-sub">${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))}</p>
+    </article>
+  </div>
+  <a class="btn btn-wa btn-bloque pago-cta" href="${waConsulta(p)}"
+     target="_blank" rel="noopener"
+     data-evento="wa-consultar" data-producto="${p.id}">
+    ${ICO.wa} Consultar disponibilidad
+  </a>`;
+
   return `
   <div class="pagos pagos-2">
 
@@ -65,10 +83,17 @@ function pagosHTML(p) {
 function renderTiles(cont) {
   cont.innerHTML = PRODUCTOS.map((p, i) => {
     const ancho = i === 0 ? ' tile-ancho' : '';
-    const cinta = `<span class="tile-cinta">${TIENDA.descuentoTransferencia * 100}% OFF transferencia</span>`;
+    const cinta = p.stock
+      ? `<span class="tile-cinta">${TIENDA.descuentoTransferencia * 100}% OFF transferencia</span>`
+      : `<span class="tile-cinta tile-cinta-agotado">Sin stock</span>`;
+    const accion = p.stock
+      ? `<a class="enlace" href="${waProducto(p)}" target="_blank" rel="noopener"
+             data-evento="wa-tile" data-producto="${p.id}">Comprar con ${TIENDA.descuentoTransferencia * 100}% OFF</a>`
+      : `<a class="enlace" href="${waConsulta(p)}" target="_blank" rel="noopener"
+             data-evento="wa-consultar" data-producto="${p.id}">Consultar disponibilidad</a>`;
 
     return `
-    <article class="tile${ancho} aparece" data-retraso="${Math.min(i, 3)}">
+    <article class="tile${ancho}${p.stock ? '' : ' sin-stock'} aparece" data-retraso="${Math.min(i, 3)}">
       ${cinta}
       <div class="tile-cab">
         <p class="tile-etiqueta">${p.etiqueta} · ${p.tipo}</p>
@@ -80,8 +105,7 @@ function renderTiles(cont) {
         </p>
         <div class="tile-acciones">
           <a class="enlace" href="${P.url(p)}">Ver detalle</a>
-          <a class="enlace" href="${waProducto(p)}" target="_blank" rel="noopener"
-             data-evento="wa-tile" data-producto="${p.id}">Comprar con ${TIENDA.descuentoTransferencia * 100}% OFF</a>
+          ${accion}
         </div>
       </div>
       <div class="tile-img">
@@ -136,7 +160,7 @@ function renderPDP(id) {
   const galeria = document.querySelector('[data-slot="galeria"]');
   if (galeria) {
     galeria.innerHTML = `
-      <div class="galeria-marco">
+      <div class="galeria-marco${p.stock ? '' : ' sin-stock'}">
         <img id="img-principal" src="${p.imgs[0]}" alt="${nombre}" width="900" height="900">
       </div>
       ${p.imgs.length > 1 ? `
@@ -165,7 +189,7 @@ function renderPDP(id) {
       <p class="compra-tagline">${p.tagline}</p>
 
       <p class="estado-stock${p.stock ? '' : ' agotado'}">
-        ${p.stock ? 'Stock disponible · Envío inmediato' : 'Sin stock por el momento'}
+        ${p.stock ? 'Stock disponible · Envío inmediato' : 'Sin stock · Consultá disponibilidad'}
       </p>
 
       ${pagosHTML(p)}
@@ -197,7 +221,8 @@ function renderPDP(id) {
   const otros = document.querySelector('[data-slot="otros"]');
   if (otros) {
     otros.innerHTML = PRODUCTOS.filter(o => o.id !== p.id).map((o, i) => `
-      <article class="tile aparece" data-retraso="${i}">
+      <article class="tile${o.stock ? '' : ' sin-stock'} aparece" data-retraso="${i}">
+        ${o.stock ? '' : '<span class="tile-cinta tile-cinta-agotado">Sin stock</span>'}
         <div class="tile-cab">
           <p class="tile-etiqueta">${o.tipo}</p>
           <h3>${o.marca} ${o.modelo}</h3>
@@ -214,7 +239,13 @@ function renderPDP(id) {
   /* Barra móvil */
   const barra = document.querySelector('[data-slot="barra-movil"]');
   if (barra) {
-    barra.innerHTML = `
+    barra.innerHTML = !p.stock ? `
+      <div class="barra-movil-precio">
+        <b>Sin stock</b>
+        <small>Consultá disponibilidad</small>
+      </div>
+      <a class="btn btn-wa" href="${waConsulta(p)}" target="_blank" rel="noopener"
+         data-evento="wa-consultar" data-producto="${p.id}">${ICO.wa} Consultar</a>` : `
       <div class="barra-movil-precio">
         <b>${fmt(P.transferencia(p))}</b>
         <small>${TIENDA.descuentoTransferencia * 100}% OFF transferencia</small>

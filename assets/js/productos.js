@@ -172,4 +172,8 @@ const waProducto = p => waLink(
   `${TIENDA.descuentoTransferencia * 100}% OFF (${fmt(P.transferencia(p))}). ¿Me pasás los datos?`
 );
 
+const waConsulta = p => waLink(
+  `Hola! Vi que la ${P.nombre(p)} figura sin stock. ¿Cuándo vuelve a estar disponible?`
+);
+
 const getProducto = id => PRODUCTOS.find(p => p.id === id);
