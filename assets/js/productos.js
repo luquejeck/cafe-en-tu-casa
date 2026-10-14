@@ -128,7 +128,7 @@ const PRODUCTOS = [
     stock: true,
     color: '',                          // no se indica el color
     medidas: { ancho: 14.9, profundidad: 33, alto: 30.4 },
-    linkML: 'https://www.mercadolibre.com.ar/cafetera-express-delonghi-dedica-ec-685-acero-15-bares-color-metal/p/MLA69097041',
+    linkML: 'https://articulo.mercadolibre.com.ar/MLA-1785846595-cafetera-portatil-delonghi-dedica-ec685-automatica-blanca-expreso-blanco-_JM',
     imgs: ['assets/img/dedica.webp'],
     highlights: [
       'Solo 15 cm de ancho: entra en cualquier mesada',
