@@ -12,11 +12,11 @@
    Recomendar algo que no entra vuelve como devolución.
    ============================================================ */
 
-/* Ventaja inicial de la Magnifica S: ante empate o duda, gana ella.
-   La Krups conserva su nicho real (poco volumen y mesada justa) para que
-   el test no termine dando siempre el mismo resultado, que se nota enseguida. */
+/* Ventaja inicial de la Magnifica S: es la que queremos que gane en la
+   mayoría de los casos. Las otras ganan solo cuando la respuesta las pide
+   claramente (la Dedica si te gusta prepararlo vos o tenés poca mesada). */
 const SESGO = {
-  'magnifica-s': 3,
+  'magnifica-s': 5,
   'krups-roma': 2,
   'dedica': 0
 };
@@ -97,7 +97,8 @@ function calcular() {
 
   return PRODUCTOS
     .map(p => ({ p, puntos: puntos[p.id], fuera: fuera.has(p.id) }))
-    .sort((a, b) => (a.fuera - b.fuera) || (b.puntos - a.puntos));
+    // Primero las que entran, después las que tienen stock, después por puntos
+    .sort((a, b) => (a.fuera - b.fuera) || (b.p.stock - a.p.stock) || (b.puntos - a.puntos));
 }
 
 /* ---------- Pantallas ---------- */
@@ -192,7 +193,7 @@ function pintarResultado() {
         </div>
       </div>
 
-      ${segunda && !segunda.fuera ? `
+      ${segunda && !segunda.fuera && segunda.p.stock ? `
         <div class="segunda">
           <p class="segunda-titulo">También podría servirte</p>
           <a class="segunda-caja" href="${P.url(segunda.p)}" data-evento="ficha-quiz-2" data-producto="${segunda.p.id}">
