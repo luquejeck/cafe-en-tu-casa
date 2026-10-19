@@ -213,6 +213,7 @@
   },
 
   "narracion": {
+    "activa": false,
     "nota": "Guion de la voz en off. Cada frase arranca en t (segundos del video) y tiene que entrar antes de que termine su paso. Voseo, como los textos de la pantalla. El audio de cada frase va en instagram/modelos/voz/magnifica-s/<id>.wav (grabado o generado); si no está, el video sale sin voz.",
     "carpeta": "voz/magnifica-s",
     "volumen": 1.0,

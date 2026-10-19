@@ -167,7 +167,7 @@ def leer_wav(ruta):
 def narracion(M, base, n):
     cfg = M.get('narracion')
     voz = np.zeros(n)
-    if not cfg: return voz, 0
+    if not cfg or not cfg.get('activa', True): return voz, 0   # "activa": false = video sin voz
     carpeta = os.path.join(base, cfg['carpeta']); usadas = 0
     for fr in cfg['frases']:
         ruta = os.path.join(carpeta, f"{fr['id']}.wav")
