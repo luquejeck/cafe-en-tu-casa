@@ -67,20 +67,21 @@ const VIDEOS = [
     id: 'v01-comprar-en-3-pasos', titulo: 'Comprar tu cafetera, en 3 pasos', tema: 'Cómo se compra',
     estilo: { fondo: 'puntos', entrada: 'lado', alinea: 'izq' },
     caption:
-      'Comprar tu cafetera lleva tres pasos. 👇\n\n' +
+      '3 pasos y tenés tu cafetera. 👇\n\n' +
       '1. Elegís la tuya en el sitio, con medidas y ficha completa.\n' +
-      `2. Elegís cómo pagar: transferencia con ${V_OFF}% OFF o cuotas sin interés.\n` +
+      `2. Elegís cómo pagar: transferencia o efectivo con ${V_OFF}% OFF (desde ${fmt(Math.min(...PRODUCTOS.filter(p => p.stock).map(P.transferencia)))}) o cuotas sin interés en Mercado Libre. No se combinan.\n` +
       '3. Te llega a tu casa, con envío gratis y número de seguimiento.\n\n' +
-      'Todas son nuevas y vienen selladas de fábrica.\n\n' +
-      'Mirá las tres desde el link de la bio.\n\n#cafeencasa #cafetera #espresso #comprasonline',
+      'Guardalo para cuando compres.\n\n' +
+      '¿Vos pagarías por transferencia o en cuotas?\n\n#cafeencasa #cafetera #espresso #comprasonline',
+    // 11,6 s: gancho en el seg. 0 y el 20% OFF + envío gratis antes del seg. 6
     escenas: [
-      { d: 2.8, tono: 'oscuro', html: `${V.ep('Cómo comprar')}${V.titulo('Tu cafetera, en <em>3 pasos.</em>')}` },
-      { d: 5.4, tono: 'gris', html: `${V.titulo('Así de simple', 's')}${V.pasos([
-          ['Elegís tu cafetera', 'En el sitio, con medidas y ficha completa.'],
+      { d: 2.0, tono: 'oscuro', html: `${V.ep('Cómo comprar')}${V.titulo('3 pasos y tenés tu <em>cafetera.</em>')}` },
+      { d: 4.2, tono: 'gris', html: V.pasos([
+          ['Elegís la tuya', 'En el sitio, con medidas y ficha.'],
           ['Elegís cómo pagar', `Transferencia con ${V_OFF}% OFF o cuotas sin interés.`],
-          ['Te llega a tu casa', 'Envío gratis, con seguimiento.']])}` },
-      { d: 4.2, tono: 'oliva', html: `${V.ep('Siempre')}${V.titulo('Nueva y sellada de fábrica.', 'm')}${V.chips(['Envío gratis', 'Con seguimiento', '30 días para devolverla'], 1.3)}` },
-      V.cierre({ h: 'Mirá las tres en el sitio.' })
+          ['Te llega a tu casa', 'Envío gratis, con seguimiento.']]) },
+      { d: 2.6, tono: 'oliva', html: `${V.ep('Pagando por transferencia')}${V.titulo(`${V_OFF}% OFF y envío gratis.`, 'm')}${V.chips(['O cuotas sin interés en Mercado Libre'], .8)}` },
+      V.cierre({ h: 'Guardalo para cuando compres.', sub: '¿Transferencia o cuotas?', d: 2.8 })
     ]
   },
   {
@@ -208,12 +209,13 @@ const VIDEOS = [
       `La ${VM.modelo} muele el grano en cada taza, y también acepta café molido.\n\n` +
       'Conocela desde el link de la bio.\n\n#cafeencasa #cafeengrano #espresso',
     escenas: [
-      { d: 3.2, tono: 'oliva', html: `${V.ep('Tip de café')}${V.titulo('El café pierde aroma apenas se muele.', 'm')}` },
-      { d: 5.0, tono: 'oscuro', html: V.mitades(
-          ['Grano entero', 'Más fresco', 'Se muele en el momento, taza por taza.'],
-          ['Ya molido', 'Más práctico', 'Conviene comprar de a poco y usarlo pronto.']) },
-      { d: 4.0, html: `${V.titulo('La Magnifica S muele en cada taza', 's')}${V.foto(VM.imgs[1], [{ txt: 'También acepta molido', t: 1.4, pos: 'bottom:70px;left:50px' }])}` },
-      V.cierre({ ep: P.nombre(VM), h: 'Conocela en el sitio.' })
+      // 11,2 s: la Magnifica aparece en el seg. 5,4
+      { d: 2.2, tono: 'oliva', html: `${V.ep('Tip de café')}${V.titulo('Tu café pierde aroma apenas se muele.', 'm')}` },
+      { d: 3.2, tono: 'oscuro', html: V.mitades(
+          ['Grano entero', 'Más fresco', 'Se muele en el momento.'],
+          ['Ya molido', 'Más práctico', 'Comprá de a poco y usalo pronto.']) },
+      { d: 3.0, html: `${V.titulo('La Magnifica S muele en cada taza', 's')}${V.foto(VM.imgs[1] || VM.imgs[0], [{ txt: 'También acepta molido', t: 1.0, pos: 'bottom:70px;left:50px' }])}` },
+      V.cierre({ ep: 'Tip de café', h: 'Guardalo para tu próxima compra.', sub: '¿Vos, grano o molido?', d: 2.8 })
     ]
   },
   {

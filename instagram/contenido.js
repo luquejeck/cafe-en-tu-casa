@@ -19,8 +19,18 @@ const D = getProducto('dedica');
 const DISP = PRODUCTOS.filter(p => p.stock);
 const CUANTAS = ['Una', 'Dos', 'Tres', 'Cuatro'][DISP.length - 1];
 const SUPER = DISP.filter(p => p.tipo === 'Superautomática');
+const DESDE = Math.min(...DISP.map(p => P.transferencia(p)));
+const nombres = DISP.map(p => p.modelo).join(' o ');
+// Una placa por cafetera con los dos precios (transferencia y cuotas, sin combinar)
+const placaPrecio = p => ({ t: 'foto', tono: 'gris', ep: p.etiqueta, h: p.modelo,
+  sub: `${fmt(P.transferencia(p))} por transferencia (${OFF}% OFF)`, img: p.imgs[0],
+  pildora: `o ${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))} en Mercado Libre` });
+const preciosCortos = p =>
+  `${p.modelo}\n💸 ${fmt(P.transferencia(p))} por transferencia (${OFF}% OFF)\n` +
+  `💳 o ${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))} en Mercado Libre`;
 
 const OFF = TIENDA.descuentoTransferencia * 100;
+const COMO_PAGAR = `El ${OFF}% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan.`;
 const cm  = n => String(n).replace('.', ',') + ' cm';
 const pagoCorto = p => `${OFF}% OFF por transferencia · ${p.cuotas} cuotas sin interés`;
 const precios = p =>
@@ -63,7 +73,8 @@ const PIEZAS = [
       '¿No sabés cuál? Hacé el test de 4 preguntas desde el link de la bio.\n\n' +
       '#cafeencasa #cafetera #espresso #delonghi' + (K.stock ? ' #krups' : ''),
     placas: [
-      { t: 'portada', ep: 'Elegí la tuya', h: `${CUANTAS} cafeteras. Una es la tuya.`, sub: 'Te las presentamos en un minuto.' },
+      { t: 'portada', ep: 'Elegí la tuya', h: `${CUANTAS} cafeteras. Una es la tuya.`, sub: 'Te las presentamos en un minuto.',
+        pildora: `Desde ${fmt(DESDE)} por transferencia` },
       ...DISP.map(p => ({ t: 'foto', tono: 'gris', ep: p.etiqueta, h: p.modelo, sub: lema(p), img: p.imgs[0] })),
       { t: 'trio', h: '¿Para quién es cada una?', productos: DISP,
         linea: p => ({ 'magnifica-s': 'Varios cafés por día y lugar en la mesada.',
@@ -396,6 +407,82 @@ const PIEZAS = [
       { t: 'texto', tono: 'gris', ep: 'Pregunta 3', h: '¿Cuánto lugar libre tenés en la mesada?', p: 'Medí el ancho disponible.' },
       { t: 'texto', tono: 'gris', ep: 'Pregunta 4', h: '¿Apretar un botón o prepararlo vos?', p: 'No hay respuesta correcta.' },
       { t: 'cta', tono: 'oscuro', ep: 'Test de 4 preguntas', h: 'Te decimos cuál es la tuya.', sub: 'Un minuto, desde el sitio.', boton: 'Link en la bio' }
+    ]
+  },
+  /* ======================= OCTUBRE-NOVIEMBRE — piezas del reporte del 19/10 ======================= */
+  {
+    id: 'x1-jue-carrusel-lado-a-lado', semana: 5, dia: 'Jueves', tipo: 'carrusel',
+    titulo: '¿Cuál es la tuya? Lado a lado',
+    caption:
+      '¿Cuál es la tuya? Lado a lado, con precio. ☕\n\n' +
+      DISP.map(preciosCortos).join('\n\n') + '\n\n' +
+      COMO_PAGAR + ' Envío gratis a todo el país.\n\n' +
+      'Guardalo para comparar.\n\n' +
+      `¿Cuál te llevarías: ${nombres}?\n\n#cafeencasa #cafetera #espresso #delonghi`,
+    placas: [
+      { t: 'portada', ep: 'Lado a lado', h: '¿Cuál es la tuya?', sub: 'Precio y diferencias, en un minuto.',
+        pildora: `Desde ${fmt(DESDE)} por transferencia` },
+      ...DISP.map(placaPrecio),
+      { t: 'dos', tono: 'gris', h: 'La diferencia',
+        cols: DISP.map(p => ({ ep: p.tipo, h: p.modelo, items: [
+          `${cm(p.medidas.ancho)} de ancho`,
+          p.id === 'dedica' ? 'Usás café molido' : 'Muele el grano sola',
+          p.id === 'dedica' ? 'Cappuccino System' : 'Vaporizador para leche',
+          p.id === 'dedica' ? 'Para prepararlo vos' : 'Varios cafés por día'] })) },
+      { t: 'cta', tono: 'oscuro', ep: 'Para decidir tranquilo', h: 'Guardalo para comparar.',
+        sub: `¿${nombres}?`, boton: 'Link en la bio' }
+    ]
+  },
+  {
+    id: 'x1-sab-historia-molienda', semana: 5, dia: 'Sábado', tipo: 'historia',
+    titulo: '¿Molienda fina o gruesa? (encuesta)',
+    caption: '',
+    placas: [
+      { t: 'texto', ep: 'Encuesta', h: '¿Molienda fina o gruesa?',
+        p: 'Fina: más cuerpo. Gruesa: más suave. Votá acá abajo 👇' }
+    ]
+  },
+  {
+    id: 'x1-dom-historia-preguntas', semana: 5, dia: 'Domingo', tipo: 'historia',
+    titulo: '¿Qué querés saber antes de comprar? (caja de preguntas)',
+    caption: '',
+    placas: [
+      { t: 'texto', tono: 'oscuro', ep: 'Preguntanos', h: '¿Qué querés saber antes de comprar?',
+        p: 'Escribilo acá abajo y te respondemos en historias 👇' }
+    ]
+  },
+  {
+    id: 'x2-lun-carrusel-ofertas', semana: 6, dia: 'Lunes', tipo: 'carrusel',
+    titulo: 'Semana de ofertas: transferencia o cuotas',
+    caption:
+      '¿Esperabas el CyberMonday para comprar tu cafetera? ☕\n\n' +
+      `Acá el ${OFF}% OFF por transferencia es todos los días. Y si preferís financiar, tenés cuotas sin interés en Mercado Libre.\n\n` +
+      DISP.map(preciosCortos).join('\n\n') + '\n\n' +
+      COMO_PAGAR + ' Envío gratis a todo el país. Consultá la fecha de entrega por WhatsApp antes de comprar.\n\n' +
+      'Guardalo para comparar.\n\n' +
+      '¿Vos qué elegís: transferencia o cuotas?\n\n#cafeencasa #cafetera #espresso',
+    placas: [
+      { t: 'portada', tono: 'oscuro', ep: 'Semana de ofertas', h: '¿Esperabas esta semana para comprar?',
+        sub: `Acá el ${OFF}% OFF por transferencia es todos los días.` },
+      ...DISP.map(placaPrecio),
+      { t: 'dos', tono: 'gris', h: 'Transferencia o cuotas',
+        cols: [
+          { ep: 'Transferencia o efectivo', h: `${OFF}% OFF`, destacada: true,
+            items: ['Coordinás por WhatsApp', 'Despachamos apenas se acredita', 'Envío gratis'] },
+          { ep: 'Mercado Libre', h: 'Cuotas sin interés', items: [
+            `Hasta ${Math.max(...DISP.map(p => p.cuotas))} cuotas según el modelo`, 'Con tarjeta', 'Envío gratis'] }
+        ] },
+      { t: 'cta', tono: 'oscuro', ep: 'No se combinan', h: 'Guardalo para comparar.',
+        sub: '¿Transferencia o cuotas?', boton: 'Link en la bio' }
+    ]
+  },
+  {
+    id: 'x2-mie-historia-todos-los-dias', semana: 6, dia: 'Miércoles', tipo: 'historia',
+    titulo: '20% OFF todos los días',
+    caption: '',
+    placas: [
+      { t: 'dato', tono: 'oscuro', ep: 'Pagando por transferencia', num: OFF, unidad: '% OFF',
+        sub: 'Todos los días, no solo esta semana.', p: 'Escribinos por WhatsApp · link en la bio' }
     ]
   }
 ];
