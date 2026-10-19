@@ -174,7 +174,7 @@ def narracion(M, base, n):
         if not os.path.exists(ruta): continue
         y = leer_wav(ruta)
         y = banda(y, 70, None)                       # saca retumbe
-        y = y / (np.abs(y).max() or 1) * .9 * cfg.get('volumen', 1)
+        y = y / (np.sqrt((y ** 2).mean()) or 1) * .11 * cfg.get('volumen', 1)   # todas las frases al mismo nivel medio
         i = int(fr['t'] * SR); L = min(len(y), n - i)
         voz[i:i + L] += y[:L] * env(L, .01, .05)
         usadas += 1

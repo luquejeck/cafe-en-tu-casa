@@ -218,7 +218,7 @@
     "volumen": 1.0,
     "bajar_resto": 0.45,
     "frases": [
-      { "id": "portada",  "t": 0.35,  "texto": "Así funciona la Magnifica S, por dentro." },
+      { "id": "portada",  "t": 0.35,  "texto": "La Magnifica S, por dentro." },
       { "id": "carga",    "t": 2.75,  "texto": "Cargás el agua… y los granos." },
       { "id": "elegis",   "t": 5.7,   "texto": "Elegís la intensidad, y un botón." },
       { "id": "muele",    "t": 8.35,  "texto": "Muele el grano en el momento." },
@@ -227,7 +227,7 @@
       { "id": "extrae",   "t": 16.95, "texto": "Y sale tu espresso." },
       { "id": "limpia",   "t": 20.1,  "texto": "La pastilla cae sola al cajón." },
       { "id": "leche",    "t": 22.5,  "texto": "Y para el cappuccino, espumás la leche." },
-      { "id": "cierre",   "t": 25.5,  "texto": "Magnifica S. Café de cafetería, en tu casa." }
+      { "id": "cierre",   "t": 25.4,  "texto": "Café de cafetería, en tu casa." }
     ]
   }
 }
