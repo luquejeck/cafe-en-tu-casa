@@ -192,22 +192,42 @@
   ],
 
   "sonido": {
-    "nota": "Lo sintetiza instagram/sonido-modelo.py: todo generado, sin muestras ni música con derechos.",
-    "musica": { "bpm": 92, "acordes": [["D3", "F#3", "A3", "C#4"], ["B2", "D3", "F#3", "A3"], ["G2", "B2", "D3", "F#3"], ["A2", "C#3", "E3", "G3"]], "volumen": 0.22 },
+    "nota": "Lo sintetiza instagram/sonido-modelo.py: todo generado, sin muestras ni música con derechos. Estilo ASMR: sonidos cercanos y suaves, sin agudos filosos, con un poco de ambiente.",
+    "estilo": "asmr",
+    "volumen_general_db": -24.5,
+    "ambiente": 0.16,
+    "musica": { "bpm": 72, "acordes": [["D3", "F#3", "A3", "C#4"], ["B2", "D3", "F#3", "A3"], ["G2", "B2", "D3", "F#3"], ["A2", "C#3", "E3", "G3"]], "volumen": 0.13 },
     "efectos": [
-      { "tipo": "granos",    "t0": 2.6,  "dur": 2.4, "volumen": 0.35 },
-      { "tipo": "agua",      "t0": 2.6,  "dur": 2.4, "volumen": 0.25 },
-      { "tipo": "click",     "t0": 6.0,  "dur": 0.1, "volumen": 0.6 },
-      { "tipo": "dial",      "t0": 6.0,  "dur": 1.0, "volumen": 0.35 },
-      { "tipo": "click",     "t0": 7.2,  "dur": 0.1, "volumen": 0.7 },
-      { "tipo": "molinillo", "t0": 8.3,  "dur": 2.6, "volumen": 0.45 },
-      { "tipo": "golpe",     "t0": 12.0, "dur": 0.4, "volumen": 0.7 },
-      { "tipo": "bomba",     "t0": 13.8, "dur": 2.7, "volumen": 0.16 },
-      { "tipo": "bomba",     "t0": 16.6, "dur": 2.4, "volumen": 0.1 },
-      { "tipo": "goteo",     "t0": 17.1, "dur": 2.5, "volumen": 0.4 },
-      { "tipo": "golpe",     "t0": 21.1, "dur": 0.4, "volumen": 0.55 },
-      { "tipo": "vapor",     "t0": 22.5, "dur": 2.6, "volumen": 0.35 },
-      { "tipo": "campana",   "t0": 25.3, "dur": 2.0, "volumen": 0.4 }
+      { "tipo": "granos",    "t0": 2.6,  "dur": 2.4, "volumen": 0.2 },
+      { "tipo": "agua",      "t0": 2.7,  "dur": 2.3, "volumen": 0.12 },
+      { "tipo": "dial",      "t0": 6.0,  "dur": 1.0, "volumen": 0.16 },
+      { "tipo": "click",     "t0": 7.2,  "dur": 0.1, "volumen": 0.22 },
+      { "tipo": "molinillo", "t0": 8.3,  "dur": 2.6, "volumen": 0.22 },
+      { "tipo": "golpe",     "t0": 12.0, "dur": 0.4, "volumen": 0.26 },
+      { "tipo": "bomba",     "t0": 13.8, "dur": 2.7, "volumen": 0.045 },
+      { "tipo": "goteo",     "t0": 17.1, "dur": 2.5, "volumen": 0.22 },
+      { "tipo": "golpe",     "t0": 21.1, "dur": 0.4, "volumen": 0.2 },
+      { "tipo": "vapor",     "t0": 22.5, "dur": 2.6, "volumen": 0.14 },
+      { "tipo": "campana",   "t0": 25.4, "dur": 2.6, "volumen": 0.16 }
+    ]
+  },
+
+  "narracion": {
+    "nota": "Guion de la voz en off. Cada frase arranca en t (segundos del video) y tiene que entrar antes de que termine su paso. Voseo, como los textos de la pantalla. El audio de cada frase va en instagram/modelos/voz/magnifica-s/<id>.wav (grabado o generado); si no está, el video sale sin voz.",
+    "carpeta": "voz/magnifica-s",
+    "volumen": 1.0,
+    "bajar_resto": 0.45,
+    "frases": [
+      { "id": "portada",  "t": 0.35,  "texto": "Así funciona la Magnifica S, por dentro." },
+      { "id": "carga",    "t": 2.75,  "texto": "Cargás el agua… y los granos." },
+      { "id": "elegis",   "t": 5.7,   "texto": "Elegís la intensidad, y un botón." },
+      { "id": "muele",    "t": 8.35,  "texto": "Muele el grano en el momento." },
+      { "id": "compacta", "t": 11.3,  "texto": "Dosifica, y prensa el café." },
+      { "id": "calienta", "t": 13.9,  "texto": "Quince bares… y el agua, bien caliente." },
+      { "id": "extrae",   "t": 16.95, "texto": "Y sale tu espresso." },
+      { "id": "limpia",   "t": 20.1,  "texto": "La pastilla cae sola al cajón." },
+      { "id": "leche",    "t": 22.5,  "texto": "Y para el cappuccino, espumás la leche." },
+      { "id": "cierre",   "t": 25.5,  "texto": "Magnifica S. Café de cafetería, en tu casa." }
     ]
   }
 }
