@@ -2,41 +2,36 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Modelo animado</title>
+<title>Modelo animado 3D</title>
 <!--
-  Dibuja y anima una cafetera a partir de su modelo en JSON (instagram/modelos/*.json).
-  Cada cuadro es determinístico: window.cuadro(f) deja la escena en el cuadro f (30 por segundo),
-  así se puede filmar con node instagram/filmar-modelo.mjs.
+  Dibuja y anima una cafetera en 3D (vista isométrica, carcasa transparente) a partir de su
+  modelo en JSON (instagram/modelos/*.json). Cada cuadro es determinístico: window.cuadro(f)
+  deja la escena en el cuadro f (30 por segundo), así se filma con instagram/filmar-modelo.mjs.
   Para mirarlo en el navegador hace falta un servidor (fetch no lee archivos locales):
     npx serve .   →   http://localhost:3000/instagram/modelo.html?modelo=magnifica-s&play
 -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #f5f5f7; --ink: #1d1d1f; --ink-2: #6e6e73; --oliva: #5b6e32; --oliva-claro: #a3c26a;
-    --oliva-suave: rgba(91, 110, 50, .12);
-  }
+  :root { --bg: #f5f5f7; --ink: #1d1d1f; --ink-2: #6e6e73; --oliva: #5b6e32; --oliva-suave: rgba(91, 110, 50, .12); }
   * { box-sizing: border-box; margin: 0; }
   html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg); }
   body { font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
-  #escena { position: relative; width: 1080px; height: 1920px; }
+  #escena { position: relative; width: 1080px; height: 1920px; background: radial-gradient(120% 70% at 50% 62%, #ffffff 0%, #f5f5f7 55%, #ececf0 100%); }
   .marca { position: absolute; top: 120px; left: 0; right: 0; text-align: center; font-size: 30px; font-weight: 600; letter-spacing: -.01em; }
   .marca i { display: inline-block; width: 13px; height: 13px; border-radius: 50%; background: var(--oliva); margin-right: 12px; vertical-align: 3px; }
-  .texto { position: absolute; top: 300px; left: 80px; right: 80px; text-align: center; }
+  .texto { position: absolute; top: 300px; left: 80px; right: 80px; text-align: center; z-index: 2; }
   .texto .ep { font-size: 27px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--oliva); }
   .texto h1 { font-size: 74px; font-weight: 600; line-height: 1.05; letter-spacing: -.035em; margin-top: 18px; text-wrap: balance; }
   .texto p { font-size: 34px; color: var(--ink-2); line-height: 1.35; margin-top: 20px; text-wrap: balance; }
-  .texto .boton { display: inline-block; margin-top: 30px; background: var(--ink); color: #fff; font-size: 32px; font-weight: 600; padding: 20px 44px; border-radius: 980px; }
+  .texto .pildora { display: inline-block; margin-top: 30px; background: var(--oliva-suave); color: #455426; font-size: 33px; font-weight: 600; padding: 18px 34px; border-radius: 980px; }
+  .texto .boton { display: block; width: max-content; margin: 26px auto 0; background: var(--ink); color: #fff; font-size: 32px; font-weight: 600; padding: 20px 44px; border-radius: 980px; }
   #maquina { position: absolute; left: 40px; top: 660px; width: 1000px; height: 1120px;
-    /* bordes suaves: cuando la cámara se acerca, la máquina no queda cortada en seco */
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 70px, #000 calc(100% - 90px), transparent 100%),
                         linear-gradient(to right, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
     -webkit-mask-composite: source-in; mask-composite: intersect; }
   .puntos { position: absolute; bottom: 92px; left: 0; right: 0; display: flex; justify-content: center; gap: 14px; }
   .puntos span { width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,.14); }
   .puntos span.on { background: var(--oliva); width: 40px; border-radius: 8px; }
-  .etq rect { fill: #fff; }
-  .etq text { font-weight: 600; fill: var(--ink); }
 </style>
 </head>
 <body>
@@ -48,109 +43,99 @@
 </div>
 <script>
 (() => {
-  const FPS = 30;
-  const NS = 'http://www.w3.org/2000/svg';
+  const FPS = 30, PITCH = 28 * Math.PI / 180, VH0 = 780, AREA = [1000, 1120];
   const q = new URLSearchParams(location.search);
-  let M, C, inicio = [], total = 0, largoCaminos = {};
+  let M, inicio = [], total = 0, largos = {};
 
+  /* ---------------------------------------------------------- utilidades */
   const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   const lerp = (a, b, k) => a + (b - a) * k;
   const col = c => (M.colores[c] || c);
-  const el = (tag, attrs = {}, padre) => {
-    const n = document.createElementNS(NS, tag);
-    for (const [k, v] of Object.entries(attrs)) if (v != null) n.setAttribute(k, v);
-    if (padre) padre.appendChild(n);
-    return n;
-  };
-  const mezclar = (h1, h2, k) => {
-    const a = h1.match(/\w\w/g).map(x => parseInt(x, 16)), b = h2.match(/\w\w/g).map(x => parseInt(x, 16));
-    return '#' + a.map((v, i) => Math.round(lerp(v, b[i], k)).toString(16).padStart(2, '0')).join('');
-  };
+  const hex = h => h.match(/\w\w/g).map(x => parseInt(x, 16));
+  const rgb = (h, f = 1) => { const [r, g, b] = hex(h); return `rgb(${Math.round(clamp(r * f, 0, 255))},${Math.round(clamp(g * f, 0, 255))},${Math.round(clamp(b * f, 0, 255))})`; };
+  const mezcla = (h1, h2, k) => '#' + hex(h1).map((v, i) => Math.round(lerp(v, hex(h2)[i], k)).toString(16).padStart(2, '0')).join('');
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const norm = a => { const l = Math.hypot(...a) || 1; return [a[0] / l, a[1] / l, a[2] / l]; };
+  const LUZ = norm([-0.45, -0.75, 1]);
+
+  /* ---------------------------------------------------------- cámara */
+  let V, R, U;
+  function vista(giroGrados) {
+    const t = giroGrados * Math.PI / 180;
+    V = [Math.sin(t) * Math.cos(PITCH), -Math.cos(t) * Math.cos(PITCH), Math.sin(PITCH)];   // hacia el que mira
+    R = [Math.cos(t), Math.sin(t), 0];
+    U = [-Math.sin(t) * Math.sin(PITCH), Math.cos(t) * Math.sin(PITCH), Math.cos(PITCH)];
+  }
+  const pr = P => [dot(P, R), -dot(P, U), dot(P, V)];   // x, y en pantalla y profundidad (más grande = más cerca)
+
+  function catmull(p0, p1, p2, p3, t) {
+    const t2 = t * t, t3 = t2 * t;
+    return .5 * ((2 * p1) + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 + (-p0 + 3 * p1 - 3 * p2 + p3) * t3);
+  }
+  function camara(T) {
+    const K = M.recorrido;
+    let i = K.findIndex(k => k.t > T) - 1;
+    if (i < 0) i = T <= K[0].t ? 0 : K.length - 2;
+    const k1 = K[i], k2 = K[Math.min(i + 1, K.length - 1)], k0 = K[Math.max(i - 1, 0)], k3 = K[Math.min(i + 2, K.length - 1)];
+    const t = k2.t > k1.t ? clamp((T - k1.t) / (k2.t - k1.t)) : 0;
+    const f = (g) => catmull(g(k0), g(k1), g(k2), g(k3), t);
+    return { mira: [0, 1, 2].map(j => f(k => k.mira[j])), zoom: f(k => k.zoom), giro: f(k => k.giro) };
+  }
+
+  /* ---------------------------------------------------------- geometría */
+  function solido(f, dz = 0, dx = 0) {
+    const vs = [], caras = [];
+    if (f.tipo === 'caja' || f.tipo === 'tronco') {
+      const [x, y, z] = f.p, [w, d, h] = f.t, b = f.base ?? 1, c = f.cima ?? 1;
+      const esq = (s, zz) => { const cx = x + w / 2, cy = y + d / 2;
+        return [[cx - w / 2 * s, cy - d / 2 * s, zz], [cx + w / 2 * s, cy - d / 2 * s, zz], [cx + w / 2 * s, cy + d / 2 * s, zz], [cx - w / 2 * s, cy + d / 2 * s, zz]]; };
+      vs.push(...esq(b, z), ...esq(c, z + h));
+      caras.push([0, 1, 2, 3], [4, 5, 6, 7], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7]);
+    } else if (f.tipo === 'cilindro') {
+      const n = f.lados || 20, [cx, cy, cz] = f.c;
+      for (const k of [0, 1]) for (let i = 0; i < n; i++) {
+        const a = i / n * Math.PI * 2;
+        vs.push(f.eje === 'y' ? [cx + f.r * Math.cos(a), cy + k * f.h, cz + f.r * Math.sin(a)] : [cx + f.r * Math.cos(a), cy + f.r * Math.sin(a), cz + k * f.h]);
+      }
+      caras.push([...Array(n).keys()], [...Array(n).keys()].map(i => i + n));
+      for (let i = 0; i < n; i++) caras.push([i, (i + 1) % n, n + (i + 1) % n, n + i]);
+    }
+    for (const v of vs) { v[2] += dz; v[0] += dx; }
+    const centro = vs.reduce((a, v) => [a[0] + v[0] / vs.length, a[1] + v[1] / vs.length, a[2] + v[2] / vs.length], [0, 0, 0]);
+    return caras.map((cara, j) => {
+      const pts = cara.map(i => vs[i]);
+      let nrm = norm(cross(sub(pts[1], pts[0]), sub(pts[2], pts[0])));
+      const cc = pts.reduce((a, v) => [a[0] + v[0] / pts.length, a[1] + v[1] / pts.length, a[2] + v[2] / pts.length], [0, 0, 0]);
+      if (dot(nrm, sub(cc, centro)) < 0) nrm = nrm.map(v => -v);
+      return { pts, nrm, cc, tapa: j === 1 };
+    });
+  }
+  // contenido a un nivel: misma forma, más baja
+  function aNivel(c, nivel) {
+    const k = clamp(nivel);
+    if (c.tipo === 'cilindro') return { ...c, h: c.h * k };
+    const b = c.base ?? 1;
+    return { ...c, t: [c.t[0], c.t[1], c.t[2] * k], cima: c.tipo === 'tronco' ? b + (1 - b) * k : 1 };
+  }
 
   /* ---------------------------------------------------------- caminos */
-  function largo(pts) { let L = 0; for (let i = 1; i < pts.length; i++) L += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); return L; }
+  function largo(p) { let L = 0; for (let i = 1; i < p.length; i++) L += Math.hypot(...sub(p[i], p[i - 1])); return L; }
   function punto(nombre, f) {
-    const pts = M.caminos[nombre]; let d = clamp(f) * largoCaminos[nombre];
-    for (let i = 1; i < pts.length; i++) {
-      const s = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
-      if (d <= s || i === pts.length - 1) { const k = s ? clamp(d / s) : 0; return [lerp(pts[i - 1][0], pts[i][0], k), lerp(pts[i - 1][1], pts[i][1], k)]; }
+    const p = M.caminos[nombre]; let d = clamp(f) * largos[nombre];
+    for (let i = 1; i < p.length; i++) {
+      const s = Math.hypot(...sub(p[i], p[i - 1]));
+      if (d <= s || i === p.length - 1) { const k = s ? clamp(d / s) : 0; return [0, 1, 2].map(j => lerp(p[i - 1][j], p[i][j], k)); }
       d -= s;
     }
   }
 
-  /* ---------------------------------------------------------- dibujo base */
-  const nodos = {};   // id de pieza -> { g, formas[], nivel (rect), espuma }
-  let capaParticulas, capaFlujos, capaEtiquetas, mundo;
-
-  function engranaje({ cx, cy, r, dientes }) {
-    let d = '';
-    for (let i = 0; i < dientes * 2; i++) {
-      const a = (i / (dientes * 2)) * Math.PI * 2, rr = i % 2 ? r * .78 : r;
-      const a2 = a + Math.PI / dientes;
-      d += `${i ? 'L' : 'M'}${cx + rr * Math.cos(a)} ${cy + rr * Math.sin(a)} L${cx + rr * Math.cos(a2)} ${cy + rr * Math.sin(a2)} `;
-    }
-    return d + 'Z';
-  }
-
-  function forma(f, padre) {
-    const comun = { stroke: col('borde'), 'stroke-width': 2 };
-    if (f.tipo === 'rect') return el('rect', { x: f.x, y: f.y, width: f.w, height: f.h, rx: f.rx || 0, fill: col(f.relleno || 'pieza'), ...comun }, padre);
-    if (f.tipo === 'circle') return el('circle', { cx: f.cx, cy: f.cy, r: f.r, fill: col(f.relleno || 'pieza'), ...comun }, padre);
-    if (f.tipo === 'path') return el('path', { d: f.d, fill: col(f.relleno || 'pieza'), ...comun }, padre);
-    if (f.tipo === 'engranaje') return el('path', { d: engranaje(f), fill: col(f.relleno || 'pieza'), ...comun }, padre);
-    if (f.tipo === 'linea') return el('path', { d: f.d, fill: 'none', stroke: col(f.color || 'borde'), 'stroke-width': f.ancho || 4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, padre);
-  }
-
-  function construir() {
-    const svg = document.getElementById('maquina');
-    svg.innerHTML = '';
-    const defs = el('defs', {}, svg);
-    // Patrones: granos de café y café molido
-    const pg = el('pattern', { id: 'p-granos', width: 18, height: 13, patternUnits: 'userSpaceOnUse' }, defs);
-    el('rect', { width: 18, height: 13, fill: col('grano') }, pg);
-    [[5, 4, 20], [13, 10, -25]].forEach(([x, y, a]) => {
-      el('ellipse', { cx: x, cy: y, rx: 5, ry: 3.4, fill: '#8f6340', transform: `rotate(${a} ${x} ${y})` }, pg);
-      el('path', { d: `M${x - 3} ${y} Q${x} ${y - 1.5} ${x + 3} ${y}`, stroke: '#4a2f1a', 'stroke-width': 1, fill: 'none', transform: `rotate(${a} ${x} ${y})` }, pg);
-    });
-    const pp = el('pattern', { id: 'p-polvo', width: 6, height: 6, patternUnits: 'userSpaceOnUse' }, defs);
-    el('rect', { width: 6, height: 6, fill: col('molido') }, pp);
-    el('circle', { cx: 1.5, cy: 2, r: .9, fill: '#7a5232' }, pp);
-    el('circle', { cx: 4.5, cy: 4.5, r: .7, fill: '#3e2716' }, pp);
-    const glow = el('filter', { id: 'brillo', x: '-40%', y: '-40%', width: '180%', height: '180%' }, defs);
-    el('feDropShadow', { dx: 0, dy: 0, stdDeviation: 6, 'flood-color': col('foco'), 'flood-opacity': .9 }, glow);
-
-    mundo = el('g', {}, svg);
-    for (const p of M.piezas) {
-      const g = el('g', { 'data-id': p.id }, mundo);
-      const formas = p.formas.map(f => forma(f, g));
-      const n = { g, formas, pieza: p };
-      if (p.contenido) {
-        const c = p.contenido, cid = 'clip-' + p.id;
-        const clip = el('clipPath', { id: cid }, defs);
-        if (c.d) el('path', { d: c.d }, clip); else el('rect', { x: c.x, y: c.y, width: c.w, height: c.h, rx: c.rx || 0 }, clip);
-        const gc = el('g', { 'clip-path': `url(#${cid})` }, g);
-        const caja = c.d ? { x: 0, y: c.y, w: 600, h: c.h } : { x: c.x, y: c.y, w: c.w, h: c.h };
-        n.caja = caja;
-        n.nivel = el('rect', { x: caja.x, width: caja.w, fill: c.patron ? `url(#p-${c.patron})` : col(c.color), opacity: c.color === 'agua' ? .85 : 1 }, gc);
-        if (c.espuma) n.espuma = el('rect', { x: caja.x, width: caja.w, height: 5, fill: col(c.espuma) }, gc);
-        // la forma de vidrio vuelve a dibujarse arriba, para que el borde quede sobre el contenido
-        if (p.formas[0].relleno === 'vidrio') { const borde = forma({ ...p.formas[0], relleno: 'none' }, g); borde.setAttribute('fill', 'none'); formas.push(borde); }
-      }
-      nodos[p.id] = n;
-    }
-    capaFlujos = el('g', {}, mundo);
-    capaParticulas = el('g', {}, mundo);
-    capaEtiquetas = el('g', { class: 'etq' }, mundo);
-
-    const nums = M.pasos.filter(s => s.numero).length;
-    document.getElementById('puntos').innerHTML = Array.from({ length: nums }, () => '<span></span>').join('');
-  }
-
   /* ---------------------------------------------------------- estado en el tiempo T */
   function estado(T) {
-    const st = { nivel: {}, ang: {}, dy: {}, paso: 0, lt: 0 };
-    for (const p of M.piezas) { if (p.contenido) st.nivel[p.id] = p.contenido.nivel || 0; st.ang[p.id] = 0; st.dy[p.id] = 0; }
+    const st = { nivel: {}, ang: {}, dz: {}, paso: 0, lt: 0 };
+    for (const p of M.piezas) { st.nivel[p.id] = p.contenido?.nivel || 0; st.ang[p.id] = 0; st.dz[p.id] = 0; }
     M.pasos.forEach((s, i) => {
       const lt = T - inicio[i];
       if (lt < 0) return;
@@ -160,7 +145,7 @@
         const k = ease(clamp((t - (a.t0 || 0)) / (a.dur || .001)));
         if (a.tipo === 'llenar') st.nivel[a.parte] = lerp(st.nivel[a.parte], a.a, k);
         if (a.tipo === 'girar') st.ang[a.parte] += a.grados * k;
-        if (a.tipo === 'mover') st.dy[a.parte] = lerp(st.dy[a.parte], a.dy, k);
+        if (a.tipo === 'mover') st.dz[a.parte] = lerp(st.dz[a.parte], a.dz, k);
       }
     });
     return st;
@@ -169,115 +154,160 @@
   /* ---------------------------------------------------------- un cuadro */
   function cuadro(f) {
     const T = f / FPS, st = estado(T), i = st.paso, s = M.pasos[i], lt = st.lt;
-    const prev = M.pasos[Math.max(0, i - 1)];
-    const kt = ease(clamp(lt / .7));
+    const prev = M.pasos[Math.max(0, i - 1)], kt = ease(clamp(lt / .6));
+    const cam = camara(T);
+    vista(cam.giro);
+    const [mx, my] = pr(cam.mira);
+    const vh = VH0 / cam.zoom, vw = vh * AREA[0] / AREA[1], px = AREA[1] / vh;   // px = píxeles por unidad
+    const svg = document.getElementById('maquina');
+    svg.setAttribute('viewBox', `${mx - vw / 2} ${my - vh / 2} ${vw} ${vh}`);
 
-    // cámara
-    const cam = { x: lerp(prev.camara.x, s.camara.x, kt), y: lerp(prev.camara.y, s.camara.y, kt), z: lerp(prev.camara.zoom, s.camara.zoom, kt) };
-    const W0 = M.lienzo.alto * (1000 / 1120), vw = W0 / cam.z, vh = M.lienzo.alto / cam.z;
-    document.getElementById('maquina').setAttribute('viewBox', `${cam.x - vw / 2} ${cam.y - vh / 2} ${vw} ${vh}`);
-
-    // aparición en la portada
     const ap = s.acciones.find(a => a.tipo === 'aparecer');
-    const kap = ap ? ease(clamp((lt - ap.t0) / ap.dur)) : 1;
-    mundo.setAttribute('opacity', (i === 0 ? kap : 1) * (s.cierre ? lerp(1, .3, kt) : 1));
-    mundo.setAttribute('transform', i === 0 ? `translate(300 360) scale(${lerp(.92, 1, kap)}) translate(-300 -360)` : '');
+    const enFoco = (paso, id) => paso.foco.includes(id);
+    const hayFoco = paso => paso.foco.length > 0;
+    const pz = (p) => {   // opacidad y resalte de cada pieza, mezclando el paso anterior y el actual
+      const padre = p.sigue || p.id;
+      const o = paso => p.carcasa ? 1 : !hayFoco(paso) || enFoco(paso, p.id) || enFoco(paso, padre) ? 1 : .22;
+      const r = paso => hayFoco(paso) && (enFoco(paso, p.id) || enFoco(paso, padre)) ? 1 : 0;
+      return { o: lerp(o(prev), o(s), kt) * (s.cierre ? lerp(1, .35, kt) : 1), r: lerp(r(prev), r(s), kt) };
+    };
 
-    // foco: mezcla entre el del paso anterior y el actual
-    const enFoco = (paso, id) => !paso.foco.length || paso.foco.includes(id);
-    for (const p of M.piezas) {
-      const n = nodos[p.id];
-      const o = (paso) => p.fijo ? 1 : enFoco(paso, p.id) ? 1 : .26;
-      const resaltado = (paso) => paso.foco.length && paso.foco.includes(p.id) ? 1 : 0;
-      n.g.setAttribute('opacity', lerp(o(prev), o(s), kt).toFixed(3));
-      const r = lerp(resaltado(prev), resaltado(s), kt);
-      n.formas.forEach(fm => {
-        const orig = fm.dataset.s ??= fm.getAttribute('stroke');
-        fm.setAttribute('stroke', r > .5 && orig === col('borde') ? col('foco') : orig);
+    const atras = [], medio = [], adelante = [];
+    const sw = 1.6 / px;   // trazo de 1,6 px
+    const poly = (pts) => pts.map(P => { const [x, y] = pr(P); return `${x.toFixed(1)},${y.toFixed(1)}`; }).join(' ');
+
+    M.piezas.forEach((p, idx) => {
+      const est = pz(p);
+      // aparición: cada pieza baja a su lugar, una detrás de otra
+      let caida = 0, opAp = 1;
+      if (i === 0 && ap) { const k = ease(clamp((lt - ap.t0 - idx * .05) / (ap.dur * .6))); caida = (1 - k) * 90; opAp = k; }
+      const op = est.o * opAp;
+      if (op < .01) return;
+      let dz = (st.dz[p.id] || 0) + caida, dx = 0;
+      for (const a of s.acciones) if (a.tipo === 'vibrar' && a.parte === p.id && lt > a.t0 && lt < a.t0 + a.dur) dx = Math.sin(lt * 90) * 1.2;
+      let calor = 0;
+      for (const a of s.acciones) if (a.tipo === 'calor' && a.parte === p.id) { const k = clamp((lt - a.t0) / a.dur); calor = k > 0 && k < 1 ? Math.min(1, Math.sin(Math.PI * k) * 1.5) : 0; }
+      let pulso = 0;
+      for (const a of s.acciones) if (a.tipo === 'pulso' && a.parte === p.id) pulso = Math.max(0, Math.sin(Math.PI * clamp((lt - a.t0) / .5)));
+
+      const trazoFoco = est.r > .5 ? col('foco') : null;
+      p.formas.forEach((fm, j) => {
+        if (fm.tipo === 'tubo') {
+          const pts = fm.puntos.map(P => [P[0] + dx, P[1], P[2] + dz]);
+          const d = pts.reduce((a, P) => a + pr(P)[2], 0) / pts.length;
+          const c = trazoFoco || col(fm.color);
+          medio.push({ d, svg: `<polyline points="${poly(pts)}" fill="none" stroke="${rgb(mezcla(c, '#000000', .35))}" stroke-width="${(fm.ancho + 2) * .9}" stroke-linecap="round" stroke-linejoin="round" opacity="${op}"/><polyline points="${poly(pts)}" fill="none" stroke="${c}" stroke-width="${fm.ancho * .9}" stroke-linecap="round" stroke-linejoin="round" opacity="${op}"/>` });
+          return;
+        }
+        let base = col(fm.color);
+        if (calor && j === 0) base = mezcla(base, col('calor'), calor);
+        if (pulso && j > 0) base = mezcla(base, col('foco'), pulso);
+        for (const c of solido(fm, dz, dx)) {
+          const vis = dot(c.nrm, V) > 0;
+          const luz = .6 + .4 * Math.max(0, dot(c.nrm, LUZ));
+          const d = dot(c.cc, V);
+          if (p.carcasa) {
+            if (!vis) atras.push({ d, svg: `<polygon points="${poly(c.pts)}" fill="${rgb(base, .9 + .5 * luz)}" stroke="#3a3a40" stroke-width="${sw}" opacity="${op}"/>` });
+            else adelante.push({ d, svg: `<polygon points="${poly(c.pts)}" fill="${rgb(base, luz)}" fill-opacity="${.16 * op}" stroke="#8a8a92" stroke-opacity="${.55 * op}" stroke-width="${sw}"/>` });
+            continue;
+          }
+          if (fm.vidrio) {
+            medio.push({ d: d + (vis ? 0 : -400), svg: `<polygon points="${poly(c.pts)}" fill="${col('vidrio')}" fill-opacity="${(vis ? .14 : .08) * op}" stroke="${trazoFoco || '#c9d2dc'}" stroke-opacity="${(trazoFoco ? .95 : .55) * op}" stroke-width="${sw * (trazoFoco ? 1.8 : 1)}"/>` });
+            continue;
+          }
+          if (!vis) continue;
+          medio.push({ d, svg: `<polygon points="${poly(c.pts)}" fill="${rgb(base, luz)}" stroke="${trazoFoco || rgb(base, .7)}" stroke-width="${sw * (trazoFoco ? 1.8 : 1)}" stroke-linejoin="round" opacity="${op}"/>` });
+        }
       });
-      n.g.setAttribute('filter', r > .5 ? 'url(#brillo)' : '');
-      // transformaciones
-      const tr = [];
-      if (st.dy[p.id]) tr.push(`translate(0 ${st.dy[p.id]})`);
-      if (st.ang[p.id] && p.centro) tr.push(`rotate(${st.ang[p.id]} ${p.centro[0]} ${p.centro[1]})`);
-      n.g.setAttribute('transform', tr.join(' '));
-      // niveles
-      if (n.nivel) {
-        const h = n.caja.h * clamp(st.nivel[p.id]), y = n.caja.y + n.caja.h - h;
-        n.nivel.setAttribute('y', y); n.nivel.setAttribute('height', h);
-        if (n.espuma) { n.espuma.setAttribute('y', y); n.espuma.setAttribute('opacity', h > 3 ? 1 : 0); }
+      // contenido (agua, granos, café...)
+      if (p.contenido && st.nivel[p.id] > .005) {
+        const c = p.contenido, fm = aNivel(c, st.nivel[p.id]);
+        for (const cara of solido(fm, dz, dx)) {
+          if (dot(cara.nrm, V) <= 0) continue;
+          const luz = .62 + .38 * Math.max(0, dot(cara.nrm, LUZ));
+          const color = cara.tapa && c.espuma ? col(c.espuma) : col(c.color);
+          medio.push({ d: dot(cara.cc, V) + 1, svg: `<polygon points="${poly(cara.pts)}" fill="${rgb(color, cara.tapa ? 1.12 : luz)}" opacity="${(c.color === 'agua' ? .82 : 1) * op}"/>` });
+        }
+        if (c.color === 'grano') {   // granos sueltos sobre la superficie
+          const top = c.p[2] + c.t[2] * st.nivel[p.id] + dz;
+          for (let g = 0; g < 9; g++) {
+            const gx = c.p[0] + c.t[0] * (.2 + .6 * ((g * 37) % 10) / 10), gy = c.p[1] + c.t[1] * (.2 + .6 * ((g * 53) % 10) / 10);
+            const [x, y, d] = pr([gx, gy, top]);
+            medio.push({ d: d + 2, svg: `<ellipse cx="${x}" cy="${y}" rx="${6 / px * 1.3}" ry="${4 / px * 1.3}" fill="#9a6b45" stroke="#3e2716" stroke-width="${1 / px}" transform="rotate(${g * 41} ${x} ${y})" opacity="${op}"/>` });
+          }
+        }
       }
-    }
-    // calor y pulso (solo durante el paso)
-    nodos.thermoblock.formas[0].setAttribute('fill', col('pieza'));
-    for (const a of s.acciones) {
-      const k = clamp((lt - a.t0) / a.dur);
-      if (a.tipo === 'calor') {
-        const v = Math.sin(Math.PI * k) * (k > 0 && k < 1 ? 1 : 0);
-        nodos[a.parte].formas[0].setAttribute('fill', mezclar(col('pieza'), col('calor'), clamp(v * 1.4)));
+      // aspas del molinillo y aguja del dial (giran)
+      if (p.aspas) {
+        const a0 = (st.ang[p.id] || 0) * Math.PI / 180, [cx, cy, cz] = p.aspas.c;
+        for (let k = 0; k < p.aspas.n; k++) {
+          const a = a0 + k / p.aspas.n * Math.PI * 2;
+          const P1 = [cx + 6 * Math.cos(a), cy + 6 * Math.sin(a), cz + dz], P2 = [cx + p.aspas.r * Math.cos(a + .35), cy + p.aspas.r * Math.sin(a + .35), cz + dz];
+          medio.push({ d: pr([cx, cy, cz])[2] + 3, svg: `<polyline points="${poly([P1, P2])}" stroke="${rgb(col(p.aspas.color), .8)}" stroke-width="${3 / px * 1.4}" stroke-linecap="round" opacity="${op}"/>` });
+        }
       }
-      if (a.tipo === 'pulso') {
-        const v = Math.sin(Math.PI * clamp((lt - a.t0) / .5));
-        nodos[a.parte].formas.forEach((fm, j) => j && fm.setAttribute('fill', v > .05 ? mezclar(col('borde'), col('foco'), v) : col('borde')));
+      if (p.aguja) {
+        const a = ((st.ang[p.id] || 0) - 50) * Math.PI / 180, [cx, cy, cz] = p.aguja.c;
+        const P2 = [cx + p.aguja.r * Math.sin(a), cy, cz + p.aguja.r * Math.cos(a)];
+        medio.push({ d: pr([cx, cy, cz])[2] + 5, svg: `<polyline points="${poly([[cx, cy, cz], P2])}" stroke="${col(p.aguja.color)}" stroke-width="${3.5 / px * 1.3}" stroke-linecap="round" opacity="${op}"/>` });
       }
-    }
+    });
 
-    // flujos
-    capaFlujos.innerHTML = '';
+    // flujos y partículas, arriba de las piezas
+    const encima = [];
     for (const a of s.acciones.filter(a => a.tipo === 'flujo')) {
       const k = (lt - a.t0) / a.dur;
       if (k <= 0 || k >= 1) continue;
-      const op = Math.min(1, k * 5, (1 - k) * 5);
-      const d = 'M' + M.caminos[a.camino].map(p => p.join(' ')).join(' L');
-      el('path', { d, fill: 'none', stroke: col(a.color), 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', opacity: .35 * op }, capaFlujos);
-      el('path', { d, fill: 'none', stroke: col(a.color), 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-dasharray': '10 16', 'stroke-dashoffset': -lt * 70, opacity: op }, capaFlujos);
+      const o = Math.min(1, k * 5, (1 - k) * 5);
+      const pts = poly(M.caminos[a.camino]);
+      encima.push(`<polyline points="${pts}" fill="none" stroke="${col(a.color)}" stroke-width="${11 / px}" stroke-linecap="round" stroke-linejoin="round" opacity="${.3 * o}"/>`);
+      encima.push(`<polyline points="${pts}" fill="none" stroke="${col(a.color)}" stroke-width="${8 / px}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="${14 / px} ${18 / px}" stroke-dashoffset="${-lt * 95 / px}" opacity="${o}"/>`);
     }
-
-    // partículas
-    capaParticulas.innerHTML = '';
     for (const a of s.acciones.filter(a => a.tipo === 'particulas')) {
       const ventana = Math.max(0, a.dur - a.viaje);
       for (let j = 0; j < a.n; j++) {
-        const inicioP = a.t0 + (a.n > 1 ? j * ventana / (a.n - 1) : 0);
-        const p = (lt - inicioP) / a.viaje;
+        const t0 = a.t0 + (a.n > 1 ? j * ventana / (a.n - 1) : 0), p = (lt - t0) / a.viaje;
         if (p <= 0 || p >= 1) continue;
-        let [x, y] = punto(a.camino, a.forma === 'pastilla' ? ease(p) : p);
-        const jit = ((j * 37) % 9) - 4;
-        const op = Math.min(1, p * 6, (1 - p) * 6);
-        if (a.forma === 'grano') { x += jit * 2.4; el('ellipse', { cx: x, cy: y, rx: 6, ry: 4.2, fill: '#8f6340', stroke: '#4a2f1a', 'stroke-width': 1, opacity: op, transform: `rotate(${j * 47 + p * 200} ${x} ${y})` }, capaParticulas); }
-        if (a.forma === 'gota') { x += jit * .6; el('ellipse', { cx: x, cy: y, rx: 3.2, ry: 4.6, fill: col(a.color), opacity: op }, capaParticulas); }
-        if (a.forma === 'polvo') { x += jit * 1.6; el('circle', { cx: x, cy: y, r: 2.2, fill: col(a.color), opacity: op }, capaParticulas); }
-        if (a.forma === 'vapor') { x += jit * 3 * p; el('circle', { cx: x, cy: y, r: 4 + p * 6, fill: '#ffffff', opacity: .7 * (1 - p) }, capaParticulas); }
-        if (a.forma === 'pastilla') el('rect', { x: x - 20, y: y - 8, width: 40, height: 16, rx: 6, fill: 'url(#p-polvo)', stroke: '#3e2716', 'stroke-width': 1.5, transform: `rotate(${p * 70} ${x} ${y})` }, capaParticulas);
+        const P = punto(a.camino, a.forma === 'pastilla' ? ease(p) : p);
+        const jit = ((j * 37) % 9) - 4, jit2 = ((j * 53) % 7) - 3;
+        const o = Math.min(1, p * 6, (1 - p) * 6);
+        if (a.forma === 'grano') { P[0] += jit * 3; P[1] += jit2 * 3; const [x, y] = pr(P);
+          encima.push(`<ellipse cx="${x}" cy="${y}" rx="${8 / px}" ry="${5.5 / px}" fill="#9a6b45" stroke="#3e2716" stroke-width="${1.2 / px}" opacity="${o}" transform="rotate(${j * 47 + p * 260} ${x} ${y})"/>`); }
+        if (a.forma === 'gota') { P[0] += jit * .5; const [x, y] = pr(P); encima.push(`<ellipse cx="${x}" cy="${y}" rx="${4 / px}" ry="${6 / px}" fill="${col(a.color)}" opacity="${o}"/>`); }
+        if (a.forma === 'polvo') { P[0] += jit * 1.5; P[1] += jit2 * 1.5; const [x, y] = pr(P); encima.push(`<circle cx="${x}" cy="${y}" r="${2.8 / px}" fill="${col(a.color)}" opacity="${o}"/>`); }
+        if (a.forma === 'burbuja') { P[0] += jit * 4 * p; P[1] += jit2 * 4 * p; P[2] -= p * 10; const [x, y] = pr(P);
+          encima.push(`<circle cx="${x}" cy="${y}" r="${(3 + p * 6) / px}" fill="#ffffff" fill-opacity="${.55 * (1 - p)}" stroke="#ffffff" stroke-opacity="${.9 * (1 - p)}" stroke-width="${1.2 / px}"/>`); }
+        if (a.forma === 'pastilla') { const [x, y] = pr(P); encima.push(`<rect x="${x - 26 / px}" y="${y - 11 / px}" width="${52 / px}" height="${22 / px}" rx="${8 / px}" fill="${col('molido')}" stroke="#2a180c" stroke-width="${1.5 / px}" transform="rotate(${p * 80} ${x} ${y})"/>`); }
       }
     }
 
-    // etiquetas de las piezas en foco (tamaño constante en pantalla)
-    capaEtiquetas.innerHTML = '';
-    const ke = clamp((lt - .45) / .35) * (s.d - lt > .2 ? 1 : clamp((s.d - lt) / .2));
+    // etiquetas de las piezas en foco (tamaño fijo en pantalla)
+    const etiquetas = [];
+    const ke = clamp((lt - .45) / .35) * clamp((s.d - lt) / .2);
     if (ke > 0 && !s.cierre) for (const id of s.foco) {
       const p = M.piezas.find(x => x.id === id);
-      if (!p.etiqueta) continue;
-      const fs = 19 / cam.z, padX = 12 / cam.z, padY = 8 / cam.z;
-      const g = el('g', { opacity: ke }, capaEtiquetas);
-      const t = el('text', { x: p.etiqueta.x, y: p.etiqueta.y, 'font-size': fs, 'text-anchor': 'middle', 'dominant-baseline': 'central' }, g);
-      t.textContent = p.nombre;
-      const bb = t.getBBox();
-      const r = el('rect', { x: bb.x - padX, y: bb.y - padY, width: bb.width + padX * 2, height: bb.height + padY * 2, rx: (bb.height + padY * 2) / 2, stroke: col('foco'), 'stroke-width': 2 / cam.z }, g);
-      g.insertBefore(r, t);
+      if (!p.ancla) continue;
+      const [x, y] = pr(p.ancla), fs = 21 / px, w = p.nombre.length * fs * .56 + 28 / px, h = 42 / px;
+      etiquetas.push(`<g opacity="${ke}"><rect x="${x - w / 2}" y="${y - h / 2}" width="${w}" height="${h}" rx="${h / 2}" fill="#ffffff" stroke="${col('foco')}" stroke-width="${2 / px}"/><text x="${x}" y="${y}" font-size="${fs}" font-weight="600" fill="#1d1d1f" text-anchor="middle" dominant-baseline="central">${p.nombre}</text></g>`);
     }
+
+    // sombra en el piso, para que la máquina "apoye"
+    const piso = [[-90, -80, 0], [260, -80, 0], [260, 460, 0], [-90, 460, 0]];
+    const sombra = `<polygon points="${poly(piso)}" fill="url(#sombra)" opacity="${i === 0 && ap ? ease(clamp(lt / ap.dur)) : 1}"/>`;
+    const orden = (a, b) => a.d - b.d;
+    svg.innerHTML = `<defs><radialGradient id="sombra"><stop offset="0" stop-color="#000" stop-opacity=".16"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>`
+      + sombra + atras.sort(orden).map(x => x.svg).join('') + medio.sort(orden).map(x => x.svg).join('')
+      + encima.join('') + adelante.sort(orden).map(x => x.svg).join('') + etiquetas.join('');
 
     // texto
     const tx = document.getElementById('texto');
     if (tx.dataset.paso !== String(i)) {
       tx.dataset.paso = i;
-      tx.innerHTML = `<p class="ep">${s.epigrafe || ''}</p><h1>${s.titulo}</h1>${s.bajada ? `<p>${s.bajada}</p>` : ''}${s.boton ? `<span class="boton">${s.boton}</span>` : ''}`;
+      tx.innerHTML = `<p class="ep">${s.epigrafe || ''}</p><h1>${s.titulo}</h1>${s.bajada ? `<p>${s.bajada}</p>` : ''}`
+        + `${s.pildora ? `<span class="pildora">${s.pildora}</span>` : ''}${s.boton ? `<span class="boton">${s.boton}</span>` : ''}`;
     }
     const salida = i < M.pasos.length - 1 ? clamp((s.d - lt) / .25) : 1;
-    [...tx.children].forEach((c, j) => {
-      const k = ease(clamp((lt - j * .1) / .4)) * salida;
-      c.style.opacity = k; c.style.transform = `translateY(${(1 - k) * 24}px)`;
-    });
+    [...tx.children].forEach((c, j) => { const k = ease(clamp((lt - j * .1) / .4)) * salida; c.style.opacity = k; c.style.transform = `translateY(${(1 - k) * 24}px)`; });
     document.querySelectorAll('#puntos span').forEach((d, j) => d.classList.toggle('on', s.numero === j + 1));
     document.getElementById('puntos').style.opacity = s.numero ? 1 : 0;
   }
@@ -287,9 +317,9 @@
     M = await (await fetch(`modelos/${nombre}.json`)).json();
     inicio = []; total = 0;
     for (const s of M.pasos) { inicio.push(total); total += s.d; }
-    for (const [k, pts] of Object.entries(M.caminos)) largoCaminos[k] = largo(pts);
+    for (const [k, p] of Object.entries(M.caminos)) largos[k] = largo(p);
     await document.fonts.ready;
-    construir();
+    document.getElementById('puntos').innerHTML = M.pasos.filter(s => s.numero).map(() => '<span></span>').join('');
     cuadro(0);
     return Math.round(total * FPS);
   };

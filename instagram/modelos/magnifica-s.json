@@ -1,179 +1,213 @@
 {
   "id": "magnifica-s",
+  "version": 2,
   "nombre": "De'Longhi Magnifica S",
-  "nota": "Modelo esquemático, vista frontal en corte. Las medidas son de dibujo (viewBox 600 x 720), no de fábrica. Datos técnicos tomados de la ficha del sitio (assets/js/productos.js).",
-  "lienzo": { "ancho": 600, "alto": 720 },
+  "nota": "Modelo 3D esquemático para el video (vista isométrica, carcasa transparente). Unidades: milímetros aproximados; x = ancho, y = profundidad (el frente está en y = 0), z = alto. Medidas exteriores de la ficha: 24 x 44 x 36 cm. La posición interna de las piezas está simplificada para que se entienda. Datos técnicos tomados de assets/js/productos.js.",
+
   "colores": {
     "cuerpo": "#1d1d1f",
-    "hueco": "#0c0c0e",
-    "pieza": "#3a3a40",
-    "borde": "#6e6e73",
+    "pieza": "#4a4a52",
+    "metal": "#9a9aa2",
+    "boton": "#2c2c30",
     "foco": "#a3c26a",
     "agua": "#5aa0e6",
     "grano": "#7a5230",
     "molido": "#5a3a22",
-    "cafe": "#4a2c18",
+    "cafe": "#3e2414",
     "crema": "#c08a52",
     "leche": "#f3efe6",
     "calor": "#e8743b",
-    "vidrio": "rgba(255,255,255,.18)"
+    "vidrio": "#dfe6ee"
   },
+
   "piezas": [
-    { "id": "cuerpo", "nombre": "Cuerpo", "fijo": true,
+    { "id": "carcasa", "nombre": "Carcasa", "carcasa": true,
+      "formas": [ { "tipo": "caja", "p": [0, 0, 0], "t": [240, 440, 360], "color": "cuerpo" } ] },
+
+    { "id": "panel", "nombre": "Panel: dial y botones", "ancla": [120, -12, 360],
       "formas": [
-        { "tipo": "rect", "x": 110, "y": 40, "w": 380, "h": 640, "rx": 30, "relleno": "cuerpo" },
-        { "tipo": "rect", "x": 190, "y": 500, "w": 210, "h": 124, "rx": 10, "relleno": "hueco" }
+        { "tipo": "caja", "p": [30, -6, 292], "t": [180, 8, 56], "color": "pieza" },
+        { "tipo": "caja", "p": [44, -12, 298], "t": [24, 6, 16], "color": "boton" },
+        { "tipo": "caja", "p": [44, -12, 322], "t": [24, 6, 16], "color": "boton" },
+        { "tipo": "caja", "p": [172, -12, 298], "t": [24, 6, 16], "color": "boton" },
+        { "tipo": "caja", "p": [172, -12, 322], "t": [24, 6, 16], "color": "boton" }
       ] },
-    { "id": "tolva", "nombre": "Contenedor de granos · 250 g", "etiqueta": { "x": 240, "y": 22 },
-      "formas": [ { "tipo": "path", "d": "M150 62 L330 62 L292 168 L188 168 Z", "relleno": "pieza" } ],
-      "contenido": { "d": "M150 62 L330 62 L292 168 L188 168 Z", "y": 62, "h": 106, "color": "grano", "patron": "granos", "nivel": 0.12 } },
-    { "id": "molinillo", "nombre": "Molinillo cónico de acero · 13 niveles", "etiqueta": { "x": 240, "y": 258 },
-      "centro": [240, 196],
-      "formas": [
-        { "tipo": "engranaje", "cx": 240, "cy": 196, "r": 24, "dientes": 12, "relleno": "pieza" },
-        { "tipo": "circle", "cx": 240, "cy": 196, "r": 8, "relleno": "cuerpo" }
-      ] },
+    { "id": "dial", "nombre": "Dial de intensidad", "sigue": "panel",
+      "formas": [ { "tipo": "cilindro", "c": [120, -14, 320], "r": 19, "h": 8, "eje": "y", "color": "leche", "lados": 24 } ],
+      "aguja": { "c": [120, -15, 320], "r": 15, "plano": "xz", "color": "cuerpo" } },
+
+    { "id": "tolva", "nombre": "Contenedor de granos · 250 g", "ancla": [80, 250, 385],
+      "formas": [ { "tipo": "tronco", "p": [20, 170, 240], "t": [120, 170, 118], "base": 0.5, "color": "vidrio", "vidrio": true } ],
+      "contenido": { "tipo": "tronco", "p": [24, 174, 242], "t": [112, 162, 112], "base": 0.5, "color": "grano", "nivel": 0.12 } },
+
+    { "id": "molinillo", "nombre": "Molinillo cónico de acero · 13 niveles", "ancla": [150, 255, 215],
+      "formas": [ { "tipo": "cilindro", "c": [80, 255, 200], "r": 30, "h": 32, "eje": "z", "color": "metal", "lados": 24 } ],
+      "aspas": { "c": [80, 255, 233], "r": 26, "n": 8, "color": "pieza" } },
     { "id": "conducto", "nombre": "Conducto del molido",
-      "formas": [ { "tipo": "linea", "d": "M240 222 L240 292", "ancho": 12 } ] },
-    { "id": "unidad", "nombre": "Unidad de infusión", "etiqueta": { "x": 240, "y": 272 },
-      "formas": [ { "tipo": "rect", "x": 190, "y": 292, "w": 100, "h": 110, "rx": 12, "relleno": "pieza" } ],
-      "contenido": { "x": 198, "y": 334, "w": 84, "h": 60, "rx": 6, "color": "molido", "patron": "polvo", "nivel": 0 } },
+      "formas": [ { "tipo": "tubo", "puntos": [[80, 255, 200], [80, 255, 190]], "ancho": 12, "color": "metal" } ] },
+
+    { "id": "unidad", "nombre": "Unidad de infusión", "ancla": [80, 200, 215],
+      "formas": [ { "tipo": "caja", "p": [40, 200, 80], "t": [80, 110, 110], "color": "vidrio", "vidrio": true } ],
+      "contenido": { "tipo": "caja", "p": [46, 206, 86], "t": [68, 98, 70], "color": "molido", "nivel": 0 } },
     { "id": "piston", "nombre": "Prensa", "sigue": "unidad",
-      "formas": [ { "tipo": "rect", "x": 198, "y": 300, "w": 84, "h": 16, "rx": 4, "relleno": "borde" } ] },
-    { "id": "deposito", "nombre": "Depósito de agua · 1,8 L", "etiqueta": { "x": 426, "y": 104 },
-      "formas": [ { "tipo": "rect", "x": 380, "y": 116, "w": 92, "h": 308, "rx": 14, "relleno": "vidrio" } ],
-      "contenido": { "x": 384, "y": 120, "w": 84, "h": 300, "rx": 11, "color": "agua", "nivel": 0.18 } },
-    { "id": "bomba", "nombre": "Bomba · 15 bares", "etiqueta": { "x": 426, "y": 512 },
-      "formas": [
-        { "tipo": "rect", "x": 388, "y": 442, "w": 76, "h": 44, "rx": 10, "relleno": "pieza" },
-        { "tipo": "linea", "d": "M402 464 L450 464", "ancho": 4 }
-      ] },
-    { "id": "thermoblock", "nombre": "Thermoblock", "etiqueta": { "x": 322, "y": 512 },
-      "formas": [
-        { "tipo": "rect", "x": 284, "y": 442, "w": 76, "h": 44, "rx": 10, "relleno": "pieza" },
-        { "tipo": "linea", "d": "M294 464 L302 452 L312 476 L322 452 L332 476 L342 452 L350 464", "ancho": 3 }
-      ] },
+      "formas": [ { "tipo": "caja", "p": [46, 206, 166], "t": [68, 98, 14], "color": "metal" } ] },
+
+    { "id": "deposito", "nombre": "Depósito de agua · 1,8 L", "ancla": [193, 120, 352],
+      "formas": [ { "tipo": "caja", "p": [160, 20, 30], "t": [66, 200, 300], "color": "vidrio", "vidrio": true } ],
+      "contenido": { "tipo": "caja", "p": [164, 24, 34], "t": [58, 192, 292], "color": "agua", "nivel": 0.18 } },
+
+    { "id": "bomba", "nombre": "Bomba · 15 bares", "ancla": [215, 420, 25],
+      "formas": [ { "tipo": "cilindro", "c": [193, 330, 60], "r": 22, "h": 70, "eje": "y", "color": "pieza", "lados": 18 } ] },
+    { "id": "thermoblock", "nombre": "Thermoblock", "ancla": [110, 355, 112],
+      "formas": [ { "tipo": "caja", "p": [90, 320, 30], "t": [60, 70, 50], "color": "pieza" } ] },
     { "id": "canos", "nombre": "Circuito de agua",
       "formas": [
-        { "tipo": "linea", "d": "M426 424 L426 442", "ancho": 6 },
-        { "tipo": "linea", "d": "M388 464 L360 464", "ancho": 6 },
-        { "tipo": "linea", "d": "M322 442 L322 350 L290 350", "ancho": 6 }
+        { "tipo": "tubo", "puntos": [[193, 120, 30], [193, 120, 15], [193, 330, 15], [193, 340, 40]], "ancho": 6, "color": "metal" },
+        { "tipo": "tubo", "puntos": [[171, 365, 60], [150, 355, 55]], "ancho": 6, "color": "metal" },
+        { "tipo": "tubo", "puntos": [[120, 330, 80], [120, 290, 150], [120, 255, 150]], "ancho": 6, "color": "metal" }
       ] },
-    { "id": "surtidor", "nombre": "Surtidor de altura regulable", "etiqueta": { "x": 330, "y": 476 },
+
+    { "id": "surtidor", "nombre": "Surtidor de altura regulable", "ancla": [150, -34, 130],
       "formas": [
-        { "tipo": "linea", "d": "M240 402 L240 452", "ancho": 10 },
-        { "tipo": "rect", "x": 212, "y": 450, "w": 56, "h": 18, "rx": 6, "relleno": "borde" },
-        { "tipo": "rect", "x": 222, "y": 466, "w": 8, "h": 10, "rx": 2, "relleno": "borde" },
-        { "tipo": "rect", "x": 250, "y": 466, "w": 8, "h": 10, "rx": 2, "relleno": "borde" }
+        { "tipo": "tubo", "puntos": [[80, 200, 100], [80, 0, 108]], "ancho": 10, "color": "metal" },
+        { "tipo": "caja", "p": [50, -34, 96], "t": [60, 40, 20], "color": "metal" },
+        { "tipo": "caja", "p": [62, -26, 86], "t": [10, 10, 10], "color": "metal" },
+        { "tipo": "caja", "p": [88, -26, 86], "t": [10, 10, 10], "color": "metal" }
       ] },
     { "id": "taza", "nombre": "Taza",
-      "formas": [ { "tipo": "path", "d": "M206 540 L274 540 L268 612 Q266 620 258 620 L222 620 Q214 620 212 612 Z", "relleno": "vidrio" } ],
-      "contenido": { "d": "M206 540 L274 540 L268 612 Q266 620 258 620 L222 620 Q214 620 212 612 Z", "y": 552, "h": 68, "color": "cafe", "espuma": "crema", "nivel": 0 } },
+      "formas": [ { "tipo": "cilindro", "c": [80, -16, 26], "r": 26, "h": 52, "eje": "z", "color": "vidrio", "vidrio": true, "lados": 24 } ],
+      "contenido": { "tipo": "cilindro", "c": [80, -16, 28], "r": 23, "h": 46, "eje": "z", "color": "cafe", "espuma": "crema", "nivel": 0, "lados": 24 } },
     { "id": "bandeja", "nombre": "Bandeja de goteo",
+      "formas": [ { "tipo": "caja", "p": [10, -62, 0], "t": [220, 72, 26], "color": "pieza" } ] },
+
+    { "id": "cajon", "nombre": "Cajón de posos", "ancla": [45, 40, 10],
+      "formas": [ { "tipo": "caja", "p": [10, 40, 26], "t": [70, 100, 50], "color": "vidrio", "vidrio": true } ],
+      "contenido": { "tipo": "caja", "p": [14, 44, 28], "t": [62, 92, 46], "color": "molido", "nivel": 0.1 } },
+
+    { "id": "vaporizador", "nombre": "Vaporizador · Cappuccino System", "ancla": [-36, 60, 305],
       "formas": [
-        { "tipo": "rect", "x": 150, "y": 624, "w": 300, "h": 26, "rx": 8, "relleno": "pieza" },
-        { "tipo": "linea", "d": "M170 637 L430 637", "ancho": 2 }
-      ] },
-    { "id": "cajon", "nombre": "Cajón de posos", "etiqueta": { "x": 152, "y": 590 },
-      "formas": [ { "tipo": "rect", "x": 124, "y": 450, "w": 58, "h": 112, "rx": 8, "relleno": "pieza" } ],
-      "contenido": { "x": 128, "y": 454, "w": 50, "h": 104, "rx": 6, "color": "molido", "patron": "polvo", "nivel": 0.1 } },
-    { "id": "panel", "nombre": "Panel: dial y botones", "etiqueta": { "x": 405, "y": 22 },
-      "formas": [
-        { "tipo": "rect", "x": 335, "y": 50, "w": 140, "h": 50, "rx": 12, "relleno": "pieza" },
-        { "tipo": "rect", "x": 346, "y": 62, "w": 20, "h": 12, "rx": 3, "relleno": "borde" },
-        { "tipo": "rect", "x": 346, "y": 78, "w": 20, "h": 12, "rx": 3, "relleno": "borde" },
-        { "tipo": "rect", "x": 444, "y": 62, "w": 20, "h": 12, "rx": 3, "relleno": "borde" },
-        { "tipo": "rect", "x": 444, "y": 78, "w": 20, "h": 12, "rx": 3, "relleno": "borde" }
-      ] },
-    { "id": "dial", "nombre": "Dial de intensidad", "sigue": "panel", "centro": [405, 75],
-      "formas": [
-        { "tipo": "circle", "cx": 405, "cy": 75, "r": 16, "relleno": "leche" },
-        { "tipo": "linea", "d": "M405 75 L405 62", "ancho": 3, "color": "cuerpo" }
-      ] },
-    { "id": "vaporizador", "nombre": "Vaporizador · Cappuccino System", "etiqueta": { "x": 72, "y": 220 },
-      "formas": [
-        { "tipo": "linea", "d": "M110 250 L72 250 L72 470", "ancho": 8 },
-        { "tipo": "circle", "cx": 110, "cy": 250, "r": 9, "relleno": "borde" }
+        { "tipo": "tubo", "puntos": [[0, 60, 280], [-36, 60, 280], [-36, 60, 92]], "ancho": 9, "color": "metal" },
+        { "tipo": "cilindro", "c": [-8, 60, 280], "r": 10, "h": 16, "eje": "z", "color": "metal", "lados": 14 }
       ] },
     { "id": "jarra", "nombre": "Jarra de leche",
-      "formas": [ { "tipo": "path", "d": "M38 480 L106 480 L100 566 L44 566 Z", "relleno": "vidrio" } ],
-      "contenido": { "d": "M38 480 L106 480 L100 566 L44 566 Z", "y": 480, "h": 86, "color": "leche", "nivel": 0.3 } }
+      "formas": [ { "tipo": "cilindro", "c": [-36, 60, 30], "r": 34, "h": 100, "eje": "z", "color": "vidrio", "vidrio": true, "lados": 24 } ],
+      "contenido": { "tipo": "cilindro", "c": [-36, 60, 32], "r": 31, "h": 96, "eje": "z", "color": "leche", "nivel": 0.3, "lados": 24 } }
   ],
+
   "caminos": {
-    "carga_granos": [[240, -40], [240, 140]],
-    "carga_agua": [[426, -40], [426, 300]],
-    "a_molinillo": [[240, 120], [240, 192]],
-    "molido": [[240, 220], [240, 360]],
-    "agua_a_bomba": [[426, 400], [426, 464], [364, 464]],
-    "agua_a_unidad": [[322, 442], [322, 350], [282, 350]],
-    "cafe": [[240, 470], [240, 600]],
-    "pastilla": [[240, 386], [205, 410], [152, 500]],
-    "vapor": [[72, 470], [72, 540]]
+    "carga_granos": [[80, 255, 560], [80, 255, 300]],
+    "carga_agua": [[193, 60, 560], [193, 60, 200]],
+    "a_molinillo": [[80, 255, 290], [80, 255, 234]],
+    "molido": [[80, 255, 200], [80, 255, 110]],
+    "agua_a_bomba": [[193, 120, 30], [193, 120, 15], [193, 330, 15], [193, 340, 40]],
+    "agua_a_unidad": [[150, 355, 55], [120, 330, 80], [120, 290, 150], [100, 255, 150]],
+    "cafe": [[67, -21, 86], [67, -21, 50]],
+    "cafe2": [[93, -21, 86], [93, -21, 50]],
+    "pastilla": [[80, 230, 84], [50, 140, 84], [45, 90, 40]],
+    "vapor": [[-36, 60, 96], [-36, 60, 60]]
   },
+
+  "recorrido": [
+    { "t": 0.0,  "mira": [120, 200, 180], "zoom": 0.95, "giro": 30 },
+    { "t": 2.0,  "mira": [120, 200, 190], "zoom": 1.0,  "giro": 36 },
+    { "t": 3.9,  "mira": [140, 190, 250], "zoom": 1.15, "giro": 42 },
+    { "t": 6.6,  "mira": [120, -10, 320], "zoom": 2.1,  "giro": 28 },
+    { "t": 9.4,  "mira": [80, 255, 245],  "zoom": 1.9,  "giro": 40 },
+    { "t": 12.2, "mira": [80, 250, 140],  "zoom": 1.9,  "giro": 50 },
+    { "t": 14.4, "mira": [180, 200, 90],  "zoom": 1.45, "giro": 58 },
+    { "t": 16.0, "mira": [130, 330, 70],  "zoom": 1.5,  "giro": 62 },
+    { "t": 17.6, "mira": [90, 120, 120],  "zoom": 1.55, "giro": 44 },
+    { "t": 19.0, "mira": [80, -16, 70],   "zoom": 1.9,  "giro": 32 },
+    { "t": 21.0, "mira": [50, 110, 70],   "zoom": 1.75, "giro": 26 },
+    { "t": 23.7, "mira": [-30, 60, 140],  "zoom": 1.7,  "giro": 20 },
+    { "t": 26.0, "mira": [110, 200, 180], "zoom": 0.92, "giro": 34 },
+    { "t": 28.2, "mira": [110, 200, 180], "zoom": 0.9,  "giro": 38 }
+  ],
+
   "pasos": [
     { "id": "portada", "d": 2.4, "epigrafe": "Magnifica S por dentro", "titulo": "Del grano a la taza, con un botón.", "bajada": "Así funciona, paso a paso.",
-      "foco": [], "camara": { "x": 300, "y": 360, "zoom": 1 },
-      "acciones": [ { "tipo": "aparecer", "t0": 0, "dur": 1.2 } ] },
+      "foco": [], "acciones": [ { "tipo": "aparecer", "t0": 0, "dur": 1.4 } ] },
     { "id": "carga", "d": 3.0, "numero": 1, "epigrafe": "Paso 1 · Cargás", "titulo": "Agua y granos.", "bajada": "Depósito de 1,8 L y contenedor de 250 g.",
-      "foco": ["deposito", "tolva"], "camara": { "x": 300, "y": 300, "zoom": 1.1 },
+      "foco": ["deposito", "tolva"],
       "acciones": [
         { "tipo": "llenar", "parte": "deposito", "a": 0.85, "t0": 0.3, "dur": 2.2 },
         { "tipo": "llenar", "parte": "tolva", "a": 0.8, "t0": 0.3, "dur": 2.2 },
-        { "tipo": "particulas", "camino": "carga_granos", "forma": "grano", "n": 14, "t0": 0.2, "dur": 2.3, "viaje": 0.6 },
-        { "tipo": "particulas", "camino": "carga_agua", "forma": "gota", "color": "agua", "n": 12, "t0": 0.2, "dur": 2.3, "viaje": 0.6 }
+        { "tipo": "particulas", "camino": "carga_granos", "forma": "grano", "n": 18, "t0": 0.2, "dur": 2.3, "viaje": 0.55 },
+        { "tipo": "particulas", "camino": "carga_agua", "forma": "gota", "color": "agua", "n": 16, "t0": 0.2, "dur": 2.3, "viaje": 0.5 }
       ] },
     { "id": "elegis", "d": 2.6, "numero": 2, "epigrafe": "Paso 2 · Elegís", "titulo": "Un botón por taza.", "bajada": "Con el dial elegís la intensidad.",
-      "foco": ["panel", "dial"], "camara": { "x": 405, "y": 90, "zoom": 2.2 },
+      "foco": ["panel", "dial"],
       "acciones": [
         { "tipo": "girar", "parte": "dial", "grados": 110, "t0": 0.6, "dur": 1.0 },
         { "tipo": "pulso", "parte": "panel", "t0": 1.8 }
       ] },
     { "id": "muele", "d": 3.0, "numero": 3, "epigrafe": "Paso 3 · Muele", "titulo": "Muele el grano en el momento.", "bajada": "Molinillo cónico de acero, 13 niveles.",
-      "foco": ["molinillo", "tolva", "conducto"], "camara": { "x": 240, "y": 190, "zoom": 1.7 },
+      "foco": ["molinillo", "tolva", "conducto"],
       "acciones": [
-        { "tipo": "girar", "parte": "molinillo", "grados": 1440, "t0": 0.3, "dur": 2.5 },
+        { "tipo": "girar", "parte": "molinillo", "grados": 1800, "t0": 0.3, "dur": 2.5 },
         { "tipo": "llenar", "parte": "tolva", "a": 0.66, "t0": 0.3, "dur": 2.5 },
-        { "tipo": "particulas", "camino": "a_molinillo", "forma": "grano", "n": 10, "t0": 0.3, "dur": 2.2, "viaje": 0.5 },
-        { "tipo": "particulas", "camino": "molido", "forma": "polvo", "color": "molido", "n": 26, "t0": 0.7, "dur": 2.1, "viaje": 0.5 }
+        { "tipo": "particulas", "camino": "a_molinillo", "forma": "grano", "n": 12, "t0": 0.3, "dur": 2.2, "viaje": 0.45 },
+        { "tipo": "particulas", "camino": "molido", "forma": "polvo", "color": "molido", "n": 40, "t0": 0.7, "dur": 2.2, "viaje": 0.5 }
       ] },
     { "id": "compacta", "d": 2.6, "numero": 4, "epigrafe": "Paso 4 · Prensa", "titulo": "Dosifica y prensa el café.", "bajada": "La unidad de infusión arma la pastilla.",
-      "foco": ["unidad", "piston"], "camara": { "x": 240, "y": 345, "zoom": 1.9 },
+      "foco": ["unidad", "piston"],
       "acciones": [
         { "tipo": "llenar", "parte": "unidad", "a": 0.8, "t0": 0, "dur": 0.8 },
-        { "tipo": "mover", "parte": "piston", "dy": 22, "t0": 1.0, "dur": 0.8 }
+        { "tipo": "mover", "parte": "piston", "dz": -20, "t0": 1.0, "dur": 0.7 }
       ] },
     { "id": "calienta", "d": 3.0, "numero": 5, "epigrafe": "Paso 5 · Calienta", "titulo": "15 bares de presión.", "bajada": "La bomba empuja el agua y el Thermoblock la calienta al instante.",
-      "foco": ["deposito", "bomba", "thermoblock", "canos"], "camara": { "x": 360, "y": 410, "zoom": 1.45 },
+      "foco": ["deposito", "bomba", "thermoblock", "canos"],
       "acciones": [
         { "tipo": "flujo", "camino": "agua_a_bomba", "color": "agua", "t0": 0.2, "dur": 2.6 },
-        { "tipo": "flujo", "camino": "agua_a_unidad", "color": "calor", "t0": 0.8, "dur": 2.0 },
-        { "tipo": "calor", "parte": "thermoblock", "t0": 0.6, "dur": 2.2 },
+        { "tipo": "flujo", "camino": "agua_a_unidad", "color": "calor", "t0": 0.9, "dur": 1.9 },
+        { "tipo": "calor", "parte": "thermoblock", "t0": 0.6, "dur": 2.3 },
+        { "tipo": "vibrar", "parte": "bomba", "t0": 0.2, "dur": 2.6 },
         { "tipo": "llenar", "parte": "deposito", "a": 0.78, "t0": 0.2, "dur": 2.6 }
       ] },
     { "id": "extrae", "d": 3.2, "numero": 6, "epigrafe": "Paso 6 · Extrae", "titulo": "Sale el espresso.", "bajada": "El agua atraviesa la pastilla y sale por el surtidor.",
-      "foco": ["unidad", "piston", "surtidor", "taza"], "camara": { "x": 240, "y": 470, "zoom": 1.5 },
+      "foco": ["unidad", "piston", "surtidor", "taza"],
       "acciones": [
-        { "tipo": "flujo", "camino": "agua_a_unidad", "color": "calor", "t0": 0, "dur": 2.6 },
-        { "tipo": "particulas", "camino": "cafe", "forma": "gota", "color": "cafe", "n": 22, "t0": 0.4, "dur": 2.5, "viaje": 0.45 },
-        { "tipo": "llenar", "parte": "taza", "a": 0.6, "t0": 0.7, "dur": 2.3 }
+        { "tipo": "flujo", "camino": "agua_a_unidad", "color": "calor", "t0": 0, "dur": 2.4 },
+        { "tipo": "particulas", "camino": "cafe", "forma": "gota", "color": "cafe", "n": 26, "t0": 0.5, "dur": 2.5, "viaje": 0.35 },
+        { "tipo": "particulas", "camino": "cafe2", "forma": "gota", "color": "cafe", "n": 26, "t0": 0.55, "dur": 2.5, "viaje": 0.35 },
+        { "tipo": "llenar", "parte": "taza", "a": 0.62, "t0": 0.8, "dur": 2.3 }
       ] },
     { "id": "limpia", "d": 2.4, "numero": 7, "epigrafe": "Paso 7 · Descarta", "titulo": "La pastilla va al cajón.", "bajada": "El café usado cae solo al cajón de posos.",
-      "foco": ["unidad", "cajon"], "camara": { "x": 190, "y": 450, "zoom": 1.6 },
+      "foco": ["unidad", "cajon"],
       "acciones": [
-        { "tipo": "mover", "parte": "piston", "dy": 0, "t0": 0, "dur": 0.4 },
-        { "tipo": "llenar", "parte": "unidad", "a": 0, "t0": 0.4, "dur": 0.3 },
+        { "tipo": "mover", "parte": "piston", "dz": 0, "t0": 0, "dur": 0.4 },
+        { "tipo": "llenar", "parte": "unidad", "a": 0, "t0": 0.4, "dur": 0.25 },
         { "tipo": "particulas", "camino": "pastilla", "forma": "pastilla", "color": "molido", "n": 1, "t0": 0.4, "dur": 1.0, "viaje": 1.0 },
-        { "tipo": "llenar", "parte": "cajon", "a": 0.22, "t0": 1.3, "dur": 0.4 }
+        { "tipo": "llenar", "parte": "cajon", "a": 0.24, "t0": 1.3, "dur": 0.4 }
       ] },
     { "id": "leche", "d": 3.0, "numero": 8, "epigrafe": "Y para el cappuccino", "titulo": "Espumás la leche.", "bajada": "Vaporizador manual: Cappuccino System.",
-      "foco": ["vaporizador", "jarra"], "camara": { "x": 90, "y": 420, "zoom": 1.55 },
+      "foco": ["vaporizador", "jarra"],
       "acciones": [
-        { "tipo": "flujo", "camino": "vapor", "color": "leche", "t0": 0.3, "dur": 2.5 },
-        { "tipo": "particulas", "camino": "vapor", "forma": "vapor", "color": "leche", "n": 18, "t0": 0.4, "dur": 2.4, "viaje": 0.5 },
-        { "tipo": "llenar", "parte": "jarra", "a": 0.7, "t0": 0.4, "dur": 2.4 }
+        { "tipo": "particulas", "camino": "vapor", "forma": "burbuja", "color": "leche", "n": 30, "t0": 0.3, "dur": 2.5, "viaje": 0.5 },
+        { "tipo": "llenar", "parte": "jarra", "a": 0.72, "t0": 0.4, "dur": 2.4 }
       ] },
-    { "id": "cierre", "d": 3.0, "cierre": true, "epigrafe": "De'Longhi Magnifica S", "titulo": "Guardalo para cuando la uses.", "bajada": "¿Vos la tomarías con leche o sin leche?", "boton": "Link en la bio",
-      "foco": [], "camara": { "x": 300, "y": 360, "zoom": 1 },
-      "acciones": [] }
-  ]
+    { "id": "cierre", "d": 3.0, "cierre": true, "epigrafe": "De'Longhi Magnifica S", "titulo": "Café de cafetería, en tu casa.",
+      "pildora": "20% OFF por transferencia · o 9 cuotas sin interés", "boton": "Link en la bio",
+      "foco": [], "acciones": [] }
+  ],
+
+  "sonido": {
+    "nota": "Lo sintetiza instagram/sonido-modelo.py: todo generado, sin muestras ni música con derechos.",
+    "musica": { "bpm": 92, "acordes": [["D3", "F#3", "A3", "C#4"], ["B2", "D3", "F#3", "A3"], ["G2", "B2", "D3", "F#3"], ["A2", "C#3", "E3", "G3"]], "volumen": 0.22 },
+    "efectos": [
+      { "tipo": "granos",    "t0": 2.6,  "dur": 2.4, "volumen": 0.35 },
+      { "tipo": "agua",      "t0": 2.6,  "dur": 2.4, "volumen": 0.25 },
+      { "tipo": "click",     "t0": 6.0,  "dur": 0.1, "volumen": 0.6 },
+      { "tipo": "dial",      "t0": 6.0,  "dur": 1.0, "volumen": 0.35 },
+      { "tipo": "click",     "t0": 7.2,  "dur": 0.1, "volumen": 0.7 },
+      { "tipo": "molinillo", "t0": 8.3,  "dur": 2.6, "volumen": 0.45 },
+      { "tipo": "golpe",     "t0": 12.0, "dur": 0.4, "volumen": 0.7 },
+      { "tipo": "bomba",     "t0": 13.8, "dur": 2.7, "volumen": 0.16 },
+      { "tipo": "bomba",     "t0": 16.6, "dur": 2.4, "volumen": 0.1 },
+      { "tipo": "goteo",     "t0": 17.1, "dur": 2.5, "volumen": 0.4 },
+      { "tipo": "golpe",     "t0": 21.1, "dur": 0.4, "volumen": 0.55 },
+      { "tipo": "vapor",     "t0": 22.5, "dur": 2.6, "volumen": 0.35 },
+      { "tipo": "campana",   "t0": 25.3, "dur": 2.0, "volumen": 0.4 }
+    ]
+  }
 }

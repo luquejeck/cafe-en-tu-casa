@@ -3,9 +3,11 @@
 //
 //   node instagram/filmar-modelo.mjs magnifica-s v13-como-funciona-la-magnifica-s
 //
-// Igual que filmar.mjs: 1080x1920, 30 cuadros, H.264 y pista de audio muda.
+// Igual que filmar.mjs: 1080x1920, 30 cuadros, H.264. Si el modelo tiene bloque "sonido", la pista
+// de audio sale de instagram/sonido-modelo.py (música + efectos); si no, va muda.
 // Usa playwright y ffmpeg-static (o el ffmpeg del sistema si no están).
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
+import os from "node:os";
 import fs from "node:fs";
 import http from "node:http";
 import path from "node:path";
@@ -45,10 +47,18 @@ const total = await page.evaluate((m) => window.prepararModelo(m), modelo);
 console.log(id, total, "cuadros =", (total / 30).toFixed(1), "s");
 
 const destino = path.join(salida, `${id}.mp4`);
+const json = path.join(aqui, "modelos", `${modelo}.json`);
+const wav = path.join(os.tmpdir(), `${id}.wav`);
+let audio = ["-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=44100"];
+if (JSON.parse(fs.readFileSync(json, "utf8")).sonido) {
+  const py = spawnSync(process.platform === "win32" ? "python" : "python3", [path.join(aqui, "sonido-modelo.py"), json, wav], { stdio: "inherit" });
+  if (py.status === 0) audio = ["-i", wav];
+  else console.warn("No se pudo generar el audio (¿falta numpy?): el video va mudo.");
+}
 const ff = spawn(ffmpeg, [
   "-y", "-loglevel", "error",
   "-f", "image2pipe", "-framerate", "30", "-c:v", "mjpeg", "-i", "-",
-  "-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=44100",
+  ...audio,
   "-shortest", "-map", "0:v", "-map", "1:a",
   "-c:v", "libx264", "-preset", "slow", "-crf", "16", "-pix_fmt", "yuv420p",
   "-profile:v", "high", "-level", "4.1", "-movflags", "+faststart",
@@ -63,7 +73,7 @@ for (let f = 0; f < total; f++) {
 ff.stdin.end();
 await new Promise((r) => ff.on("close", r));
 // Portada: la máquina entera con el título, ya armada
-await page.evaluate(() => window.cuadro(60));
+await page.evaluate(() => window.cuadro(70));
 await page.screenshot({ path: path.join(salida, `${id}-portada.jpg`), type: "jpeg", quality: 92 });
 console.log("  →", path.relative(raiz, destino));
 await browser.close();
