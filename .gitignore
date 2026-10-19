@@ -23,3 +23,4 @@ skills-lock.json
 
 # Modelo de voz (se arma solo con instagram/narrar-modelo.py)
 instagram/.voz/
+__pycache__/
