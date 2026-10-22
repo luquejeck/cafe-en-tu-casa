@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Carta de agradecimiento — Café en tu Casa</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Tres cartas A4 (210 x 297 mm) para poner dentro de la caja.
+   Mismo lenguaje que las piezas de Instagram: punto oliva + nombre,
+   epígrafe en mayúsculas, título grande y apretado, fondos claros
+   (se imprimen bien en casa), una píldora oliva y el botón negro.
+   Sin WhatsApp, web ni descuentos: Mercado Libre no lo permite. */
+@page { size: A4; margin: 0; }
+:root { --brand: #5b6e32; --brand-dark: #455426; --ink: #1d1d1f; --ink-2: #6e6e73; --gris: #f5f5f7; --linea: rgba(0,0,0,.1); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.carta { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; display: flex; flex-direction: column; padding: 18.39mm 16.97mm 15.56mm; background: #fff; }
+.carta:last-child { page-break-after: auto; }
+.marca { display: flex; align-items: center; gap: 3.39mm; font-size: 6.51mm; font-weight: 600; letter-spacing: -.02em; }
+.marca i { width: 3.11mm; height: 3.11mm; border-radius: 50%; background: var(--brand); }
+.ep { font-size: 3.82mm; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); margin-bottom: 3.68mm; }
+h1 { font-size: 16.26mm; font-weight: 600; line-height: 1.04; letter-spacing: -.035em; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--brand); }
+.sub { margin-top: 5.66mm; font-size: 5.52mm; line-height: 1.45; color: var(--ink-2); max-width: 158.4mm; text-wrap: pretty; }
+.sub b { color: var(--ink); font-weight: 600; }
+.pildora { display: inline-block; background: rgba(91,110,50,.12); color: var(--brand-dark); border-radius: 140.01mm; padding: 2.26mm 5.66mm; font-size: 4.53mm; font-weight: 600; }
+.ruta { display: flex; flex-wrap: nowrap; white-space: nowrap; align-items: center; gap: 2.12mm; margin-top: 4.24mm; font-size: 4.53mm; font-weight: 600; }
+.ruta span { background: #fff; border: .3mm solid var(--linea); border-radius: 140.01mm; padding: 1.56mm 3.68mm; }
+.ruta u { text-decoration: none; color: var(--brand); font-weight: 700; }
+
+/* bloque "dejanos tu opinión" */
+.opinion { display: flex; gap: 8.49mm; align-items: center; background: var(--gris); border-radius: 8.49mm; padding: 8.49mm; }
+.opinion .qr { flex: none; width: 42.43mm; background: #fff; border-radius: 4.24mm; padding: 3.54mm; text-align: center; }
+.opinion .qr img { width: 100%; display: block; }
+.opinion .qr small { display: block; margin-top: 2.12mm; font-size: 3.39mm; font-weight: 600; color: var(--ink-2); }
+.opinion h2 { font-size: 8.49mm; font-weight: 600; letter-spacing: -.025em; line-height: 1.1; }
+.opinion p { margin-top: 2.83mm; font-size: 4.67mm; line-height: 1.45; color: var(--ink-2); }
+
+/* pie con Instagram */
+.pie { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 7.07mm; padding-top: 7.07mm; border-top: .3mm solid var(--linea); }
+.pie .ig { display: flex; align-items: center; gap: 4.95mm; }
+.pie .ig img { width: 21.21mm; display: block; }
+.pie .ig p { font-size: 4.24mm; line-height: 1.4; color: var(--ink-2); }
+.pie .ig b { display: block; font-size: 6.22mm; color: var(--ink); letter-spacing: -.01em; }
+.pie .firma { font-size: 4.24mm; color: var(--ink-2); text-align: right; line-height: 1.4; }
+.pie .firma b { color: var(--ink); font-weight: 600; }
+
+/* ---------- Opción 1: corta y cálida (blanca) ---------- */
+.o1 .cuerpo { margin-top: 33.94mm; }
+.o1 .opinion { margin-top: 22.63mm; }
+
+/* ---------- Opción 2: tu primer café (gris con pasos) ---------- */
+.o2 { background: var(--gris); }
+.o2 .cuerpo { margin-top: 12.73mm; }
+.o2 h1 { font-size: 14.85mm; }
+.o2 .pasos { margin-top: 7.07mm; display: grid; gap: 3.11mm; }
+.o2 .paso { display: flex; gap: 4.95mm; align-items: flex-start; background: #fff; border-radius: 5.66mm; padding: 4.81mm 5.66mm; }
+.o2 .paso i { flex: none; width: 9.9mm; height: 9.9mm; border-radius: 50%; background: var(--brand); color: #fff; font-style: normal; font-weight: 700; font-size: 4.81mm; display: flex; align-items: center; justify-content: center; }
+.o2 .paso b { display: block; font-size: 5.23mm; font-weight: 600; letter-spacing: -.01em; }
+.o2 .paso span { display: block; margin-top: .6mm; font-size: 4.38mm; color: var(--ink-2); line-height: 1.35; }
+.o2 .opinion { margin-top: 7.07mm; background: #fff; }
+.o2 .pie { border-top-color: rgba(0,0,0,.08); }
+
+/* ---------- Opción 3: quiénes somos (franja oliva arriba) ---------- */
+.o3 { padding: 0; }
+.o3 .franja { background: var(--brand-dark); color: #fff; padding: 18.39mm 16.97mm 15.56mm; }
+.o3 .franja .marca i { background: #dcecb8; }
+.o3 .franja .ep { color: #dcecb8; margin-top: 16.97mm; }
+.o3 .franja h1 { color: #fff; }
+.o3 .resto { padding: 9.9mm 16.97mm 15.56mm; display: flex; flex-direction: column; flex: 1; }
+.o3 .historia { font-size: 5.23mm; line-height: 1.5; color: var(--ink-2); }
+.o3 .historia b { color: var(--ink); font-weight: 600; }
+.o3 .opinion { margin-top: 8.49mm; }
+
+/* ===== Versión para imprimir en blanco y negro =====
+   Sin fondos llenos (ahorran tinta y se ven limpios en gris): todo en
+   negro y grises, con bordes finos. El punto de la marca va en negro. */
+:root { --brand: #1d1d1f; --brand-dark: #1d1d1f; --ink: #000; --ink-2: #444; --gris: #fff; --linea: #999; }
+.marca i { background: #000; }
+h1 em { color: #000; font-style: normal; box-shadow: inset 0 -2.4mm 0 #d9d9d9; }
+.ep { color: #000; }
+.opinion { background: #fff; border: .5mm solid #000; }
+.opinion .qr { border: .3mm solid #999; }
+.ruta span { border-color: #000; }
+.ruta u { color: #000; }
+.pie { border-top-color: #999; }
+.o2, .o2 .opinion { background: #fff; }
+.o2 .paso { border: .35mm solid #999; }
+.o2 .paso i { background: #000; }
+.o3 .franja { background: #fff; color: #000; border-bottom: 1.4mm solid #000; }
+.o3 .franja .marca i { background: #000; }
+.o3 .franja .ep { color: #000; }
+.o3 .franja h1 { color: #000; }
+
+/* Carta elegida: diseño de la opción 3 con los textos de la opción 1 */
+.o3 .historia { font-size: 5.6mm; line-height: 1.5; margin-top: 4mm; }
+.o3 .opinion { margin-top: 12mm; }
+</style>
+</head>
+<body>
+<section class="carta o3">
+  <div class="franja">
+    <div class="marca"><i></i> Café en tu Casa</div>
+    <p class="ep">Gracias por tu compra</p>
+    <h1>Que la disfrutes, taza a taza.</h1>
+  </div>
+  <div class="resto">
+    <p class="historia">Esperamos que tu cafetera te acompañe en muchos cafés: desde el primero de la mañana hasta el de la tarde.<br><br>En <b>Café en tu Casa</b> elegimos pocas cafeteras: <b>las que de verdad recomendaríamos.</b> Gracias por confiar en nosotros.</p>
+    <div class="opinion">
+      <div class="qr"><img src="qr-opinar.svg" alt=""><small>Escaneá y opiná</small></div>
+      <div>
+        <h2>¿Nos ayudás con tu opinión?</h2>
+        <p>Contanos qué te pareció en Mercado Libre: ayuda a que más gente nos encuentre. Te lleva un minuto.</p>
+        <div class="ruta"><span>Mis compras</span><u>→</u><span>Opinar sobre el producto</span></div>
+      </div>
+    </div>
+    <div class="pie">
+      <div class="ig"><img src="qr-instagram.svg" alt=""><p>Tips, recetas y novedades<b>@cafentucasa</b></p></div>
+      <p class="firma">Con cariño,<br><b>el equipo de Café en tu Casa</b></p>
+    </div>
+  </div>
+</section>
+</body>
+</html>
