@@ -1,0 +1,261 @@
+{
+ "resumen": [
+  {
+   "variante": 1,
+   "n": 6,
+   "lee_hasta_el_final_0a100": 74.2,
+   "escanea_qr_opinion_0a100": 16.8,
+   "deja_opinion_ml_0a100": 10.8,
+   "sigue_instagram_0a100": 6.5,
+   "recuerda_marca_en_una_semana_0a100": 22,
+   "atractivo_visual_1a10": 6.5,
+   "claridad_del_pedido_1a10": 8.5,
+   "puesto_promedio": 2.67,
+   "veces_primera": 0
+  },
+  {
+   "variante": 2,
+   "n": 6,
+   "lee_hasta_el_final_0a100": 46.7,
+   "escanea_qr_opinion_0a100": 10.7,
+   "deja_opinion_ml_0a100": 6.8,
+   "sigue_instagram_0a100": 6.5,
+   "recuerda_marca_en_una_semana_0a100": 22.2,
+   "atractivo_visual_1a10": 5.8,
+   "claridad_del_pedido_1a10": 6.2,
+   "puesto_promedio": 4.67,
+   "veces_primera": 0
+  },
+  {
+   "variante": 3,
+   "n": 6,
+   "lee_hasta_el_final_0a100": 55.8,
+   "escanea_qr_opinion_0a100": 12.3,
+   "deja_opinion_ml_0a100": 8,
+   "sigue_instagram_0a100": 6.7,
+   "recuerda_marca_en_una_semana_0a100": 22.7,
+   "atractivo_visual_1a10": 6.7,
+   "claridad_del_pedido_1a10": 6.3,
+   "puesto_promedio": 4,
+   "veces_primera": 0
+  },
+  {
+   "variante": 4,
+   "n": 6,
+   "lee_hasta_el_final_0a100": 72.2,
+   "escanea_qr_opinion_0a100": 22.3,
+   "deja_opinion_ml_0a100": 16.3,
+   "sigue_instagram_0a100": 7.2,
+   "recuerda_marca_en_una_semana_0a100": 26.5,
+   "atractivo_visual_1a10": 7,
+   "claridad_del_pedido_1a10": 9.5,
+   "puesto_promedio": 1,
+   "veces_primera": 6
+  },
+  {
+   "variante": 5,
+   "n": 6,
+   "lee_hasta_el_final_0a100": 65,
+   "escanea_qr_opinion_0a100": 14.3,
+   "deja_opinion_ml_0a100": 10.2,
+   "sigue_instagram_0a100": 9.3,
+   "recuerda_marca_en_una_semana_0a100": 34.2,
+   "atractivo_visual_1a10": 7.5,
+   "claridad_del_pedido_1a10": 6.5,
+   "puesto_promedio": 2.67,
+   "veces_primera": 0
+  }
+ ],
+ "notas": {
+  "1": [
+   [
+    "1",
+    "",
+    "",
+    ""
+   ],
+   [
+    "2",
+    "",
+    "",
+    ""
+   ],
+   [
+    "3",
+    "",
+    "",
+    ""
+   ],
+   [
+    "4",
+    "¿Cómo te fue con tu cafetera?",
+    "Me pregunta cómo me fue apenas abro la caja y todavía ni la enchufé; además el QR solo no me dice qué pasa después de escanearlo, y si no lo hago ahora me olvido.",
+    "Agregar algo como 'cuando ya la hayas probado' y explicar en dos pasitos qué voy a ver en el celular después de escanear."
+   ],
+   [
+    "5",
+    "",
+    "",
+    ""
+   ],
+   [
+    "6",
+    "",
+    "",
+    ""
+   ]
+  ],
+  "2": [
+   [
+    "1",
+    "",
+    "",
+    ""
+   ],
+   [
+    "2",
+    "",
+    "",
+    ""
+   ],
+   [
+    "3",
+    "",
+    "",
+    ""
+   ],
+   [
+    "4",
+    "Una ayuda grande",
+    "La saqué y la mitad estaba al revés; pensé que vino mal impresa. No se me ocurrió doblarla hasta ver la rayita de 'doblar acá', y la letra del costado es chica para mis ojos.",
+    "Que venga ya doblada dentro de la caja, así se lee como tarjetita y no parece un error de imprenta."
+   ],
+   [
+    "5",
+    "",
+    "",
+    ""
+   ],
+   [
+    "6",
+    "",
+    "",
+    ""
+   ]
+  ],
+  "3": [
+   [
+    "1",
+    "",
+    "",
+    ""
+   ],
+   [
+    "2",
+    "",
+    "",
+    ""
+   ],
+   [
+    "3",
+    "",
+    "",
+    ""
+   ],
+   [
+    "4",
+    "desde el primero de la mañana hasta el de la tarde",
+    "Es linda y cálida, pero el pedido está abajo y es cortito; 'Mis compras → Opinar' no me alcanza para saber qué hacer.",
+    "Explicar los pasos como en una lista numerada y decir que se puede opinar después de usarla unos días."
+   ],
+   [
+    "5",
+    "",
+    "",
+    ""
+   ],
+   [
+    "6",
+    "",
+    "",
+    ""
+   ]
+  ],
+  "4": [
+   [
+    "1",
+    "",
+    "",
+    ""
+   ],
+   [
+    "2",
+    "",
+    "",
+    ""
+   ],
+   [
+    "3",
+    "",
+    "",
+    ""
+   ],
+   [
+    "4",
+    "Con una o dos líneas alcanza.",
+    "Igual tengo que animarme con el QR sola; si no me abre bien, la dejo para cuando venga mi hijo y ahí ya me olvido.",
+    "Agregar una línea para quien no escanea: 'O entrá a Mercado Libre > Mis compras > tu cafetera > Opinar', con letra un poquito más grande."
+   ],
+   [
+    "5",
+    "",
+    "",
+    ""
+   ],
+   [
+    "6",
+    "",
+    "",
+    ""
+   ]
+  ],
+  "5": [
+   [
+    "1",
+    "",
+    "",
+    ""
+   ],
+   [
+    "2",
+    "",
+    "",
+    ""
+   ],
+   [
+    "3",
+    "",
+    "",
+    ""
+   ],
+   [
+    "4",
+    "Gracias.",
+    "Me gustan los consejos y recortaría la parte de abajo para guardarla, pero el pedido de opinión queda como una cosa más entre tantas; lo leo, me gusta y no hago nada en el momento.",
+    "Poner el pedido de opinión en la parte que se recorta y se guarda junto a la cafetera, así lo tengo a mano cuando ya la haya usado."
+   ],
+   [
+    "5",
+    "",
+    "",
+    ""
+   ],
+   [
+    "6",
+    "",
+    "",
+    ""
+   ]
+  ]
+ }
+}
