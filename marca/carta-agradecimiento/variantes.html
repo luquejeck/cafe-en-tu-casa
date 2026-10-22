@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Carta de agradecimiento — 5 variantes</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* 5 variantes A4 para imprimir en blanco y negro. Misma marca que Instagram:
+   Inter, punto + nombre, títulos grandes y apretados, subrayado gris como
+   acento (reemplaza al oliva). Sin fondos llenos: ahorran tinta.
+   Sin WhatsApp, web ni beneficios a cambio de opinar (reglas de Mercado Libre). */
+@page { size: A4; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, Helvetica, Arial, sans-serif; color: #000; -webkit-font-smoothing: antialiased; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.hoja { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; background: #fff; }
+.hoja:last-child { page-break-after: auto; }
+.marca { display: flex; align-items: center; gap: 3mm; font-size: 6.4mm; font-weight: 600; letter-spacing: -.02em; }
+.marca i { width: 3mm; height: 3mm; border-radius: 50%; background: #000; }
+.ep { font-size: 3.6mm; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+h1 { font-weight: 600; letter-spacing: -.04em; line-height: 1.02; }
+em { font-style: normal; box-shadow: inset 0 -.28em 0 #d4d4d4; }
+.gris { color: #444; }
+.qr { background: #fff; border: .35mm solid #999; border-radius: 4mm; padding: 3.5mm; text-align: center; }
+.qr img { width: 100%; display: block; }
+.qr small { display: block; margin-top: 2mm; font-size: 3.2mm; font-weight: 600; color: #444; }
+.ruta { display: inline-flex; align-items: center; gap: 2mm; font-size: 4.2mm; font-weight: 600; white-space: nowrap; }
+.ruta span { border: .4mm solid #000; border-radius: 99mm; padding: 1.4mm 3.8mm; }
+.ig { display: flex; align-items: center; gap: 4mm; }
+.ig img { width: 20mm; display: block; }
+.ig p { font-size: 4mm; line-height: 1.35; color: #444; }
+.ig b { display: block; font-size: 6mm; color: #000; letter-spacing: -.01em; }
+.corte { position: absolute; left: 0; right: 0; border-top: .35mm dashed #999; }
+.corte span { position: absolute; right: 12mm; top: -2.4mm; background: #fff; padding: 0 2mm; font-size: 2.8mm; color: #777; letter-spacing: .08em; text-transform: uppercase; }
+
+/* ===== V1 · Opinión primero: el QR es el protagonista ===== */
+.v1 { padding: 20mm 22mm; display: flex; flex-direction: column; }
+.v1 .arriba { display: flex; justify-content: space-between; align-items: center; }
+.v1 .arriba .ep { color: #444; }
+.v1 h1 { margin-top: 26mm; font-size: 17mm; text-align: center; }
+.v1 .bajada { margin: 7mm auto 0; text-align: center; font-size: 5.4mm; line-height: 1.45; color: #444; max-width: 140mm; }
+.v1 .qr { margin: 14mm auto 0; width: 82mm; border: .6mm solid #000; border-radius: 6mm; padding: 6mm; }
+.v1 .qr small { font-size: 4.2mm; color: #000; margin-top: 3mm; }
+.v1 .ruta { margin: 8mm auto 0; }
+.v1 .pie { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; border-top: .35mm solid #999; padding-top: 7mm; }
+.v1 .firma { font-size: 4.2mm; text-align: right; line-height: 1.45; color: #444; }
+.v1 .firma b { color: #000; }
+
+/* ===== V2 · Doblada al medio: tapa arriba, pedido abajo ===== */
+.v2 .mitad { position: absolute; left: 0; right: 0; height: 148.5mm; padding: 18mm 22mm; }
+.v2 .tapa { top: 0; display: flex; flex-direction: column; justify-content: space-between; transform: rotate(180deg); }
+.v2 .tapa h1 { font-size: 21mm; }
+.v2 .tapa .gris { font-size: 5.2mm; margin-top: 6mm; line-height: 1.45; max-width: 150mm; }
+.v2 .interior { top: 148.5mm; display: flex; flex-direction: column; }
+.v2 .doblez { position: absolute; top: 148.5mm; left: 0; right: 0; border-top: .3mm dashed #aaa; }
+.v2 .doblez span { position: absolute; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 0 3mm; font-size: 2.8mm; color: #888; letter-spacing: .1em; text-transform: uppercase; }
+.v2 .fila { display: flex; gap: 10mm; align-items: center; margin-top: 4mm; }
+.v2 .fila .qr { width: 62mm; flex: none; border: .5mm solid #000; }
+.v2 .fila h2 { font-size: 10mm; font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
+.v2 .fila p { margin: 4mm 0 6mm; font-size: 4.6mm; line-height: 1.45; color: #444; }
+.v2 .pie2 { display: flex; align-items: center; margin-top: auto; justify-content: space-between; border-top: .35mm solid #999; padding-top: 6mm; }
+.v2 .interior .firma { font-size: 4mm; text-align: right; color: #444; line-height: 1.4; }
+.v2 .interior .firma b { color: #000; }
+
+/* ===== V3 · Postal: centrada, editorial, el QR como estampilla ===== */
+.v3 { padding: 16mm; }
+.v3 .marco { position: absolute; inset: 12mm; border: .6mm solid #000; border-radius: 6mm; padding: 18mm 18mm 16mm; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.v3 .marca { justify-content: center; }
+.v3 .linea { width: 30mm; border-top: .5mm solid #000; margin: 10mm 0 8mm; }
+.v3 h1 { font-size: 19mm; letter-spacing: -.045em; }
+.v3 .gris { margin-bottom: 8mm; margin-top: 7mm; font-size: 5mm; line-height: 1.5; max-width: 140mm; }
+.v3 .estampilla { margin-top: auto; margin-bottom: 0; display: flex; gap: 12mm; align-items: center; text-align: left; border-top: .35mm solid #999; padding-top: 10mm; width: 100%; }
+.v3 .estampilla .qr { width: 52mm; flex: none; border: .5mm dashed #000; border-radius: 2mm; }
+.v3 .estampilla h2 { font-size: 8.4mm; font-weight: 600; letter-spacing: -.03em; line-height: 1.08; }
+.v3 .estampilla p { font-size: 4.4mm; color: #444; line-height: 1.45; margin: 3mm 0 5mm; }
+.v3 .final { margin-top: 9mm; display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.v3 .final .ig img { width: 20mm; }
+.v3 .final .firma { font-size: 4mm; color: #444; text-align: right; line-height: 1.4; }
+.v3 .final .firma b { color: #000; }
+
+/* ===== V4 · Paso a paso: cómo dejar tu opinión en 3 pasos ===== */
+.v4 { padding: 20mm 22mm; display: flex; flex-direction: column; }
+.v4 h1 { margin-top: 18mm; font-size: 18mm; }
+.v4 .bajada { margin-top: 6mm; font-size: 5.2mm; line-height: 1.45; color: #444; max-width: 150mm; }
+.v4 .bloque { margin-top: 14mm; display: grid; grid-template-columns: 1fr 66mm; gap: 10mm; align-items: center; }
+.v4 .bloque .ep { margin-bottom: 5mm; }
+.v4 .pasos { display: grid; gap: 4mm; }
+.v4 .paso { display: flex; gap: 5mm; align-items: center; border: .35mm solid #999; border-radius: 5mm; padding: 5mm 6mm; }
+.v4 .paso i { flex: none; width: 11mm; height: 11mm; border-radius: 50%; background: #000; color: #fff; font-style: normal; font-weight: 700; font-size: 5.4mm; display: flex; align-items: center; justify-content: center; }
+.v4 .paso b { display: block; font-size: 5.2mm; letter-spacing: -.01em; }
+.v4 .paso span { display: block; font-size: 4mm; color: #444; margin-top: .8mm; }
+.v4 .qr { border: .6mm solid #000; padding: 5mm; }
+.v4 .pie { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: .35mm solid #999; padding-top: 7mm; }
+.v4 .firma { font-size: 4.2mm; color: #444; text-align: right; line-height: 1.45; }
+.v4 .firma b { color: #000; }
+
+/* ===== V5 · Tipográfica: un "Gracias." enorme + tarjeta para recortar ===== */
+.v5 { padding: 20mm 22mm; }
+.v5 .gigante { margin-top: 22mm; font-size: 47mm; font-weight: 700; letter-spacing: -.06em; line-height: .88; }
+.v5 .sub { margin-top: 10mm; font-size: 9mm; font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
+.v5 .gris { margin-top: 6mm; font-size: 5.2mm; line-height: 1.5; max-width: 150mm; }
+.v5 .opinion { position: absolute; left: 22mm; right: 22mm; top: 150mm; display: flex; gap: 9mm; align-items: center; }
+.v5 .opinion .qr { width: 52mm; flex: none; border: .5mm solid #000; }
+.v5 .opinion h2 { font-size: 8.6mm; font-weight: 600; letter-spacing: -.03em; line-height: 1.08; }
+.v5 .opinion p { font-size: 4.4mm; color: #444; line-height: 1.45; margin: 3mm 0 5mm; }
+.v5 .corte { top: 222mm; }
+.v5 .tarjeta { position: absolute; left: 22mm; right: 22mm; top: 232mm; bottom: 16mm; display: grid; grid-template-columns: 1fr auto; gap: 8mm; align-items: center; }
+.v5 .tarjeta .ep { margin-bottom: 3mm; }
+.v5 .tarjeta ol { list-style: none; display: grid; gap: 1.6mm; font-size: 4.2mm; }
+.v5 .tarjeta ol li b { display: inline-block; width: 6mm; }
+</style>
+</head>
+<body>
+
+<!-- V1 · OPINIÓN PRIMERO -->
+<section class="hoja v1">
+  <div class="arriba"><div class="marca"><i></i> Café en tu Casa</div><p class="ep">Gracias por tu compra</p></div>
+  <h1>¿Cómo te fue con <em>tu cafetera?</em></h1>
+  <p class="bajada">Esperamos que la disfrutes, taza a taza. Si tenés un minuto, contanos qué te pareció en Mercado Libre: ayuda a que más gente nos encuentre.</p>
+  <div class="qr"><img src="qr-opinar.svg" alt=""><small>Escaneá y dejá tu opinión</small></div>
+  <div class="ruta"><span>Mis compras</span>→<span>Opinar sobre el producto</span></div>
+  <div class="pie">
+    <div class="ig"><img src="qr-instagram.svg" alt=""><p>Tips, recetas y novedades<b>@cafentucasa</b></p></div>
+    <p class="firma">Con cariño,<br><b>el equipo de Café en tu Casa</b></p>
+  </div>
+</section>
+
+<!-- V2 · DOBLADA AL MEDIO (la mitad de arriba se imprime al revés: al doblar queda de tapa) -->
+<section class="hoja v2">
+  <div class="mitad tapa">
+    <div class="marca"><i></i> Café en tu Casa</div>
+    <div>
+      <p class="ep">Gracias por tu compra</p>
+      <h1 style="margin-top:5mm">Que la disfrutes, <em>taza a taza.</em></h1>
+      <p class="gris">Elegimos pocas cafeteras: las que de verdad recomendaríamos. Gracias por confiar en nosotros.</p>
+    </div>
+  </div>
+  <div class="doblez"><span>Doblar acá</span></div>
+  <div class="mitad interior">
+    <p class="ep">Una ayuda grande</p>
+    <div class="fila">
+      <div class="qr"><img src="qr-opinar.svg" alt=""><small>Escaneá y opiná</small></div>
+      <div>
+        <h2>¿Nos dejás tu opinión?</h2>
+        <p>Contanos qué te pareció en Mercado Libre: ayuda a que más gente nos encuentre. Te lleva un minuto.</p>
+        <div class="ruta"><span>Mis compras</span>→<span>Opinar</span></div>
+      </div>
+    </div>
+    <div class="pie2"><div class="ig"><img src="qr-instagram.svg" alt=""><p>Seguinos<b>@cafentucasa</b></p></div><p class="firma">Con cariño,<br><b>Café en tu Casa</b></p></div>
+  </div>
+</section>
+
+<!-- V3 · POSTAL -->
+<section class="hoja v3">
+  <div class="marco">
+    <div class="marca"><i></i> Café en tu Casa</div>
+    <div class="linea"></div>
+    <p class="ep">Gracias por tu compra</p>
+    <h1 style="margin-top:6mm">Que la disfrutes,<br><em>taza a taza.</em></h1>
+    <p class="gris">Esperamos que tu cafetera te acompañe en muchos cafés: desde el primero de la mañana hasta el de la tarde. En Café en tu Casa elegimos pocas cafeteras: las que de verdad recomendaríamos.</p>
+    <div class="estampilla">
+      <div class="qr"><img src="qr-opinar.svg" alt=""><small>Escaneá y opiná</small></div>
+      <div>
+        <h2>¿Nos ayudás con tu opinión?</h2>
+        <p>Contanos qué te pareció en Mercado Libre. Te lleva un minuto.</p>
+        <div class="ruta"><span>Mis compras</span>→<span>Opinar</span></div>
+      </div>
+    </div>
+    <div class="final">
+      <div class="ig"><img src="qr-instagram.svg" alt=""><p>Tips y recetas<b>@cafentucasa</b></p></div>
+      <p class="firma">Con cariño,<br><b>el equipo de Café en tu Casa</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- V4 · PASO A PASO -->
+<section class="hoja v4">
+  <div class="marca"><i></i> Café en tu Casa</div>
+  <h1>Que la disfrutes, <em>taza a taza.</em></h1>
+  <p class="bajada">Gracias por elegirnos. Cuando ya hayas probado tu cafetera, tu opinión en Mercado Libre nos ayuda a que más gente nos encuentre.</p>
+  <div class="bloque">
+    <div>
+      <p class="ep">Opinar lleva un minuto</p>
+      <div class="pasos">
+        <div class="paso"><i>1</i><div><b>Escaneá el código</b><span>Te lleva a Mis compras en Mercado Libre.</span></div></div>
+        <div class="paso"><i>2</i><div><b>Elegí tu cafetera</b><span>Tocá "Opinar sobre el producto".</span></div></div>
+        <div class="paso"><i>3</i><div><b>Contanos qué te pareció</b><span>Con una o dos líneas alcanza.</span></div></div>
+      </div>
+    </div>
+    <div class="qr"><img src="qr-opinar.svg" alt=""><small>Escaneá acá</small></div>
+  </div>
+  <div class="pie">
+    <div class="ig"><img src="qr-instagram.svg" alt=""><p>Tips, recetas y novedades<b>@cafentucasa</b></p></div>
+    <p class="firma">Con cariño,<br><b>el equipo de Café en tu Casa</b></p>
+  </div>
+</section>
+
+<!-- V5 · TIPOGRÁFICA + TARJETA PARA RECORTAR -->
+<section class="hoja v5">
+  <div class="marca"><i></i> Café en tu Casa</div>
+  <p class="gigante">Gracias.</p>
+  <p class="sub">Que la disfrutes, <em>taza a taza.</em></p>
+  <p class="gris">Elegimos pocas cafeteras: las que de verdad recomendaríamos. Gracias por confiar en Café en tu Casa.</p>
+  <div class="opinion">
+    <div class="qr"><img src="qr-opinar.svg" alt=""><small>Escaneá y opiná</small></div>
+    <div>
+      <h2>¿Nos ayudás con tu opinión?</h2>
+      <p>Contanos qué te pareció en Mercado Libre: ayuda a que más gente nos encuentre.</p>
+      <div class="ruta"><span>Mis compras</span>→<span>Opinar sobre el producto</span></div>
+    </div>
+  </div>
+  <div class="corte"><span>✂ Recortá y guardala junto a la cafetera</span></div>
+  <div class="tarjeta">
+    <div>
+      <p class="ep">Para un café mejor</p>
+      <ol>
+        <li><b>1</b>Guardá el café en un frasco hermético, lejos de la luz.</li>
+        <li><b>2</b>Precalentá la taza: el espresso se enfría rápido.</li>
+        <li><b>3</b>Mantené limpia la cafetera: el café viejo cambia el sabor.</li>
+      </ol>
+    </div>
+    <div class="ig"><img src="qr-instagram.svg" alt=""><p>Más tips en<b>@cafentucasa</b></p></div>
+  </div>
+</section>
+
+</body>
+</html>
