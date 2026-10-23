@@ -162,7 +162,7 @@ def musicalizar(video, tema=None):
         wav, mp4 = os.path.join(tmp, "m.wav"), os.path.join(tmp, "v.mp4")
         guardar(componer(tema, dur), wav)
         subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", video, "-i", wav, "-map", "0:v", "-map", "1:a",
-                        "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", mp4], check=True)
+                        "-c:v", "copy", "-af", "loudnorm=I=-15:TP=-2.5:LRA=11", "-ar", "44100", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", mp4], check=True)
         os.replace(mp4, video)
     print(f"{os.path.basename(video)}: música «{tema}», {dur:.1f} s")
 
