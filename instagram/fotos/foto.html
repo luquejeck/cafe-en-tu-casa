@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Foto con marca</title>
+<style>
+/* Post de foto 4:5 (1080 x 1350): la foto de Flow a sangre y, arriba, en
+   la pared vacía, la marca y un título corto con el mismo lenguaje de las
+   placas (punto oliva, epígrafe en mayúsculas, título apretado). */
+:root { --brand: #5b6e32; --brand-dark: #455426; --ink: #1d1d1f; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1350px; overflow: hidden; font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+.foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.velo { position: absolute; left: 0; right: 0; top: 0; height: 560px; background: linear-gradient(rgba(255,255,255,.55), rgba(255,255,255,0)); }
+.arriba { position: absolute; left: 0; right: 0; top: 64px; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 90px; }
+.marca { display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 600; letter-spacing: -.02em; }
+.marca i { width: 13px; height: 13px; border-radius: 50%; background: var(--brand); }
+.ep { margin-top: 72px; font-size: 25px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--brand-dark); }
+h1 { margin-top: 18px; font-size: 76px; font-weight: 600; line-height: 1.05; letter-spacing: -.035em; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--brand-dark); }
+</style>
+</head>
+<body>
+<img class="foto" id="foto" alt="">
+<div class="velo"></div>
+<div class="arriba">
+  <div class="marca"><i></i> Café en tu Casa</div>
+  <p class="ep" id="ep"></p>
+  <h1 id="titulo"></h1>
+</div>
+<script>
+const q = new URLSearchParams(location.search);
+document.getElementById("foto").src = q.get("foto");
+const ep = q.get("ep"), titulo = q.get("titulo");
+if (ep) document.getElementById("ep").textContent = ep; else document.getElementById("ep").remove();
+if (titulo) document.getElementById("titulo").innerHTML = titulo; else document.getElementById("titulo").remove();
+</script>
+</body>
+</html>
