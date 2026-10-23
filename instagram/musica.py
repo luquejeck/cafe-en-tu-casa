@@ -1,6 +1,7 @@
 """Música de fondo para los reels: lo-fi tranquilo, generado con numpy.
 
 Uso:  python3 instagram/musica.py <tema> <segundos> salida.wav
+      python3 instagram/musica.py --video reel.mp4 [tema]   le pone la música al reel (reemplaza su audio)
 
 Todo se sintetiza acá (piano eléctrico FM, contrabajo, batería con escobillas
 y ruido de vinilo), así que no hay derechos de autor de por medio y Instagram
@@ -147,6 +148,28 @@ def guardar(x, ruta):
         w.writeframes(datos.tobytes())
 
 
+def tema_para(nombre):
+    """Si no se elige tema, sale siempre el mismo para cada reel, repartidos entre los tres."""
+    return list(TEMAS)[sum(map(ord, nombre)) % len(TEMAS)]
+
+
+def musicalizar(video, tema=None):
+    import os, subprocess, tempfile
+    dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", video],
+                               capture_output=True, text=True, check=True).stdout)
+    tema = tema or tema_para(os.path.basename(video))
+    with tempfile.TemporaryDirectory() as tmp:
+        wav, mp4 = os.path.join(tmp, "m.wav"), os.path.join(tmp, "v.mp4")
+        guardar(componer(tema, dur), wav)
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", video, "-i", wav, "-map", "0:v", "-map", "1:a",
+                        "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", mp4], check=True)
+        os.replace(mp4, video)
+    print(f"{os.path.basename(video)}: música «{tema}», {dur:.1f} s")
+
+
 if __name__ == "__main__":
-    tema, segundos, salida = sys.argv[1], float(sys.argv[2]), sys.argv[3]
-    guardar(componer(tema, segundos), salida)
+    if sys.argv[1] == "--video":
+        musicalizar(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None)
+    else:
+        tema, segundos, salida = sys.argv[1], float(sys.argv[2]), sys.argv[3]
+        guardar(componer(tema, segundos), salida)

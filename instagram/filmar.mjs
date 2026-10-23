@@ -6,8 +6,8 @@
 //   node instagram/filmar.mjs --videos        los videos de videos.js (con su portada)
 //   node instagram/filmar.mjs --videos v03    solo los que empiezan con "v03"
 //
-// Sale 1080x1920 a 30 cuadros, H.264 y con una pista de audio muda: sin
-// audio, algunas versiones de Instagram no dejan agregarle música.
+// Sale 1080x1920 a 30 cuadros, H.264 y con música de fondo de musica.py
+// (lo-fi generado acá, sin derechos). Con --mudo sale con audio en silencio.
 //
 // Usa playwright y ffmpeg-static. Si no están instalados acá, toma los
 // del proyecto de Piel con Valen, que ya los tiene.
@@ -64,6 +64,10 @@ for (const id of reels.filter((r) => r.startsWith(filtro))) {
   }
   ff.stdin.end();
   await new Promise((res) => ff.on("close", res));
+  if (!process.argv.includes("--mudo")) {
+    await new Promise((res, rej) => spawn("python3", [path.join(aqui, "musica.py"), "--video", destino], { stdio: "inherit" })
+      .on("close", (c) => (c ? rej(new Error("musica.py falló")) : res())));
+  }
   if (modoVideos) {
     // La portada: el final de la primera escena, con todo ya en su lugar
     const fin1 = await page.evaluate((id) => Math.round(VIDEOS.find((v) => v.id === id).escenas[0].d * 30) - 3, id);
