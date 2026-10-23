@@ -364,17 +364,17 @@ const PIEZAS = [
     titulo: 'Lo que siempre nos preguntan',
     caption:
       'Lo que siempre nos preguntan, respondido. 👇\n\n' +
-      '¿Son originales? Sí: nuevas, selladas de fábrica y con garantía oficial.\n' +
+      '¿Son originales? Sí: cafeteras De\'Longhi nuevas, en su caja.\n' +
       '¿Envían a todo el país? Sí, gratis y con seguimiento.\n' +
       '¿Cuánto tarda? 24 a 72 h en AMBA y hasta 5 días hábiles en el interior.\n' +
-      '¿Puedo devolverla? Tenés 30 días, sin costo.\n\n' +
+      '¿Puedo devolverla? Sí, según la política de devoluciones de Mercado Libre.\n\n' +
       '¿Te quedó otra duda? ' + CIERRE,
     placas: [
       { t: 'portada', ep: 'Preguntas frecuentes', h: 'Lo que siempre nos preguntan.', sub: 'Respondido en cinco placas.' },
-      { t: 'texto', tono: 'gris', ep: '¿Son originales?', h: 'Nuevas y selladas de fábrica.', p: `Con ${TIENDA.garantiaMeses} meses de garantía oficial del fabricante y servicio técnico en el país.` },
+      { t: 'texto', tono: 'gris', ep: '¿Son originales?', h: 'Sí, De\'Longhi originales.', p: 'Nuevas, en su caja. Y cada compra tiene la protección de Mercado Libre.' },
       { t: 'texto', ep: '¿Envían a todo el país?', h: 'Sí, y el envío es gratis.', p: 'Despachamos por Mercado Envíos y te pasamos el número de seguimiento.' },
       { t: 'texto', tono: 'gris', ep: '¿Cuánto tarda?', h: '24 a 72 h en AMBA.', p: 'Hasta 5 días hábiles en el interior. Sale el mismo día si el pago se acredita antes de las 15 h.' },
-      { t: 'texto', ep: '¿Y si no me convence?', h: '30 días para devolverla.', p: 'Sin costo, siempre que esté en las mismas condiciones en las que llegó.' },
+      { t: 'texto', ep: '¿Y si no me convence?', h: 'Podés devolverla.', p: 'Según la política de devoluciones de Mercado Libre. Ante cualquier duda, escribinos antes.' },
       { t: 'cta', tono: 'oscuro', ep: '¿Otra duda?', h: 'Escribinos.', sub: 'Contestamos en el día.', boton: 'WhatsApp · link en la bio' }
     ]
   },
