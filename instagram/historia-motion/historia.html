@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Historia motion — Café en tu Casa</title>
+<style>
+/* Historia de presentación de marca, 15 s a 30 cuadros (1080 x 1920).
+   Todo se mueve desde cuadro(f): la animación es determinística y
+   filmar.mjs la saca cuadro por cuadro. Las zonas de arriba (250 px) y de
+   abajo (340 px) quedan libres para la barra y los stickers de Instagram. */
+:root { --oliva: #5b6e32; --oliva-fuerte: #455426; --oliva-claro: #a3c26a; --tinta: #1d1d1f; --gris: #6e6e73; --fondo: #fbfbf8; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: var(--fondo); font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: var(--tinta); -webkit-font-smoothing: antialiased; }
+.capa { position: absolute; inset: 0; }
+.marca { position: absolute; top: 270px; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 16px; font-size: 38px; font-weight: 600; letter-spacing: -.02em; }
+.marca i { width: 16px; height: 16px; border-radius: 50%; background: var(--oliva); }
+.frase { position: absolute; left: 80px; right: 80px; text-align: center; font-size: 112px; font-weight: 600; line-height: 1.02; letter-spacing: -.045em; }
+.frase span { display: inline-block; white-space: pre; will-change: transform, opacity, filter; }
+.frase em { font-style: normal; color: var(--oliva); }
+.escena { position: absolute; left: 0; right: 0; top: 640px; height: 840px; perspective: 1700px; }
+.tarjeta { position: absolute; left: 50%; top: 50%; width: 480px; height: 640px; margin: -320px 0 0 -240px; border-radius: 34px; overflow: hidden; box-shadow: 0 40px 80px -30px rgba(40,50,20,.45); background: #ddd; }
+.tarjeta img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.etiqueta { position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%); background: rgba(255,255,255,.92); color: var(--oliva-fuerte); border-radius: 999px; padding: 14px 30px; font-size: 30px; font-weight: 600; white-space: nowrap; }
+.full { position: absolute; inset: 0; overflow: hidden; }
+.full img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.velo { position: absolute; left: 0; right: 0; bottom: 0; height: 1100px; background: linear-gradient(rgba(251,251,248,0), rgba(251,251,248,.94) 45%, var(--fondo)); }
+.chips { position: absolute; left: 0; right: 0; top: 1330px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; padding: 0 90px; }
+.chip { background: #fff; border: 2px solid rgba(91,110,50,.25); color: var(--oliva-fuerte); border-radius: 999px; padding: 18px 34px; font-size: 36px; font-weight: 600; }
+.avatar { position: absolute; left: 50%; top: 640px; width: 380px; height: 380px; margin-left: -190px; }
+.avatar .c { position: absolute; inset: 24px; border-radius: 50%; background: #101012; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 140px; letter-spacing: -.04em; }
+.avatar .c span { color: var(--oliva-claro); }
+.avatar svg { position: absolute; inset: 0; }
+.usuario { position: absolute; left: 0; right: 0; top: 1100px; text-align: center; font-size: 76px; font-weight: 600; letter-spacing: -.035em; }
+.usuario span { display: inline-block; white-space: pre; }
+.seguinos { position: absolute; left: 50%; top: 1240px; transform: translateX(-50%); background: var(--oliva); color: #fff; border-radius: 999px; padding: 24px 56px; font-size: 40px; font-weight: 600; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="capa" id="c1">
+  <div class="marca" id="marca"><i></i> Café en tu Casa</div>
+  <div class="frase" id="f1" style="top:440px"></div>
+  <div class="escena" id="escena"></div>
+  <div class="frase" id="f2" style="top:1440px; font-size:104px"></div>
+</div>
+<div class="capa" id="c2">
+  <div class="full" id="full"><img id="fullImg" alt=""></div>
+  <div class="velo" id="velo"></div>
+  <div class="frase" id="f3" style="top:1010px; font-size:92px"></div>
+  <div class="chips" id="chips">
+    <span class="chip">Cafeteras De'Longhi</span><span class="chip">Te ayudamos a elegir</span><span class="chip">Envío a todo el país</span>
+  </div>
+</div>
+<div class="capa" id="c3">
+  <div class="avatar" id="avatar">
+    <svg viewBox="0 0 380 380"><circle id="aro" cx="190" cy="190" r="181" fill="none" stroke="#5b6e32" stroke-width="12" stroke-linecap="round" transform="rotate(-90 190 190)"/></svg>
+    <div class="c">C<span>·</span></div>
+  </div>
+  <div class="usuario" id="usuario"></div>
+  <div class="seguinos" id="seguinos">Seguinos</div>
+</div>
+<script>
+const FPS = 30, TOTAL = 15 * FPS;
+const FOTOS = [
+  { src: "../fotos/espresso-magnifica.jpg", t: "Recién molido" },
+  { src: "../fotos/pareja-magnifica.jpg", t: "Para compartir" },
+  { src: "../fotos/home-office-magnifica.jpg", t: "Entre reuniones" },
+  { src: "../fotos/sobremesa-dedica.jpg", t: "En la sobremesa" },
+];
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const suave = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };   // easeInOutCubic
+const salida = (x) => 1 - Math.pow(1 - clamp(x), 4);                                                     // easeOutQuart
+const tramo = (t, a, b) => clamp((t - a) / (b - a));
+
+// Frases palabra por palabra
+function armar(id, html) {
+  const el = $(id);
+  el.innerHTML = html.split(" ").map((w) => w.startsWith("*") ? `<span><em>${w.slice(1)}</em> </span>` : `<span>${w} </span>`).join("");
+  return [...el.children];
+}
+function palabras(spans, t, inicio, paso = .14, dur = .6, fin = null) {
+  spans.forEach((s, i) => {
+    const k = salida(tramo(t, inicio + i * paso, inicio + i * paso + dur));
+    let o = k, y = (1 - k) * 60, b = (1 - k) * 10;
+    if (fin !== null) { const q = suave(tramo(t, fin, fin + .45)); o *= 1 - q; y -= q * 40; b += q * 8; }
+    s.style.opacity = o; s.style.transform = `translateY(${y}px)`; s.style.filter = `blur(${b}px)`;
+  });
+}
+const F1 = armar("f1", "Café de cafetería,");
+const F2 = armar("f2", "*en *tu *casa.");
+const F3 = armar("f3", "Elegí la tuya con *nosotros.");
+const US = armar("usuario", "@cafentucasa");
+
+// Tarjetas de la rocola
+const tarjetas = FOTOS.map((f) => {
+  const d = document.createElement("div");
+  d.className = "tarjeta";
+  d.innerHTML = `<img src="${f.src}" alt=""><span class="etiqueta">${f.t}</span>`;
+  $("escena").appendChild(d);
+  return d;
+});
+$("fullImg").src = FOTOS[0].src;
+
+// Posición del carrusel: entra desde la derecha y frena en cada foto (ritmo de la música, 84 bpm)
+function posicion(t) {
+  const entrada = 1.4 - 1.4 * salida(tramo(t, 1.2, 2.6));      // de 1.4 a 0
+  const pasos = [[3.9, 4.8], [5.4, 6.3], [6.9, 7.8], [8.4, 9.3]]; // cuatro avances: termina en la 1.ª foto otra vez
+  return entrada + pasos.reduce((p, [a, b]) => p + suave(tramo(t, a, b)), 0);
+}
+
+window.cuadro = function (f) {
+  const t = f / FPS;
+  // ---------- capa 1: marca, frase, rocola (0 a 9.8 s)
+  const fueraC1 = suave(tramo(t, 9.3, 10.1));
+  $("c1").style.opacity = 1 - fueraC1;
+  $("marca").style.opacity = salida(tramo(t, .1, .8)) * (1 - fueraC1);
+  $("marca").style.transform = `translateY(${(1 - salida(tramo(t, .1, .8))) * -20}px)`;
+  palabras(F1, t, .4, .16, .7);
+  palabras(F2, t, 2.4, .18, .7);
+
+  const p = posicion(t), N = FOTOS.length;
+  tarjetas.forEach((el, i) => {
+    let d = ((i - p) % N + N) % N; if (d > N / 2) d -= N;          // -2..2
+    const a = d * 0.62;                                             // radianes sobre el arco
+    const x = Math.sin(a) * 560, z = (Math.cos(a) - 1) * 480;
+    const centro = clamp(1 - Math.abs(d));
+    // "respira": zoom in leve mientras está frenada al centro
+    const respira = 1 + .05 * centro * Math.sin(Math.PI * clamp((t % 1.5) / 1.5));
+    const escala = (0.82 + .26 * salida(centro)) * respira;
+    el.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${-a * 52}deg) scale(${escala})`;
+    el.style.zIndex = Math.round(100 - Math.abs(d) * 10);
+    el.style.opacity = clamp(1.6 - Math.abs(d) * .7) * salida(tramo(t, .9 + Math.max(0, d) * .15, 2.0));
+    el.querySelector(".etiqueta").style.opacity = suave(clamp(centro * 1.6 - .6));
+  });
+
+  // ---------- capa 2: zoom in a pantalla completa (9.4 a 12.6 s)
+  const dentro = suave(tramo(t, 9.4, 10.4)), fueraC2 = suave(tramo(t, 12.2, 12.9));
+  $("c2").style.opacity = dentro * (1 - fueraC2);
+  const full = $("full");
+  const r = 34 * (1 - dentro);
+  full.style.clipPath = `inset(${(1 - dentro) * 700}px ${(1 - dentro) * 280}px ${(1 - dentro) * 860}px ${(1 - dentro) * 280}px round ${r}px)`;
+  $("fullImg").style.transform = `scale(${1.02 + .1 * tramo(t, 9.4, 12.9) - .12 * fueraC2})`;    // Ken Burns, y zoom out al irse
+  $("velo").style.opacity = suave(tramo(t, 10, 10.6));
+  palabras(F3, t, 10.3, .14, .6);
+  [...$("chips").children].forEach((c, i) => {
+    const k = salida(tramo(t, 11 + i * .22, 11.6 + i * .22));
+    c.style.opacity = k; c.style.transform = `scale(${.7 + .3 * k})`;
+  });
+
+  // ---------- capa 3: logo con aro y @cafentucasa (12.6 a 15 s)
+  const c3 = suave(tramo(t, 12.6, 13.2));
+  $("c3").style.opacity = c3;
+  const pop = salida(tramo(t, 12.6, 13.4));
+  $("avatar").style.transform = `scale(${.55 + .45 * pop + .03 * Math.sin(Math.PI * tramo(t, 13.4, 15))})`;
+  const L = 2 * Math.PI * 181;
+  $("aro").setAttribute("stroke-dasharray", L);
+  $("aro").setAttribute("stroke-dashoffset", L * (1 - suave(tramo(t, 12.9, 14))));
+  palabras(US, t, 13.3, .1, .6);
+  const sg = salida(tramo(t, 13.9, 14.5));
+  $("seguinos").style.opacity = sg;
+  $("seguinos").style.transform = `translateX(-50%) scale(${.8 + .2 * sg})`;
+};
+window.TOTAL = TOTAL;
+Promise.all([...document.images].map((i) => i.decode().catch(() => {}))).then(() => { window.listo = true; cuadro(0); });
+</script>
+</body>
+</html>
