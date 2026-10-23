@@ -68,5 +68,14 @@ Preguntas que tiene que contestar el reporte: ¿sube el tiempo medio de vista co
 - Noviembre: CyberMonday y Black Friday (confirmar fechas).
 - Diciembre: Navidad y Reyes.
 
+## Música en los reels (23/10)
+- Los reels salen con música de fondo: lo-fi generado por `instagram/musica.py` (sin derechos, Instagram no lo silencia). `filmar.mjs` la agrega sola; `--mudo` la saca.
+- Se alternan los tres temas (mañana, tarde, sobremesa) para que no suenen todos iguales.
+- El catálogo de música de Instagram vía Metricool dio error del servidor (23/10): por ahora no se usa.
+
+## Fotos de Flow (23/10)
+- Las fotos van intercaladas con carruseles y reels: nunca dos del mismo tipo seguidas.
+- Se marcan como hechas con IA en Metricool (etiqueta de Instagram).
+
 ---
 Última actualización: 8/10/2026 (reporte de prueba, 1 reel medido). Semana del 12/10 programada con la fórmula nueva.
