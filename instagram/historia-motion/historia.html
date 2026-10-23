@@ -21,7 +21,10 @@ body { width: 1080px; height: 1920px; overflow: hidden; background: var(--fondo)
 .tarjeta { position: absolute; left: 50%; top: 50%; width: 480px; height: 640px; margin: -320px 0 0 -240px; border-radius: 34px; overflow: hidden; box-shadow: 0 40px 80px -30px rgba(40,50,20,.45); background: #ddd; }
 .tarjeta img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .titular { position: absolute; left: 60px; right: 60px; top: 390px; height: 250px; }
-.titular .frase { left: 0; right: 0; top: 50%; transform: translateY(-50%); }
+.titular .frase { left: 0; right: 0; top: 0; }
+.ventana { position: absolute; left: 0; right: 0; top: 118px; height: 130px; overflow: hidden; perspective: 700px; }
+.rueda-palabra { position: absolute; left: 0; right: 0; top: 0; text-align: center; font-size: 112px; font-weight: 600; line-height: 1.12; letter-spacing: -.045em; color: var(--oliva); transform-origin: 50% 50% -60px; }
+.rueda-palabra:last-child { background: linear-gradient(rgba(163,194,106,.5), rgba(163,194,106,.5)) no-repeat 50% 86%; background-size: 0% 20px; width: max-content; margin: 0 auto; padding: 0 8px; }
 .etiqueta { position: absolute; left: 50%; top: 1460px; height: 104px; margin-left: 0; display: flex; align-items: center; gap: 18px; padding: 0 44px; background: #fff; border: 2px solid rgba(91,110,50,.22); border-radius: 999px; box-shadow: 0 18px 40px -24px rgba(40,50,20,.35); overflow: hidden; white-space: nowrap; }
 .etiqueta i { flex: none; width: 16px; height: 16px; border-radius: 50%; background: var(--oliva); }
 .etiqueta .txt { position: relative; height: 104px; flex: 1; }
@@ -44,7 +47,7 @@ body { width: 1080px; height: 1920px; overflow: hidden; background: var(--fondo)
 <body>
 <div class="capa" id="c1">
   <div class="marca" id="marca"><i></i> Café en tu Casa</div>
-  <div class="titular" id="titular"></div>
+  <div class="titular" id="titular"><div class="frase" id="linea1"></div><div class="ventana" id="ventana"></div></div>
   <div class="escena" id="escena"></div>
   <div class="etiqueta" id="etiqueta"><i id="punto"></i><div class="txt" id="etTxt"></div></div>
 </div>
@@ -92,45 +95,44 @@ function palabras(spans, t, inicio, paso = .14, dur = .6, fin = null) {
     s.style.opacity = o; s.style.transform = `translateY(${y}px)`; s.style.filter = `blur(${b}px)`;
   });
 }
-// El titular va cambiando al ritmo de la rocola: alterna las dos mitades
-// del lema y al final queda completo.
-const FRASES = [
-  { txt: "Café de cafetería,", desde: .4 },
-  { txt: "*en *tu *casa.", desde: 3.9 },
-  { txt: "Café de cafetería,", desde: 5.4 },
-  { txt: "*en *tu *casa.", desde: 6.9 },
-  { txt: "Café de cafetería, | *en *tu *casa.", desde: 8.4, chica: true },
-].map((f, i) => {
+// El titular: "Café de cafetería," queda fijo arriba y la segunda línea es
+// una rueda (como el tambor de una rocola) que cuenta un momento distinto
+// por cada foto. Al final la rueda frena en "en tu casa." y se subraya.
+const RUEDA = [
+  ["recién molido.", 1.5], ["para compartir.", 4.35], ["entre reuniones.", 5.85],
+  ["en la sobremesa.", 7.35], ["en tu casa.", 8.85],
+];
+const L1 = armar("linea1", "Café de cafetería,");
+const RUEDA_EL = RUEDA.map(([w]) => {
   const d = document.createElement("div");
-  d.className = "frase"; d.id = "fr" + i;
-  if (f.chica) d.style.fontSize = "100px";
-  $("titular").appendChild(d);
-  return { ...f, spans: armar(d.id, f.txt) };
+  d.className = "rueda-palabra"; d.textContent = w;
+  $("ventana").appendChild(d);
+  return d;
 });
 function titular(t) {
-  FRASES.forEach((f, i) => {
-    const sale = FRASES[i + 1]?.desde ?? 99;
-    f.spans.forEach((s, j) => {
-      const paso = i === 0 ? .16 : .07;
-      const a = f.desde + (i ? .18 : 0) + j * paso;   // la nueva entra apenas después de que empieza a irse la anterior
-      const k = salida(tramo(t, a, a + (i === 0 ? .7 : .55)));
-      const q = suave(tramo(t, sale + j * .05, sale + j * .05 + .4));
-      s.style.opacity = k * (1 - q);
-      s.style.transform = `translateY(${(1 - k) * 70 - q * 70}px)`;
-      s.style.filter = `blur(${(1 - k) * 10 + q * 8}px)`;
-    });
+  palabras(L1, t, .4, .16, .7);
+  RUEDA.forEach(([, a], i) => {
+    const b = RUEDA[i + 1]?.[1] ?? 99;
+    const k = salida(tramo(t, a, a + .6)), q = suave(tramo(t, b - .05, b + .4));
+    const el = RUEDA_EL[i];
+    el.style.opacity = k * (1 - q);
+    el.style.transform = `translateY(${(1 - k) * 100 - q * 100}%) rotateX(${-(1 - k) * 70 + q * 70}deg)`;
+    el.style.filter = `blur(${(1 - k) * 6 + q * 6}px)`;
   });
+  // la última se subraya
+  $("ventana").lastChild.style.backgroundSize = `${suave(tramo(t, 9.3, 9.8)) * 100}% 20px`;
 }
 
 // Etiqueta de la foto del centro: la píldora se estira o se achica al ancho
 // del texto nuevo y las letras entran en cascada.
-const ETQ = FOTOS.map((f) => {
+const ETIQUETAS = ["Lunes · 7:30", "Domingo · 10:00", "Martes · 11:15", "Sábado · 15:40", "Todos los días"];
+const ETQ = ETIQUETAS.map((txt) => {
   const d = document.createElement("div");
-  d.innerHTML = [...f.t].map((l) => `<span>${l}</span>`).join("");
+  d.innerHTML = [...txt].map((l) => `<span>${l}</span>`).join("");
   $("etTxt").appendChild(d);
   return { el: d, letras: [...d.children], ancho: 0 };
 });
-const CAMBIOS = [[2.5, 0], [4.35, 1], [5.85, 2], [7.35, 3], [8.85, 0]];   // [segundo, foto]
+const CAMBIOS = [[2.5, 0], [4.35, 1], [5.85, 2], [7.35, 3], [8.85, 4]];   // [segundo, etiqueta]
 function etiqueta(t) {
   ETQ.forEach((e) => (e.ancho ||= e.el.offsetWidth));
   let anchoA = 0, anchoB = ETQ[0].ancho, mezcla = 0;
@@ -181,7 +183,7 @@ function posicion(t) {
 window.cuadro = function (f) {
   const t = f / FPS;
   // ---------- capa 1: marca, frase, rocola (0 a 9.8 s)
-  const fueraC1 = suave(tramo(t, 9.3, 10.1));
+  const fueraC1 = suave(tramo(t, 9.9, 10.6));
   $("c1").style.opacity = 1 - fueraC1;
   $("marca").style.opacity = salida(tramo(t, .1, .8)) * (1 - fueraC1);
   $("marca").style.transform = `translateY(${(1 - salida(tramo(t, .1, .8))) * -20}px)`;
@@ -203,17 +205,17 @@ window.cuadro = function (f) {
   });
 
   // ---------- capa 2: zoom in a pantalla completa (9.4 a 12.6 s)
-  const dentro = suave(tramo(t, 9.4, 10.4)), fueraC2 = suave(tramo(t, 12.2, 12.9));
+  const dentro = suave(tramo(t, 9.9, 10.8)), fueraC2 = suave(tramo(t, 12.2, 12.9));
   $("c2").style.opacity = dentro * (1 - fueraC2);
   const full = $("full");
   const r = 34 * (1 - dentro);
   full.style.clipPath = `inset(${(1 - dentro) * 700}px ${(1 - dentro) * 280}px ${(1 - dentro) * 860}px ${(1 - dentro) * 280}px round ${r}px)`;
-  $("fullImg").style.transform = `scale(${1.02 + .1 * tramo(t, 9.4, 12.9) - .12 * fueraC2})`;    // Ken Burns, y zoom out al irse
-  $("velo").style.opacity = suave(tramo(t, 10, 10.6));
-  palabras(F3, t, 10.3, .14, .6);
+  $("fullImg").style.transform = `scale(${1.02 + .1 * tramo(t, 9.9, 12.9) - .12 * fueraC2})`;    // Ken Burns, y zoom out al irse
+  $("velo").style.opacity = suave(tramo(t, 10.4, 10.9));
+  palabras(F3, t, 10.7, .14, .6);
   [...$("chips").children].forEach((c, i) => {
     // entran desde los costados, alternando, con un rebote corto
-    const x = clamp(tramo(t, 10.9 + i * .25, 11.6 + i * .25));
+    const x = clamp(tramo(t, 11.2 + i * .22, 11.9 + i * .22));
     const k = x === 0 ? 0 : 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
     c.style.opacity = salida(x * 1.6);
     c.style.transform = `translateX(${(1 - k) * 260 * (i % 2 ? 1 : -1)}px) scale(${.92 + .08 * k})`;
