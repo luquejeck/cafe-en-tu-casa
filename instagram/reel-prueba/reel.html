@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Reel de prueba — Antes / después</title>
+<style>
+/* Reel de prueba (no va al perfil): "Antes / después", tono canchero.
+   1080 x 1920 a 30 cuadros. Los tiempos salen de guion.json (lo que dura
+   cada frase de la voz): filmar.mjs llama a armar(G) y después a cuadro(f).
+   Lo que se lee queda entre los 250 y los 1600 px de alto. */
+:root { --oliva: #5b6e32; --oliva-claro: #a3c26a; --negro: #101012; --tinta: #1d1d1f; --gris: #f5f5f7; --rojo: #e5484d; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: var(--negro); font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #fff; -webkit-font-smoothing: antialiased; }
+.capa { position: absolute; inset: 0; overflow: hidden; }
+.marca { position: absolute; top: 250px; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 14px; font-size: 34px; font-weight: 600; letter-spacing: -.02em; }
+.marca i { width: 14px; height: 14px; border-radius: 50%; background: var(--oliva-claro); }
+.grande { font-weight: 700; letter-spacing: -.045em; line-height: .98; text-align: center; }
+.grande span { display: inline-block; white-space: pre; }
+.mitad { position: absolute; left: 0; right: 0; height: 960px; overflow: hidden; }
+.rotulo { position: absolute; left: 60px; padding: 12px 26px; border-radius: 999px; font-size: 34px; font-weight: 800; letter-spacing: .12em; }
+.sello { position: absolute; padding: 16px 30px; border: 6px solid var(--rojo); color: var(--rojo); border-radius: 18px; font-size: 52px; font-weight: 800; letter-spacing: -.01em; background: rgba(16,16,18,.82); white-space: nowrap; }
+.taza { position: absolute; width: 300px; height: 260px; }
+.taza .cuerpo { position: absolute; left: 0; bottom: 0; width: 240px; height: 220px; background: #9a9a9f; border-radius: 0 0 70px 70px; }
+.taza .asa { position: absolute; right: 0; bottom: 60px; width: 90px; height: 110px; border: 26px solid #9a9a9f; border-left: 0; border-radius: 0 60px 60px 0; }
+.taza .liquido { position: absolute; left: 14px; top: 40px; width: 212px; height: 26px; background: #b39a78; border-radius: 50%; }
+.medidor { position: absolute; left: 60px; right: 60px; height: 26px; background: rgba(255,255,255,.14); border-radius: 999px; overflow: hidden; }
+.medidor u { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; }
+.medidor-txt { position: absolute; left: 60px; font-size: 32px; font-weight: 600; }
+.foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.paso { position: absolute; left: 70px; right: 70px; display: flex; align-items: center; gap: 26px; background: #fff; color: var(--tinta); border-radius: 30px; padding: 26px 34px; font-size: 52px; font-weight: 700; letter-spacing: -.03em; box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
+.paso b { flex: none; width: 76px; height: 76px; border-radius: 50%; background: var(--oliva); color: #fff; display: grid; place-items: center; font-size: 40px; }
+.reloj { position: absolute; font-weight: 800; font-size: 300px; letter-spacing: -.06em; line-height: 1; font-variant-numeric: tabular-nums; }
+.tarjeta { position: absolute; left: 50%; width: 560px; height: 560px; margin-left: -280px; background: #fff; border-radius: 48px; display: grid; place-items: center; box-shadow: 0 50px 100px -40px rgba(0,0,0,.8); }
+.tarjeta img { width: 82%; height: 82%; object-fit: contain; }
+.url { position: absolute; left: 50%; transform: translateX(-50%); background: var(--oliva); color: #fff; border-radius: 999px; padding: 30px 56px; font-size: 46px; font-weight: 700; letter-spacing: -.02em; white-space: nowrap; }
+.flash { position: absolute; inset: 0; background: #fff; pointer-events: none; }
+</style>
+</head>
+<body>
+<!-- 1 · gancho -->
+<div class="capa" id="e1">
+  <div class="taza" id="taza1" style="left:390px; top:840px"><div class="cuerpo"></div><div class="asa"></div><div class="liquido"></div></div>
+  <div class="grande" id="t1" style="position:absolute; left:60px; right:60px; top:420px; font-size:132px"></div>
+  <div class="sello" id="s0" style="left:300px; top:1230px; transform:rotate(-6deg); border-color:#fff; color:#fff">café de oficina™</div>
+</div>
+<!-- 2 · antes (arriba) y después (abajo) -->
+<div class="capa" id="e2">
+  <div class="mitad" id="arriba" style="top:0; height:1920px; background:#2a2a2e"><div class="capa" id="arribaIn">
+    <div class="rotulo" style="top:330px; background:#fff; color:#2a2a2e">ANTES</div>
+    <div class="grande" id="hora" style="position:absolute; right:60px; top:310px; font-size:110px; color:#c7c7cc">9:00</div>
+    <div class="taza" id="taza2" style="left:390px; top:470px; filter:grayscale(1)"><div class="cuerpo"></div><div class="asa"></div><div class="liquido"></div></div>
+    <div class="sello" id="s1" style="left:70px;  top:520px; transform:rotate(-8deg)">tibio</div>
+    <div class="sello" id="s2" style="left:660px; top:560px; transform:rotate(7deg)">aguado</div>
+    <div class="sello" id="s3" style="left:180px; top:760px; transform:rotate(-3deg)">gusto a reunión</div>
+    <div class="medidor-txt" id="m1t" style="top:860px; color:#c7c7cc">Nivel de café: 2/10</div>
+  </div></div>
+  <div class="mitad" id="abajo" style="top:960px; background:var(--negro)">
+    <img class="foto" id="fotoDespues" src="../fotos/espresso-magnifica.jpg" alt="">
+    <div class="capa" style="background:linear-gradient(rgba(16,16,18,.55), rgba(16,16,18,0) 40%, rgba(16,16,18,.75))"></div>
+    <div class="rotulo" style="top:40px; background:var(--oliva); color:#fff">DESPUÉS</div>
+    <div class="grande" id="t3" style="position:absolute; left:50px; right:50px; top:150px; font-size:92px"></div>
+  </div>
+</div>
+<!-- 3 · pasos -->
+<div class="capa" id="e3" style="background:var(--gris)">
+  <img class="foto" src="../fotos/espresso-magnifica.jpg" alt="" id="fotoPasos" style="opacity:.18">
+  <div class="paso" id="p1" style="top:330px"><b>1</b>Molés el grano</div>
+  <div class="paso" id="p2" style="top:500px"><b>2</b>Apretás un botón</div>
+  <div class="paso" id="p3" style="top:670px"><b>3</b>Espresso con crema</div>
+  <div class="reloj" id="reloj" style="left:0; right:0; text-align:center; top:930px; color:var(--tinta)">40<span style="font-size:.4em">s</span></div>
+  <div class="medidor-txt" id="m2t" style="top:1360px; color:var(--tinta)">Nivel de café: 2/10</div>
+  <div class="medidor" style="top:1420px; background:rgba(0,0,0,.08)"><u id="m2" style="background:var(--oliva)"></u></div>
+</div>
+<!-- 4 · remate -->
+<div class="capa" id="e4">
+  <div class="grande" id="t5a" style="position:absolute; left:60px; right:60px; top:380px; font-size:96px; color:#c7c7cc"></div>
+  <div class="grande" id="t5b" style="position:absolute; left:60px; right:60px; top:640px; font-size:150px; color:var(--oliva-claro)"></div>
+  <div class="tarjeta" id="maquina" style="top:930px"><img src="../../assets/img/magnifica-s.webp" alt=""></div>
+</div>
+<!-- 5 · cierre -->
+<div class="capa" id="e5" style="background:#fff; color:var(--tinta)">
+  <div class="marca" style="color:var(--tinta)"><i style="background:var(--oliva)"></i> Café en tu Casa</div>
+  <div class="grande" id="t6" style="position:absolute; left:60px; right:60px; top:520px; font-size:124px"></div>
+  <div class="tarjeta" id="maquina2" style="top:860px; box-shadow:none; background:var(--gris)"><img src="../../assets/img/magnifica-s.webp" alt=""></div>
+  <div class="url" id="url" style="top:1480px">cafe-en-tu-casa.vercel.app</div>
+</div>
+<div class="flash" id="flash"></div>
+<script>
+const FPS = 30;
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const tramo = (t, a, b) => clamp((t - a) / (b - a));
+const suave = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const salida = (x) => 1 - Math.pow(1 - clamp(x), 4);
+const golpe = (x) => { x = clamp(x); const c = 1.9; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };  // con rebote
+
+function palabras(id, texto) {
+  $(id).innerHTML = texto.split(" ").map((w) => w === "|" ? "<br>" : w.startsWith("*") ? `<span style="color:var(--oliva)">${w.slice(1)} </span>` : `<span>${w} </span>`).join("");
+  return [...$(id).querySelectorAll("span")];
+}
+// palabras que "caen" desde grande al ritmo de la voz
+function golpes(spans, t, a, paso) {
+  spans.forEach((s, i) => {
+    const x = tramo(t, a + i * paso, a + i * paso + .28);
+    s.style.opacity = clamp(x * 3);
+    s.style.transform = `scale(${1.8 - .8 * golpe(x)})`;
+  });
+}
+function aparece(el, t, a, d = .35, desde = 'scale(.6)') {
+  const k = golpe(tramo(t, a, a + d));
+  el.style.opacity = clamp(tramo(t, a, a + d * .5));
+  return k;
+}
+
+let T = {}, TOTAL = 0;
+window.armar = (G) => {
+  // cada frase arranca cuando termina la anterior, con un respiro
+  let t = .25;
+  for (const f of G.frases) { T[f.id] = { a: t, b: t + f.dur }; t += f.dur + (f.id === "antes" || f.id === "pasos" ? .45 : .3); }
+  TOTAL = Math.round((T.cierre.b + 2.2) * FPS);
+  window.TIEMPOS = T;
+  return TOTAL;
+};
+const W1 = palabras("t1", "¿Seguís tomando | este café?");
+const W3 = palabras("t3", "La misma mañana, | *en *tu *casa.");
+const W5a = palabras("t5a", "El problema | nunca fuiste vos.");
+const W5b = palabras("t5b", "Era la | cafetera.");
+const W6 = palabras("t6", "Café de cafetería, | *en *tu *casa.");
+
+window.cuadro = (f) => {
+  const t = f / FPS;
+  const vis = (id, a, b) => { $(id).style.display = t >= a && t < b ? "block" : "none"; };
+  const g = T.gancho, an = T.antes, de = T.despues, pa = T.pasos, re = T.remate, ci = T.cierre;
+
+  // ---------- 1 · gancho: la taza gris de la oficina se acerca, las palabras golpean
+  vis("e1", 0, an.a);
+  golpes(W1, t, g.a, .2);
+  const tz = 1 + .5 * tramo(t, 0, an.a);
+  $("taza1").style.transform = `scale(${tz}) rotate(${Math.sin(t * 9) * 2}deg)`;
+  const s0 = golpe(tramo(t, g.a + .9, g.a + 1.25));
+  $("s0").style.opacity = clamp(tramo(t, g.a + .9, g.a + 1.05));
+  $("s0").style.transform = `rotate(-6deg) scale(${2 - s0})`;
+
+  // ---------- 2 · antes arriba; después entra desde abajo
+  vis("e2", an.a, pa.a - .05);
+  const entra = suave(tramo(t, an.a, an.a + .4));
+  $("arriba").style.transform = `translateY(${(1 - entra) * -960}px)`;
+  // el "antes" ocupa toda la pantalla hasta que sube el "después" desde abajo
+  const sube = suave(tramo(t, de.a - .2, de.a + .35));
+  $("arribaIn").style.transform = `translateY(${(1 - sube) * 440}px)`;
+  $("hora").textContent = `9:0${Math.min(9, Math.floor(tramo(t, an.a, an.b) * 9))}`;
+  $("taza2").style.transform = `scale(${1 + .03 * Math.sin(t * 6)})`;
+  // los sellos caen con la voz: "tibio", "aguado", "gusto a reunión"
+  [["s1", .32], ["s2", .5], ["s3", .74]].forEach(([id, p], i) => {
+    const a = an.a + (an.b - an.a) * p, k = golpe(tramo(t, a, a + .3));
+    const rot = [-8, 7, -3][i];
+    $(id).style.opacity = clamp(tramo(t, a, a + .1));
+    $(id).style.transform = `rotate(${rot}deg) scale(${2.2 - 1.2 * k})`;
+  });
+  $("abajo").style.transform = `translateY(${(1 - sube) * 960}px)`;
+  $("fotoDespues").style.transform = `scale(${1.25 - .15 * tramo(t, de.a, pa.a)})`;
+  golpes(W3, t, de.a, .16);
+
+  // ---------- 3 · pasos con cuenta regresiva y el medidor que sube
+  vis("e3", pa.a - .05, re.a);
+  $("e3").style.clipPath = `circle(${suave(tramo(t, pa.a - .05, pa.a + .35)) * 150}% at 50% 100%)`;
+  [["p1", .0], ["p2", .3], ["p3", .58]].forEach(([id, p]) => {
+    const a = pa.a + (pa.b - pa.a) * p, k = golpe(tramo(t, a, a + .35));
+    $(id).style.opacity = clamp(tramo(t, a, a + .12));
+    $(id).style.transform = `translateX(${(1 - k) * 700}px)`;
+  });
+  const cuenta = tramo(t, pa.a + (pa.b - pa.a) * .45, pa.b);
+  const seg = Math.round(40 * (1 - cuenta));
+  $("reloj").innerHTML = `${seg}<span style="font-size:.4em">s</span>`;
+  $("reloj").style.color = seg === 0 ? "var(--oliva)" : "var(--tinta)";
+  $("reloj").style.transform = `scale(${seg === 0 ? 1 + .12 * Math.sin(Math.PI * tramo(t, pa.b - .05, pa.b + .3)) : 1})`;
+  const nivel = 2 + Math.round(8 * suave(tramo(t, pa.b - .6, pa.b + .2)));
+  $("m2t").textContent = `Nivel de café: ${nivel}/10`;
+  $("m2").style.width = `${nivel * 10}%`;
+  $("fotoPasos").style.transform = `scale(${1.1 + .08 * tramo(t, pa.a, re.a)})`;
+
+  // ---------- 4 · remate
+  vis("e4", re.a, ci.a);
+  golpes(W5a, t, re.a, .14);
+  golpes(W5b, t, re.a + (re.b - re.a) * .6, .18);
+  const mq = golpe(tramo(t, re.a + (re.b - re.a) * .75, re.a + (re.b - re.a) * .75 + .4));
+  $("maquina").style.opacity = clamp(mq * 3);
+  $("maquina").style.transform = `scale(${.4 + .6 * mq}) rotate(${(1 - mq) * -12}deg)`;
+
+  // ---------- 5 · cierre
+  vis("e5", ci.a, 99);
+  golpes(W6, t, ci.a, .13);
+  const m2 = golpe(tramo(t, ci.a + .5, ci.a + .95));
+  $("maquina2").style.opacity = clamp(m2 * 3);
+  $("maquina2").style.transform = `scale(${.6 + .4 * m2 + .02 * Math.sin(t * 3)})`;
+  const u = golpe(tramo(t, ci.a + (ci.b - ci.a) * .6, ci.a + (ci.b - ci.a) * .6 + .4));
+  $("url").style.opacity = clamp(u * 3);
+  $("url").style.transform = `translateX(-50%) scale(${.7 + .3 * u + .03 * Math.max(0, Math.sin((t - ci.b) * 5))})`;
+
+  // flash blanco corto en cada cambio de escena
+  const cortes = [an.a, pa.a, re.a, ci.a];
+  $("flash").style.opacity = Math.max(...cortes.map((c) => clamp(1 - Math.abs(t - c) / .09) * .55));
+};
+window.listo = Promise.all([...document.images].map((i) => i.decode().catch(() => {})));
+</script>
+</body>
+</html>
