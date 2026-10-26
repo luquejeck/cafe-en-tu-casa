@@ -45,4 +45,6 @@
   window.SFX = window.SFX.map(([t, x]) => [pasar(t, 1, 0) + DESDE, x]).filter(([t]) => t >= 0 && t < window.TOTAL / FPS)
     .filter(([t], i, l) => i === 0 || t - l[i - 1][0] > .15);   // donde la animación pasa rápido, un solo efecto
   window.VOZ = [v.archivo, DESDE];
+  // la voz cierra con "link en la bio": el botón del final dice lo mismo
+  const url = document.getElementById("url"); if (url) url.textContent = "Link en la bio ↑";
 })();
