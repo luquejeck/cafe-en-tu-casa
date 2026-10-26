@@ -21,3 +21,4 @@ fuentes/
 .claude/skills/
 skills-lock.json
 instagram/.voz/
+__pycache__/
