@@ -1,5 +1,6 @@
 // Filma el reel de prueba v3 "1.460 cafés por año" (motion graphics, sin voz).
 //   node instagram/reel-prueba/filmar3.mjs [página.html salida.mp4]
+// Con ?voz=original|particulas|calendario filma la versión con voz.
 // Sin argumentos filma reel3.html → reel-prueba-v3-1460-cafes.mp4 (no va al perfil).
 // Las alternativas: reel3a.html → reel-prueba-v3a-particulas.mp4,
 // reel3b.html → reel-prueba-v3b-plata.mp4, reel3c.html → reel-prueba-v3c-calendario.mp4.
@@ -17,7 +18,8 @@ const destino = path.resolve(aqui, sale), mudo = destino.replace(/\.mp4$/, "-mud
 const navegador = await chromium.launch();
 const pagina = await navegador.newPage({ viewport: { width: 1080, height: 1920 } });
 pagina.on("pageerror", (e) => console.error("ERROR en la página:", e.message));
-await pagina.goto(pathToFileURL(path.resolve(aqui, pag)).href);
+const [archivo, consulta = ""] = pag.split("?");   // reel3.html?voz=original → versión con voz (voz3.js)
+await pagina.goto(pathToFileURL(path.resolve(aqui, archivo)).href + (consulta && "?" + consulta));
 await pagina.evaluate(() => window.listo);
 const { total, sfx, voz } = await pagina.evaluate(() => ({ total: window.TOTAL, sfx: window.SFX, voz: window.VOZ }));
 
