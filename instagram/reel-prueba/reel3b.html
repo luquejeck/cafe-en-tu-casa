@@ -5,10 +5,12 @@
 <title>Reel de prueba v3·B — 1.460 cafés (la plata)</title>
 <style>
 /* Alternativa B de "1.460 cafés por año": la cuenta en plata.
-   1.460 cafés x $4.000 en un bar, con dígitos tipo tragamonedas, un ticket
-   que se imprime sin fin, barras afuera / en casa y los 1.460 puntos que se
-   vuelven oliva. Valores aproximados (precios al 27/10; kilo de grano $60.000,
-   130 tazas por kilo). Sin fotos. 26 s. */
+   De los 1.460 cafés del año, unos 730 se pagan afuera (estimado: 2 por día;
+   el resto es de filtro o de la oficina). 730 x $4.000 con dígitos tipo
+   tragamonedas, un ticket que se imprime sin fin, barras afuera / en casa y
+   los 1.460 puntos que se vuelven oliva. Valores estimados (precios al 27/10;
+   kilo de grano $50.000, 120 tazas por kilo). Sin fotos. ~32 s, con pausas
+   para que se lean los números. */
 :root { --disp: 'Inter Display', 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { width: 1080px; height: 1920px; overflow: hidden; background: #f3ede2; color: #1f1d1a; font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
@@ -28,6 +30,7 @@ canvas { position: absolute; left: 0; top: 0; }
 .barra { position: absolute; left: 90px; height: 140px; border-radius: 0 28px 28px 0; }
 .rotulo { position: absolute; left: 90px; font-size: 40px; font-weight: 700; letter-spacing: -.01em; }
 .monto { position: absolute; font-family: var(--disp); font-weight: 800; font-size: 64px; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.chip { position: absolute; left: 50%; top: 200px; transform: translateX(-50%); border: 3px solid #c8643b; color: #c8643b; border-radius: 999px; padding: 10px 28px; font-size: 28px; font-weight: 800; letter-spacing: .16em; }
 .nota { position: absolute; left: 0; right: 0; bottom: 330px; text-align: center; font-size: 28px; color: #7d776c; }
 .marca { position: absolute; left: 0; right: 0; top: 300px; display: flex; justify-content: center; align-items: center; gap: 16px; font-size: 40px; font-weight: 600; }
 .marca i { width: 16px; height: 16px; border-radius: 50%; background: #5b6e32; }
@@ -38,18 +41,20 @@ canvas { position: absolute; left: 0; top: 0; }
 <div id="mundo">
   <canvas id="dots" width="1080" height="1920"></canvas>
   <div class="capa" id="e1">
-    <div class="ep" style="top:420px; color:#5b6e32">Este año, en un bar</div>
+    <div class="chip">ESTIMADO</div>
+    <div class="ep" style="top:370px; color:#5b6e32; line-height:1.5">De tus 1.460 cafés del año,<br>los que pagás en un bar</div>
     <div class="slot" id="s1" style="top:520px; font-size:250px"></div>
     <div class="txt" id="t1a" style="top:790px; font-size:92px">cafés <span style="color:#7d776c">×</span> $4.000</div>
     <div class="txt" id="igual" style="top:930px; font-size:110px; color:#7d776c">=</div>
     <div class="slot" id="s2" style="top:1070px; font-size:170px; color:#c8643b"></div>
-    <div class="nota">Valores aproximados</div>
+    <div class="nota">Estimado: 2 cafés pagos por día · el resto, de filtro o en la oficina</div>
   </div>
   <div class="capa" id="e2">
     <div class="ticket" id="ticket" style="top:250px"></div>
     <div class="txt" id="t2" style="top:1420px; left:140px; right:140px; font-size:100px; background:#f3ede2; border-radius:40px; padding:30px 0; box-shadow:0 30px 60px -30px rgba(0,0,0,.35)">En café.<br><span style="color:#c8643b">Por año.</span></div>
   </div>
   <div class="capa" id="e3">
+    <div class="chip">ESTIMADO</div>
     <div class="txt" id="t3" style="top:330px; font-size:92px">Lo mismo,<br>hecho en casa:</div>
     <div class="rotulo" style="top:640px">Afuera</div>
     <div class="barra" id="b1" style="top:700px; background:#c8643b"></div>
@@ -59,7 +64,7 @@ canvas { position: absolute; left: 0; top: 0; }
     <div class="monto" id="m2" style="top:1015px; color:#5b6e32"></div>
     <div class="txt" id="t3b" style="top:1240px; font-size:84px">Te ahorrás</div>
     <div class="txt" id="ahorro" style="top:1340px; font-size:120px; color:#5b6e32">$0</div>
-    <div class="nota">Valores aproximados · grano a $60.000 el kilo</div>
+    <div class="nota">Estimado · grano a $50.000 el kilo, unas 120 tazas por kilo</div>
   </div>
   <div class="capa" id="e4">
     <div class="txt" id="t4" style="top:320px; font-size:96px">Y los 1.460 cafés,<br><span style="color:#5b6e32">buenos.</span></div>
@@ -67,21 +72,27 @@ canvas { position: absolute; left: 0; top: 0; }
   <div class="capa" id="e5">
     <div class="marca"><i></i> Café en tu Casa</div>
     <div class="txt" id="t5a" style="top:560px; font-size:84px">La Dedica se paga sola</div>
-    <div class="txt" id="t5b" style="top:780px; font-size:200px; color:#c8643b">en 2 meses.</div>
+    <div class="txt" id="t5b" style="top:780px; font-size:200px; color:#c8643b">en 3 meses.</div>
     <div class="url" id="url">cafe-en-tu-casa.vercel.app</div>
-    <div class="nota">Dedica EC685 · $632.000 por transferencia, precio al 27/10 · valores aproximados</div>
+    <div class="nota">Estimado · Dedica EC685 $632.000 por transferencia, precio al 27/10</div>
   </div>
   <canvas id="ola" width="1080" height="1920"></canvas>
 </div>
 <script src="comun3.js"></script>
 <script>
-const TOTAL = Math.round(26 * FPS); window.TOTAL = TOTAL;
-// cuentas: 4 cafés por día (1.460 al año) a $4.000 en el bar; en casa, $60.000 el kilo y 130 tazas por kilo
-const AFUERA = 1460 * 4000, CASA = Math.round(1460 * 60000 / 130), AHORRO = AFUERA - CASA;
+// cuentas (estimadas): de 4 cafés por día, 2 se pagan en el bar a $4.000 (730 al año);
+// en casa, $50.000 el kilo y 120 tazas por kilo. La Dedica ($632.000) se paga en ~3 meses.
+const PAGOS = 730, AFUERA = PAGOS * 4000, CASA = Math.round(PAGOS * 50000 / 120), AHORRO = AFUERA - CASA;
+// pausas: en cada dato que hay que leer, el tiempo de la animación corre al 10 %
+// [segundo de la animación, segundos reales que dura la pausa]
+const PAUSAS = [[5.0, 2.0], [8.5, 1.4], [11.7, 1.2], [13.8, 1.6], [17.6, .6]];
+const aAnim = (r) => { for (const [p, l] of PAUSAS) { if (r <= p) break; if (r < p + l) return p + (r - p) * .1; r -= l * .9; } return r; };
+const aReal = (d) => PAUSAS.reduce((r, [p, l]) => r + (d > p ? Math.min(d - p, l * .1) * 9 : 0), d);
+const TOTAL = Math.round(aReal(26) * FPS); window.TOTAL = TOTAL;
 const E = { e1: [0, 5.2], e2: [5.2, 8.6], e3: [8.6, 14.6], e4: [14.6, 19.0], e5: [19.0, 99] };
 const GOLPES = [1.3, 3.9, 8.6, 12.2, 19.6];
 window.SFX = [[.2, "tic"], [1.3, "golpe"], [2.0, "pop"], [2.4, "tic"], [3.9, "golpe"], [5.2, "imprime"], [8.6, "whoosh"], [9.4, "subida"],
-  [12.2, "golpe"], [14.6, "whoosh"], [15.2, "subida"], [19.0, "whoosh"], [19.6, "golpe"], [21.2, "pop"]];
+  [12.2, "golpe"], [14.6, "whoosh"], [15.2, "subida"], [19.0, "whoosh"], [19.6, "golpe"], [21.2, "pop"]].map(([d, x]) => [aReal(d), x]);
 const P = {}; ["t1a", "t2", "t3", "t3b", "t4", "t5a", "t5b"].forEach((id) => (P[id] = partir(id)));
 
 // ---------- dígitos tragamonedas: cada dígito es una tira 0-9 que gira y frena
@@ -99,7 +110,7 @@ function girarSlot(tiras, t, a, dur) {
     el.parentElement.style.filter = `blur(${(1 - k) * (k > 0 ? 3 : 0)}px)`;
   });
 }
-const S1 = armarSlot("s1", "1.460"), S2 = armarSlot("s2", "$" + fmt(AFUERA));
+const S1 = armarSlot("s1", fmt(PAGOS)), S2 = armarSlot("s2", "$" + fmt(AFUERA));
 
 // ---------- ticket
 $("ticket").innerHTML = [...Array(40)].map((_, i) =>
@@ -124,10 +135,10 @@ function puntos(t) {
 }
 
 window.cuadro = (f) => {
-  const t = f / FPS;
+  const t = aAnim(f / FPS);
   Object.entries(E).forEach(([id, [a, b]]) => ($(id).style.display = t >= a && t < b ? "block" : "none"));
 
-  // 1 · 1.460 cafés x $4.000 = $5.840.000
+  // 1 · 730 cafés x $4.000 = $2.920.000
   girarSlot(S1, t, .2, 1.0);
   $("s1").style.transform = `scale(${t < 1.3 ? 1 : 1.25 - .25 * rebote(tramo(t, 1.3, 1.6))})`;
   entrar(P.t1a, t, 1.7, .12);
