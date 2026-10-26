@@ -50,6 +50,10 @@ Los prompts están **en inglés** porque Veo e Imagen responden mucho mejor así
 **REF-COCINA**
 > Wide establishing shot of a modest 1970s kitchen in a Buenos Aires "PH" row house in Villa Devoto: pale green and white square ceramic wall tiles, a cream formica table with chrome edges and two mismatched wooden chairs, a white enamel gas stove, a wooden cabinet with glass doors holding mismatched cups, a paper butcher-shop calendar on the wall, a stainless steel sink under a window that looks onto a small tiled patio with terracotta pots of geraniums, an old radio on a shelf. Empty room, early morning. Cinematic film still, 16:9, shot on ARRI Alexa Mini LF with Cooke S4 lenses, Kodak Vision3 250D film emulation, soft natural window light from camera left, muted warm palette of faded olive green, ochre, cream and coffee brown, subtle film grain, gentle halation, authentic lived-in details. No text, no logos, no watermarks.
 
+**Generadas en Canva (versión 1, pendientes de aprobación):**
+REF-ROBERTO `MAHZJxlYMcU` · REF-LAURA `MAHZJyspFno` · REF-LAURA-NENA `MAHZJ92X0HQ` · REF-MARTA `MAHZJ7mWH4Q` · REF-COCINA `MAHZJ6Ja8Fo`
+(se abren en `https://www.canva.com/M/<id>`)
+
 **REF-CAFETERA:** subí la foto `assets/img/magnifica-s.webp` (no la generes).
 
 ---
