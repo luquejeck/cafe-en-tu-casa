@@ -18,6 +18,8 @@ body { width: 1080px; height: 1350px; overflow: hidden; font-family: 'Inter', -a
 .ep { margin-top: 72px; font-size: 25px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--brand-dark); }
 h1 { margin-top: 18px; font-size: 76px; font-weight: 600; line-height: 1.05; letter-spacing: -.035em; text-wrap: balance; }
 h1 em { font-style: normal; color: var(--brand-dark); }
+.precio { position: absolute; left: 50%; bottom: 72px; transform: translateX(-50%); white-space: nowrap; background: rgba(255,255,255,.94); color: var(--brand-dark); border-radius: 999px; padding: 22px 40px; font-size: 32px; font-weight: 600; letter-spacing: -.01em; box-shadow: 0 16px 40px -20px rgba(0,0,0,.35); }
+.precio b { color: var(--ink); }
 </style>
 </head>
 <body>
@@ -28,11 +30,14 @@ h1 em { font-style: normal; color: var(--brand-dark); }
   <p class="ep" id="ep"></p>
   <h1 id="titulo"></h1>
 </div>
+<p class="precio" id="precio"></p>
 <script>
 const q = new URLSearchParams(location.search);
 document.getElementById("foto").src = q.get("foto");
 const ep = q.get("ep"), titulo = q.get("titulo");
 if (ep) document.getElementById("ep").textContent = ep; else document.getElementById("ep").remove();
+const precio = q.get("precio");
+if (precio) document.getElementById("precio").innerHTML = precio; else document.getElementById("precio").remove();
 if (titulo) document.getElementById("titulo").innerHTML = titulo; else document.getElementById("titulo").remove();
 </script>
 </body>

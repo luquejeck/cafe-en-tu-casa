@@ -10,7 +10,7 @@ const aqui = path.dirname(fileURLToPath(import.meta.url));
 const salida = path.join(aqui, "..", "..", "assets/img/ig");
 
 export const FOTOS = [
-  { id: "f1-espresso-magnifica", foto: "espresso-magnifica.jpg" },
+  { id: "f1-espresso-magnifica", foto: "espresso-magnifica.jpg", precio: "<b>$1.205.521</b> por transferencia · o 9 cuotas sin interés" },
   { id: "f2-pareja-magnifica", foto: "pareja-magnifica.jpg", ep: "Magnifica S", titulo: "Café de cafetería, <em>en tu casa.</em>" },
   { id: "f3-home-office-magnifica", foto: "home-office-magnifica.jpg", ep: "Home office", titulo: "El mejor café del día, <em>sin salir.</em>" },
   { id: "f4-sobremesa-dedica", foto: "sobremesa-dedica.jpg", ep: "Dedica EC685", titulo: "La sobremesa,<br><em>con café de verdad.</em>" },
@@ -20,7 +20,7 @@ const navegador = await chromium.launch();
 const pagina = await navegador.newPage({ viewport: { width: 1080, height: 1350 } });
 for (const f of FOTOS) {
   const url = pathToFileURL(path.join(aqui, "foto.html"));
-  url.search = new URLSearchParams({ foto: f.foto, ep: f.ep || "", titulo: f.titulo || "" });
+  url.search = new URLSearchParams({ foto: f.foto, ep: f.ep || "", titulo: f.titulo || "", precio: f.precio || "" });
   await pagina.goto(url.href);
   await pagina.waitForFunction(() => document.getElementById("foto").complete);
   await pagina.screenshot({ path: path.join(salida, `${f.id}.jpg`), type: "jpeg", quality: 92 });

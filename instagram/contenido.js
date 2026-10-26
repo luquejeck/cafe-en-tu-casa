@@ -165,7 +165,8 @@ const PIEZAS = [
       cierre('Guardalo para comparar, o compartilo con quien está buscando cafetera.', '¿Qué es lo primero que te fijás en una cafetera?') +
       '\n\n#delonghi #magnificas #cafeencasa #cafetera #cafeengrano',
     placas: [
-      { t: 'portada', ep: M.etiqueta, h: M.modelo, sub: lema(M), img: M.imgs[0] },
+      { t: 'portada', ep: M.etiqueta, h: M.modelo, sub: lema(M), img: M.imgs[0],
+        pildora: `${fmt(P.transferencia(M))} por transferencia · o ${M.cuotas} cuotas sin interés` },
       { t: 'foto', tono: 'gris', ep: 'Molinillo integrado', h: 'Muele en el momento', sub: 'El aroma no se pierde en un paquete abierto.', img: M.imgs[1] },
       { t: 'dato', tono: 'oscuro', ep: 'Molinillo cónico de acero', num: 13, sub: 'niveles de molienda', p: 'Ajustás el cuerpo de la taza a tu gusto con un dial.' },
       { t: 'foto', tono: 'gris', ep: 'Sin menús ni pantallas', h: 'Un botón por taza', sub: 'Panel analógico: apretás y listo.', img: M.imgs[3] },
@@ -226,6 +227,58 @@ const PIEZAS = [
     ]
   },
 
+  {
+    /* Semana 26/10: el reel de la cuenta fue el único que pasó los 10 s de
+       tiempo visto (10,7 s). Esta versión lleva los números EN PANTALLA,
+       a pedido (excepción a "sin montos en video"): precios del sitio al 27/10. */
+    id: 'r1-mar-reel-la-cuenta-dedica', semana: 3, dia: 'Martes', tipo: 'reel', fecha: '2026-10-27',
+    titulo: 'La cuenta, versión Dedica',
+    caption:
+      `2 cafés por día en un bar: ${fmt(mesAfuera)} por mes. 🧮\n\n` +
+      `En casa, los mismos 2 cafés salen unos ${fmt(Math.round(mesCasa))}. La ${D.modelo} por transferencia (${fmt(P.transferencia(D))}) se paga sola en unos ${Math.round(P.transferencia(D) / (mesAfuera - mesCasa))} meses.\n\n` +
+      `Valores aproximados, con los precios del sitio al 27/10. El 20% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan.\n\n` +
+      'Mandáselo a quien vive en el bar.\n\n¿Cuántos cafés tomás afuera por semana?\n\n#cafeencasa #cafetera #dedica #delonghi #ahorro',
+    placas: [
+      { t: 'dato', tono: 'oscuro', ep: '2 cafés por día en un bar', num: `<span style="font-size:.56em">${fmt(mesAfuera)}</span>`, sub: 'por mes.', d: 2.4 },
+      { t: 'dato', tono: 'gris', ep: 'En casa, con grano', num: `<span style="font-size:.56em">${fmt(Math.round(mesCasa))}</span>`, sub: 'por mes. Los mismos 2 cafés.', d: 2.4 },
+      { t: 'texto', tono: 'oscuro', ep: `${D.modelo} · ${fmt(P.transferencia(D))} por transferencia`, h: `Se paga sola en unos ${Math.round(P.transferencia(D) / (mesAfuera - mesCasa))} meses.`, p: 'Valores aproximados. Precios del sitio al 27/10.', d: 3.2 },
+      { t: 'cta', tono: 'oscuro', ep: 'Hacé la cuenta', h: 'Mandáselo a quien vive en el bar.', sub: '¿Cuántos cafés tomás afuera por semana?', boton: 'Compartilo ↗', d: 2.6 }
+    ]
+  },
+
+  /* Historias del fin de semana del CyberMonday (2 al 4/11, CACE). Las que
+     llevan sticker (cuenta regresiva, preguntas) se suben con aviso al celular. */
+  {
+    id: 'r1-sab-historia-cuenta-regresiva', semana: 3, dia: 'Sábado', tipo: 'historia', fecha: '2026-10-31',
+    titulo: 'Cuenta regresiva al CyberMonday',
+    caption: '',
+    nota: 'Sumar en Instagram el sticker de cuenta regresiva (CyberMonday, lun 2/11 00:00) y la caja de preguntas "¿Qué cafetera estás mirando?".',
+    placas: [
+      { t: 'texto', tono: 'oscuro', ep: 'CyberMonday · lunes 2/11', h: `Acá el ${OFF}% OFF por transferencia es todo el año.`,
+        p: 'Activá el recordatorio y contanos qué estás mirando ↓' }
+    ]
+  },
+  {
+    id: 'r1-dom-historia-transferencia-o-cuotas', semana: 3, dia: 'Domingo', tipo: 'historia', fecha: '2026-11-01',
+    titulo: '¿Transferencia o cuotas?',
+    caption: '',
+    placas: [
+      { t: 'opciones', tono: 'gris', ep: M.modelo, h: '¿Transferencia o cuotas?',
+        ops: [`1 · ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF)`, `2 · ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre`],
+        p: 'Contestanos por mensaje: ¿1 o 2? No se combinan.' }
+    ]
+  },
+  {
+    id: 'r1-lun-historia-hoy-cybermonday', semana: 3, dia: 'Lunes', tipo: 'historia', fecha: '2026-11-02',
+    titulo: 'Hoy es CyberMonday',
+    caption: '',
+    nota: 'Confirmar en cybermonday.com.ar que arranca el lunes 2/11 antes de publicar.',
+    placas: [
+      { t: 'texto', tono: 'oscuro', ep: 'CyberMonday · 2 al 4/11', h: `Hoy es CyberMonday: acá el ${OFF}% OFF es todos los días.`,
+        p: 'Pagando por transferencia o efectivo. Escribinos por WhatsApp · link en la bio' }
+    ]
+  },
+
   /* ======================= SEMANA 3 — Krups Roma + guía ======================= */
   {
     id: 's3-lun-historia-krups', semana: 3, dia: 'Lunes', tipo: 'historia',
@@ -279,7 +332,7 @@ const PIEZAS = [
       `Tenemos las dos: ${M.modelo} y ${K.modelo} (superautomáticas) y ${D.modelo} (manual).\n\n` +
       '¿Dudás? El test de 4 preguntas está en el link de la bio.\n\n#cafeencasa #espresso #cafetera #barista',
     placas: [
-      { t: 'portada', ep: 'Guía rápida', h: '¿Superautomática o espresso manual?', sub: 'Dos formas distintas de tomar café.' },
+      { t: 'portada', ep: 'Superautomática o espresso manual', h: '¿De botón o a mano?', sub: 'Dos formas distintas de tomar café. ¿Cuál es la tuya?' },
       { t: 'dos', tono: 'gris', h: 'La diferencia',
         cols: [
           { ep: 'Superautomática', h: 'Apretás un botón', items: ['Muele el grano sola', 'Siempre sale igual', 'Varios cafés seguidos'] },
