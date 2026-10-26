@@ -1,6 +1,7 @@
 """Sonido del reel de prueba v3: música lo-fi y efectos sincronizados con la animación.
 
-Uso (lo llama filmar3.mjs):  python3 mezclar3.py mudo.mp4 salida.mp4 <segundos> '<sfx json>'
+Uso (lo llama filmar3.mjs):  python3 mezclar3.py mudo.mp4 salida.mp4 <segundos> '<sfx json>' [voz.mp3 desde]
+Con voz, la música y los efectos bajan para que se entienda lo que dice.
 sfx: lista de [segundo, tipo] con tipo tic (contador), whoosh, pop, golpe, subida, caida,
 imprime (ticket), flap (cartel de aeropuerto) o rebobina.
 """
@@ -93,7 +94,7 @@ TIPOS = {'tic': tic, 'whoosh': whoosh, 'pop': pop, 'golpe': golpe, 'subida': sub
          'caida': caida, 'imprime': imprime, 'flap': flap, 'rebobina': rebobina}
 
 
-def main(mudo, salida, segundos, sfx):
+def main(mudo, salida, segundos, sfx, voz=None, desde=0):
     seg = float(segundos); n = int(seg * SR)
     rng = np.random.default_rng(11)
     mus = musica.componer('manana', seg)
@@ -103,9 +104,20 @@ def main(mudo, salida, segundos, sfx):
         x = TIPOS[tipo](rng)
         i = max(0, int((t - (.3 if tipo == 'whoosh' else 0)) * SR))
         fx[i:i + len(x)] += x[: max(0, n - i)]
-    mezcla = mus * .75 + fx * .6
-    mezcla /= np.abs(mezcla).max() or 1
     with tempfile.TemporaryDirectory() as tmp:
+        if voz:
+            wv = os.path.join(tmp, 'v.wav')
+            subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', voz, '-ac', '1', '-ar', str(SR), wv], check=True)
+            import wave
+            with wave.open(wv) as w:
+                v = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16) / 32768
+            pista = np.zeros(n); i = int(float(desde) * SR)
+            pista[i:i + len(v)] = v[: max(0, n - i)]
+            pista /= np.abs(pista).max() or 1
+            mezcla = pista + mus * .16 + fx * .22
+        else:
+            mezcla = mus * .75 + fx * .6
+        mezcla /= np.abs(mezcla).max() or 1
         wav = os.path.join(tmp, 'a.wav')
         musica.guardar(mezcla * .9, wav)
         subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', mudo, '-i', wav, '-map', '0:v', '-map', '1:a',
@@ -114,4 +126,4 @@ def main(mudo, salida, segundos, sfx):
 
 
 if __name__ == '__main__':
-    main(*sys.argv[1:5])
+    main(*sys.argv[1:7])

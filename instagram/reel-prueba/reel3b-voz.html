@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Reel de prueba v3·B con voz — la cuenta del café</title>
+<style>
+/* Alternativa B con voz (ElevenLabs, voz-b-valeria.mp3). Cada dato aparece
+   cuando la voz lo dice y queda en pantalla mientras dura la frase.
+   Tiempos de la voz (silencios medidos con ffmpeg silencedetect):
+     0.00 Dos cafecitos por día · 1.76 Nada, ¿no? · 3.05 Cuatro mil pesos cada uno
+     5.36 En un año son casi tres millones · 7.90 Sí: · 8.70 TRES MILLONES. En café.
+     11.59 Los mismos cafés en casa, con buen grano · 14.40 unos trescientos mil por año
+     16.41 Te quedan más de dos millones y medio en el bolsillo
+     19.50 y la cafetera se paga sola en tres meses
+     22.52 Café de cafetería, en tu casa · 24.77 Hacé tu cuenta · 25.75 link en la bio
+   Cuentas estimadas: 2 cafés pagos por día a $4.000; grano a $50.000 el kilo,
+   120 tazas por kilo; Dedica EC685 $632.000 (precios al 27/10). */
+:root { --disp: 'Inter Display', 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: #f3ede2; color: #1f1d1a; font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+#mundo { position: absolute; inset: 0; }
+canvas { position: absolute; left: 0; top: 0; }
+.capa { position: absolute; inset: 0; display: none; }
+.txt { position: absolute; left: 60px; right: 60px; text-align: center; font-family: var(--disp); font-weight: 800; letter-spacing: -.045em; line-height: .98; }
+.txt span { display: inline-block; white-space: pre; }
+.slot { position: absolute; left: 0; right: 0; display: flex; justify-content: center; font-family: var(--disp); font-weight: 800; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
+.slot .d { display: inline-block; height: 1em; overflow: hidden; line-height: 1; }
+.slot .d div { display: flex; flex-direction: column; }
+.slot .s { line-height: 1; }
+.chip { position: absolute; left: 50%; top: 200px; transform: translateX(-50%); border: 3px solid #c8643b; color: #c8643b; border-radius: 999px; padding: 10px 28px; font-size: 28px; font-weight: 800; letter-spacing: .16em; }
+.nota { position: absolute; left: 60px; right: 60px; bottom: 300px; text-align: center; font-size: 30px; line-height: 1.4; color: #7d776c; }
+.taza { position: absolute; top: 560px; width: 300px; height: 300px; }
+.precio { position: absolute; top: 900px; width: 300px; text-align: center; font-family: var(--disp); font-weight: 800; font-size: 76px; letter-spacing: -.03em; color: #c8643b; }
+.barra { position: absolute; left: 90px; height: 150px; border-radius: 0 30px 30px 0; }
+.rotulo { position: absolute; left: 90px; font-size: 44px; font-weight: 700; letter-spacing: -.01em; }
+.monto { position: absolute; font-family: var(--disp); font-weight: 800; font-size: 70px; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.marca { position: absolute; left: 0; right: 0; top: 300px; display: flex; justify-content: center; align-items: center; gap: 16px; font-size: 40px; font-weight: 600; color: #f3ede2; }
+.marca i { width: 16px; height: 16px; border-radius: 50%; background: #f3ede2; }
+.pild { position: absolute; left: 50%; white-space: nowrap; border-radius: 999px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div id="mundo">
+  <!-- 1 · dos cafecitos por día / nada, ¿no? / $4.000 cada uno -->
+  <div class="capa" id="e1">
+    <div class="txt" id="t1" style="top:330px; font-size:104px">Dos cafecitos<br>por día.</div>
+    <svg class="taza" id="c1" style="left:200px" viewBox="0 0 300 300"><path d="M50 110h170v70a80 80 0 0 1-80 80h-10a80 80 0 0 1-80-80z" fill="#1f1d1a"/><path d="M220 130h20a35 35 0 0 1 0 70h-24" fill="none" stroke="#1f1d1a" stroke-width="18"/><path d="M110 40c-14 18 14 30 0 50M150 30c-14 18 14 30 0 50" fill="none" stroke="#7d776c" stroke-width="10" stroke-linecap="round"/></svg>
+    <svg class="taza" id="c2" style="left:580px" viewBox="0 0 300 300"><path d="M50 110h170v70a80 80 0 0 1-80 80h-10a80 80 0 0 1-80-80z" fill="#1f1d1a"/><path d="M220 130h20a35 35 0 0 1 0 70h-24" fill="none" stroke="#1f1d1a" stroke-width="18"/><path d="M110 40c-14 18 14 30 0 50M150 30c-14 18 14 30 0 50" fill="none" stroke="#7d776c" stroke-width="10" stroke-linecap="round"/></svg>
+    <div class="precio" id="p1" style="left:185px">$4.000</div>
+    <div class="precio" id="p2" style="left:565px">$4.000</div>
+    <div class="txt" id="nada" style="top:1130px; font-size:84px; color:#7d776c; font-style:italic">Nada, ¿no?</div>
+    <div class="txt" id="cada" style="top:1130px; font-size:84px">cada uno.</div>
+  </div>
+  <!-- 2 · en un año: $2.920.000 / sí: TRES MILLONES. en café. -->
+  <div class="capa" id="e2">
+    <div class="chip">ESTIMADO</div>
+    <div class="txt" id="t2" style="top:400px; font-size:96px">En un año:</div>
+    <div class="slot" id="s2" style="top:560px; font-size:190px; color:#c8643b"></div>
+    <div class="txt" id="t2b" style="top:860px; font-size:150px; color:#c8643b">TRES<br>MILLONES.</div>
+    <div class="txt" id="t2c" style="top:1200px; font-size:110px">En café.</div>
+    <div class="nota">Estimado: 2 cafés pagos por día, a $4.000<br>Precios al 27/10</div>
+  </div>
+  <!-- 3 · los mismos cafés en casa: barras -->
+  <div class="capa" id="e3">
+    <div class="chip">ESTIMADO</div>
+    <div class="txt" id="t3" style="top:330px; font-size:96px">Los mismos cafés,<br><span style="color:#5b6e32">en casa:</span></div>
+    <div class="rotulo" style="top:650px">Afuera, por año</div>
+    <div class="barra" id="b1" style="top:715px; background:#c8643b"></div>
+    <div class="monto" id="m1" style="top:752px; color:#fff"></div>
+    <div class="rotulo" style="top:960px">En casa, con buen grano</div>
+    <div class="barra" id="b2" style="top:1025px; background:#5b6e32"></div>
+    <div class="monto" id="m2" style="top:1062px; color:#5b6e32"></div>
+    <div class="nota">Estimado: grano a $50.000 el kilo,<br>unas 120 tazas por kilo</div>
+  </div>
+  <!-- 4 · te quedan $2.615.833 / la cafetera se paga sola en 3 meses -->
+  <div class="capa" id="e4">
+    <div class="chip">ESTIMADO</div>
+    <div class="txt" id="t4" style="top:340px; font-size:92px">Te quedan<br>en el bolsillo</div>
+    <div class="txt" id="ahorro" style="top:600px; font-size:150px; color:#5b6e32">$0</div>
+    <div class="txt" id="t4b" style="top:780px; font-size:56px; color:#7d776c">por año</div>
+    <div class="txt" id="t4c" style="top:1000px; font-size:84px">y la cafetera<br>se paga sola en</div>
+    <div class="txt" id="t4d" style="top:1190px; font-size:190px; color:#c8643b">3 meses.</div>
+    <div class="nota">Estimado · Dedica EC685 $632.000 por transferencia,<br>precio al 27/10</div>
+  </div>
+  <canvas id="ola" width="1080" height="1920"></canvas>
+  <!-- 5 · cierre -->
+  <div class="capa" id="e5">
+    <div class="marca"><i></i> Café en tu Casa</div>
+    <div class="txt" id="t5" style="top:560px; font-size:130px; color:#f3ede2">Café de<br>cafetería,<br><span style="color:#a3c26a">en tu casa.</span></div>
+    <div class="txt" id="t5b" style="top:1060px; font-size:76px; color:#f3ede2">Hacé tu cuenta</div>
+    <div class="pild" id="bio" style="top:1210px; background:#f3ede2; color:#2e3a17; padding:34px 70px; font-size:56px">Link en la bio ↑</div>
+    <div class="pild" id="url" style="top:1400px; color:#a3c26a; font-size:36px">cafe-en-tu-casa.vercel.app</div>
+  </div>
+</div>
+<script src="comun3.js"></script>
+<script>
+// la voz arranca en OFF segundos; todos los tiempos de abajo son de la voz
+const OFF = .25, VOZ_DURA = 26.67;
+const TOTAL = Math.round((OFF + VOZ_DURA + 1.6) * FPS); window.TOTAL = TOTAL;
+window.VOZ = ["voz-b-valeria.mp3", OFF];
+const PAGOS = 730, AFUERA = PAGOS * 4000, CASA = Math.round(PAGOS * 50000 / 120), AHORRO = AFUERA - CASA;
+const E = { e1: [-1, 5.3], e2: [5.3, 11.45], e3: [11.45, 16.3], e4: [16.3, 22.6], e5: [22.6, 99] };
+const GOLPES = [8.7, 21.2];
+window.SFX = [[.05, "pop"], [.45, "pop"], [3.1, "tic"], [5.3, "whoosh"], [5.4, "tic"], [8.7, "golpe"], [11.45, "whoosh"],
+  [12.0, "subida"], [16.3, "whoosh"], [16.5, "tic"], [21.2, "golpe"], [22.6, "whoosh"], [25.75, "pop"]].map(([t, x]) => [t + OFF, x]);
+const P = {}; ["t1", "t2", "t2c", "t3", "t4", "t4c", "t5", "t5b"].forEach((id) => (P[id] = partir(id)));
+
+// ---------- dígitos tragamonedas
+function armarSlot(id, texto) {
+  $(id).innerHTML = [...texto].map((ch) => /\d/.test(ch)
+    ? `<span class="d"><div>${[...Array(30)].map((_, k) => `<span class="s">${k % 10}</span>`).join("")}</div></span>`
+    : `<span class="s">${ch}</span>`).join("");
+  return [...$(id).querySelectorAll(".d div")].map((el, i) => ({ el, dig: +texto.replace(/\D/g, "")[i] }));
+}
+function girarSlot(tiras, t, a, dur) {
+  tiras.forEach(({ el, dig }, i) => {
+    const k = salida(tramo(t, a, a + dur + i * .1));
+    el.style.transform = `translateY(${-(20 + dig) * k}em)`;
+    el.parentElement.style.filter = `blur(${(1 - k) * (k > 0 ? 3 : 0)}px)`;
+  });
+}
+const S2 = armarSlot("s2", "$" + fmt(AFUERA));
+const oc = $("ola").getContext("2d");
+const aparece = (id, t, a, desde = .6) => { const k = rebote(tramo(t, a, a + .35)); $(id).style.opacity = clamp(tramo(t, a, a + .1)); return desde + (1 - desde) * k; };
+
+window.cuadro = (f) => {
+  const t = f / FPS - OFF;   // tiempo de la voz
+  Object.entries(E).forEach(([id, [a, b]]) => ($(id).style.display = t >= a && t < b ? "block" : "none"));
+
+  // 1 · dos cafecitos (0–3) · nada, ¿no? (1.76) · $4.000 cada uno (3.05)
+  entrar(P.t1, t, -.2, .1);
+  ["c1", "c2"].forEach((id, i) => {
+    const s = aparece(id, t, .1 + i * .4, 0);
+    $(id).style.transform = `scale(${s}) rotate(${Math.sin(t * 2 + i) * 3}deg)`;
+  });
+  $("nada").style.opacity = clamp(tramo(t, 1.76, 1.9)) * (1 - tramo(t, 2.9, 3.0));
+  $("nada").style.transform = `rotate(${-4 * salida(tramo(t, 1.76, 2.1))}deg) scale(${1 + .1 * (1 - salida(tramo(t, 1.76, 2.1)))})`;
+  ["p1", "p2"].forEach((id, i) => { $(id).style.transform = `scale(${aparece(id, t, 3.3 + i * .25)})`; });
+  $("cada").style.opacity = clamp(tramo(t, 4.2, 4.35));
+
+  // 2 · en un año (5.36): $2.920.000 · sí: (7.9) TRES MILLONES (8.7) · en café
+  entrar(P.t2, t, 5.36, .1);
+  girarSlot(S2, t, 5.5, 1.3);
+  $("s2").style.opacity = clamp(tramo(t, 5.45, 5.6));
+  $("s2").style.transform = `scale(${t < 7.9 ? 1 : 1 - .3 * salida(tramo(t, 7.9, 8.3))}) translateY(${t < 7.9 ? 0 : -60 * salida(tramo(t, 7.9, 8.3))}px)`;
+  $("t2b").style.opacity = clamp(tramo(t, 8.7, 8.8));
+  $("t2b").style.transform = `scale(${2.4 - 1.4 * rebote(tramo(t, 8.7, 9.0), 1.2)})`;
+  golpear(P.t2c, t, 10.25, .25);
+
+  // 3 · barras (11.59) · unos trescientos mil por año (14.4)
+  entrar(P.t3, t, 11.5, .08);
+  const k1 = suave(tramo(t, 11.9, 12.7)), k2 = suave(tramo(t, 14.4, 15.3));
+  $("b1").style.width = `${900 * k1}px`;
+  $("m1").textContent = "$" + fmt(AFUERA); $("m1").style.left = `${Math.max(110, 900 * k1 - 360)}px`;
+  $("m1").style.opacity = clamp(tramo(t, 12.4, 12.6));
+  $("b2").style.width = `${Math.max(14, 900 * CASA / AFUERA * k2)}px`;
+  $("m2").textContent = "$" + fmt(CASA * k2); $("m2").style.left = `${110 + 900 * CASA / AFUERA * k2 + 20}px`;
+  $("m2").style.opacity = clamp(tramo(t, 14.4, 14.55));
+
+  // 4 · te quedan (16.41) $2.615.833 · la cafetera se paga sola (19.5) en 3 meses (21.2)
+  entrar(P.t4, t, 16.35, .08);
+  $("ahorro").textContent = "$" + fmt(AHORRO * salida(tramo(t, 16.6, 18.4)));
+  $("ahorro").style.opacity = clamp(tramo(t, 16.55, 16.7));
+  $("ahorro").style.transform = `scale(${t < 18.4 ? 1 : 1 + .08 * Math.sin(Math.PI * tramo(t, 18.4, 18.8))})`;
+  $("t4b").style.opacity = clamp(tramo(t, 18.4, 18.6));
+  entrar(P.t4c, t, 19.5, .1);
+  $("t4d").style.opacity = clamp(tramo(t, 21.2, 21.3));
+  $("t4d").style.transform = `scale(${2.2 - 1.2 * rebote(tramo(t, 21.2, 21.5), 1.2)})`;
+
+  // 5 · cierre (22.52) · hacé tu cuenta (24.77) · link en la bio (25.75)
+  oc.clearRect(0, 0, 1080, 1920);
+  liquido(oc, t, 22.1, 22.7, COL.olivaOsc);
+  if (t >= 22.7) { oc.fillStyle = COL.olivaOsc; oc.fillRect(0, 0, 1080, 1920); }
+  entrar(P.t5, t, 22.65, .1);
+  entrar(P.t5b, t, 24.77, .1);
+  const b = rebote(tramo(t, 25.75, 26.15));
+  $("bio").style.opacity = clamp(tramo(t, 25.75, 25.85));
+  $("bio").style.transform = `translateX(-50%) scale(${.6 + .4 * b + .03 * Math.max(0, Math.sin((t - 26.3) * 5))})`;
+  $("url").style.opacity = clamp(tramo(t, 26.2, 26.5));
+  $("url").style.transform = "translateX(-50%)";
+
+  temblor($("mundo"), t, GOLPES);
+};
+</script>
+</body>
+</html>
