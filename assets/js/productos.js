@@ -23,7 +23,7 @@ const TIENDA = {
   // Relevamiento 26/10/2026: cafe en bar $3.000-5.400 (cortado/cafe con leche);
   // grano de especialidad $40.000-60.000 el kilo (Bonafide ~$56.600, tostadores ~$49.000-59.000).
   precioCafeAfuera: 4000,   // lo que sale un cafe en un bar, en pesos
-  precioKiloCafe: 50000,    // lo que te sale 1 kg de cafe en grano
+  precioKiloCafe: 60000,    // lo que te sale 1 kg de cafe en grano (Lucas: entre 40.000 y 80.000)
   cafesPorKilo: 130,        // tazas que salen de 1 kg (aprox 7,5 g por taza)
 
   url: 'https://cafe-en-tu-casa.vercel.app'

@@ -54,8 +54,8 @@ Firmeza: **señal** (1–2 piezas) · **probado** (3+ piezas o 3+ semanas) · **
 ## Precios para "la cuenta" (relevamiento 26/10/2026)
 
 - Café en un bar: $3.000 a $5.400 (cortado / café con leche). Usamos **$4.000**.
-- Kilo de café en grano: comercial ~$23.000 (La Virginia molido); especialidad $40.000 a $60.000 (Bonafide ~$56.600, tostadores $49.000-59.000; Lavazza grano $75.400). Usamos **$50.000** y 130 tazas por kilo.
-- Con esos valores: 2 cafés por día afuera = $240.000/mes; en casa ≈ $23.077/mes. Dedica se paga en ~3 meses; Magnifica S en ~6. Los valores viven en `assets/js/productos.js` (TIENDA) y los usa también la calculadora del sitio.
+- Kilo de café en grano: comercial ~$23.000 (La Virginia molido); especialidad $40.000 a $60.000 (Bonafide ~$56.600, tostadores $49.000-59.000; Lavazza grano $75.400). Usamos **$60.000** (Lucas: entre $40.000 y $80.000) y 130 tazas por kilo.
+- Con esos valores: 2 cafés por día afuera = $240.000/mes; en casa ≈ $27.692/mes. Dedica se paga en ~3 meses; Magnifica S en ~6. Los valores viven en `assets/js/productos.js` (TIENDA) y los usa también la calculadora del sitio.
 
 ## Fechas que vienen
 
