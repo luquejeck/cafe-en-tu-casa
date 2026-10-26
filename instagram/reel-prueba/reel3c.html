@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Reel de prueba v3·C — 1.460 cafés (el calendario)</title>
+<style>
+/* Alternativa C de "1.460 cafés por año": el calendario.
+   "1.460" en letras de cartel de aeropuerto, el año entero pasando a toda
+   velocidad (365 días, 4 cafés por día, 0 buenos), rebobinado tipo VHS y el
+   mismo año de nuevo en oliva. Cierra con el café subiendo hasta tapar todo.
+   Sin fotos. 25 s. */
+:root { --disp: 'Inter Display', 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: #f3ede2; color: #1f1d1a; font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+#mundo { position: absolute; inset: 0; }
+canvas { position: absolute; left: 0; top: 0; }
+.capa { position: absolute; inset: 0; display: none; }
+.txt { position: absolute; left: 60px; right: 60px; text-align: center; font-family: var(--disp); font-weight: 800; letter-spacing: -.045em; line-height: .98; }
+.txt span { display: inline-block; white-space: pre; }
+.ep { position: absolute; left: 0; right: 0; text-align: center; font-size: 30px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.flap { position: absolute; left: 0; right: 0; display: flex; justify-content: center; gap: .06em; font-family: var(--disp); font-weight: 800; font-variant-numeric: tabular-nums; perspective: 800px; }
+.flap b { position: relative; display: inline-flex; justify-content: center; align-items: center; width: .74em; height: 1.18em; background: #1f1d1a; color: #f3ede2; border-radius: .08em; line-height: 1; box-shadow: 0 .06em .12em -.04em rgba(0,0,0,.45); }
+.flap b.p { width: .32em; background: none; color: #1f1d1a; box-shadow: none; }
+.flap b::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: .025em; background: #f3ede2; opacity: .25; }
+.flap b.p::after { display: none; }
+.cont { position: absolute; display: flex; flex-direction: column; align-items: center; }
+.cont small { font-size: 30px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #7d776c; }
+.cont strong { font-family: var(--disp); font-size: 96px; font-weight: 800; letter-spacing: -.04em; font-variant-numeric: tabular-nums; line-height: 1.05; }
+.rew { position: absolute; left: 0; right: 0; top: 64px; text-align: center; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 42px; font-weight: 700; color: #c8643b; letter-spacing: .05em; }
+.marca { position: absolute; left: 0; right: 0; top: 300px; display: flex; justify-content: center; align-items: center; gap: 16px; font-size: 40px; font-weight: 600; color: #f3ede2; }
+.marca i { width: 16px; height: 16px; border-radius: 50%; background: #f3ede2; }
+.url { position: absolute; left: 50%; top: 1250px; white-space: nowrap; background: #f3ede2; color: #2e3a17; border-radius: 999px; padding: 30px 60px; font-size: 46px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div id="mundo">
+  <canvas id="cal" width="1080" height="1920"></canvas>
+  <div class="capa" id="e1">
+    <div class="ep" style="top:560px; color:#5b6e32">Este año vas a tomar</div>
+    <div class="flap" id="f1" style="top:660px; font-size:230px"></div>
+    <div class="txt" id="t1" style="top:1010px; font-size:110px">cafés.</div>
+  </div>
+  <div class="capa" id="e2">
+    <div class="txt" id="t2" style="top:640px; font-size:150px">¿Cuántos<br>van a ser<br><span style="color:#c8643b">buenos?</span></div>
+  </div>
+  <div class="capa" id="e3">
+    <div class="flap" id="fecha" style="top:150px; font-size:120px"></div>
+    <div class="cont" style="left:110px; top:1560px; width:400px"><small>Cafés</small><strong id="nCafes">0</strong></div>
+    <div class="cont" style="left:570px; top:1560px; width:400px"><small id="lBuenos">Buenos</small><strong id="nBuenos" style="color:#c8643b">0</strong></div>
+    <div class="rew" id="rew">◀◀ REBOBINANDO</div>
+  </div>
+  <div class="capa" id="e3b">
+    <div class="txt" id="t3" style="top:780px; left:140px; right:140px; font-size:130px; background:#f3ede2; border-radius:44px; padding:40px 0; box-shadow:0 30px 60px -30px rgba(0,0,0,.35)">Casi<br><span style="color:#c8643b">ninguno.</span></div>
+  </div>
+  <div class="capa" id="e4">
+    <div class="txt" id="t4" style="top:760px; left:140px; right:140px; font-size:120px; background:#f3ede2; border-radius:44px; padding:40px 0; box-shadow:0 30px 60px -30px rgba(0,0,0,.35)">Rebobinemos.<br><span style="color:#5b6e32">Con tu cafetera.</span></div>
+  </div>
+  <canvas id="ola" width="1080" height="1920"></canvas>
+  <div class="capa" id="e5">
+    <div class="txt" id="t5" style="top:760px; font-size:150px; color:#f3ede2">Todos<br>buenos.</div>
+  </div>
+  <div class="capa" id="e6">
+    <div class="marca"><i></i> Café en tu Casa</div>
+    <div class="txt" id="t6" style="top:620px; font-size:124px; color:#f3ede2">Café de<br>cafetería,<br><span style="color:#a3c26a">en tu casa.</span></div>
+    <div class="url" id="url">cafe-en-tu-casa.vercel.app</div>
+  </div>
+</div>
+<script src="comun3.js"></script>
+<script>
+const TOTAL = Math.round(25 * FPS); window.TOTAL = TOTAL;
+const E = { e1: [0, 2.8], e2: [2.8, 5.0], e3: [5.0, 17.2], e3b: [10.9, 12.3], e4: [12.3, 13.1], e5: [17.2, 20.0], e6: [20.0, 99] };
+const GOLPES = [1.6, 3.2, 3.6, 4.0, 10.9, 12.4, 13.0, 16.3, 17.5, 20.6];
+// tiempos del calendario: año en gris, rebobinado, año en oliva
+const A1 = [5.4, 10.6], RW = [13.0, 13.9], A2 = [14.0, 16.2];
+window.SFX = [[0, "flap"], [1.6, "golpe"], [2.8, "whoosh"], [3.2, "pop"], [3.6, "pop"], [4.0, "golpe"], [5.0, "whoosh"],
+  [5.4, "flap"], [7.4, "flap"], [9.4, "tic"], [10.9, "golpe"], [12.3, "golpe"], [13.0, "rebobina"], [14.0, "flap"], [14.0, "subida"],
+  [16.3, "golpe"], [17.2, "whoosh"], [17.5, "golpe"], [20.0, "whoosh"], [20.6, "golpe"], [22.0, "pop"]];
+const P = {}; ["t1", "t2", "t3", "t4", "t5", "t6"].forEach((id) => (P[id] = partir(id)));
+
+// ---------- letras de cartel de aeropuerto
+const LETRAS = "0123456789ABCDEFGHIJLMNOPRSTUV";
+function armarFlap(id, texto) {
+  $(id).innerHTML = [...texto].map((c) => `<b class="${/[.\s]/.test(c) ? "p" : ""}">${c}</b>`).join("");
+  return [...$(id).children];
+}
+/** Cada letra gira por el abecedario y frena en su lugar, una detrás de otra. */
+function girarFlap(celdas, texto, t, a, dur) {
+  celdas.forEach((b, i) => {
+    if (b.classList.contains("p")) { b.style.opacity = t >= a ? 1 : 0; return; }
+    const fin = a + dur + i * .15, k = tramo(t, a, fin);
+    const listo = k >= 1, paso = Math.floor(t * 22 + i * 5);
+    b.textContent = listo ? texto[i] : LETRAS[(paso * 7 + i) % (texto[i] <= "9" ? 10 : LETRAS.length)];
+    const fase = listo ? 1 : (t * 22 + i * 5) % 1;
+    b.style.transform = `rotateX(${listo ? 0 : (1 - fase) * 70}deg)`;
+    b.style.opacity = t >= a + i * .05 ? 1 : 0;
+  });
+}
+const F1 = armarFlap("f1", "1.460");
+const MESES = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+const FECHA = armarFlap("fecha", "01 ENE");
+function ponerFecha(dia) {
+  const d = new Date(2027, 0, 1 + Math.min(364, Math.max(0, dia)));
+  const txt = String(d.getDate()).padStart(2, "0") + " " + MESES[d.getMonth()];
+  FECHA.forEach((b, i) => { b.textContent = txt[i]; });
+}
+
+// ---------- el año: 12 meses en 3 x 4, cada día un cuadradito
+const DIAS = [];
+for (let m = 0; m < 12; m++) {
+  const x0 = 70 + (m % 3) * 320, y0 = 420 + Math.floor(m / 3) * 280;
+  const primero = (new Date(2027, m, 1).getDay() + 6) % 7, cant = new Date(2027, m + 1, 0).getDate();
+  for (let d = 0; d < cant; d++) {
+    const c = primero + d;
+    DIAS.push({ m, x: x0 + (c % 7) * 40, y: y0 + 50 + Math.floor(c / 7) * 36 });
+  }
+}
+const cal = $("cal").getContext("2d"), ola = $("ola").getContext("2d");
+function calendario(t) {
+  cal.clearRect(0, 0, 1080, 1920);
+  if (t < 5.0 || t >= 17.2) return;
+  // cuántos días van llenos, y de qué color
+  let n = 0, col = "#8f8676", rebob = 0;
+  if (t < RW[0]) n = 365 * suave(tramo(t, ...A1));
+  else if (t < A2[0]) { rebob = tramo(t, ...RW); n = 365 * (1 - Math.pow(rebob, .6)); }
+  else { n = 365 * suave(tramo(t, ...A2)); col = COL.oliva; }
+  const entra = salida(tramo(t, 5.0, 5.6)), sale = suave(tramo(t, 16.6, 17.2));
+  cal.save();
+  // rebobinado: la imagen tiembla y se corre como un VHS
+  const corrido = rebob > 0 && rebob < 1 ? ruido(t, 3) * 26 : 0;
+  cal.translate(540 + corrido, 960); cal.scale(.85 + .15 * entra - .3 * sale, .85 + .15 * entra - .3 * sale); cal.translate(-540, -960);
+  cal.globalAlpha = entra * (1 - sale);
+  cal.font = "700 26px Inter, sans-serif"; cal.textBaseline = "top";
+  for (let m = 0; m < 12; m++) {
+    cal.fillStyle = COL.gris;
+    cal.fillText(MESES[m], 70 + (m % 3) * 320, 420 + Math.floor(m / 3) * 280);
+  }
+  DIAS.forEach((d, i) => {
+    const lleno = clamp(n - i);
+    cal.fillStyle = COL.crema2; cal.beginPath(); cal.roundRect(d.x, d.y, 32, 28, 7); cal.fill();
+    if (lleno > 0) {
+      const s = .4 + .6 * lleno;
+      cal.fillStyle = col; cal.beginPath(); cal.roundRect(d.x + 16 - 16 * s, d.y + 14 - 14 * s, 32 * s, 28 * s, 7); cal.fill();
+    }
+  });
+  // el día de hoy: aro terracota que corre por el año
+  const hoy = Math.min(364, Math.floor(n));
+  if (n > 0 && n < 365) {
+    const d = DIAS[hoy];
+    cal.strokeStyle = col === COL.oliva ? COL.olivaClaro : COL.terra; cal.lineWidth = 5;
+    cal.beginPath(); cal.roundRect(d.x - 6, d.y - 6, 44, 40, 10); cal.stroke();
+  }
+  // líneas de VHS durante el rebobinado
+  if (rebob > 0 && rebob < 1) {
+    cal.globalAlpha = .25; cal.fillStyle = COL.tinta;
+    for (let k = 0; k < 6; k++) cal.fillRect(0, (k * 337 + t * 2400) % 1920, 1080, 8 + k * 3);
+  }
+  cal.restore();
+  return { n, hoy };
+}
+
+window.cuadro = (f) => {
+  const t = f / FPS;
+  Object.entries(E).forEach(([id, [a, b]]) => ($(id).style.display = t >= a && t < b ? "block" : "none"));
+
+  // 1 · 1.460 en el cartel
+  girarFlap(F1, "1.460", t, .1, 1.0);
+  $("f1").style.transform = `scale(${t < 1.6 ? 1 : 1.2 - .2 * rebote(tramo(t, 1.6, 1.9))})`;
+  golpear(P.t1, t, 1.9, .2);
+
+  // 2 · la pregunta
+  golpear(P.t2, t, 3.2, .4);
+
+  // 3 · el año en gris
+  const c = calendario(t) || { n: 0, hoy: 0 };
+  ponerFecha(c.hoy);
+  $("fecha").style.opacity = salida(tramo(t, 5.1, 5.5));
+  const replay = t >= A2[0];
+  $("nCafes").textContent = fmt(Math.min(1460, Math.round(c.n) * 4));
+  $("lBuenos").textContent = "Buenos";
+  $("nBuenos").textContent = replay ? fmt(Math.min(1460, Math.round(c.n) * 4)) : "0";
+  $("nBuenos").style.color = replay ? COL.oliva : COL.terra;
+  $("nBuenos").style.transform = `scale(${replay && t > 16.3 ? 1.25 - .25 * rebote(tramo(t, 16.3, 16.6)) : 1})`;
+  $("rew").style.display = t >= RW[0] && t < RW[1] && Math.floor(t * 4) % 2 === 0 ? "block" : "none";
+  golpear(P.t3, t, 10.9, .25);
+  $("t3").style.opacity = clamp(tramo(t, 10.85, 11)) * (1 - tramo(t, 12.1, 12.3));
+  golpear(P.t4, t, 12.4, .3);
+  $("t4").style.opacity = clamp(tramo(t, 12.35, 12.5)) * (1 - tramo(t, 12.9, 13.1));
+
+  // 4 · el café sube y tapa todo
+  ola.clearRect(0, 0, 1080, 1920);
+  liquido(ola, t, 16.8, 18.0, COL.oliva);
+  if (t >= 18.0) { ola.fillStyle = COL.oliva; ola.fillRect(0, 0, 1080, 1920); }
+  liquido(ola, t, 19.4, 20.4, COL.olivaOsc);
+  if (t >= 20.4) { ola.fillStyle = COL.olivaOsc; ola.fillRect(0, 0, 1080, 1920); }
+  golpear(P.t5, t, 17.5, .3);
+  $("t5").style.opacity = 1 - tramo(t, 19.6, 19.9);
+
+  // 5 · cierre
+  golpear(P.t6, t, 20.4, .1);
+  const u = rebote(tramo(t, 22.0, 22.5));
+  $("url").style.opacity = clamp(tramo(t, 22.0, 22.2));
+  $("url").style.transform = `translateX(-50%) scale(${.6 + .4 * u + .03 * Math.max(0, Math.sin((t - 22.8) * 4))})`;
+
+  temblor($("mundo"), t, GOLPES);
+};
+</script>
+</body>
+</html>

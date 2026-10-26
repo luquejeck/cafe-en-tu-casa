@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Reel de prueba v3·A — 1.460 cafés (partículas)</title>
+<style>
+/* Alternativa A de "1.460 cafés por año": los 1.460 puntos son partículas.
+   Explotan desde el centro, forman el gráfico, se caen ("casi ninguno"),
+   vuelven en oliva armando una taza, después el número 1.460 y al final se
+   juntan en el punto de la marca. Sin fotos. 24,5 s. */
+:root { --disp: 'Inter Display', 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: #f3ede2; color: #1f1d1a; font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+#mundo { position: absolute; inset: 0; }
+canvas { position: absolute; left: 0; top: 0; }
+.capa { position: absolute; inset: 0; display: none; }
+.txt { position: absolute; left: 60px; right: 60px; text-align: center; font-family: var(--disp); font-weight: 800; letter-spacing: -.045em; line-height: .98; }
+.txt span { display: inline-block; white-space: pre; }
+.ep { position: absolute; left: 0; right: 0; text-align: center; font-size: 30px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+#num { position: absolute; left: 0; right: 0; top: 760px; text-align: center; font-family: var(--disp); font-weight: 800; font-size: 360px; letter-spacing: -.06em; line-height: 1; color: #f3ede2; font-variant-numeric: tabular-nums; }
+.leyenda { position: absolute; left: 90px; right: 90px; top: 1440px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 30px; }
+.item { display: flex; align-items: center; gap: 16px; font-size: 36px; font-weight: 600; }
+.item i { flex: none; width: 30px; height: 30px; border-radius: 50%; }
+.item b { margin-left: auto; font-family: var(--disp); font-weight: 800; font-variant-numeric: tabular-nums; }
+.marca { position: absolute; left: 0; right: 0; top: 520px; display: flex; justify-content: center; align-items: center; gap: 22px; font-size: 64px; font-weight: 600; letter-spacing: -.02em; }
+.marca i { width: 28px; height: 28px; border-radius: 50%; background: #5b6e32; }
+.url { position: absolute; left: 50%; top: 1240px; white-space: nowrap; background: #5b6e32; color: #f3ede2; border-radius: 999px; padding: 30px 60px; font-size: 46px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div id="mundo">
+  <canvas id="fondo" width="1080" height="1920"></canvas>
+  <canvas id="parts" width="1080" height="1920"></canvas>
+  <div class="capa" id="e1">
+    <div class="txt" id="t1a" style="top:560px; font-size:84px; color:#f3ede2">Este año vas a tomar</div>
+    <div id="num">0</div>
+    <div class="txt" id="t1b" style="top:1150px; font-size:120px; color:#a3c26a">cafés.</div>
+  </div>
+  <div class="capa" id="e2">
+    <div class="txt" id="t2" style="top:600px; font-size:170px">¿Cuántos<br>van a ser<br><span style="color:#c8643b">buenos?</span></div>
+  </div>
+  <div class="capa" id="e3">
+    <div class="ep" style="top:340px; color:#5b6e32">Tus 1.460 cafés del año</div>
+    <div class="txt" id="t3" style="top:400px; font-size:84px">Uno por punto.</div>
+    <div class="leyenda" id="leyenda"></div>
+  </div>
+  <div class="capa" id="e4">
+    <div class="txt" id="t4" style="top:760px; font-size:170px; color:#c8643b">Casi<br>ninguno.</div>
+  </div>
+  <div class="capa" id="e5">
+    <div class="txt" id="t5" style="top:300px; font-size:96px">¿Y si fueran<br><span style="color:#5b6e32">todos así?</span></div>
+  </div>
+  <div class="capa" id="e6">
+    <div class="txt" id="t6" style="top:420px; font-size:110px">Todos <span style="color:#5b6e32">buenos.</span></div>
+    <div class="ep" id="ep6" style="top:1260px; color:#5b6e32">1.460 de 1.460 · recién molidos, en tu casa</div>
+  </div>
+  <div class="capa" id="e7">
+    <div class="marca" id="marca"><i id="punto"></i><span id="nombre">Café en tu Casa</span></div>
+    <div class="txt" id="t7" style="top:740px; font-size:118px">Café de cafetería,<br><span style="color:#5b6e32">en tu casa.</span></div>
+    <div class="url" id="url">cafe-en-tu-casa.vercel.app</div>
+  </div>
+  <canvas id="ola" width="1080" height="1920"></canvas>
+</div>
+<script src="comun3.js"></script>
+<script>
+const TOTAL = Math.round(24.5 * FPS); window.TOTAL = TOTAL;
+const E = { e1: [0, 2.7], e2: [2.7, 5.0], e3: [5.0, 9.9], e4: [9.9, 12.0], e5: [12.0, 15.8], e6: [15.8, 18.9], e7: [18.9, 99] };
+const GOLPES = [.95, 3.0, 3.35, 3.7, 4.1, 9.9, 15.8];
+window.SFX = [[.15, "tic"], [.95, "golpe"], [2.7, "whoosh"], [3.0, "pop"], [3.35, "pop"], [3.7, "pop"], [4.1, "golpe"], [5.0, "whoosh"],
+  [6.6, "pop"], [7.3, "pop"], [8.0, "pop"], [8.7, "pop"], [9.9, "golpe"], [10.2, "caida"], [12.0, "whoosh"], [12.3, "subida"], [15.8, "golpe"], [18.9, "whoosh"], [20.4, "pop"]];
+
+const P = {}; ["t1a", "t1b", "t2", "t3", "t4", "t5", "t6", "t7"].forEach((id) => (P[id] = partir(id)));
+const TIPOS = [{ n: "Café de oficina", c: "#7d776c", k: 560 }, { n: "Cápsula", c: "#a59d8d", k: 400 }, { n: "Soluble", c: "#c8bfae", k: 300 }, { n: "Al paso, apurado", c: "#d9a487", k: 200 }];
+const INI = [6.6, 7.3, 8.0, 8.7];
+$("leyenda").innerHTML = TIPOS.map((tp, j) => `<div class="item" id="ley${j}"><i style="background:${tp.c}"></i>${tp.n}<b id="leyn${j}">0</b></div>`).join("");
+
+// ---------- destinos de las partículas
+const N = 1460, COLS = 40, PASO = 22.5;
+const grilla = [...Array(N)].map((_, i) => [(1080 - COLS * PASO) / 2 + PASO / 2 + (i % COLS) * PASO, 560 + Math.floor(i / COLS) * PASO]);
+const tipo = []; TIPOS.forEach((tp, j) => { for (let q = 0; q < tp.k; q++) tipo.push(j); });
+const orden = tipo.map((j, i) => (i - TIPOS.slice(0, j).reduce((s, x) => s + x.k, 0)) / TIPOS[j].k);
+const rnd = [...Array(N)].map(() => [azar(), azar(), azar(), azar()]);
+const estallido = rnd.map(([a, b]) => [540 + Math.cos(a * 6.283) * (250 + b * 520), 960 + Math.sin(a * 6.283) * (250 + b * 720)]);
+
+function muestrear(dibujar) {
+  const c = document.createElement("canvas"); c.width = 1080; c.height = 1920;
+  const x = c.getContext("2d"); x.fillStyle = "#000"; dibujar(x);
+  const d = x.getImageData(0, 0, 1080, 1920).data, pts = [];
+  for (let y = 0; y < 1920; y += 7) for (let xx = (y / 7) % 2 ? 3 : 0; xx < 1080; xx += 7) if (d[(y * 1080 + xx) * 4 + 3] > 128) pts.push([xx, y]);
+  return [...Array(N)].map((_, k) => pts[Math.floor(k * pts.length / N)]);
+}
+const taza = muestrear((x) => {
+  x.beginPath(); x.moveTo(300, 700); x.lineTo(780, 700); x.lineTo(735, 1060); x.quadraticCurveTo(540, 1200, 345, 1060); x.closePath(); x.fill();
+  x.lineWidth = 46; x.strokeStyle = "#000"; x.beginPath(); x.arc(800, 860, 95, -1.2, 1.2); x.stroke();
+  x.beginPath(); x.ellipse(540, 1175, 330, 46, 0, 0, Math.PI * 2); x.fill();
+});
+const numero = muestrear((x) => { x.font = "800 360px 'Inter Display', Inter, sans-serif"; x.textAlign = "center"; x.fillText("1.460", 540, 1090); });
+
+const pc = $("parts").getContext("2d"), fc = $("fondo").getContext("2d"), oc = $("ola").getContext("2d");
+const lerp = (a, b, k) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
+
+function particulas(t) {
+  pc.clearRect(0, 0, 1080, 1920);
+  if (t < 5.0) return;
+  for (let i = 0; i < N; i++) {
+    const [r1, r2, r3, r4] = rnd[i];
+    let p, col = "#e2d8c5", rad = 8.2;
+    if (t < 12.2) {
+      // estallido desde el centro y al gráfico
+      const d = r3 * .35;
+      p = lerp([540, 960], estallido[i], salida(tramo(t, 5.0 + d * .4, 5.5 + d * .4)));
+      p = lerp(p, grilla[i], suave(tramo(t, 5.6 + d, 6.4 + d)));
+      const pinta = tramo(t, INI[tipo[i]] + orden[i] * .55, INI[tipo[i]] + orden[i] * .55 + .1);
+      if (pinta > 0) col = TIPOS[tipo[i]].c;
+      // "casi ninguno": se caen con gravedad
+      const tf = 9.9 + r1 * .9 + (grilla[i][1] - 560) / 832 * -.3 + .3;
+      if (t > tf) { const dt = t - tf; p = [p[0] + (r2 - .5) * 120 * dt, p[1] + .5 * 5200 * dt * dt - 260 * dt * (r4 > .5 ? 1 : .4)]; }
+    } else if (t < 15.8) {
+      // vuelven desde abajo, en oliva, y arman la taza
+      const d = r3 * .9;
+      p = lerp([grilla[i][0] + (r2 - .5) * 400, 2100 + r1 * 300], taza[i], rebote(tramo(t, 12.2 + d, 13.1 + d), .6));
+      col = COL.oliva;
+      const respira = Math.sin(t * 3 + i * .03) * 3;
+      p = [p[0], p[1] + respira * tramo(t, 13.6, 14)];
+    } else if (t < 18.9) {
+      const d = r3 * .35;
+      p = lerp(taza[i], numero[i], suave(tramo(t, 15.8 + d, 16.5 + d)));
+      col = COL.oliva;
+    } else {
+      // todo se junta en el punto de la marca
+      const d = r3 * .3;
+      const k = suave(tramo(t, 18.9 + d, 19.7 + d));
+      p = lerp(numero[i], [PUNTO.x, PUNTO.y], k);
+      col = COL.oliva; rad = 8.2 * (1 - k * .6);
+      if (k >= 1) continue;
+    }
+    pc.fillStyle = col; pc.beginPath(); pc.arc(p[0], p[1], rad, 0, 6.2832); pc.fill();
+  }
+  // vapor sobre la taza
+  if (t > 13.4 && t < 16.2) {
+    const v = tramo(t, 13.4, 13.9) * (1 - tramo(t, 15.8, 16.2));
+    for (let s = 0; s < 3; s++) for (let q = 0; q < 14; q++) {
+      const fase = (t * .7 + q / 14) % 1, y = 640 - fase * 300;
+      const x = 450 + s * 90 + Math.sin(fase * 9 + s * 2 + t * 2) * 26;
+      pc.fillStyle = `rgba(91,110,50,${.55 * v * (1 - fase)})`; pc.beginPath(); pc.arc(x, y, 7 * (1 - fase * .5), 0, 6.2832); pc.fill();
+    }
+  }
+}
+let PUNTO = { x: 0, y: 0 };
+
+window.cuadro = (f) => {
+  const t = f / FPS;
+  Object.entries(E).forEach(([id, [a, b]]) => ($(id).style.display = t >= a && t < b ? "block" : "none"));
+  // fondo: oliva oscuro al principio y en el veredicto, crema el resto
+  const oscuro = t < 2.7 || (t >= 9.9 && t < 12.0);
+  document.body.style.background = oscuro ? COL.olivaOsc : COL.crema;
+
+  // 1 · el número cae de golpe (gira y frena)
+  golpear(P.t1a, t, .05, .1);
+  const n = t < .95 ? Math.floor(azar() * 9000 + 1000) : 1460;
+  $("num").textContent = fmt(n);
+  const g1 = tramo(t, .95, 1.25);
+  $("num").style.transform = `scale(${t < .95 ? 1.15 : 1.6 - .6 * rebote(g1, 1)})`;
+  $("num").style.color = t < .95 ? "rgba(243,237,226,.35)" : COL.crema;
+  entrar(P.t1b, t, 1.3, .1);
+
+  // 2 · la pregunta, palabra por palabra de golpe
+  golpear(P.t2, t, 2.95, .36);
+
+  // 3 · leyenda
+  entrar(P.t3, t, 5.2, .08);
+  TIPOS.forEach((tp, j) => {
+    const k = salida(tramo(t, INI[j] - .1, INI[j] + .3));
+    $("ley" + j).style.opacity = k; $("ley" + j).style.transform = `translateY(${(1 - k) * 30}px)`;
+    $("leyn" + j).textContent = fmt(tp.k * salida(tramo(t, INI[j], INI[j] + .6)));
+  });
+
+  // 4 · casi ninguno
+  golpear(P.t4, t, 9.95, .25);
+
+  // 5 / 6
+  entrar(P.t5, t, 12.1, .08);
+  golpear(P.t6, t, 15.85, .18);
+  $("ep6").style.opacity = salida(tramo(t, 16.8, 17.3));
+
+  // 7 · cierre: el punto de la marca recibe las partículas
+  if (t >= 18.9) { const r = $("punto").getBoundingClientRect(); PUNTO = { x: r.left + r.width / 2, y: r.top + r.height / 2 }; }
+  $("nombre").style.opacity = salida(tramo(t, 19.7, 20.2));
+  $("nombre").style.transform = `translateX(${(1 - salida(tramo(t, 19.7, 20.2))) * -40}px)`;
+  $("punto").style.transform = `scale(${t < 19.6 ? 0 : 1 + .6 * Math.sin(Math.PI * tramo(t, 19.6, 20.0))})`;
+  entrar(P.t7, t, 20.2, .09, .55);
+  const u = rebote(tramo(t, 21.4, 21.9));
+  $("url").style.opacity = clamp(tramo(t, 21.4, 21.6));
+  $("url").style.transform = `translateX(-50%) scale(${.6 + .4 * u + .03 * Math.max(0, Math.sin((t - 22) * 4))})`;
+
+  particulas(t);
+  barrido(oc, t, [[2.7, COL.oliva, [540, 960]], [12.0, COL.oliva], [18.9, COL.crema2]]);
+  temblor($("mundo"), t, GOLPES);
+};
+</script>
+</body>
+</html>

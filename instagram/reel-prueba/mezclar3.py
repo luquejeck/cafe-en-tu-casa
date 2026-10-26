@@ -1,7 +1,8 @@
 """Sonido del reel de prueba v3: música lo-fi y efectos sincronizados con la animación.
 
 Uso (lo llama filmar3.mjs):  python3 mezclar3.py mudo.mp4 salida.mp4 <segundos> '<sfx json>'
-sfx: lista de [segundo, tipo] con tipo tic (contador), whoosh, pop, golpe o subida.
+sfx: lista de [segundo, tipo] con tipo tic (contador), whoosh, pop, golpe, subida, caida,
+imprime (ticket), flap (cartel de aeropuerto) o rebobina.
 """
 import json, os, subprocess, sys, tempfile
 import numpy as np
@@ -54,7 +55,42 @@ def subida(rng):
     return x * np.minimum(1, t / 2.6) * np.exp(-np.maximum(0, t - 2.7) * 12) * .12
 
 
-TIPOS = {'tic': tic, 'whoosh': whoosh, 'pop': pop, 'golpe': golpe, 'subida': subida}
+def caida(rng):
+    """Silbido que baja mientras las partículas se caen (1,4 s)."""
+    n = int(1.4 * SR); t = np.arange(n) / SR
+    f = 1200 * 2 ** (-t / .45) + 90
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, t / .05) * np.exp(-t / .9) * .22
+
+
+def imprime(rng):
+    """Impresora de tickets: zumbido a pulsos durante 2,6 s."""
+    n = int(2.6 * SR); t = np.arange(n) / SR
+    zumbido = musica.pasabajos(rng.standard_normal(n), 3000) * (.6 + .4 * np.sign(np.sin(2 * np.pi * 18 * t)))
+    return zumbido * np.minimum(1, t / .05) * np.minimum(1, (t[-1] - t) / .1) * .18
+
+
+def flap(rng):
+    """Cartel de aeropuerto: paletas que caen rápido y frenan (2 s)."""
+    n = int(2.0 * SR); x = np.zeros(n); m = int(.02 * SR)
+    clac = musica.pasabajos(musica.pasaaltos(rng.standard_normal(m), 900), 6000) * np.exp(-np.arange(m) / (.004 * SR))
+    t = 0.0
+    while t < 1.9:
+        i = int(t * SR); x[i:i + m] += clac * (.35 + .2 * rng.random())
+        t += .035 + .05 * (t / 2) ** 3
+    return x
+
+
+def rebobina(rng):
+    """Rebobinado de casete: chirrido que acelera (0,9 s)."""
+    n = int(.9 * SR); t = np.arange(n) / SR
+    f = 500 + 2600 * (t / t[-1]) ** 2
+    tono = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(2 * np.pi * 31 * t) ** 2
+    ruido = musica.pasaaltos(rng.standard_normal(n), 2000) * .3
+    return (tono * .18 + ruido * .25) * np.sin(np.pi * t / t[-1]) ** .5
+
+
+TIPOS = {'tic': tic, 'whoosh': whoosh, 'pop': pop, 'golpe': golpe, 'subida': subida,
+         'caida': caida, 'imprime': imprime, 'flap': flap, 'rebobina': rebobina}
 
 
 def main(mudo, salida, segundos, sfx):

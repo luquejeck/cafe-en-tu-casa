@@ -1,6 +1,8 @@
 // Filma el reel de prueba v3 "1.460 cafés por año" (motion graphics, sin voz).
-//   node instagram/reel-prueba/filmar3.mjs
-// Salida: instagram/reel-prueba/reel-prueba-v3-1460-cafes.mp4 (no va al perfil).
+//   node instagram/reel-prueba/filmar3.mjs [página.html salida.mp4]
+// Sin argumentos filma reel3.html → reel-prueba-v3-1460-cafes.mp4 (no va al perfil).
+// Las alternativas: reel3a.html → reel-prueba-v3a-particulas.mp4,
+// reel3b.html → reel-prueba-v3b-plata.mp4, reel3c.html → reel-prueba-v3c-calendario.mp4.
 import { spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -9,12 +11,13 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const { chromium } = createRequire(import.meta.url)("playwright");
 const aqui = path.dirname(fileURLToPath(import.meta.url));
-const mudo = path.join(aqui, "mudo3.mp4"), destino = path.join(aqui, "reel-prueba-v3-1460-cafes.mp4");
+const [pag = "reel3.html", sale = "reel-prueba-v3-1460-cafes.mp4"] = process.argv.slice(2);
+const destino = path.resolve(aqui, sale), mudo = destino.replace(/\.mp4$/, "-mudo.mp4");
 
 const navegador = await chromium.launch();
 const pagina = await navegador.newPage({ viewport: { width: 1080, height: 1920 } });
 pagina.on("pageerror", (e) => console.error("ERROR en la página:", e.message));
-await pagina.goto(pathToFileURL(path.join(aqui, "reel3.html")).href);
+await pagina.goto(pathToFileURL(path.resolve(aqui, pag)).href);
 await pagina.evaluate(() => window.listo);
 const { total, sfx } = await pagina.evaluate(() => ({ total: window.TOTAL, sfx: window.SFX }));
 
