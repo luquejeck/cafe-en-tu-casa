@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Reel de prueba v3 — 1.460 cafés por año</title>
+<style>
+/* Reel de prueba v3 (no va al perfil): "Este año vas a tomar 1.460 cafés.
+   ¿Cuántos van a ser buenos?". Motion graphics con datos: un punto por café
+   (4 por día x 365), agrupados por tipo de café, que al final se vuelven oliva.
+   Paleta: crema, oliva y terracota de acento. 1080 x 1920, 30 cuadros.
+   Lo que se lee queda entre los 250 y los 1600 px de alto. */
+:root {
+  --crema: #f3ede2; --crema-2: #e9e0cf; --tinta: #1f1d1a; --gris: #7d776c;
+  --oliva: #5b6e32; --oliva-osc: #2e3a17; --oliva-claro: #a3c26a; --terra: #c8643b;
+  --disp: 'Inter Display', 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: var(--crema); color: var(--tinta); font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+.capa { position: absolute; inset: 0; }
+.marca { position: absolute; top: 230px; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 14px; font-size: 32px; font-weight: 600; letter-spacing: -.02em; }
+.marca i { width: 14px; height: 14px; border-radius: 50%; background: var(--oliva); }
+.txt { position: absolute; left: 70px; right: 70px; text-align: center; font-family: var(--disp); font-weight: 800; letter-spacing: -.045em; line-height: .98; }
+.txt span { display: inline-block; white-space: pre; }
+.ep { position: absolute; left: 0; right: 0; text-align: center; font-size: 30px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--oliva); }
+#contador { position: absolute; left: 0; right: 0; top: 700px; text-align: center; font-family: var(--disp); font-weight: 800; font-size: 330px; letter-spacing: -.06em; line-height: 1; color: var(--terra); font-variant-numeric: tabular-nums; }
+#lienzo { position: absolute; left: 0; top: 0; }
+.leyenda { position: absolute; left: 90px; right: 90px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 30px; }
+.item { display: flex; align-items: center; gap: 16px; font-size: 36px; font-weight: 600; letter-spacing: -.01em; }
+.item i { flex: none; width: 30px; height: 30px; border-radius: 50%; }
+.item b { margin-left: auto; font-family: var(--disp); font-weight: 800; font-variant-numeric: tabular-nums; }
+.subrayado { background: linear-gradient(var(--terra), var(--terra)) no-repeat 0 92%; background-size: 0% 16px; padding: 0 6px; }
+.tarjeta { position: absolute; left: 90px; right: 90px; height: 760px; border-radius: 48px; overflow: hidden; box-shadow: 0 50px 100px -50px rgba(46,58,23,.55); }
+.tarjeta img { width: 100%; height: 100%; object-fit: cover; }
+.pastilla { position: absolute; left: 50%; white-space: nowrap; background: var(--crema); color: var(--oliva-osc); border-radius: 999px; padding: 18px 36px; font-size: 40px; font-weight: 700; letter-spacing: -.02em; box-shadow: 0 20px 50px -24px rgba(0,0,0,.45); }
+.pastilla i { font-style: normal; color: var(--terra); }
+.url { position: absolute; left: 50%; white-space: nowrap; background: var(--oliva); color: var(--crema); border-radius: 999px; padding: 30px 60px; font-size: 46px; font-weight: 700; letter-spacing: -.02em; }
+#ola { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; }
+</style>
+</head>
+<body>
+<canvas id="lienzo" width="1080" height="1920"></canvas>
+
+<!-- 1 · el número -->
+<div class="capa" id="e1">
+  <div class="txt" id="t1a" style="top:520px; font-size:88px">Este año vas a tomar</div>
+  <div id="contador">0</div>
+  <div class="txt" id="t1b" style="top:1060px; font-size:120px">cafés.</div>
+</div>
+<!-- 2 · la pregunta -->
+<div class="capa" id="e2">
+  <div class="txt" id="t2" style="top:640px; font-size:150px">¿Cuántos van<br>a ser <span class="subrayado" id="buenos" style="color:var(--terra)">buenos?</span></div>
+</div>
+<!-- 3 · el gráfico de puntos -->
+<div class="capa" id="e3">
+  <div class="ep" id="ep3" style="top:330px">Tus 1.460 cafés del año</div>
+  <div class="txt" id="t3" style="top:390px; font-size:84px">Uno por punto.</div>
+  <div class="leyenda" id="leyenda" style="top:1440px"></div>
+</div>
+<!-- 4 · el veredicto -->
+<div class="capa" id="e4">
+  <div class="txt" id="t4a" style="top:1440px; font-size:86px">Buenos de verdad:</div>
+  <div class="txt" id="t4b" style="top:1540px; font-size:86px; color:var(--terra)">casi ninguno.</div>
+</div>
+<!-- 5 · todos -->
+<div class="capa" id="e5">
+  <div class="txt" id="t5a" style="top:360px; font-size:96px">¿Y si fueran</div>
+  <div class="txt" id="t5b" style="top:460px; font-size:96px; color:var(--oliva)">todos así?</div>
+  <div class="txt" id="t5c" style="top:1440px; font-size:96px"><span id="buenosN">0</span> de 1.460</div>
+  <div class="ep" id="ep5" style="top:1560px">recién molidos, en tu casa</div>
+</div>
+<!-- 6 · el cómo -->
+<div class="capa" id="e6">
+  <div class="tarjeta" id="foto" style="top:420px"><img src="../fotos/espresso-magnifica.jpg" alt=""></div>
+  <div class="pastilla" id="p1" style="top:1230px">Grano <i>recién molido</i></div>
+  <div class="pastilla" id="p2" style="top:1330px">Un <i>botón</i></div>
+  <div class="pastilla" id="p3" style="top:1430px"><i>40 segundos</i></div>
+</div>
+<!-- 7 · cierre -->
+<div class="capa" id="e7">
+  <div class="marca" id="marca"><i></i> Café en tu Casa</div>
+  <div class="txt" id="t7" style="top:600px; font-size:124px">Café de<br>cafetería,<br><span style="color:var(--oliva)">en tu casa.</span></div>
+  <div class="url" id="url" style="top:1160px">cafe-en-tu-casa.vercel.app</div>
+  <div class="ep" id="ep7" style="top:1300px; color:var(--gris)">Magnifica S · Dedica EC685</div>
+</div>
+<canvas id="ola" width="1080" height="1920"></canvas>
+<script>
+const FPS = 30;
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const tramo = (t, a, b) => clamp((t - a) / (b - a));
+const suave = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const salida = (x) => 1 - Math.pow(1 - clamp(x), 4);
+const rebote = (x) => { x = clamp(x); const c = 1.4; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const fmt = (n) => Math.round(n).toLocaleString("es-AR");
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+// ---------- escenas (segundos)
+const E = { e1: [0, 3.4], e2: [3.4, 6.2], e3: [6.2, 13.6], e4: [11.6, 13.6], e5: [13.6, 19.4], e6: [19.4, 23.6], e7: [23.6, 28.5] };
+const TOTAL = Math.round(28.5 * FPS);
+window.TOTAL = TOTAL;
+// efectos de sonido que usa mezclar3.py: [segundo, tipo]
+window.SFX = [[.3, "tic"], [3.4, "whoosh"], [6.2, "whoosh"], [7.7, "pop"], [8.9, "pop"], [10.1, "pop"], [11.3, "pop"], [11.6, "golpe"],
+  [13.6, "whoosh"], [15.0, "subida"], [19.4, "whoosh"], [19.9, "pop"], [20.6, "pop"], [21.3, "pop"], [23.6, "golpe"]];
+
+// ---------- palabras que entran (estilo de la marca: suben y se enfocan)
+function partir(id) {
+  const el = $(id);
+  const nodos = [...el.childNodes];
+  el.innerHTML = "";
+  nodos.forEach((n) => {
+    if (n.nodeType === 3) n.textContent.split(/(\s+)/).filter(Boolean).forEach((w) => {
+      if (/^\s+$/.test(w)) { el.append(" "); return; }
+      const s = document.createElement("span"); s.textContent = w; el.append(s);
+    });
+    else el.append(n);
+  });
+  return [...el.children].filter((c) => c.tagName === "SPAN" || c.tagName === "BR" ? c.tagName === "SPAN" : false);
+}
+function entrar(spans, t, a, paso = .08, d = .5) {
+  spans.forEach((s, i) => {
+    const k = salida(tramo(t, a + i * paso, a + i * paso + d));
+    s.style.opacity = k; s.style.transform = `translateY(${(1 - k) * 60}px)`; s.style.filter = `blur(${(1 - k) * 8}px)`;
+  });
+}
+const P = {};
+["t1a", "t1b", "t2", "t3", "t4a", "t4b", "t5a", "t5b", "t7"].forEach((id) => (P[id] = partir(id)));
+
+// ---------- el gráfico: 1.460 puntos (40 x 37)
+const COLS = 40, N = 1460, PASO = 22.5, R = 8.2, X0 = (1080 - COLS * PASO) / 2 + PASO / 2, Y0 = 560;
+const TIPOS = [
+  { n: "Café de oficina", c: "#7d776c", k: 560 },
+  { n: "Cápsula", c: "#a59d8d", k: 400 },
+  { n: "Soluble", c: "#c8bfae", k: 300 },
+  { n: "Al paso, apurado", c: "#d9a487", k: 200 },
+];
+// los tipos se pintan en bloques de filas: se lee como un gráfico de "waffle"
+const tipoDe = new Array(N); { let i = 0; TIPOS.forEach((tp, j) => { for (let q = 0; q < tp.k; q++) tipoDe[i++] = j; }); }
+const INICIO_TIPO = [7.4, 8.6, 9.8, 11.0];
+$("leyenda").innerHTML = TIPOS.map((tp, j) => `<div class="item" id="ley${j}"><i style="background:${tp.c}"></i>${tp.n}<b id="leyn${j}">0</b></div>`).join("");
+
+const ctx = $("lienzo").getContext("2d");
+let VERDES = 0;
+function dibujarPuntos(t) {
+  ctx.clearRect(0, 0, 1080, 1920);
+  VERDES = 0;
+  const [a, b] = [E.e3[0], E.e5[1]];
+  if (t < a || t >= b) return;
+  const oliva = css("--oliva"), vacio = "#e2d8c5";
+  const salidaGrafico = suave(tramo(t, 19.0, 19.45));
+  for (let i = 0; i < N; i++) {
+    const c = i % COLS, f = Math.floor(i / COLS);
+    const x = X0 + c * PASO, y = Y0 + f * PASO;
+    // aparición en ola diagonal
+    const ap = rebote(tramo(t, a + .25 + (c + f) * .012, a + .55 + (c + f) * .012));
+    if (ap <= 0) continue;
+    let color = vacio, r = R * ap;
+    const tp = tipoDe[i], ini = INICIO_TIPO[tp];
+    const orden = i - TIPOS.slice(0, tp).reduce((s, x) => s + x.k, 0);
+    const pinta = tramo(t, ini + orden / TIPOS[tp].k * .7, ini + orden / TIPOS[tp].k * .7 + .12);
+    if (pinta > 0) color = TIPOS[tp].c;
+    // escena 5: de a uno se vuelven oliva, en ola desde el centro
+    const dx = c - COLS / 2, dy = f - 18, d = Math.sqrt(dx * dx + dy * dy) / 26;
+    const verde = tramo(t, 15.0 + d * 2.4, 15.15 + d * 2.4);
+    if (verde > .5) VERDES++;
+    if (verde > 0) { color = oliva; r = R * (1 + .35 * Math.sin(Math.PI * verde)); }
+    r *= 1 - salidaGrafico;
+    if (r <= .2) continue;
+    ctx.fillStyle = color;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+}
+
+// ---------- transición: círculo oliva/crema que barre (para los cortes grandes)
+const ola = $("ola").getContext("2d");
+function barrido(t) {
+  ola.clearRect(0, 0, 1080, 1920);
+  [[3.4, "#5b6e32"], [13.6, "#2e3a17"], [23.6, "#5b6e32"]].forEach(([c, col]) => {
+    const k = tramo(t, c - .32, c + .32);
+    if (k <= 0 || k >= 1) return;
+    // entra creciendo desde abajo y sale achicándose hacia arriba
+    const crece = suave(clamp(k * 2)), achica = suave(clamp(k * 2 - 1));
+    ola.fillStyle = col;
+    ola.beginPath();
+    ola.arc(540, 1920 - 1920 * achica, 2300 * crece * (1 - achica) + 1, 0, Math.PI * 2);
+    ola.fill();
+  });
+}
+
+function vis(id, t) { const [a, b] = E[id]; $(id).style.display = t >= a && t < b ? "block" : "none"; }
+
+window.cuadro = (f) => {
+  const t = f / FPS;
+  Object.keys(E).forEach((id) => vis(id, t));
+
+  // 1 · contador que gira hasta 1.460
+  entrar(P.t1a, t, .1, .07);
+  const k = salida(tramo(t, .3, 2.3));
+  $("contador").textContent = fmt(1460 * k);
+  $("contador").style.transform = `scale(${.85 + .15 * rebote(tramo(t, .3, .8))})`;
+  entrar(P.t1b, t, 2.2, .1);
+
+  // 2 · la pregunta, "buenos?" subrayado en terracota
+  entrar(P.t2, t, 3.6, .1, .55);
+  $("buenos").style.backgroundSize = `${suave(tramo(t, 4.7, 5.3)) * 100}% 16px`;
+  $("t2").style.transform = `scale(${1 + .04 * tramo(t, 3.6, 6.2)})`;
+
+  // 3 · gráfico + leyenda que cuenta
+  entrar(P.t3, t, 6.3, .08);
+  $("ep3").style.opacity = salida(tramo(t, 6.3, 6.8));
+  TIPOS.forEach((tp, j) => {
+    const a = INICIO_TIPO[j], el = $("ley" + j), kk = salida(tramo(t, a - .1, a + .35));
+    el.style.opacity = kk; el.style.transform = `translateY(${(1 - kk) * 30}px)`;
+    $("leyn" + j).textContent = fmt(tp.k * salida(tramo(t, a, a + .8)));
+  });
+  const fueraLey = suave(tramo(t, 11.4, 11.7));
+  $("leyenda").style.opacity = 1 - fueraLey;
+
+  // 4 · veredicto
+  entrar(P.t4a, t, 11.7, .07); entrar(P.t4b, t, 12.2, .1);
+  const golpe4 = rebote(tramo(t, 12.2, 12.6));
+  $("t4b").style.transform = `scale(${1.25 - .25 * golpe4})`;
+
+  // 5 · ¿y si fueran todos así? (los puntos se vuelven oliva)
+  entrar(P.t5a, t, 13.8, .08); entrar(P.t5b, t, 14.2, .1);
+  dibujarPuntos(t);
+  const n = t >= 18.5 ? 1460 : VERDES;
+  $("buenosN").textContent = fmt(n);
+  $("t5c").style.opacity = salida(tramo(t, 14.9, 15.3));
+  $("t5c").style.color = n === 1460 ? css("--oliva") : css("--tinta");
+  $("t5c").style.transform = `scale(${n === 1460 ? 1 + .06 * Math.sin(Math.PI * tramo(t, 17.6, 18.0)) : 1})`;
+  $("ep5").style.opacity = salida(tramo(t, 17.7, 18.2));
+
+  // 6 · la foto y el cómo
+  const ft = rebote(tramo(t, 19.45, 20.0));
+  $("foto").style.transform = `translateY(${(1 - ft) * 300}px) scale(${.92 + .08 * ft})`;
+  $("foto").style.opacity = clamp(tramo(t, 19.45, 19.7));
+  $("foto").querySelector("img").style.transform = `scale(${1.15 - .1 * tramo(t, 19.4, 23.6)})`;
+  [["p1", 19.9], ["p2", 20.6], ["p3", 21.3]].forEach(([id, a]) => {
+    const kk = rebote(tramo(t, a, a + .4));
+    $(id).style.opacity = clamp(tramo(t, a, a + .12));
+    $(id).style.transform = `translateX(-50%) scale(${.6 + .4 * kk})`;
+  });
+
+  // 7 · cierre
+  $("marca").style.opacity = salida(tramo(t, 23.8, 24.3));
+  entrar(P.t7, t, 23.9, .09, .55);
+  const u = rebote(tramo(t, 25.2, 25.7));
+  $("url").style.opacity = clamp(tramo(t, 25.2, 25.4));
+  $("url").style.transform = `translateX(-50%) scale(${.6 + .4 * u + .03 * Math.max(0, Math.sin((t - 26) * 4))})`;
+  $("ep7").style.opacity = salida(tramo(t, 25.9, 26.4));
+
+  // fondo: crema, salvo el veredicto (más oscuro) y "todos así" (crema claro)
+  document.body.style.background = t >= 13.6 && t < 19.4 ? "#f6f1e7" : css("--crema");
+  dibujarPuntos(t);
+  barrido(t);
+};
+window.listo = Promise.all([document.fonts.ready, ...[...document.images].map((i) => i.decode().catch(() => {}))]);
+</script>
+</body>
+</html>
