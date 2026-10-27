@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Reel — El viaje del grano por la Magnifica S</title>
+<style>
+/* "El viaje del grano": un grano de café cuenta en primera persona qué le pasa
+   adentro de la Magnifica S. Hook: la foto real de la máquina se desarma en el
+   aire (despiece). Estudio negro, piezas de metal con brillo, oliva claro
+   (#A3C26A, el oliva del manual sobre negro) como único acento y el dorado del
+   café. La cámara sigue al grano hacia abajo: tolva, molinillo, Thermoblock,
+   prensa, bomba y taza. Cierra con la foto real y "Guardalo".
+   Datos de la ficha: molinillo cónico de acero, 13 niveles, Thermoblock,
+   hasta 15 bares, tolva de 250 g. Voz: "Chelo" (ElevenLabs), voz-grano.mp3. */
+:root { --olc: #a3c26a; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0a0b; color: #f5f5f7; font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+canvas { position: absolute; left: 0; top: 0; }
+#foto { display: none; }   /* las fotos solo se usan como fuente para el canvas */
+#foto img { position: absolute; }
+.grande { position: absolute; left: 0; right: 0; text-align: center; font-weight: 700; letter-spacing: -.05em; line-height: .9; white-space: nowrap; }
+.grande i { display: inline-block; width: .16em; height: .16em; border-radius: 50%; background: var(--olc); margin-left: .04em; }
+.ep { position: absolute; left: 0; right: 0; text-align: center; font-size: 26px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--olc); }
+#reloj { position: absolute; right: 56px; top: 64px; display: flex; align-items: center; gap: 12px; padding: 12px 22px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.18); font-size: 34px; font-weight: 600; font-variant-numeric: tabular-nums; }
+#reloj i { width: 12px; height: 12px; border-radius: 50%; background: var(--olc); }
+#paso { position: absolute; left: 56px; top: 70px; font-size: 24px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+/* subtítulos: dos o tres palabras grandes por vez, que entran de a una */
+#subs { position: absolute; left: 60px; right: 60px; top: 1530px; text-align: center; font-size: 74px; font-weight: 700; letter-spacing: -.035em; line-height: 1.05; }
+#subs span { display: inline-block; margin: 0 .12em; }
+#subs span.o { color: var(--olc); }
+.dato { position: absolute; text-align: center; }
+.dato b { display: block; font-size: 150px; font-weight: 700; letter-spacing: -.05em; line-height: .95; font-variant-numeric: tabular-nums; }
+.dato small { font-size: 26px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--olc); }
+.etq { position: absolute; font-size: 24px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.85); white-space: nowrap; }
+.etq::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--olc); margin-right: 12px; vertical-align: middle; }
+#cierre { position: absolute; left: 0; right: 0; top: 1420px; text-align: center; }
+#cierre .t { font-size: 96px; font-weight: 700; letter-spacing: -.045em; line-height: 1; }
+#cierre .g { display: inline-flex; align-items: center; gap: 16px; margin-top: 34px; padding: 22px 40px; border-radius: 999px; background: var(--olc); color: #0a0a0b; font-size: 40px; font-weight: 700; letter-spacing: -.01em; }
+#cierre .logo { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 40px; font-size: 40px; font-weight: 600; letter-spacing: -.02em; }
+#cierre .logo i { width: 15px; height: 15px; border-radius: 50%; background: var(--olc); }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div id="foto"><img id="f1" src="magnifica-s-1-recorte.png"><img id="f2" src="magnifica-s-2-recorte.png"></div>
+<canvas id="c2" width="1080" height="1920"></canvas>
+<div id="paso">Magnifica S · por dentro</div>
+<div id="reloj"><i></i><span id="relojN">0:00</span></div>
+<div class="grande" id="g1" style="top:250px; font-size:150px">¡Apretaron<br>el botón!</div>
+<div id="etqs"></div>
+<div class="dato" id="d1" style="left:0; right:0; top:240px"><b id="d1n">13</b><small id="d1e">niveles de molienda</small></div>
+<div id="subs"></div>
+<div id="cierre"><div class="t">Un botón.<br>Un minuto.</div><div class="g">🔖 Guardalo para cuando elijas tu cafetera</div><div class="logo"><i></i>Café en tu Casa</div></div>
+
+<script src="../reel-prueba/comun3.js"></script>
+<script src="palabras-grano.js"></script>
+<script>
+const OFF = .2, VOZ = 38.32;
+window.TOTAL = Math.round((OFF + VOZ + 1.6) * FPS);
+window.VOZ = ["../reel-magnifica/voz-grano.mp3", OFF];
+window.MEZCLA = "../reel-magnifica/mezclar-maquina.py";
+// momentos de la voz (segundos, de la transcripción)
+const T = { despiece: .72, hola: 3.94, muele: 9.3, trece: 13.52, fino: 15.28, calienta: 15.94, noventa: 18.4, prensa: 20.84,
+  bomba: 25.62, agarrate: 28.28, crema: 29.42, aceites: 31.18, gas: 32.06, cierre: 34.86, guardalo: 36.48 };
+window.SFX = [[.05, "click"], [T.despiece, "despiece"], [T.hola - .3, "whoosh"], [T.hola, "beat"], [T.muele - .4, "whoosh"], [T.muele + .3, "molienda"], [T.trece, "molienda"],
+  [T.calienta - .3, "whoosh"], [T.calienta + .2, "agua"], [T.prensa - .3, "whoosh"], [T.prensa + .8, "golpe"], [T.bomba - .2, "bomba"], [T.agarrate, "golpe"],
+  [T.crema - .3, "corte"], [T.crema - .2, "whoosh"], [T.crema + .3, "goteo"], [T.cierre - .2, "whoosh"], [T.cierre, "beat"], [T.cierre + 2.4, "pop"]].map(([t, x]) => [t + OFF, x]);
+
+const c = $("c").getContext("2d"), c2 = $("c2").getContext("2d");
+const OLC = "#a3c26a", CAFE = "#6e4526", ORO = "#c99a5c";
+const W = 1080, H = 1920;
+// ---------- materiales
+function metal(ctx, x0, y0, x1, y1, osc = 0) {
+  const g = ctx.createLinearGradient(x0, y0, x1, y1);
+  g.addColorStop(0, osc ? "#4a4c50" : "#9a9da2"); g.addColorStop(.35, osc ? "#9a9da2" : "#f2f3f5"); g.addColorStop(.55, osc ? "#2c2d30" : "#8f9297"); g.addColorStop(1, osc ? "#141416" : "#3a3c40");
+  return g;
+}
+function foco(ctx, x, y, r, a = .22) { const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, `rgba(255,255,255,${a})`); g.addColorStop(1, "rgba(255,255,255,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); }
+function brillo(ctx, x, y, r, col = "rgba(163,194,106,.35)") { const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, col); g.addColorStop(1, "rgba(0,0,0,0)"); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); }
+/** Grano de café; si es el protagonista, con ojos y un halo oliva. */
+function grano(ctx, x, y, s, rot, prota = false, t = 0, mira = 0) {
+  if (prota) brillo(ctx, x, y, 95 * s);
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  const g = ctx.createRadialGradient(-12 * s, -14 * s, 4 * s, 0, 0, 50 * s); g.addColorStop(0, "#9a6436"); g.addColorStop(.6, "#5e3a1c"); g.addColorStop(1, "#2e1a0b");
+  ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(0, 0, 46 * s, 32 * s, 0, 0, 7); ctx.fill();
+  ctx.strokeStyle = "#24140a"; ctx.lineWidth = 5 * s; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(-38 * s, 2 * s); ctx.bezierCurveTo(-12 * s, -10 * s, 12 * s, 14 * s, 38 * s, 0); ctx.stroke();
+  ctx.fillStyle = "rgba(255,255,255,.35)"; ctx.beginPath(); ctx.ellipse(-16 * s, -16 * s, 12 * s, 5 * s, -.4, 0, 7); ctx.fill();
+  if (prota) {
+    const parp = (t % 2.6) < .1 ? .15 : 1;
+    [[-14, -6], [14, -8]].forEach(([ex, ey]) => { ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.ellipse(ex * s, ey * s, 8 * s, 9 * s * parp, 0, 0, 7); ctx.fill(); if (parp > .5) { ctx.fillStyle = "#111"; ctx.beginPath(); ctx.arc((ex + 2 + mira * 2) * s, (ey + 1) * s, 4.2 * s, 0, 7); ctx.fill(); } });
+  }
+  ctx.restore();
+}
+
+// ---------- escenas (cada una dibuja la pantalla entera en su propio espacio)
+const azarF = (i) => ((Math.sin(i * 12.9898) * 43758.5453) % 1 + 1) % 1;
+function fondo(ctx, x = 540, y = 900) { ctx.fillStyle = "#0a0a0b"; ctx.fillRect(0, 0, W, H); foco(ctx, x, y, 900, .1); }
+
+/** 1 · la tolva: el grano saluda entre otros granos, bajo un vidrio ahumado */
+function tolva(ctx, t, l) {
+  fondo(ctx, 540, 800);
+  ctx.fillStyle = "rgba(255,255,255,.05)"; ctx.strokeStyle = "rgba(255,255,255,.25)"; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(120, 420); ctx.lineTo(960, 420); ctx.lineTo(700, 1500); ctx.lineTo(380, 1500); ctx.closePath(); ctx.fill(); ctx.stroke();
+  for (let i = 0; i < 70; i++) {
+    const fy = azarF(i) ** .7, x = 380 - 260 * (1 - fy) + azarF(i + 99) * (320 + 520 * (1 - fy)), y = 1460 - fy * 980 + Math.sin(t * 2 + i) * 3 + l * 400 * (1 - fy);
+    grano(ctx, x, y, .9 + azarF(i + 7) * .3, azarF(i + 3) * 6);
+  }
+  grano(ctx, 540, 1080 + Math.sin(t * 3) * 10, 2.1, -.15 + Math.sin(t * 2) * .08, true, t, Math.sin(t));
+  etiqueta(0, "Tolva · 250 g de grano", 150, 380, t, l);
+}
+/** 2 · el molinillo cónico: el grano cae, se parte y sale molido */
+function molinillo(ctx, t, l) {
+  fondo(ctx, 540, 900);
+  const cx = 540, top = 560, bot = 1340;
+  // anillo exterior
+  ctx.fillStyle = metal(ctx, 160, 0, 920, 0, 1); ctx.beginPath(); ctx.moveTo(160, top); ctx.lineTo(920, top); ctx.lineTo(820, bot); ctx.lineTo(260, bot); ctx.closePath(); ctx.fill();
+  // cono que gira: ranuras en espiral que se desplazan
+  ctx.save(); ctx.beginPath(); ctx.moveTo(300, top + 40); ctx.lineTo(780, top + 40); ctx.lineTo(600, bot - 40); ctx.lineTo(480, bot - 40); ctx.closePath(); ctx.clip();
+  ctx.fillStyle = metal(ctx, 300, 0, 780, 0); ctx.fillRect(280, top, 520, bot - top);
+  const gira = t * 2.4;
+  ctx.strokeStyle = "rgba(20,20,22,.75)"; ctx.lineWidth = 9;
+  for (let i = -8; i < 16; i++) { const y0 = top + ((i * 70 + gira * 140) % 1680 + 1680) % 1680 - 400; ctx.beginPath(); ctx.moveTo(280, y0); ctx.lineTo(800, y0 + 260); ctx.stroke(); }
+  ctx.restore();
+  // el grano: entra, se parte en el momento justo y queda molido
+  const rompe = tramo(t, T.muele + 1.2, T.muele + 1.5);
+  if (rompe < 1) grano(ctx, cx, 300 + 330 * suave(tramo(t, T.muele, T.muele + 1.2)), 1.9, t * 2, true, t);
+  if (rompe > 0) for (let i = 0; i < 140; i++) { const a = azarF(i) * 6.28, v = 120 + azarF(i + 5) * 340, k = clamp((t - T.muele - 1.2) / 2.2); ctx.fillStyle = i % 3 ? "#5e3a1c" : "#8a5a33"; ctx.beginPath(); ctx.arc(cx + Math.cos(a) * v * Math.min(1, k * 3) * .5, 640 + Math.sin(a) * 60 + k * 900 + azarF(i + 2) * 200 * k, 4 + azarF(i) * 5, 0, 7); ctx.fill(); }
+  if (rompe > 0 && rompe < 1) { ctx.fillStyle = `rgba(255,255,255,${.6 * (1 - rompe)})`; ctx.fillRect(0, 0, W, H); }
+  etiqueta(1, "Molinillo cónico de acero", 160, 520, t, l);
+  // dial de 13 niveles
+  const dd = tramo(t, T.trece, T.trece + .5);
+  if (dd > 0) {
+    const x = 540, y = 1300, R = 150; ctx.globalAlpha = dd;
+    ctx.fillStyle = "rgba(10,10,11,.85)"; ctx.beginPath(); ctx.arc(x, y, R + 30, 0, 7); ctx.fill();
+    for (let i = 0; i < 13; i++) { const a = Math.PI * (.75 + 1.5 * i / 12); ctx.strokeStyle = i === 2 ? OLC : "rgba(255,255,255,.7)"; ctx.lineWidth = i === 2 ? 10 : 6; ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * (R - 30), y + Math.sin(a) * (R - 30)); ctx.lineTo(x + Math.cos(a) * R, y + Math.sin(a) * R); ctx.stroke(); }
+    const ap = Math.PI * (.75 + 1.5 * (12 - 10 * salida(tramo(t, T.fino - .2, T.fino + .6))) / 12);
+    ctx.strokeStyle = OLC; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + Math.cos(ap) * (R - 40), y + Math.sin(ap) * (R - 40)); ctx.stroke();
+    ctx.fillStyle = "#fff"; ctx.font = "700 40px Inter"; ctx.textAlign = "center"; ctx.fillText("13", x, y + 80); ctx.font = "600 20px Inter"; ctx.fillText("NIVELES", x, y + 108);
+    ctx.fillStyle = OLC; ctx.font = "600 22px Inter"; ctx.fillText("FINO", x + Math.cos(Math.PI * 1.0) * (R + 60), y + Math.sin(Math.PI * 1.0) * (R + 60) + 8);
+    ctx.globalAlpha = 1;
+  }
+}
+/** 3 · el Thermoblock: el agua recorre la serpentina y se pone al rojo */
+function thermo(ctx, t, l) {
+  fondo(ctx, 540, 900);
+  const calor = clamp(tramo(t, T.calienta + .3, T.calienta + 2.6));
+  ctx.fillStyle = metal(ctx, 200, 0, 880, 0); ctx.beginPath(); ctx.roundRect(200, 520, 680, 820, 40); ctx.fill();
+  ctx.fillStyle = "rgba(10,10,11,.55)"; ctx.beginPath(); ctx.roundRect(250, 570, 580, 720, 26); ctx.fill();
+  const pts = []; for (let i = 0; i <= 10; i++) pts.push([i % 2 ? 760 : 320, 620 + i * 62]);
+  const col = `rgb(${Math.round(110 + 145 * calor)},${Math.round(160 - 60 * calor)},${Math.round(200 - 160 * calor)})`;
+  ctx.shadowColor = calor > .3 ? "rgba(255,120,40,.9)" : "transparent"; ctx.shadowBlur = 40 * calor;
+  ctx.strokeStyle = col; ctx.lineWidth = 30; ctx.lineJoin = "round"; ctx.beginPath(); pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.stroke();
+  ctx.shadowBlur = 0;
+  for (let i = 0; i < 18; i++) { const k = (t * .35 + i / 18) % 1, f = k * 10, a = Math.floor(f), r = f - a; if (a >= 10) continue; const p = pts[a], q = pts[a + 1]; ctx.fillStyle = k > .5 && calor > .4 ? "#ffd6a8" : "#cfe6f5"; ctx.beginPath(); ctx.arc(p[0] + (q[0] - p[0]) * r, p[1] + (q[1] - p[1]) * r, 9, 0, 7); ctx.fill(); }
+  etiqueta(2, "Thermoblock", 200, 480, t, l);
+  // el grano (ya molido) mira desde abajo
+  for (let i = 0; i < 9; i++) grano(ctx, 160 + i * 95, 1520 + Math.sin(t * 3 + i) * 6, .55, i, false);
+  grano(ctx, 880, 1440, 1.2, .2, true, t, -1);
+}
+/** 4 · la unidad de infusión: el pistón baja y compacta la pastilla */
+function prensa(ctx, t, l) {
+  fondo(ctx, 540, 900);
+  const baja = salida(tramo(t, T.prensa + .5, T.prensa + 1.1));
+  ctx.fillStyle = metal(ctx, 250, 0, 830, 0, 1); ctx.beginPath(); ctx.roundRect(250, 560, 580, 900, 30); ctx.fill();
+  ctx.fillStyle = "#121214"; ctx.fillRect(300, 600, 480, 820);
+  const alto = 330 - 150 * baja, base = 1400;
+  // pastilla de café (el grano, ahora molido, todavía con ojos)
+  const g = ctx.createLinearGradient(0, base - alto, 0, base); g.addColorStop(0, "#7a5233"); g.addColorStop(1, "#3e2614"); ctx.fillStyle = g; ctx.fillRect(310, base - alto, 460, alto);
+  for (let i = 0; i < 120; i++) { ctx.fillStyle = "rgba(255,255,255,.08)"; ctx.fillRect(320 + azarF(i) * 440, base - alto + azarF(i + 9) * alto, 4, 4); }
+  const ojo = (dx) => { ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.ellipse(540 + dx, base - alto / 2, 16, 18 * (baja > .5 ? .35 : 1), 0, 0, 7); ctx.fill(); ctx.fillStyle = "#111"; ctx.beginPath(); ctx.arc(542 + dx, base - alto / 2, 8, 0, 7); ctx.fill(); };
+  ojo(-34); ojo(34);
+  // pistón
+  const py = 600 + (base - alto - 600 - 40) * baja;
+  ctx.fillStyle = metal(ctx, 320, 0, 760, 0); ctx.fillRect(320, py - 10, 440, 50);
+  ctx.fillStyle = metal(ctx, 500, 0, 580, 0); ctx.fillRect(500, 380, 80, py - 380);
+  if (baja > 0 && baja < 1) { ctx.fillStyle = `rgba(163,194,106,${.4 * (1 - baja)})`; ctx.fillRect(0, 0, W, H); }
+  etiqueta(3, "Unidad de infusión", 250, 520, t, l);
+}
+/** 5 · la bomba: el manómetro salta a 15 bar y el agua atraviesa el café */
+function bomba(ctx, t, l) {
+  fondo(ctx, 540, 900);
+  const p = salida(tramo(t, T.bomba, T.bomba + 1.4)), sacude = t > T.agarrate && t < T.agarrate + .5 ? Math.sin(t * 80) * 10 : 0;
+  ctx.save(); ctx.translate(sacude, 0);
+  const x = 540, y = 980, R = 290;
+  ctx.fillStyle = metal(ctx, x - R, y - R, x + R, y + R); ctx.beginPath(); ctx.arc(x, y, R + 30, 0, 7); ctx.fill();
+  ctx.fillStyle = "#111113"; ctx.beginPath(); ctx.arc(x, y, R, 0, 7); ctx.fill();
+  for (let i = 0; i <= 15; i++) { const a = Math.PI * (.75 + 1.5 * i / 15); ctx.strokeStyle = i >= 9 ? OLC : "rgba(255,255,255,.75)"; ctx.lineWidth = i % 5 ? 5 : 10; ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * (R - (i % 5 ? 30 : 50)), y + Math.sin(a) * (R - (i % 5 ? 30 : 50))); ctx.lineTo(x + Math.cos(a) * (R - 8), y + Math.sin(a) * (R - 8)); ctx.stroke(); if (i % 5 === 0) { ctx.fillStyle = "#fff"; ctx.font = "600 36px Inter"; ctx.textAlign = "center"; ctx.fillText(String(i), x + Math.cos(a) * (R - 95), y + Math.sin(a) * (R - 95) + 12); } }
+  const v = 15 * p + (p > .95 ? Math.sin(t * 30) * .15 : 0), a = Math.PI * (.75 + 1.5 * v / 15);
+  ctx.strokeStyle = OLC; ctx.lineWidth = 12; ctx.lineCap = "round"; ctx.shadowColor = OLC; ctx.shadowBlur = 25; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + Math.cos(a) * (R - 60), y + Math.sin(a) * (R - 60)); ctx.stroke(); ctx.shadowBlur = 0;
+  ctx.fillStyle = metal(ctx, x - 40, 0, x + 40, 0); ctx.beginPath(); ctx.arc(x, y, 34, 0, 7); ctx.fill();
+  ctx.fillStyle = "#fff"; ctx.font = "700 130px Inter"; ctx.textAlign = "center"; ctx.fillText(Math.round(v) + " bar", x, y - R - 70);
+  ctx.restore();
+  // chorros de café abajo
+  const cae = tramo(t, T.bomba + 1.2, T.crema);
+  if (cae > 0) { [460, 620].forEach((sx) => { ctx.fillStyle = metal(ctx, sx - 30, 0, sx + 30, 0); ctx.fillRect(sx - 30, 1330, 60, 40); const gg = ctx.createLinearGradient(0, 1370, 0, 1920); gg.addColorStop(0, "#8a5a33"); gg.addColorStop(1, "#3e2614"); ctx.fillStyle = gg; ctx.fillRect(sx - 8 + Math.sin(t * 20 + sx) * 1.5, 1370, 16, 600 * Math.min(1, cae * 4)); }); }
+  etiqueta(4, "Bomba · hasta 15 bar", 200, 400, t, l);
+}
+/** 6 · la crema: macro de la taza, burbujas de gas y gotas de aceite */
+function crema(ctx, t, l) {
+  fondo(ctx, 540, 820);
+  const cx = 540, cy = 980, R = 470;
+  ctx.fillStyle = "rgba(255,255,255,.10)"; ctx.beginPath(); ctx.ellipse(cx, cy + 40, R + 30, 190, 0, 0, 7); ctx.fill();
+  const g = ctx.createRadialGradient(cx - 80, cy - 40, 30, cx, cy, R); g.addColorStop(0, "#e2b47a"); g.addColorStop(.55, "#c08a4e"); g.addColorStop(1, "#6e4526");
+  ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(cx, cy, R, 170, 0, 0, 7); ctx.fill();
+  // remolino de la crema
+  ctx.strokeStyle = "rgba(255,230,190,.35)"; ctx.lineWidth = 6; ctx.beginPath();
+  for (let k = 0; k < 220; k++) { const a = k * .09 + t * .6, r = 20 + k * 1.9; const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r * .36; k ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke();
+  for (let i = 0; i < 90; i++) {
+    const a = azarF(i) * 6.28, r = Math.sqrt(azarF(i + 1)) * (R - 40), x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r * .34;
+    const k = clamp(tramo(t, T.crema + .3 + i * .015, T.crema + .6 + i * .015)); ctx.globalAlpha = k;
+    if (i % 3) { ctx.strokeStyle = "rgba(255,248,235,.8)"; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(x, y, 3 + (i % 6) + Math.sin(t * 3 + i) * .8, 0, 7); ctx.stroke(); }
+    else { ctx.fillStyle = "rgba(255,210,140,.75)"; ctx.beginPath(); ctx.ellipse(x, y, 10, 5, 0, 0, 7); ctx.fill(); }
+  }
+  ctx.globalAlpha = 1;
+  etiqueta(5, "Aceites del grano", 120, 760, t, l, T.aceites);
+  etiqueta(6, "Gas (CO₂) del grano fresco", 480, 1240, t, l, T.gas);
+}
+// etiquetas (HTML) que pertenecen a una escena
+const ETQ = []; function etiqueta(i, txt, x, y, t, l, a = null) {
+  if (!ETQ[i]) { const el = document.createElement("div"); el.className = "etq"; el.textContent = txt; $("etqs").append(el); ETQ[i] = el; }
+  const el = ETQ[i], k = a === null ? 1 : salida(tramo(t, a, a + .4)); el.dataset.vivo = "1";
+  el.style.left = x + "px"; el.style.top = (y + l) + "px"; el.style.opacity = k * clamp(1 - Math.abs(l) / 500);
+}
+
+// ---------- montaje: escenas y transiciones (la cámara "cae" siguiendo al grano)
+const ESC = () => [
+  [T.hola - .25, tolva, "abajo"], [T.muele - .35, molinillo, "abajo"], [T.calienta - .3, thermo, "derecha"],
+  [T.prensa - .3, prensa, "abajo"], [T.bomba - .35, bomba, "abajo"], [T.crema - .3, crema, "abajo"], [T.cierre - .25, null, "abajo"]];
+function escenas(t) {
+  const L = ESC();
+  let i = L.findIndex((e) => e[0] > t) - 1; if (i < -1) i = L.length - 1;
+  ETQ.forEach((e) => e && (e.dataset.vivo = ""));
+  if (i < 0) return;
+  const [a, f, dir] = L[i], tr = .5, k = suave(tramo(t, a, a + tr));
+  if (k < 1 && i > 0 && L[i - 1][1]) { c2.save(); mover(c2, dir, -k); L[i - 1][1](c2, t, -1920 * k); c2.restore(); }
+  if (f) { c2.save(); mover(c2, dir, 1 - k); f(c2, t, (1 - k) * 1920); c2.restore(); }
+}
+function mover(ctx, dir, k) { if (dir === "abajo") ctx.translate(0, k * 1920); else ctx.translate(k * 1080, 0); }
+
+// ---------- foto real: el hook (despiece) y el cierre
+const F1 = $("f1"), F2 = $("f2");
+function despiece(t) {
+  // la foto, partida en bandas que vuelan cuando "se aprieta el botón"
+  c.fillStyle = "#0a0a0b"; c.fillRect(0, 0, W, H); foco(c, 540, 980, 760, .16);
+  if (!F1.complete || t > T.hola + .3) return;
+  const w = 600, h = w * F1.naturalHeight / F1.naturalWidth, x0 = 540 - w / 2, y0 = 1030 - h / 2;
+  const BANDAS = [0, .14, .36, .62, .8, 1];
+  const k = salida(tramo(t, T.despiece, T.despiece + .9)), vuelo = k;
+  const zoom = 1 + .04 * Math.sin(Math.min(t, T.despiece) * 1.5);
+  for (let b = 0; b < 5; b++) {
+    const sy = BANDAS[b] * F1.naturalHeight, sh = (BANDAS[b + 1] - BANDAS[b]) * F1.naturalHeight;
+    const dy = (b - 2) * 190 * vuelo, rot = (b % 2 ? 1 : -1) * .1 * vuelo, dx = (b % 2 ? 1 : -1) * 60 * vuelo;
+    c.save(); c.translate(540 + dx, y0 + (BANDAS[b] + BANDAS[b + 1]) / 2 * h * zoom + dy); c.rotate(rot); c.globalAlpha = 1 - tramo(t, T.hola - .5, T.hola);
+    c.drawImage(F1, 0, sy, F1.naturalWidth, sh, -w * zoom / 2, -sh / F1.naturalHeight * h * zoom / 2, w * zoom, sh / F1.naturalHeight * h * zoom);
+    c.restore();
+  }
+  // destello y piezas internas (metal) que aparecen entre las bandas
+  if (t > T.despiece && t < T.despiece + .25) { c.fillStyle = `rgba(255,255,255,${.7 * (1 - (t - T.despiece) / .25)})`; c.fillRect(0, 0, W, H); }
+  if (vuelo > .3) { c.globalAlpha = clamp((vuelo - .3) * 2) * (1 - tramo(t, T.hola - .5, T.hola)); [[350, 690, "Tolva"], [700, 900, "Molinillo"], [330, 1110, "Thermoblock"], [720, 1300, "Bomba · 15 bar"]].forEach(([x, y, n]) => { brillo(c, x, y, 70, "rgba(163,194,106,.45)"); c.fillStyle = OLC; c.beginPath(); c.arc(x, y, 9, 0, 7); c.fill(); c.fillStyle = "#fff"; c.font = "600 26px Inter"; c.textAlign = x < 540 ? "right" : "left"; c.fillText(n.toUpperCase(), x + (x < 540 ? -22 : 22), y + 9); }); c.globalAlpha = 1; }
+}
+function cierreFoto(t) {
+  const k = salida(tramo(t, T.cierre - .2, T.cierre + .6));
+  if (k <= 0) return;
+  c2.fillStyle = `rgba(10,10,11,${k})`; c2.fillRect(0, 0, W, H);
+  c2.globalAlpha = k; foco(c2, 540, 900, 800, .18);
+  const w = 760 * (1.06 - .06 * k), h = w * F2.naturalHeight / F2.naturalWidth;
+  if (F2.complete) c2.drawImage(F2, 540 - w / 2, 860 - h / 2 + (1 - k) * 80, w, h);
+  c2.globalAlpha = 1;
+}
+
+// ---------- subtítulos en bloques de 2 o 3 palabras
+const BLOQ = []; { let b = []; PALABRAS.forEach((p, i) => { b.push(p); const fin = /[.,!?…:]$/.test(p.text) || b.length === 3 || i === PALABRAS.length - 1; if (fin) { BLOQ.push(b); b = []; } }); }
+const RESALTA = /^(botón|minuto|grano|molinillo|trece|fino|thermoblock|noventa|barista|apretadito|bomba|quince|bares|crema|dorada|aceites|gas|recién|molido)/i;
+let bloqActual = -1;
+function subs(t) {
+  const i = BLOQ.findIndex((b, k) => t >= b[0].start - .05 && (k === BLOQ.length - 1 || t < BLOQ[k + 1][0].start - .05));
+  if (t > T.cierre - .1 || t < T.hola - .2) { $("subs").style.opacity = 0; return; }
+  $("subs").style.opacity = 1;
+  if (i !== bloqActual) { bloqActual = i; $("subs").innerHTML = i < 0 ? "" : BLOQ[i].map((p) => `<span class="${RESALTA.test(p.text.replace(/[¿¡]/g, "")) ? "o" : ""}">${p.text.replace(/[,.]$/, "")}</span>`).join(""); }
+  if (i < 0) return;
+  [...$("subs").children].forEach((s, k) => { const p = BLOQ[i][k], kk = rebote(tramo(t, p.start - .05, p.start + .2), 1.4); s.style.opacity = clamp(tramo(t, p.start - .06, p.start + .02)); s.style.transform = `scale(${.6 + .4 * kk})`; });
+}
+
+window.cuadro = (f) => {
+  const t = f / FPS - OFF;
+  c2.clearRect(0, 0, W, H);
+  despiece(t);
+  escenas(t);
+  cierreFoto(t);
+  ETQ.forEach((e) => e && (e.style.display = e.dataset.vivo ? "block" : "none"));
+  // hook en letras grandes, con temblor en el despiece
+  const g1 = $("g1"), kk = rebote(tramo(t, .02, .3), 1.6), tiembla = t > T.despiece && t < T.despiece + .4 ? Math.sin(t * 90) * 12 : 0;
+  g1.style.opacity = clamp(tramo(t, 0, .1)) * (1 - tramo(t, T.hola - .6, T.hola - .2));
+  g1.style.transform = `translate(${tiembla}px, 0) scale(${.5 + .5 * kk})`;
+  // reloj de un minuto: arranca con el botón, termina con el video
+  const seg = Math.min(60, Math.round(60 * tramo(t, 0, T.cierre + 1.2)));
+  $("relojN").textContent = Math.floor(seg / 60) + ":" + String(seg % 60).padStart(2, "0");
+  $("reloj").style.borderColor = seg >= 60 ? "#a3c26a" : "";
+  $("paso").style.opacity = t > T.hola - .2 && t < T.cierre - .3 ? .9 : 0;
+  // dato: los grados del Thermoblock
+  const d = $("d1"), dv = t >= T.noventa - 1.2 && t < T.prensa - .3;
+  d.style.display = dv ? "block" : "none";
+  if (dv) { $("d1n").textContent = "≈ " + Math.round(20 + 70 * salida(tramo(t, T.noventa - 1.2, T.noventa + .3))) + " °C"; $("d1e").textContent = "agua, al instante"; d.style.opacity = clamp(tramo(t, T.noventa - 1.2, T.noventa - 1.0)) * (1 - tramo(t, T.prensa - .5, T.prensa - .3)); }
+  subs(t);
+  const ci = salida(tramo(t, T.cierre + .3, T.cierre + .9));
+  $("cierre").style.opacity = ci; $("cierre").style.transform = `translateY(${(1 - ci) * 40}px)`;
+  $("cierre").querySelector(".g").style.opacity = salida(tramo(t, T.guardalo - .1, T.guardalo + .3));
+};
+window.listo = Promise.all([document.fonts.ready, ...[...document.images].map((i) => i.decode().catch(() => {}))]);
+</script>
+</body>
+</html>
