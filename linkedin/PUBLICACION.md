@@ -252,28 +252,48 @@ en `video.html`) y corregir el segundo en que arranca cada escena.
 
 ### Texto para el post con video
 
+Contado como historia, en primera persona. Las dos primeras líneas son las que se ven antes del "…ver más".
+
 ```
-No sé programar. No sé diseñar.
+Cuando arranqué Café en tu Casa tenía claro qué quería vender. Lo que no tenía era todo lo demás.
 
-Igual armé Café en tu Casa entero con inteligencia artificial. En el video está todo, en un minuto:
+Una tienda online "en serio" necesita una web, alguien que la mantenga, contenido todas las semanas, una marca prolija, los números en orden y alguien que mire las métricas y diga qué cambiar.
 
-☕ La página web, diseñada y programada hablando con una IA
-📦 Stock, compras, ventas y finanzas, en orden
-📱 Un mes de Instagram listo antes de empezar: 34 publicaciones
-🤖 Un agente que todos los lunes a las 8:47 mira qué se vio, qué se guardó y cuánto duró cada reel. Aprende qué funciona, me manda la estrategia de la semana, y otro agente deja todo programado
-🎨 El rediseño de la marca, con su propio manual
-📊 Y los datos me corrigieron: la gente miraba mis reels solo 3 a 5 segundos, y el precio aparecía al final. Ahora aparece en el primer segundo y los reels duran la mitad
+Eso, hace no tanto, eran cuatro o cinco personas.
+Yo no sé programar. No sé diseñar. Y no tenía el presupuesto para contratar a nadie.
 
-Lo que más me sorprendió no fue la velocidad. Fue que dejó de existir el "no sé hacerlo".
+Así que hice lo único que tenía a mano: me senté a hablar con una IA.
 
-La IA no decidió nada por mí: qué vender, a qué precio y cómo hablarle al cliente sigue siendo mío. Lo que cambió es que ya no necesito saber hacer todo para llevarlo a cabo.
+Primero fue la web. Le expliqué cómo quería que se sintiera y la fuimos armando juntos. Hoy, si cambia un precio, toco un número y se actualiza todo el sitio.
 
-Si estás por emprender y te frena eso, hoy esa excusa ya no corre.
+Después vinieron el stock, las compras, las ventas y las finanzas. Por primera vez tengo todo en un mismo lugar.
 
-¿Qué parte de tu negocio le darías primero a la IA? 👇
+Después, el contenido: un mes entero de Instagram, 34 publicaciones listas antes de empezar.
 
-#Emprendimiento #InteligenciaArtificial #IA #Emprendedores #Pymes
+Y después llegó lo que más me cambió el día a día.
+
+Todos los lunes a las 8:47 me llega un mail. Lo manda un agente que miró qué se vio, qué se guardó y cuánto duró cada reel. Me dice qué funcionó, qué no, y cuál es la estrategia de la semana. Yo lo leo con el café, apruebo, y otro agente deja todo programado.
+
+Ese mail también me bajó a tierra.
+
+Yo estaba orgulloso de mis reels de 20 segundos. Los datos dijeron que la gente los miraba 3 a 5. El precio, que era lo más importante, aparecía cuando ya no quedaba nadie.
+
+Ahora el precio va en el primer segundo y los reels duran la mitad.
+
+Lo que más me sorprendió de todo esto no fue la velocidad. Fue que dejó de existir el "no sé hacerlo".
+
+La IA no hizo el negocio por mí. Qué vender, a qué precio y cómo hablarle a cada cliente sigue siendo mío. Pero cada cosa que antes era un "no sé" o un "no puedo pagarlo", hoy es una conversación.
+
+En el video les muestro cómo quedó cada parte. 👇
+
+Y les pregunto: si mañana arrancaran algo propio, ¿qué parte le darían primero a la IA?
+
+#Emprendimiento #InteligenciaArtificial #Emprendedores #Pymes #IA
 ```
+
+**Ganchos alternativos** (para reemplazar las dos primeras líneas):
+- "Yo no sé programar. Tampoco diseñar. Igual tengo una tienda online, un mes de contenido y un agente que me escribe todos los lunes a las 8:47."
+- "Hace poco descubrí que mis reels se miraban 3 segundos. Me lo dijo una IA. Y no fue lo único que me enseñó."
 
 **Primer comentario** (publicalo vos apenas sale el post):
 ```
