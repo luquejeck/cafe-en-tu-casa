@@ -221,38 +221,33 @@ Overhead flat lay on a light grey (#f5f5f7) surface: a cup of espresso in the ce
 
 ## 4. Versión video
 
-**Archivo:** `linkedin/cafe-en-tu-casa-con-ia.mp4`. Es de 1080×1350 (4:5, el formato que más
-ocupa en el feed del celular) y dura 55 segundos.
+**Archivo:** `linkedin/cafe-en-tu-casa-con-ia.mp4`. Es **horizontal, 1920×1080 (16:9)**, y dura 55 segundos.
+Cada escena ocupa toda la pantalla: el texto grande a la izquierda y, a la derecha, lo que se cuenta.
 
-**Formato "documental"**, como los videos de Bill Gates en LinkedIn: a la izquierda, una columna negra
-con subtítulos grandes en serif que siguen la voz palabra por palabra, con lo importante en caja blanca.
-A la derecha, lo que se cuenta: la foto de la tienda, la web pasando en un celular, las piezas reales
-de Instagram, el agente, la marca y las métricas.
-
-**Voz en off:** ElevenLabs, voz "Dante" (hombre joven, rioplatense), modelo v4. Está en
-`linkedin/voz/voz-dante.mp3`. La música de fondo está hecha desde cero, sin derechos, y baja sola cuando habla la voz.
-Como los subtítulos están en pantalla, el video también se entiende sin sonido.
+**Voz en off:** ElevenLabs, voz "Dante" (hombre joven, rioplatense), modelo v4, en `linkedin/voz/voz-dante.mp3`.
+La música de fondo está hecha desde cero, sin derechos, y baja sola cuando habla la voz.
+Cada escena dura lo mismo que su parte de la voz, y los títulos aparecen cuando se los nombra.
+Sin sonido también se entiende, porque todo lo importante está escrito.
 
 **Miniatura:** `linkedin/portada-video.jpg`. Al subir el video, tocá *Editar miniatura* y elegí esa imagen.
 
-Para rehacerlo después de cambiar `linkedin/video.html`: `node linkedin/filmar.mjs`.
-Si se graba otra voz, hay que volver a medir las pausas (el comando está en el comentario de `GUION`,
-en `video.html`) y corregir los segundos de cada frase.
-
 | Seg. | Voz | Imagen |
 |---|---|---|
-| 0–9 | "No sé programar. No sé diseñar… Pero armé mi negocio entero con inteligencia artificial." | Foto de la tienda |
-| 9–14 | "Primero, la página web…" | La web real pasando en un celular |
-| 14–20 | "Después, la gestión: stock, compras, ventas y finanzas." | 4 tarjetas que se tildan |
-| 20–27 | "Un mes entero de Instagram. 34 publicaciones…" | Las piezas reales corriendo y un contador |
+| 0–9 | "No sé programar. No sé diseñar… Pero armé mi negocio entero con inteligencia artificial." | La foto de la tienda; las frases aparecen a medida que las dice |
+| 9–14 | "Primero, la página web…" | La web en un navegador y en el celular, bajando |
+| 14–20 | "Después, la gestión: stock, compras, ventas y finanzas." | 4 tarjetas que se tildan con "Todo en orden" |
+| 20–27 | "Un mes entero de Instagram. 34 publicaciones…" | Tres carriles de piezas reales y un contador |
 | 27–34 | "Un agente que todos los lunes a las 8:47…" | El reloj llega a 8:47 y los 4 pasos |
 | 34–37 | "Rediseñé la marca, con su propio manual." | El logo en sus 4 fondos y la paleta |
 | 37–44 | "Un reel se mira entre 3 y 5 segundos…" | "3 a 5 seg." y carrusel (430) vs. mejor reel (177) |
-| 44–55 | "La IA no hizo el negocio por mí… ¿Qué parte de tu negocio le darías primero a la IA?" | La pregunta y tu firma |
+| 44–55 | "La IA no hizo el negocio por mí… ¿Qué parte de tu negocio le darías primero a la IA?" | La frase, tu firma y la pregunta |
 
-**Lo que más lo mejoraría:** que la columna de la derecha seas vos hablando, como en el video de
-Gates. Si te grabás con el celular diciendo este mismo texto (vertical, con luz de ventana, 1 minuto),
-se reemplaza la voz de ElevenLabs por la tuya y tu cara va en ese panel, alternando con las pantallas.
+**Versión alternativa:** `linkedin/cafe-en-tu-casa-con-ia-documental.mp4` (4:5, con la columna negra de
+subtítulos estilo Bill Gates), por si algún día la querés para el celular o para Instagram.
+
+**Para rehacerlos:** `node linkedin/filmar.mjs` (horizontal) o `node linkedin/filmar.mjs documental`.
+Si se graba otra voz, hay que volver a medir las pausas (el comando está en el comentario de `VOZ`,
+en `video.html`) y corregir el segundo en que arranca cada escena.
 
 ### Texto para el post con video
 

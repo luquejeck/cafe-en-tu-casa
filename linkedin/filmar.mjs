@@ -1,10 +1,13 @@
 // Filma linkedin/video.html cuadro por cuadro y le pone la voz en off
 // (voz/voz-dante.mp3, ElevenLabs) sobre la música de musica.py, que baja sola
 // cuando habla la voz.
-// Salida: linkedin/cafe-en-tu-casa-con-ia.mp4 (1080x1350, 30 cuadros, H.264 + AAC)
-// y linkedin/portada-video.jpg (el cuadro que conviene usar de miniatura).
 //
-//   node linkedin/filmar.mjs
+//   node linkedin/filmar.mjs               video.html (horizontal 1920x1080)
+//                                          -> cafe-en-tu-casa-con-ia.mp4 + portada-video.jpg
+//   node linkedin/filmar.mjs documental    video-documental.html (4:5 con subtítulos)
+//                                          -> cafe-en-tu-casa-con-ia-documental.mp4 + portada-video-documental.jpg
+//
+// El tamaño, la duración, los cambios de escena y la miniatura los toma de la página.
 //
 // Usa playwright, ffmpeg (el del sistema o ffmpeg-static) y python3 con numpy.
 import { spawn, execFileSync } from "node:child_process";
@@ -19,20 +22,25 @@ const { chromium } = require("playwright");
 let ffmpeg = "ffmpeg";
 try { ffmpeg = require("ffmpeg-static"); } catch {}
 
+const version = process.argv[2] || "";
+const sufijo = version ? `-${version}` : "";
+const html = path.join(aqui, `video${sufijo}.html`);
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1080, height: 1350 }, deviceScaleFactor: 1 });
+const page = await browser.newPage({ viewport: { width: 1920, height: 1920 }, deviceScaleFactor: 1 });
 page.on("pageerror", (e) => console.error("ERROR en la página:", e.message));
-await page.goto(pathToFileURL(path.join(aqui, "video.html")).href, { waitUntil: "load" });
+await page.goto(pathToFileURL(html).href, { waitUntil: "load" });
 await page.evaluate(() => document.fonts.ready);
-const { total, fps, escenas, desfase } = await page.evaluate(() => ({ total: TOTAL, fps: FPS, escenas: ESCENAS, desfase: DESFASE }));
+const tam = await page.evaluate(() => ({ width: document.body.offsetWidth, height: document.body.offsetHeight }));
+await page.setViewportSize(tam);
+const { total, fps, escenas, desfase, miniatura } = await page.evaluate(() => ({ total: TOTAL, fps: FPS, escenas: ESCENAS, desfase: DESFASE, miniatura: MINIATURA }));
 const cuadros = Math.round(total * fps);
-console.log(`${cuadros} cuadros = ${total} s`);
+console.log(`${path.basename(html)}: ${tam.width}x${tam.height}, ${cuadros} cuadros = ${total.toFixed(1)} s`);
 
 // La música se arma a la medida del video, con un golpe suave en cada cambio de escena
 const musica = path.join(aqui, "musica.wav");
 execFileSync("python3", [path.join(aqui, "musica.py"), musica, String(total), escenas.join(",")], { stdio: "inherit" });
 
-const destino = path.join(aqui, "cafe-en-tu-casa-con-ia.mp4");
+const destino = path.join(aqui, `cafe-en-tu-casa-con-ia${sufijo}.mp4`);
 const ff = spawn(ffmpeg, [
   "-y", "-loglevel", "error",
   "-f", "image2pipe", "-framerate", String(fps), "-c:v", "mjpeg", "-i", "-",
@@ -57,9 +65,9 @@ for (let f = 0; f < cuadros; f++) {
 ff.stdin.end();
 await new Promise((r) => ff.on("close", r));
 
-// Miniatura: el gancho con su frase en caja blanca
-await page.evaluate(() => dibujar(8.2));
-await page.screenshot({ path: path.join(aqui, "portada-video.jpg"), type: "jpeg", quality: 92 });
+// Miniatura: el cuadro que marca la página (el gancho ya armado)
+await page.evaluate((t) => dibujar(t), miniatura);
+await page.screenshot({ path: path.join(aqui, `portada-video${sufijo}.jpg`), type: "jpeg", quality: 92 });
 await browser.close();
 fs.rmSync(musica);
 console.log("Listo:", destino);
