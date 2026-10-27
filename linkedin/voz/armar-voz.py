@@ -55,7 +55,8 @@ nueva = leer('voz-dante-2.mp3')
 p = max(pausas(nueva), key=lambda q: q[1] - q[0])
 agente = tramo(nueva, 0, p[0] + .05)
 # recorte del silencio del final de los datos
-fin_datos = max([q[0] for q in pausas(nueva) if q[0] > p[1]] + [len(nueva) / SR])
+cola = [q for q in pausas(nueva) if q[0] > p[1] and q[1] >= len(nueva) / SR - .05]
+fin_datos = cola[0][0] if cola else len(nueva) / SR
 datos = tramo(nueva, p[1] - .05, min(fin_datos + .1, len(nueva) / SR))
 
 partes = [
