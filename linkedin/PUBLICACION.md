@@ -221,26 +221,27 @@ Overhead flat lay on a light grey (#f5f5f7) surface: a cup of espresso in the ce
 
 ## 4. Versión video
 
-**Archivo:** `linkedin/cafe-en-tu-casa-con-ia.mp4`. Es **horizontal, 1920×1080 (16:9)**, y dura 55 segundos.
+**Archivo:** `linkedin/cafe-en-tu-casa-con-ia.mp4`. Es **horizontal, 1920×1080 (16:9)**, y dura 64 segundos.
 Cada escena ocupa toda la pantalla: el texto grande a la izquierda y, a la derecha, lo que se cuenta.
 
-**Voz en off:** ElevenLabs, voz "Dante" (hombre joven, rioplatense), modelo v4, en `linkedin/voz/voz-dante.mp3`.
-La música de fondo está hecha desde cero, sin derechos, y baja sola cuando habla la voz.
-Cada escena dura lo mismo que su parte de la voz, y los títulos aparecen cuando se los nombra.
+**Voz en off:** ElevenLabs, voz "Dante" (hombre joven, rioplatense), modelo v4. La final es `linkedin/voz/voz-final.wav`,
+que arma `linkedin/voz/armar-voz.py` con la grabación original (`voz-dante.mp3`) y la regrabación del agente y
+de los datos (`voz-dante-2.mp3`). La música de fondo está hecha desde cero, sin derechos, y baja sola cuando habla la voz.
 Sin sonido también se entiende, porque todo lo importante está escrito.
 
 **Miniatura:** `linkedin/portada-video.jpg`. Al subir el video, tocá *Editar miniatura* y elegí esa imagen.
 
 | Seg. | Voz | Imagen |
 |---|---|---|
-| 0–9 | "No sé programar. No sé diseñar… Pero armé mi negocio entero con inteligencia artificial." | La foto de la tienda; las frases aparecen a medida que las dice |
-| 9–14 | "Primero, la página web…" | La web en un navegador y en el celular, bajando |
-| 14–20 | "Después, la gestión: stock, compras, ventas y finanzas." | 4 tarjetas que se tildan con "Todo en orden" |
-| 20–27 | "Un mes entero de Instagram. 34 publicaciones…" | Tres carriles de piezas reales y un contador |
-| 27–34 | "Un agente que todos los lunes a las 8:47…" | El reloj llega a 8:47 y los 4 pasos |
-| 34–37 | "Rediseñé la marca, con su propio manual." | El logo en sus 4 fondos y la paleta |
-| 37–44 | "Un reel se mira entre 3 y 5 segundos…" | "3 a 5 seg." y carrusel (430) vs. mejor reel (177) |
-| 44–55 | "La IA no hizo el negocio por mí… ¿Qué parte de tu negocio le darías primero a la IA?" | La frase, tu firma y la pregunta |
+| 0–7 | "No sé programar. No sé diseñar. Pero armé mi negocio entero con inteligencia artificial." | La foto de la tienda; las frases aparecen a medida que las dice |
+| 7–12 | "Primero, la página web…" | La web en un navegador y en el celular, bajando |
+| 12–18 | "Después, la gestión: stock, compras, ventas y finanzas." | 4 tarjetas que se tildan |
+| 18–24 | "Un mes entero de Instagram. 34 publicaciones…" | Tres carriles de piezas reales y un contador |
+| 24–35 | "Un agente. Todos los lunes a las 8:47 mira qué se vio, qué se guardó y cuánto duró cada reel. Aprende qué funciona…" | El reloj llega a 8:47, las 3 métricas y la regla nueva que aprendió |
+| 35–39 | "…me manda la estrategia de la semana, y otro agente deja todo programado." | El mail con la estrategia y los días que se van tildando: "Todo programado" |
+| 39–42 | "Rediseñé la marca, con su propio manual." | El logo en sus 4 fondos y la paleta |
+| 42–52 | "Los datos me corrigieron: la gente miraba mis reels solo 3 a 5 segundos. Ahora el precio aparece en el primer segundo, y los reels duran la mitad." | Línea de tiempo: el reel de 20 s con el precio al final, contra el de 10 s con el precio al principio |
+| 52–64 | "La IA no hizo el negocio por mí… ¿Qué parte de tu negocio le darías primero a la IA?" | La frase a todo el ancho; después la pregunta a pantalla completa y tu firma |
 
 **Versión alternativa:** `linkedin/cafe-en-tu-casa-con-ia-documental.mp4` (4:5, con la columna negra de
 subtítulos estilo Bill Gates), por si algún día la querés para el celular o para Instagram.

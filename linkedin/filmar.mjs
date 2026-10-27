@@ -1,6 +1,6 @@
-// Filma linkedin/video.html cuadro por cuadro y le pone la voz en off
-// (voz/voz-dante.mp3, ElevenLabs) sobre la música de musica.py, que baja sola
-// cuando habla la voz.
+// Filma linkedin/video.html cuadro por cuadro y le pone la voz en off (la que
+// indica la página en VOZ_ARCHIVO, de ElevenLabs) sobre la música de musica.py,
+// que baja sola cuando habla la voz.
 //
 //   node linkedin/filmar.mjs               video.html (horizontal 1920x1080)
 //                                          -> cafe-en-tu-casa-con-ia.mp4 + portada-video.jpg
@@ -32,7 +32,7 @@ await page.goto(pathToFileURL(html).href, { waitUntil: "load" });
 await page.evaluate(() => document.fonts.ready);
 const tam = await page.evaluate(() => ({ width: document.body.offsetWidth, height: document.body.offsetHeight }));
 await page.setViewportSize(tam);
-const { total, fps, escenas, desfase, miniatura } = await page.evaluate(() => ({ total: TOTAL, fps: FPS, escenas: ESCENAS, desfase: DESFASE, miniatura: MINIATURA }));
+const { total, fps, escenas, desfase, miniatura, voz } = await page.evaluate(() => ({ total: TOTAL, fps: FPS, escenas: ESCENAS, desfase: DESFASE, miniatura: MINIATURA, voz: VOZ_ARCHIVO }));
 const cuadros = Math.round(total * fps);
 console.log(`${path.basename(html)}: ${tam.width}x${tam.height}, ${cuadros} cuadros = ${total.toFixed(1)} s`);
 
@@ -44,7 +44,7 @@ const destino = path.join(aqui, `cafe-en-tu-casa-con-ia${sufijo}.mp4`);
 const ff = spawn(ffmpeg, [
   "-y", "-loglevel", "error",
   "-f", "image2pipe", "-framerate", String(fps), "-c:v", "mjpeg", "-i", "-",
-  "-i", musica, "-i", path.join(aqui, "voz", "voz-dante.mp3"),
+  "-i", musica, "-i", path.join(aqui, voz),
   "-filter_complex",
   `[2:a]aformat=channel_layouts=stereo,adelay=${Math.round(desfase * 1000)}:all=1,apad,asplit=2[voz][llave];` +
   `[1:a]volume=0.14[mus];[mus][llave]sidechaincompress=threshold=0.02:ratio=6:attack=30:release=700[musbaja];` +
