@@ -216,3 +216,64 @@ Overhead flat lay on a light grey (#f5f5f7) surface: a cup of espresso in the ce
 
 - **Post:** carrusel PDF solo. Es lo más fuerte porque muestra cosas reales.
 - **Artículo:** portada con la foto **B** de Flow, y adentro las placas 2, 4, 5 y 7 como imágenes de cada sección.
+
+---
+
+## 4. Versión video
+
+**Archivo:** `linkedin/cafe-en-tu-casa-con-ia.mp4`. Es de 1080×1350 (4:5, el formato que más
+ocupa en el feed del celular) y dura 49 segundos. Tiene música generada desde cero, sin derechos.
+Se entiende sin sonido porque todo está escrito en pantalla.
+**Miniatura:** `linkedin/portada-video.jpg`. Al subir el video, tocá *Editar miniatura* y elegí esa imagen;
+si no, LinkedIn toma el primer cuadro, que está casi vacío.
+Para rehacerlo después de cambiar `linkedin/video.html`: `node linkedin/filmar.mjs`.
+
+| Seg. | Escena |
+|---|---|
+| 0–5 | "Armé mi negocio entero con inteligencia artificial." |
+| 5–12 | La web: la página real pasando dentro de un celular |
+| 12–17 | Stock, compras, ventas y finanzas |
+| 17–24 | Un mes de Instagram: 8 piezas reales y un contador hasta 34 |
+| 24–31 | El agente: un reloj que llega a 8:47 y los 4 pasos |
+| 31–37 | La marca: el logo pasando por sus 4 fondos y la paleta |
+| 37–43 | Métricas: "3 a 5 seg." y la barra del carrusel (430) contra el mejor reel (177) |
+| 43–49 | Cierre: "Me sacó el 'no sé hacerlo' de encima" y la pregunta |
+
+### Texto para el post con video
+
+El video ya cuenta cada parte, así que el texto es más corto que el del carrusel y se
+concentra en la historia y en la pregunta.
+
+```
+No sé programar. No sé diseñar. Nunca fui community manager.
+
+Igual armé Café en tu Casa entero con inteligencia artificial. En el video está todo, en 50 segundos:
+
+☕ La página web, diseñada y programada con IA
+📦 Stock, compras, ventas y finanzas, en orden
+📱 Un mes de Instagram listo antes de empezar: 34 publicaciones
+🤖 Un agente que todos los lunes a las 8:47 lee las métricas y me manda la estrategia
+🎨 El rediseño de la marca, con su manual
+📊 Y lo que me enseñaron los datos: un reel se mira 3 a 5 segundos, así que lo importante va en el primero
+
+Lo que más me sorprendió no fue la velocidad. Fue que dejó de existir el "no sé hacerlo".
+
+La IA no decidió nada por mí: qué vender, a qué precio y cómo hablarle al cliente sigue siendo mío. Lo que cambió es que ya no necesito saber hacer todo para llevarlo a cabo.
+
+Si estás por emprender y te frena eso, hoy esa excusa ya no corre.
+
+¿Qué parte de tu negocio le darías primero a la IA? 👇
+
+#Emprendimiento #InteligenciaArtificial #IA #Emprendedores #Pymes
+```
+
+**Primer comentario** (publicalo vos apenas sale el post):
+```
+Para quien quiera ver cómo quedó la web: [link a la web]
+Y si te interesa algo en particular (el agente, la web, el contenido), preguntame y te cuento cómo lo armé.
+```
+
+**Consejos para el video:**
+- Subilo directo a LinkedIn (no un link de YouTube): los videos nativos tienen mucho más alcance.
+- Activá *Reproducir automáticamente* si te lo ofrece, y no le pongas subtítulos automáticos: no hay voz y LinkedIn no va a encontrar nada que transcribir.
+- Video y carrusel se pueden usar los dos: publicá uno y, a la semana, el otro con el otro texto.

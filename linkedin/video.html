@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Video LinkedIn · Café en tu Casa con IA</title>
+<style>
+/* Video para LinkedIn, 1080 × 1350 (4:5, el formato que más ocupa en el feed).
+   Todo se dibuja con dibujar(t), sin animaciones CSS: así cada cuadro sale
+   exacto al filmarlo con linkedin/filmar.mjs. Se mira sin sonido, por eso
+   todo lo importante está escrito. Mismo sistema visual que la web y las placas. */
+:root { --oliva: #5b6e32; --oliva-fuerte: #455426; --oliva-claro: #a3c26a; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1350px; overflow: hidden; background: #101012; }
+body { font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+#video { position: relative; width: 1080px; height: 1350px; overflow: hidden; }
+
+.esc { position: absolute; inset: 0; overflow: hidden; background: var(--fondo); color: var(--ink); padding: 0 84px;
+  --fondo: #f5f5f7; --ink: #1d1d1f; --ink-2: #6e6e73; --acento: #5b6e32; --suave: rgba(91,110,50,.12); --tarjeta: #fff; --linea: rgba(0,0,0,.1); }
+.esc.blanco { --fondo: #fff; --tarjeta: #f5f5f7; }
+.esc.oscuro { --fondo: #101012; --ink: #f5f5f7; --ink-2: #a1a1a6; --acento: #a3c26a; --suave: rgba(163,194,106,.18); --tarjeta: #1c1c1f; --linea: rgba(255,255,255,.16); }
+.esc.oliva { --fondo: #455426; --ink: #fff; --ink-2: rgba(255,255,255,.78); --acento: #dcecb8; --suave: rgba(255,255,255,.14); --tarjeta: rgba(255,255,255,.12); --linea: rgba(255,255,255,.25); }
+
+.orbe { position: absolute; border-radius: 50%; background: var(--suave); filter: blur(60px); }
+.marca { position: absolute; top: 72px; left: 84px; display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 600; letter-spacing: -.02em; z-index: 2; }
+.marca i { width: 13px; height: 13px; border-radius: 50%; background: var(--acento); }
+.barra { position: absolute; left: 84px; right: 84px; bottom: 64px; height: 6px; border-radius: 3px; background: var(--linea); overflow: hidden; z-index: 2; }
+.barra b { display: block; height: 100%; width: 0; background: var(--acento); }
+
+.ep { font-size: 28px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--acento); }
+h1 { font-size: 104px; font-weight: 700; line-height: 1.02; letter-spacing: -.04em; }
+h2 { font-size: 80px; font-weight: 700; line-height: 1.04; letter-spacing: -.035em; }
+h1 .w, h2 .w { display: inline-block; white-space: pre; }
+em { font-style: normal; color: var(--acento); }
+.sub { font-size: 38px; line-height: 1.3; color: var(--ink-2); }
+.arriba { position: absolute; left: 84px; right: 84px; top: 170px; }
+.centro { position: absolute; left: 84px; right: 84px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+
+/* 1 · gancho */
+.chips { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 46px; }
+.chip { background: var(--tarjeta); border-radius: 980px; padding: 16px 30px; font-size: 32px; font-weight: 600; color: var(--oliva-fuerte); }
+
+/* 2 · web */
+.celu { position: absolute; left: 84px; top: 400px; width: 400px; height: 820px; border-radius: 56px; border: 13px solid #1d1d1f; overflow: hidden; background: #fff; box-shadow: 0 30px 80px rgba(0,0,0,.16); }
+.celu img { width: 100%; display: block; }
+.lado { position: absolute; left: 530px; right: 84px; top: 430px; display: grid; gap: 18px; }
+.tar { background: var(--tarjeta); border-radius: 26px; padding: 26px 28px; }
+.tar b { display: block; font-size: 32px; font-weight: 600; letter-spacing: -.02em; line-height: 1.15; }
+.tar span { display: block; margin-top: 6px; font-size: 24px; color: var(--ink-2); line-height: 1.3; }
+
+/* 3 · gestión */
+.cuatro { position: absolute; left: 84px; right: 84px; top: 520px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.cuatro .tar { padding: 34px 32px; min-height: 290px; display: flex; flex-direction: column; }
+.cuatro .ico { width: 76px; height: 76px; border-radius: 22px; background: var(--suave); display: grid; place-items: center; }
+.cuatro .ico svg { width: 40px; height: 40px; fill: none; stroke: var(--oliva); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.cuatro b { margin-top: auto; font-size: 44px; }
+
+/* 4 · contenido */
+.grilla { position: absolute; left: 84px; right: 84px; top: 440px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.grilla img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; display: block; box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+.contador { position: absolute; left: 84px; right: 84px; top: 1020px; display: flex; align-items: baseline; gap: 22px; }
+.contador .num { font-size: 150px; font-weight: 700; letter-spacing: -.05em; line-height: 1; font-variant-numeric: tabular-nums; }
+.contador span { font-size: 36px; color: var(--ink-2); line-height: 1.25; }
+
+/* 5 · agente */
+.reloj { display: flex; align-items: baseline; gap: 24px; margin-top: 18px; }
+.reloj .hora { font-size: 170px; font-weight: 700; letter-spacing: -.05em; line-height: 1; font-variant-numeric: tabular-nums; color: var(--acento); }
+.reloj span { font-size: 40px; color: var(--ink-2); }
+.pasos { position: absolute; left: 84px; right: 84px; top: 560px; }
+.paso { display: grid; grid-template-columns: 66px 1fr; gap: 26px; align-items: start; margin-bottom: 40px; position: relative; }
+.paso i { width: 66px; height: 66px; border-radius: 50%; background: var(--acento); color: #101012; font: 700 30px Inter; font-style: normal; display: grid; place-items: center; position: relative; z-index: 1; }
+.paso b { display: block; font-size: 38px; font-weight: 600; letter-spacing: -.02em; padding-top: 6px; }
+.paso span { display: block; font-size: 27px; color: var(--ink-2); margin-top: 4px; }
+.riel { position: absolute; left: 116px; top: 590px; width: 3px; background: var(--acento); opacity: .45; height: 0; }
+
+/* 6 · marca */
+.logo-grande { position: absolute; left: 84px; right: 84px; top: 470px; height: 380px; border-radius: 40px; display: grid; place-items: center; }
+.logo-grande .marca { position: static; font-size: 76px; gap: 28px; }
+.logo-grande .marca i { width: 30px; height: 30px; }
+.paleta { position: absolute; left: 84px; right: 84px; top: 900px; display: flex; gap: 14px; }
+.paleta span { flex: 1; height: 150px; border-radius: 26px; display: flex; align-items: flex-end; padding: 16px 20px; font: 600 24px ui-monospace, monospace; }
+
+/* 7 · métricas */
+.dato-grande { font-size: 220px; font-weight: 700; letter-spacing: -.06em; line-height: .95; margin-top: 10px; }
+.dato-grande small { font-size: 80px; letter-spacing: -.03em; margin-left: 10px; }
+.barras { position: absolute; left: 84px; right: 84px; top: 820px; display: grid; gap: 22px; }
+.fila { display: grid; grid-template-columns: 250px 1fr; gap: 20px; align-items: center; }
+.fila span { font-size: 30px; font-weight: 600; }
+.fila .pista { height: 76px; border-radius: 20px; background: var(--linea); position: relative; overflow: hidden; }
+.fila .relleno { position: absolute; inset: 0 auto 0 0; border-radius: 20px; background: var(--ink-2); display: flex; align-items: center; justify-content: flex-end; padding-right: 22px; color: #fff; font-size: 32px; font-weight: 700; width: 0; white-space: nowrap; }
+.fila.gana .relleno { background: var(--oliva); }
+
+/* 8 · cierre */
+.pregunta { margin-top: 60px; background: var(--tarjeta); border-radius: 30px; padding: 36px 40px; font-size: 42px; font-weight: 600; line-height: 1.25; }
+.firma { margin-top: 40px; font-size: 30px; color: var(--ink-2); }
+.firma b { color: var(--ink); }
+</style>
+</head>
+<body>
+<div id="video">
+
+<!-- 1 · Gancho -->
+<section class="esc" data-d="5">
+  <div class="orbe" style="width:700px;height:700px;right:-240px;top:-160px" data-a="deriva"></div>
+  <div class="marca" data-a="sube" data-t="0"><i></i>Café en tu Casa</div>
+  <div class="centro">
+    <p class="ep" data-a="sube" data-t=".2">Emprender con IA</p>
+    <h1 style="margin-top:22px" data-a="palabras" data-t=".4">Armé mi negocio entero con <em>inteligencia artificial.</em></h1>
+    <div class="chips">
+      <span class="chip" data-a="pop" data-t="2.0">Web</span><span class="chip" data-a="pop" data-t="2.15">Stock</span>
+      <span class="chip" data-a="pop" data-t="2.3">Ventas</span><span class="chip" data-a="pop" data-t="2.45">Finanzas</span>
+      <span class="chip" data-a="pop" data-t="2.6">Contenido</span><span class="chip" data-a="pop" data-t="2.75">Agentes</span>
+      <span class="chip" data-a="pop" data-t="2.9">Marca</span><span class="chip" data-a="pop" data-t="3.05">Métricas</span>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · Web -->
+<section class="esc blanco" data-d="7">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <div class="arriba">
+    <p class="ep" data-a="sube" data-t=".1">01 · La página web</p>
+    <h2 style="margin-top:16px" data-a="palabras" data-t=".25">Sin saber programar.</h2>
+  </div>
+  <div class="celu" data-a="pop" data-t=".5"><img src="capturas/web-celu-completa.jpg" alt="" data-a="scroll" data-t="1.6" data-dur="5" data-hasta="-2900"></div>
+  <div class="lado">
+    <div class="tar" data-a="der" data-t="1.0"><b>Diseñada y programada con IA</b><span>Home, fichas y SEO.</span></div>
+    <div class="tar" data-a="der" data-t="1.7"><b>Precios en un solo archivo</b><span>Cambio dos números y se actualiza todo.</span></div>
+    <div class="tar" data-a="der" data-t="2.4"><b>Recomendador de 4 preguntas</b><span>Qué cafetera te conviene.</span></div>
+    <div class="tar" data-a="der" data-t="3.1"><b>WhatsApp y Mercado Libre</b><span>El mensaje se arma solo.</span></div>
+  </div>
+</section>
+
+<!-- 3 · Gestión -->
+<section class="esc" data-d="5.5">
+  <div class="orbe" style="width:600px;height:600px;left:-260px;bottom:-200px" data-a="deriva"></div>
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <div class="arriba">
+    <p class="ep" data-a="sube" data-t=".1">02 · La gestión</p>
+    <h2 style="margin-top:16px" data-a="palabras" data-t=".25">Stock, compras, ventas y números. <em>En orden.</em></h2>
+  </div>
+  <div class="cuatro">
+    <div class="tar" data-a="pop" data-t="1.3"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div><b>Stock</b><span>Qué tengo y qué se agota.</span></div>
+    <div class="tar" data-a="pop" data-t="1.6"><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></div><b>Compras</b><span>Cuándo y cuánto reponer.</span></div>
+    <div class="tar" data-a="pop" data-t="1.9"><div class="ico"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div><b>Ventas</b><span>Por canal: web, WhatsApp, ML.</span></div>
+    <div class="tar" data-a="pop" data-t="2.2"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><b>Finanzas</b><span>Márgenes, precios y caja.</span></div>
+  </div>
+</section>
+
+<!-- 4 · Contenido -->
+<section class="esc" data-d="6.5">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <div class="arriba">
+    <p class="ep" data-a="sube" data-t=".1">03 · El contenido</p>
+    <h2 style="margin-top:16px" data-a="palabras" data-t=".25">Un mes de Instagram, listo antes de empezar.</h2>
+  </div>
+  <div class="grilla">
+    <img src="../assets/img/ig/s2-mar-carrusel-magnifica-a-fondo-1.jpg" data-a="pop" data-t="1.1" alt="">
+    <img src="../assets/img/ig/s1-sab-reel-del-grano-a-la-taza-1.jpg" data-a="pop" data-t="1.25" alt="">
+    <img src="../assets/img/ig/s3-jue-carrusel-super-o-manual-1.jpg" data-a="pop" data-t="1.4" alt="">
+    <img src="../assets/img/ig/s2-sab-reel-la-cuenta-del-cafe-1.jpg" data-a="pop" data-t="1.55" alt="">
+    <img src="../assets/img/ig/s4-jue-carrusel-preguntas-1.jpg" data-a="pop" data-t="1.7" alt="">
+    <img src="../assets/img/ig/v03-pagaste-y-ahora-portada.jpg" data-a="pop" data-t="1.85" alt="">
+    <img src="../assets/img/ig/s4-mar-carrusel-dedica-a-fondo-1.jpg" data-a="pop" data-t="2.0" alt="">
+    <img src="../assets/img/ig/s3-sab-reel-entra-en-tu-mesada-1.jpg" data-a="pop" data-t="2.15" alt="">
+  </div>
+  <div class="contador" data-a="sube" data-t="2.6">
+    <p class="num" data-a="cuenta" data-n="34" data-t="2.6" data-dur="1.4">0</p>
+    <span>publicaciones<br>con 14 reels y videos</span>
+  </div>
+</section>
+
+<!-- 5 · Agente -->
+<section class="esc oscuro" data-d="7.5">
+  <div class="orbe" style="width:700px;height:700px;right:-300px;top:-200px" data-a="deriva"></div>
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <div class="arriba">
+    <p class="ep" data-a="sube" data-t=".1">04 · Agentes · CM automático</p>
+    <div class="reloj" data-a="sube" data-t=".3"><p class="hora" data-a="reloj" data-t=".4" data-dur="1.2">0:00</p><span>todos los lunes</span></div>
+  </div>
+  <div class="riel" data-a="crece" data-t="1.6" data-dur="3.4" data-alto="420"></div>
+  <div class="pasos">
+    <div class="paso" data-a="izq" data-t="1.6"><i>1</i><div><b>Lee las métricas de la semana</b><span>Alcance, vistas, guardados, tiempo de reel.</span></div></div>
+    <div class="paso" data-a="izq" data-t="2.7"><i>2</i><div><b>Aprende y anota reglas</b><span>Lo que se repite pasa de señal a regla.</span></div></div>
+    <div class="paso" data-a="izq" data-t="3.8"><i>3</i><div><b>Me manda un mail de 1 minuto</b><span>Cifras, estrategia y plan día por día.</span></div></div>
+    <div class="paso" data-a="izq" data-t="4.9"><i>4</i><div><b>Otro agente diseña y programa</b><span>Yo leo el mail con el café y apruebo.</span></div></div>
+  </div>
+</section>
+
+<!-- 6 · Marca -->
+<section class="esc blanco" data-d="5.5">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <div class="arriba">
+    <p class="ep" data-a="sube" data-t=".1">05 · Rediseño de marca</p>
+    <h2 style="margin-top:16px" data-a="palabras" data-t=".25">Una marca que se ve igual en todos lados.</h2>
+  </div>
+  <div class="logo-grande" data-a="logo" data-t="1.0"><div class="marca"><i></i>Café en tu Casa</div></div>
+  <div class="paleta">
+    <span style="background:#5b6e32;color:#fff" data-a="pop" data-t="1.4">#5B6E32</span>
+    <span style="background:#455426;color:#fff" data-a="pop" data-t="1.55">#455426</span>
+    <span style="background:#1d1d1f;color:#fff" data-a="pop" data-t="1.7">#1D1D1F</span>
+    <span style="background:#f5f5f7;color:#1d1d1f;border:2px solid rgba(0,0,0,.06)" data-a="pop" data-t="1.85">#F5F5F7</span>
+  </div>
+</section>
+
+<!-- 7 · Métricas -->
+<section class="esc" data-d="6.5">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <div class="arriba">
+    <p class="ep" data-a="sube" data-t=".1">06 · Lo que dijeron las métricas</p>
+    <p class="dato-grande" data-a="sube" data-t=".3">3 a 5<small>seg.</small></p>
+    <p class="sub" style="margin-top:14px" data-a="sube" data-t=".7">es lo que se mira un reel. El precio va en el <b style="color:var(--ink)">primer segundo</b>.</p>
+  </div>
+  <div class="barras">
+    <p class="ep" data-a="sube" data-t="2.2" style="margin-bottom:6px">Vistas</p>
+    <div class="fila" data-a="sube" data-t="2.3"><span>Mejor reel</span><div class="pista"><div class="relleno" data-a="barra" data-pct="41" data-n="177" data-t="2.6" data-dur="1"></div></div></div>
+    <div class="fila gana" data-a="sube" data-t="2.5"><span>Carrusel con precios</span><div class="pista"><div class="relleno" data-a="barra" data-pct="100" data-n="430" data-t="2.9" data-dur="1.2"></div></div></div>
+  </div>
+</section>
+
+<!-- 8 · Cierre -->
+<section class="esc oliva" data-d="6">
+  <div class="orbe" style="width:800px;height:800px;left:-300px;top:-260px" data-a="deriva"></div>
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <div class="centro">
+    <p class="ep" data-a="sube" data-t=".1">Lo que aprendí</p>
+    <h2 style="margin-top:20px" data-a="palabras" data-t=".3">La IA no hizo el negocio por mí. Me sacó el <em>"no sé hacerlo"</em> de encima.</h2>
+    <p class="pregunta" data-a="pop" data-t="2.6">¿Qué parte de tu negocio le darías primero a la IA?</p>
+    <p class="firma" data-a="sube" data-t="3.2"><b>Lucas Jeckeln</b> · Café en tu Casa</p>
+  </div>
+</section>
+
+<div class="barra" id="barra"><b></b></div>
+</div>
+
+<script>
+/* ---------- motor: dibujar(t) pone cada elemento en su lugar para el segundo t ---------- */
+const FPS = 30, FUNDIDO = .45;
+const escenas = [...document.querySelectorAll('.esc')];
+let ini = 0;
+for (const e of escenas) { e.ini = ini; e.d = +e.dataset.d; ini += e.d; }
+const TOTAL = ini;
+
+// Las palabras de los títulos entran de a una
+document.querySelectorAll('[data-a="palabras"]').forEach(h => {
+  const t0 = +(h.dataset.t || 0); let i = 0;
+  const partir = nodo => [...nodo.childNodes].forEach(n => {
+    if (n.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(p => {
+        if (!p) return;
+        if (/^\s+$/.test(p)) { frag.append(p); return; }
+        const s = document.createElement('span'); s.className = 'w'; s.textContent = p;
+        s.dataset.a = 'palabra'; s.dataset.t = (t0 + i++ * .09).toFixed(2); frag.append(s);
+      });
+      n.replaceWith(frag);
+    } else partir(n);
+  });
+  partir(h); h.dataset.a = '';
+});
+
+const lim = x => Math.max(0, Math.min(1, x));
+const sale = x => 1 - Math.pow(1 - x, 3);
+const rebota = x => { const c = 1.5; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const suave = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const LOGOS = [['#ffffff', '#1d1d1f', '#5b6e32', '2px solid rgba(0,0,0,.08)'], ['#101012', '#f5f5f7', '#a3c26a', '0'], ['#455426', '#ffffff', '#dcecb8', '0'], ['#f5f5f7', '#1d1d1f', '#5b6e32', '0']];
+
+function dibujar(t) {
+  for (const e of escenas) {
+    const lt = t - e.ini;
+    const visible = lt > -FUNDIDO && lt < e.d + (e === escenas.at(-1) ? 99 : 0);
+    e.style.display = visible ? 'block' : 'none';
+    if (!visible) continue;
+    // entra fundiendo sobre la anterior y se aleja un poco al salir
+    const entra = e === escenas[0] ? 1 : lim((lt + FUNDIDO) / FUNDIDO);
+    e.style.opacity = entra;
+    e.style.zIndex = Math.round(entra * 10);
+    e.style.transform = `scale(${1.03 - .03 * sale(entra)})`;
+
+    for (const el of e.querySelectorAll('[data-a]')) {
+      const a = el.dataset.a; if (!a) continue;
+      const t0 = +(el.dataset.t || 0), dur = +(el.dataset.dur || .55);
+      const p = lim((lt - t0) / dur), q = sale(p);
+      switch (a) {
+        case 'sube': case 'palabra':
+          el.style.opacity = q; el.style.transform = `translateY(${(1 - q) * (a === 'palabra' ? 40 : 30)}px)`; break;
+        case 'pop':
+          el.style.opacity = lim(p * 2.5); el.style.transform = `scale(${.86 + .14 * rebota(p)})`; break;
+        case 'izq': case 'der':
+          el.style.opacity = q; el.style.transform = `translateX(${(1 - q) * (a === 'izq' ? -60 : 60)}px)`; break;
+        case 'deriva':
+          el.style.transform = `translate(${Math.sin(lt * .5) * 40}px, ${Math.cos(lt * .4) * 30}px)`; break;
+        case 'scroll':
+          el.style.transform = `translateY(${+el.dataset.hasta * suave(p)}px)`; break;
+        case 'cuenta':
+          el.textContent = Math.round(+el.dataset.n * sale(p)); break;
+        case 'reloj': {
+          const m = Math.round(527 * sale(p)); // 8:47 = 527 minutos
+          el.textContent = `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`; break;
+        }
+        case 'crece':
+          el.style.height = `${+el.dataset.alto * suave(p)}px`; break;
+        case 'barra':
+          el.style.width = `${+el.dataset.pct * sale(p)}%`;
+          el.textContent = p > .15 ? Math.round(+el.dataset.n * sale(p)) : ''; break;
+        case 'logo': {
+          // el logo pasa por los cuatro fondos de la marca
+          const k = Math.max(0, lt - t0), i = Math.min(LOGOS.length - 1, Math.floor(k / .95));
+          const [bg, ink, dot, borde] = LOGOS[i];
+          el.style.background = bg; el.style.border = borde; el.style.color = ink;
+          el.querySelector('i').style.background = dot;
+          el.style.opacity = lim(k * 3); el.style.transform = `scale(${.94 + .06 * sale(lim(k * 2))})`; break;
+        }
+      }
+    }
+  }
+  const actual = escenas.findLast(e => t >= e.ini - FUNDIDO / 2) || escenas[0];
+  // la barra de progreso toma los colores de la escena que se está viendo
+  const barra = document.getElementById('barra');
+  barra.querySelector('b').style.width = `${lim(t / TOTAL) * 100}%`;
+  barra.style.background = getComputedStyle(actual).getPropertyValue('--linea');
+  barra.querySelector('b').style.background = getComputedStyle(actual).getPropertyValue('--acento');
+}
+
+window.TOTAL = TOTAL; window.FPS = FPS; window.dibujar = dibujar;
+window.ESCENAS = escenas.map(e => e.ini);
+dibujar(+(new URLSearchParams(location.search).get('t') || 0));
+</script>
+</body>
+</html>
