@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Carrusel LinkedIn · IA en Oil & Gas</title>
+<!-- Carrusel personal (no de Café en tu Casa ni de la empresa): cómo creo que la IA
+     va a cambiar Oil & Gas. Cada .slide es una placa de 1080×1350; las renderiza
+     linkedin/oil-gas/generar.js a PNG y a un PDF para subir como documento. -->
+<style>
+  :root {
+    --fondo: #0d1117; --fondo-2: #161b22; --tarjeta: #1b222c; --linea: rgba(255,255,255,.12);
+    --ink: #f2f4f7; --ink-2: #9aa4b2; --ink-3: #6b7685;
+    --ambar: #f5a524; --ambar-suave: rgba(245,165,36,.14);
+    --ia: #4fd1c5; --ia-suave: rgba(79,209,197,.14); --rojo: #ff6b5b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', -apple-system, sans-serif; color: var(--ink); background: #333; -webkit-font-smoothing: antialiased; }
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; background: var(--fondo); padding: 96px 88px 0; display: flex; flex-direction: column; page-break-after: always; }
+  .slide.claro { background: #f4f1ea; color: #14181f; --ink: #14181f; --ink-2: #5b6573; --tarjeta: #fff; --linea: rgba(0,0,0,.1); }
+  .grilla-fondo { position: absolute; inset: 0; background-image: linear-gradient(var(--linea) 1px, transparent 1px), linear-gradient(90deg, var(--linea) 1px, transparent 1px); background-size: 90px 90px; opacity: .35; mask-image: radial-gradient(circle at 80% 10%, #000 0%, transparent 65%); }
+
+  .top { display: flex; justify-content: space-between; align-items: center; font-size: 24px; color: var(--ink-3); position: relative; }
+  .top b { color: var(--ambar); font-weight: 700; letter-spacing: .08em; }
+  .epi { margin-top: 70px; font-size: 26px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ambar); position: relative; }
+  h1 { margin-top: 20px; font-size: 104px; line-height: 1.02; letter-spacing: -.04em; font-weight: 800; text-wrap: balance; position: relative; }
+  h2 { margin-top: 18px; font-size: 76px; line-height: 1.04; letter-spacing: -.035em; font-weight: 800; text-wrap: balance; position: relative; }
+  h1 em, h2 em { font-style: normal; color: var(--ambar); }
+  .ia { color: var(--ia); }
+  .bajada { margin-top: 26px; font-size: 36px; line-height: 1.32; color: var(--ink-2); text-wrap: pretty; position: relative; }
+  .bajada b { color: var(--ink); }
+
+  .pie { position: absolute; left: 88px; right: 88px; bottom: 64px; display: flex; justify-content: space-between; align-items: center; font-size: 24px; color: var(--ink-3); }
+  .pie .firma { display: flex; align-items: center; gap: 14px; color: var(--ink-2); font-weight: 600; }
+  .pie .firma i { width: 12px; height: 12px; border-radius: 50%; background: var(--ambar); }
+
+  .tarjeta { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 30px; }
+  svg text { font-family: Inter, sans-serif; }
+
+  /* 1 · portada */
+  .senales { position: absolute; left: 0; right: 0; bottom: 170px; height: 430px; }
+  /* 2 · los datos */
+  .sensores { margin-top: 44px; display: grid; gap: 12px; }
+  .sensor { padding: 18px 30px; display: grid; grid-template-columns: 220px 1fr 140px; align-items: center; gap: 24px; }
+  .sensor b { font-size: 32px; }
+  .sensor span { font-size: 26px; color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; }
+  /* gráficos grandes */
+  .grafico { margin-top: 50px; padding: 36px 36px 30px; }
+  .grafico .leyenda { display: flex; gap: 28px; margin-top: 18px; font-size: 24px; color: var(--ink-2); }
+  .grafico .leyenda i { display: inline-block; width: 26px; height: 6px; border-radius: 3px; margin-right: 10px; vertical-align: middle; }
+  .dato { margin-top: 34px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .dato div { padding: 26px 28px; }
+  .dato small { font-size: 22px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .dato p { margin-top: 8px; font-size: 32px; font-weight: 600; line-height: 1.2; }
+  .dato .antes p { color: var(--ink-2); }
+  .dato .despues { border-color: rgba(79,209,197,.5); background: var(--ia-suave); }
+  .dato .despues small { color: var(--ia); }
+  /* conocimiento: chat */
+  .chat { margin-top: 54px; display: grid; gap: 18px; }
+  .burbuja { max-width: 760px; padding: 26px 32px; border-radius: 30px; font-size: 32px; line-height: 1.3; }
+  .burbuja.yo { justify-self: end; background: var(--ambar); color: #14181f; border-bottom-right-radius: 8px; font-weight: 600; }
+  .burbuja.ia-r { background: var(--tarjeta); border: 1px solid var(--linea); border-bottom-left-radius: 8px; }
+  .burbuja.ia-r small { display: block; font-size: 22px; color: var(--ia); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+  .burbuja.ia-r span { display: block; margin-top: 12px; font-size: 22px; color: var(--ink-3); }
+  /* opinión */
+  .puntos { margin-top: 50px; display: grid; gap: 18px; }
+  .punto { padding: 28px 32px; display: grid; grid-template-columns: 74px 1fr; gap: 24px; align-items: start; }
+  .punto i { font-style: normal; width: 74px; height: 74px; border-radius: 22px; background: var(--ambar-suave); color: var(--ambar); font-size: 36px; font-weight: 800; display: grid; place-items: center; }
+  .punto b { display: block; font-size: 36px; letter-spacing: -.02em; line-height: 1.15; }
+  .punto span { display: block; margin-top: 6px; font-size: 26px; color: var(--ink-2); line-height: 1.3; }
+  /* cierre */
+  .cierre h2 { font-size: 84px; margin-top: 30px; }
+  .pregunta { margin-top: auto; margin-bottom: 170px; padding: 40px 44px; font-size: 44px; font-weight: 700; line-height: 1.2; border-color: rgba(245,165,36,.45); background: var(--ambar-suave); }
+</style>
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="slide">
+  <div class="grilla-fondo"></div>
+  <div class="top"><b>IA × OIL &amp; GAS</b><span>01 / 09</span></div>
+  <p class="epi">Mi opinión</p>
+  <h1>Generamos datos todo el tiempo. <em>Usamos una mínima parte.</em></h1>
+  <p class="bajada">Cómo creo que la inteligencia artificial va a cambiar el rubro. No en un laboratorio: <b>en el campo.</b></p>
+  <svg class="senales" viewBox="0 0 1080 430" preserveAspectRatio="none">
+    <defs><linearGradient id="fa" x1="0" x2="1"><stop offset="0" stop-color="#f5a524" stop-opacity="0"/><stop offset=".5" stop-color="#f5a524"/><stop offset="1" stop-color="#f5a524" stop-opacity=".2"/></linearGradient>
+      <linearGradient id="fi" x1="0" x2="1"><stop offset="0" stop-color="#4fd1c5" stop-opacity="0"/><stop offset=".6" stop-color="#4fd1c5"/><stop offset="1" stop-color="#4fd1c5" stop-opacity=".2"/></linearGradient></defs>
+    <path d="M0 110 C80 90 120 150 200 120 S330 60 410 110 520 170 600 120 730 70 820 110 960 150 1080 100" fill="none" stroke="url(#fa)" stroke-width="5"/>
+    <path d="M0 220 L60 215 90 160 120 260 150 210 260 205 290 150 320 270 350 212 470 208 500 140 530 280 560 214 700 210 730 165 760 255 790 212 900 206 930 150 960 270 990 210 1080 205" fill="none" stroke="url(#fi)" stroke-width="4"/>
+    <path d="M0 330 C120 330 160 300 260 310 S420 360 520 330 700 280 800 320 980 350 1080 320" fill="none" stroke="url(#fa)" stroke-width="3" opacity=".6"/>
+    <path d="M0 390 L1080 390" stroke="rgba(255,255,255,.12)" stroke-dasharray="6 10"/>
+  </svg>
+  <div class="pie"><span class="firma"><i></i>Lucas Jeckeln</span><span>Deslizá →</span></div>
+</section>
+
+<!-- 2 · El problema -->
+<section class="slide">
+  <div class="top"><b>IA × OIL &amp; GAS</b><span>02 / 09</span></div>
+  <p class="epi">El punto de partida</p>
+  <h2>Un yacimiento <em>no para nunca.</em></h2>
+  <p class="bajada">Miles de señales por minuto, de cientos de equipos, durante años. El problema nunca fue tener datos: <b>fue tener tiempo para mirarlos.</b></p>
+  <div class="sensores">
+    <div class="sensor tarjeta"><b>Presión</b><svg viewBox="0 0 400 60"><path d="M0 40 C40 38 60 20 100 26 S160 44 200 34 260 18 300 24 360 40 400 30" fill="none" stroke="#f5a524" stroke-width="4"/></svg><span>cada 1 s</span></div>
+    <div class="sensor tarjeta"><b>Caudal</b><svg viewBox="0 0 400 60"><path d="M0 22 L60 24 120 20 180 26 240 22 300 38 340 44 400 46" fill="none" stroke="#4fd1c5" stroke-width="4"/></svg><span>cada 1 s</span></div>
+    <div class="sensor tarjeta"><b>Temperatura</b><svg viewBox="0 0 400 60"><path d="M0 44 C60 42 100 40 160 36 S260 30 300 28 360 22 400 20" fill="none" stroke="#f5a524" stroke-width="4"/></svg><span>cada 5 s</span></div>
+    <div class="sensor tarjeta"><b>Vibración</b><svg viewBox="0 0 400 60"><path d="M0 30 L20 26 40 34 60 27 80 33 100 28 120 34 140 24 160 36 180 22 200 38 220 20 240 40 260 18 280 42 300 16 320 44 340 14 360 46 380 12 400 48" fill="none" stroke="#ff6b5b" stroke-width="3"/></svg><span>cada 0,1 s</span></div>
+    <div class="sensor tarjeta"><b>Alarmas</b><svg viewBox="0 0 400 60"><g fill="#f5a524"><rect x="30" y="22" width="10" height="16" rx="3"/><rect x="110" y="22" width="10" height="16" rx="3"/><rect x="130" y="22" width="10" height="16" rx="3"/><rect x="230" y="22" width="10" height="16" rx="3"/><rect x="300" y="22" width="10" height="16" rx="3"/><rect x="320" y="22" width="10" height="16" rx="3"/><rect x="340" y="22" width="10" height="16" rx="3"/></g></svg><span>cientos / día</span></div>
+  </div>
+  <div class="pie"><span class="firma"><i></i>Lucas Jeckeln</span><span>Deslizá →</span></div>
+</section>
+
+<!-- 3 · Mantenimiento -->
+<section class="slide">
+  <div class="top"><b>IA × OIL &amp; GAS</b><span>03 / 09</span></div>
+  <p class="epi">01 · Mantenimiento</p>
+  <h2>De arreglar cuando falla a <em>anticipar la falla.</em></h2>
+  <div class="grafico tarjeta">
+    <svg viewBox="0 0 840 380">
+      <path d="M0 330 H840" stroke="rgba(255,255,255,.12)"/>
+      <path d="M0 290 L60 286 120 292 180 284 240 290 300 282 360 286 420 276 470 262 520 240 570 210 620 172 660 130 700 84 730 50" fill="none" stroke="#f5a524" stroke-width="5"/>
+      <path d="M730 50 L740 330" stroke="#ff6b5b" stroke-width="3" stroke-dasharray="8 8"/>
+      <text x="748" y="40" fill="#ff6b5b" font-size="24" font-weight="700">Falla</text>
+      <path d="M470 262 L470 330" stroke="#4fd1c5" stroke-width="3" stroke-dasharray="8 8"/>
+      <circle cx="470" cy="262" r="12" fill="#4fd1c5"/>
+      <rect x="300" y="200" width="160" height="44" rx="12" fill="rgba(79,209,197,.16)"/>
+      <text x="380" y="230" fill="#4fd1c5" font-size="24" font-weight="700" text-anchor="middle">Aviso IA</text>
+      <path d="M480 360 H725" stroke="#9aa4b2" stroke-width="2"/><path d="M480 352 V368 M725 352 V368" stroke="#9aa4b2" stroke-width="2"/>
+      <text x="602" y="352" fill="#9aa4b2" font-size="22" text-anchor="middle">días de margen</text>
+    </svg>
+    <div class="leyenda"><span><i style="background:#f5a524"></i>Vibración de una bomba</span></div>
+  </div>
+  <div class="dato">
+    <div class="tarjeta antes"><small>Hoy</small><p>Se rompe, se para, se arregla.</p></div>
+    <div class="tarjeta despues"><small>Con IA</small><p>Se ve venir y se planifica.</p></div>
+  </div>
+  <div class="pie"><span class="firma"><i></i>Lucas Jeckeln</span><span>Deslizá →</span></div>
+</section>
+
+<!-- 4 · Producción -->
+<section class="slide">
+  <div class="top"><b>IA × OIL &amp; GAS</b><span>04 / 09</span></div>
+  <p class="epi">02 · Producción</p>
+  <h2>Cada pozo, mirado <em>en tiempo real.</em></h2>
+  <div class="grafico tarjeta">
+    <svg viewBox="0 0 840 380">
+      <path d="M0 330 H840" stroke="rgba(255,255,255,.12)"/>
+      <path d="M0 120 C100 116 200 124 300 118 S420 112 460 120" fill="none" stroke="#4fd1c5" stroke-width="5"/>
+      <path d="M460 120 C520 140 560 190 620 220 S740 250 840 262" fill="none" stroke="#f5a524" stroke-width="5"/>
+      <path d="M460 120 C540 118 640 124 840 120" fill="none" stroke="#4fd1c5" stroke-width="3" stroke-dasharray="10 10" opacity=".7"/>
+      <path d="M470 120 V330" stroke="#4fd1c5" stroke-width="3" stroke-dasharray="8 8"/>
+      <circle cx="470" cy="122" r="12" fill="#4fd1c5"/>
+      <text x="486" y="80" fill="#4fd1c5" font-size="24" font-weight="700">La IA avisa acá</text>
+      <path d="M800 262 V330" stroke="#ff6b5b" stroke-width="3" stroke-dasharray="8 8"/>
+      <text x="790" y="300" fill="#ff6b5b" font-size="22" font-weight="700" text-anchor="end">Reporte del día siguiente</text>
+      <path d="M470 160 Q640 150 800 240" fill="rgba(255,107,91,.0)"/>
+      <text x="700" y="160" fill="#9aa4b2" font-size="22" text-anchor="middle">producción perdida</text>
+    </svg>
+    <div class="leyenda"><span><i style="background:#4fd1c5"></i>Lo esperado</span><span><i style="background:#f5a524"></i>Lo que pasó</span></div>
+  </div>
+  <div class="dato">
+    <div class="tarjeta antes"><small>Hoy</small><p>Se ve en el reporte de mañana.</p></div>
+    <div class="tarjeta despues"><small>Con IA</small><p>Se ve y se corrige en el momento.</p></div>
+  </div>
+  <div class="pie"><span class="firma"><i></i>Lucas Jeckeln</span><span>Deslizá →</span></div>
+</section>
+
+<!-- 5 · Perforación y reservorio -->
+<section class="slide">
+  <div class="top"><b>IA × OIL &amp; GAS</b><span>05 / 09</span></div>
+  <p class="epi">03 · Perforación y reservorio</p>
+  <h2>La historia de cientos de pozos, <em>para decidir el próximo.</em></h2>
+  <div class="grafico tarjeta">
+    <svg viewBox="0 0 840 470">
+      <defs><radialGradient id="zona"><stop offset="0" stop-color="#f5a524" stop-opacity=".45"/><stop offset="1" stop-color="#f5a524" stop-opacity="0"/></radialGradient></defs>
+      <ellipse cx="560" cy="210" rx="250" ry="170" fill="url(#zona)"/>
+      <g fill="#9aa4b2">
+        <circle cx="90" cy="90" r="9"/><circle cx="170" cy="150" r="9"/><circle cx="120" cy="260" r="9"/><circle cx="230" cy="330" r="9"/><circle cx="300" cy="80" r="9"/><circle cx="330" cy="220" r="9"/><circle cx="410" cy="380" r="9"/><circle cx="200" cy="410" r="9"/><circle cx="80" cy="380" r="9"/><circle cx="740" cy="410" r="9"/><circle cx="780" cy="70" r="9"/>
+      </g>
+      <g fill="#f5a524">
+        <circle cx="470" cy="150" r="11"/><circle cx="560" cy="120" r="11"/><circle cx="640" cy="200" r="11"/><circle cx="520" cy="280" r="11"/><circle cx="690" cy="300" r="11"/>
+      </g>
+      <circle cx="590" cy="215" r="26" fill="none" stroke="#4fd1c5" stroke-width="5" stroke-dasharray="8 6"/>
+      <circle cx="590" cy="215" r="8" fill="#4fd1c5"/>
+      <rect x="560" y="440" width="0" height="0"/>
+      <rect x="455" y="350" width="270" height="48" rx="14" fill="rgba(79,209,197,.16)"/><path d="M590 245 V350" stroke="#4fd1c5" stroke-width="2" stroke-dasharray="6 6"/><text x="590" y="383" fill="#4fd1c5" font-size="26" font-weight="700" text-anchor="middle">próximo pozo</text>
+    </svg>
+    <div class="leyenda"><span><i style="background:#f5a524"></i>Pozos que mejor rindieron</span><span><i style="background:#9aa4b2"></i>Resto</span><span><i style="background:#4fd1c5"></i>Sugerencia</span></div>
+  </div>
+  <p class="bajada" style="font-size:32px">Modelos que aprenden de lo que ya se perforó para elegir <b>dónde y cómo</b> hacer el siguiente.</p>
+  <div class="pie"><span class="firma"><i></i>Lucas Jeckeln</span><span>Deslizá →</span></div>
+</section>
+
+<!-- 6 · Seguridad y emisiones -->
+<section class="slide">
+  <div class="top"><b>IA × OIL &amp; GAS</b><span>06 / 09</span></div>
+  <p class="epi">04 · Seguridad y emisiones</p>
+  <h2>Detectar el riesgo <em>en minutos,</em> no en la próxima recorrida.</h2>
+  <div class="grafico tarjeta">
+    <svg viewBox="0 0 840 330">
+      <text x="0" y="40" fill="#9aa4b2" font-size="24" font-weight="700">HOY</text>
+      <path d="M0 90 H840" stroke="rgba(255,255,255,.18)" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="120" cy="90" r="14" fill="#ff6b5b"/><text x="120" y="140" fill="#ff6b5b" font-size="22" text-anchor="middle" font-weight="700">Empieza una fuga</text>
+      <circle cx="760" cy="90" r="14" fill="#9aa4b2"/><text x="840" y="140" fill="#9aa4b2" font-size="22" text-anchor="end">Se detecta en la recorrida</text>
+      <path d="M120 70 H760" stroke="#ff6b5b" stroke-width="3" stroke-dasharray="6 8" opacity=".6"/>
+      <text x="0" y="220" fill="#4fd1c5" font-size="24" font-weight="700">CON IA</text>
+      <path d="M0 270 H840" stroke="rgba(255,255,255,.18)" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="120" cy="270" r="14" fill="#ff6b5b"/>
+      <circle cx="190" cy="270" r="14" fill="#4fd1c5"/><text x="210" y="320" fill="#4fd1c5" font-size="22" font-weight="700">Alerta en minutos</text>
+      <path d="M120 250 H190" stroke="#4fd1c5" stroke-width="3"/>
+    </svg>
+  </div>
+  <p class="bajada" style="font-size:32px">Sensores, cámaras e imágenes que avisan solos: <b>fugas de metano, desvíos de proceso, situaciones de riesgo para la gente.</b></p>
+  <div class="pie"><span class="firma"><i></i>Lucas Jeckeln</span><span>Deslizá →</span></div>
+</section>
+
+<!-- 7 · Conocimiento -->
+<section class="slide">
+  <div class="top"><b>IA × OIL &amp; GAS</b><span>07 / 09</span></div>
+  <p class="epi">05 · Conocimiento · el más subestimado</p>
+  <h2>Que la experiencia <em>no se jubile</em> con la gente.</h2>
+  <p class="bajada" style="font-size:32px">En cada operación hay alguien con 30 años de campo que sabe cosas que no están escritas en ningún lado.</p>
+  <div class="chat">
+    <p class="burbuja yo">La bomba del pozo 12 vibra igual que el año pasado. ¿Qué se hizo esa vez?</p>
+    <p class="burbuja ia-r"><small>Asistente de operación</small>Pasó algo parecido en otro equipo. Se cambió el rodamiento antes de que fallara y se ajustó el procedimiento.<span>Fuentes: historial de mantenimiento · lección aprendida · procedimiento</span></p>
+  </div>
+  <div class="pie"><span class="firma"><i></i>Lucas Jeckeln</span><span>Deslizá →</span></div>
+</section>
+
+<!-- 8 · Mi opinión -->
+<section class="slide claro">
+  <div class="top"><b>IA × OIL &amp; GAS</b><span>08 / 09</span></div>
+  <p class="epi">Mi opinión</p>
+  <h2>Lo que va a definir <em>quién gana.</em></h2>
+  <div class="puntos">
+    <div class="punto tarjeta"><i>1</i><div><b>El cuello de botella son los datos.</b><span>No la tecnología. Un modelo con datos desordenados no sirve.</span></div></div>
+    <div class="punto tarjeta"><i>2</i><div><b>No reemplaza a la gente de operación.</b><span>La necesita: el que conoce el campo dice si el modelo tiene sentido.</span></div></div>
+    <div class="punto tarjeta"><i>3</i><div><b>Cambia el perfil.</b><span>Gana quien sepa hacerle buenas preguntas a los datos.</span></div></div>
+    <div class="punto tarjeta"><i>4</i><div><b>Gana el que empieza chico.</b><span>Un problema concreto, un resultado medible, y después escalar.</span></div></div>
+  </div>
+  <div class="pie"><span class="firma"><i></i>Lucas Jeckeln</span><span>Deslizá →</span></div>
+</section>
+
+<!-- 9 · Cierre -->
+<section class="slide cierre">
+  <div class="grilla-fondo"></div>
+  <div class="top"><b>IA × OIL &amp; GAS</b><span>09 / 09</span></div>
+  <p class="epi">Lo que aprendí</p>
+  <h2>La IA no hace el trabajo por vos. <em>Te saca el "no sé hacerlo" de encima.</em></h2>
+  <p class="bajada">En una industria que vive de los datos, eso puede cambiarlo todo.</p>
+  <p class="pregunta tarjeta">¿Qué área creés que va a cambiar primero?</p>
+  <div class="pie"><span class="firma"><i></i>Lucas Jeckeln</span><span>Te leo en los comentarios</span></div>
+</section>
+
+</body>
+</html>
