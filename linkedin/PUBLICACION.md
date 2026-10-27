@@ -233,7 +233,7 @@ Sin sonido también se entiende, porque todo lo importante está escrito.
 
 | Seg. | Voz | Imagen |
 |---|---|---|
-| 0–7 | "No sé programar. No sé diseñar. Pero armé mi negocio entero con inteligencia artificial." | La foto de la tienda; las frases aparecen a medida que las dice |
+| 0–7 | "No sé programar. No sé diseñar. Pero armé mi negocio entero con inteligencia artificial." | La foto de portada (`capturas/portada.jpg`); las frases aparecen a medida que las dice |
 | 7–12 | "Primero, la página web…" | La web en un navegador y en el celular, bajando |
 | 12–18 | "Después, la gestión: stock, compras, ventas y finanzas." | 4 tarjetas que se tildan |
 | 18–24 | "Un mes entero de Instagram. 34 publicaciones…" | Tres carriles de piezas reales y un contador |
@@ -252,20 +252,17 @@ en `video.html`) y corregir el segundo en que arranca cada escena.
 
 ### Texto para el post con video
 
-El video ya cuenta cada parte, así que el texto es más corto que el del carrusel y se
-concentra en la historia y en la pregunta.
-
 ```
-No sé programar. No sé diseñar. Nunca fui community manager.
+No sé programar. No sé diseñar.
 
-Igual armé Café en tu Casa entero con inteligencia artificial. En el video está todo, en menos de un minuto:
+Igual armé Café en tu Casa entero con inteligencia artificial. En el video está todo, en un minuto:
 
-☕ La página web, diseñada y programada con IA
+☕ La página web, diseñada y programada hablando con una IA
 📦 Stock, compras, ventas y finanzas, en orden
 📱 Un mes de Instagram listo antes de empezar: 34 publicaciones
-🤖 Un agente que todos los lunes a las 8:47 lee las métricas y me manda la estrategia
-🎨 El rediseño de la marca, con su manual
-📊 Y lo que me enseñaron los datos: un reel se mira 3 a 5 segundos, así que lo importante va en el primero
+🤖 Un agente que todos los lunes a las 8:47 mira qué se vio, qué se guardó y cuánto duró cada reel. Aprende qué funciona, me manda la estrategia de la semana, y otro agente deja todo programado
+🎨 El rediseño de la marca, con su propio manual
+📊 Y los datos me corrigieron: la gente miraba mis reels solo 3 a 5 segundos, y el precio aparecía al final. Ahora aparece en el primer segundo y los reels duran la mitad
 
 Lo que más me sorprendió no fue la velocidad. Fue que dejó de existir el "no sé hacerlo".
 
