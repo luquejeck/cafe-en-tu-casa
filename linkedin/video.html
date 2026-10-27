@@ -82,13 +82,30 @@ em { font-style: normal; color: var(--acento); }
 
 /* 4 · agente */
 .hora { font-size: 260px; font-weight: 700; letter-spacing: -.055em; line-height: 1; font-variant-numeric: tabular-nums; color: var(--acento); margin-top: 10px; }
-.pasos { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); }
-.paso { display: grid; grid-template-columns: 76px 1fr; gap: 30px; align-items: start; margin-bottom: 44px; position: relative; }
-.paso:last-child { margin-bottom: 0; }
-.paso i { width: 76px; height: 76px; border-radius: 50%; background: var(--acento); color: #101012; font: 700 34px Inter; font-style: normal; display: grid; place-items: center; position: relative; z-index: 1; }
-.paso b { display: block; font-size: 44px; font-weight: 600; letter-spacing: -.02em; padding-top: 6px; }
-.paso span { display: block; font-size: 28px; color: var(--ink-2); margin-top: 4px; }
-.riel { position: absolute; left: 37px; top: 38px; width: 3px; background: var(--acento); opacity: .45; height: 0; }
+.metricas { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); display: grid; gap: 18px; }
+.met { background: var(--tarjeta); border-radius: 28px; padding: 26px 30px; display: grid; grid-template-columns: 76px 1fr 190px; gap: 24px; align-items: center; }
+.met .ico { width: 76px; height: 76px; border-radius: 22px; background: var(--suave); display: grid; place-items: center; }
+.met .ico svg { width: 40px; height: 40px; fill: none; stroke: var(--acento); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.met b { font-size: 40px; font-weight: 600; letter-spacing: -.02em; }
+.mini { height: 76px; display: flex; align-items: flex-end; gap: 10px; }
+.mini i { flex: 1; background: var(--acento); border-radius: 6px; opacity: .85; transform-origin: bottom; }
+.regla { margin-top: 10px; background: var(--acento); color: #101012; border-radius: 28px; padding: 26px 32px; }
+.regla span { font-size: 22px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .7; }
+.regla b { display: block; font-size: 40px; letter-spacing: -.02em; margin-top: 6px; line-height: 1.15; }
+.mail { position: absolute; left: 0; right: 0; top: 150px; background: #fff; color: #1d1d1f; border-radius: 30px; padding: 36px 40px; box-shadow: 0 30px 90px rgba(0,0,0,.4); }
+.mail-cab { border-bottom: 1px solid rgba(0,0,0,.1); padding-bottom: 20px; }
+.mail-cab b { display: block; font-size: 34px; letter-spacing: -.02em; }
+.mail-cab span { font-size: 22px; color: #6e6e73; }
+.mail-tit { margin-top: 24px; font-size: 22px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #5b6e32; }
+.mail-items { margin-top: 12px; display: grid; gap: 8px; }
+.mail-items p { font-size: 30px; font-weight: 500; padding-left: 28px; position: relative; }
+.mail-items p::before { content: ''; position: absolute; left: 0; top: 14px; width: 12px; height: 12px; border-radius: 50%; background: #5b6e32; }
+.dias { margin-top: 28px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.dias div { background: #f5f5f7; border-radius: 18px; padding: 16px 12px; text-align: center; position: relative; }
+.dias b { display: block; font-size: 24px; }
+.dias span { display: block; font-size: 19px; color: #6e6e73; margin-top: 2px; }
+.dias i { position: absolute; top: -12px; right: -8px; width: 36px; height: 36px; border-radius: 50%; background: #5b6e32; color: #fff; font: 700 20px Inter; font-style: normal; display: grid; place-items: center; opacity: 0; }
+.programado { margin-top: 26px; display: inline-block; background: #5b6e32; color: #fff; border-radius: 980px; padding: 14px 28px; font-size: 28px; font-weight: 700; }
 
 /* 5 · marca */
 .logo-grande { position: absolute; left: 0; right: 0; top: 180px; height: 430px; border-radius: 40px; display: grid; place-items: center; }
@@ -97,20 +114,28 @@ em { font-style: normal; color: var(--acento); }
 .paleta { position: absolute; left: 0; right: 0; top: 640px; display: flex; gap: 14px; }
 .paleta span { flex: 1; height: 170px; border-radius: 26px; display: flex; align-items: flex-end; padding: 18px 20px; font: 600 24px ui-monospace, monospace; }
 
-/* 6 · métricas */
-.dato-grande { font-size: 250px; font-weight: 700; letter-spacing: -.06em; line-height: .95; margin-top: 14px; white-space: nowrap; }
-.dato-grande small { font-size: 90px; letter-spacing: -.03em; margin-left: 12px; }
-.barras { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); display: grid; gap: 34px; }
-.fila span { display: block; font-size: 32px; font-weight: 600; margin-bottom: 12px; }
-.pista { height: 110px; border-radius: 26px; background: var(--linea); position: relative; overflow: hidden; }
-.relleno { position: absolute; inset: 0 auto 0 0; border-radius: 26px; background: #8e8e93; display: flex; align-items: center; justify-content: flex-end; padding-right: 28px; color: #fff; font-size: 48px; font-weight: 700; width: 0; white-space: nowrap; }
-.gana .relleno { background: var(--oliva); }
+/* 7 · los datos: línea de tiempo del reel */
+.lineas { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); display: grid; gap: 70px; }
+.rotulo { font-size: 30px; color: var(--ink-2); margin-bottom: 16px; }
+.rotulo b { color: var(--ink); }
+.pista-reel { position: relative; height: 110px; border-radius: 24px; background: repeating-linear-gradient(-45deg, rgba(0,0,0,.05) 0 14px, rgba(0,0,0,.09) 14px 28px); }
+.pista-reel.corta { width: 50%; }
+.visto { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 24px; background: var(--oliva); overflow: hidden; display: flex; align-items: center; padding-left: 24px; }
+.visto span { color: #fff; font-size: 24px; font-weight: 600; white-space: nowrap; }
+.precio { position: absolute; top: -24px; background: #1d1d1f; color: #fff; border-radius: 16px; padding: 12px 18px; font-size: 26px; font-weight: 700; white-space: nowrap; }
+.precio.tarde { right: 20px; background: #d92d20; }
+.pista-reel.corta .precio { left: 6px; top: auto; bottom: -64px; background: #1d1d1f; }
+.regla-seg { display: flex; justify-content: space-between; margin-top: 12px; font-size: 22px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.regla-seg.corta { width: 50%; }
+.nadie { margin-top: 18px; font-size: 28px; font-weight: 600; color: #d92d20; }
 
-/* 7 · cierre */
-.pregunta { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); background: var(--tarjeta); border-radius: 36px; padding: 56px 56px; font-size: 64px; font-weight: 700; line-height: 1.1; letter-spacing: -.03em; }
-.firma { margin-top: 40px; font-size: 32px; color: var(--ink-2); }
+/* 8 · cierre */
+.ancho { position: absolute; left: 120px; right: 120px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+.ancho h2 { font-size: 110px; max-width: 1500px; }
+.pregunta { font-size: 128px; max-width: 1560px; }
+.firma { margin-top: 50px; font-size: 34px; color: var(--ink-2); }
 .firma b { color: var(--ink); }
-</style>
+</style></style>
 </head>
 <body>
 <div id="video">
@@ -124,7 +149,6 @@ em { font-style: normal; color: var(--acento); }
       <div class="negaciones" data-out="5.4">
         <p data-a="sube" data-t=".4">No sé programar.</p>
         <p data-a="sube" data-t="1.85">No sé diseñar.</p>
-        <p data-a="sube" data-t="3.1">Nunca fui community manager.</p>
       </div>
       <div style="align-self:center">
         <h1 data-a="palabras" data-t="5.85">Pero armé mi negocio entero con <em>inteligencia artificial.</em></h1>
@@ -207,27 +231,54 @@ em { font-style: normal; color: var(--acento); }
   </div>
 </section>
 
-<!-- 4 · Agente -->
+<!-- 4 · Agente: qué mira y qué aprende -->
 <section class="esc oscuro">
   <div class="orbe" style="width:800px;height:800px;left:-320px;bottom:-320px" data-a="deriva"></div>
   <div class="marca"><i></i>Café en tu Casa</div>
   <div class="izq">
     <p class="ep" data-a="sube" data-t=".1">04 · Un agente · todos los lunes</p>
-    <p class="hora" data-a="reloj" data-t="1.9" data-dur="1.7">0:00</p>
-    <p class="sub" data-a="sube" data-t=".3">Mi community manager automático.</p>
+    <p class="hora" data-a="reloj" data-t="T_RELOJ" data-dur="1.6">0:00</p>
+    <p class="sub" data-a="sube" data-t=".3">mira las métricas de Instagram y aprende qué funciona.</p>
   </div>
   <div class="der">
-    <div class="pasos">
-      <div class="riel" data-a="crece" data-t="4.2" data-dur="2.4" data-alto="460"></div>
-      <div class="paso" data-a="izq" data-t="4.2"><i>1</i><div><b>Lee las métricas</b><span>Alcance, vistas, guardados.</span></div></div>
-      <div class="paso" data-a="izq" data-t="4.9"><i>2</i><div><b>Aprende qué funciona</b><span>Lo que se repite pasa a ser regla.</span></div></div>
-      <div class="paso" data-a="izq" data-t="5.6"><i>3</i><div><b>Me manda la estrategia</b><span>Un mail que se lee en 1 minuto.</span></div></div>
-      <div class="paso" data-a="izq" data-t="6.3"><i>4</i><div><b>Otro agente la programa</b><span>Yo apruebo con el café.</span></div></div>
+    <div class="metricas">
+      <div class="met" data-a="izq" data-t="T_M1"><div class="ico"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><b>Qué se vio</b><div class="mini"><i style="height:40%" data-a="alto" data-t="T_M1"></i><i style="height:65%" data-a="alto" data-t="T_M1"></i><i style="height:50%" data-a="alto" data-t="T_M1"></i><i style="height:90%" data-a="alto" data-t="T_M1"></i><i style="height:70%" data-a="alto" data-t="T_M1"></i></div></div>
+      <div class="met" data-a="izq" data-t="T_M2"><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></div><b>Qué se guardó</b><div class="mini"><i style="height:30%" data-a="alto" data-t="T_M2"></i><i style="height:45%" data-a="alto" data-t="T_M2"></i><i style="height:85%" data-a="alto" data-t="T_M2"></i><i style="height:40%" data-a="alto" data-t="T_M2"></i><i style="height:60%" data-a="alto" data-t="T_M2"></i></div></div>
+      <div class="met" data-a="izq" data-t="T_M3"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><b>Cuánto duró cada reel</b><div class="mini"><i style="height:55%" data-a="alto" data-t="T_M3"></i><i style="height:35%" data-a="alto" data-t="T_M3"></i><i style="height:30%" data-a="alto" data-t="T_M3"></i><i style="height:45%" data-a="alto" data-t="T_M3"></i><i style="height:25%" data-a="alto" data-t="T_M3"></i></div></div>
+      <div class="regla" data-a="pop" data-t="T_REGLA"><span>Regla nueva</span><b>Carruseles con precios: alcanzan el doble.</b></div>
     </div>
   </div>
 </section>
 
-<!-- 5 · Marca -->
+<!-- 5 · Agente: qué me manda y qué hace -->
+<section class="esc oscuro">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <div class="izq">
+    <p class="ep" data-a="sube" data-t=".1">04 · Un agente · todos los lunes</p>
+    <h2 data-a="palabras" data-t=".2">Me manda la estrategia. <em>Otro agente la programa.</em></h2>
+  </div>
+  <div class="der">
+    <div class="mail" data-a="pop" data-t=".2">
+      <div class="mail-cab"><b>Reporte semanal · Instagram</b><span>Para: Lucas · Lunes 8:47</span></div>
+      <p class="mail-tit">La estrategia de la semana</p>
+      <div class="mail-items">
+        <p data-a="izq" data-t=".7">Carruseles con precios y comparativas</p>
+        <p data-a="izq" data-t="1.0">Reels de 9 a 12 segundos</p>
+        <p data-a="izq" data-t="1.3">Todo sale a las 10:00</p>
+      </div>
+      <div class="dias">
+        <div data-a="pop" data-t="1.7"><b>Lun</b><span>Historia</span><i data-a="sello" data-t="T_SELLO">✓</i></div>
+        <div data-a="pop" data-t="1.8"><b>Mar</b><span>Carrusel</span><i data-a="sello" data-t="T_SELLO+.12">✓</i></div>
+        <div data-a="pop" data-t="1.9"><b>Mié</b><span>Reel</span><i data-a="sello" data-t="T_SELLO+.24">✓</i></div>
+        <div data-a="pop" data-t="2.0"><b>Jue</b><span>Carrusel</span><i data-a="sello" data-t="T_SELLO+.36">✓</i></div>
+        <div data-a="pop" data-t="2.1"><b>Vie</b><span>Post</span><i data-a="sello" data-t="T_SELLO+.48">✓</i></div>
+      </div>
+      <p class="programado" data-a="pop" data-t="T_SELLO+.7">✓ Todo programado</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · Marca -->
 <section class="esc blanco">
   <div class="marca"><i></i>Café en tu Casa</div>
   <div class="izq">
@@ -245,34 +296,42 @@ em { font-style: normal; color: var(--acento); }
   </div>
 </section>
 
-<!-- 6 · Métricas -->
+<!-- 7 · Los datos me corrigieron -->
 <section class="esc">
   <div class="marca"><i></i>Café en tu Casa</div>
   <div class="izq">
     <p class="ep" data-a="sube" data-t=".1">06 · Los datos me corrigieron</p>
-    <p class="dato-grande" data-a="sube" data-t="1.6">3 a 5<small>seg.</small></p>
-    <p class="sub" data-a="sube" data-t="2.2">es lo que se mira un reel. Lo importante va <b style="color:var(--ink)">en el primero</b>.</p>
+    <h2 data-a="palabras" data-t=".2">La gente miraba mis reels solo <em>3 a 5 segundos.</em></h2>
+    <p class="sub" data-a="sube" data-t="T_AHORA">Ahora el precio aparece <b style="color:var(--ink)">en el primer segundo</b> y los reels duran la mitad.</p>
   </div>
   <div class="der">
-    <div class="barras">
-      <p class="ep" data-a="sube" data-t="3.6">Vistas</p>
-      <div class="fila" data-a="sube" data-t="3.7"><span>Mejor reel</span><div class="pista"><div class="relleno" data-a="barra" data-pct="41" data-n="177" data-t="4.0" data-dur="1"></div></div></div>
-      <div class="fila gana" data-a="sube" data-t="3.9"><span>Carrusel con precios</span><div class="pista"><div class="relleno" data-a="barra" data-pct="100" data-n="430" data-t="4.3" data-dur="1.2"></div></div></div>
+    <div class="lineas">
+      <div class="linea-reel" data-a="sube" data-t=".6">
+        <p class="rotulo"><b>Antes</b> · reel de 20 segundos</p>
+        <div class="pista-reel"><div class="visto" data-a="ancho" data-pct="22" data-t="1.2" data-dur="1"><span>lo que se mira</span></div><div class="precio tarde" data-a="pop" data-t="1.9">$ precio</div></div>
+        <div class="regla-seg"><span>0 s</span><span>5 s</span><span>10 s</span><span>15 s</span><span>20 s</span></div>
+        <p class="nadie" data-a="sube" data-t="2.4">El precio llegaba cuando ya no quedaba nadie.</p>
+      </div>
+      <div class="linea-reel" data-a="sube" data-t="T_AHORA">
+        <p class="rotulo"><b>Ahora</b> · reel de 10 segundos</p>
+        <div class="pista-reel corta"><div class="visto" data-a="ancho" data-pct="44" data-t="T_AHORA+.4" data-dur=".8"><span>lo que se mira</span></div><div class="precio" data-a="pop" data-t="T_AHORA+.5">$ precio</div></div>
+        <div class="regla-seg corta"><span>0 s</span><span>5 s</span><span>10 s</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 7 · Cierre -->
+<!-- 8 · Cierre -->
 <section class="esc oliva">
   <div class="orbe" style="width:900px;height:900px;left:-300px;top:-300px" data-a="deriva"></div>
   <div class="marca"><i></i>Café en tu Casa</div>
-  <div class="izq">
+  <div class="ancho" data-out="T_PREGUNTA-.4">
     <p class="ep" data-a="sube" data-t=".1">Lo que aprendí</p>
     <h2 data-a="palabras" data-t=".3">La IA no hizo el negocio por mí. Me sacó el <em>"no sé hacerlo"</em> de encima.</h2>
-    <p class="firma" data-a="sube" data-t="3.4"><b>Lucas Jeckeln</b> · Fundador de Café en tu Casa</p>
   </div>
-  <div class="der">
-    <p class="pregunta" data-a="pop" data-t="6.2">¿Qué parte de tu negocio le darías primero a la IA?</p>
+  <div class="ancho">
+    <h1 class="pregunta" data-a="palabras" data-t="T_PREGUNTA">¿Qué parte de tu negocio le darías primero <em>a la IA?</em></h1>
+    <p class="firma" data-a="sube" data-t="T_PREGUNTA+1.2"><b>Lucas Jeckeln</b> · Fundador de Café en tu Casa</p>
   </div>
 </section>
 
@@ -357,6 +416,12 @@ function dibujar(t) {
           const m = Math.round(527 * sale(p)); // 8:47 = 527 minutos
           el.textContent = `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`; break;
         }
+        case 'alto':
+          el.style.transform = `scaleY(${sale(p)})`; break;
+        case 'ancho':
+          el.style.width = `${+el.dataset.pct * sale(p)}%`; break;
+        case 'sello':
+          el.style.opacity = lim(p * 3); el.style.transform = `scale(${.5 + .5 * rebota(p)})`; break;
         case 'crece':
           el.style.height = `${+el.dataset.alto * suave(p)}px`; break;
         case 'barra':
