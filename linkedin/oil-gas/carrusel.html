@@ -4,257 +4,172 @@
 <meta charset="utf-8">
 <title>Carrusel LinkedIn · IA en Oil & Gas</title>
 <!-- Carrusel personal: cómo creo que la IA va a cambiar Oil & Gas.
-     Estilo "documento técnico" pensado para gente de ingeniería y de IA: fondo papel,
-     etiquetas en monoespaciada, diagramas de flujo de cada caso (dato → modelo →
-     decisión) y las técnicas con su nombre. Un solo color de acento.
+     Estilo limpio: una foto grande por placa, un título corto y mucho aire.
+     Las fotos se generan con Google Flow (prompts en PROMPTS-FLOW.md) y van en
+     imagenes/01.jpg … imagenes/09.jpg. Si falta alguna, se ve un degradé suave.
      Cada .slide es una placa de 1080×1350; las renderiza linkedin/oil-gas/generar.js. -->
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --papel: #f6f4ee; --papel-2: #ecE9e0; --ink: #111111; --ink-2: #55524b; --ink-3: #8c887e;
-    --linea: rgba(17,17,17,.14); --linea-2: rgba(17,17,17,.07);
-    --acento: #ff5a1f; --acento-suave: rgba(255,90,31,.10);
-    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --fondo: #fbfaf7; --ink: #15171a; --ink-2: #6a6f76; --ink-3: #a3a7ad; --linea: rgba(21,23,26,.10);
+    --acento: #e8742c;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', -apple-system, sans-serif; color: var(--ink); background: #999; -webkit-font-smoothing: antialiased; }
-  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; background: var(--papel); padding: 92px 88px 0; display: flex; flex-direction: column; page-break-after: always; }
-  .slide::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--linea-2) 1px, transparent 1px), linear-gradient(90deg, var(--linea-2) 1px, transparent 1px); background-size: 36px 36px; }
-  .slide > * { position: relative; }
-  .slide.negro { background: #111; color: #f6f4ee; --ink: #f6f4ee; --ink-2: #b9b5ab; --ink-3: #807c73; --linea: rgba(255,255,255,.18); --linea-2: rgba(255,255,255,.05); }
+  body { font-family: 'Inter', -apple-system, sans-serif; color: var(--ink); background: #888; -webkit-font-smoothing: antialiased; }
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; background: var(--fondo); padding: 72px 72px 0; display: flex; flex-direction: column; page-break-after: always; }
 
-  .cab { display: flex; justify-content: space-between; font: 500 22px var(--mono); color: var(--ink-3); border-bottom: 1.5px solid var(--ink); padding-bottom: 18px; }
-  .cab b { color: var(--ink); font-weight: 700; }
-  .negro .cab { border-color: rgba(255,255,255,.5); }
-  .etiqueta { margin-top: 58px; font: 700 24px var(--mono); color: var(--acento); letter-spacing: .02em; }
-  h1 { margin-top: 18px; font-size: 98px; line-height: 1.02; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
-  h2 { margin-top: 16px; font-size: 76px; line-height: 1.05; letter-spacing: -.04em; font-weight: 700; text-wrap: balance; }
-  h1 u, h2 u { text-decoration: none; background: linear-gradient(transparent 62%, var(--acento-suave) 62%); box-shadow: inset 0 -6px 0 var(--acento); }
-  .bajada { margin-top: 24px; font-size: 32px; line-height: 1.35; color: var(--ink-2); text-wrap: pretty; }
-  .bajada b { color: var(--ink); }
+  .top { display: flex; justify-content: space-between; align-items: center; font-size: 22px; font-weight: 500; color: var(--ink-3); letter-spacing: .01em; }
+  .top b { color: var(--ink); font-weight: 600; }
 
-  .pie { position: absolute; left: 88px; right: 88px; bottom: 58px; display: flex; justify-content: space-between; font: 500 22px var(--mono); color: var(--ink-3); border-top: 1.5px solid var(--linea); padding-top: 18px; }
-  .pie b { color: var(--ink); font-weight: 700; }
+  /* la foto: si no está el archivo, queda el degradé de atrás */
+  .foto { margin-top: 36px; height: 650px; flex: none; border-radius: 36px; background-size: cover; background-position: center; position: relative; overflow: hidden; }
+  .foto .falta { position: absolute; inset: 0; display: grid; place-items: center; font-size: 22px; font-weight: 500; color: rgba(21,23,26,.35); letter-spacing: .04em; }
 
-  /* figura: diagrama de flujo vertical */
-  .fig { margin-top: 48px; }
-  .fig-tit { font: 500 23px var(--mono); color: var(--ink-3); margin-bottom: 18px; }
-  .flujo { display: grid; gap: 0; }
-  .paso { display: grid; grid-template-columns: 236px 1fr; border: 1.5px solid var(--ink); background: var(--papel); }
-  .paso + .flecha + .paso, .paso + .paso { margin-top: 0; }
-  .paso .k { font: 700 24px var(--mono); padding: 28px 24px; border-right: 1.5px solid var(--ink); display: flex; align-items: center; letter-spacing: .02em; }
-  .paso .v { padding: 24px 30px; font-size: 32px; line-height: 1.26; }
-  .paso .v small { display: block; font: 400 22px var(--mono); color: var(--ink-3); margin-top: 4px; }
-  .paso.ia { border-color: var(--acento); background: #fff; box-shadow: 6px 6px 0 var(--acento); }
-  .paso.ia .k { background: var(--acento); color: #fff; border-color: var(--acento); }
-  .paso.humano .k { background: var(--ink); color: var(--papel); }
-  .flecha { height: 44px; width: 236px; display: flex; justify-content: center; }
-  .flecha::before { content: ''; width: 1.5px; background: var(--ink); height: 100%; }
-  .flecha { position: relative; }
-  .flecha::after { content: ''; position: absolute; bottom: 0; left: 50%; margin-left: -7px; border: 7px solid transparent; border-top: 9px solid var(--ink); border-bottom: 0; }
+  .num { margin-top: 52px; font-size: 22px; font-weight: 600; color: var(--acento); letter-spacing: .08em; text-transform: uppercase; }
+  h2 { margin-top: 14px; font-size: 68px; line-height: 1.06; letter-spacing: -.035em; font-weight: 700; text-wrap: balance; }
+  .bajada { margin-top: 18px; font-size: 30px; line-height: 1.38; color: var(--ink-2); text-wrap: pretty; max-width: 900px; }
 
-  .chips { margin-top: 38px; display: flex; flex-wrap: wrap; gap: 10px; }
-  .chips span { font: 500 24px var(--mono); padding: 12px 20px; border: 1.5px solid var(--ink); background: var(--papel); }
-  .chips span:first-child { background: var(--ink); color: var(--papel); }
+  .pie { position: absolute; left: 72px; right: 72px; bottom: 52px; display: flex; justify-content: space-between; font-size: 22px; color: var(--ink-3); }
+  .pie b { color: var(--ink-2); font-weight: 600; }
 
-  /* tabla de señales */
-  .tabla { margin-top: 44px; border: 1.5px solid var(--ink); background: var(--papel); }
-  .tabla .fila { display: grid; grid-template-columns: 230px 1fr 210px; border-top: 1px solid var(--linea); align-items: center; }
-  .tabla .fila:first-child { border-top: 0; background: var(--ink); color: var(--papel); font: 700 20px var(--mono); }
-  .tabla .fila > * { padding: 22px 24px; }
-  .tabla .fila b { font-size: 32px; }
-  .tabla .fila span { font: 400 23px var(--mono); color: var(--ink-2); }
-  .tabla .fila:first-child span { color: var(--papel); }
-  .tabla .fila > svg { display: block; width: 100%; height: 64px; padding: 8px 10px; }
-  .tabla svg path { stroke-width: 3; vector-effect: non-scaling-stroke; }
+  /* portada y cierre: foto a sangre con el texto encima */
+  .sangre { padding: 0; }
+  .sangre .foto { position: absolute; inset: 0; margin: 0; height: auto; border-radius: 0; }
+  .sangre .velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,11,13,.55) 0%, rgba(10,11,13,0) 26%, rgba(10,11,13,0) 45%, rgba(10,11,13,.82) 100%); }
+  .sangre .top, .sangre .pie { position: absolute; left: 72px; right: 72px; color: rgba(255,255,255,.7); }
+  .sangre .top { top: 72px; } .sangre .top b, .sangre .pie b { color: #fff; }
+  .sangre .texto { position: absolute; left: 72px; right: 72px; bottom: 140px; color: #fff; }
+  .sangre .num { color: #ffb37a; margin-top: 0; }
+  .sangre h1 { margin-top: 16px; font-size: 96px; line-height: 1.0; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
+  .sangre h2 { font-size: 80px; }
+  .sangre .bajada { color: rgba(255,255,255,.82); }
+  .sangre .foto .falta { color: rgba(255,255,255,.4); align-items: start; padding-top: 420px; }
 
-  /* portada */
-  .esquema { margin-top: auto; margin-bottom: 150px; display: grid; grid-template-columns: repeat(4, 1fr); border: 1.5px solid var(--ink); background: var(--papel); }
-  .esquema div { padding: 22px 20px; border-right: 1.5px solid var(--ink); }
-  .esquema div:last-child { border-right: 0; }
-  .esquema small { display: block; font: 700 19px var(--mono); color: var(--ink-3); }
-  .esquema b { display: block; margin-top: 6px; font-size: 30px; letter-spacing: -.02em; }
-  .esquema .on { background: var(--acento); color: #fff; }
-  .esquema .on small { color: rgba(255,255,255,.8); }
-
-  /* chat RAG */
-  .chat { margin-top: 40px; display: grid; gap: 22px; }
-  .msg { padding: 28px 30px; border: 1.5px solid var(--ink); font-size: 31px; line-height: 1.3; background: #fff; }
-  .msg small { display: block; font: 700 21px var(--mono); color: var(--ink-3); margin-bottom: 6px; }
-  .msg.r { border-color: var(--acento); box-shadow: 6px 6px 0 var(--acento); }
-  .msg.r small { color: var(--acento); }
-  .msg .fuentes { display: block; margin-top: 14px; font: 400 21px var(--mono); color: var(--ink-3); }
-
-  /* principios */
-  .principios { margin-top: 44px; border: 1.5px solid var(--ink); background: var(--papel); }
-  .pr { display: grid; grid-template-columns: 120px 1fr; border-top: 1px solid var(--linea); }
-  .pr:first-child { border-top: 0; }
-  .pr i { font: 700 38px var(--mono); font-style: normal; color: var(--acento); padding: 32px 0 0 30px; }
-  .pr div { padding: 28px 34px 28px 0; }
-  .pr b { display: block; font-size: 40px; letter-spacing: -.02em; line-height: 1.15; }
-  .pr span { display: block; margin-top: 8px; font-size: 29px; color: var(--ink-2); line-height: 1.3; }
-
-  /* cierre */
-  .codigo { margin-top: 50px; border: 1.5px solid rgba(255,255,255,.5); padding: 30px 34px; font: 400 27px/1.6 var(--mono); color: #b9b5ab; }
-  .codigo .c { color: #807c73; }
-  .codigo .k { color: var(--acento); }
-  .codigo .s { color: #f6f4ee; }
-  .pregunta { margin-top: auto; margin-bottom: 150px; font-size: 52px; font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
-  .pregunta::before { content: '> '; font-family: var(--mono); color: var(--acento); }
+  /* opinión: sin foto */
+  .lista { margin-top: 64px; display: grid; border-top: 1px solid var(--linea); }
+  .lista div { display: grid; grid-template-columns: 96px 1fr; padding: 34px 0; border-bottom: 1px solid var(--linea); }
+  .lista i { font-style: normal; font-size: 30px; font-weight: 600; color: var(--acento); padding-top: 6px; }
+  .lista b { display: block; font-size: 44px; letter-spacing: -.025em; line-height: 1.12; }
+  .lista span { display: block; margin-top: 10px; font-size: 28px; color: var(--ink-2); line-height: 1.35; }
 </style>
 </head>
 <body>
 
 <!-- 1 · Portada -->
-<section class="slide">
-  <div class="cab"><b>IA × OIL &amp; GAS</b><span>01 / 09</span></div>
-  <p class="etiqueta">// opinión</p>
-  <h1>Generamos datos todo el tiempo. <u>Usamos una mínima parte.</u></h1>
-  <p class="bajada">5 casos de uso de IA en producción y operación, y lo que creo que define si funcionan o no.</p>
-  <div class="esquema">
-    <div><small>01</small><b>Campo</b></div>
-    <div><small>02</small><b>Datos</b></div>
-    <div class="on"><small>03</small><b>Modelo</b></div>
-    <div><small>04</small><b>Decisión</b></div>
+<section class="slide sangre">
+  <div class="foto" data-img="01"></div>
+  <div class="velo"></div>
+  <div class="top"><b>Lucas Jeckeln</b><span>1 / 9</span></div>
+  <div class="texto">
+    <p class="num">Opinión</p>
+    <h1>Cómo la IA va a cambiar Oil &amp; Gas.</h1>
+    <p class="bajada">Cinco lugares donde creo que va a pasar, y lo que va a definir quién gana.</p>
   </div>
-  <div class="pie"><b>Lucas Jeckeln</b><span>deslizá →</span></div>
+  <div class="pie" style="bottom:56px"><span></span><span>Deslizá →</span></div>
 </section>
 
-<!-- 2 · El dato -->
+<!-- 2 · Los datos -->
 <section class="slide">
-  <div class="cab"><b>IA × OIL &amp; GAS</b><span>02 / 09</span></div>
-  <p class="etiqueta">// el punto de partida</p>
-  <h2>Un yacimiento es una <u>serie temporal</u> que no se detiene.</h2>
-  <p class="bajada">El problema nunca fue tener datos. <b>Fue tener tiempo para mirarlos.</b></p>
-  <div class="tabla">
-    <div class="fila"><span>SEÑAL</span><span>FORMA</span><span>FRECUENCIA</span></div>
-    <div class="fila"><b>Presión</b><svg viewBox="0 0 300 40" preserveAspectRatio="none"><path d="M0 26 C30 24 45 12 75 16 S120 30 150 22 195 10 225 14 270 28 300 20" fill="none" stroke="#111" stroke-width="2.5"/></svg><span>segundos</span></div>
-    <div class="fila"><b>Caudal</b><svg viewBox="0 0 300 40" preserveAspectRatio="none"><path d="M0 14 L45 15 90 13 135 16 180 14 225 26 255 30 300 32" fill="none" stroke="#111" stroke-width="2.5"/></svg><span>segundos</span></div>
-    <div class="fila"><b>Temperatura</b><svg viewBox="0 0 300 40" preserveAspectRatio="none"><path d="M0 32 C60 30 100 28 150 24 S240 16 300 12" fill="none" stroke="#111" stroke-width="2.5"/></svg><span>segundos</span></div>
-    <div class="fila"><b>Vibración</b><svg viewBox="0 0 300 40" preserveAspectRatio="none"><path d="M0 20 L12 17 24 23 36 18 48 22 60 17 72 24 84 15 96 25 108 14 120 26 132 12 144 28 156 11 168 29 180 9 192 31 204 8 216 32 228 6 240 34 252 5 264 35 276 4 288 36 300 3" fill="none" stroke="#ff5a1f" stroke-width="2.5"/></svg><span>milisegundos</span></div>
-    <div class="fila"><b>Alarmas</b><svg viewBox="0 0 300 40" preserveAspectRatio="none"><g fill="#111"><rect x="20" y="12" width="6" height="16"/><rect x="80" y="12" width="6" height="16"/><rect x="92" y="12" width="6" height="16"/><rect x="170" y="12" width="6" height="16"/><rect x="225" y="12" width="6" height="16"/><rect x="237" y="12" width="6" height="16"/><rect x="249" y="12" width="6" height="16"/></g></svg><span>eventos</span></div>
-  </div>
-  <p class="bajada" style="font-size:28px">× cientos de equipos × años de historia.</p>
-  <div class="pie"><b>Lucas Jeckeln</b><span>deslizá →</span></div>
+  <div class="top"><b>IA en Oil &amp; Gas</b><span>2 / 9</span></div>
+  <div class="foto" data-img="02"></div>
+  <p class="num">El punto de partida</p>
+  <h2>Generamos datos todo el tiempo. Usamos una mínima parte.</h2>
+  <p class="bajada">Miles de señales por minuto. El problema nunca fue tener datos: fue tener tiempo para mirarlos.</p>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
 </section>
 
 <!-- 3 · Mantenimiento -->
 <section class="slide">
-  <div class="cab"><b>IA × OIL &amp; GAS</b><span>03 / 09</span></div>
-  <p class="etiqueta">// caso 01 · mantenimiento</p>
-  <h2>De arreglar cuando falla a <u>anticipar la falla.</u></h2>
-  <div class="fig">
-    <p class="fig-tit">Fig. 1 — mantenimiento predictivo</p>
-    <div class="flujo">
-      <div class="paso"><span class="k">SENSORES</span><span class="v">Vibración y temperatura de bombas y compresores<small>stream continuo</small></span></div>
-      <div class="flecha"></div>
-      <div class="paso ia"><span class="k">MODELO</span><span class="v">Aprende el comportamiento normal y detecta el desvío<small>anomalías · vida útil remanente</small></span></div>
-      <div class="flecha"></div>
-      <div class="paso"><span class="k">ALERTA</span><span class="v">Aviso con días de margen, no con el equipo parado<small>orden de trabajo planificada</small></span></div>
-    </div>
-  </div>
-  <div class="chips"><span>series temporales</span><span>detección de anomalías</span><span>RUL</span></div>
-  <div class="pie"><b>Lucas Jeckeln</b><span>deslizá →</span></div>
+  <div class="top"><b>IA en Oil &amp; Gas</b><span>3 / 9</span></div>
+  <div class="foto" data-img="03"></div>
+  <p class="num">01 · Mantenimiento</p>
+  <h2>Anticipar la falla, en vez de arreglarla.</h2>
+  <p class="bajada">Un equipo avisa días antes de romperse. La IA aprende a escucharlo.</p>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
 </section>
 
 <!-- 4 · Producción -->
 <section class="slide">
-  <div class="cab"><b>IA × OIL &amp; GAS</b><span>04 / 09</span></div>
-  <p class="etiqueta">// caso 02 · producción</p>
-  <h2>Cada pozo, mirado <u>en tiempo real.</u></h2>
-  <div class="fig">
-    <p class="fig-tit">Fig. 2 — vigilancia de pozos</p>
-    <div class="flujo">
-      <div class="paso"><span class="k">SCADA</span><span class="v">Presiones, caudales y estado de cada pozo<small>tiempo real</small></span></div>
-      <div class="flecha"></div>
-      <div class="paso ia"><span class="k">MODELO</span><span class="v">Compara lo que produce con lo que debería producir<small>producción esperada · gemelo digital</small></span></div>
-      <div class="flecha"></div>
-      <div class="paso humano"><span class="k">OPERADOR</span><span class="v">Recibe el desvío y la sugerencia, y decide<small>human-in-the-loop</small></span></div>
-    </div>
-  </div>
-  <p class="bajada" style="font-size:30px">Lo que hoy aparece en el reporte del día siguiente, <b>se ve y se corrige en el momento.</b></p>
-  <div class="pie"><b>Lucas Jeckeln</b><span>deslizá →</span></div>
+  <div class="top"><b>IA en Oil &amp; Gas</b><span>4 / 9</span></div>
+  <div class="foto" data-img="04"></div>
+  <p class="num">02 · Producción</p>
+  <h2>Cada pozo, mirado en tiempo real.</h2>
+  <p class="bajada">Lo que hoy aparece en el reporte del día siguiente, se ve y se corrige en el momento.</p>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
 </section>
 
 <!-- 5 · Perforación y reservorio -->
 <section class="slide">
-  <div class="cab"><b>IA × OIL &amp; GAS</b><span>05 / 09</span></div>
-  <p class="etiqueta">// caso 03 · perforación y reservorio</p>
-  <h2>La historia de cientos de pozos <u>para decidir el próximo.</u></h2>
-  <div class="fig">
-    <p class="fig-tit">Fig. 3 — aprender de los pozos existentes</p>
-    <div class="flujo">
-      <div class="paso"><span class="k">HISTORIA</span><span class="v">Geología, diseño de completación y producción real de cada pozo</span></div>
-      <div class="flecha"></div>
-      <div class="paso ia"><span class="k">MODELO</span><span class="v">Relaciona cómo se hizo cada pozo con cuánto rindió<small>ML sobre datos tabulares</small></span></div>
-      <div class="flecha"></div>
-      <div class="paso"><span class="k">PROPUESTA</span><span class="v">Dónde y cómo perforar el siguiente, con su incertidumbre</span></div>
-    </div>
-  </div>
-  <div class="chips"><span>ML tabular</span><span>optimización</span><span>cuantificar incertidumbre</span></div>
-  <div class="pie"><b>Lucas Jeckeln</b><span>deslizá →</span></div>
+  <div class="top"><b>IA en Oil &amp; Gas</b><span>5 / 9</span></div>
+  <div class="foto" data-img="05"></div>
+  <p class="num">03 · Perforación y reservorio</p>
+  <h2>La historia de cientos de pozos, para decidir el próximo.</h2>
+  <p class="bajada">Modelos que aprenden de lo ya perforado para elegir dónde y cómo hacer el siguiente.</p>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
 </section>
 
 <!-- 6 · Seguridad y emisiones -->
 <section class="slide">
-  <div class="cab"><b>IA × OIL &amp; GAS</b><span>06 / 09</span></div>
-  <p class="etiqueta">// caso 04 · seguridad y emisiones</p>
-  <h2>Detectar el riesgo <u>en minutos,</u> no en la próxima recorrida.</h2>
-  <div class="fig">
-    <p class="fig-tit">Fig. 4 — monitoreo continuo</p>
-    <div class="flujo">
-      <div class="paso"><span class="k">CAPTURA</span><span class="v">Cámaras, sensores de gas e imágenes satelitales</span></div>
-      <div class="flecha"></div>
-      <div class="paso ia"><span class="k">MODELO</span><span class="v">Reconoce una fuga de metano, un desvío o una situación de riesgo<small>visión por computadora · en el borde</small></span></div>
-      <div class="flecha"></div>
-      <div class="paso"><span class="k">ALERTA</span><span class="v">Aviso inmediato a quien tiene que actuar</span></div>
-    </div>
-  </div>
-  <div class="chips"><span>visión por computadora</span><span>detección de metano</span><span>edge AI</span></div>
-  <div class="pie"><b>Lucas Jeckeln</b><span>deslizá →</span></div>
+  <div class="top"><b>IA en Oil &amp; Gas</b><span>6 / 9</span></div>
+  <div class="foto" data-img="06"></div>
+  <p class="num">04 · Seguridad y emisiones</p>
+  <h2>Detectar el riesgo en minutos, no en la próxima recorrida.</h2>
+  <p class="bajada">Cámaras y sensores que reconocen una fuga o una situación de riesgo, y avisan solos.</p>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
 </section>
 
 <!-- 7 · Conocimiento -->
 <section class="slide">
-  <div class="cab"><b>IA × OIL &amp; GAS</b><span>07 / 09</span></div>
-  <p class="etiqueta">// caso 05 · conocimiento · el más subestimado</p>
-  <h2>Que la experiencia <u>no se jubile</u> con la gente.</h2>
-  <p class="bajada" style="font-size:29px">Procedimientos, historiales y lecciones aprendidas, consultables con una pregunta y <b>con la fuente citada.</b></p>
-  <div class="chat">
-    <p class="msg"><small>OPERADOR</small>La bomba vibra igual que el año pasado. ¿Qué se hizo esa vez?</p>
-    <p class="msg r"><small>ASISTENTE · RAG</small>En un caso parecido se cambió el rodamiento antes de la falla y se actualizó el procedimiento de inspección.<span class="fuentes">fuentes: historial de mantenimiento · lección aprendida · procedimiento</span></p>
-  </div>
-  <div class="chips"><span>LLM</span><span>RAG</span><span>búsqueda semántica</span><span>citas a la fuente</span></div>
-  <div class="pie"><b>Lucas Jeckeln</b><span>deslizá →</span></div>
+  <div class="top"><b>IA en Oil &amp; Gas</b><span>7 / 9</span></div>
+  <div class="foto" data-img="07"></div>
+  <p class="num">05 · Conocimiento</p>
+  <h2>Que la experiencia no se jubile con la gente.</h2>
+  <p class="bajada">Treinta años de campo, consultables con una pregunta. Para mí, el cambio más subestimado.</p>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
 </section>
 
 <!-- 8 · Mi opinión -->
 <section class="slide">
-  <div class="cab"><b>IA × OIL &amp; GAS</b><span>08 / 09</span></div>
-  <p class="etiqueta">// mi opinión</p>
-  <h2>Lo que va a definir <u>quién gana.</u></h2>
-  <div class="principios">
-    <div class="pr"><i>01</i><div><b>Datos &gt; modelo.</b><span>El cuello de botella no es la tecnología. Con datos desordenados, ningún modelo sirve.</span></div></div>
-    <div class="pr"><i>02</i><div><b>Human-in-the-loop.</b><span>El que conoce el campo es quien valida si lo que marca el modelo tiene sentido.</span></div></div>
-    <div class="pr"><i>03</i><div><b>Cambia el perfil.</b><span>Gana quien sepa hacerle buenas preguntas a los datos.</span></div></div>
-    <div class="pr"><i>04</i><div><b>Empezar chico.</b><span>Un problema concreto, una métrica clara, y después escalar.</span></div></div>
+  <div class="top"><b>IA en Oil &amp; Gas</b><span>8 / 9</span></div>
+  <p class="num" style="margin-top:110px">Mi opinión</p>
+  <h2 style="font-size:84px">Lo que va a definir quién gana.</h2>
+  <div class="lista">
+    <div><i>01</i><p><b>Los datos, no la tecnología.</b><span>Con datos desordenados, ningún modelo sirve.</span></p></div>
+    <div><i>02</i><p><b>La gente de campo, más que nunca.</b><span>Es quien sabe si lo que marca el modelo tiene sentido.</span></p></div>
+    <div><i>03</i><p><b>Un perfil nuevo.</b><span>Gana quien sepa hacerle buenas preguntas a los datos.</span></p></div>
+    <div><i>04</i><p><b>Empezar chico.</b><span>Un problema concreto, un resultado medible, y después escalar.</span></p></div>
   </div>
-  <div class="pie"><b>Lucas Jeckeln</b><span>deslizá →</span></div>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
 </section>
 
 <!-- 9 · Cierre -->
-<section class="slide negro">
-  <div class="cab"><b>IA × OIL &amp; GAS</b><span>09 / 09</span></div>
-  <p class="etiqueta">// lo que aprendí</p>
-  <h2>La IA no hace el trabajo por vos. <u>Te saca el "no sé hacerlo" de encima.</u></h2>
-  <div class="codigo">
-    <span class="c"># en una industria que vive de los datos</span><br>
-    <span class="k">if</span> <span class="s">datos_ordenados</span> <span class="k">and</span> <span class="s">gente_de_campo</span>:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;<span class="s">el_rubro</span> = <span class="k">"otro"</span>
+<section class="slide sangre">
+  <div class="foto" data-img="09"></div>
+  <div class="velo"></div>
+  <div class="top"><b>Lucas Jeckeln</b><span>9 / 9</span></div>
+  <div class="texto">
+    <p class="num">Lo que aprendí</p>
+    <h2>La IA no hace el trabajo por vos. Te saca el "no sé hacerlo" de encima.</h2>
+    <p class="bajada" style="margin-top:34px;font-size:36px;color:#fff;font-weight:600">¿Qué área creés que va a cambiar primero?</p>
   </div>
-  <p class="pregunta">¿Qué área creés que va a cambiar primero?</p>
-  <div class="pie"><b>Lucas Jeckeln</b><span>te leo en los comentarios</span></div>
+  <div class="pie" style="bottom:56px"><span></span><span>Te leo en los comentarios</span></div>
 </section>
 
+<script>
+  // Cada foto busca imagenes/NN.jpg (o .png / .webp / .jpeg). Si no hay, queda un degradé con el número.
+  const DEGRADES = { '01': '#5b5f66,#2b2e33', '02': '#cfd6dc,#a9b4bd', '03': '#d8cfc4,#b3a493', '04': '#dcd2c2,#c0ab8c',
+                     '05': '#d3d1cc,#aeaba4', '06': '#d6d9d2,#b0b6a8', '07': '#ddd5ca,#bfb2a0', '09': '#4d4a46,#24262a' };
+  window.FOTOS = Promise.all([...document.querySelectorAll('.foto[data-img]')].map(f => new Promise(listo => {
+    const n = f.dataset.img, [a, b] = DEGRADES[n].split(',');
+    f.style.backgroundImage = `linear-gradient(160deg, ${a}, ${b})`;
+    const probar = exts => {
+      if (!exts.length) { f.innerHTML = `<span class="falta">IMAGEN ${n} · GOOGLE FLOW</span>`; return listo(); }
+      const src = `imagenes/${n}.${exts[0]}`, img = new Image();
+      img.onload = () => { f.style.backgroundImage = `url('${src}')`; listo(); };
+      img.onerror = () => probar(exts.slice(1));
+      img.src = src;
+    };
+    probar(['jpg', 'png', 'webp', 'jpeg']);
+  })));
+</script>
 </body>
 </html>

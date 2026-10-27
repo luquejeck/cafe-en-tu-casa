@@ -11,6 +11,7 @@ const path = require('path');
   const page = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
   await page.goto('file://' + path.join(dir, 'carrusel.html'), { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
+  await page.evaluate(() => window.FOTOS);  // espera a que carguen las fotos de imagenes/
 
   const slides = await page.$$('.slide');
   for (let i = 0; i < slides.length; i++) {
