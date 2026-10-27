@@ -222,22 +222,37 @@ Overhead flat lay on a light grey (#f5f5f7) surface: a cup of espresso in the ce
 ## 4. Versión video
 
 **Archivo:** `linkedin/cafe-en-tu-casa-con-ia.mp4`. Es de 1080×1350 (4:5, el formato que más
-ocupa en el feed del celular) y dura 49 segundos. Tiene música generada desde cero, sin derechos.
-Se entiende sin sonido porque todo está escrito en pantalla.
-**Miniatura:** `linkedin/portada-video.jpg`. Al subir el video, tocá *Editar miniatura* y elegí esa imagen;
-si no, LinkedIn toma el primer cuadro, que está casi vacío.
-Para rehacerlo después de cambiar `linkedin/video.html`: `node linkedin/filmar.mjs`.
+ocupa en el feed del celular) y dura 55 segundos.
 
-| Seg. | Escena |
-|---|---|
-| 0–5 | "Armé mi negocio entero con inteligencia artificial." |
-| 5–12 | La web: la página real pasando dentro de un celular |
-| 12–17 | Stock, compras, ventas y finanzas |
-| 17–24 | Un mes de Instagram: 8 piezas reales y un contador hasta 34 |
-| 24–31 | El agente: un reloj que llega a 8:47 y los 4 pasos |
-| 31–37 | La marca: el logo pasando por sus 4 fondos y la paleta |
-| 37–43 | Métricas: "3 a 5 seg." y la barra del carrusel (430) contra el mejor reel (177) |
-| 43–49 | Cierre: "Me sacó el 'no sé hacerlo' de encima" y la pregunta |
+**Formato "documental"**, como los videos de Bill Gates en LinkedIn: a la izquierda, una columna negra
+con subtítulos grandes en serif que siguen la voz palabra por palabra, con lo importante en caja blanca.
+A la derecha, lo que se cuenta: la foto de la tienda, la web pasando en un celular, las piezas reales
+de Instagram, el agente, la marca y las métricas.
+
+**Voz en off:** ElevenLabs, voz "Dante" (hombre joven, rioplatense), modelo v4. Está en
+`linkedin/voz/voz-dante.mp3`. La música de fondo está hecha desde cero, sin derechos, y baja sola cuando habla la voz.
+Como los subtítulos están en pantalla, el video también se entiende sin sonido.
+
+**Miniatura:** `linkedin/portada-video.jpg`. Al subir el video, tocá *Editar miniatura* y elegí esa imagen.
+
+Para rehacerlo después de cambiar `linkedin/video.html`: `node linkedin/filmar.mjs`.
+Si se graba otra voz, hay que volver a medir las pausas (el comando está en el comentario de `GUION`,
+en `video.html`) y corregir los segundos de cada frase.
+
+| Seg. | Voz | Imagen |
+|---|---|---|
+| 0–9 | "No sé programar. No sé diseñar… Pero armé mi negocio entero con inteligencia artificial." | Foto de la tienda |
+| 9–14 | "Primero, la página web…" | La web real pasando en un celular |
+| 14–20 | "Después, la gestión: stock, compras, ventas y finanzas." | 4 tarjetas que se tildan |
+| 20–27 | "Un mes entero de Instagram. 34 publicaciones…" | Las piezas reales corriendo y un contador |
+| 27–34 | "Un agente que todos los lunes a las 8:47…" | El reloj llega a 8:47 y los 4 pasos |
+| 34–37 | "Rediseñé la marca, con su propio manual." | El logo en sus 4 fondos y la paleta |
+| 37–44 | "Un reel se mira entre 3 y 5 segundos…" | "3 a 5 seg." y carrusel (430) vs. mejor reel (177) |
+| 44–55 | "La IA no hizo el negocio por mí… ¿Qué parte de tu negocio le darías primero a la IA?" | La pregunta y tu firma |
+
+**Lo que más lo mejoraría:** que la columna de la derecha seas vos hablando, como en el video de
+Gates. Si te grabás con el celular diciendo este mismo texto (vertical, con luz de ventana, 1 minuto),
+se reemplaza la voz de ElevenLabs por la tuya y tu cara va en ese panel, alternando con las pantallas.
 
 ### Texto para el post con video
 
@@ -247,7 +262,7 @@ concentra en la historia y en la pregunta.
 ```
 No sé programar. No sé diseñar. Nunca fui community manager.
 
-Igual armé Café en tu Casa entero con inteligencia artificial. En el video está todo, en 50 segundos:
+Igual armé Café en tu Casa entero con inteligencia artificial. En el video está todo, en menos de un minuto:
 
 ☕ La página web, diseñada y programada con IA
 📦 Stock, compras, ventas y finanzas, en orden
@@ -275,5 +290,5 @@ Y si te interesa algo en particular (el agente, la web, el contenido), preguntam
 
 **Consejos para el video:**
 - Subilo directo a LinkedIn (no un link de YouTube): los videos nativos tienen mucho más alcance.
-- Activá *Reproducir automáticamente* si te lo ofrece, y no le pongas subtítulos automáticos: no hay voz y LinkedIn no va a encontrar nada que transcribir.
+- No hace falta activar los subtítulos automáticos de LinkedIn: ya están en el video, más grandes y sincronizados.
 - Video y carrusel se pueden usar los dos: publicá uno y, a la semana, el otro con el otro texto.

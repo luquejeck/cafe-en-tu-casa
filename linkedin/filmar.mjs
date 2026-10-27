@@ -1,4 +1,6 @@
-// Filma linkedin/video.html cuadro por cuadro y le pone la música de musica.py.
+// Filma linkedin/video.html cuadro por cuadro y le pone la voz en off
+// (voz/voz-dante.mp3, ElevenLabs) sobre la música de musica.py, que baja sola
+// cuando habla la voz.
 // Salida: linkedin/cafe-en-tu-casa-con-ia.mp4 (1080x1350, 30 cuadros, H.264 + AAC)
 // y linkedin/portada-video.jpg (el cuadro que conviene usar de miniatura).
 //
@@ -22,7 +24,7 @@ const page = await browser.newPage({ viewport: { width: 1080, height: 1350 }, de
 page.on("pageerror", (e) => console.error("ERROR en la página:", e.message));
 await page.goto(pathToFileURL(path.join(aqui, "video.html")).href, { waitUntil: "load" });
 await page.evaluate(() => document.fonts.ready);
-const { total, fps, escenas } = await page.evaluate(() => ({ total: TOTAL, fps: FPS, escenas: ESCENAS }));
+const { total, fps, escenas, desfase } = await page.evaluate(() => ({ total: TOTAL, fps: FPS, escenas: ESCENAS, desfase: DESFASE }));
 const cuadros = Math.round(total * fps);
 console.log(`${cuadros} cuadros = ${total} s`);
 
@@ -34,7 +36,12 @@ const destino = path.join(aqui, "cafe-en-tu-casa-con-ia.mp4");
 const ff = spawn(ffmpeg, [
   "-y", "-loglevel", "error",
   "-f", "image2pipe", "-framerate", String(fps), "-c:v", "mjpeg", "-i", "-",
-  "-i", musica, "-map", "0:v", "-map", "1:a", "-shortest",
+  "-i", musica, "-i", path.join(aqui, "voz", "voz-dante.mp3"),
+  "-filter_complex",
+  `[2:a]aformat=channel_layouts=stereo,adelay=${Math.round(desfase * 1000)}:all=1,apad,asplit=2[voz][llave];` +
+  `[1:a]volume=0.14[mus];[mus][llave]sidechaincompress=threshold=0.02:ratio=6:attack=30:release=700[musbaja];` +
+  `[musbaja][voz]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-15:TP=-1.5:LRA=9[audio]`,
+  "-map", "0:v", "-map", "[audio]", "-shortest",
   "-c:v", "libx264", "-preset", "slow", "-crf", "17", "-pix_fmt", "yuv420p",
   "-profile:v", "high", "-level", "4.1", "-movflags", "+faststart",
   "-c:a", "aac", "-b:a", "192k",
@@ -50,8 +57,8 @@ for (let f = 0; f < cuadros; f++) {
 ff.stdin.end();
 await new Promise((r) => ff.on("close", r));
 
-// Miniatura: el gancho ya armado
-await page.evaluate(() => dibujar(4.2));
+// Miniatura: el gancho con su frase en caja blanca
+await page.evaluate(() => dibujar(8.2));
 await page.screenshot({ path: path.join(aqui, "portada-video.jpg"), type: "jpeg", quality: 92 });
 await browser.close();
 fs.rmSync(musica);
