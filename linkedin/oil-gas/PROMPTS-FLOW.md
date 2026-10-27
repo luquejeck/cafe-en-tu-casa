@@ -1,6 +1,6 @@
 # Prompts para Google Flow · carrusel IA en Oil & Gas
 
-Una imagen por placa. Generá 4 variantes de cada una y elegí la mejor.
+Una imagen por placa. Las 01 a 05 ya están (salieron offshore, en el mar); las que faltan van en la misma línea. Generá 4 variantes de cada una y elegí la mejor.
 Guardalas como `linkedin/oil-gas/imagenes/01.jpg`, `02.jpg`… (sirve también .png o .webp)
 y corré `node linkedin/oil-gas/generar.js`: el carrusel las toma solo.
 
@@ -45,19 +45,19 @@ A long row of pumpjacks working in the Patagonian desert of Argentina at golden 
 A drilling rig standing in the Patagonian desert at blue hour, lights on, viewed from a distance, with a subtle translucent visualization of underground rock layers and well paths beneath the ground, like a clean geological cross-section blending into the photo, photorealistic editorial photography with a minimal data visualization overlay, muted earthy palette with warm orange accents, calm and premium, shot on 35mm, no text, no logos, no brand names
 ```
 
-### 06 · Seguridad y emisiones (horizontal 16:9)
+### 06 · Seguridad y emisiones (horizontal 16:9) · versión offshore
 ```
-A small inspection drone hovering over an oil and gas processing facility in Patagonia, a field operator in plain unbranded workwear and white helmet watching it from the ground holding a tablet, clear morning light, pipes and tanks in the background, sense of safety and control, photorealistic editorial photography, muted earthy palette with warm orange accents, calm and premium, shallow depth of field, shot on 35mm, no readable text on the tablet, no logos, no brand names
-```
-
-### 07 · Conocimiento (horizontal 16:9)
-```
-An experienced senior field operator in his sixties with a grey beard and a young female engineer in plain unbranded workwear and white helmets, standing next to a wellhead in Patagonia, he is explaining something pointing at the equipment while she looks at a tablet, warm afternoon light, genuine moment of mentoring, photorealistic editorial photography, muted earthy palette with warm orange accents, calm and premium, shallow depth of field, shot on 35mm, no readable text on the tablet, no logos, no brand names
+A small inspection drone hovering next to an offshore oil platform at sea, a field operator in plain unbranded orange coveralls and white helmet on the platform deck watching it and holding a tablet, clear morning light, calm sea and distant mountains on the horizon, pipes and railings in the foreground, sense of safety and control, photorealistic editorial photography, muted earthy palette with warm orange accents, calm and premium, shallow depth of field, shot on 35mm, no readable text on the tablet, no logos, no brand names
 ```
 
-### 09 · Cierre (vertical 9:16)
+### 07 · Conocimiento (horizontal 16:9) · versión offshore
 ```
-Silhouette of a single field engineer in a helmet standing on a small hill looking over a Patagonian oil field at sunset, pumpjacks and facility lights in the distance, warm orange sky fading to deep blue, peaceful and reflective mood, photorealistic editorial photography, muted earthy palette with warm orange accents, calm and premium, shot on 35mm, lots of empty sky at the top and darker ground at the bottom for text, no text, no logos, no brand names
+An experienced senior offshore operator in his sixties with a grey beard and a young female engineer, both in plain unbranded orange coveralls and white helmets, on the deck of an offshore oil platform, he is explaining something pointing at a valve while she looks at a tablet, warm golden hour light, sea and another platform softly blurred in the background, genuine moment of mentoring, photorealistic editorial photography, muted earthy palette with warm orange accents, calm and premium, shallow depth of field, shot on 35mm, no readable text on the tablet, no logos, no brand names
+```
+
+### 09 · Cierre (vertical 9:16) · versión offshore
+```
+Silhouette of a single offshore worker in a helmet standing at the railing of an oil platform deck, looking out at the sea at sunset, other platforms with their lights on in the distance, warm orange sky fading to deep blue, calm reflective mood, photorealistic editorial photography, muted earthy palette with warm orange accents, calm and premium, shot on 35mm, lots of empty sky at the top and darker deck at the bottom for text, no text, no logos, no brand names
 ```
 
 La placa 08 (mi opinión) va sin foto, a propósito: es la placa de la idea.
