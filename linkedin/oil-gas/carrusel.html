@@ -2,167 +2,295 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Carrusel LinkedIn · IA en Oil & Gas</title>
-<!-- Carrusel personal: cómo creo que la IA va a cambiar Oil & Gas.
-     Estilo limpio: una foto grande por placa, un título corto y mucho aire.
-     Las fotos se generan con Google Flow (prompts en PROMPTS-FLOW.md) y van en
-     imagenes/01.jpg … imagenes/09.jpg. Si falta alguna, se ve un degradé suave.
-     Cada .slide es una placa de 1080×1350; las renderiza linkedin/oil-gas/generar.js. -->
+<title>Carrusel LinkedIn · Oil & Gas hoy y mañana</title>
+<!-- Carrusel personal: cómo trabaja hoy Oil & Gas y cómo puede trabajar mañana con IA.
+     Claro y limpio, tipografía grande y una composición distinta en cada placa
+     (foto a sangre, pantalla partida, tarjeta sobre la foto, collage, solo tipografía).
+     Fotos de Google Flow en imagenes/NN.jpg (prompts en PROMPTS-FLOW.md); si falta
+     alguna, se ve un degradé suave. Placas de 1080×1350; las renderiza generar.js. -->
 <style>
   :root {
-    --fondo: #fbfaf7; --ink: #15171a; --ink-2: #6a6f76; --ink-3: #a3a7ad; --linea: rgba(21,23,26,.10);
-    --acento: #e8742c;
+    --fondo: #faf8f4; --blanco: #ffffff; --arena: #f1ebe1; --ink: #16181b; --ink-2: #61666d; --ink-3: #9a9ea4;
+    --linea: rgba(22,24,27,.10); --acento: #e2672a; --verde: #2f7d5b; --verde-suave: #e3f1ea;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Inter', -apple-system, sans-serif; color: var(--ink); background: #888; -webkit-font-smoothing: antialiased; }
-  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; background: var(--fondo); padding: 72px 72px 0; display: flex; flex-direction: column; page-break-after: always; }
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; background: var(--fondo); page-break-after: always; }
+  .slide.blanca { background: var(--blanco); }
+  .slide.arena { background: var(--arena); }
+  .foto { background-size: cover; background-position: center; position: relative; overflow: hidden; }
+  .foto .falta { position: absolute; inset: 0; display: grid; place-items: center; font-size: 20px; font-weight: 600; letter-spacing: .06em; color: rgba(22,24,27,.35); }
 
-  .top { display: flex; justify-content: space-between; align-items: center; font-size: 22px; font-weight: 500; color: var(--ink-3); letter-spacing: .01em; }
-  .top b { color: var(--ink); font-weight: 600; }
+  .cab { position: absolute; left: 72px; right: 72px; top: 64px; display: flex; justify-content: space-between; font-size: 21px; font-weight: 500; color: var(--ink-3); z-index: 3; }
+  .cab b { color: var(--ink); font-weight: 600; }
+  .cab.claro, .cab.claro b { color: #fff; }
+  .num { font-size: 21px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--acento); }
+  h1 { font-size: 92px; line-height: 1.0; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
+  h2 { font-size: 64px; line-height: 1.04; letter-spacing: -.04em; font-weight: 700; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  .bajada { font-size: 29px; line-height: 1.38; color: var(--ink-2); }
+  .fuente { font-size: 18px; color: var(--ink-3); line-height: 1.35; }
 
-  /* la foto: si no está el archivo, queda el degradé de atrás */
-  .foto { margin-top: 36px; height: 650px; flex: none; border-radius: 36px; background-size: cover; background-position: center; position: relative; overflow: hidden; }
-  .foto .falta { position: absolute; inset: 0; display: grid; place-items: center; font-size: 22px; font-weight: 500; color: rgba(21,23,26,.35); letter-spacing: .04em; }
+  /* bloque hoy / mañana */
+  .hm { display: grid; gap: 14px; }
+  .hm > div { border-radius: 24px; padding: 24px 28px; }
+  .hm small { display: block; font-size: 18px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .hm p { margin-top: 8px; font-size: 27px; line-height: 1.3; }
+  .hoy { background: var(--blanco); border: 1px solid var(--linea); }
+  .hoy small { color: var(--ink-3); } .hoy p { color: var(--ink-2); }
+  .man { background: var(--verde-suave); }
+  .man small { color: var(--verde); } .man p { color: var(--ink); font-weight: 500; }
+  .dos { grid-template-columns: 1fr 1fr; }
 
-  .num { margin-top: 52px; font-size: 22px; font-weight: 600; color: var(--acento); letter-spacing: .08em; text-transform: uppercase; }
-  h2 { margin-top: 14px; font-size: 68px; line-height: 1.06; letter-spacing: -.035em; font-weight: 700; text-wrap: balance; }
-  .bajada { margin-top: 18px; font-size: 30px; line-height: 1.38; color: var(--ink-2); text-wrap: pretty; max-width: 900px; }
-
-  .pie { position: absolute; left: 72px; right: 72px; bottom: 52px; display: flex; justify-content: space-between; font-size: 22px; color: var(--ink-3); }
+  .pie { position: absolute; left: 72px; right: 72px; bottom: 52px; display: flex; justify-content: space-between; font-size: 21px; color: var(--ink-3); }
   .pie b { color: var(--ink-2); font-weight: 600; }
 
-  /* portada y cierre: foto a sangre con el texto encima */
-  .sangre { padding: 0; }
-  .sangre .foto { position: absolute; inset: 0; margin: 0; height: auto; border-radius: 0; }
-  .sangre .velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,11,13,.55) 0%, rgba(10,11,13,0) 26%, rgba(10,11,13,0) 45%, rgba(10,11,13,.82) 100%); }
-  .sangre .top, .sangre .pie { position: absolute; left: 72px; right: 72px; color: rgba(255,255,255,.7); }
-  .sangre .top { top: 72px; } .sangre .top b, .sangre .pie b { color: #fff; }
-  .sangre .texto { position: absolute; left: 72px; right: 72px; bottom: 140px; color: #fff; }
-  .sangre .num { color: #ffb37a; margin-top: 0; }
-  .sangre h1 { margin-top: 16px; font-size: 96px; line-height: 1.0; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
-  .sangre h2 { font-size: 80px; }
-  .sangre .bajada { color: rgba(255,255,255,.82); }
-  .cierre .texto { right: auto; width: 660px; }
-  .cierre h2 { font-size: 66px; }
-  .sangre .foto .falta { color: rgba(255,255,255,.4); align-items: start; padding-top: 420px; }
+  /* 1 · portada: foto arriba a sangre, título en blanco abajo */
+  .p1 .foto { position: absolute; left: 0; right: 0; top: 0; height: 830px; }
+  .p1 .texto { position: absolute; left: 72px; right: 72px; top: 890px; }
+  .p1 h1 { margin-top: 18px; }
+  .p1 .bajada { margin-top: 20px; }
 
-  /* opinión: sin foto */
-  .lista { margin-top: 64px; display: grid; border-top: 1px solid var(--linea); }
-  .lista div { display: grid; grid-template-columns: 96px 1fr; padding: 34px 0; border-bottom: 1px solid var(--linea); }
-  .lista i { font-style: normal; font-size: 30px; font-weight: 600; color: var(--acento); padding-top: 6px; }
-  .lista b { display: block; font-size: 44px; letter-spacing: -.025em; line-height: 1.12; }
-  .lista span { display: block; margin-top: 10px; font-size: 28px; color: var(--ink-2); line-height: 1.35; }
+  /* 2 · solo tipografía con el dato */
+  .p2 .texto { position: absolute; left: 72px; right: 72px; top: 200px; }
+  .p2 .cifra { font-size: 300px; font-weight: 700; letter-spacing: -.07em; line-height: .9; color: var(--acento); margin-top: 40px; }
+  .p2 .cifra-txt { margin-top: 18px; font-size: 40px; line-height: 1.2; letter-spacing: -.02em; font-weight: 600; max-width: 600px; }
+  .p2 .fuente { margin-top: 18px; }
+  .p2 .foto { position: absolute; right: 72px; bottom: 140px; width: 300px; height: 300px; border-radius: 50%; }
+
+  /* 3 · pantalla partida vertical */
+  .p3 .foto { position: absolute; left: 0; top: 0; bottom: 0; width: 450px; }
+  .p3 .col { position: absolute; left: 510px; right: 60px; top: 150px; }
+  .p3 h2 { font-size: 54px; margin-top: 14px; }
+  .p3 .hm { margin-top: 30px; }
+  .p3 .hm p { font-size: 25px; }
+  .p3 .dato { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--linea); }
+  .p3 .dato b { display: block; font-size: 64px; letter-spacing: -.04em; color: var(--acento); line-height: 1; }
+  .p3 .dato span { display: block; margin-top: 8px; font-size: 22px; color: var(--ink-2); line-height: 1.3; }
+  .p3 .cab, .p3 .pie { left: 510px; right: 60px; }
+
+  /* 4 · foto ancha arriba y hoy/mañana lado a lado */
+  .p4 .foto { position: absolute; left: 0; right: 0; top: 0; height: 640px; background-position: center 35%; }
+  .p4 .col { position: absolute; left: 72px; right: 72px; top: 690px; }
+  .p4 h2 { margin-top: 14px; font-size: 58px; }
+  .p4 .hm { margin-top: 30px; }
+
+  /* 5 · foto recuadrada al medio */
+  .p5 .col { position: absolute; left: 72px; right: 72px; top: 150px; }
+  .p5 h2 { margin-top: 14px; }
+  .p5 .foto { margin-top: 34px; height: 470px; border-radius: 32px; }
+  .p5 .flujo { margin-top: 30px; display: grid; grid-template-columns: 1fr 60px 1fr; align-items: center; }
+  .p5 .flecha { text-align: center; font-size: 40px; color: var(--acento); }
+
+  /* 6 · foto a sangre con tarjeta clara encima */
+  .p6 .foto { position: absolute; inset: 0; }
+  .p6 .tarjeta { position: absolute; left: 48px; right: 48px; bottom: 48px; background: rgba(255,255,255,.96); border-radius: 36px; padding: 44px 48px 40px; box-shadow: 0 30px 80px rgba(0,0,0,.25); }
+  .p6 h2 { margin-top: 14px; font-size: 58px; }
+  .p6 .hm { margin-top: 26px; }
+  .p6 .cab { background: rgba(255,255,255,.92); border-radius: 980px; padding: 12px 22px; left: 48px; right: 48px; }
+
+  /* 7 · eficiencia y eficacia */
+  .p7 .col { position: absolute; left: 72px; right: 72px; top: 50%; transform: translateY(-50%); }
+  .p7 h2 { font-size: 76px; margin-top: 14px; }
+  .p7 .pares { margin-top: 50px; display: grid; gap: 18px; }
+  .p7 .par { background: var(--blanco); border-radius: 30px; padding: 34px 38px; display: grid; grid-template-columns: 250px 1fr; gap: 26px; align-items: start; }
+  .p7 .par b { font-size: 46px; letter-spacing: -.03em; }
+  .p7 .par b small { display: block; font-size: 22px; letter-spacing: 0; color: var(--acento); font-weight: 600; margin-top: 6px; }
+  .p7 .par p { font-size: 28px; line-height: 1.35; color: var(--ink-2); }
+  .p7 .remate { margin-top: 34px; font-size: 34px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; }
+
+  /* 8 · collage de tres fotos + pasos */
+  .p8 .tira { position: absolute; left: 72px; right: 72px; top: 140px; height: 330px; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 12px; }
+  .p8 .tira .foto { border-radius: 24px; height: 100%; }
+  .p8 .col { position: absolute; left: 72px; right: 72px; top: 520px; }
+  .p8 h2 { margin-top: 14px; font-size: 56px; }
+  .p8 .pasos { margin-top: 28px; display: grid; border-top: 1px solid var(--linea); }
+  .p8 .paso { display: grid; grid-template-columns: 70px 1fr; padding: 20px 0; border-bottom: 1px solid var(--linea); }
+  .p8 .paso i { font-style: normal; font-size: 26px; font-weight: 700; color: var(--acento); padding-top: 2px; }
+  .p8 .paso b { font-size: 30px; letter-spacing: -.02em; }
+  .p8 .paso span { display: block; font-size: 23px; color: var(--ink-2); margin-top: 3px; }
+
+  /* 9 · resumen para guardar */
+  .p9 .col { position: absolute; left: 72px; right: 72px; top: 160px; }
+  .p9 h2 { margin-top: 14px; font-size: 70px; }
+  .p9 .tabla { margin-top: 44px; border-radius: 30px; overflow: hidden; border: 1px solid var(--linea); }
+  .p9 .fila { display: grid; grid-template-columns: 1fr 1fr; }
+  .p9 .fila > div { padding: 24px 28px; font-size: 25px; line-height: 1.3; border-top: 1px solid var(--linea); }
+  .p9 .fila > div:first-child { color: var(--ink-2); background: var(--blanco); }
+  .p9 .fila > div:last-child { background: var(--verde-suave); font-weight: 500; }
+  .p9 .fila.tit > div { border-top: 0; font-size: 18px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 18px 28px; }
+  .p9 .fila.tit > div:first-child { color: var(--ink-3); }
+  .p9 .fila.tit > div:last-child { color: var(--verde); }
+  .p9 .fila b { display: block; font-size: 17px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--acento); margin-bottom: 6px; }
+
+  /* 10 · cierre: foto a sangre y la pregunta */
+  .p10 .foto { position: absolute; inset: 0; }
+  .p10 .velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,11,13,.45) 0%, rgba(10,11,13,0) 25%, rgba(10,11,13,0) 45%, rgba(10,11,13,.85) 100%); }
+  .p10 .texto { position: absolute; left: 72px; width: 640px; bottom: 150px; color: #fff; }
+  .p10 .num { color: #ffb183; }
+  .p10 h2 { margin-top: 16px; font-size: 64px; }
+  .p10 .bajada { margin-top: 22px; color: rgba(255,255,255,.85); }
 </style>
 </head>
 <body>
 
 <!-- 1 · Portada -->
-<section class="slide sangre">
+<section class="slide blanca p1">
   <div class="foto" data-img="01"></div>
-  <div class="velo"></div>
-  <div class="top"><b>Lucas Jeckeln</b><span>1 / 9</span></div>
+  <div class="cab claro"><b>Lucas Jeckeln</b><span>1 / 10</span></div>
   <div class="texto">
-    <p class="num">Opinión</p>
-    <h1>Cómo la IA va a cambiar Oil &amp; Gas.</h1>
-    <p class="bajada">Cinco lugares donde creo que va a pasar, y lo que va a definir quién gana.</p>
+    <p class="num">Oil &amp; Gas · hoy y mañana</p>
+    <h1>Cómo trabajamos hoy. Cómo vamos a trabajar mañana.</h1>
+    <p class="bajada">Cuatro problemas del rubro y lo que la IA puede cambiar en cada uno.</p>
   </div>
-  <div class="pie" style="bottom:56px"><span></span><span>Deslizá →</span></div>
+  <div class="pie"><span></span><span>Deslizá →</span></div>
 </section>
 
-<!-- 2 · Los datos -->
-<section class="slide">
-  <div class="top"><b>IA en Oil &amp; Gas</b><span>2 / 9</span></div>
-  <div class="foto" data-img="02"></div>
-  <p class="num">El punto de partida</p>
-  <h2>Generamos datos todo el tiempo. Usamos una mínima parte.</h2>
-  <p class="bajada">Miles de señales por minuto. El problema nunca fue tener datos: fue tener tiempo para mirarlos.</p>
-  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
-</section>
-
-<!-- 3 · Mantenimiento -->
-<section class="slide">
-  <div class="top"><b>IA en Oil &amp; Gas</b><span>3 / 9</span></div>
-  <div class="foto" data-img="03"></div>
-  <p class="num">01 · Mantenimiento</p>
-  <h2>Anticipar la falla, en vez de arreglarla.</h2>
-  <p class="bajada">Un equipo avisa días antes de romperse. La IA aprende a escucharlo.</p>
-  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
-</section>
-
-<!-- 4 · Producción -->
-<section class="slide">
-  <div class="top"><b>IA en Oil &amp; Gas</b><span>4 / 9</span></div>
+<!-- 2 · El punto de partida (solo tipografía) -->
+<section class="slide p2">
+  <div class="cab"><b>IA en Oil &amp; Gas</b><span>2 / 10</span></div>
+  <div class="texto">
+    <p class="num">El punto de partida</p>
+    <h2 style="margin-top:16px">Tenemos más datos que nunca. Y seguimos decidiendo con el reporte de ayer.</h2>
+    <p class="cifra">&lt;1%</p>
+    <p class="cifra-txt">de los datos de una plataforma offshore llega a quien toma las decisiones.</p>
+    <p class="fuente">Fuente: McKinsey &amp; Company.</p>
+  </div>
   <div class="foto" data-img="04"></div>
-  <p class="num">02 · Producción</p>
-  <h2>Cada pozo, mirado en tiempo real.</h2>
-  <p class="bajada">Lo que hoy aparece en el reporte del día siguiente, se ve y se corrige en el momento.</p>
   <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
 </section>
 
-<!-- 5 · Perforación y reservorio -->
-<section class="slide">
-  <div class="top"><b>IA en Oil &amp; Gas</b><span>5 / 9</span></div>
-  <div class="foto" data-img="05"></div>
-  <p class="num">03 · Perforación y reservorio</p>
-  <h2>La historia de cientos de pozos, para decidir el próximo.</h2>
-  <p class="bajada">Modelos que aprenden de lo ya perforado para elegir dónde y cómo hacer el siguiente.</p>
-  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
-</section>
-
-<!-- 6 · Seguridad y emisiones -->
-<section class="slide">
-  <div class="top"><b>IA en Oil &amp; Gas</b><span>6 / 9</span></div>
-  <div class="foto" data-img="06"></div>
-  <p class="num">04 · Seguridad y emisiones</p>
-  <h2>Detectar el riesgo en minutos, no en la próxima recorrida.</h2>
-  <p class="bajada">Cámaras y sensores que reconocen una fuga o una situación de riesgo, y avisan solos.</p>
-  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
-</section>
-
-<!-- 7 · Conocimiento -->
-<section class="slide">
-  <div class="top"><b>IA en Oil &amp; Gas</b><span>7 / 9</span></div>
-  <div class="foto" data-img="07"></div>
-  <p class="num">05 · Conocimiento</p>
-  <h2>Que la experiencia no se jubile con la gente.</h2>
-  <p class="bajada">Treinta años de campo, consultables con una pregunta. Para mí, el cambio más subestimado.</p>
-  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
-</section>
-
-<!-- 8 · Mi opinión -->
-<section class="slide">
-  <div class="top"><b>IA en Oil &amp; Gas</b><span>8 / 9</span></div>
-  <p class="num" style="margin-top:110px">Mi opinión</p>
-  <h2 style="font-size:84px">Lo que va a definir quién gana.</h2>
-  <div class="lista">
-    <div><i>01</i><p><b>Los datos, no la tecnología.</b><span>Con datos desordenados, ningún modelo sirve.</span></p></div>
-    <div><i>02</i><p><b>La gente de campo, más que nunca.</b><span>Es quien sabe si lo que marca el modelo tiene sentido.</span></p></div>
-    <div><i>03</i><p><b>Un perfil nuevo.</b><span>Gana quien sepa hacerle buenas preguntas a los datos.</span></p></div>
-    <div><i>04</i><p><b>Empezar chico.</b><span>Un problema concreto, un resultado medible, y después escalar.</span></p></div>
+<!-- 3 · Problema 1: paradas no planificadas (pantalla partida) -->
+<section class="slide blanca p3">
+  <div class="foto" data-img="03"></div>
+  <div class="cab"><b>IA en Oil &amp; Gas</b><span>3 / 10</span></div>
+  <div class="col">
+    <p class="num">Problema 01</p>
+    <h2>Paradas no planificadas.</h2>
+    <div class="hm">
+      <div class="hoy"><small>Hoy</small><p>El equipo falla, se para la producción y recién ahí se actúa.</p></div>
+      <div class="man"><small>Mañana</small><p>El modelo detecta el desvío días antes y la intervención se planifica.</p></div>
+    </div>
+    <div class="dato"><b>US$ 38 M</b><span>por año: impacto promedio de las paradas no planificadas en operadores offshore. Con mantenimiento predictivo, 36% menos paradas.</span><span class="fuente" style="margin-top:8px">Fuente: Kimberlite, 2016.</span></div>
   </div>
   <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
 </section>
 
-<!-- 9 · Cierre -->
-<section class="slide sangre cierre">
+<!-- 4 · Problema 2: datos dispersos (foto ancha arriba) -->
+<section class="slide p4">
+  <div class="foto" data-img="02"></div>
+  <div class="cab claro"><b>IA en Oil &amp; Gas</b><span>4 / 10</span></div>
+  <div class="col">
+    <p class="num">Problema 02</p>
+    <h2>Datos dispersos que nadie cruza.</h2>
+    <div class="hm dos">
+      <div class="hoy"><small>Hoy</small><p>La información vive en SCADA, planillas, mails y reportes separados.</p></div>
+      <div class="man"><small>Mañana</small><p>Todo cruzado en una sola vista, con alertas cuando algo se desvía.</p></div>
+    </div>
+  </div>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
+</section>
+
+<!-- 5 · Problema 3: tareas manuales (foto recuadrada) -->
+<section class="slide blanca p5">
+  <div class="cab"><b>IA en Oil &amp; Gas</b><span>5 / 10</span></div>
+  <div class="col">
+    <p class="num">Problema 03</p>
+    <h2>Horas en tareas que no agregan valor.</h2>
+    <div class="foto" data-img="10"></div>
+    <div class="flujo hm">
+      <div class="hoy"><small>Hoy</small><p>Armar reportes, cargar datos, buscar información.</p></div>
+      <p class="flecha">→</p>
+      <div class="man"><small>Mañana</small><p>La IA arma el borrador; las personas analizan y deciden.</p></div>
+    </div>
+  </div>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
+</section>
+
+<!-- 6 · Problema 4: conocimiento que se pierde (tarjeta sobre la foto) -->
+<section class="slide p6">
+  <div class="foto" data-img="07"></div>
+  <div class="cab"><b>IA en Oil &amp; Gas</b><span>6 / 10</span></div>
+  <div class="tarjeta">
+    <p class="num">Problema 04</p>
+    <h2>El conocimiento que se jubila.</h2>
+    <div class="hm dos">
+      <div class="hoy"><small>Hoy</small><p>Treinta años de campo se van con quien se retira.</p></div>
+      <div class="man"><small>Mañana</small><p>Lecciones e historiales que se consultan con una pregunta.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · Eficiencia y eficacia (solo tipografía, fondo arena) -->
+<section class="slide arena p7">
+  <div class="cab"><b>IA en Oil &amp; Gas</b><span>7 / 10</span></div>
+  <div class="col">
+    <p class="num">Lo que está en juego</p>
+    <h2>Ser más eficientes. Y más eficaces.</h2>
+    <div class="pares">
+      <div class="par"><b>Eficiencia<small>hacer las cosas bien</small></b><p>Lo mismo con menos: menos horas, menos paradas, menos costo por barril.</p></div>
+      <div class="par"><b>Eficacia<small>hacer las cosas correctas</small></b><p>Decidir mejor: dónde intervenir, qué pozo priorizar, qué riesgo atender primero.</p></div>
+    </div>
+    <p class="remate">La IA puede mejorar las dos. Pero solo si se la aplica al problema correcto.</p>
+  </div>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
+</section>
+
+<!-- 8 · Cómo usar la IA (collage + pasos) -->
+<section class="slide blanca p8">
+  <div class="cab"><b>IA en Oil &amp; Gas</b><span>8 / 10</span></div>
+  <div class="tira">
+    <div class="foto" data-img="11"></div>
+    <div class="foto" data-img="06"></div>
+    <div class="foto" data-img="05"></div>
+  </div>
+  <div class="col">
+    <p class="num">Cómo empezar</p>
+    <h2>Cuatro pasos para usar la IA y tener mejores resultados.</h2>
+    <div class="pasos">
+      <div class="paso"><i>01</i><p><b>Elegí un problema que duela.</b><span>Concreto y medible: una parada, un reporte, una pérdida.</span></p></div>
+      <div class="paso"><i>02</i><p><b>Ordená los datos de ese problema.</b><span>No los de toda la empresa: solo los que hacen falta.</span></p></div>
+      <div class="paso"><i>03</i><p><b>Sumá a la gente de campo desde el día uno.</b><span>Son quienes saben si el resultado tiene sentido.</span></p></div>
+      <div class="paso"><i>04</i><p><b>Probá chico, medí y recién ahí escalá.</b><span>Un piloto que funciona convence más que cualquier plan.</span></p></div>
+    </div>
+  </div>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
+</section>
+
+<!-- 9 · Resumen para guardar -->
+<section class="slide p9">
+  <div class="cab"><b>IA en Oil &amp; Gas</b><span>9 / 10</span></div>
+  <div class="col">
+    <p class="num">Para guardar</p>
+    <h2>Hoy y mañana, en una sola placa.</h2>
+    <div class="tabla">
+      <div class="fila tit"><div>Hoy</div><div>Mañana</div></div>
+      <div class="fila"><div><b>Paradas</b>Se arregla cuando falla.</div><div><b>&nbsp;</b>Se anticipa y se planifica.</div></div>
+      <div class="fila"><div><b>Datos</b>Dispersos en mil lugares.</div><div><b>&nbsp;</b>Cruzados, con alertas.</div></div>
+      <div class="fila"><div><b>Tareas</b>Horas de reportes y cargas.</div><div><b>&nbsp;</b>Borrador automático; la gente decide.</div></div>
+      <div class="fila"><div><b>Conocimiento</b>Se va con quien se retira.</div><div><b>&nbsp;</b>Queda y se consulta.</div></div>
+    </div>
+  </div>
+  <div class="pie"><b>Lucas Jeckeln</b><span>→</span></div>
+</section>
+
+<!-- 10 · Cierre -->
+<section class="slide p10">
   <div class="foto" data-img="09"></div>
   <div class="velo"></div>
-  <div class="top"><b>Lucas Jeckeln</b><span>9 / 9</span></div>
+  <div class="cab claro"><b>Lucas Jeckeln</b><span>10 / 10</span></div>
   <div class="texto">
-    <p class="num">Lo que aprendí</p>
-    <h2>La IA no hace el trabajo por vos. Te saca el "no sé hacerlo" de encima.</h2>
-    <p class="bajada" style="margin-top:34px;font-size:36px;color:#fff;font-weight:600">¿Qué área creés que va a cambiar primero?</p>
+    <p class="num">Te pregunto</p>
+    <h2>¿Cuál de estos problemas resolverías primero en tu operación?</h2>
+    <p class="bajada">Paradas, datos, tareas manuales o conocimiento. Te leo en los comentarios.</p>
   </div>
-  <div class="pie" style="bottom:56px"><span></span><span>Te leo en los comentarios</span></div>
 </section>
 
 <script>
   // Cada foto busca imagenes/NN.jpg (o .png / .webp / .jpeg). Si no hay, queda un degradé con el número.
-  const DEGRADES = { '01': '#5b5f66,#2b2e33', '02': '#cfd6dc,#a9b4bd', '03': '#d8cfc4,#b3a493', '04': '#dcd2c2,#c0ab8c',
-                     '05': '#d3d1cc,#aeaba4', '06': '#d6d9d2,#b0b6a8', '07': '#ddd5ca,#bfb2a0', '09': '#4d4a46,#24262a' };
   window.FOTOS = Promise.all([...document.querySelectorAll('.foto[data-img]')].map(f => new Promise(listo => {
-    const n = f.dataset.img, [a, b] = DEGRADES[n].split(',');
-    f.style.backgroundImage = `linear-gradient(160deg, ${a}, ${b})`;
+    const n = f.dataset.img;
+    f.style.backgroundImage = 'linear-gradient(160deg, #e7e1d6, #cfc5b5)';
     const probar = exts => {
       if (!exts.length) { f.innerHTML = `<span class="falta">IMAGEN ${n} · GOOGLE FLOW</span>`; return listo(); }
       const src = `imagenes/${n}.${exts[0]}`, img = new Image();

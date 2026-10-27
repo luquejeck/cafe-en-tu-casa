@@ -7,54 +7,56 @@ Estilo "documento técnico" pensado para gente de ingeniería y de IA: diagramas
   Se sube con *Agregar documento*; título sugerido: "Cómo la IA va a cambiar Oil & Gas".
 - **Para rehacerlo** después de editar `carrusel.html`: `node linkedin/oil-gas/generar.js`.
 
-| Placa | Tema |
-|---|---|
-| 1 | Generamos datos todo el tiempo. Usamos una mínima parte. |
-| 2 | Un yacimiento no para nunca: las señales de cada equipo |
-| 3 | Mantenimiento: de arreglar cuando falla a anticipar la falla |
-| 4 | Producción: cada pozo, mirado en tiempo real |
-| 5 | Perforación y reservorio: la historia de cientos de pozos para decidir el próximo |
-| 6 | Seguridad y emisiones: detectar el riesgo en minutos |
-| 7 | Conocimiento: que la experiencia no se jubile con la gente |
-| 8 | Mi opinión: lo que va a definir quién gana |
-| 9 | Cierre y pregunta |
+| Placa | Tema | Diseño |
+|---|---|---|
+| 1 | Cómo trabajamos hoy. Cómo vamos a trabajar mañana. | Foto arriba a sangre, título abajo |
+| 2 | Más datos que nunca; menos del 1% llega a quien decide | Solo tipografía, cifra gigante y foto redonda |
+| 3 | Problema 01 · Paradas no planificadas (US$ 38 M/año) | Pantalla partida vertical |
+| 4 | Problema 02 · Datos dispersos que nadie cruza | Foto ancha arriba, hoy/mañana lado a lado |
+| 5 | Problema 03 · Horas en tareas que no agregan valor | Foto recuadrada al medio |
+| 6 | Problema 04 · El conocimiento que se jubila | Foto a sangre con tarjeta encima |
+| 7 | Eficiencia y eficacia | Solo tipografía, fondo arena |
+| 8 | Cuatro pasos para usar la IA y tener mejores resultados | Collage de tres fotos + pasos |
+| 9 | Hoy y mañana, en una sola placa | Tabla para guardar |
+| 10 | ¿Cuál de estos problemas resolverías primero? | Foto a sangre con la pregunta |
 
-Los gráficos son ilustrativos: no muestran datos reales de ninguna operación.
+**Cifras y fuentes** (verificadas):
+- Menos del 1% de los datos de una plataforma offshore llega a quien decide: McKinsey & Company
+  ([PDF](https://www.mckinsey.com.br/~/media/McKinsey/Industries/Oil%20and%20Gas/Our%20Insights/Why%20oil%20and%20gas%20companies%20must%20act%20on%20analytics/Why-oil-and-gas-companies-must-act-on-analytics.pdf), [CNBC](https://www.cnbc.com/2015/03/05/us-energy-industry-collects-a-lot-of-operational-data-but-doesnt-use-it.html)).
+- US$ 38 M por año de impacto promedio de las paradas no planificadas en operadores offshore, y 36% menos paradas
+  con mantenimiento predictivo: Kimberlite, 2016 ([estudio citado por GE](https://nisusacorp.com/sites/default/files/2017-12/impact-of-digital-on-unplanned-downtime-study.pdf)).
+  Son cifras de hace unos años: sirven como orden de magnitud.
+
+Los gráficos y las fotos son ilustrativos (generados con Google Flow): no muestran ninguna operación real.
 
 ## Texto
 
 ```
-Hay una industria que genera datos todo el tiempo y que todavía usa una mínima parte de ellos.
+Trabajo en Oil & Gas y cada vez me convenzo más de algo: el próximo gran salto del rubro no va a venir de un equipo nuevo. Va a venir de cómo usamos lo que ya tenemos.
 
-Es la mía: Oil & Gas.
+Hoy generamos más datos que nunca. Pero según McKinsey, menos del 1% de los datos de una plataforma offshore llega a quien toma las decisiones. Seguimos decidiendo con el reporte de ayer.
 
-Un yacimiento no para nunca. Presiones, caudales, temperaturas, vibraciones, alarmas. Miles de señales por minuto, de cientos de equipos, durante años. Por mucho tiempo el problema no fue tener datos. Fue que nadie tenía tiempo de mirarlos todos.
+Veo cuatro problemas que se repiten en casi cualquier operación:
 
-Ahí es donde creo que la IA va a cambiar el rumbo del rubro. No en un laboratorio, sino en el campo:
+Paradas no planificadas. Hoy, el equipo falla y recién ahí actuamos. Mañana, un modelo detecta el desvío días antes y la intervención se planifica. Un estudio de Kimberlite estimó en US$ 38 millones por año el impacto promedio de estas paradas en operadores offshore, y 36% menos paradas en quienes trabajan con mantenimiento predictivo.
 
-🔧 Mantenimiento. Pasar de arreglar cuando algo falla a anticipar la falla, leyendo las señales que un equipo da días antes de romperse. Menos paradas, menos riesgos, menos urgencias.
+Datos dispersos. Hoy la información vive en el SCADA, en planillas, en mails y en reportes que nadie cruza. Mañana, todo en una sola vista, con alertas cuando algo se desvía.
 
-🛢️ Producción. Modelos que miran cada pozo en tiempo real y avisan cuando algo se desvía, antes de que se pierda producción. Lo que hoy se revisa en un reporte del día siguiente, mañana se va a ver en el momento.
+Tareas manuales. Hoy se van horas armando reportes, cargando datos y buscando información. Mañana, la IA arma el borrador y las personas usan ese tiempo para analizar y decidir.
 
-⛏️ Perforación y reservorio. Usar la historia de cientos de pozos para decidir mejor dónde y cómo perforar el próximo.
+Conocimiento que se pierde. Hoy, cuando alguien con treinta años de campo se retira, se va con lo que sabe. Mañana, sus lecciones e historiales quedan y se pueden consultar con una pregunta.
 
-🦺 Seguridad y emisiones. Detectar una fuga, un desvío o una situación de riesgo en minutos, no en la próxima recorrida.
+En el fondo, se trata de dos cosas: ser más eficientes (hacer lo mismo con menos horas, menos paradas, menos costo) y más eficaces (decidir mejor dónde intervenir y qué priorizar).
 
-📚 Conocimiento. Para mí, el más subestimado. En cada operación hay gente con 30 años de experiencia que sabe cosas que no están escritas en ningún lado. La IA puede ayudar a que ese conocimiento no se jubile con ellos: procedimientos, lecciones aprendidas e historiales que se puedan consultar con una pregunta.
+¿Cómo se empieza? Por lo que veo, con cuatro pasos:
+1. Elegir un problema que duela y se pueda medir.
+2. Ordenar los datos de ese problema, no los de toda la empresa.
+3. Sumar a la gente de campo desde el primer día.
+4. Probar en chico, medir, y recién ahí escalar.
 
-Ahora, mi opinión sobre lo que va a definir quién gana:
+La tecnología ya está. Lo que va a marcar la diferencia es cómo la aplicamos.
 
-1️⃣ La tecnología no va a ser el cuello de botella. Los datos sí. Un modelo con datos desordenados no sirve de nada.
+¿Cuál de estos cuatro problemas resolverías primero en tu operación? Te leo en los comentarios.
 
-2️⃣ No reemplaza a la gente de operación; la necesita más que nunca. El que conoce el campo es el único que puede decir si lo que marca un modelo tiene sentido.
-
-3️⃣ Va a cambiar el perfil. El operador, el ingeniero o el analista que sepa hacerle buenas preguntas a los datos va a tener una ventaja enorme.
-
-4️⃣ Gana el que empieza chico. Un problema concreto, un resultado medible, y de ahí escalar. Los grandes proyectos de "transformación digital" que nadie usa no cambian nada.
-
-Lo aprendí en carne propia armando mi emprendimiento con IA: no hace el trabajo por vos, pero te saca el "no sé hacerlo" de encima. En una industria que vive de los datos, eso puede cambiar todo.
-
-¿Ustedes qué área creen que va a cambiar primero? 👇
-
-#OilAndGas #InteligenciaArtificial #Energía #VacaMuerta #TransformaciónDigital
+#OilAndGas #InteligenciaArtificial #Energía #TransformaciónDigital #Eficiencia
 ```

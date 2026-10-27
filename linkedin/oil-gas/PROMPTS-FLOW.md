@@ -61,3 +61,19 @@ Silhouette of a single offshore worker in a helmet standing at the railing of an
 ```
 
 La placa 08 (mi opinión) va sin foto, a propósito: es la placa de la idea.
+
+---
+
+## Fotos nuevas para la versión "hoy y mañana" (10 placas)
+
+Mismo estilo que las anteriores. Formato **horizontal 16:9**.
+
+### 10 · Tareas manuales (placa 5)
+```
+A tired field engineer at night inside a small oil field site office trailer, surrounded by stacks of printed reports, binders and a laptop with a spreadsheet, a cup of coffee, warm desk lamp light, through the window the lights of an oil field in the Patagonian desert, feeling of repetitive manual work, photorealistic editorial photography, muted earthy palette with warm orange accents, calm and premium, shallow depth of field, shot on 35mm, no readable text on papers or screen, no logos, no brand names
+```
+
+### 11 · El mañana: decisiones con IA (placa 8)
+```
+A confident young field engineer in plain unbranded orange coveralls and white helmet at sunrise on an oil field in Patagonia, looking at a rugged tablet with a calm smile, the tablet shows an abstract clean dashboard with a single highlighted alert, pumpjacks softly blurred in the background, fresh morning light, sense of control and clarity, photorealistic editorial photography, muted earthy palette with warm orange accents, calm and premium, shallow depth of field, shot on 35mm, no readable text, no logos, no brand names
+```
