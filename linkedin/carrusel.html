@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Carrusel LinkedIn · Café en tu Casa con IA</title>
+<!-- Carrusel para LinkedIn (documento PDF). Cada .slide es una placa de 1080×1350.
+     Lo renderiza linkedin/generar.js a PNG y PDF. Mismo sistema que las piezas de Instagram. -->
+<style>
+  :root {
+    --ink: #1d1d1f; --ink-2: #6e6e73; --ink-3: #86868b;
+    --bg: #ffffff; --bg-2: #f5f5f7; --dark: #101012;
+    --oliva: #5b6e32; --oliva-fuerte: #455426; --oliva-suave: rgba(91, 110, 50, .12);
+    --oliva-claro: #a3c26a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', -apple-system, sans-serif; color: var(--ink); background: #ddd; -webkit-font-smoothing: antialiased; }
+  .slide {
+    width: 1080px; height: 1350px; position: relative; overflow: hidden;
+    background: var(--bg-2); padding: 90px 84px 0; display: flex; flex-direction: column;
+    page-break-after: always;
+  }
+  .slide.blanco { background: var(--bg); }
+  .slide.negro { background: var(--dark); color: #f5f5f7; }
+  .slide.oliva { background: var(--oliva-fuerte); color: #fff; }
+
+  .marca { display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 600; letter-spacing: -.02em; }
+  .marca i { width: 13px; height: 13px; border-radius: 50%; background: var(--oliva); }
+  .negro .marca i { background: var(--oliva-claro); }
+  .oliva .marca i { background: #dcecb8; }
+
+  .epi { margin-top: 64px; font-size: 26px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--oliva); }
+  .negro .epi { color: var(--oliva-claro); }
+  .oliva .epi { color: #dcecb8; }
+  h1 { margin-top: 18px; font-size: 96px; line-height: 1.02; letter-spacing: -.04em; font-weight: 700; text-wrap: balance; }
+  h2 { margin-top: 18px; font-size: 76px; line-height: 1.04; letter-spacing: -.035em; font-weight: 700; text-wrap: balance; }
+  .bajada { margin-top: 26px; font-size: 36px; line-height: 1.3; color: var(--ink-2); text-wrap: pretty; }
+  .negro .bajada { color: #a1a1a6; }
+  .oliva .bajada { color: rgba(255,255,255,.78); }
+
+  .pie { position: absolute; left: 84px; right: 84px; bottom: 60px; display: flex; justify-content: space-between; align-items: center; font-size: 24px; color: var(--ink-3); }
+  .puntos { display: flex; gap: 10px; }
+  .puntos b { width: 11px; height: 11px; border-radius: 50%; background: #d2d2d7; }
+  .puntos b.on { background: var(--oliva); }
+  .negro .puntos b { background: #3a3a3e; } .negro .puntos b.on { background: var(--oliva-claro); }
+  .oliva .puntos b { background: rgba(255,255,255,.3); } .oliva .puntos b.on { background: #fff; }
+  .negro .pie, .oliva .pie { color: rgba(255,255,255,.55); }
+
+  /* tarjetas */
+  .lista { margin-top: 50px; display: grid; gap: 18px; }
+  .item { background: var(--bg); border-radius: 28px; padding: 30px 34px; display: grid; grid-template-columns: 64px 1fr; gap: 24px; align-items: center; }
+  .blanco .item { background: var(--bg-2); }
+  .item .ico { width: 64px; height: 64px; border-radius: 18px; background: var(--oliva-suave); display: grid; place-items: center; font-size: 32px; }
+  .item b { display: block; font-size: 34px; font-weight: 600; letter-spacing: -.02em; }
+  .item span { display: block; margin-top: 4px; font-size: 26px; color: var(--ink-2); line-height: 1.3; }
+
+  /* portada */
+  .portada h1 { font-size: 112px; margin-top: 22px; }
+  .chips { margin-top: 50px; display: flex; flex-wrap: wrap; gap: 14px; }
+  .chips span { background: var(--bg); border-radius: 980px; padding: 16px 28px; font-size: 28px; font-weight: 600; color: var(--oliva-fuerte); }
+  .portada .firma { margin-top: auto; margin-bottom: 150px; font-size: 30px; color: var(--ink-2); }
+  .portada .firma b { color: var(--ink); }
+
+  /* captura web */
+  .dos { margin-top: 44px; display: grid; grid-template-columns: 330px 1fr; gap: 40px; align-items: start; }
+  .celu { width: 330px; height: 690px; border-radius: 48px; border: 12px solid #1d1d1f; overflow: hidden; background: #fff; box-shadow: 0 18px 60px rgba(0,0,0,.14); }
+  .celu img { width: 100%; display: block; }
+  .dos .lista { margin-top: 0; gap: 14px; }
+  .dos .item { grid-template-columns: 1fr; padding: 24px 28px; }
+  .dos .item b { font-size: 30px; }
+  .dos .item span { font-size: 24px; }
+
+  /* grilla de piezas */
+  .grilla { margin-top: 46px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .grilla img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 18px; display: block; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+  .cifras { margin-top: 34px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .cifras div { background: var(--bg); border-radius: 22px; padding: 20px 22px; }
+  .cifras b { display: block; font-size: 52px; letter-spacing: -.03em; }
+  .cifras span { font-size: 22px; color: var(--ink-2); }
+
+  /* flujo del agente */
+  .flujo { margin-top: 54px; display: grid; gap: 0; }
+  .paso { display: grid; grid-template-columns: 70px 1fr; gap: 26px; }
+  .paso .n { width: 70px; height: 70px; border-radius: 50%; background: var(--oliva-claro); color: var(--dark); font-size: 32px; font-weight: 700; display: grid; place-items: center; }
+  .paso .linea { grid-column: 1; width: 2px; height: 56px; background: #3a3a3e; justify-self: center; }
+  .paso b { display: block; font-size: 36px; font-weight: 600; letter-spacing: -.02em; padding-top: 4px; }
+  .paso span { display: block; font-size: 26px; color: #a1a1a6; margin-top: 4px; line-height: 1.3; }
+
+  /* logos */
+  .logos { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .logos > div { height: 200px; border-radius: 28px; display: grid; place-items: center; }
+  .logos .marca { font-size: 40px; }
+  .l1 { background: #fff; } .l2 { background: #f5f5f7; border: 2px solid rgba(0,0,0,.06); }
+  .l3 { background: #101012; color: #f5f5f7; } .l3 .marca i { background: #a3c26a; }
+  .l4 { background: #455426; color: #fff; } .l4 .marca i { background: #dcecb8; }
+  .paleta { margin-top: 26px; display: flex; gap: 12px; }
+  .paleta span { flex: 1; height: 90px; border-radius: 20px; display: flex; align-items: flex-end; padding: 12px 16px; font: 600 20px ui-monospace, monospace; }
+
+  /* aprendizajes */
+  .reglas { margin-top: 44px; display: grid; gap: 16px; }
+  .regla { background: var(--bg); border-radius: 28px; padding: 28px 32px; }
+  .regla .dato { font-size: 24px; color: var(--oliva); font-weight: 600; letter-spacing: .02em; }
+  .regla b { display: block; margin-top: 8px; font-size: 34px; letter-spacing: -.02em; line-height: 1.2; }
+
+  /* cierre */
+  .cierre h2 { font-size: 88px; margin-top: 30px; }
+  .cierre .pregunta { margin-top: auto; margin-bottom: 170px; background: rgba(255,255,255,.12); border-radius: 30px; padding: 36px 40px; font-size: 38px; font-weight: 600; line-height: 1.25; }
+</style>
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="slide portada">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <p class="epi">Emprender con IA</p>
+  <h1>Armé mi negocio entero con inteligencia artificial.</h1>
+  <p class="bajada">Sin agencia, sin programador, sin community manager. Esto es lo que hoy hace la IA por mi emprendimiento.</p>
+  <div class="chips">
+    <span>Página web</span><span>Stock y compras</span><span>Ventas y finanzas</span>
+    <span>Contenido</span><span>Agentes</span><span>Branding</span><span>Métricas</span>
+  </div>
+  <p class="firma"><b>Lucas Jeckeln</b> · Fundador de Café en tu Casa</p>
+  <div class="pie"><div class="puntos"><b class="on"></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div><span>Deslizá →</span></div>
+</section>
+
+<!-- 2 · Web -->
+<section class="slide blanco">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <p class="epi">01 · La página web</p>
+  <h2>Una tienda con look de marca grande.</h2>
+  <div class="dos">
+    <div class="celu"><img src="capturas/web-celu.png" alt=""></div>
+    <div class="lista">
+      <div class="item"><div><b>Diseñada y programada con IA</b><span>Home, fichas de producto y SEO. Publicada en Vercel.</span></div></div>
+      <div class="item"><div><b>Precios en un solo archivo</b><span>Cambio dos números y se actualiza todo el sitio.</span></div></div>
+      <div class="item"><div><b>Recomendador de 4 preguntas</b><span>Le dice a cada cliente qué cafetera le conviene.</span></div></div>
+      <div class="item"><div><b>Venta por WhatsApp y Mercado Libre</b><span>El mensaje se arma solo con modelo y precio.</span></div></div>
+    </div>
+  </div>
+  <div class="pie"><div class="puntos"><b></b><b class="on"></b><b></b><b></b><b></b><b></b><b></b><b></b></div><span>Deslizá →</span></div>
+</section>
+
+<!-- 3 · Gestión -->
+<section class="slide">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <p class="epi">02 · La gestión</p>
+  <h2>Stock, compras, ventas y números. En orden.</h2>
+  <div class="lista">
+    <div class="item"><div class="ico">📦</div><div><b>Stock</b><span>Qué tengo, qué se agota y qué modelo dejo de promocionar.</span></div></div>
+    <div class="item"><div class="ico">🧾</div><div><b>Compras</b><span>Cuándo reponer y cuánto pedir según lo que se vende.</span></div></div>
+    <div class="item"><div class="ico">💬</div><div><b>Ventas</b><span>Cada venta registrada, por canal: web, WhatsApp, Mercado Libre.</span></div></div>
+    <div class="item"><div class="ico">📊</div><div><b>Finanzas</b><span>Márgenes, precios y caja, sin pelearme con planillas.</span></div></div>
+  </div>
+  <div class="pie"><div class="puntos"><b></b><b></b><b class="on"></b><b></b><b></b><b></b><b></b><b></b></div><span>Deslizá →</span></div>
+</section>
+
+<!-- 4 · Contenido -->
+<section class="slide">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <p class="epi">03 · El contenido</p>
+  <h2>Un mes de Instagram, listo antes de empezar.</h2>
+  <div class="grilla">
+    <img src="../assets/img/ig/s2-mar-carrusel-magnifica-a-fondo-1.jpg" alt="">
+    <img src="../assets/img/ig/s1-sab-reel-del-grano-a-la-taza-1.jpg" alt="">
+    <img src="../assets/img/ig/s3-jue-carrusel-super-o-manual-1.jpg" alt="">
+    <img src="../assets/img/ig/s2-sab-reel-la-cuenta-del-cafe-1.jpg" alt="">
+    <img src="../assets/img/ig/s4-jue-carrusel-preguntas-1.jpg" alt="">
+    <img src="../assets/img/ig/v03-pagaste-y-ahora-portada.jpg" alt="">
+    <img src="../assets/img/ig/s4-mar-carrusel-dedica-a-fondo-1.jpg" alt="">
+    <img src="../assets/img/ig/s3-sab-reel-entra-en-tu-mesada-1.jpg" alt="">
+  </div>
+  <div class="cifras">
+    <div><b>34</b><span>publicaciones</span></div>
+    <div><b>14</b><span>reels y videos</span></div>
+    <div><b>7</b><span>carruseles</span></div>
+    <div><b>12</b><span>historias</span></div>
+  </div>
+  <div class="pie"><div class="puntos"><b></b><b></b><b></b><b class="on"></b><b></b><b></b><b></b><b></b></div><span>Deslizá →</span></div>
+</section>
+
+<!-- 5 · Agentes -->
+<section class="slide negro">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <p class="epi">04 · Agentes y CM automático</p>
+  <h2>Mi community manager trabaja los lunes a las 8:47.</h2>
+  <div class="flujo">
+    <div class="paso"><div class="n">1</div><div><b>Lee las métricas de la semana</b><span>Alcance, vistas, guardados y tiempo de cada reel.</span></div></div>
+    <div class="paso"><div class="linea"></div></div>
+    <div class="paso"><div class="n">2</div><div><b>Saca conclusiones y las anota</b><span>Lo que funciona pasa de "señal" a "regla".</span></div></div>
+    <div class="paso"><div class="linea"></div></div>
+    <div class="paso"><div class="n">3</div><div><b>Me manda un mail de 1 minuto</b><span>4 cifras, la estrategia y el plan día por día.</span></div></div>
+    <div class="paso"><div class="linea"></div></div>
+    <div class="paso"><div class="n">4</div><div><b>Otro agente diseña y programa</b><span>Ajusta las piezas y las deja agendadas.</span></div></div>
+  </div>
+  <div class="pie"><div class="puntos"><b></b><b></b><b></b><b></b><b class="on"></b><b></b><b></b><b></b></div><span>Deslizá →</span></div>
+</section>
+
+<!-- 6 · Branding -->
+<section class="slide blanco">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <p class="epi">05 · Rediseño de marca</p>
+  <h2>Una marca simple, que se ve igual en todos lados.</h2>
+  <div class="logos">
+    <div class="l1" style="border:2px solid rgba(0,0,0,.08)"><div class="marca"><i></i>Café en tu Casa</div></div>
+    <div class="l2"><div class="marca"><i></i>Café en tu Casa</div></div>
+    <div class="l3"><div class="marca"><i></i>Café en tu Casa</div></div>
+    <div class="l4"><div class="marca"><i></i>Café en tu Casa</div></div>
+  </div>
+  <div class="paleta">
+    <span style="background:#5b6e32;color:#fff">#5B6E32</span>
+    <span style="background:#455426;color:#fff">#455426</span>
+    <span style="background:#1d1d1f;color:#fff">#1D1D1F</span>
+    <span style="background:#f5f5f7;color:#1d1d1f;border:2px solid rgba(0,0,0,.06)">#F5F5F7</span>
+  </div>
+  <p class="bajada" style="font-size:30px">Manual de marca completo: logo, colores, tipografía y reglas para redes.</p>
+  <div class="pie"><div class="puntos"><b></b><b></b><b></b><b></b><b></b><b class="on"></b><b></b><b></b></div><span>Deslizá →</span></div>
+</section>
+
+<!-- 7 · Métricas -->
+<section class="slide">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <p class="epi">06 · Análisis de métricas</p>
+  <h2>Los datos me corrigieron. Y la IA lo vio primero.</h2>
+  <div class="reglas">
+    <div class="regla"><div class="dato">REELS · SE MIRAN 3 A 5 SEGUNDOS</div><b>El precio o el beneficio va en el primer segundo. Nunca solo el nombre del producto.</b></div>
+    <div class="regla"><div class="dato">DURACIÓN</div><b>De reels de 14–25 s pasamos a 9–12 s.</b></div>
+    <div class="regla"><div class="dato">CARRUSEL CON PRECIOS · 430 VISTAS</div><b>Las comparativas con precio alcanzan el doble que cualquier reel.</b></div>
+    <div class="regla"><div class="dato">HORARIO</div><b>Todo sale a las 10:00, el pico de la audiencia.</b></div>
+  </div>
+  <div class="pie"><div class="puntos"><b></b><b></b><b></b><b></b><b></b><b></b><b class="on"></b><b></b></div><span>Deslizá →</span></div>
+</section>
+
+<!-- 8 · Cierre -->
+<section class="slide oliva cierre">
+  <div class="marca"><i></i>Café en tu Casa</div>
+  <p class="epi">Lo que aprendí</p>
+  <h2>La IA no hizo el negocio por mí. Me sacó el "no sé hacerlo" de encima.</h2>
+  <p class="bajada">Las decisiones siguen siendo mías. Lo que cambió es que ya no dependo de saber programar, diseñar o analizar datos para hacerlo.</p>
+  <div class="pregunta">¿Qué parte de tu negocio le darías primero a la IA?</div>
+  <div class="pie"><div class="puntos"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b class="on"></b></div><span>Lucas Jeckeln</span></div>
+</section>
+
+</body>
+</html>
