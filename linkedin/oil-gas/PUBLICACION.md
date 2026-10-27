@@ -1,6 +1,7 @@
 # LinkedIn · IA en Oil & Gas
 
 Publicación de opinión personal (no de Café en tu Casa ni de la empresa).
+Estilo "documento técnico" pensado para gente de ingeniería y de IA: diagramas de flujo de cada caso, técnicas con su nombre, monoespaciada y un solo color de acento.
 
 - **Carrusel:** `ia-en-oil-and-gas.pdf` (9 placas de 1080×1350, también sueltas en `placas/`).
   Se sube con *Agregar documento*; título sugerido: "Cómo la IA va a cambiar Oil & Gas".

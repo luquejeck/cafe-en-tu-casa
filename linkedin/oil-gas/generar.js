@@ -9,7 +9,7 @@ const path = require('path');
   fs.mkdirSync(path.join(dir, 'placas'), { recursive: true });
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
-  await page.goto('file://' + path.join(dir, 'carrusel.html'), { waitUntil: 'load' });
+  await page.goto('file://' + path.join(dir, 'carrusel.html'), { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
 
   const slides = await page.$$('.slide');
