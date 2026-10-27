@@ -23,6 +23,44 @@ Los prompts están **en inglés** porque Veo e Imagen responden mucho mejor así
 
 ---
 
+## Lo que aprendimos generando los videos (octubre 2026)
+
+La primera tanda (Omni Flash, inicial + final distintas, varias acciones por toma) salió casi toda inservible: gente que atraviesa objetos, tazas que aparecen o cambian de mano, movimientos irreales. Lo que funcionó:
+
+1. **La IA nunca hace la manipulación.** Cada clip arranca con los objetos *ya en su estado final* (por ejemplo, Roberto ya con las dos tazas en la mano) y solo se mueven la cara, la respiración, la luz o la cámara. El gesto de agarrar, guardar o servir se cuenta con un corte o se filma de verdad.
+2. **Una sola acción chica por clip.** Nada de "saca, duda, guarda, cierra". Si hace falta más, se divide en dos planos cortos (como la 11a y la 11b).
+3. **Imagen final casi igual a la inicial, o sin final.** Si las dos imágenes están muy lejos (cruzar la cocina, pararse, sacarse el saco), el modelo inventa la transición y ahí se rompe la física.
+4. **Sin contacto entre personas.** Las manos que se tocan (la 06) fallaron siempre; lo resolvimos con la mano de la madre apoyada cerca, sin tocar.
+5. **Sin dedos tocando la máquina.** En la 13 el dedo apretaba en cualquier lado; se resolvió con un primer plano solo de cara.
+6. **El método pesa más que el modelo.** Con este criterio, Veo 3.1 Fast (20 puntos) alcanzó; Quality (100) no arregló los errores de manos.
+7. **En el prompt de video:** "locked-off camera", "exactly as in the frame", "nothing appears or disappears", "hands and objects do not move".
+8. **Imágenes con Nano Banana Pro:** tiene límite de uso diario. Cuando se agota, Nano Banana 2.1 (0 puntos) sirve bien para editar.
+9. **Ojo con los ajustes de Flow:** al cambiar entre Imagen y Video, a veces vuelve a "x4" o a "Ingredientes" (cuatro veces el costo). Revisá siempre el costo antes de enviar.
+
+## Estado de producción
+
+| Toma | Estado | Archivo |
+|---|---|---|
+| 01 | ✅ IA (Veo Fast, arranca con las dos tazas en la mano) | `clips/toma-01.mp4` |
+| 02 | 📱 Filmar: manos guardando una taza | — |
+| 03 | 📱 Filmar: revolver café instantáneo | — |
+| 04 | ✅ IA (Veo Fast) | `clips/toma-04.mp4` |
+| 05 | ✅ IA (Veo Fast) | `clips/toma-05.mp4` |
+| 06 | ✅ IA (Veo Fast, manos sin tocarse) | `clips/toma-06.mp4` |
+| 07 | 📱 Filmar: café a la pileta | — |
+| 08 | ✅ IA (Veo Fast) | `clips/toma-08.mp4` |
+| 09 | ✅ IA (Veo Quality, final cercana) | `clips/toma-09.mp4` |
+| 10 | 🎬 Montaje: fundido entre las imágenes de mañana y noche | `frames/toma-10-*.png` |
+| 11 | ✅ IA en dos planos (leyendo / junto a la máquina) | `clips/toma-11a.mp4`, `clips/toma-11b.mp4` |
+| 12 | 📱 Filmar: granos cayendo en la tolva | — |
+| 13 | ✅ IA (Veo Fast, primer plano sin manos) | `clips/toma-13.mp4` |
+| 14 | 📱 Filmar: espresso cayendo (la Magnifica real) | — |
+| 15–19 | ✅ IA (Veo Fast) | `clips/toma-15.mp4` … `clips/toma-19.mp4` |
+
+Las imágenes de cada toma están en `frames/` (`toma-XX-inicial.png` / `toma-XX-final.png`). Todo vive también en el proyecto de Google Flow.
+
+---
+
 ## Bloques de estilo (referencia; ya están pegados en cada prompt)
 
 **PRESENTE**
