@@ -59,6 +59,8 @@ La primera tanda (Omni Flash, inicial + final distintas, varias acciones por tom
 
 Las imágenes de cada toma están en `frames/` (`toma-XX-inicial.png` / `toma-XX-final.png`). Todo vive también en el proyecto de Google Flow.
 
+Cómo filmar las tomas marcadas con 📱 (y qué sonidos grabar): ver [GUIA-RODAJE.md](GUIA-RODAJE.md). El corte provisional con placas negras en su lugar se arma con la composición de Remotion `para-alguien-corte-provisional`.
+
 ---
 
 ## Bloques de estilo (referencia; ya están pegados en cada prompt)
