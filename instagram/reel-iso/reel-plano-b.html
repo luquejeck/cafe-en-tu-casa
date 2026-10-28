@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Reel plano B — Dos vecinos, arranque en frío</title>
+<style>
+/* "Dos vecinos, mismo edificio" en ilustración plana de frente (vista de
+   fachada, como un plano), para que nada tape nada: la cámara se desliza por
+   la cuadra, el edificio se abre de frente y cada piso es un rectángulo claro.
+   Misma dinámica que la v2 (edificio entero, los dos vecinos marcados, notas
+   tipo plano, tarjetas, primer plano de la cafetera) con la paleta de la marca:
+   neutros, madera clara y oliva. La Magnifica S va de frente, como en la foto.
+   Voz: Valeria (ElevenLabs), voz-toma2.mp3, con tiempos por palabra.
+   VERSIÓN B (prueba de retención, 28/10): arranque en frío con el conflicto.
+   La voz se reordena (voz-toma2-b.mp3): primero "uno gasta casi tres millones…
+   y el otro, unos trescientos mil", después "Dos vecinos. Mismo edificio…" y
+   recién ahí "¿Por qué?". En el primer cuadro ya están el edificio de cerca y
+   los montos, que entran de golpe. Cierre más corto. */
+:root { --disp: 'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; --oliva: #5b6e32; --ink: #1d1d1f; --ink2: #6e6e73; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: #f3f1ec; color: var(--ink); font-family: var(--disp); -webkit-font-smoothing: antialiased; }
+canvas { position: absolute; left: 0; top: 0; }
+#banda { position: absolute; left: 0; right: 0; top: 0; height: 480px; background: #fff; }
+.ep { position: absolute; left: 0; right: 0; top: 110px; text-align: center; font-size: 30px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--oliva); }
+.tit { position: absolute; left: 76px; right: 76px; top: 168px; text-align: center; font-weight: 600; font-size: 90px; letter-spacing: -.035em; line-height: 1.05; }
+.tit span { display: inline-block; white-space: pre; }
+.tit .s { background: linear-gradient(transparent 64%, rgba(91,110,50,.24) 64%, rgba(91,110,50,.24) 94%, transparent 94%); }
+.nota { position: absolute; background: #fff; border-radius: 16px; padding: 18px 26px; box-shadow: 0 18px 40px -22px rgba(0,0,0,.35); white-space: nowrap; }
+.nota .e { font-size: 22px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--oliva); }
+.nota .n { font-size: 50px; font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
+.nota .n small { font-size: 26px; color: var(--ink2); letter-spacing: 0; font-weight: 500; }
+.tarjeta { position: absolute; left: 76px; right: 76px; background: #fff; border-radius: 16px; padding: 28px 36px; box-shadow: 0 24px 50px -26px rgba(0,0,0,.4); }
+.tarjeta .e { font-size: 24px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--oliva); }
+.tarjeta .fila { display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; font-size: 34px; font-weight: 500; }
+.tarjeta .fila b { font-size: 56px; font-weight: 600; letter-spacing: -.03em; }
+.tarjeta .chica { font-size: 22px; color: var(--ink2); margin-top: 12px; }
+.pildoras { position: absolute; left: 60px; right: 60px; top: 1500px; display: flex; justify-content: center; gap: 14px; }
+.pil { display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 999px; padding: 16px 28px; font-size: 32px; font-weight: 600; box-shadow: 0 14px 30px -20px rgba(0,0,0,.4); }
+.pil i { width: 14px; height: 14px; border-radius: 50%; background: var(--oliva); }
+#reloj { position: absolute; left: 50%; top: 1640px; transform: translateX(-50%); background: var(--ink); color: #fff; border-radius: 999px; padding: 14px 34px; font-size: 44px; font-weight: 600; font-variant-numeric: tabular-nums; }
+#marca { position: absolute; left: 0; right: 0; top: 0; height: 480px; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#marca .logo { display: flex; align-items: center; gap: 22px; font-size: 92px; font-weight: 600; letter-spacing: -.035em; }
+#marca .logo i { width: 34px; height: 34px; border-radius: 50%; background: var(--oliva); }
+#marca .boton { margin-top: 30px; background: var(--oliva); color: #fff; font-size: 46px; font-weight: 600; padding: 22px 56px; border-radius: 999px; }
+#marca .bajada { margin-top: 16px; font-size: 32px; color: var(--ink2); }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div id="banda"></div>
+<div class="ep" id="ep1">Un edificio · PB a 6°</div>
+<div class="ep" id="ep2">El del 5° B</div>
+<div class="ep" id="ep3">El del 3° A</div>
+<div class="tit" id="t1">Dos vecinos.</div>
+<div class="tit" id="t2">Mismo <span class="s">edificio.</span></div>
+<div class="tit" id="t3">Mismo café, todas<br>las <span class="s">mañanas.</span></div>
+<div class="tit" id="t4">Uno gasta casi<br><span class="s">$3.000.000</span> por año.</div>
+<div class="tit" id="t5">El otro, unos<br><span class="s">$300.000.</span></div>
+<div class="tit" id="t6">¿Por <span class="s">qué?</span></div>
+<div class="tit" id="t7">Baja al <span class="s">bar.</span></div>
+<div class="tit" id="t8">Dos veces por día.<br><span class="s">$4.000</span> cada vez.</div>
+<div class="tit" id="t9">Tiene un <span class="s">sistema.</span></div>
+<div class="tit" id="t10">Café de <span class="s">cafetería.</span></div>
+<div class="tit" id="t11">Cada taza, unos<br><span class="s">$400.</span></div>
+<div class="tit" id="t12">¿Cuál de los dos<br>querés <span class="s">ser?</span></div>
+<div id="notas"></div>
+<div class="pildoras" id="pils"><span class="pil" id="p1"><i></i>Grano recién molido</span><span class="pil" id="p2"><i></i>Un botón</span></div>
+<div id="reloj">0:00</div>
+<div class="tarjeta" id="bar1" style="top:1390px"><div class="e">Bar de la esquina · 8:15</div><div class="fila">Cortado <b>$4.000</b></div></div>
+<div class="tarjeta" id="bar2" style="top:1590px"><div class="e">Bar de la esquina · 16:30</div><div class="fila">Café con leche <b>$4.000</b></div></div>
+<div class="tarjeta" id="anio" style="top:1390px"><div class="e">En un año · estimado</div><div class="fila">2 × $4.000 × 365 <b>$2.920.000</b></div></div>
+<div class="tarjeta" id="taza" style="top:1390px">
+  <div class="e">En casa, con grano · estimado</div>
+  <div class="fila">Por taza <b>~$417</b></div>
+  <div class="fila">En un año <b>~$304.000</b></div>
+  <div class="chica">Grano a $50.000 el kilo, unas 120 tazas por kilo. Precios al 27/10.</div>
+</div>
+<div id="marca"><div class="logo"><i></i>Café en tu Casa</div><div class="boton" id="boton">Comentá CAFÉ</div><div class="bajada" id="bajada">y te contamos cómo arrancar.</div></div>
+
+<script src="../reel-prueba/comun3.js"></script>
+<script>
+function partir(id) {   // como el de comun3.js, pero conserva el subrayado
+  const el = $(id), out = [];
+  const recorrer = (nodo, destino, clase) => [...nodo.childNodes].forEach((n) => {
+    if (n.nodeType === 3) n.textContent.split(/(\s+)/).filter(Boolean).forEach((w) => {
+      if (/^\s+$/.test(w)) { destino.append(" "); return; }
+      const s = document.createElement("span"); s.textContent = w; if (clase) s.className = clase; destino.append(s); out.push(s);
+    });
+    else if (n.tagName === "BR") destino.append(document.createElement("br"));
+    else recorrer(n, destino, n.className);
+  });
+  const copia = el.cloneNode(true); el.innerHTML = ""; recorrer(copia, el, "");
+  return out;
+}
+const OFF = .25, VOZ = 29.3;
+window.TOTAL = Math.round((OFF + VOZ + 1.8) * FPS);
+window.VOZ = ["../reel-iso/voz-toma2.mp3", OFF];
+window.SFX = [[1.4, "pop"], [2.0, "pop"], [5.0, "pop"], [8.0, "pop"], [10.2, "whoosh"], [11.1, "whoosh"], [12.1, "subida"], [13.78, "pop"], [14.44, "pop"],
+  [15.5, "whoosh"], [17.3, "whoosh"], [17.6, "tic"], [19.1, "pop"], [21.38, "golpe"], [22.9, "pop"], [25.4, "whoosh"], [26.96, "golpe"]]
+  .map(([t, x]) => [t + OFF, x]);
+
+// ---------- mundo plano: x a la derecha, y hacia arriba, el suelo en y = 0
+const c = $("c").getContext("2d"), CY = 1250;
+let CAM = { x: 180, y: 400, z: 1 };
+const X = (x) => (x - CAM.x) * CAM.z + 540, Y = (y) => CY - (y - CAM.y) * CAM.z;
+const TINTA = "#1d1d1f", LIN = "rgba(29,29,31,.55)";
+function rect(x, y, w, h, col, linea = LIN, r = 0) {
+  c.beginPath(); c.roundRect(X(x), Y(y + h), w * CAM.z, h * CAM.z, r * CAM.z);
+  if (col) { c.fillStyle = col; c.fill(); }
+  if (linea) { c.strokeStyle = linea; c.lineWidth = Math.max(1, Math.min(4, CAM.z * 1.3)); c.stroke(); }
+}
+function linea(x0, y0, x1, y1, col = LIN, g = 1.3) { c.strokeStyle = col; c.lineWidth = Math.max(1, CAM.z * g); c.beginPath(); c.moveTo(X(x0), Y(y0)); c.lineTo(X(x1), Y(y1)); c.stroke(); }
+function circ(x, y, r, col, l = null) { c.beginPath(); c.arc(X(x), Y(y), r * CAM.z, 0, 7); if (col) { c.fillStyle = col; c.fill(); } if (l) { c.strokeStyle = l; c.lineWidth = Math.max(1, CAM.z * 1.3); c.stroke(); } }
+function texto(s, x, y, tam, col = TINTA, peso = 600) { c.fillStyle = col; c.font = `${peso} ${tam * CAM.z}px Inter`; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(s, X(x), Y(y)); }
+
+// ---------- la cuadra
+const FH = 110, PISOS = 7, ED = { x: 0, w: 360 };   // nuestro edificio: PB a 6°
+const VECINOS = [   // [x, ancho, tipo, pisos o alto, color]
+  [-760, 300, "edif", 5, "#ecebe7"], [-450, 230, "ph", 2, "#f4f2ed"], [-210, 200, "casa", 1, "#e7e4dd"],
+  [380, 220, "casa", 1, "#efede8"], [610, 250, "edif", 4, "#e4e2dd"], [870, 320, "bar", 3, "#f4f2ed"], [1200, 260, "edif", 6, "#eceae5"], [1470, 230, "ph", 2, "#e6e3dc"]];
+const BAR_X = 870 + 160;
+function cielo() {
+  c.fillStyle = "#f3f1ec"; c.fillRect(0, 0, 1080, 1920);
+  // silueta lejana de la ciudad
+  c.fillStyle = "#e4e2dc";
+  for (let i = -12; i < 22; i++) { const x = i * 150, h = 380 + ((i * 97) % 5) * 110; const px = (x - CAM.x * .6) * CAM.z * .7 + 540; c.fillRect(px, Y(0) - h * CAM.z * .7, 130 * CAM.z * .7, h * CAM.z * .7); }
+  // vereda y calle
+  c.fillStyle = "#e9e6df"; c.fillRect(0, Y(0), 1080, 40 * CAM.z);
+  c.fillStyle = "#d3d1cc"; c.fillRect(0, Y(-40), 1080, 1920);
+  for (let k = -20; k < 30; k++) rect(k * 160, -105, 80, 6, "#f7f6f3", null);
+}
+function ventana(x, y, w, h, luz = 0) {
+  rect(x, y, w, h, luz ? `rgba(246,214,140,${.55 + .45 * luz})` : "#d9dee2", TINTA);
+  linea(x + w / 2, y, x + w / 2, y + h, "rgba(29,29,31,.6)", 1);
+  if (!luz) linea(x + w * .15, y + h * .2, x + w * .35, y + h * .75, "rgba(255,255,255,.8)", 2.2);
+}
+function balcon(x, y, w) { rect(x - 6, y - 4, w + 12, 6, "#cfccc5", TINTA); for (let i = 0; i <= 8; i++) linea(x - 6 + i * (w + 12) / 8, y + 2, x - 6 + i * (w + 12) / 8, y + 26, TINTA, 1); linea(x - 6, y + 26, x + w + 6, y + 26, TINTA, 1.4); }
+function arbol(x, s = 1) {
+  rect(x - 5, 0, 10, 110 * s, "#8b857c", null);
+  circ(x, 150 * s, 62 * s, "#a9b98a", TINTA); circ(x + 22 * s, 135 * s, 40 * s, "#97a978", null);
+}
+function farol(x) { rect(x - 3, 0, 6, 190, TINTA, null); rect(x - 14, 186, 28, 14, TINTA, null, 4); }
+function vecino([x, w, tipo, n, col]) {
+  if (tipo === "edif" || tipo === "bar") {
+    const h = n * 100 + 40;
+    rect(x, 0, w, h, col, TINTA); rect(x - 8, h, w + 16, 14, "#dcd9d2", TINTA);
+    const cols = Math.floor(w / 80);
+    for (let f = tipo === "bar" ? 1 : 0; f < n; f++) for (let i = 0; i < cols; i++) { const wx = x + 22 + i * (w - 44) / cols, ww = (w - 44) / cols - 22; ventana(wx, f * 100 + 40, ww, 56); if (f > 0 && i % 2 === 0) balcon(wx, f * 100 + 40, ww); }
+    if (tipo === "bar") bar(x, w);
+    else rect(x + w / 2 - 22, 0, 44, 80, "#8b857c", TINTA, 4);
+  } else if (tipo === "ph") {
+    rect(x, 0, w, n * 95, col, TINTA); rect(x - 6, n * 95, w + 12, 12, "#dcd9d2", TINTA);
+    for (let f = 0; f < n; f++) { ventana(x + 30, f * 95 + 25, 60, 50); ventana(x + w - 90, f * 95 + 25, 60, 50); }
+    rect(x + w / 2 - 20, 0, 40, 76, "#5b6e32", TINTA, 4);
+    for (let i = 0; i < 3; i++) circ(x + 40 + i * 70, n * 95 + 26, 16, "#7d9150", null);   // macetas en la terraza
+  } else {   // casa baja con techo a dos aguas
+    rect(x, 0, w, 120, col, TINTA);
+    c.beginPath(); c.moveTo(X(x - 14), Y(120)); c.lineTo(X(x + w / 2), Y(190)); c.lineTo(X(x + w + 14), Y(120)); c.closePath(); c.fillStyle = "#b9b5ad"; c.fill(); c.strokeStyle = TINTA; c.lineWidth = Math.max(1, CAM.z * 1.3); c.stroke();
+    ventana(x + 26, 40, 56, 52); rect(x + w - 70, 0, 44, 84, "#8b857c", TINTA, 4);
+  }
+}
+function bar(x, w) {
+  quadToldo(x + 10, 92, w - 20);
+  rect(x + 24, 0, w - 48, 86, "#dfe5e8", TINTA);
+  rect(x + w / 2 - 70, 120, 140, 34, TINTA, null, 8); texto("BAR", x + w / 2, 137, 22, "#fff");
+  [x - 40, x + w + 10].forEach((mx) => { rect(mx, 0, 6, 46, TINTA, null); rect(mx - 18, 46, 42, 6, TINTA, null); });
+}
+function quadToldo(x, y, w) { const n = 10; for (let i = 0; i < n; i++) { c.beginPath(); c.moveTo(X(x + i * w / n), Y(y + 22)); c.lineTo(X(x + (i + 1) * w / n), Y(y + 22)); c.lineTo(X(x + (i + 1) * w / n + 6), Y(y)); c.lineTo(X(x + i * w / n + 6), Y(y)); c.closePath(); c.fillStyle = i % 2 ? "#fff" : "#5b6e32"; c.fill(); } rect(x, y, w + 6, 22, null, TINTA); }
+
+// ---------- personas (de frente / de perfil)
+function persona(x, y, col, t, camina = false, alto = 1, dir = 1) {
+  const s = alto, p = camina ? Math.sin(t * 13) : 0;
+  rect(x - 9 * s + p * 4, y, 7 * s, 34 * s, "#3a3a3c", null, 3);
+  rect(x + 2 * s - p * 4, y, 7 * s, 34 * s, "#3a3a3c", null, 3);
+  rect(x - 13 * s, y + 32 * s, 26 * s, 40 * s, col, null, 9 * s);
+  circ(x, y + 84 * s, 11 * s, "#e3c4a8");
+  c.beginPath(); c.arc(X(x), Y(y + 87 * s), 11.5 * s * CAM.z, Math.PI, 0); c.fillStyle = "#3a332d"; c.fill();
+}
+
+// ---------- el edificio: fachada y corte
+const PARED = ["#efede8", "#f1efe9", "#f0ede6", "#eef0e6", "#f1efe9", "#f2efe8", "#f3f1ec"];
+const fz = (k) => k * FH + 8;
+function fachada(alfa, luces) {
+  c.globalAlpha = alfa;
+  rect(ED.x, 0, ED.w, PISOS * FH + 10, "#fbfaf8", TINTA);
+  rect(ED.x - 10, PISOS * FH + 10, ED.w + 20, 16, "#e2dfd8", TINTA);
+  for (let k = 0; k < PISOS; k++) {
+    if (k === 0) { rect(ED.x + 150, 0, 60, 92, "#5b6e32", TINTA, 4); ventana(ED.x + 30, 26, 90, 60); ventana(ED.x + 240, 26, 90, 60); continue; }
+    [30, 150, 260].forEach((wx, i) => { const luz = luces[k] && i < 2 ? luces[k] : 0; ventana(ED.x + wx, k * FH + 26, 70, 66, luz); if (i !== 1) balcon(ED.x + wx, k * FH + 26, 70); });
+  }
+  c.globalAlpha = 1;
+}
+function corte(t) {
+  // estructura: losas, paredes del fondo y el ascensor a la derecha
+  for (let k = 0; k < PISOS; k++) {
+    const y0 = k * FH;
+    rect(ED.x, y0, ED.w, FH, PARED[k], null);
+    rect(ED.x, y0, ED.w, 8, "#d8d3c9", TINTA);
+    if (k > 0 && k !== 6) ventana(ED.x + 170, y0 + 34, 74, 58);
+    piso(k, t);
+  }
+  rect(ED.x + 300, 8, 54, PISOS * FH - 8, "#e3e1dc", TINTA);   // hueco del ascensor
+  for (let k = 0; k < PISOS; k++) rect(ED.x + 302, k * FH + 8, 50, 2, "rgba(29,29,31,.25)", null);
+  const cab = cabina(t);
+  rect(ED.x + 304, cab, 46, 92, "#cfccc5", TINTA, 4);
+  if (t > 12.15 && t < 12.85) persona(ED.x + 327, cab + 2, TINTA, t, false, .85);
+  rect(ED.x, 0, ED.w, PISOS * FH + 10, null, TINTA);
+  rect(ED.x - 10, PISOS * FH + 10, ED.w + 20, 16, "#e2dfd8", TINTA);
+}
+// el ascensor baja del 5° a PB con el vecino
+const cabina = (t) => fz(5) + (fz(0) - fz(5)) * suave(tramo(t, 12.15, 12.75));
+function piso(k, t) {
+  const y = fz(k);
+  if (k === 0) {   // hall
+    rect(ED.x + 20, y + 30, 70, 46, "#d9c3a0", TINTA, 3); for (let i = 0; i < 3; i++) linea(ED.x + 28 + i * 22, y + 50, ED.x + 40 + i * 22, y + 50, TINTA, 1);
+    rect(ED.x + 150, y - 8, 60, 92, "rgba(91,110,50,.25)", TINTA, 4);
+    maceta(ED.x + 250, y);
+  } else if (k === 1) {   // living
+    rect(ED.x + 20, y, 120, 30, "#b9b5ad", TINTA, 8); rect(ED.x + 20, y + 22, 120, 22, "#b9b5ad", TINTA, 8);
+    rect(ED.x + 230, y + 28, 56, 36, TINTA, null, 3); rect(ED.x + 220, y, 76, 26, "#d9c3a0", TINTA, 3);
+    persona(ED.x + 80, y + 2, "#9aa0a6", t, false, .8);
+  } else if (k === 2) {   // dormitorio
+    rect(ED.x + 20, y, 140, 28, "#fff", TINTA, 6); rect(ED.x + 20, y + 20, 140, 12, "#d9c3a0", TINTA, 4); rect(ED.x + 20, y, 10, 60, "#d9c3a0", TINTA, 3);
+    maceta(ED.x + 250, y);
+  } else if (k === 3) cocina3(y, t);
+  else if (k === 4) {   // oficina en casa
+    rect(ED.x + 40, y, 120, 46, "#efece6", TINTA, 3); rect(ED.x + 80, y + 46, 46, 30, TINTA, null, 3);
+    persona(ED.x + 210, y + 2, "#c9c6bf", t, false, .8);
+  } else if (k === 5) cocina5(y, t);
+  else { maceta(ED.x + 40, y); maceta(ED.x + 110, y); maceta(ED.x + 180, y); rect(ED.x + 230, y, 50, 36, "#d9c3a0", TINTA, 4); }
+}
+function maceta(x, y) { rect(x, y, 30, 26, "#b9b5ad", TINTA, 3); circ(x + 15, y + 44, 20, "#7d9150", TINTA); circ(x + 4, y + 36, 12, "#94a868", null); }
+function mesada(y) { rect(ED.x + 14, y, 150, 40, "#e2dfd8", TINTA, 2); rect(ED.x + 10, y + 40, 158, 6, "#fbfaf8", TINTA, 2); rect(ED.x + 14, y + 74, 150, 26, "#f4f3f0", TINTA, 2); }
+function cocina5(y, t) {
+  mesada(y);
+  rect(ED.x + 30, y + 46, 18, 22, "#b9bcc0", TINTA, 4);   // pava
+  circ(ED.x + 230, y + 80, 14, "#fff", TINTA); linea(ED.x + 230, y + 80, ED.x + 240, y + 82, TINTA, 1.6); linea(ED.x + 230, y + 80, ED.x + 231, y + 70, TINTA, 1.6);   // 8:15
+  const k = suave(tramo(t, 11.35, 12.1));
+  if (t < 12.15) persona(ED.x + 110 + 215 * k, y, TINTA, t, k > 0 && k < 1, .85);
+}
+const MQ = { x: ED.x + 52, w: 32, h: 46 };
+function cocina3(y, t) {
+  mesada(y);
+  rect(ED.x + 120, y + 46, 12, 14, "#fff", TINTA, 3); rect(ED.x + 136, y + 46, 12, 14, "#fff", TINTA, 3);
+  magnifica(MQ.x, y + 46, t);
+  maceta(ED.x + 250, y);
+  persona(ED.x + 200, y, "#5b6e32", t, false, .85);
+}
+/** De'Longhi Magnifica S de frente: negra, tolva arriba, panel con la perilla
+    plateada y tres botones por lado, placa, doble pico, tazas de vidrio y la
+    bandeja con rejilla; el espumador a la izquierda. */
+function magnifica(x, y, t) {
+  const { w, h } = MQ, NEG = "#1f1f21";
+  rect(x - 4, y + h * .62, 3, -h * .4 > 0 ? 0 : 0, null, null);
+  linea(x - 3, y + h * .66, x - 3, y + h * .26, "#b9bcc0", 1.6);                              // espumador
+  rect(x, y, w, h, NEG, "rgba(0,0,0,.9)", 2.5);
+  const abre = Math.sin(Math.PI * tramo(t, 17.55, 18.9));
+  c.save(); c.translate(X(x + w * .1), Y(y + h)); c.rotate(-abre * .6);
+  c.fillStyle = "#333336"; c.fillRect(0, -h * .09 * CAM.z, w * .8 * CAM.z, h * .09 * CAM.z); c.restore();
+  if (abre > .02) for (let i = 0; i < 6; i++) { const by = y + h + 14 - ((t * 2.4 + i * .17) % 1) * 16; circ(x + w * .25 + (i % 3) * w * .2, by, 1.3, "#5a3a22"); }
+  rect(x + w * .06, y + h * .55, w * .88, h * .22, "#2b2b2e", null, 1.5);                    // panel
+  circ(x + w / 2, y + h * .66, w * .1, "#c9ccd0"); circ(x + w / 2, y + h * .66, w * .045, "#8c8f93");
+  const prende = t >= 19.06;
+  [[.17, .72], [.17, .66], [.17, .6], [.83, .72], [.83, .66], [.83, .6]].forEach(([bx, bz], i) => rect(x + w * bx - 1.4, y + h * bz - 1, 2.8, 2, i === 3 && prende ? "#a3c26a" : "#d9dbde", null, .5));
+  if (prende) { const r = ((t * 2) % 1); circ(x + w * .83, y + h * .66 + .5, 2 + r * 4, null, `rgba(163,194,106,${.7 * (1 - r)})`); }
+  rect(x + w * .4, y + h * .49, w * .2, h * .025, "#b9bcc0", null);                          // placa
+  rect(x + w * .18, y + h * .1, w * .64, h * .34, "#111113", null);                           // hueco de las tazas
+  rect(x + w * .4, y + h * .36, w * .2, h * .08, "#b9bcc0", null, .8);                         // doble pico
+  const llena = tramo(t, 19.9, 21.2);
+  [.3, .54].forEach((cx) => {
+    const tx = x + w * cx, ty = y + h * .1, tw = w * .16, th = h * .15;
+    if (llena > 0) rect(tx + .5, ty + .5, tw - 1, th * .85 * llena, "#7a4f2c", null, .8);
+    if (llena > 0 && llena < 1) linea(tx + tw / 2, y + h * .36, tx + tw / 2, ty + th * .85 * llena, "#6e4526", .5);
+    rect(tx, ty, tw, th, "rgba(225,232,236,.35)", "rgba(220,226,230,.9)", .8);
+    if (t > 21.2) vapor(tx + tw / 2, ty + th, t);
+  });
+  rect(x - 1, y, w + 2, h * .1, "#1a1a1c", null, 1);                                           // bandeja
+  for (let i = 1; i < 8; i++) linea(x + i * w / 8, y + h * .07, x + i * w / 8, y + h * .1, "#9a9da1", .4);
+}
+function vapor(x, y, t) {
+  c.globalAlpha = clamp(tramo(t, 21.2, 21.7)); c.strokeStyle = "rgba(255,255,255,.95)"; c.lineWidth = Math.max(1.5, CAM.z * .5); c.lineCap = "round";
+  for (let i = 0; i < 2; i++) { c.beginPath(); for (let k = 0; k <= 12; k++) { const px = X(x + (i - .5) * 1.4 + Math.sin(k * .7 + t * 4 + i * 2) * .8), py = Y(y + 1 + k * .9); k ? c.lineTo(px, py) : c.moveTo(px, py); } c.stroke(); }
+  c.globalAlpha = 1;
+}
+
+// ---------- cámara: [segundo de la voz, x, y, zoom]
+const MC = [MQ.x + MQ.w / 2, fz(3) + 46 + MQ.h / 2 - 2];
+const TOMAS = [
+  [-.3, 260, 420, .62], [1.3, 180, 420, .95], [4.6, 180, 420, 1.0], [4.9, 160, 470, 1.5], [9.75, 165, 470, 1.6], [10.0, 180, 420, 1.05],
+  [11.1, 180, fz(5) + 50, 2.4], [12.1, 200, fz(5) + 50, 2.4], [12.8, 220, fz(0) + 60, 1.9],
+  [13.2, 520, 60, 1.25], [13.85, 980, 40, 1.15], [15.3, 1000, 40, 1.2],
+  [16.3, 180, fz(3) + 50, 2.4], [17.4, 160, fz(3) + 50, 2.6],
+  [18.4, MC[0], MC[1], 11], [21.6, MC[0], MC[1] - 1, 12.5],
+  [22.8, 180, fz(3) + 30, 2.6], [25.1, 180, fz(3) + 30, 2.7],
+  [26.6, 180, 330, .95], [32, 180, 330, .88]];
+function camara(t) {
+  let i = TOMAS.findIndex((k) => k[0] > t); if (i < 0) i = TOMAS.length - 1; if (i === 0) i = 1;
+  const a = TOMAS[i - 1], b = TOMAS[i], k = suave(tramo(t, a[0], b[0]));
+  CAM = { x: a[1] + (b[1] - a[1]) * k, y: a[2] + (b[2] - a[2]) * k, z: a[3] * Math.pow(b[3] / a[3], k) };
+}
+// el vecino del 5° en la vereda: sale del edificio y va al bar
+function enLaCalle(t) { if (t < 12.8 || t > 14.0) return null; return ED.x + 180 + (BAR_X - ED.x - 180) * tramo(t, 12.85, 13.8); }
+const PEATONES = [...Array(9)].map((_, i) => ({ base: -900 + i * 320, vel: (i % 2 ? 1 : -1) * (60 + i * 7), col: ["#9aa0a6", "#c9c6bf", "#5b6e32", "#55575b", "#efede8"][i % 5] }));
+const AUTOS = [...Array(4)].map((_, i) => ({ base: i * 700, vel: (i % 2 ? 1 : -1) * 420, col: ["#fbfaf8", TINTA, "#b9b5ad", "#5b6e32"][i] }));
+
+// ---------- textos y notas
+const TIT = [["t1", .18, 1.1], ["t2", 1.38, 2.35], ["t3", 2.6, 4.6], ["t4", 4.9, 7.45], ["t5", 7.74, 9.8], ["t6", 10.08, 10.85],
+  ["t7", 11.1, 12.35], ["t8", 12.62, 15.5], ["t9", 15.74, 17.45], ["t10", 21.38, 22.65], ["t11", 22.9, 25.25], ["t12", 25.52, 26.8]];
+const EPIS = [["ep1", .18, 4.6], ["ep2", 11.1, 15.5], ["ep3", 15.74, 25.25]];
+const PAL = {}; TIT.forEach(([id]) => (PAL[id] = partir(id)));
+const NOTAS = [
+  [`<div class="e">5° B</div><div class="n">$2.920.000 <small>al año</small></div>`, ED.x + 330, 5 * FH + 60, 1, 4.96, 10.0, -60],
+  [`<div class="e">3° A</div><div class="n">$304.000 <small>al año</small></div>`, ED.x + 330, 3 * FH + 60, 1, 7.8, 10.0, 40],
+].map(([html, x, y, lado, a, b, dy]) => { const el = document.createElement("div"); el.className = "nota"; el.innerHTML = html; $("notas").append(el); return { el, x, y, lado, a, b, dy }; });
+
+window.cuadro = (f) => {
+  const t = f / FPS - OFF;
+  camara(t);
+  cielo();
+  VECINOS.forEach(vecino);
+  [-560, -330, 300, 560, 820, 1180, 1420].forEach((x) => arbol(x, .9));
+  [-100, 470, 760].forEach(farol);
+  // nuestro edificio: fachada con las ventanas de los dos vecinos; se abre con "¿Por qué?"
+  const abierto = suave(tramo(t, 10.1, 10.9)) * (1 - suave(tramo(t, 25.6, 26.4)));
+  const luces = { 5: tramo(t, 1.4, 1.8) * (t < 11 ? 1 : 0), 3: tramo(t, 2.0, 2.4) + suave(tramo(t, 25.8, 26.4)) };
+  if (abierto > 0) corte(t);
+  if (abierto < 1) fachada(1 - abierto, luces);
+  // marcas sobre las ventanas mientras se habla de los dos
+  const marca = tramo(t, 1.4, 1.8) * (1 - tramo(t, 9.8, 10.2));
+  if (marca > 0) [[5, TINTA], [3, "#5b6e32"]].forEach(([k, col]) => { c.globalAlpha = marca; c.lineWidth = 5; c.strokeStyle = col; c.strokeRect(X(ED.x + 22), Y(k * FH + 100), 214 * CAM.z, 82 * CAM.z); c.globalAlpha = 1; });
+  // vereda: peatones, el vecino y los autos
+  PEATONES.forEach((p) => { const x = ((p.base + p.vel * t) % 2600 + 2600) % 2600 - 1000; persona(x, 6, p.col, t, true, .8); });
+  const v = enLaCalle(t); if (v !== null) persona(v, 6, TINTA, t, true, .85);
+  AUTOS.forEach((a) => { const x = ((a.base + a.vel * t) % 3000 + 3000) % 3000 - 1200; rect(x, -80, 130, 34, a.col, TINTA, 10); rect(x + 26, -46, 74, 26, "#d9dee2", TINTA, 8); circ(x + 28, -82, 11, TINTA); circ(x + 102, -82, 11, TINTA); });
+  // "$4.000" sobre el bar en cada pago
+  [[13.78, 0], [14.44, 1]].forEach(([a, i]) => { if (t < a || t > 15.4) return; const k = rebote(tramo(t, a, a + .35)); c.globalAlpha = clamp(tramo(t, a, a + .1)) * (1 - tramo(t, 15.1, 15.4)); const px = X(BAR_X + (i ? 60 : -60)), py = Y(330 + i * 40) - 30 * k; c.fillStyle = TINTA; c.beginPath(); c.roundRect(px - 80 * k, py - 28, 160 * k, 56, 28); c.fill(); c.fillStyle = "#fff"; c.font = "600 32px Inter"; c.textAlign = "center"; c.textBaseline = "middle"; if (k > .5) c.fillText("$4.000", px, py + 1); c.globalAlpha = 1; });
+
+  // notas con línea guía
+  NOTAS.forEach((n) => {
+    const vis = t >= n.a && t < n.b + .3; n.el.style.display = vis ? "block" : "none"; if (!vis) return;
+    const px = X(n.x), py = Y(n.y), k = salida(tramo(t, n.a, n.a + .45)), fuera = tramo(t, n.b, n.b + .3);
+    const ex = px + n.lado * 110 * k, ey = py + n.dy * k;
+    c.globalAlpha = 1 - fuera; c.strokeStyle = TINTA; c.lineWidth = 2.5; c.beginPath(); c.moveTo(px, py); c.lineTo(ex, ey); c.stroke();
+    c.fillStyle = "#5b6e32"; c.beginPath(); c.arc(px, py, 9, 0, 7); c.fill(); c.globalAlpha = 1;
+    const r = n.el.getBoundingClientRect();
+    n.el.style.left = Math.min(1080 - r.width - 20, ex + 8) + "px"; n.el.style.top = (ey - r.height / 2) + "px";
+    n.el.style.opacity = clamp(tramo(t, n.a + .2, n.a + .45)) * (1 - fuera);
+    n.el.style.transform = `scale(${1.7 - .7 * rebote(tramo(t, n.a + .2, n.a + .55), 1.4)})`; n.el.style.transformOrigin = "left center";
+  });
+  TIT.forEach(([id, a, b]) => {
+    const el = $(id), on = t >= a - .05 && t < b + .25;
+    el.style.display = on ? "block" : "none"; if (!on) return;
+    PAL[id].forEach((s, i) => { const k = salida(tramo(t, a + i * .16, a + i * .16 + .35)); s.style.opacity = k; s.style.transform = `translateY(${(1 - k) * 36}px)`; });
+    el.style.opacity = 1 - tramo(t, b, b + .25);
+  });
+  EPIS.forEach(([id, a, b]) => { $(id).style.opacity = salida(tramo(t, a, a + .4)) * (1 - tramo(t, b, b + .3)); });
+  $("pils").style.display = t > 17.4 && t < 22.6 ? "flex" : "none";
+  [["p1", 17.54], ["p2", 19.06]].forEach(([id, a]) => { const k = rebote(tramo(t, a, a + .35)); $(id).style.opacity = clamp(tramo(t, a, a + .1)) * (1 - tramo(t, 22.3, 22.6)); $(id).style.transform = `scale(${.6 + .4 * k})`; });
+  $("reloj").style.display = t >= 19.92 && t < 22.8 ? "block" : "none";
+  $("reloj").textContent = "0:" + String(Math.round(40 * salida(tramo(t, 19.92, 21.2)))).padStart(2, "0");
+  $("reloj").style.opacity = clamp(tramo(t, 19.92, 20.05)) * (1 - tramo(t, 22.5, 22.8));
+  $("reloj").style.background = t > 21.2 ? "#5b6e32" : TINTA;
+  const tarjeta = (id, a, b) => { const k = salida(tramo(t, a, a + .4)), s = tramo(t, b, b + .3), el = $(id); el.style.display = t >= a && t < b + .3 ? "block" : "none"; el.style.opacity = k * (1 - s); el.style.transform = `translateY(${(1 - k) * 100}px)`; };
+  tarjeta("bar1", 13.78, 14.9); tarjeta("bar2", 14.44, 14.9); tarjeta("anio", 14.95, 15.6); tarjeta("taza", 22.9, 25.3);
+  const m = salida(tramo(t, 26.96, 27.4));
+  $("marca").style.display = t > 26.9 ? "flex" : "none"; $("marca").style.opacity = m;
+  $("boton").style.transform = `scale(${.6 + .4 * rebote(tramo(t, 27.36, 27.8))})`;
+  $("bajada").style.opacity = salida(tramo(t, 27.9, 28.4));
+};
+// ---------- versión B: la línea de tiempo nueva recorre tramos de la original
+const TRAMOS = [[0, 5.16, 9.72], [4.68, 0.18, 4.6], [9.2, 10.08, 29.3]];   // [inicio nuevo, desde, hasta]
+const aOriginal = (n) => { let r = TRAMOS[0]; TRAMOS.forEach((tr) => { if (n >= tr[0]) r = tr; }); return Math.min(r[2] + .6, r[1] + n - r[0]); };
+const aNuevo = (o) => { const tr = TRAMOS.find(([, a, b]) => o >= a - .3 && o <= b + .3); return tr ? tr[0] + o - tr[1] : null; };
+const cuadroA = window.cuadro;
+window.cuadro = (f) => {
+  const n = f / FPS - OFF;
+  cuadroA((aOriginal(n) + OFF) * FPS);
+  // en el gancho el texto ya está entero desde el primer cuadro: no se espera a la voz
+  if (n < 4.6) ["t4", "t5"].forEach((id) => PAL[id].forEach((s) => { s.style.opacity = 1; s.style.transform = "none"; }));
+};
+window.TOTAL = Math.round((OFF + 28.42 + 1.0) * FPS);
+window.VOZ = ["../reel-iso/voz-toma2-b.mp3", OFF];
+window.SFX = [[OFF, "golpe"], [OFF + 2.6, "golpe"], [OFF + 4.6, "whoosh"], [OFF + 9.1, "whoosh"],
+  ...window.SFX.map(([t, x]) => [aNuevo(t - OFF), x]).filter(([t]) => t !== null && t > 9.3).map(([t, x]) => [t + OFF, x])];
+</script>
+</body>
+</html>
