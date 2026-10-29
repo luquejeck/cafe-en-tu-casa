@@ -22,7 +22,11 @@ const CUERPO = {
              return `${ep(s.ep)}<h2>${s.h}</h2><div class="barras">${s.items.map(i =>
              `<div class="barra ${i[3] ? 'suave' : ''}"><div>${i[0]}<span>${i[1]}</span></div><u style="width:${Math.max(3, i[2] / max * 100)}%"></u></div>`).join('')}</div>${par(s.p)}`; },
   opciones:s => `${ep(s.ep)}<h2>${s.h}</h2><div class="opciones">${s.ops.map(o => `<div>${o}</div>`).join('')}</div>${par(s.p)}`,
-  cta:     s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}<p class="boton">${s.boton}</p>`
+  cta:     s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}<p class="boton">${s.boton}</p>`,
+  // foto de ambiente a sangre: el texto arriba, el precio (opcional) abajo
+  escena:  s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}${par(s.p)}<div class="abajo">${
+             s.precio ? `<div class="precio"><b>${s.precio}</b><small>${s.nota}</small>${s.cuotas ? `<span>${s.cuotas}</span>` : ''}</div>` : ''}${
+             s.boton ? `<p class="boton">${s.boton}</p>` : ''}</div>`
 };
 
 /** Una placa entera: el lienzo con la marca, el cuerpo y los puntitos del carrusel. */
@@ -32,6 +36,8 @@ function placaHTML(pieza, n) {
   const puntos = pieza.tipo === 'carrusel'
     ? `<div class="pie">${pieza.placas.map((_, i) => `<b class="${i === n ? 'on' : ''}"></b>`).join('')}${n === 0 ? '<span>Deslizá →</span>' : ''}</div>`
     : '';
-  return `<div class="lienzo ${vertical ? 'vertical' : ''} ${s.tono || ''}">
+  const fondo = s.t === 'escena'
+    ? `<img class="fondo" src="../${s.img}" alt="" style="object-position:${s.encuadre || 'center'}">` : '';
+  return `<div class="lienzo ${vertical ? 'vertical' : ''} ${s.tono || ''} ${s.t === 'escena' ? 'escena' : ''} ${s.velo ? 'velo-' + s.velo : ''}">${fondo}
     <div class="marca"><i></i> Café en tu Casa</div><main>${CUERPO[s.t](s)}</main>${puntos}</div>`;
 }
