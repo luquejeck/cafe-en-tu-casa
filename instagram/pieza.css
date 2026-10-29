@@ -114,3 +114,6 @@ h2 { font-size: 72px; font-weight: 600; line-height: 1.07; letter-spacing: -.03e
 .escena.oscuro .ep { color: #c5dd96; }
 .escena.oscuro h1 em { color: #c5dd96; }
 .escena.oscuro .precio { color: #f5f5f7; }
+.escena.oscuro .marca, .escena.oscuro main { text-shadow: 0 2px 24px rgba(0, 0, 0, .45); }
+.escena.oscuro .ep { color: #d8eaa8; }
+.escena.oscuro h1 em { color: #d8eaa8; }

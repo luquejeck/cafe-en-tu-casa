@@ -493,9 +493,9 @@ const PIEZAS = [
     titulo: 'Magnifica S en casa (fotos de ambiente)',
     caption: '',
     placas: [
-      { t: 'escena', img: 'assets/img/escenas/magnifica-mueble.jpg',
-        ep: M.modelo, h: 'Recién molido,<br><em>con un botón.</em>' },
-      { t: 'escena', img: 'assets/img/escenas/magnifica-desayuno.jpg',
+      { t: 'escena', img: 'assets/img/escenas/magnifica-home-office.jpg',
+        ep: M.modelo, h: 'Home office,<br><em>café de verdad.</em>' },
+      { t: 'escena', img: 'assets/img/escenas/magnifica-desayuno-familia.jpg',
         ep: M.etiqueta, h: 'Ellos desayunan.<br><em>Tu café ya está.</em>',
         precio: fmt(P.transferencia(M)), nota: `por transferencia · ${OFF}% OFF`,
         cuotas: `o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre` }
@@ -503,15 +503,15 @@ const PIEZAS = [
   },
   {
     id: 'x3-historia-dedica-encuesta', semana: 6, dia: 'A definir', tipo: 'historia',
-    titulo: 'Dedica + encuesta ¿Magnifica S o Dedica?',
+    titulo: 'Dedica + encuesta ¿mate o café?',
     caption: '',
     placas: [
       { t: 'escena', img: 'assets/img/escenas/dedica-ventana.jpg',
         ep: `${D.modelo.split(' ')[0]} · ${cm(D.medidas.ancho)} de ancho`, h: 'Tu rincón,<br><em>tu ritual.</em>',
         precio: fmt(P.transferencia(D)), nota: `por transferencia · ${OFF}% OFF`,
         cuotas: `o ${D.cuotas} cuotas sin interés de ${fmt(P.cuota(D))} en Mercado Libre` },
-      { t: 'escena', tono: 'oscuro', img: 'assets/img/escenas/magnifica-estudio.jpg',
-        ep: 'Encuesta · votá abajo 👇', h: `¿${M.modelo}<br><em>o ${D.modelo.split(' ')[0]}?</em>` }
+      { t: 'escena', tono: 'oscuro', img: 'assets/img/escenas/magnifica-estudio-noche.jpg',
+        ep: 'Encuesta · votá abajo 👇', h: 'Noche de estudio:<br><em>¿mate o café?</em>' }
     ]
   }
 ];
