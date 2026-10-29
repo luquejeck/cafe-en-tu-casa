@@ -24,3 +24,7 @@ skills-lock.json
 # Modelo de voz (se arma solo con instagram/narrar-modelo.py)
 instagram/.voz/
 __pycache__/
+
+# Película: imágenes y clips generados en Google Flow (pesados, se guardan fuera del repo)
+instagram/pelicula/frames/
+instagram/pelicula/clips/
