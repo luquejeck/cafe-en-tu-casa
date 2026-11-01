@@ -513,6 +513,15 @@ const PIEZAS = [
       { t: 'escena', tono: 'oscuro', img: 'assets/img/escenas/magnifica-estudio-noche.jpg',
         ep: 'Encuesta · votá abajo 👇', h: 'Noche de estudio:<br><em>¿mate o café?</em>' }
     ]
+  },
+  {
+    id: 'x3-dom-historia-post-halloween', semana: 5, dia: 'Domingo', tipo: 'historia',
+    titulo: 'Domingo post Halloween',
+    caption: '',
+    placas: [
+      { t: 'escena', img: 'assets/img/escenas/dedica-ventana.jpg',
+        ep: 'Domingo post Halloween 🎃', h: '¿Mucho susto anoche?<br><em>Hoy, café tranquilo.</em>' }
+    ]
   }
 ];
 
