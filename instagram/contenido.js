@@ -529,7 +529,7 @@ const PIEZAS = [
     caption: '',
     placas: [
       { t: 'escena', img: 'assets/img/escenas/halloween-familia.jpg',
-        ep: 'Halloween 🎃', h: 'Ellos salen a pedir dulces.<br><em>Vos, un café.</em>' }
+        ep: 'Dulce o truco 🎃', h: 'Ellos, dulces.<br><em>Vos, café.</em>', grande: true, bajar: 40 }
     ]
   }
 ];

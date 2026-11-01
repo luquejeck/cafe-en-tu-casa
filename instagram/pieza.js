@@ -24,7 +24,7 @@ const CUERPO = {
   opciones:s => `${ep(s.ep)}<h2>${s.h}</h2><div class="opciones">${s.ops.map(o => `<div>${o}</div>`).join('')}</div>${par(s.p)}`,
   cta:     s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}<p class="boton">${s.boton}</p>`,
   // foto de ambiente a sangre: el texto arriba, sobre la parte limpia de la foto
-  escena:  s => `${ep(s.ep)}<h1>${s.h}</h1>${s.precio ? `<p class="precio"><b>${s.precio}</b> ${s.nota}</p>` : ''}${
+  escena:  s => `${ep(s.ep)}<h1 class="${s.grande ? 'grande' : ''}">${s.h}</h1>${s.precio ? `<p class="precio"><b>${s.precio}</b> ${s.nota}</p>` : ''}${
              s.cuotas ? `<p class="cuotas">${s.cuotas}</p>` : ''}`
 };
 
@@ -38,5 +38,5 @@ function placaHTML(pieza, n) {
   const fondo = s.t === 'escena'
     ? `<img class="fondo" src="../${s.img}" alt="">` : '';
   return `<div class="lienzo ${vertical ? 'vertical' : ''} ${s.tono || ''} ${s.t === 'escena' ? 'escena' : ''}">${fondo}
-    <div class="marca"><i></i> Café en tu Casa</div><main>${CUERPO[s.t](s)}</main>${puntos}</div>`;
+    <div class="marca"><i></i> Café en tu Casa</div><main${s.bajar ? ` style="padding-top:${s.bajar}px"` : ''}>${CUERPO[s.t](s)}</main>${puntos}</div>`;
 }

@@ -107,6 +107,7 @@ h2 { font-size: 72px; font-weight: 600; line-height: 1.07; letter-spacing: -.03e
 .escena main { flex: none; justify-content: flex-start; padding: 52px 0 0; }
 .escena .ep { font-size: 30px; color: var(--brand-dark); margin-bottom: 18px; }
 .escena h1 { font-size: 96px; line-height: 1.06; }
+.escena h1.grande { font-size: 124px; line-height: 1.02; letter-spacing: -.04em; }
 .escena h1 em { font-style: normal; color: var(--brand-dark); }
 .escena .precio { margin-top: 34px; font-size: 40px; color: var(--ink); }
 .escena .precio b { font-weight: 600; }
