@@ -522,6 +522,15 @@ const PIEZAS = [
       { t: 'escena', img: 'assets/img/escenas/dedica-ventana.jpg',
         ep: 'Domingo post Halloween 🎃', h: '¿Mucho susto anoche?<br><em>Hoy, café tranquilo.</em>' }
     ]
+  },
+  {
+    id: 'x3-historia-halloween', semana: 5, dia: 'Halloween', tipo: 'historia',
+    titulo: 'Halloween en casa',
+    caption: '',
+    placas: [
+      { t: 'escena', img: 'assets/img/escenas/halloween-familia.jpg',
+        ep: 'Halloween 🎃', h: 'Ellos salen a pedir dulces.<br><em>Vos, un café.</em>' }
+    ]
   }
 ];
 
