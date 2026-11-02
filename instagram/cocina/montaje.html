@@ -23,12 +23,12 @@ const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 const lerp = (a, b, k) => a + (b - a) * k;
 const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 const back = t => { const c = 1.9; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
-const escenas = GOLPES.map((g, i) => { const im = new Image(); im.src = `escenas/${String(i + 1).padStart(2, '0')}.jpg`; return im; });
+const escenas = GOLPES.map(g => { const im = new Image(); im.src = `escenas/${String(g.img).padStart(2, '0')}.jpg`; return im; });
 function golpe(T) { let i = GOLPES.length - 1; while (i > 0 && T < GOLPES[i].t0) i--; return i; }
-// hacia dónde va el zoom lento de cada escena (fracción del cuadro): casi siempre a la cara o al aparato nuevo
+// hacia dónde va el zoom lento de cada imagen (fracción del cuadro, en el orden de escenas/01…21): casi siempre a la cara o al aparato nuevo
 const FOCO = [[.5,.33],[.5,.3],[.45,.45],[.5,.35],[.45,.45],[.5,.28],[.6,.42],[.35,.5],[.5,.42],[.5,.38],[.5,.42],[.5,.38],[.5,.45],[.55,.45],[.45,.42],[.5,.45],[.5,.38],[.5,.42],[.5,.5],[.55,.48],[.5,.4]];
 function escena(T, i, lt) {
-  const im = escenas[i], g = GOLPES[i], [fx, fy] = FOCO[i] || [.5, .4];
+  const im = escenas[i], g = GOLPES[i], [fx, fy] = FOCO[g.img - 1] || [.5, .4];
   const base = Math.max(W / im.width, H / im.height);             // cubrir el cuadro
   const golpeCam = 1 + .05 * (1 - easeOut(clamp(lt / .28)));        // golpe de cámara al entrar
   const lento = 1 + .06 * clamp(lt / Math.max(g.d, 1.2));            // zoom lento hacia el foco
