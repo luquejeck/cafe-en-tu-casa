@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel cocina: montaje 2 (parallax y subtítulos grandes)</title>
+<!--
+  Montaje 2 del reel "Cómo inventar una cafetera automática", con las escenas de Google Flow.
+  · Corte seco en cada frase, con un golpe de cámara corto.
+  · Parallax 2.5D: cada escena está en tres capas (cocina/capas/NN-fondo|hombre|frente, de capas.py)
+    que se mueven a distinta velocidad; cada toma tiene su movimiento (acercarse, deslizarse, subir…).
+  · Subtítulos palabra por palabra, grandes, sobre la mesada: blancos con borde negro, palabras clave en amarillo.
+  · Contador chico arriba a la derecha, gancho de texto antes de la voz y tarjeta de venta al final.
+  Tiempos: cocina/golpes.js (armar.py). La voz arranca en GANCHO segundos.
+-->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+<style>* { margin: 0; } html, body { width: 1080px; height: 1920px; overflow: hidden; background: #1d1612; } .pre { position: absolute; left: -9999px; font-family: Inter; }</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div class="pre"><b style="font-weight:900">Aa</b><b style="font-weight:800">Aa</b><b style="font-weight:700">Aa</b></div>
+<script src="golpes.js"></script>
+<script>
+(() => {
+const FPS = 30, W = 1080, H = 1920, GANCHO = 1.2;
+const ctx = document.getElementById('c').getContext('2d');
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ex = t => 1 - Math.pow(1 - t, 4);                        // frena en seco
+const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+const spr = t => t >= 1 ? 1 : 1 - Math.exp(-7 * t) * Math.cos(11 * t);   // resorte
+const img = src => { const i = new Image(); i.src = src; return i; };
+const nn = k => String(k).padStart(2, '0');
+
+/* ------------------------------------------------ tomas: la del gancho + una por golpe del guion */
+const TOMAS = [{ id: 'gancho', img: 1, t0: 0, d: GANCHO }].concat(GOLPES.map(g => ({ ...g, t0: g.t0 + GANCHO })));
+TOMAS[TOMAS.length - 1].d += .4;
+const TOTAL = GANCHO + DURACION + .4;
+const capas = {}; TOMAS.forEach(t => { if (!capas[t.img]) capas[t.img] = ['fondo.jpg', 'hombre.png', 'frente.png'].map(f => img(`capas/${nn(t.img)}-${f}`)); });
+// movimiento de cada toma: dx, dy (px a velocidad 1), acercamiento, y hacia dónde mira (fracción del cuadro)
+const MOV = {
+  gancho: [0, 0, .07, .5, .36], grano: [0, 0, .06, .5, .36], noseToma: [-30, 0, .02, .5, .34], moler: [40, 0, .05, .45, .45],
+  aroma: [-40, -10, .04, .5, .38], recien: [0, 0, .08, .45, .45], pasaLargo: [36, -12, .04, .4, .5], fria: [0, -26, .05, .5, .4],
+  calentar: [-34, 0, .05, .5, .42], prensar: [0, 18, .06, .5, .45], noPasa: [30, 0, .03, .5, .38], empujar: [0, -30, .06, .5, .45],
+  espresso: [0, 0, .09, .55, .48], borra: [-30, 0, .04, .45, .42], tirar: [34, 10, .04, .5, .45], leche: [0, -20, .04, .5, .38],
+  espumar: [-30, -16, .05, .5, .42], siete: [0, 0, -.05, .5, .5], caja: [24, 0, .05, .55, .45], final: [0, 0, .06, .5, .4],
+};
+const PROF = [.55, 1, 1.6];                                      // fondo, hombre, mesada
+const SACUDE = { prensar: [.5, 14], empujar: [.25, 10], siete: [0, 6], caja: [.12, 18], tirar: [.35, 8] };
+
+function toma(T) { let i = TOMAS.length - 1; while (i > 0 && T < TOMAS[i].t0) i--; return i; }
+
+function escena(T, i, u) {
+  const tm = TOMAS[i], [ls] = capas[tm.img], [mx, my, mz, fx, fy] = MOV[tm.id] || [0, 0, .05, .5, .4];
+  const k = ease(clamp(u / Math.max(tm.d, 1)));
+  const golpe = 1 + .045 * (1 - ex(clamp(u / .22)));            // golpe de cámara en el corte
+  const base = Math.max(W / ls.width, H / ls.height) * 1.08;      // margen para mover sin bordes
+  let sx = 0, sy = 0; const sa = SACUDE[tm.id];
+  if (sa) { const q = u - sa[0]; if (tm.id === 'siete') { sx = Math.sin(T * 41) * sa[1] * .5; sy = Math.cos(T * 37) * sa[1] * .4; }
+    else if (q > 0 && q < .35) { const a = sa[1] * (1 - q / .35); sx = Math.sin(q * 90) * a; sy = Math.cos(q * 80) * a * .6; } }
+  // posición de cada capa; el fondo nunca deja ver bordes y las otras capas se corren lo mismo que él
+  const pos = capas[tm.img].map((c, j) => {
+    const p = PROF[j], z = base * golpe * (1 + mz * k * p), w = c.width * z, h = c.height * z;
+    return [W / 2 - w * fx + (mx * k - mx / 2) * p + sx, H / 2 - h * fy + (my * k - my / 2) * p + sy, w, h];
+  });
+  const [bx, by, bw, bh] = pos[0], cx = clamp(bx, W - bw, 0) - bx, cy = clamp(by, H - bh, 0) - by;
+  capas[tm.img].forEach((c, j) => { const [x, y, w, h] = pos[j]; ctx.drawImage(c, x + cx, y + cy, w, h); });
+}
+
+/* ------------------------------------------------ subtítulos palabra por palabra */
+const AMARILLO = /^(pero|entonces|encima|grano|aroma|cansa|agua|fría|calentás|prensás|pasa|fuerza|espresso|borra|tirás|leche|espumás|siete|caja|botón|sola)$/i;
+let tramos = [];
+function armarTramos() {
+  let g = []; tramos = [];
+  PALABRAS.forEach(w0 => { const w = { ...w0, start: w0.start + GANCHO, end: w0.end + GANCHO };
+    const corta = /^(pero|entonces,?|encima,?|y|¿y)$/i.test(w.text);
+    if (g.length && (g.length >= 2 || corta)) { tramos.push(g); g = []; }
+    g.push(w); if (/[.?!:…,]$/.test(w.text) || /^(pero|entonces,?|encima,?)$/i.test(w.text)) { tramos.push(g); g = []; } });
+  if (g.length) tramos.push(g);
+}
+function contorno(txt, x, y, color) {
+  ctx.lineJoin = 'round'; ctx.miterLimit = 2;
+  ctx.fillStyle = 'rgba(0,0,0,.45)'; ctx.fillText(txt, x + 6, y + 10);              // sombra
+  ctx.strokeStyle = '#0d0b0a'; ctx.lineWidth = 22; ctx.strokeText(txt, x, y);
+  ctx.fillStyle = color; ctx.fillText(txt, x, y);
+}
+function subtitulos(T, yBase) {
+  const j = tramos.findIndex((tr, n) => T < (tramos[n + 1] ? tramos[n + 1][0].start - .03 : 1e9));
+  const tr = tramos[Math.max(0, j)];
+  if (!tr || T < tr[0].start - .06 || T > tr[tr.length - 1].end + .45) return;
+  const pal = tr.map(w => w.text.replace(/[,.…:]+$/, '').toUpperCase());
+  let tam = 150; ctx.font = `900 ${tam}px Inter`;
+  let ancho = pal.reduce((a, p) => a + ctx.measureText(p).width, 0) + 30 * (pal.length - 1);
+  const lineas = ancho > 960 && pal.length > 1 ? pal.map(p => [p]) : [pal];
+  const maxW = Math.max(...lineas.map(l => l.reduce((a, p) => a + ctx.measureText(p).width, 0) + 30 * (l.length - 1)));
+  if (maxW > 980) { tam = Math.floor(tam * 980 / maxW); ctx.font = `900 ${tam}px Inter`; }
+  ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
+  let idx = 0;
+  lineas.forEach((l, li) => {
+    const anchoL = l.reduce((a, p) => a + ctx.measureText(p).width, 0) + 30 * (l.length - 1);
+    let x = W / 2 - anchoL / 2; const y = yBase + (li - (lineas.length - 1) / 2) * tam * 1.02;
+    l.forEach(p => {
+      const w = tr[idx++], wd = ctx.measureText(p).width;
+      const q = (T - w.start + .04) / .2;
+      if (q > 0) {
+        const s = q >= 1 ? 1 : .55 + .45 * spr(q);
+        ctx.save(); ctx.translate(x + wd / 2, y); ctx.scale(s, s); ctx.rotate((1 - Math.min(1, q)) * -.06);
+        contorno(p, -wd / 2, 0, AMARILLO.test(p.toLowerCase()) ? '#ffd23f' : '#ffffff'); ctx.restore();
+      }
+      x += wd + 30;
+    });
+  });
+}
+
+/* ------------------------------------------------ contador, gancho y tarjeta final */
+function contador(T, i, u) {
+  const tm = TOMAS[i]; if (!tm.contador) return;
+  const nuevo = tm.tipo === 'solucion' && u < .5, s = nuevo ? .7 + .3 * spr(u / .35) : 1;
+  ctx.save(); ctx.translate(960, 190); ctx.scale(s, s);
+  ctx.fillStyle = 'rgba(13,11,10,.72)'; ctx.beginPath(); ctx.roundRect(-92, -40, 184, 80, 40); ctx.fill();
+  ctx.font = '900 44px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = nuevo ? '#ffd23f' : '#ffffff'; ctx.fillText(`✓ ${tm.contador}/${SOLUCIONES}`, 0, 2); ctx.restore();
+}
+function marca() {
+  ctx.font = '800 30px Inter'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = 'rgba(13,11,10,.55)'; ctx.beginPath(); ctx.roundRect(44, 160, 318, 60, 30); ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.fillText('☕ Café en tu Casa', 66, 192);
+}
+function gancho(T) {
+  if (T > GANCHO + .15) return;
+  const lineas = ['¿CÓMO SE', 'INVENTA UNA', 'CAFETERA?'];
+  const fuera = clamp((T - GANCHO + .1) / .25);
+  ctx.save(); ctx.globalAlpha = 1 - fuera;
+  ctx.fillStyle = 'rgba(13,11,10,.35)'; ctx.fillRect(0, 0, W, H);
+  ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  lineas.forEach((l, k) => {
+    const q = (T - k * .16) / .22; if (q <= 0) return;
+    const tam = 132; ctx.font = `900 ${tam}px Inter`; const wd = ctx.measureText(l).width;
+    const s = q >= 1 ? 1 : 1.6 - .6 * ex(q);
+    ctx.save(); ctx.translate(W / 2, 760 + k * 150); ctx.scale(s, s);
+    contorno(l, -wd / 2, 0, k === 2 ? '#ffd23f' : '#ffffff'); ctx.restore();
+  });
+  ctx.restore();
+}
+function tarjeta(T) {
+  const tc = TOMAS.find(t => t.id === 'caja'); const u = T - tc.t0 - 1.0;
+  if (u < 0 || T > TOTAL - .55) return;
+  const k = spr(clamp(u / .45)), y = 1515 + (1 - Math.min(1, k)) * 120;
+  ctx.save(); ctx.globalAlpha = clamp(u / .15);
+  ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 10;
+  ctx.fillStyle = '#fffaf2'; ctx.beginPath(); ctx.roundRect(110, y - 95, 860, 190, 36); ctx.fill(); ctx.shadowColor = 'transparent';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#1d1d1f'; ctx.font = '900 54px Inter'; ctx.fillText("De'Longhi Magnifica S", W / 2, y - 40);
+  ctx.fillStyle = '#5b6e32'; ctx.font = '800 40px Inter'; ctx.fillText('20% OFF por transferencia', W / 2, y + 18);
+  ctx.fillStyle = '#6e6e73'; ctx.font = '700 30px Inter'; ctx.fillText('o cuotas sin interés en Mercado Libre · Link en la bio', W / 2, y + 64);
+  ctx.restore();
+}
+
+/* ------------------------------------------------ un cuadro */
+function cuadro(f) {
+  const T = f / FPS, i = toma(T), u = T - TOMAS[i].t0;
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = '#1d1612'; ctx.fillRect(0, 0, W, H);
+  escena(T, i, u);
+  // viñeta y un poco de contraste arriba para la marca y el contador
+  const v = ctx.createRadialGradient(W / 2, 1000, 520, W / 2, 1000, 1250); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(25,14,6,.38)');
+  ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+  marca(); contador(T, i, u);
+  const enCaja = TOMAS[i].id === 'caja' || TOMAS[i].id === 'final';
+  subtitulos(T, enCaja ? 1250 : 1420);
+  tarjeta(T); gancho(T);
+}
+window.prepararModelo = async () => {
+  await document.fonts.ready;
+  await Promise.all(Object.values(capas).flat().map(im => im.complete ? 0 : new Promise(r => { im.onload = r; im.onerror = r; })));
+  armarTramos(); cuadro(0); return Math.round(TOTAL * FPS);
+};
+window.cuadro = cuadro;
+})();
+</script>
+</body>
+</html>
