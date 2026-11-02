@@ -66,52 +66,39 @@ function escena(T, i, u) {
   capas[tm.img].forEach((c, j) => { const [x, y, w, h] = pos[j]; ctx.drawImage(c, x + cx, y + cy, w, h); });
 }
 
-/* ------------------------------------------------ subtítulos palabra por palabra */
-const AMARILLO = /^(pero|entonces|encima|grano|aroma|cansa|agua|fría|calentás|prensás|pasa|fuerza|espresso|borra|tirás|leche|espumás|siete|caja|botón|sola)$/i;
+/* ------------------------------------------------ subtítulos: simples, de la marca */
+// La frase entera (hasta ~7 palabras), blanca, sin borde, chica y abajo. Entra con un fundido corto.
 let tramos = [];
 function armarTramos() {
   let g = []; tramos = [];
   PALABRAS.forEach(w0 => { const w = { ...w0, start: w0.start + GANCHO, end: w0.end + GANCHO };
-    const corta = /^(pero|entonces,?|encima,?|y|¿y)$/i.test(w.text);
-    if (g.length && (g.length >= 2 || corta)) { tramos.push(g); g = []; }
-    g.push(w); if (/[.?!:…,]$/.test(w.text) || /^(pero|entonces,?|encima,?)$/i.test(w.text)) { tramos.push(g); g = []; } });
+    if (g.length >= 7 || (g.length >= 4 && /^(pero|entonces,?)$/i.test(w.text))) { tramos.push(g); g = []; }
+    g.push(w); if (/[.?!:…]$/.test(w.text)) { tramos.push(g); g = []; } });
   if (g.length) tramos.push(g);
 }
-function contorno(txt, x, y, color) {
-  ctx.lineJoin = 'round'; ctx.miterLimit = 2;
-  ctx.fillStyle = 'rgba(0,0,0,.45)'; ctx.fillText(txt, x + 6, y + 10);              // sombra
-  ctx.strokeStyle = '#0d0b0a'; ctx.lineWidth = 22; ctx.strokeText(txt, x, y);
-  ctx.fillStyle = color; ctx.fillText(txt, x, y);
-}
-function subtitulos(T, yBase) {
+function subtitulos(T) {
   const j = tramos.findIndex((tr, n) => T < (tramos[n + 1] ? tramos[n + 1][0].start - .03 : 1e9));
   const tr = tramos[Math.max(0, j)];
-  if (!tr || T < tr[0].start - .06 || T > tr[tr.length - 1].end + .45) return;
-  const pal = tr.map(w => w.text.replace(/[,.…:]+$/, '').toUpperCase());
-  let tam = 150; ctx.font = `900 ${tam}px Inter`;
-  let ancho = pal.reduce((a, p) => a + ctx.measureText(p).width, 0) + 30 * (pal.length - 1);
-  const lineas = ancho > 960 && pal.length > 1 ? pal.map(p => [p]) : [pal];
-  const maxW = Math.max(...lineas.map(l => l.reduce((a, p) => a + ctx.measureText(p).width, 0) + 30 * (l.length - 1)));
-  if (maxW > 980) { tam = Math.floor(tam * 980 / maxW); ctx.font = `900 ${tam}px Inter`; }
-  ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
-  let idx = 0;
-  lineas.forEach((l, li) => {
-    const anchoL = l.reduce((a, p) => a + ctx.measureText(p).width, 0) + 30 * (l.length - 1);
-    let x = W / 2 - anchoL / 2; const y = yBase + (li - (lineas.length - 1) / 2) * tam * 1.02;
-    l.forEach(p => {
-      const w = tr[idx++], wd = ctx.measureText(p).width;
-      const q = (T - w.start + .04) / .2;
-      if (q > 0) {
-        const s = q >= 1 ? 1 : .55 + .45 * spr(q);
-        ctx.save(); ctx.translate(x + wd / 2, y); ctx.scale(s, s); ctx.rotate((1 - Math.min(1, q)) * -.06);
-        contorno(p, -wd / 2, 0, AMARILLO.test(p.toLowerCase()) ? '#ffd23f' : '#ffffff'); ctx.restore();
-      }
-      x += wd + 30;
-    });
-  });
+  if (!tr || T < tr[0].start - .08 || T > tr[tr.length - 1].end + .5) return;
+  const a = clamp((T - tr[0].start + .08) / .14) * clamp((tr[tr.length - 1].end + .5 - T) / .15);
+  const texto = tr.map(w => w.text).join(' ');
+  ctx.font = '600 50px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  // corte en dos líneas si no entra
+  const pal = texto.split(' '); let l1 = texto, l2 = '';
+  if (ctx.measureText(texto).width > 900) { const m = Math.ceil(pal.length / 2); l1 = pal.slice(0, m).join(' '); l2 = pal.slice(m).join(' '); }
+  ctx.save(); ctx.globalAlpha = a;
+  ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 2;   // solo para que se lea sobre fondos claros
+  ctx.fillStyle = '#ffffff';
+  const y = l2 ? 1488 : 1520;
+  ctx.fillText(l1, W / 2, y); if (l2) ctx.fillText(l2, W / 2, y + 64);
+  ctx.restore();
 }
 
 /* ------------------------------------------------ contador, gancho y tarjeta final */
+function contorno(txt, x, y, color) {   // solo para el cartel del gancho
+  ctx.lineJoin = 'round'; ctx.fillStyle = 'rgba(0,0,0,.45)'; ctx.fillText(txt, x + 6, y + 10);
+  ctx.strokeStyle = '#0d0b0a'; ctx.lineWidth = 22; ctx.strokeText(txt, x, y); ctx.fillStyle = color; ctx.fillText(txt, x, y);
+}
 function contador(T, i, u) {
   const tm = TOMAS[i]; if (!tm.contador) return;
   const nuevo = tm.tipo === 'solucion' && u < .5, s = nuevo ? .7 + .3 * spr(u / .35) : 1;
@@ -144,7 +131,7 @@ function gancho(T) {
 function tarjeta(T) {
   const tc = TOMAS.find(t => t.id === 'caja'); const u = T - tc.t0 - 1.0;
   if (u < 0 || T > TOTAL - .55) return;
-  const k = spr(clamp(u / .45)), y = 1515 + (1 - Math.min(1, k)) * 120;
+  const k = spr(clamp(u / .45)), y = 1290 + (1 - Math.min(1, k)) * 120;
   ctx.save(); ctx.globalAlpha = clamp(u / .15);
   ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 10;
   ctx.fillStyle = '#fffaf2'; ctx.beginPath(); ctx.roundRect(110, y - 95, 860, 190, 36); ctx.fill(); ctx.shadowColor = 'transparent';
@@ -163,9 +150,10 @@ function cuadro(f) {
   // viñeta y un poco de contraste arriba para la marca y el contador
   const v = ctx.createRadialGradient(W / 2, 1000, 520, W / 2, 1000, 1250); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(25,14,6,.38)');
   ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+  const piso = ctx.createLinearGradient(0, 1300, 0, H); piso.addColorStop(0, 'rgba(15,10,6,0)'); piso.addColorStop(1, 'rgba(15,10,6,.55)');
+  ctx.fillStyle = piso; ctx.fillRect(0, 1300, W, H - 1300);
   marca(); contador(T, i, u);
-  const enCaja = TOMAS[i].id === 'caja' || TOMAS[i].id === 'final';
-  subtitulos(T, enCaja ? 1250 : 1420);
+  subtitulos(T);
   tarjeta(T); gancho(T);
 }
 window.prepararModelo = async () => {
