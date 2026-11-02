@@ -118,3 +118,9 @@ h2 { font-size: 72px; font-weight: 600; line-height: 1.07; letter-spacing: -.03e
 .escena.oscuro .marca, .escena.oscuro main { text-shadow: 0 2px 24px rgba(0, 0, 0, .45); }
 .escena.oscuro .ep { color: #d8eaa8; }
 .escena.oscuro h1 em { color: #d8eaa8; }
+
+/* escena en el feed (4:5): no hay "aire" arriba como en las historias, así que un degradé
+   suave del color de la pared, solo detrás del texto, hace que el título se lea sin tapar la foto */
+.escena.velo::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 50%; z-index: 1;
+  background: linear-gradient(to bottom, rgba(247, 243, 237, .94) 0%, rgba(247, 243, 237, .82) 45%, rgba(247, 243, 237, 0) 100%); }
+.escena.velo > .marca, .escena.velo > main { z-index: 2; }

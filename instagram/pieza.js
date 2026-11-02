@@ -37,6 +37,6 @@ function placaHTML(pieza, n) {
     : '';
   const fondo = s.t === 'escena'
     ? `<img class="fondo" src="../${s.img}" alt="">` : '';
-  return `<div class="lienzo ${vertical ? 'vertical' : ''} ${s.tono || ''} ${s.t === 'escena' ? 'escena' : ''}">${fondo}
+  return `<div class="lienzo ${vertical ? 'vertical' : ''} ${s.tono || ''} ${s.t === 'escena' ? 'escena' : ''} ${s.velo ? 'velo' : ''}">${fondo}
     <div class="marca"><i></i> Café en tu Casa</div><main${s.bajar ? ` style="padding-top:${s.bajar}px"` : ''}>${CUERPO[s.t](s)}</main>${puntos}</div>`;
 }

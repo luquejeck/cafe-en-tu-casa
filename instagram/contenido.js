@@ -531,6 +531,52 @@ const PIEZAS = [
       { t: 'escena', img: 'assets/img/escenas/halloween-familia.jpg',
         ep: 'Dulce o truco 🎃', h: 'Ellos, dulces.<br><em>Vos, café.</em>', grande: true, bajar: 40 }
     ]
+  },
+
+  /* ======================= NOVIEMBRE — fotos de ambiente en el feed ======================= */
+  {
+    id: 'x3-vie-carrusel-dedica-ambiente', semana: 7, dia: 'Viernes', tipo: 'carrusel',
+    titulo: 'Dedica en casa (fotos de ambiente)',
+    caption:
+      'Poco lugar. Mucho café. ☕\n\n' +
+      `La ${P.nombre(D)} mide ${cm(D.medidas.ancho)} de ancho: entra en cualquier mesada y en unos 40 segundos está lista para el espresso. ` +
+      'Con el Cappuccino System hacés la espuma para el cortado o el latte.\n\n' +
+      preciosCortos(D) + '\n\n' +
+      COMO_PAGAR + ' Envío gratis a todo el país.\n\n' +
+      'Guardalo para comparar.\n\n' +
+      '¿Vos sos de cortado o de latte?\n\n#delonghi #dedica #espresso #cafeencasa #barista',
+    placas: [
+      { t: 'escena', velo: true, img: 'assets/img/escenas/feed-dedica-blanca-espumando.jpg',
+        ep: `${D.modelo.split(' ')[0]} · ${cm(D.medidas.ancho)} de ancho`, h: 'Poco lugar.<br><em>Mucho café.</em>' },
+      { t: 'escena', velo: true, img: 'assets/img/escenas/feed-dedica-negra-espresso.jpg',
+        ep: 'Lista en unos 40 segundos', h: 'Espresso de verdad,<br><em>en tu casa.</em>' },
+      placaPrecio(D),
+      { t: 'cta', tono: 'oscuro', ep: 'Para decidir tranquilo', h: 'Guardalo para comparar.',
+        sub: '¿Cortado o latte?', boton: 'Link en la bio' }
+    ]
+  },
+  {
+    id: 'x4-lun-carrusel-magnifica-ambiente', semana: 8, dia: 'Lunes', tipo: 'carrusel',
+    titulo: 'Magnifica S en casa (fotos de ambiente)',
+    caption:
+      'Dos cafés, un botón. ☕\n\n' +
+      `La ${P.nombre(M)} muele el grano en el momento y prepara el espresso sola. ` +
+      'Con el vaporizador espumás la leche para el cappuccino o el latte.\n\n' +
+      preciosCortos(M) + '\n\n' +
+      COMO_PAGAR + ' Envío gratis a todo el país.\n\n' +
+      'Guardalo para comparar.\n\n' +
+      '¿Vos, con leche o sin leche?\n\n#delonghi #magnificas #cafeencasa #cafetera #latteart',
+    placas: [
+      { t: 'escena', velo: true, img: 'assets/img/escenas/feed-magnifica-desayuno-pareja.jpg',
+        ep: M.modelo, h: 'Dos cafés,<br><em>un botón.</em>' },
+      { t: 'escena', velo: true, img: 'assets/img/escenas/feed-magnifica-latte-art.jpg',
+        ep: 'Cappuccino System', h: 'La espuma,<br><em>como en el bar.</em>' },
+      { t: 'escena', velo: true, img: 'assets/img/escenas/feed-magnifica-sillon.jpg',
+        ep: 'Domingo en casa', h: 'Café de cafetería,<br><em>sin salir.</em>' },
+      placaPrecio(M),
+      { t: 'cta', tono: 'oscuro', ep: 'Para decidir tranquilo', h: 'Guardalo para comparar.',
+        sub: '¿Con leche o sin leche?', boton: 'Link en la bio' }
+    ]
   }
 ];
 
