@@ -546,10 +546,9 @@ const PIEZAS = [
       'Guardalo para comparar.\n\n' +
       '¿Vos sos de cortado o de latte?\n\n#delonghi #dedica #espresso #cafeencasa #barista',
     placas: [
-      { t: 'escena', velo: true, img: 'assets/img/escenas/feed-dedica-blanca-espumando.jpg',
+      { t: 'escena', estilo: 'tarjeta', img: 'assets/img/escenas/feed-dedica-blanca-espumando.jpg',
         ep: `${D.modelo.split(' ')[0]} · ${cm(D.medidas.ancho)} de ancho`, h: 'Poco lugar.<br><em>Mucho café.</em>' },
-      { t: 'escena', velo: true, img: 'assets/img/escenas/feed-dedica-negra-espresso.jpg',
-        ep: 'Lista en unos 40 segundos', h: 'Espresso de verdad,<br><em>en tu casa.</em>' },
+      { t: 'escena', estilo: 'limpia', img: 'assets/img/escenas/feed-dedica-negra-espresso.jpg' },
       placaPrecio(D),
       { t: 'cta', tono: 'oscuro', ep: 'Para decidir tranquilo', h: 'Guardalo para comparar.',
         sub: '¿Cortado o latte?', boton: 'Link en la bio' }
@@ -567,17 +566,88 @@ const PIEZAS = [
       'Guardalo para comparar.\n\n' +
       '¿Vos, con leche o sin leche?\n\n#delonghi #magnificas #cafeencasa #cafetera #latteart',
     placas: [
-      { t: 'escena', velo: true, img: 'assets/img/escenas/feed-magnifica-desayuno-pareja.jpg',
+      { t: 'escena', estilo: 'tarjeta', img: 'assets/img/escenas/feed-magnifica-desayuno-pareja.jpg',
         ep: M.modelo, h: 'Dos cafés,<br><em>un botón.</em>' },
-      { t: 'escena', velo: true, img: 'assets/img/escenas/feed-magnifica-latte-art.jpg',
-        ep: 'Cappuccino System', h: 'La espuma,<br><em>como en el bar.</em>' },
-      { t: 'escena', velo: true, img: 'assets/img/escenas/feed-magnifica-sillon.jpg',
-        ep: 'Domingo en casa', h: 'Café de cafetería,<br><em>sin salir.</em>' },
+      { t: 'escena', estilo: 'limpia', img: 'assets/img/escenas/feed-magnifica-latte-art.jpg' },
+      { t: 'escena', estilo: 'limpia', img: 'assets/img/escenas/feed-magnifica-sillon.jpg' },
       placaPrecio(M),
       { t: 'cta', tono: 'oscuro', ep: 'Para decidir tranquilo', h: 'Guardalo para comparar.',
         sub: '¿Con leche o sin leche?', boton: 'Link en la bio' }
     ]
-  }
+  },
+
+  /* ======================= NOVIEMBRE-DICIEMBRE — fotos de ambiente ======================= */
+  ...(() => {
+    const E = n => `assets/img/escenas/feed-${n}.jpg`;
+    const foto = n => ({ t: 'escena', estilo: 'limpia', img: E(n) });
+    const tarjeta = (n, ep, h, extra = {}) => ({ t: 'escena', estilo: 'tarjeta', img: E(n), ep, h, ...extra });
+    const cierre = sub => ({ t: 'cta', tono: 'oscuro', ep: 'Para decidir tranquilo', h: 'Guardalo para comparar.', sub, boton: 'Link en la bio' });
+    const pago = ps => ps.map(preciosCortos).join('\n\n') + '\n\n' + COMO_PAGAR + ' Envío gratis a todo el país.';
+    const texto = (gancho, cuerpo, ps, accion, pregunta, tags) =>
+      `${gancho}\n\n${cuerpo}\n\n${pago(ps)}\n\n${accion}\n\n${pregunta}\n\n${tags}`;
+    const pieza = (id, tipo, titulo, caption, placas) => ({ id, semana: 9, dia: 'Lunes', tipo, titulo, caption, placas });
+    const ENTREGA = 'Si es para regalar, consultá por WhatsApp la fecha de entrega antes de comprar.';
+    return [
+      pieza('f1118-carrusel-cual-va', 'carrusel', '¿Cuál va con tu casa?',
+        texto('¿Cuál va con tu casa? ☕',
+          `${M.modelo}: apretás un botón y muele el grano en el momento.\n${D.modelo}: ${cm(D.medidas.ancho)} de ancho, para los que disfrutan prepararlo a mano.`,
+          DISP, 'Guardalo para comparar.', `¿Botón o ritual?`, '#cafeencasa #delonghi #magnificas #dedica #cafetera'),
+        [tarjeta('magnifica-mueble', 'Dos formas de tomar café', '¿Cuál va<br><em>con tu casa?</em>'),
+         foto('magnifica-desayuno-pareja'), foto('dedica-blanca-espumando'), ...DISP.map(placaPrecio), cierre('¿Botón o ritual?')]),
+      pieza('f1120-post-magnifica-mueble', 'post', 'Magnifica S en el mueble (foto sola)',
+        texto('Un lugar en la casa para el café. ☕', `La ${P.nombre(M)}: ${cm(M.medidas.ancho)} de ancho, molinillo integrado y un botón por taza.`,
+          [M], 'Guardalo para cuando armes tu rincón del café.', '¿En la cocina o en el living?', '#delonghi #magnificas #cafeencasa #deco'),
+        [foto('magnifica-mueble')]),
+      pieza('f1123-post-dedica-ventana', 'post', 'Dedica junto a la ventana',
+        texto('Tu rincón, tu ritual. ☕', `La ${P.nombre(D)} entra en ${cm(D.medidas.ancho)} y está lista en unos 40 segundos.`,
+          [D], 'Guardalo para comparar.', '¿Café en la ventana o en la mesa?', '#delonghi #dedica #cafeencasa #espresso'),
+        [tarjeta('dedica-ventana', `Dedica · ${cm(D.medidas.ancho)} de ancho`, 'Tu rincón,<br><em>tu ritual.</em>')]),
+      pieza('f1127-carrusel-black-friday', 'carrusel', 'Black Friday',
+        texto('¿Esperabas el Black Friday? ☕', `Acá el ${OFF}% OFF por transferencia es todos los días. Y si preferís financiar, tenés cuotas sin interés en Mercado Libre.`,
+          DISP, 'Guardalo para comparar.', '¿Vos qué elegís: transferencia o cuotas?', '#blackfriday #cafeencasa #delonghi #cafetera'),
+        [tarjeta('magnifica-latte-art', 'Black Friday', `${OFF}% OFF,<br><em>todos los días.</em>`, { pildora: 'Pagando por transferencia o efectivo' }),
+         foto('dedica-negra-espresso'), ...DISP.map(placaPrecio), cierre('¿Transferencia o cuotas?')]),
+      pieza('f1130-post-magnifica-estudio', 'post', 'Magnifica S, último sprint del año',
+        texto('Último sprint del año. ☕', `Para las tardes largas de estudio o de trabajo, la ${P.nombre(M)} muele el grano en el momento y te deja el espresso con un botón.`,
+          [M], 'Guardalo para comparar.', '¿Vos estudiás o trabajás con café?', '#delonghi #magnificas #cafeencasa #estudio'),
+        [tarjeta('magnifica-estudio', 'Fin de año', 'Último sprint,<br><em>buen café.</em>')]),
+
+      pieza('f1201-carrusel-regalo-navidad', 'carrusel', 'Regalo de Navidad',
+        texto('El regalo que se usa todos los días. 🎄', `Una cafetera para la casa: ${M.modelo} si quieren un botón, ${D.modelo} si les gusta prepararlo.\n\n${ENTREGA}`,
+          DISP, 'Mandáselo a quien todavía no sabe qué regalar.', '¿Para quién sería: para vos o para regalar?', '#navidad #regalodenavidad #cafeencasa #delonghi'),
+        [tarjeta('magnifica-desayuno-familia', 'Navidad', 'El regalo que se usa<br><em>todos los días.</em>'),
+         foto('magnifica-sillon'), foto('dedica-ventana'), ...DISP.map(placaPrecio), cierre('¿Para vos o para regalar?')]),
+      pieza('f1204-post-dedica-espresso', 'post', 'Dedica negra, espresso (foto sola)',
+        texto('Espresso de verdad, en tu casa. ☕', `La ${P.nombre(D)}: portafiltro, 15 bares y lista en unos 40 segundos.`,
+          [D], 'Guardalo para comparar.', '¿Simple o doble?', '#delonghi #dedica #espresso #cafeencasa'),
+        [foto('dedica-negra-espresso')]),
+      pieza('f1209-post-magnifica-home-office', 'post', 'Magnifica S, home office',
+        texto('La última semana de laburo, con buen café. ☕', `La ${P.nombre(M)} lo hace con un botón, entre reunión y reunión.`,
+          [M], 'Guardalo para tu próximo día de home office.', '¿Cuántos cafés tomás en un día de trabajo: uno o más de dos?', '#homeoffice #delonghi #magnificas #cafeencasa'),
+        [tarjeta('magnifica-home-office', 'Home office', 'Entre reunión<br><em>y reunión.</em>')]),
+      pieza('f1211-post-dedica-espumando', 'post', 'Dedica blanca espumando (foto sola)',
+        texto('La espuma, en casa. ☕', `Con el Cappuccino System de la ${P.nombre(D)} hacés la leche para el cortado, el cappuccino o el latte.`,
+          [D], 'Guardalo para comparar.', '¿Cortado o latte?', '#delonghi #dedica #cappuccino #cafeencasa'),
+        [foto('dedica-blanca-espumando')]),
+      pieza('f1215-carrusel-antes-de-navidad', 'carrusel', 'Antes de Navidad',
+        texto('Faltan 10 días para Navidad. 🎄', `Si la querés para regalar, escribinos por WhatsApp y te confirmamos la fecha de entrega antes de comprar.`,
+          DISP, 'Mandáselo a quien está armando los regalos.', '¿Ya tenés los regalos o vas a último momento?', '#navidad #regalodenavidad #cafeencasa #delonghi'),
+        [tarjeta('magnifica-desayuno', 'Faltan 10 días', 'Regalá café<br><em>de cafetería.</em>', { pildora: 'Consultá la fecha de entrega por WhatsApp' }),
+         foto('magnifica-latte-art'), ...DISP.map(placaPrecio), cierre('¿Para vos o para regalar?')]),
+      pieza('f1218-post-magnifica-sillon', 'post', 'Magnifica S, sillón (foto sola)',
+        texto('Regalátela. ☕', `Después de un año largo, el café de cafetería en tu casa. La ${P.nombre(M)} lo hace con un botón.`,
+          [M], 'Guardalo para comparar.', '¿Con leche o sin leche?', '#delonghi #magnificas #cafeencasa #regalo'),
+        [foto('magnifica-sillon')]),
+      pieza('f1221-post-dedica-ventana-navidad', 'post', 'Dedica, última semana para regalar',
+        texto('Última semana para regalar. 🎄', `La ${P.nombre(D)}: ${cm(D.medidas.ancho)} de ancho y todo el ritual del espresso.\n\n${ENTREGA}`,
+          [D], 'Mandáselo a quien te pidió ideas de regalo.', '¿Para vos o para regalar?', '#navidad #regalodenavidad #delonghi #dedica'),
+        [tarjeta('dedica-blanca-espumando', 'Última semana', 'El regalo<br><em>más rico.</em>')]),
+      pieza('f1229-post-magnifica-noche', 'post', 'Magnifica S, fin de año',
+        texto('Para arrancar el 2027 con buen café. ☕', `La ${P.nombre(M)} muele el grano en el momento: el café de cafetería, todos los días del año que viene.`,
+          [M], 'Guardalo para comparar.', '¿Cuál es tu propósito con el café para el año que viene?', '#añonuevo #delonghi #magnificas #cafeencasa'),
+        [tarjeta('magnifica-estudio-noche', 'Fin de año', 'El 2027 arranca<br><em>con buen café.</em>')])
+    ];
+  })()
 ];
 
 /* Para generar.ps1 (corre con Node): lista "id n ancho alto" */
