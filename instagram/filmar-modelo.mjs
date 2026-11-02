@@ -42,7 +42,7 @@ const puerto = server.address().port;
 const browser = await pw.chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
 page.on("pageerror", (e) => console.error("ERROR en la página:", e.message));
-await page.goto(`http://127.0.0.1:${puerto}/instagram/modelo.html`);
+await page.goto(`http://127.0.0.1:${puerto}/instagram/${process.env.PAGINA || "modelo.html"}`);
 const total = await page.evaluate((m) => window.prepararModelo(m), modelo);
 console.log(id, total, "cuadros =", (total / 30).toFixed(1), "s");
 
