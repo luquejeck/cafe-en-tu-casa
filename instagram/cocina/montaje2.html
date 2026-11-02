@@ -128,17 +128,15 @@ function gancho(T) {
   });
   ctx.restore();
 }
-function tarjeta(T) {
+function tarjeta(T) {   // etiqueta chica arriba, debajo de la marca: no tapa la imagen
   const tc = TOMAS.find(t => t.id === 'caja'); const u = T - tc.t0 - 1.0;
   if (u < 0 || T > TOTAL - .55) return;
-  const k = spr(clamp(u / .45)), y = 1290 + (1 - Math.min(1, k)) * 120;
-  ctx.save(); ctx.globalAlpha = clamp(u / .15);
-  ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 10;
-  ctx.fillStyle = '#fffaf2'; ctx.beginPath(); ctx.roundRect(110, y - 95, 860, 190, 36); ctx.fill(); ctx.shadowColor = 'transparent';
+  const k = spr(clamp(u / .4)), a = clamp(u / .15) * clamp((TOTAL - .55 - T) / .2);
+  ctx.save(); ctx.globalAlpha = a; ctx.translate(W / 2, 300 - (1 - Math.min(1, k)) * 30);
+  ctx.fillStyle = 'rgba(255,250,242,.94)'; ctx.beginPath(); ctx.roundRect(-400, -52, 800, 104, 52); ctx.fill();
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#1d1d1f'; ctx.font = '900 54px Inter'; ctx.fillText("De'Longhi Magnifica S", W / 2, y - 40);
-  ctx.fillStyle = '#5b6e32'; ctx.font = '800 40px Inter'; ctx.fillText('20% OFF por transferencia', W / 2, y + 18);
-  ctx.fillStyle = '#6e6e73'; ctx.font = '700 30px Inter'; ctx.fillText('o cuotas sin interés en Mercado Libre · Link en la bio', W / 2, y + 64);
+  ctx.fillStyle = '#1d1d1f'; ctx.font = '800 34px Inter'; ctx.fillText("De'Longhi Magnifica S", 0, -16);
+  ctx.fillStyle = '#5b6e32'; ctx.font = '600 23px Inter'; ctx.fillText('20% OFF por transferencia o cuotas sin interés · Link en la bio', 0, 22);
   ctx.restore();
 }
 
