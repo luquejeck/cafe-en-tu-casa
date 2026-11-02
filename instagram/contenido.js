@@ -644,7 +644,7 @@ const PIEZAS = [
         [tarjeta('dedica-blanca-espumando', 'Última semana', 'El regalo<br><em>más rico.</em>')]),
       pieza('f1229-post-magnifica-noche', 'post', 'Magnifica S, fin de año',
         texto('Para arrancar el 2027 con buen café. ☕', `La ${P.nombre(M)} muele el grano en el momento: el café de cafetería, todos los días del año que viene.`,
-          [M], 'Guardalo para comparar.', '¿Cuál es tu propósito con el café para el año que viene?', '#añonuevo #delonghi #magnificas #cafeencasa'),
+          [M], 'Guardalo para comparar.', '¿El año que viene: más cafés o mejores cafés?', '#añonuevo #delonghi #magnificas #cafeencasa'),
         [tarjeta('magnifica-estudio-noche', 'Fin de año', 'El 2027 arranca<br><em>con buen café.</em>')])
     ];
   })()
