@@ -10,20 +10,24 @@
   "d4": "/home/user/cafe-en-tu-casa/edit/capsulas/src/d43939a5.mp4",
   "s70": "/home/user/cafe-en-tu-casa/edit/capsulas/src/7028d5a7.mp4",
   "kr1": "/home/user/cafe-en-tu-casa/edit/capsulas/src/8e561966.mp4",
-  "kr2": "/home/user/cafe-en-tu-casa/edit/capsulas/src/92ade276.mp4"
+  "kr2": "/home/user/cafe-en-tu-casa/edit/capsulas/src/92ade276.mp4",
+  "eb_slow": "/home/user/cafe-en-tu-casa/edit/capsulas/src/eb5845be.mp4",
+  "kr2_cta": "/home/user/cafe-en-tu-casa/edit/capsulas/src/92ade276.mp4"
  },
- "speed": 1.1,
+ "speed": 1.18,
  "speeds": {
-  "eb": 1.1,
+  "eb": 1.18,
   "eb_gag": 1.0,
-  "s103": 1.1,
-  "s57": 1.1,
+  "s103": 1.18,
+  "s57": 1.18,
   "s57_toma": 1.0,
-  "s60": 1.1,
-  "d4": 1.1,
-  "s70": 1.1,
-  "kr1": 1.1,
-  "kr2": 1.1
+  "s60": 1.18,
+  "d4": 1.18,
+  "s70": 1.18,
+  "kr1": 1.18,
+  "kr2": 1.18,
+  "eb_slow": 0.5,
+  "kr2_cta": 1.0
  },
  "grade": "colorchannelmixer=rr=0.95:bb=1.06, eq=contrast=1.05:saturation=1.04",
  "ranges": [
@@ -31,121 +35,128 @@
    "source": "eb",
    "start": 0.2,
    "end": 3.467,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "gancho: la verdad incómoda"
   },
   {
    "source": "eb_gag",
    "start": 3.467,
-   "end": 5.6,
+   "end": 3.867,
    "speed": 1.0,
-   "beat": "chiste: tira las cápsulas"
+   "beat": "chiste: arranca el tiro"
+  },
+  {
+   "source": "eb_slow",
+   "start": 3.867,
+   "end": 4.867,
+   "speed": 0.5,
+   "beat": "chiste: cámara lenta del tiro"
   },
   {
    "source": "s103",
    "start": 0.033,
    "end": 3.3,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "problema"
   },
   {
    "source": "s103",
    "start": 4.5,
    "end": 6.8,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "problema: estamos pagando"
   },
   {
    "source": "s103",
    "start": 7.033,
    "end": 7.867,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "problema: pote de plástico"
   },
   {
    "source": "s57",
    "start": 0.9,
    "end": 4.0,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "giro: el verdadero lujo"
   },
   {
    "source": "s57",
    "start": 4.633,
    "end": 5.533,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "giro"
   },
   {
    "source": "s57",
    "start": 6.3,
    "end": 6.8,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "giro"
   },
   {
    "source": "s57",
    "start": 7.033,
    "end": 7.867,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "giro: de calidad"
   },
   {
    "source": "s60",
    "start": 0.1,
    "end": 2.4,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "solución: un botón"
   },
   {
    "source": "s60",
    "start": 2.767,
    "end": 4.067,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "solución"
   },
   {
    "source": "s60",
    "start": 4.233,
    "end": 5.033,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "solución"
   },
   {
    "source": "s60",
    "start": 5.3,
    "end": 6.333,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "solución: se limpia sola"
   },
   {
    "source": "d4",
    "start": 0.0,
    "end": 2.0,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "cierre"
   },
   {
    "source": "d4",
    "start": 2.2,
    "end": 3.433,
-   "speed": 1.1,
+   "speed": 1.18,
    "beat": "cierre: hacé el cambio YA"
   },
   {
-   "source": "s70",
-   "start": 0.333,
-   "end": 3.967,
-   "speed": 1.1,
-   "beat": "CTA"
+   "source": "kr2_cta",
+   "start": 0.5,
+   "end": 2.9,
+   "speed": 1.0,
+   "beat": "CTA en pantalla sobre la cafetera"
   },
   {
    "source": "s57_toma",
    "start": 4.033,
-   "end": 7.867,
+   "end": 6.867,
    "speed": 1.0,
-   "beat": "toma fallida al final"
+   "beat": "toma fallida (recortada)"
   }
  ],
- "total_duration_s": 30.867
+ "total_duration_s": 27.633
 }

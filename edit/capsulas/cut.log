@@ -1,23 +1,25 @@
 ! kr1: no transcript /home/user/cafe-en-tu-casa/edit/capsulas/transcripts/8e561966.json: the cut is built without subtitles for this source
 ! kr2: no transcript /home/user/cafe-en-tu-casa/edit/capsulas/transcripts/92ade276.json: the cut is built without subtitles for this source
-   0 eb          0.200-3.467    x1.1   ->   0.000 +2.967 s   13 words  gancho: la verdad incómoda
-   1 eb_gag      3.467-5.600    x1.0   ->   2.967 +2.133 s    0 words  chiste: tira las cápsulas
-   2 s103        0.033-3.300    x1.1   ->   5.100 +2.967 s   10 words  problema
-   3 s103        4.500-6.800    x1.1   ->   8.067 +2.100 s    9 words  problema: estamos pagando
-   4 s103        7.033-7.867    x1.1   ->  10.167 +0.767 s    4 words  problema: pote de plástico
-   5 s57         0.900-4.000    x1.1   ->  10.933 +2.833 s   12 words  giro: el verdadero lujo
-   6 s57         4.633-5.533    x1.1   ->  13.767 +0.833 s    4 words  giro
-   7 s57         6.300-6.800    x1.1   ->  14.600 +0.467 s    1 words  giro
-   8 s57         7.033-7.867    x1.1   ->  15.067 +0.767 s    2 words  giro: de calidad
-   9 s60         0.100-2.400    x1.1   ->  15.833 +2.100 s    9 words  solución: un botón
-  10 s60         2.767-4.067    x1.1   ->  17.933 +1.167 s    8 words  solución
-  11 s60         4.233-5.033    x1.1   ->  19.100 +0.733 s    5 words  solución
-  12 s60         5.300-6.333    x1.1   ->  19.833 +0.933 s    6 words  solución: se limpia sola
-  13 d4          0.000-2.000    x1.1   ->  20.767 +1.833 s    9 words  cierre
-  14 d4          2.200-3.433    x1.1   ->  22.600 +1.133 s    4 words  cierre: hacé el cambio YA
-  15 s70         0.333-3.967    x1.1   ->  23.733 +3.300 s   16 words  CTA
-  16 s57_toma    4.033-7.867    x1.0   ->  27.033 +3.833 s    7 words  toma fallida al final
-segments 17, words 119 of 169, total 30.867 s
+! kr2_cta: no transcript /home/user/cafe-en-tu-casa/edit/capsulas/transcripts/92ade276.json: the cut is built without subtitles for this source
+   0 eb          0.200-3.467    x1.18  ->   0.000 +2.767 s   13 words  gancho: la verdad incómoda
+   1 eb_gag      3.467-3.867    x1.0   ->   2.767 +0.400 s    0 words  chiste: arranca el tiro
+   2 eb_slow     3.867-4.867    x0.5   ->   3.167 +2.000 s    0 words  chiste: cámara lenta del tiro
+   3 s103        0.033-3.300    x1.18  ->   5.167 +2.767 s   10 words  problema
+   4 s103        4.500-6.800    x1.18  ->   7.933 +1.933 s    9 words  problema: estamos pagando
+   5 s103        7.033-7.867    x1.18  ->   9.867 +0.700 s    4 words  problema: pote de plástico
+   6 s57         0.900-4.000    x1.18  ->  10.567 +2.633 s   12 words  giro: el verdadero lujo
+   7 s57         4.633-5.533    x1.18  ->  13.200 +0.767 s    4 words  giro
+   8 s57         6.300-6.800    x1.18  ->  13.967 +0.433 s    1 words  giro
+   9 s57         7.033-7.867    x1.18  ->  14.400 +0.700 s    2 words  giro: de calidad
+  10 s60         0.100-2.400    x1.18  ->  15.100 +1.933 s    9 words  solución: un botón
+  11 s60         2.767-4.067    x1.18  ->  17.033 +1.100 s    8 words  solución
+  12 s60         4.233-5.033    x1.18  ->  18.133 +0.667 s    5 words  solución
+  13 s60         5.300-6.333    x1.18  ->  18.800 +0.867 s    6 words  solución: se limpia sola
+  14 d4          0.000-2.000    x1.18  ->  19.667 +1.700 s    9 words  cierre
+  15 d4          2.200-3.433    x1.18  ->  21.367 +1.033 s    4 words  cierre: hacé el cambio YA
+  16 kr2_cta     0.500-2.900    x1.0   ->  22.400 +2.400 s    0 words  CTA en pantalla sobre la cafetera
+  17 s57_toma    4.033-6.867    x1.0   ->  24.800 +2.833 s    5 words  toma fallida (recortada)
+segments 18, words 101 of 182, total 27.633 s
 extract: krups_sirve.mp4 (3.90 s from kr1)
 extract: krups_taza.mp4 (3.20 s from kr2)
-final.mp4 ready: 30.867 s; captions.json, edl.json written. Next: python scripts/speech_mask.py --edl /home/user/cafe-en-tu-casa/edit/capsulas/edl.json
+final.mp4 ready: 27.633 s; captions.json, edl.json written. Next: python scripts/speech_mask.py --edl /home/user/cafe-en-tu-casa/edit/capsulas/edl.json

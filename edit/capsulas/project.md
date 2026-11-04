@@ -28,3 +28,10 @@ Gancho → problema (premium vs. viejo) → giro (el verdadero lujo) → soluci�
 - Subtítulos «Typewriter» (frase completa, blancos, sin cajas), oscurecido inferior 0.65 medido.
 - Escenas en tono «feature» (entradas deslizadas). Sonido: whoosh en el tiro y un tic al entrar el blooper.
 - Duración: 30,9 s. Master −14,2 LUFS, pico −1,4 dBFS.
+
+## Versión 3 (pedido: retener más la atención, mismo estilo)
+- 27,6 s: habla a x1.18; tiro de cápsulas en cámara lenta (x0.5, 2 s); sin el CTA hablado (se iba el «así que» repetido): el CTA queda en pantalla 2,4 s sobre la cafetera con la música; blooper recortado a «por… tomar un café… bueno».
+- Gráficas nuevas: «Molido hace meses.» (sin cifra, a pedido) con «meses.» letra a letra; cápsula dibujada que se tacha en «plástico»; re-gancho «Y lo mejor viene al final…» a los ~11 s.
+- Cámara: un cambio de encuadre cada 1,5–2 s (13 planos).
+- Sonido: clics en cada texto, golpe grave en «incómoda.», swish en los tachados, whoosh en el tiro; base musical propia (pad sintetizado, sin derechos), 17 dB debajo de la voz y con ducking. Master −14,0 LUFS, pico −1,4 dBFS.
+- La auditoría de caras marca el mentón a 7,25 s; revisado en el cuadro: los subtítulos quedan debajo, no lo tapan.

@@ -1,6 +1,6 @@
 {
  "id": "capsulas",
- "duration": 30.867,
+ "duration": 27.633,
  "inserts": [
   {
    "id": "b01",
@@ -8,8 +8,8 @@
    "mode": "replace",
    "file": "capsulas/inserts/b01.mp4",
    "media": "video",
-   "start": 13.767,
-   "dur": 1.6,
+   "start": 13.2,
+   "dur": 1.2,
    "src_in": 0.0,
    "transition_in": "cut",
    "transition_out": "cut",
@@ -21,10 +21,10 @@
  ],
  "scenes": [
   {
-   "id": "c05",
+   "id": "c01",
    "type": "contrast",
    "mode": "split",
-   "start": 7.415,
+   "start": 7.311,
    "dur": 3.4,
    "box": [
     60,
@@ -47,11 +47,11 @@
    "hide_subtitles": true
   },
   {
-   "id": "c04",
+   "id": "c02",
    "type": "list",
    "mode": "panel",
-   "start": 17.615,
-   "dur": 4.25,
+   "start": 16.761,
+   "dur": 3.9,
    "source": {
     "kind": "speech"
    },
@@ -64,22 +64,22 @@
    "items": [
     {
      "text": "Un solo botón",
-     "t": 17.615
+     "t": 16.761
     },
     {
      "text": "Hace todo por vos",
-     "t": 18.636
+     "t": 17.689
     },
     {
      "text": "Se limpia sola",
-     "t": 20.088
+     "t": 19.037
     }
    ],
    "face": [
-    140,
-    390,
-    599,
-    835
+    133,
+    387,
+    603,
+    836
    ],
    "hide_subtitles": true
   },
@@ -88,18 +88,18 @@
    "type": "cta",
    "mode": "full",
    "variant": "bio",
-   "start": 24.058,
-   "dur": 2.95,
+   "start": 22.324,
+   "dur": 2.3,
    "source": {
-    "kind": "speech"
+    "kind": "client"
    },
-   "transition_in": "cut",
-   "transition_out": "cut",
+   "transition_in": "slide",
+   "transition_out": "slide",
    "tone": "feature",
    "text": {
     "lines": [
      "Entrá a mi perfil",
-     "Mirá los modelos"
+     "@cafentucasa"
     ]
    },
    "hide_subtitles": true

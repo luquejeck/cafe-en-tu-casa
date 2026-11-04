@@ -1,15 +1,75 @@
 {
- "below_voice_db": 14,
+ "below_voice_db": 16,
  "sounds": [
   {
+   "file": "edit/capsulas/sfx/tick.wav",
+   "at": 0.1,
+   "start": 0.0,
+   "what": "La verdad"
+  },
+  {
+   "file": "edit/capsulas/sfx/grave.wav",
+   "at": 0.5,
+   "start": 0.0,
+   "what": "incómoda"
+  },
+  {
    "file": "edit/capsulas/sfx/whoosh.wav",
-   "at": 3.32,
+   "at": 3.17,
    "start": 0.0,
    "what": "vuela el bowl"
   },
   {
+   "file": "edit/capsulas/sfx/tick.wav",
+   "at": 7.31,
+   "start": 0.0,
+   "what": "entra Café premium"
+  },
+  {
+   "file": "edit/capsulas/sfx/swish.wav",
+   "at": 8.85,
+   "start": 0.0,
+   "what": "se tacha premium / Café viejo"
+  },
+  {
+   "file": "edit/capsulas/sfx/swish.wav",
+   "at": 10.3,
+   "start": 0.0,
+   "what": "se tacha la cápsula"
+  },
+  {
+   "file": "edit/capsulas/sfx/tick.wav",
+   "at": 11.43,
+   "start": 0.0,
+   "what": "re-gancho"
+  },
+  {
+   "file": "edit/capsulas/sfx/tick.wav",
+   "at": 16.76,
+   "start": 0.0,
+   "what": "lista 01"
+  },
+  {
+   "file": "edit/capsulas/sfx/tick.wav",
+   "at": 17.69,
+   "start": 0.0,
+   "what": "lista 02"
+  },
+  {
+   "file": "edit/capsulas/sfx/tick.wav",
+   "at": 19.04,
+   "start": 0.0,
+   "what": "lista 03"
+  },
+  {
+   "file": "edit/capsulas/sfx/tick.wav",
+   "at": 22.32,
+   "start": 0.0,
+   "what": "CTA"
+  },
+  {
    "file": "edit/capsulas/sfx/pop.wav",
-   "at": 27.04,
+   "at": 24.81,
    "start": 0.0,
    "what": "entra la toma fallida"
   }

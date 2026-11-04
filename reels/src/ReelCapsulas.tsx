@@ -41,7 +41,7 @@ const Nota: React.FC<{ t: number; from: number; to: number; text: string; x?: nu
   const o = interpolate(t, [to - 0.2, to], [1, 0], clamp);
   return (
     <div style={{ position: "absolute", left: align === "center" ? 0 : x, right: align === "center" ? 0 : undefined, top: y,
-      textAlign: align, fontFamily: FONT, fontWeight: 500, fontStyle: italic ? "italic" : "normal", fontSize: size,
+      textAlign: align, whiteSpace: "nowrap", fontFamily: FONT, fontWeight: 500, fontStyle: italic ? "italic" : "normal", fontSize: size,
       letterSpacing: "-0.02em", color: WHITE, opacity: k * o, transform: `translateY(${(1 - k) * 14}px)` }}>
       {italic ? (
         <span style={{ display: "inline-block", padding: "14px 28px", borderRadius: 999, background: "rgba(16,16,18,.38)",
@@ -51,15 +51,58 @@ const Nota: React.FC<{ t: number; from: number; to: number; text: string; x?: nu
   );
 };
 
+/** «Molido hace meses.»: la primera línea entra fina, «meses.» aparece letra a letra. */
+const Meses: React.FC<{ t: number; from: number; to: number; y: number }> = ({ t, from, to, y }) => {
+  if (t < from || t > to) return null;
+  const o = interpolate(t, [to - 0.2, to], [1, 0], clamp);
+  const k = interpolate(t, [from, from + 0.3], [0, 1], { ...clamp, easing: out });
+  const word = "meses.";
+  const shown = Math.floor(interpolate(t, [from + 0.25, from + 0.85], [0, word.length], clamp));
+  return (
+    <div style={{ position: "absolute", left: 68, top: y, textAlign: "left", fontFamily: FONT, color: WHITE, opacity: o }}>
+      <div style={{ fontSize: 38, fontWeight: 500, letterSpacing: "-0.02em", opacity: k, transform: `translateY(${(1 - k) * 12}px)` }}>Molido hace</div>
+      <div style={{ fontSize: 92, fontWeight: 800, letterSpacing: "0.02em", color: GREEN, lineHeight: 1.05 }}>
+        {word.split("").map((ch, i) => (
+          <span key={i} style={{ opacity: i < shown ? 1 : 0.12 }}>{ch}</span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/** Cápsula dibujada con líneas finas; una línea verde la tacha. */
+const CapsulaTachada: React.FC<{ t: number; from: number; tacha: number; to: number; x: number; y: number }> = ({ t, from, tacha, to, x, y }) => {
+  if (t < from || t > to) return null;
+  const k = interpolate(t, [from, from + 0.3], [0, 1], { ...clamp, easing: out });
+  const o = interpolate(t, [to - 0.15, to], [1, 0], clamp);
+  const line = interpolate(t, [tacha, tacha + 0.22], [0, 1], { ...clamp, easing: out });
+  return (
+    <svg width={150} height={150} viewBox="0 0 220 220" style={{ position: "absolute", left: x - 75, top: y - 75, opacity: k * o,
+      transform: `scale(${0.9 + 0.1 * k})` }}>
+      <g fill="none" stroke={WHITE} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M60 70 H160" />
+        <path d="M66 70 L82 168 Q110 180 138 168 L154 70" />
+        <path d="M54 60 Q110 46 166 60" />
+      </g>
+      <path d="M40 180 L180 40" stroke={GREEN} strokeWidth={10} strokeLinecap="round"
+        strokeDasharray={200} strokeDashoffset={200 * (1 - line)} />
+    </svg>
+  );
+};
+
 export const ReelCapsulas: React.FC<ReelKitProps> = (p) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
   const ws = wordsOf(p);
   const t = f / fps;
 
-  const cocina = atWord(ws, "cocina", 1, "end");      // fin del gancho: después vuela el bowl
   const es = atWord(ws, "Es", 1);                     // vuelve a hablar
-  const tiro = cocina + 0.75;                          // el bowl sale despedido
+  const tiro = es - 1.7;                               // el bowl sale despedido (en cámara lenta, cut.json: eb_slow)
+  const viejo = atWord(ws, "viejo", 1);
+  const pote = atWord(ws, "pote", 1);
+  const plastico = atWord(ws, "plástico", 1);
+  const no = atWord(ws, "no", 1);
+  const cafe2 = atWord(ws, "por", 2);                  // ahí entra el B-roll: el re-gancho sale antes
   const toma = atWord(ws, "por", ws.filter((w) => norm(w.text) === "por").length); // la última: arranca la toma fallida
   const tomar = atWord(ws, "tomar", 2);
   const cafe = atWord(ws, "café", ws.filter((w) => norm(w.text) === "café").length, "end");
@@ -88,6 +131,13 @@ export const ReelCapsulas: React.FC<ReelKitProps> = (p) => {
 
       {/* remate del tiro */}
       <Nota t={t} from={tiro + 0.05} to={es - 0.1} text="Chau, cápsulas." y={330} size={72} />
+
+      {/* «café viejo»: Molido hace meses + cápsula tachada (dentro del campo de la escena split) */}
+      <Meses t={t} from={viejo + 0.1} to={plastico + 0.12} y={705} />
+      <CapsulaTachada t={t} from={pote - 0.05} tacha={plastico} to={plastico + 0.12} x={880} y={790} />
+
+      {/* re-gancho a mitad del video */}
+      <Nota t={t} from={no - 0.1} to={cafe2 - 0.05} text="Y lo mejor viene al final…" x={440} y={270} size={40} italic align="left" />
 
       {/* toma fallida */}
       {blooper ? (

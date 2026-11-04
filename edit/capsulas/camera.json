@@ -1,11 +1,15 @@
 {"shots": [
   {"at": 0.0, "z": 1.0, "cx": 540, "cy": 960},
   {"at": "word:Es#1", "z": 1.0, "cx": 540, "cy": 960, "drift": 0.03},
-  {"at": "word:estamos#1", "z": 1.12, "cx": 540, "cy": 960},
-  {"at": "word:El#1", "z": 1.0, "cx": 540, "cy": 960, "drift": 0.04},
-  {"at": "word:segundo#1", "z": 1.12, "cx": 440, "cy": 960},
+  {"at": "word:estábamos#1", "z": 1.1, "cx": 540, "cy": 1080},
+  {"at": "word:El#1", "z": 1.0, "cx": 540, "cy": 960, "drift": 0.03},
+  {"at": "word:no#1", "z": 1.12, "cx": 440, "cy": 1000},
+  {"at": "word:de#4", "z": 1.0, "cx": 540, "cy": 960},
+  {"at": "word:Por#3", "z": 1.0, "cx": 540, "cy": 960, "drift": 0.03},
+  {"at": "word:tocás#1", "z": 1.12, "cx": 540, "cy": 1000},
   {"at": "word:Así#1", "z": 1.0, "cx": 540, "cy": 960},
+  {"at": "word:tiempo#1", "z": 1.1, "cx": 540, "cy": 1000},
   {"at": "word:hacé#1", "z": 1.22, "cx": 540, "cy": 1060},
-  {"at": "word:Así#2", "z": 1.0, "cx": 540, "cy": 960},
-  {"at": "word:por#5", "z": 1.0, "cx": 540, "cy": 960, "drift": 0.04}
+  {"at": "word:por#5", "z": 1.0, "cx": 540, "cy": 960, "drift": 0.03},
+  {"at": "word:tomar#2", "z": 1.1, "cx": 520, "cy": 1000}
 ]}

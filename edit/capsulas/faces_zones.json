@@ -8,262 +8,228 @@
  "frame": null,
  "segments": [
   {
-   "id": "k00",
+   "id": "s01a",
    "start": 0.0,
-   "end": 2.967,
+   "end": 2.767,
    "face": [
-    388,
-    533,
-    306,
-    386
+    387,
+    529,
+    305,
+    392
    ],
    "ceiling": [
     250,
-    473
+    469
    ],
    "chest": [
-    979,
+    981,
     1230
    ],
-   "left": 288,
-   "right": 206,
+   "left": 287,
+   "right": 208,
    "sub_ok": true,
    "cut_top": false
   },
   {
-   "id": "k01",
-   "start": 2.967,
+   "id": "s01b",
+   "start": 2.767,
+   "end": 3.167,
+   "face": [
+    480,
+    682,
+    178,
+    185
+   ],
+   "ceiling": [
+    250,
+    622
+   ],
+   "chest": [
+    927,
+    1230
+   ],
+   "left": 380,
+   "right": 242,
+   "sub_ok": true,
+   "cut_top": false
+  },
+  {
+   "id": "s01c",
+   "start": 3.167,
    "end": 5.1,
    "face": [
-    324,
-    554,
-    532,
-    821
+    323,
+    636,
+    523,
+    706
    ],
    "ceiling": [
     250,
-    494
+    576
    ],
    "chest": null,
-   "left": 224,
-   "right": 44,
+   "left": 223,
+   "right": 54,
    "sub_ok": false,
    "cut_top": false
   },
   {
-   "id": "k02",
+   "id": "s02a",
    "start": 5.1,
-   "end": 8.067,
+   "end": 5.167,
    "face": [
-    255,
-    592,
-    579,
-    792
+    406,
+    670,
+    225,
+    267
    ],
    "ceiling": [
     250,
-    532
+    610
    ],
-   "chest": null,
-   "left": 155,
-   "right": 66,
-   "sub_ok": false,
-   "cut_top": false
-  },
-  {
-   "id": "k03",
-   "start": 8.067,
-   "end": 10.967,
-   "face": [
-    105,
-    436,
-    937,
-    1015
-   ],
-   "ceiling": [
-    250,
-    376
-   ],
-   "chest": null,
-   "left": 5,
-   "right": 0,
-   "sub_ok": false,
-   "cut_top": false
-  },
-  {
-   "id": "k04",
-   "start": 10.967,
-   "end": 11.734,
-   "face": [
-    105,
-    436,
-    937,
-    999
-   ],
-   "ceiling": [
-    250,
-    376
-   ],
-   "chest": null,
-   "left": 5,
-   "right": 0,
-   "sub_ok": false,
-   "cut_top": false
-  },
-  {
-   "id": "k05",
-   "start": 11.733,
-   "end": 15.366,
-   "face": [
-    20,
-    256,
-    538,
-    678
-   ],
-   "ceiling": null,
    "chest": [
-    994,
+    997,
     1230
    ],
-   "left": 0,
-   "right": 342,
+   "left": 306,
+   "right": 269,
    "sub_ok": true,
    "cut_top": false
   },
   {
-   "id": "k06",
-   "start": 15.367,
-   "end": 16.2,
+   "id": "s02b",
+   "start": 5.167,
+   "end": 9.539,
    "face": [
-    13,
-    263,
-    549,
-    677
+    212,
+    590,
+    634,
+    839
+   ],
+   "ceiling": [
+    250,
+    530
+   ],
+   "chest": null,
+   "left": 112,
+   "right": 54,
+   "sub_ok": false,
+   "cut_top": false
+  },
+  {
+   "id": "s03a",
+   "start": 9.539,
+   "end": 10.567,
+   "face": [
+    89,
+    315,
+    729,
+    1139
+   ],
+   "ceiling": null,
+   "chest": null,
+   "left": 0,
+   "right": 82,
+   "sub_ok": false,
+   "cut_top": false
+  },
+  {
+   "id": "s03b",
+   "start": 10.567,
+   "end": 10.952,
+   "face": [
+    76,
+    300,
+    454,
+    609
    ],
    "ceiling": null,
    "chest": [
-    1000,
+    969,
     1230
    ],
    "left": 0,
-   "right": 338,
+   "right": 370,
    "sub_ok": true,
    "cut_top": false
   },
   {
-   "id": "k07",
-   "start": 16.2,
-   "end": 16.666999999999998,
+   "id": "s04a",
+   "start": 10.952,
+   "end": 15.1,
    "face": [
-    -7,
-    281,
-    512,
-    681
+    -11,
+    249,
+    735,
+    937
    ],
    "ceiling": null,
-   "chest": [
-    1022,
-    1230
-   ],
+   "chest": null,
    "left": 0,
-   "right": 395,
+   "right": 176,
    "sub_ok": true,
    "cut_top": false
   },
   {
-   "id": "k08",
-   "start": 16.667,
-   "end": 17.434,
+   "id": "s04b",
+   "start": 15.1,
+   "end": 15.309,
    "face": [
-    -9,
-    281,
-    794,
-    943
+    159,
+    333,
+    613,
+    884
+   ],
+   "ceiling": null,
+   "chest": null,
+   "left": 59,
+   "right": 128,
+   "sub_ok": true,
+   "cut_top": false
+  },
+  {
+   "id": "s05",
+   "start": 15.309,
+   "end": 19.197,
+   "face": [
+    -11,
+    307,
+    783,
+    958
    ],
    "ceiling": null,
    "chest": null,
    "left": 0,
-   "right": 115,
+   "right": 128,
    "sub_ok": false,
    "cut_top": false
   },
   {
-   "id": "k09",
-   "start": 17.433,
-   "end": 19.533,
+   "id": "s06a",
+   "start": 19.197,
+   "end": 19.667,
    "face": [
-    100,
-    326,
-    685,
-    928
+    84,
+    382,
+    706,
+    917
    ],
    "ceiling": null,
    "chest": null,
    "left": 0,
-   "right": 115,
+   "right": 110,
    "sub_ok": false,
    "cut_top": false
   },
   {
-   "id": "k10",
-   "start": 19.533,
-   "end": 20.700000000000003,
-   "face": [
-    100,
-    350,
-    661,
-    876
-   ],
-   "ceiling": null,
-   "chest": null,
-   "left": 0,
-   "right": 139,
-   "sub_ok": false,
-   "cut_top": false
-  },
-  {
-   "id": "k11",
-   "start": 20.7,
-   "end": 21.433,
-   "face": [
-    27,
-    332,
-    725,
-    984
-   ],
-   "ceiling": null,
-   "chest": null,
-   "left": 0,
-   "right": 148,
-   "sub_ok": false,
-   "cut_top": false
-  },
-  {
-   "id": "k12",
-   "start": 21.433,
-   "end": 22.366,
-   "face": [
-    27,
-    332,
-    933,
-    927
-   ],
-   "ceiling": null,
-   "chest": null,
-   "left": 0,
-   "right": 0,
-   "sub_ok": false,
-   "cut_top": false
-  },
-  {
-   "id": "k13",
-   "start": 22.367,
-   "end": 24.2,
+   "id": "s06b",
+   "start": 19.667,
+   "end": 20.767,
    "face": [
     127,
-    370,
-    776,
-    945
+    387,
+    785,
+    946
    ],
    "ceiling": null,
    "chest": null,
@@ -273,58 +239,116 @@
    "cut_top": false
   },
   {
-   "id": "k14",
-   "start": 24.2,
-   "end": 25.333,
+   "id": "s07a",
+   "start": 20.767,
+   "end": 22.4,
    "face": [
-    94,
-    358,
-    812,
-    966
+    80,
+    346,
+    768,
+    987
    ],
    "ceiling": null,
    "chest": null,
    "left": 0,
-   "right": 0,
+   "right": 52,
    "sub_ok": false,
    "cut_top": false
   },
   {
-   "id": "k15",
-   "start": 25.333,
-   "end": 28.633,
+   "id": "s07b",
+   "start": 22.4,
+   "end": 23.733,
    "face": [
-    242,
-    309,
-    689,
-    979
+    462,
+    1049,
+    164,
+    182
    ],
-   "ceiling": null,
+   "ceiling": [
+    250,
+    989
+   ],
    "chest": null,
-   "left": 142,
-   "right": 0,
+   "left": 362,
+   "right": 274,
    "sub_ok": false,
    "cut_top": false
   },
   {
-   "id": "k16",
-   "start": 28.633,
-   "end": 32.466,
+   "id": "s08a",
+   "start": 23.733,
+   "end": 24.4,
    "face": [
-    -10,
-    216,
-    564,
-    757
+    468,
+    1057,
+    155,
+    171
+   ],
+   "ceiling": [
+    250,
+    997
+   ],
+   "chest": null,
+   "left": 368,
+   "right": 277,
+   "sub_ok": false,
+   "cut_top": false
+  },
+  {
+   "id": "s08b",
+   "start": 24.4,
+   "end": 27.04,
+   "face": [
+    -1,
+    229,
+    559,
+    728
    ],
    "ceiling": null,
    "chest": [
-    1033,
+    1017,
     1230
    ],
    "left": 0,
-   "right": 346,
+   "right": 342,
    "sub_ok": true,
    "cut_top": false
+  },
+  {
+   "id": "s09",
+   "start": 27.04,
+   "end": 29.32,
+   "face": [
+    -1,
+    283,
+    473,
+    674
+   ],
+   "ceiling": null,
+   "chest": [
+    1017,
+    1230
+   ],
+   "left": 0,
+   "right": 428,
+   "sub_ok": true,
+   "cut_top": false
+  },
+  {
+   "id": "s10",
+   "start": 29.32,
+   "end": 30.867,
+   "face": null,
+   "ceiling": [
+    250,
+    1210
+   ],
+   "chest": null,
+   "left": 960,
+   "right": 960,
+   "sub_ok": true,
+   "unmeasured": true
   }
  ]
 }

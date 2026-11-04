@@ -1,13 +1,13 @@
 {
  "schema": 1,
  "id": "capsulas",
- "created": "2026-11-04T23:18",
- "duration": 30.867,
+ "created": "2026-11-04T23:45",
+ "duration": 27.633,
  "segments": [
   {
    "id": "s01",
    "start": 0.0,
-   "end": 5.1,
+   "end": 5.167,
    "text": "La verdad incómoda sobre esa cafetera de cápsulas que tenés en tu cocina.",
    "cut_segs": [
     0
@@ -23,12 +23,13 @@
   },
   {
    "id": "s02",
-   "start": 5.1,
-   "end": 9.539,
-   "text": "Es que nos convencieron de que estábamos consumiendo café premium, estamos pagando por café viejo y",
+   "start": 5.167,
+   "end": 10.584,
+   "text": "Es que nos convencieron de que estábamos consumiendo café premium, estamos pagando por café viejo y encima guardado en un pote de plástico.",
    "cut_segs": [
-    2,
-    3
+    3,
+    4,
+    5
    ],
    "main": "main shot",
    "camera": "",
@@ -40,29 +41,32 @@
   },
   {
    "id": "s03",
-   "start": 9.539,
-   "end": 10.952,
-   "text": "encima guardado en un pote de plástico.",
+   "start": 10.584,
+   "end": 14.626,
+   "text": "El verdadero lujo es no perder ni un segundo de tu día por tomar un café bueno de",
    "cut_segs": [
-    3,
-    4
+    6,
+    7,
+    8,
+    9
    ],
    "main": "main shot",
    "camera": "",
    "graphics": "",
-   "hints": [],
+   "hints": [
+    "a segment join at the start: B-roll will hide the cut"
+   ],
    "notes": ""
   },
   {
    "id": "s04",
-   "start": 10.952,
-   "end": 15.309,
-   "text": "El verdadero lujo es no perder ni un segundo de tu día por tomar un café bueno de",
+   "start": 14.626,
+   "end": 18.224,
+   "text": "calidad Por eso, con una automática tocás un solo botón y te hace todo el trabajo por vos.",
    "cut_segs": [
-    5,
-    6,
-    7,
-    8
+    9,
+    10,
+    11
    ],
    "main": "main shot",
    "camera": "",
@@ -74,13 +78,12 @@
   },
   {
    "id": "s05",
-   "start": 15.309,
-   "end": 19.197,
-   "text": "calidad Por eso, con una automática tocás un solo botón y te hace todo el trabajo por vos.",
+   "start": 18.224,
+   "end": 19.667,
+   "text": "Y lo mejor de todo es que además se limpia sola.",
    "cut_segs": [
-    8,
-    9,
-    10
+    12,
+    13
    ],
    "main": "main shot",
    "camera": "",
@@ -92,61 +95,12 @@
   },
   {
    "id": "s06",
-   "start": 19.197,
-   "end": 20.767,
-   "text": "Y lo mejor de todo es que además se limpia sola.",
-   "cut_segs": [
-    11,
-    12
-   ],
-   "main": "main shot",
-   "camera": "",
-   "graphics": "",
-   "hints": [
-    "a segment join at the start: B-roll will hide the cut"
-   ],
-   "notes": ""
-  },
-  {
-   "id": "s07",
-   "start": 20.767,
-   "end": 23.733,
+   "start": 19.667,
+   "end": 24.807,
    "text": "Así que si valorás tu tiempo y tu paladar, hacé el cambio ya.",
    "cut_segs": [
-    13,
-    14
-   ],
-   "main": "main shot",
-   "camera": "",
-   "graphics": "",
-   "hints": [
-    "a segment join at the start: B-roll will hide the cut"
-   ],
-   "notes": ""
-  },
-  {
-   "id": "s08",
-   "start": 23.733,
-   "end": 27.04,
-   "text": "Así que entrá a mi perfil y mirá todos los modelos que tenemos disponibles para vos.",
-   "cut_segs": [
+    14,
     15
-   ],
-   "main": "main shot",
-   "camera": "",
-   "graphics": "",
-   "hints": [
-    "a segment join at the start: B-roll will hide the cut"
-   ],
-   "notes": ""
-  },
-  {
-   "id": "s09",
-   "start": 27.04,
-   "end": 29.32,
-   "text": "por tomar un café",
-   "cut_segs": [
-    16
    ],
    "main": "main shot",
    "camera": "",
@@ -158,17 +112,18 @@
    "notes": ""
   },
   {
-   "id": "s10",
-   "start": 29.32,
-   "end": 30.867,
-   "text": "bueno de calidad",
+   "id": "s07",
+   "start": 24.807,
+   "end": 27.633,
+   "text": "por tomar un café bueno",
    "cut_segs": [
-    16
+    17
    ],
    "main": "main shot",
    "camera": "",
    "graphics": "",
    "hints": [
+    "a segment join at the start: B-roll will hide the cut",
     "ending/CTA: no memes here"
    ],
    "notes": ""
@@ -176,13 +131,13 @@
  ],
  "inserts": [
   {
-   "id": "c05",
+   "id": "c01",
    "kind": "scene",
    "type": "contrast",
    "mode": "split",
    "variant": null,
    "segment": "s02",
-   "start": 7.415,
+   "start": 7.311,
    "dur": 3.4,
    "at": "word:premium#1",
    "offset": -0.2,
@@ -210,7 +165,7 @@
     "kind": "speech",
     "ref": null
    },
-   "what": "premium tachado, aparece viejo",
+   "what": "premium tachado, aparece viejo; abajo «Molido hace meses.» y la cápsula tachada (ReelCapsulas)",
    "why": "el dato que da vuelta el video",
    "transition_in": "slide",
    "transition_out": "slide",
@@ -222,9 +177,9 @@
   {
    "id": "b01",
    "kind": "broll",
-   "segment": "s04",
-   "start": 13.767,
-   "dur": 1.6,
+   "segment": "s03",
+   "start": 13.2,
+   "dur": 1.2,
    "mode": "replace",
    "what": "la automática sirviendo",
    "why": "mostrar el café cuando lo nombra",
@@ -283,14 +238,14 @@
    ]
   },
   {
-   "id": "c04",
+   "id": "c02",
    "kind": "scene",
    "type": "list",
    "mode": "panel",
    "variant": null,
-   "segment": "s05",
-   "start": 17.615,
-   "dur": 4.25,
+   "segment": "s04",
+   "start": 16.761,
+   "dur": 3.9,
    "at": "word:botón#1",
    "tone": null,
    "text": {
@@ -302,17 +257,17 @@
     {
      "text": "Un solo botón",
      "at": "word:botón#1",
-     "t": 17.615
+     "t": 16.761
     },
     {
      "text": "Hace todo por vos",
      "at": "word:trabajo#1",
-     "t": 18.636
+     "t": 17.689
     },
     {
      "text": "Se limpia sola",
      "at": "word:además#1",
-     "t": 20.088
+     "t": 19.037
     }
    ],
    "value": null,
@@ -324,7 +279,7 @@
     "kind": "speech",
     "ref": null
    },
-   "what": "3 beneficios uno por palabra",
+   "what": "3 beneficios",
    "why": "tres ideas paralelas",
    "transition_in": "slide",
    "transition_out": "slide",
@@ -339,16 +294,16 @@
    "type": "cta",
    "mode": "full",
    "variant": "bio",
-   "segment": "s08",
-   "start": 24.058,
-   "dur": 2.95,
-   "at": "word:entrá#1",
-   "offset": -0.1,
+   "segment": "s06",
+   "start": 22.324,
+   "dur": 2.3,
+   "at": "word:ya#1",
+   "offset": 0.5,
    "tone": null,
    "text": {
     "lines": [
      "Entrá a mi perfil",
-     "Mirá los modelos"
+     "@cafentucasa"
     ],
     "accent": null,
     "label": null
@@ -360,13 +315,13 @@
    "box": null,
    "side": null,
    "source": {
-    "kind": "speech",
+    "kind": "client",
     "ref": null
    },
    "what": "CTA al link del perfil",
-   "why": "CTA hablado, refuerzo visual",
-   "transition_in": "cut",
-   "transition_out": "cut",
+   "why": "cierre con acción",
+   "transition_in": "slide",
+   "transition_out": "slide",
    "sound": null,
    "hide_subtitles": true,
    "status": "ready",
@@ -375,16 +330,16 @@
  ],
  "keep_clear": [
   {
-   "start": 7.415,
-   "end": 10.815,
+   "start": 7.311,
+   "end": 10.711,
    "box": [
     60,
     220,
     900,
     660
    ],
-   "what": "scene c05 contrast (split)",
-   "scene": "c05",
+   "what": "scene c01 contrast (split)",
+   "scene": "c01",
    "mode": "split",
    "cam": [
     0.56,
@@ -393,7 +348,7 @@
    ]
   }
  ],
- "captions_id": "4f865d8636a2",
+ "captions_id": "9b7cf7481141",
  "brand": "cafe-en-tu-casa",
  "settings": {
   "brand": "cafe-en-tu-casa",
@@ -520,8 +475,8 @@
   "memes_max": 4,
   "coverage_max": 0.4,
   "min_gap_s": 2.0,
-  "broll_max": 7,
-  "coverage_max_s": 12.35
+  "broll_max": 6,
+  "coverage_max_s": 11.05
  },
  "hide_subtitles": [
   {

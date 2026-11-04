@@ -1,6 +1,6 @@
 {
  "fps": 30,
- "speed": 1.1,
+ "speed": 1.18,
  "sources": {
   "eb": {
    "file": "edit/capsulas/src/eb5845be.mp4"
@@ -35,6 +35,15 @@
   },
   "kr2": {
    "file": "edit/capsulas/src/92ade276.mp4"
+  },
+  "eb_slow": {
+   "file": "edit/capsulas/src/eb5845be.mp4",
+   "transcript": "edit/capsulas/transcripts/eb5845be.json",
+   "speed": 0.5
+  },
+  "kr2_cta": {
+   "file": "edit/capsulas/src/92ade276.mp4",
+   "speed": 1.0
   }
  },
  "ranges": [
@@ -47,8 +56,14 @@
   {
    "source": "eb_gag",
    "start": 3.48,
-   "end": 5.6,
-   "beat": "chiste: tira las cápsulas"
+   "end": 3.85,
+   "beat": "chiste: arranca el tiro"
+  },
+  {
+   "source": "eb_slow",
+   "start": 3.85,
+   "end": 4.85,
+   "beat": "chiste: cámara lenta del tiro"
   },
   {
    "source": "s103",
@@ -129,16 +144,16 @@
    "beat": "cierre: hacé el cambio YA"
   },
   {
-   "source": "s70",
-   "start": 0.333,
-   "end": 3.967,
-   "beat": "CTA"
+   "source": "kr2_cta",
+   "start": 0.5,
+   "end": 2.9,
+   "beat": "CTA en pantalla sobre la cafetera"
   },
   {
    "source": "s57_toma",
    "start": 4.03,
-   "end": 7.86,
-   "beat": "toma fallida al final"
+   "end": 6.85,
+   "beat": "toma fallida (recortada)"
   }
  ],
  "fix": {
