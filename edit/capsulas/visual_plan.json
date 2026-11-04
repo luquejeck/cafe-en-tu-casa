@@ -1,8 +1,8 @@
 {
  "schema": 1,
  "id": "capsulas",
- "created": "2026-11-04T21:13",
- "duration": 32.467,
+ "created": "2026-11-04T23:18",
+ "duration": 30.867,
  "segments": [
   {
    "id": "s01",
@@ -24,10 +24,11 @@
   {
    "id": "s02",
    "start": 5.1,
-   "end": 8.194,
-   "text": "Es que nos convencieron de que estábamos consumiendo café premium,",
+   "end": 9.539,
+   "text": "Es que nos convencieron de que estábamos consumiendo café premium, estamos pagando por café viejo y",
    "cut_segs": [
-    2
+    2,
+    3
    ],
    "main": "main shot",
    "camera": "",
@@ -39,9 +40,9 @@
   },
   {
    "id": "s03",
-   "start": 8.194,
-   "end": 11.733,
-   "text": "pero la verdad es que estamos pagando por café viejo y encima guardado en un pote de plástico.",
+   "start": 9.539,
+   "end": 10.952,
+   "text": "encima guardado en un pote de plástico.",
    "cut_segs": [
     3,
     4
@@ -49,19 +50,19 @@
    "main": "main shot",
    "camera": "",
    "graphics": "",
-   "hints": [
-    "a segment join at the start: B-roll will hide the cut"
-   ],
+   "hints": [],
    "notes": ""
   },
   {
    "id": "s04",
-   "start": 11.733,
-   "end": 16.218,
-   "text": "la verdad es que el verdadero lujo es no perder ni un segundo de tu día por tomar un café",
+   "start": 10.952,
+   "end": 15.309,
+   "text": "El verdadero lujo es no perder ni un segundo de tu día por tomar un café bueno de",
    "cut_segs": [
     5,
-    6
+    6,
+    7,
+    8
    ],
    "main": "main shot",
    "camera": "",
@@ -73,11 +74,10 @@
   },
   {
    "id": "s05",
-   "start": 16.218,
-   "end": 20.797,
-   "text": "bueno de calidad Por eso, con una automática tocás un solo botón y te hace todo el trabajo por vos.",
+   "start": 15.309,
+   "end": 19.197,
+   "text": "calidad Por eso, con una automática tocás un solo botón y te hace todo el trabajo por vos.",
    "cut_segs": [
-    7,
     8,
     9,
     10
@@ -92,8 +92,8 @@
   },
   {
    "id": "s06",
-   "start": 20.797,
-   "end": 22.367,
+   "start": 19.197,
+   "end": 20.767,
    "text": "Y lo mejor de todo es que además se limpia sola.",
    "cut_segs": [
     11,
@@ -109,8 +109,8 @@
   },
   {
    "id": "s07",
-   "start": 22.367,
-   "end": 25.333,
+   "start": 20.767,
+   "end": 23.733,
    "text": "Así que si valorás tu tiempo y tu paladar, hacé el cambio ya.",
    "cut_segs": [
     13,
@@ -126,8 +126,8 @@
   },
   {
    "id": "s08",
-   "start": 25.333,
-   "end": 28.64,
+   "start": 23.733,
+   "end": 27.04,
    "text": "Así que entrá a mi perfil y mirá todos los modelos que tenemos disponibles para vos.",
    "cut_segs": [
     15
@@ -142,8 +142,8 @@
   },
   {
    "id": "s09",
-   "start": 28.64,
-   "end": 30.92,
+   "start": 27.04,
+   "end": 29.32,
    "text": "por tomar un café",
    "cut_segs": [
     16
@@ -159,8 +159,8 @@
   },
   {
    "id": "s10",
-   "start": 30.92,
-   "end": 32.467,
+   "start": 29.32,
+   "end": 30.867,
    "text": "bueno de calidad",
    "cut_segs": [
     16
@@ -176,57 +176,14 @@
  ],
  "inserts": [
   {
-   "id": "c01",
-   "kind": "scene",
-   "type": "hook",
-   "mode": "overlay",
-   "variant": "slam",
-   "segment": "s01",
-   "start": 0.018,
-   "dur": 2.6,
-   "at": "word:La#1",
-   "tone": null,
-   "text": {
-    "lines": [
-     "La verdad",
-     "incómoda"
-    ],
-    "accent": "incómoda",
-    "label": null
-   },
-   "items": null,
-   "value": null,
-   "media": null,
-   "interaction": null,
-   "box": [
-    60,
-    1050,
-    600,
-    450
-   ],
-   "side": null,
-   "source": {
-    "kind": "speech",
-    "ref": null
-   },
-   "what": "gancho grande en el aire sobre la cabeza",
-   "why": "gancho en el primer segundo",
-   "transition_in": "cut",
-   "transition_out": "cut",
-   "sound": null,
-   "hide_subtitles": true,
-   "status": "ready",
-   "fallback": "main footage"
-  },
-  {
-   "id": "c02",
+   "id": "c05",
    "kind": "scene",
    "type": "contrast",
    "mode": "split",
    "variant": null,
    "segment": "s02",
    "start": 7.415,
-   "dur": 4.2,
+   "dur": 3.4,
    "at": "word:premium#1",
    "offset": -0.2,
    "tone": null,
@@ -254,9 +211,9 @@
     "ref": null
    },
    "what": "premium tachado, aparece viejo",
-   "why": "el dato que da vuelta el video, se entiende sin sonido",
-   "transition_in": "cut",
-   "transition_out": "cut",
+   "why": "el dato que da vuelta el video",
+   "transition_in": "slide",
+   "transition_out": "slide",
    "sound": null,
    "hide_subtitles": true,
    "status": "ready",
@@ -266,7 +223,7 @@
    "id": "b01",
    "kind": "broll",
    "segment": "s04",
-   "start": 15.367,
+   "start": 13.767,
    "dur": 1.6,
    "mode": "replace",
    "what": "la automática sirviendo",
@@ -326,14 +283,14 @@
    ]
   },
   {
-   "id": "c03",
+   "id": "c04",
    "kind": "scene",
    "type": "list",
    "mode": "panel",
    "variant": null,
    "segment": "s05",
-   "start": 19.215,
-   "dur": 4.1,
+   "start": 17.615,
+   "dur": 4.25,
    "at": "word:botón#1",
    "tone": null,
    "text": {
@@ -345,17 +302,17 @@
     {
      "text": "Un solo botón",
      "at": "word:botón#1",
-     "t": 19.215
+     "t": 17.615
     },
     {
      "text": "Hace todo por vos",
      "at": "word:trabajo#1",
-     "t": 20.236
+     "t": 18.636
     },
     {
      "text": "Se limpia sola",
-     "at": "word:limpia#1",
-     "t": 21.961
+     "at": "word:además#1",
+     "t": 20.088
     }
    ],
    "value": null,
@@ -369,21 +326,21 @@
    },
    "what": "3 beneficios uno por palabra",
    "why": "tres ideas paralelas",
-   "transition_in": "cut",
-   "transition_out": "cut",
+   "transition_in": "slide",
+   "transition_out": "slide",
    "sound": null,
    "hide_subtitles": true,
    "status": "ready",
    "fallback": "main footage"
   },
   {
-   "id": "c04",
+   "id": "c03",
    "kind": "scene",
    "type": "cta",
    "mode": "full",
    "variant": "bio",
    "segment": "s08",
-   "start": 25.658,
+   "start": 24.058,
    "dur": 2.95,
    "at": "word:entrá#1",
    "offset": -0.1,
@@ -418,29 +375,16 @@
  ],
  "keep_clear": [
   {
-   "start": 0.018,
-   "end": 2.618,
-   "box": [
-    60,
-    1050,
-    600,
-    450
-   ],
-   "what": "scene c01 hook (overlay)",
-   "scene": "c01",
-   "mode": "overlay"
-  },
-  {
    "start": 7.415,
-   "end": 11.615,
+   "end": 10.815,
    "box": [
     60,
     220,
     900,
     660
    ],
-   "what": "scene c02 contrast (split)",
-   "scene": "c02",
+   "what": "scene c05 contrast (split)",
+   "scene": "c05",
    "mode": "split",
    "cam": [
     0.56,
@@ -449,13 +393,13 @@
    ]
   }
  ],
- "captions_id": "039818c62208",
+ "captions_id": "4f865d8636a2",
  "brand": "cafe-en-tu-casa",
  "settings": {
   "brand": "cafe-en-tu-casa",
   "style": "marker",
-  "subtitles": "accent",
-  "subtitles_shade": null,
+  "subtitles": "typewriter",
+  "subtitles_shade": 0.65,
   "intensity": "active",
   "use_broll": true,
   "use_project_footage": true,
@@ -483,7 +427,7 @@
   ],
   "library_dirs": [],
   "meme_size": "m",
-  "scene_tone": "punchy",
+  "scene_tone": "feature",
   "use_scenes": true,
   "brand_tone": {
    "label": "Lively, friendly",
@@ -526,7 +470,7 @@
   "brand": "reel.json",
   "style": "reel.json",
   "subtitles": "reel.json",
-  "subtitles_shade": "defaults",
+  "subtitles_shade": "reel.json",
   "intensity": "reel.json",
   "use_broll": "reel.json",
   "use_project_footage": "reel.json",
@@ -541,7 +485,7 @@
   "generation_engines": "defaults",
   "library_dirs": "defaults",
   "meme_size": "tone:friendly",
-  "scene_tone": "tone:friendly",
+  "scene_tone": "reel.json",
   "use_scenes": "reel.json",
   "brand_tone": "brand:cafe-en-tu-casa"
  },
@@ -577,8 +521,15 @@
   "coverage_max": 0.4,
   "min_gap_s": 2.0,
   "broll_max": 7,
-  "coverage_max_s": 12.99
+  "coverage_max_s": 12.35
  },
+ "hide_subtitles": [
+  {
+   "start": 0.0,
+   "end": 2.3,
+   "why": "gancho que se revela (ReelCapsulas)"
+  }
+ ],
  "subtitles_band": [
   1390,
   1500

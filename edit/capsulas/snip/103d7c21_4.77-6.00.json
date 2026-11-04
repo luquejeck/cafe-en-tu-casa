@@ -1,0 +1,38 @@
+{
+ "language_code": "es",
+ "text": "por café viejo y...",
+ "words": [
+  {
+   "text": "por",
+   "start": 4.767,
+   "end": 5.307,
+   "type": "word",
+   "p": 0.077
+  },
+  {
+   "text": "café",
+   "start": 5.307,
+   "end": 5.547,
+   "type": "word",
+   "p": 0.714
+  },
+  {
+   "text": "viejo",
+   "start": 5.547,
+   "end": 5.887,
+   "type": "word",
+   "p": 0.988
+  },
+  {
+   "text": "y...",
+   "start": 5.887,
+   "end": 5.967,
+   "type": "word",
+   "p": 0.701
+  }
+ ],
+ "source": "103d7c21.mp4",
+ "from": 4.767,
+ "to": 6.0,
+ "prompt": null
+}

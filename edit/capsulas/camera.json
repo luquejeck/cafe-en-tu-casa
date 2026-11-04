@@ -1,11 +1,11 @@
 {"shots": [
-  {"at": 0.0, "z": 1.0, "cx": 540, "cy": 960, "drift": 0.04},
+  {"at": 0.0, "z": 1.0, "cx": 540, "cy": 960},
   {"at": "word:Es#1", "z": 1.0, "cx": 540, "cy": 960, "drift": 0.03},
-  {"at": "word:pero#1", "z": 1.12, "cx": 540, "cy": 900},
-  {"at": "word:la#3", "z": 1.0, "cx": 540, "cy": 960, "drift": 0.04},
-  {"at": "word:segundo#1", "z": 1.15, "cx": 420, "cy": 900},
+  {"at": "word:estamos#1", "z": 1.12, "cx": 540, "cy": 960},
+  {"at": "word:El#1", "z": 1.0, "cx": 540, "cy": 960, "drift": 0.04},
+  {"at": "word:segundo#1", "z": 1.12, "cx": 440, "cy": 960},
   {"at": "word:Así#1", "z": 1.0, "cx": 540, "cy": 960},
-  {"at": "word:hacé#1", "z": 1.28, "cx": 540, "cy": 1060, "whip": true},
+  {"at": "word:hacé#1", "z": 1.22, "cx": 540, "cy": 1060},
   {"at": "word:Así#2", "z": 1.0, "cx": 540, "cy": 960},
-  {"at": "word:por#5", "z": 1.0, "cx": 540, "cy": 960, "drift": 0.06}
+  {"at": "word:por#5", "z": 1.0, "cx": 540, "cy": 960, "drift": 0.04}
 ]}

@@ -1,0 +1,45 @@
+{
+ "language_code": "es",
+ "text": "verdadero lujo es no poder",
+ "words": [
+  {
+   "text": "verdadero",
+   "start": 0.95,
+   "end": 1.35,
+   "type": "word",
+   "p": 0.774
+  },
+  {
+   "text": "lujo",
+   "start": 1.35,
+   "end": 1.71,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "es",
+   "start": 1.71,
+   "end": 2.01,
+   "type": "word",
+   "p": 0.875
+  },
+  {
+   "text": "no",
+   "start": 2.01,
+   "end": 2.17,
+   "type": "word",
+   "p": 0.571
+  },
+  {
+   "text": "poder",
+   "start": 2.17,
+   "end": 2.17,
+   "type": "word",
+   "p": 0.114
+  }
+ ],
+ "source": "57ee6e8d.mp4",
+ "from": 0.95,
+ "to": 2.2,
+ "prompt": null
+}

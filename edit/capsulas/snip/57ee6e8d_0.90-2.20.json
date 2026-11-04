@@ -1,0 +1,45 @@
+{
+ "language_code": "es",
+ "text": "El verdadero lujo es no...",
+ "words": [
+  {
+   "text": "El",
+   "start": 0.9,
+   "end": 1.1,
+   "type": "word",
+   "p": 0.06
+  },
+  {
+   "text": "verdadero",
+   "start": 1.1,
+   "end": 1.38,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "lujo",
+   "start": 1.38,
+   "end": 1.7,
+   "type": "word",
+   "p": 0.993
+  },
+  {
+   "text": "es",
+   "start": 1.7,
+   "end": 2.0,
+   "type": "word",
+   "p": 0.948
+  },
+  {
+   "text": "no...",
+   "start": 2.0,
+   "end": 2.18,
+   "type": "word",
+   "p": 0.385
+  }
+ ],
+ "source": "57ee6e8d.mp4",
+ "from": 0.9,
+ "to": 2.2,
+ "prompt": null
+}

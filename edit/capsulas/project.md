@@ -20,3 +20,11 @@ Gancho → problema (premium vs. viejo) → giro (el verdadero lujo) → soluci�
 ## Pendientes
 - La Krups Roma figura sin stock en `reportes/APRENDIZAJES.md` y aparece en el B-roll y de fondo. Confirmar con Lucas si se publica así.
 - Publicar solo con el "sí" de Lucas.
+
+## Versión 2 (pedido de Lucas: más limpio, estilo Apple, público ~40 años)
+- Gancho: «La verdad / incómoda.» se revela desde un desenfoque sobre un zoom lento, con un oscurecido suave arriba. Sin stickers.
+- Sin repetir «la verdad»: se cortó «pero la verdad es que» (queda «…café premium, estamos pagando por café viejo…») y «La verdad es que» del giro (queda «El verdadero lujo es…», corte en 0,90 s de `57ee6e8d`, verificado con transcripción del fragmento).
+- Remates sobrios: punch-in + «Chau, cápsulas.» en blanco fino; «¡YA!» solo con zoom; blooper en blanco y negro con «Toma 7 · lo que no viste» chico y «silencio incómodo…» / «sigue pensando…» en píldora de vidrio esmerilado.
+- Subtítulos «Typewriter» (frase completa, blancos, sin cajas), oscurecido inferior 0.65 medido.
+- Escenas en tono «feature» (entradas deslizadas). Sonido: whoosh en el tiro y un tic al entrar el blooper.
+- Duración: 30,9 s. Master −14,2 LUFS, pico −1,4 dBFS.

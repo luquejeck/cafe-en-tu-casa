@@ -1,0 +1,59 @@
+{
+ "language_code": "es",
+ "text": "que estamos pagando por café viejo y...",
+ "words": [
+  {
+   "text": "que",
+   "start": 4.333,
+   "end": 4.553,
+   "type": "word",
+   "p": 0.468
+  },
+  {
+   "text": "estamos",
+   "start": 4.553,
+   "end": 4.753,
+   "type": "word",
+   "p": 0.93
+  },
+  {
+   "text": "pagando",
+   "start": 4.753,
+   "end": 5.093,
+   "type": "word",
+   "p": 0.994
+  },
+  {
+   "text": "por",
+   "start": 5.093,
+   "end": 5.353,
+   "type": "word",
+   "p": 0.985
+  },
+  {
+   "text": "café",
+   "start": 5.353,
+   "end": 5.573,
+   "type": "word",
+   "p": 0.555
+  },
+  {
+   "text": "viejo",
+   "start": 5.573,
+   "end": 5.893,
+   "type": "word",
+   "p": 0.985
+  },
+  {
+   "text": "y...",
+   "start": 5.893,
+   "end": 5.973,
+   "type": "word",
+   "p": 0.688
+  }
+ ],
+ "source": "103d7c21.mp4",
+ "from": 4.333,
+ "to": 6.0,
+ "prompt": null
+}

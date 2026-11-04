@@ -1,6 +1,6 @@
 {
  "id": "capsulas",
- "duration": 32.467,
+ "duration": 30.867,
  "inserts": [
   {
    "id": "b01",
@@ -8,7 +8,7 @@
    "mode": "replace",
    "file": "capsulas/inserts/b01.mp4",
    "media": "video",
-   "start": 15.367,
+   "start": 13.767,
    "dur": 1.6,
    "src_in": 0.0,
    "transition_in": "cut",
@@ -21,39 +21,11 @@
  ],
  "scenes": [
   {
-   "id": "c01",
-   "type": "hook",
-   "mode": "overlay",
-   "variant": "slam",
-   "start": 0.018,
-   "dur": 2.6,
-   "box": [
-    60,
-    1050,
-    600,
-    450
-   ],
-   "source": {
-    "kind": "speech"
-   },
-   "transition_in": "cut",
-   "transition_out": "cut",
-   "tone": "punchy",
-   "text": {
-    "lines": [
-     "La verdad",
-     "incómoda"
-    ],
-    "accent": "incómoda"
-   },
-   "hide_subtitles": true
-  },
-  {
-   "id": "c02",
+   "id": "c05",
    "type": "contrast",
    "mode": "split",
    "start": 7.415,
-   "dur": 4.2,
+   "dur": 3.4,
    "box": [
     60,
     220,
@@ -63,9 +35,9 @@
    "source": {
     "kind": "speech"
    },
-   "transition_in": "cut",
-   "transition_out": "cut",
-   "tone": "punchy",
+   "transition_in": "slide",
+   "transition_out": "slide",
+   "tone": "feature",
    "text": {
     "lines": [
      "Café premium",
@@ -75,55 +47,55 @@
    "hide_subtitles": true
   },
   {
-   "id": "c03",
+   "id": "c04",
    "type": "list",
    "mode": "panel",
-   "start": 19.215,
-   "dur": 4.1,
+   "start": 17.615,
+   "dur": 4.25,
    "source": {
     "kind": "speech"
    },
-   "transition_in": "cut",
-   "transition_out": "cut",
-   "tone": "punchy",
+   "transition_in": "slide",
+   "transition_out": "slide",
+   "tone": "feature",
    "text": {
     "lines": []
    },
    "items": [
     {
      "text": "Un solo botón",
-     "t": 19.215
+     "t": 17.615
     },
     {
      "text": "Hace todo por vos",
-     "t": 20.236
+     "t": 18.636
     },
     {
      "text": "Se limpia sola",
-     "t": 21.961
+     "t": 20.088
     }
    ],
    "face": [
-    136,
-    381,
-    600,
-    845
+    140,
+    390,
+    599,
+    835
    ],
    "hide_subtitles": true
   },
   {
-   "id": "c04",
+   "id": "c03",
    "type": "cta",
    "mode": "full",
    "variant": "bio",
-   "start": 25.658,
+   "start": 24.058,
    "dur": 2.95,
    "source": {
     "kind": "speech"
    },
    "transition_in": "cut",
    "transition_out": "cut",
-   "tone": "punchy",
+   "tone": "feature",
    "text": {
     "lines": [
      "Entrá a mi perfil",

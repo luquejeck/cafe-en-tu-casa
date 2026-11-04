@@ -1,0 +1,38 @@
+{
+ "language_code": "es",
+ "text": "verdadero lujo es no...",
+ "words": [
+  {
+   "text": "verdadero",
+   "start": 0.0,
+   "end": 0.48,
+   "type": "word",
+   "p": 0.718
+  },
+  {
+   "text": "lujo",
+   "start": 0.48,
+   "end": 0.94,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "es",
+   "start": 0.94,
+   "end": 1.06,
+   "type": "word",
+   "p": 0.684
+  },
+  {
+   "text": "no...",
+   "start": 1.06,
+   "end": 1.18,
+   "type": "word",
+   "p": 0.56
+  }
+ ],
+ "source": "38a2542b.mp4",
+ "from": 0.0,
+ "to": 1.2,
+ "prompt": null
+}

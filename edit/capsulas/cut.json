@@ -58,9 +58,9 @@
   },
   {
    "source": "s103",
-   "start": 3.6,
+   "start": 4.5,
    "end": 6.8,
-   "beat": "problema"
+   "beat": "problema: estamos pagando"
   },
   {
    "source": "s103",
@@ -70,7 +70,7 @@
   },
   {
    "source": "s57",
-   "start": 0.0,
+   "start": 0.9,
    "end": 4.0,
    "beat": "giro: el verdadero lujo"
   },
@@ -178,16 +178,22 @@
    "at": 5.72,
    "start": 6.32,
    "end": 6.78
-  },
-  {
-   "text": "verdad",
-   "at": 0.5,
-   "start": 0.37,
-   "end": 0.62
   }
  ],
  "look": {
   "correct": "colorchannelmixer=rr=0.95:bb=1.06",
   "grade": "eq=contrast=1.05:saturation=1.04"
- }
+ },
+ "fix_at": [
+  {
+   "text": "el",
+   "at": 0.92,
+   "to": "El"
+  },
+  {
+   "text": "que",
+   "at": 0.86,
+   "to": ""
+  }
+ ]
 }

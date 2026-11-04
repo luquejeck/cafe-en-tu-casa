@@ -50,10 +50,10 @@
   },
   {
    "source": "s103",
-   "start": 3.6,
+   "start": 4.5,
    "end": 6.8,
    "speed": 1.1,
-   "beat": "problema"
+   "beat": "problema: estamos pagando"
   },
   {
    "source": "s103",
@@ -64,7 +64,7 @@
   },
   {
    "source": "s57",
-   "start": 0.0,
+   "start": 0.9,
    "end": 4.0,
    "speed": 1.1,
    "beat": "giro: el verdadero lujo"
@@ -147,5 +147,5 @@
    "beat": "toma fallida al final"
   }
  ],
- "total_duration_s": 32.467
+ "total_duration_s": 30.867
 }
