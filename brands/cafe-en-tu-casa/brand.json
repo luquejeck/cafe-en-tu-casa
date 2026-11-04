@@ -1,0 +1,74 @@
+{
+ "schema": 2,
+ "slug": "cafe-en-tu-casa",
+ "name": "Café en tu Casa",
+ "description": "Venta de cafeteras De'Longhi y Krups en Argentina; videos para @cafentucasa",
+ "language": "es",
+ "colors": {
+  "primary": "#101012",
+  "accent": "#A3C26A",
+  "light": "#F5F5F7",
+  "text_on_primary": "#F5F5F7",
+  "text_on_accent": "#101012",
+  "extra": {
+   "c1": "#5B6E32"
+  }
+ },
+ "fonts": {
+  "heading": {
+   "family": "Inter",
+   "weights": [
+    600,
+    700,
+    800
+   ],
+   "source": "google"
+  },
+  "body": {
+   "family": "Inter",
+   "weights": [
+    500,
+    600,
+    700
+   ],
+   "source": "google"
+  }
+ },
+ "logos": {},
+ "lut": null,
+ "tagline": "Café de cafetería, en tu casa.",
+ "guide": null,
+ "rules": "rules.md",
+ "styles": {
+  "default": "marker",
+  "allowed": [
+   "marker",
+   "brand",
+   "minimal",
+   "editorial",
+   "bold"
+  ]
+ },
+ "subtitles_default": "accent",
+ "motion": null,
+ "tone": {
+  "preset": "friendly"
+ },
+ "voice": "",
+ "forbidden_imagery": [],
+ "forbidden_imagery_en": [],
+ "cta_library": null,
+ "asset_verdicts": null,
+ "approver": "Lucas",
+ "account": "business",
+ "music_policy": "do not burn in without a commercial license; pick the track in the app when publishing",
+ "memes_policy": "strict",
+ "inserts": {},
+ "brandbook": [],
+ "fonts_found": null,
+ "examples": [],
+ "derived": [],
+ "created": "2026-11-04",
+ "updated": "2026-11-04",
+ "last_used": null
+}
