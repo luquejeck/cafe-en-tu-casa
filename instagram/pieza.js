@@ -25,7 +25,7 @@ const CUERPO = {
   cta:     s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}<p class="boton">${s.boton}</p>`,
   // foto de ambiente a sangre: el texto arriba, sobre la parte limpia de la foto
   escena:  s => `${ep(s.ep)}<h1 class="${s.grande ? 'grande' : ''}">${s.h}</h1>${s.precio ? `<p class="precio"><b>${s.precio}</b> ${s.nota}</p>` : ''}${
-             s.cuotas ? `<p class="cuotas">${s.cuotas}</p>` : ''}`
+             s.cuotas ? `<p class="cuotas">${s.cuotas}</p>` : ''}${pil(s.pildora)}`
 };
 
 /** Una placa entera: el lienzo con la marca, el cuerpo y los puntitos del carrusel. */
@@ -37,6 +37,6 @@ function placaHTML(pieza, n) {
     : '';
   const fondo = s.t === 'escena'
     ? `<img class="fondo" src="../${s.img}" alt="">` : '';
-  return `<div class="lienzo ${vertical ? 'vertical' : ''} ${s.tono || ''} ${s.t === 'escena' ? 'escena' : ''}">${fondo}
+  return `<div class="lienzo ${vertical ? 'vertical' : ''} ${s.tono || ''} ${s.t === 'escena' ? 'escena' : ''} ${s.estilo || ''}">${fondo}
     <div class="marca"><i></i> Café en tu Casa</div><main${s.bajar ? ` style="padding-top:${s.bajar}px"` : ''}>${CUERPO[s.t](s)}</main>${puntos}</div>`;
 }
