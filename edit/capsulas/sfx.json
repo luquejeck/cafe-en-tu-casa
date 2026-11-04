@@ -1,0 +1,29 @@
+{
+ "below_voice_db": 12,
+ "sounds": [
+  {
+   "file": "edit/capsulas/sfx/whoosh.wav",
+   "at": 3.32,
+   "start": 0.0,
+   "what": "vuela el bowl"
+  },
+  {
+   "file": "edit/capsulas/sfx/pop.wav",
+   "at": 3.57,
+   "start": 0.0,
+   "what": "sticker chau cápsulas"
+  },
+  {
+   "file": "edit/capsulas/sfx/pop.wav",
+   "at": 24.69,
+   "start": 0.0,
+   "what": "sticker YA"
+  },
+  {
+   "file": "edit/capsulas/sfx/pop.wav",
+   "at": 28.69,
+   "start": 0.0,
+   "what": "sticker toma fallida"
+  }
+ ]
+}

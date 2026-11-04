@@ -31,3 +31,5 @@ reels/public/
 edit/**/*.mp4
 edit/**/*.wav
 edit/**/*.mov
+models/
+edit/**/clips/

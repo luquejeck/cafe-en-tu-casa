@@ -1,0 +1,64 @@
+{
+ "slug": "cafe-en-tu-casa",
+ "name": "Café en tu Casa",
+ "tagline": "Café de cafetería, en tu casa.",
+ "colors": {
+  "primary": "#101012",
+  "accent": "#A3C26A",
+  "light": "#F5F5F7",
+  "text_on_primary": "#F5F5F7",
+  "text_on_accent": "#101012",
+  "extra": {
+   "c1": "#5B6E32"
+  }
+ },
+ "fonts": {
+  "heading": {
+   "family": "Inter",
+   "weights": [
+    600,
+    700,
+    800
+   ],
+   "source": "google"
+  },
+  "body": {
+   "family": "Inter",
+   "weights": [
+    500,
+    600,
+    700
+   ],
+   "source": "google"
+  }
+ },
+ "logos": {},
+ "motion": "lively",
+ "tone": {
+  "preset": "friendly",
+  "label": "Lively, friendly",
+  "loudness": "lively",
+  "overshoot": true,
+  "shake": false,
+  "scene_tone": "punchy",
+  "scene_tones": [
+   "punchy",
+   "feature",
+   "calm",
+   "deadpan"
+  ],
+  "full_scenes_max": 2,
+  "transitions": [
+   "cut",
+   "fade",
+   "whip",
+   "slide",
+   "flash"
+  ],
+  "flash_max": 2,
+  "whip_max": 4,
+  "sfx": "moderate"
+ },
+ "subtitles_default": "accent",
+ "style_default": "marker"
+}

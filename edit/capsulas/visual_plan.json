@@ -1,0 +1,586 @@
+{
+ "schema": 1,
+ "id": "capsulas",
+ "created": "2026-11-04T21:13",
+ "duration": 32.467,
+ "segments": [
+  {
+   "id": "s01",
+   "start": 0.0,
+   "end": 5.1,
+   "text": "La verdad incómoda sobre esa cafetera de cápsulas que tenés en tu cocina.",
+   "cut_segs": [
+    0
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "hook: the first 1.5 s decide whether people keep watching",
+    "scene:hook - a weak start (a filler word, or > 2 s without a number or a question) -> a hook scene"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s02",
+   "start": 5.1,
+   "end": 8.194,
+   "text": "Es que nos convencieron de que estábamos consumiendo café premium,",
+   "cut_segs": [
+    2
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "a segment join at the start: B-roll will hide the cut"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s03",
+   "start": 8.194,
+   "end": 11.733,
+   "text": "pero la verdad es que estamos pagando por café viejo y encima guardado en un pote de plástico.",
+   "cut_segs": [
+    3,
+    4
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "a segment join at the start: B-roll will hide the cut"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s04",
+   "start": 11.733,
+   "end": 16.218,
+   "text": "la verdad es que el verdadero lujo es no perder ni un segundo de tu día por tomar un café",
+   "cut_segs": [
+    5,
+    6
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "a segment join at the start: B-roll will hide the cut"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s05",
+   "start": 16.218,
+   "end": 20.797,
+   "text": "bueno de calidad Por eso, con una automática tocás un solo botón y te hace todo el trabajo por vos.",
+   "cut_segs": [
+    7,
+    8,
+    9,
+    10
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "a segment join at the start: B-roll will hide the cut"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s06",
+   "start": 20.797,
+   "end": 22.367,
+   "text": "Y lo mejor de todo es que además se limpia sola.",
+   "cut_segs": [
+    11,
+    12
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "a segment join at the start: B-roll will hide the cut"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s07",
+   "start": 22.367,
+   "end": 25.333,
+   "text": "Así que si valorás tu tiempo y tu paladar, hacé el cambio ya.",
+   "cut_segs": [
+    13,
+    14
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "a segment join at the start: B-roll will hide the cut"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s08",
+   "start": 25.333,
+   "end": 28.64,
+   "text": "Así que entrá a mi perfil y mirá todos los modelos que tenemos disponibles para vos.",
+   "cut_segs": [
+    15
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "a segment join at the start: B-roll will hide the cut"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s09",
+   "start": 28.64,
+   "end": 30.92,
+   "text": "por tomar un café",
+   "cut_segs": [
+    16
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "a segment join at the start: B-roll will hide the cut",
+    "ending/CTA: no memes here"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s10",
+   "start": 30.92,
+   "end": 32.467,
+   "text": "bueno de calidad",
+   "cut_segs": [
+    16
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "ending/CTA: no memes here"
+   ],
+   "notes": ""
+  }
+ ],
+ "inserts": [
+  {
+   "id": "c01",
+   "kind": "scene",
+   "type": "hook",
+   "mode": "overlay",
+   "variant": "slam",
+   "segment": "s01",
+   "start": 0.018,
+   "dur": 2.6,
+   "at": "word:La#1",
+   "tone": null,
+   "text": {
+    "lines": [
+     "La verdad",
+     "incómoda"
+    ],
+    "accent": "incómoda",
+    "label": null
+   },
+   "items": null,
+   "value": null,
+   "media": null,
+   "interaction": null,
+   "box": [
+    60,
+    1050,
+    600,
+    450
+   ],
+   "side": null,
+   "source": {
+    "kind": "speech",
+    "ref": null
+   },
+   "what": "gancho grande en el aire sobre la cabeza",
+   "why": "gancho en el primer segundo",
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "sound": null,
+   "hide_subtitles": true,
+   "status": "ready",
+   "fallback": "main footage"
+  },
+  {
+   "id": "c02",
+   "kind": "scene",
+   "type": "contrast",
+   "mode": "split",
+   "variant": null,
+   "segment": "s02",
+   "start": 7.415,
+   "dur": 4.2,
+   "at": "word:premium#1",
+   "offset": -0.2,
+   "tone": null,
+   "text": {
+    "lines": [
+     "Café premium",
+     "Café viejo"
+    ],
+    "accent": null,
+    "label": null
+   },
+   "items": null,
+   "value": null,
+   "media": null,
+   "interaction": null,
+   "box": [
+    60,
+    220,
+    900,
+    660
+   ],
+   "side": null,
+   "source": {
+    "kind": "speech",
+    "ref": null
+   },
+   "what": "premium tachado, aparece viejo",
+   "why": "el dato que da vuelta el video, se entiende sin sonido",
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "sound": null,
+   "hide_subtitles": true,
+   "status": "ready",
+   "fallback": "main footage"
+  },
+  {
+   "id": "b01",
+   "kind": "broll",
+   "segment": "s04",
+   "start": 15.367,
+   "dur": 1.6,
+   "mode": "replace",
+   "what": "la automática sirviendo",
+   "why": "mostrar el café cuando lo nombra",
+   "query": "cafetera automática sirviendo un café",
+   "source": "project",
+   "candidate": {
+    "provider": "project",
+    "id": "edit/capsulas/krups_sirve.mp4",
+    "title": "cafetera automática sirviendo un café",
+    "path": "/home/user/cafe-en-tu-casa/edit/capsulas/krups_sirve.mp4",
+    "url": null,
+    "page_url": null,
+    "w": null,
+    "h": null,
+    "dur": null,
+    "size_mb": 3.7,
+    "license": "own footage",
+    "author": null,
+    "score": 1.0,
+    "embed": true,
+    "notes": "cut.py extract of this video, already in the rough cut's color",
+    "graded": true
+   },
+   "file": "inserts/b01.mp4",
+   "src_in": 0.0,
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "status": "ready",
+   "fallback": "main footage",
+   "credit": {
+    "provider": "project",
+    "id": "edit/capsulas/krups_sirve.mp4",
+    "author": null,
+    "page_url": null,
+    "license": "own footage"
+   },
+   "candidates": [
+    {
+     "provider": "project",
+     "id": "edit/capsulas/krups_sirve.mp4",
+     "title": "cafetera automática sirviendo un café",
+     "path": "/home/user/cafe-en-tu-casa/edit/capsulas/krups_sirve.mp4",
+     "url": null,
+     "page_url": null,
+     "w": null,
+     "h": null,
+     "dur": null,
+     "size_mb": 3.7,
+     "license": "own footage",
+     "author": null,
+     "score": 1.0,
+     "embed": true,
+     "notes": "cut.py extract of this video, already in the rough cut's color",
+     "graded": true
+    }
+   ]
+  },
+  {
+   "id": "c03",
+   "kind": "scene",
+   "type": "list",
+   "mode": "panel",
+   "variant": null,
+   "segment": "s05",
+   "start": 19.215,
+   "dur": 4.1,
+   "at": "word:botón#1",
+   "tone": null,
+   "text": {
+    "lines": [],
+    "accent": null,
+    "label": null
+   },
+   "items": [
+    {
+     "text": "Un solo botón",
+     "at": "word:botón#1",
+     "t": 19.215
+    },
+    {
+     "text": "Hace todo por vos",
+     "at": "word:trabajo#1",
+     "t": 20.236
+    },
+    {
+     "text": "Se limpia sola",
+     "at": "word:limpia#1",
+     "t": 21.961
+    }
+   ],
+   "value": null,
+   "media": null,
+   "interaction": null,
+   "box": null,
+   "side": null,
+   "source": {
+    "kind": "speech",
+    "ref": null
+   },
+   "what": "3 beneficios uno por palabra",
+   "why": "tres ideas paralelas",
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "sound": null,
+   "hide_subtitles": true,
+   "status": "ready",
+   "fallback": "main footage"
+  },
+  {
+   "id": "c04",
+   "kind": "scene",
+   "type": "cta",
+   "mode": "full",
+   "variant": "bio",
+   "segment": "s08",
+   "start": 25.658,
+   "dur": 2.95,
+   "at": "word:entrá#1",
+   "offset": -0.1,
+   "tone": null,
+   "text": {
+    "lines": [
+     "Entrá a mi perfil",
+     "Mirá los modelos"
+    ],
+    "accent": null,
+    "label": null
+   },
+   "items": null,
+   "value": null,
+   "media": null,
+   "interaction": null,
+   "box": null,
+   "side": null,
+   "source": {
+    "kind": "speech",
+    "ref": null
+   },
+   "what": "CTA al link del perfil",
+   "why": "CTA hablado, refuerzo visual",
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "sound": null,
+   "hide_subtitles": true,
+   "status": "ready",
+   "fallback": "main footage"
+  }
+ ],
+ "keep_clear": [
+  {
+   "start": 0.018,
+   "end": 2.618,
+   "box": [
+    60,
+    1050,
+    600,
+    450
+   ],
+   "what": "scene c01 hook (overlay)",
+   "scene": "c01",
+   "mode": "overlay"
+  },
+  {
+   "start": 7.415,
+   "end": 11.615,
+   "box": [
+    60,
+    220,
+    900,
+    660
+   ],
+   "what": "scene c02 contrast (split)",
+   "scene": "c02",
+   "mode": "split",
+   "cam": [
+    0.56,
+    540.0,
+    107.143
+   ]
+  }
+ ],
+ "captions_id": "039818c62208",
+ "brand": "cafe-en-tu-casa",
+ "settings": {
+  "brand": "cafe-en-tu-casa",
+  "style": "marker",
+  "subtitles": "accent",
+  "subtitles_shade": null,
+  "intensity": "active",
+  "use_broll": true,
+  "use_project_footage": true,
+  "use_local_footage": false,
+  "use_generated_footage": false,
+  "use_memes": false,
+  "use_local_memes": true,
+  "broll_priority": [
+   "project",
+   "local",
+   "generated"
+  ],
+  "meme_priority": [
+   "local"
+  ],
+  "footage_dirs": [
+   "footage",
+   "broll"
+  ],
+  "memes_dirs": [
+   "memes"
+  ],
+  "generation_engines": [
+   "code"
+  ],
+  "library_dirs": [],
+  "meme_size": "m",
+  "scene_tone": "punchy",
+  "use_scenes": true,
+  "brand_tone": {
+   "label": "Lively, friendly",
+   "for": "real estate, local business, lifestyle, communities",
+   "intensity": "moderate",
+   "motion": "lively",
+   "loudness": "lively",
+   "memes": {
+    "allowed": true,
+    "default": true,
+    "max": 2,
+    "size_max": "m",
+    "cutaway": false
+   },
+   "broll_default": true,
+   "transitions": [
+    "cut",
+    "fade",
+    "whip",
+    "slide",
+    "flash"
+   ],
+   "flash_max": 2,
+   "whip_max": 4,
+   "shake": false,
+   "overshoot": true,
+   "full_scenes_max": 2,
+   "scene_tones": [
+    "punchy",
+    "feature",
+    "calm",
+    "deadpan"
+   ],
+   "scene_tone": "punchy",
+   "sfx": "moderate",
+   "preset": "friendly"
+  }
+ },
+ "provenance": {
+  "brand": "reel.json",
+  "style": "reel.json",
+  "subtitles": "reel.json",
+  "subtitles_shade": "defaults",
+  "intensity": "reel.json",
+  "use_broll": "reel.json",
+  "use_project_footage": "reel.json",
+  "use_local_footage": "reel.json",
+  "use_generated_footage": "reel.json",
+  "use_memes": "reel.json",
+  "use_local_memes": "defaults",
+  "broll_priority": "defaults",
+  "meme_priority": "defaults",
+  "footage_dirs": "defaults",
+  "memes_dirs": "defaults",
+  "generation_engines": "defaults",
+  "library_dirs": "defaults",
+  "meme_size": "tone:friendly",
+  "scene_tone": "tone:friendly",
+  "use_scenes": "reel.json",
+  "brand_tone": "brand:cafe-en-tu-casa"
+ },
+ "effective": {
+  "broll": true,
+  "project_footage": true,
+  "local_footage": false,
+  "generated_code": false,
+  "memes": false,
+  "local_memes": false,
+  "scenes": true,
+  "online_footage": false,
+  "generated_prompts": false,
+  "generate_now": false,
+  "online_memes": false,
+  "online_footage_providers": [],
+  "online_meme_providers": []
+ },
+ "fallback": {
+  "local_footage": "off",
+  "generated_code": "off",
+  "memes": "use_memes=false",
+  "local_memes": "off",
+  "online_footage": "off",
+  "generated_prompts": "off",
+  "generate_now": "off",
+  "online_memes": "off"
+ },
+ "budget": {
+  "label": "active",
+  "broll_per_30s": 6,
+  "memes_max": 4,
+  "coverage_max": 0.4,
+  "min_gap_s": 2.0,
+  "broll_max": 7,
+  "coverage_max_s": 12.99
+ },
+ "subtitles_band": [
+  1390,
+  1500
+ ]
+}

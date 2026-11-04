@@ -1,0 +1,99 @@
+{
+ "language_code": "es",
+ "text": "Así que si valoras tu tiempo y tu paladar, haz el cambio.",
+ "words": [
+  {
+   "text": "Así",
+   "start": 0.0,
+   "end": 0.08,
+   "type": "word",
+   "p": 0.331
+  },
+  {
+   "text": "que",
+   "start": 0.08,
+   "end": 0.24,
+   "type": "word",
+   "p": 0.991
+  },
+  {
+   "text": "si",
+   "start": 0.24,
+   "end": 0.34,
+   "type": "word",
+   "p": 0.953
+  },
+  {
+   "text": "valoras",
+   "start": 0.34,
+   "end": 0.64,
+   "type": "word",
+   "p": 0.839
+  },
+  {
+   "text": "tu",
+   "start": 0.64,
+   "end": 0.72,
+   "type": "word",
+   "p": 0.991
+  },
+  {
+   "text": "tiempo",
+   "start": 0.72,
+   "end": 0.94,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "y",
+   "start": 0.94,
+   "end": 1.06,
+   "type": "word",
+   "p": 0.982
+  },
+  {
+   "text": "tu",
+   "start": 1.06,
+   "end": 1.18,
+   "type": "word",
+   "p": 0.861
+  },
+  {
+   "text": "paladar,",
+   "start": 1.18,
+   "end": 1.7,
+   "type": "word",
+   "p": 0.986
+  },
+  {
+   "text": "haz",
+   "start": 1.86,
+   "end": 1.94,
+   "type": "word",
+   "p": 0.924
+  },
+  {
+   "text": "el",
+   "start": 1.94,
+   "end": 2.08,
+   "type": "word",
+   "p": 0.976
+  },
+  {
+   "text": "cambio.",
+   "start": 2.08,
+   "end": 2.28,
+   "type": "word",
+   "p": 0.993
+  }
+ ],
+ "source": "a409b7bb.mp4",
+ "source_identity": {
+  "path": "/home/user/cafe-en-tu-casa/edit/capsulas/src/a409b7bb.mp4",
+  "size": 3352302,
+  "mtime_ns": 1793825990063127900
+ },
+ "model": "faster-whisper medium int8",
+ "timeline": "video",
+ "audio_offset": 0.0
+}

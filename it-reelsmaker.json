@@ -2,5 +2,5 @@
   "project_root": "/home/user/cafe-en-tu-casa",
   "remotion_dir": "/home/user/cafe-en-tu-casa/reels",
   "assets_dir": "",
-  "face_model": ""
+  "face_model": "/home/user/cafe-en-tu-casa/models/face_detection_yunet_2023mar.onnx"
 }

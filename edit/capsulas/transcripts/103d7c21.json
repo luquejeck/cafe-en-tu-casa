@@ -1,0 +1,211 @@
+{
+ "language_code": "es",
+ "text": "Es que nos convencieron de que estábamos consumiendo café premium, pero la verdad es que estamos pagando por café viejo y encima guardado en un pote de plástico.",
+ "words": [
+  {
+   "text": "Es",
+   "start": 0.0,
+   "end": 0.24,
+   "type": "word",
+   "p": 0.475
+  },
+  {
+   "text": "que",
+   "start": 0.24,
+   "end": 0.3,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "nos",
+   "start": 0.3,
+   "end": 0.48,
+   "type": "word",
+   "p": 0.994
+  },
+  {
+   "text": "convencieron",
+   "start": 0.48,
+   "end": 1.06,
+   "type": "word",
+   "p": 0.977
+  },
+  {
+   "text": "de",
+   "start": 1.06,
+   "end": 1.28,
+   "type": "word",
+   "p": 0.836
+  },
+  {
+   "text": "que",
+   "start": 1.28,
+   "end": 1.4,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "estábamos",
+   "start": 1.4,
+   "end": 1.9,
+   "type": "word",
+   "p": 0.981
+  },
+  {
+   "text": "consumiendo",
+   "start": 1.9,
+   "end": 2.56,
+   "type": "word",
+   "p": 0.976
+  },
+  {
+   "text": "café",
+   "start": 2.56,
+   "end": 2.8,
+   "type": "word",
+   "p": 0.884
+  },
+  {
+   "text": "premium,",
+   "start": 2.8,
+   "end": 3.24,
+   "type": "word",
+   "p": 0.86
+  },
+  {
+   "text": "pero",
+   "start": 3.74,
+   "end": 3.84,
+   "type": "word",
+   "p": 0.965
+  },
+  {
+   "text": "la",
+   "start": 3.84,
+   "end": 3.9,
+   "type": "word",
+   "p": 0.991
+  },
+  {
+   "text": "verdad",
+   "start": 3.9,
+   "end": 4.2,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "es",
+   "start": 4.2,
+   "end": 4.4,
+   "type": "word",
+   "p": 0.958
+  },
+  {
+   "text": "que",
+   "start": 4.4,
+   "end": 4.52,
+   "type": "word",
+   "p": 0.997
+  },
+  {
+   "text": "estamos",
+   "start": 4.52,
+   "end": 4.74,
+   "type": "word",
+   "p": 0.955
+  },
+  {
+   "text": "pagando",
+   "start": 4.74,
+   "end": 5.12,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "por",
+   "start": 5.12,
+   "end": 5.36,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "café",
+   "start": 5.36,
+   "end": 5.58,
+   "type": "word",
+   "p": 0.985
+  },
+  {
+   "text": "viejo",
+   "start": 5.58,
+   "end": 5.94,
+   "type": "word",
+   "p": 0.994
+  },
+  {
+   "text": "y",
+   "start": 5.94,
+   "end": 6.12,
+   "type": "word",
+   "p": 0.916
+  },
+  {
+   "text": "encima",
+   "start": 6.12,
+   "end": 6.28,
+   "type": "word",
+   "p": 0.929
+  },
+  {
+   "text": "guardado",
+   "start": 6.28,
+   "end": 6.64,
+   "type": "word",
+   "p": 0.885
+  },
+  {
+   "text": "en",
+   "start": 6.64,
+   "end": 7.02,
+   "type": "word",
+   "p": 0.992
+  },
+  {
+   "text": "un",
+   "start": 7.02,
+   "end": 7.16,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "pote",
+   "start": 7.16,
+   "end": 7.34,
+   "type": "word",
+   "p": 0.981
+  },
+  {
+   "text": "de",
+   "start": 7.34,
+   "end": 7.54,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "plástico.",
+   "start": 7.54,
+   "end": 7.8,
+   "type": "word",
+   "p": 0.987
+  }
+ ],
+ "source": "103d7c21.mp4",
+ "source_identity": {
+  "path": "/home/user/cafe-en-tu-casa/edit/capsulas/src/103d7c21.mp4",
+  "size": 11570421,
+  "mtime_ns": 1793825989973821783
+ },
+ "model": "faster-whisper medium int8",
+ "timeline": "video",
+ "audio_offset": 0.0
+}

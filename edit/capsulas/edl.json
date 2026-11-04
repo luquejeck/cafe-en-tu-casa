@@ -1,0 +1,151 @@
+{
+ "version": 1,
+ "sources": {
+  "eb": "/home/user/cafe-en-tu-casa/edit/capsulas/src/eb5845be.mp4",
+  "eb_gag": "/home/user/cafe-en-tu-casa/edit/capsulas/src/eb5845be.mp4",
+  "s103": "/home/user/cafe-en-tu-casa/edit/capsulas/src/103d7c21.mp4",
+  "s57": "/home/user/cafe-en-tu-casa/edit/capsulas/src/57ee6e8d.mp4",
+  "s57_toma": "/home/user/cafe-en-tu-casa/edit/capsulas/src/57ee6e8d.mp4",
+  "s60": "/home/user/cafe-en-tu-casa/edit/capsulas/src/60d896c4.mp4",
+  "d4": "/home/user/cafe-en-tu-casa/edit/capsulas/src/d43939a5.mp4",
+  "s70": "/home/user/cafe-en-tu-casa/edit/capsulas/src/7028d5a7.mp4",
+  "kr1": "/home/user/cafe-en-tu-casa/edit/capsulas/src/8e561966.mp4",
+  "kr2": "/home/user/cafe-en-tu-casa/edit/capsulas/src/92ade276.mp4"
+ },
+ "speed": 1.1,
+ "speeds": {
+  "eb": 1.1,
+  "eb_gag": 1.0,
+  "s103": 1.1,
+  "s57": 1.1,
+  "s57_toma": 1.0,
+  "s60": 1.1,
+  "d4": 1.1,
+  "s70": 1.1,
+  "kr1": 1.1,
+  "kr2": 1.1
+ },
+ "grade": "colorchannelmixer=rr=0.95:bb=1.06, eq=contrast=1.05:saturation=1.04",
+ "ranges": [
+  {
+   "source": "eb",
+   "start": 0.2,
+   "end": 3.467,
+   "speed": 1.1,
+   "beat": "gancho: la verdad incómoda"
+  },
+  {
+   "source": "eb_gag",
+   "start": 3.467,
+   "end": 5.6,
+   "speed": 1.0,
+   "beat": "chiste: tira las cápsulas"
+  },
+  {
+   "source": "s103",
+   "start": 0.033,
+   "end": 3.3,
+   "speed": 1.1,
+   "beat": "problema"
+  },
+  {
+   "source": "s103",
+   "start": 3.6,
+   "end": 6.8,
+   "speed": 1.1,
+   "beat": "problema"
+  },
+  {
+   "source": "s103",
+   "start": 7.033,
+   "end": 7.867,
+   "speed": 1.1,
+   "beat": "problema: pote de plástico"
+  },
+  {
+   "source": "s57",
+   "start": 0.0,
+   "end": 4.0,
+   "speed": 1.1,
+   "beat": "giro: el verdadero lujo"
+  },
+  {
+   "source": "s57",
+   "start": 4.633,
+   "end": 5.533,
+   "speed": 1.1,
+   "beat": "giro"
+  },
+  {
+   "source": "s57",
+   "start": 6.3,
+   "end": 6.8,
+   "speed": 1.1,
+   "beat": "giro"
+  },
+  {
+   "source": "s57",
+   "start": 7.033,
+   "end": 7.867,
+   "speed": 1.1,
+   "beat": "giro: de calidad"
+  },
+  {
+   "source": "s60",
+   "start": 0.1,
+   "end": 2.4,
+   "speed": 1.1,
+   "beat": "solución: un botón"
+  },
+  {
+   "source": "s60",
+   "start": 2.767,
+   "end": 4.067,
+   "speed": 1.1,
+   "beat": "solución"
+  },
+  {
+   "source": "s60",
+   "start": 4.233,
+   "end": 5.033,
+   "speed": 1.1,
+   "beat": "solución"
+  },
+  {
+   "source": "s60",
+   "start": 5.3,
+   "end": 6.333,
+   "speed": 1.1,
+   "beat": "solución: se limpia sola"
+  },
+  {
+   "source": "d4",
+   "start": 0.0,
+   "end": 2.0,
+   "speed": 1.1,
+   "beat": "cierre"
+  },
+  {
+   "source": "d4",
+   "start": 2.2,
+   "end": 3.433,
+   "speed": 1.1,
+   "beat": "cierre: hacé el cambio YA"
+  },
+  {
+   "source": "s70",
+   "start": 0.333,
+   "end": 3.967,
+   "speed": 1.1,
+   "beat": "CTA"
+  },
+  {
+   "source": "s57_toma",
+   "start": 4.033,
+   "end": 7.867,
+   "speed": 1.0,
+   "beat": "toma fallida al final"
+  }
+ ],
+ "total_duration_s": 32.467
+}

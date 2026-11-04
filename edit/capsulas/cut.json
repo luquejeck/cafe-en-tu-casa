@@ -1,0 +1,193 @@
+{
+ "fps": 30,
+ "speed": 1.1,
+ "sources": {
+  "eb": {
+   "file": "edit/capsulas/src/eb5845be.mp4"
+  },
+  "eb_gag": {
+   "file": "edit/capsulas/src/eb5845be.mp4",
+   "transcript": "edit/capsulas/transcripts/eb5845be.json",
+   "speed": 1.0
+  },
+  "s103": {
+   "file": "edit/capsulas/src/103d7c21.mp4"
+  },
+  "s57": {
+   "file": "edit/capsulas/src/57ee6e8d.mp4"
+  },
+  "s57_toma": {
+   "file": "edit/capsulas/src/57ee6e8d.mp4",
+   "transcript": "edit/capsulas/transcripts/57ee6e8d.json",
+   "speed": 1.0
+  },
+  "s60": {
+   "file": "edit/capsulas/src/60d896c4.mp4"
+  },
+  "d4": {
+   "file": "edit/capsulas/src/d43939a5.mp4"
+  },
+  "s70": {
+   "file": "edit/capsulas/src/7028d5a7.mp4"
+  },
+  "kr1": {
+   "file": "edit/capsulas/src/8e561966.mp4"
+  },
+  "kr2": {
+   "file": "edit/capsulas/src/92ade276.mp4"
+  }
+ },
+ "ranges": [
+  {
+   "source": "eb",
+   "start": 0.2,
+   "end": 3.48,
+   "beat": "gancho: la verdad incómoda"
+  },
+  {
+   "source": "eb_gag",
+   "start": 3.48,
+   "end": 5.6,
+   "beat": "chiste: tira las cápsulas"
+  },
+  {
+   "source": "s103",
+   "start": 0.033,
+   "end": 3.3,
+   "beat": "problema"
+  },
+  {
+   "source": "s103",
+   "start": 3.6,
+   "end": 6.8,
+   "beat": "problema"
+  },
+  {
+   "source": "s103",
+   "start": 7.033,
+   "end": 7.867,
+   "beat": "problema: pote de plástico"
+  },
+  {
+   "source": "s57",
+   "start": 0.0,
+   "end": 4.0,
+   "beat": "giro: el verdadero lujo"
+  },
+  {
+   "source": "s57",
+   "start": 4.633,
+   "end": 5.533,
+   "beat": "giro"
+  },
+  {
+   "source": "s57",
+   "start": 6.3,
+   "end": 6.8,
+   "beat": "giro"
+  },
+  {
+   "source": "s57",
+   "start": 7.033,
+   "end": 7.867,
+   "beat": "giro: de calidad"
+  },
+  {
+   "source": "s60",
+   "start": 0.1,
+   "end": 2.4,
+   "beat": "solución: un botón"
+  },
+  {
+   "source": "s60",
+   "start": 2.767,
+   "end": 4.067,
+   "beat": "solución"
+  },
+  {
+   "source": "s60",
+   "start": 4.233,
+   "end": 5.033,
+   "beat": "solución"
+  },
+  {
+   "source": "s60",
+   "start": 5.3,
+   "end": 6.333,
+   "beat": "solución: se limpia sola"
+  },
+  {
+   "source": "d4",
+   "start": 0.0,
+   "end": 2.0,
+   "beat": "cierre"
+  },
+  {
+   "source": "d4",
+   "start": 2.2,
+   "end": 3.433,
+   "beat": "cierre: hacé el cambio YA"
+  },
+  {
+   "source": "s70",
+   "start": 0.333,
+   "end": 3.967,
+   "beat": "CTA"
+  },
+  {
+   "source": "s57_toma",
+   "start": 4.03,
+   "end": 7.86,
+   "beat": "toma fallida al final"
+  }
+ ],
+ "fix": {
+  "incomoda": "incómoda",
+  "cápsula": "cápsulas",
+  "tocas": "tocás",
+  "haz": "hacé",
+  "Entra": "Entrá",
+  "entra": "entrá",
+  "mira": "mirá",
+  "valoras": "valorás",
+  "disponible": "disponibles"
+ },
+ "extract": {
+  "krups_sirve": {
+   "source": "kr1",
+   "start": 0.0,
+   "end": 3.9,
+   "what": "cafetera automática sirviendo un café"
+  },
+  "krups_taza": {
+   "source": "kr2",
+   "start": 0.0,
+   "end": 3.2,
+   "what": "mano que retira la taza de café"
+  }
+ },
+ "retime": [
+  {
+   "text": "La",
+   "at": 0.0,
+   "start": 0.22,
+   "end": 0.36
+  },
+  {
+   "text": "bueno",
+   "at": 5.72,
+   "start": 6.32,
+   "end": 6.78
+  },
+  {
+   "text": "verdad",
+   "at": 0.5,
+   "start": 0.37,
+   "end": 0.62
+  }
+ ],
+ "look": {
+  "correct": "colorchannelmixer=rr=0.95:bb=1.06",
+  "grade": "eq=contrast=1.05:saturation=1.04"
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "id": "capsulas",
+ "duration": 32.467,
+ "inserts": [
+  {
+   "id": "b01",
+   "kind": "broll",
+   "mode": "replace",
+   "file": "capsulas/inserts/b01.mp4",
+   "media": "video",
+   "start": 15.367,
+   "dur": 1.6,
+   "src_in": 0.0,
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "position": null,
+   "audio": false,
+   "plate": false,
+   "box": null
+  }
+ ],
+ "scenes": [
+  {
+   "id": "c01",
+   "type": "hook",
+   "mode": "overlay",
+   "variant": "slam",
+   "start": 0.018,
+   "dur": 2.6,
+   "box": [
+    60,
+    1050,
+    600,
+    450
+   ],
+   "source": {
+    "kind": "speech"
+   },
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "tone": "punchy",
+   "text": {
+    "lines": [
+     "La verdad",
+     "incómoda"
+    ],
+    "accent": "incómoda"
+   },
+   "hide_subtitles": true
+  },
+  {
+   "id": "c02",
+   "type": "contrast",
+   "mode": "split",
+   "start": 7.415,
+   "dur": 4.2,
+   "box": [
+    60,
+    220,
+    900,
+    660
+   ],
+   "source": {
+    "kind": "speech"
+   },
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "tone": "punchy",
+   "text": {
+    "lines": [
+     "Café premium",
+     "Café viejo"
+    ]
+   },
+   "hide_subtitles": true
+  },
+  {
+   "id": "c03",
+   "type": "list",
+   "mode": "panel",
+   "start": 19.215,
+   "dur": 4.1,
+   "source": {
+    "kind": "speech"
+   },
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "tone": "punchy",
+   "text": {
+    "lines": []
+   },
+   "items": [
+    {
+     "text": "Un solo botón",
+     "t": 19.215
+    },
+    {
+     "text": "Hace todo por vos",
+     "t": 20.236
+    },
+    {
+     "text": "Se limpia sola",
+     "t": 21.961
+    }
+   ],
+   "face": [
+    136,
+    381,
+    600,
+    845
+   ],
+   "hide_subtitles": true
+  },
+  {
+   "id": "c04",
+   "type": "cta",
+   "mode": "full",
+   "variant": "bio",
+   "start": 25.658,
+   "dur": 2.95,
+   "source": {
+    "kind": "speech"
+   },
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "tone": "punchy",
+   "text": {
+    "lines": [
+     "Entrá a mi perfil",
+     "Mirá los modelos"
+    ]
+   },
+   "hide_subtitles": true
+  }
+ ]
+}

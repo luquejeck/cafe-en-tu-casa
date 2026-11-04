@@ -1,0 +1,764 @@
+{
+ "language_code": "es",
+ "text": "La verdad incomoda, sobre esa cafetera de cápsulas que tenés en tu cocina. Es que nos convencieron de que estábamos consumiendo café premium, pero la verdad es que estamos pagando por café viejo y encima guardado en un pote de plástico. El verdadero lujo es no perder ni un segundo en tomar un café recién molido. Con una automática tocas un solo botón y te hace todo el trabajo por vos. Y lo mejor de todo es que además se limpia sola. Si valorás tu tiempo y tu paladar, haz el cambio ya. Entra a mi perfil y mira todos los modelos que tenemos disponibles para vos.",
+ "words": [
+  {
+   "text": "La",
+   "start": 0.0,
+   "end": 0.36,
+   "type": "word",
+   "p": 0.832
+  },
+  {
+   "text": "verdad",
+   "start": 0.36,
+   "end": 0.52,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "incomoda,",
+   "start": 0.52,
+   "end": 1.0,
+   "type": "word",
+   "p": 0.826
+  },
+  {
+   "text": "sobre",
+   "start": 1.12,
+   "end": 1.28,
+   "type": "word",
+   "p": 0.948
+  },
+  {
+   "text": "esa",
+   "start": 1.28,
+   "end": 1.5,
+   "type": "word",
+   "p": 0.941
+  },
+  {
+   "text": "cafetera",
+   "start": 1.5,
+   "end": 1.86,
+   "type": "word",
+   "p": 0.847
+  },
+  {
+   "text": "de",
+   "start": 1.86,
+   "end": 2.0,
+   "type": "word",
+   "p": 0.869
+  },
+  {
+   "text": "cápsulas",
+   "start": 2.0,
+   "end": 2.38,
+   "type": "word",
+   "p": 0.815
+  },
+  {
+   "text": "que",
+   "start": 2.38,
+   "end": 2.56,
+   "type": "word",
+   "p": 0.979
+  },
+  {
+   "text": "tenés",
+   "start": 2.56,
+   "end": 2.76,
+   "type": "word",
+   "p": 0.717
+  },
+  {
+   "text": "en",
+   "start": 2.76,
+   "end": 2.88,
+   "type": "word",
+   "p": 0.994
+  },
+  {
+   "text": "tu",
+   "start": 2.88,
+   "end": 3.0,
+   "type": "word",
+   "p": 0.983
+  },
+  {
+   "text": "cocina.",
+   "start": 3.0,
+   "end": 3.28,
+   "type": "word",
+   "p": 0.997
+  },
+  {
+   "text": "Es",
+   "start": 5.12,
+   "end": 5.18,
+   "type": "word",
+   "p": 0.923
+  },
+  {
+   "text": "que",
+   "start": 5.18,
+   "end": 5.24,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "nos",
+   "start": 5.24,
+   "end": 5.42,
+   "type": "word",
+   "p": 0.997
+  },
+  {
+   "text": "convencieron",
+   "start": 5.42,
+   "end": 5.94,
+   "type": "word",
+   "p": 0.965
+  },
+  {
+   "text": "de",
+   "start": 5.94,
+   "end": 6.22,
+   "type": "word",
+   "p": 0.736
+  },
+  {
+   "text": "que",
+   "start": 6.22,
+   "end": 6.34,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "estábamos",
+   "start": 6.34,
+   "end": 6.76,
+   "type": "word",
+   "p": 0.963
+  },
+  {
+   "text": "consumiendo",
+   "start": 6.76,
+   "end": 7.48,
+   "type": "word",
+   "p": 0.971
+  },
+  {
+   "text": "café",
+   "start": 7.48,
+   "end": 7.74,
+   "type": "word",
+   "p": 0.901
+  },
+  {
+   "text": "premium,",
+   "start": 7.74,
+   "end": 8.2,
+   "type": "word",
+   "p": 0.828
+  },
+  {
+   "text": "pero",
+   "start": 8.6,
+   "end": 8.76,
+   "type": "word",
+   "p": 0.984
+  },
+  {
+   "text": "la",
+   "start": 8.76,
+   "end": 8.88,
+   "type": "word",
+   "p": 0.99
+  },
+  {
+   "text": "verdad",
+   "start": 8.88,
+   "end": 9.14,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "es",
+   "start": 9.14,
+   "end": 9.34,
+   "type": "word",
+   "p": 0.94
+  },
+  {
+   "text": "que",
+   "start": 9.34,
+   "end": 9.46,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "estamos",
+   "start": 9.46,
+   "end": 9.68,
+   "type": "word",
+   "p": 0.959
+  },
+  {
+   "text": "pagando",
+   "start": 9.68,
+   "end": 10.04,
+   "type": "word",
+   "p": 0.992
+  },
+  {
+   "text": "por",
+   "start": 10.04,
+   "end": 10.28,
+   "type": "word",
+   "p": 0.994
+  },
+  {
+   "text": "café",
+   "start": 10.28,
+   "end": 10.52,
+   "type": "word",
+   "p": 0.977
+  },
+  {
+   "text": "viejo",
+   "start": 10.52,
+   "end": 10.88,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "y",
+   "start": 10.88,
+   "end": 11.06,
+   "type": "word",
+   "p": 0.941
+  },
+  {
+   "text": "encima",
+   "start": 11.06,
+   "end": 11.22,
+   "type": "word",
+   "p": 0.925
+  },
+  {
+   "text": "guardado",
+   "start": 11.22,
+   "end": 11.58,
+   "type": "word",
+   "p": 0.753
+  },
+  {
+   "text": "en",
+   "start": 11.58,
+   "end": 11.94,
+   "type": "word",
+   "p": 0.99
+  },
+  {
+   "text": "un",
+   "start": 11.94,
+   "end": 12.1,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "pote",
+   "start": 12.1,
+   "end": 12.28,
+   "type": "word",
+   "p": 0.951
+  },
+  {
+   "text": "de",
+   "start": 12.28,
+   "end": 12.46,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "plástico.",
+   "start": 12.46,
+   "end": 12.84,
+   "type": "word",
+   "p": 0.987
+  },
+  {
+   "text": "El",
+   "start": 13.1,
+   "end": 13.24,
+   "type": "word",
+   "p": 0.824
+  },
+  {
+   "text": "verdadero",
+   "start": 13.24,
+   "end": 13.48,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "lujo",
+   "start": 13.48,
+   "end": 13.9,
+   "type": "word",
+   "p": 0.997
+  },
+  {
+   "text": "es",
+   "start": 13.9,
+   "end": 14.0,
+   "type": "word",
+   "p": 0.915
+  },
+  {
+   "text": "no",
+   "start": 14.0,
+   "end": 14.16,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "perder",
+   "start": 14.16,
+   "end": 14.5,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "ni",
+   "start": 14.5,
+   "end": 14.74,
+   "type": "word",
+   "p": 0.933
+  },
+  {
+   "text": "un",
+   "start": 14.74,
+   "end": 14.92,
+   "type": "word",
+   "p": 0.99
+  },
+  {
+   "text": "segundo",
+   "start": 14.92,
+   "end": 15.26,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "en",
+   "start": 15.26,
+   "end": 15.64,
+   "type": "word",
+   "p": 0.981
+  },
+  {
+   "text": "tomar",
+   "start": 15.64,
+   "end": 15.84,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "un",
+   "start": 15.84,
+   "end": 16.04,
+   "type": "word",
+   "p": 0.984
+  },
+  {
+   "text": "café",
+   "start": 16.04,
+   "end": 16.24,
+   "type": "word",
+   "p": 0.997
+  },
+  {
+   "text": "recién",
+   "start": 16.24,
+   "end": 16.58,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "molido.",
+   "start": 16.58,
+   "end": 16.98,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "Con",
+   "start": 17.12,
+   "end": 17.26,
+   "type": "word",
+   "p": 0.99
+  },
+  {
+   "text": "una",
+   "start": 17.26,
+   "end": 17.44,
+   "type": "word",
+   "p": 0.946
+  },
+  {
+   "text": "automática",
+   "start": 17.44,
+   "end": 17.84,
+   "type": "word",
+   "p": 0.966
+  },
+  {
+   "text": "tocas",
+   "start": 17.84,
+   "end": 18.18,
+   "type": "word",
+   "p": 0.801
+  },
+  {
+   "text": "un",
+   "start": 18.18,
+   "end": 18.48,
+   "type": "word",
+   "p": 0.944
+  },
+  {
+   "text": "solo",
+   "start": 18.48,
+   "end": 18.64,
+   "type": "word",
+   "p": 0.968
+  },
+  {
+   "text": "botón",
+   "start": 18.64,
+   "end": 19.16,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "y",
+   "start": 19.16,
+   "end": 19.48,
+   "type": "word",
+   "p": 0.904
+  },
+  {
+   "text": "te",
+   "start": 19.48,
+   "end": 19.62,
+   "type": "word",
+   "p": 0.989
+  },
+  {
+   "text": "hace",
+   "start": 19.62,
+   "end": 19.78,
+   "type": "word",
+   "p": 0.945
+  },
+  {
+   "text": "todo",
+   "start": 19.78,
+   "end": 19.94,
+   "type": "word",
+   "p": 0.993
+  },
+  {
+   "text": "el",
+   "start": 19.94,
+   "end": 20.1,
+   "type": "word",
+   "p": 0.997
+  },
+  {
+   "text": "trabajo",
+   "start": 20.1,
+   "end": 20.24,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "por",
+   "start": 20.24,
+   "end": 20.48,
+   "type": "word",
+   "p": 0.994
+  },
+  {
+   "text": "vos.",
+   "start": 20.48,
+   "end": 20.62,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "Y",
+   "start": 20.88,
+   "end": 20.96,
+   "type": "word",
+   "p": 0.703
+  },
+  {
+   "text": "lo",
+   "start": 20.96,
+   "end": 21.02,
+   "type": "word",
+   "p": 0.99
+  },
+  {
+   "text": "mejor",
+   "start": 21.02,
+   "end": 21.24,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "de",
+   "start": 21.24,
+   "end": 21.38,
+   "type": "word",
+   "p": 0.994
+  },
+  {
+   "text": "todo",
+   "start": 21.38,
+   "end": 21.64,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "es",
+   "start": 21.64,
+   "end": 22.06,
+   "type": "word",
+   "p": 0.741
+  },
+  {
+   "text": "que",
+   "start": 22.06,
+   "end": 22.14,
+   "type": "word",
+   "p": 0.997
+  },
+  {
+   "text": "además",
+   "start": 22.14,
+   "end": 22.3,
+   "type": "word",
+   "p": 0.872
+  },
+  {
+   "text": "se",
+   "start": 22.3,
+   "end": 22.44,
+   "type": "word",
+   "p": 0.971
+  },
+  {
+   "text": "limpia",
+   "start": 22.44,
+   "end": 22.62,
+   "type": "word",
+   "p": 0.969
+  },
+  {
+   "text": "sola.",
+   "start": 22.62,
+   "end": 22.88,
+   "type": "word",
+   "p": 0.98
+  },
+  {
+   "text": "Si",
+   "start": 23.36,
+   "end": 23.56,
+   "type": "word",
+   "p": 0.984
+  },
+  {
+   "text": "valorás",
+   "start": 23.56,
+   "end": 23.92,
+   "type": "word",
+   "p": 0.851
+  },
+  {
+   "text": "tu",
+   "start": 23.92,
+   "end": 24.0,
+   "type": "word",
+   "p": 0.99
+  },
+  {
+   "text": "tiempo",
+   "start": 24.0,
+   "end": 24.22,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "y",
+   "start": 24.22,
+   "end": 24.36,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "tu",
+   "start": 24.36,
+   "end": 24.48,
+   "type": "word",
+   "p": 0.987
+  },
+  {
+   "text": "paladar,",
+   "start": 24.48,
+   "end": 25.14,
+   "type": "word",
+   "p": 0.988
+  },
+  {
+   "text": "haz",
+   "start": 25.3,
+   "end": 25.38,
+   "type": "word",
+   "p": 0.911
+  },
+  {
+   "text": "el",
+   "start": 25.38,
+   "end": 25.5,
+   "type": "word",
+   "p": 0.983
+  },
+  {
+   "text": "cambio",
+   "start": 25.5,
+   "end": 25.66,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "ya.",
+   "start": 25.66,
+   "end": 25.92,
+   "type": "word",
+   "p": 0.986
+  },
+  {
+   "text": "Entra",
+   "start": 26.12,
+   "end": 26.36,
+   "type": "word",
+   "p": 0.911
+  },
+  {
+   "text": "a",
+   "start": 26.36,
+   "end": 26.4,
+   "type": "word",
+   "p": 0.768
+  },
+  {
+   "text": "mi",
+   "start": 26.4,
+   "end": 26.54,
+   "type": "word",
+   "p": 0.93
+  },
+  {
+   "text": "perfil",
+   "start": 26.54,
+   "end": 26.96,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "y",
+   "start": 26.96,
+   "end": 27.1,
+   "type": "word",
+   "p": 0.985
+  },
+  {
+   "text": "mira",
+   "start": 27.1,
+   "end": 27.32,
+   "type": "word",
+   "p": 0.997
+  },
+  {
+   "text": "todos",
+   "start": 27.32,
+   "end": 27.62,
+   "type": "word",
+   "p": 0.989
+  },
+  {
+   "text": "los",
+   "start": 27.62,
+   "end": 27.84,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "modelos",
+   "start": 27.84,
+   "end": 28.12,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "que",
+   "start": 28.12,
+   "end": 28.22,
+   "type": "word",
+   "p": 0.983
+  },
+  {
+   "text": "tenemos",
+   "start": 28.22,
+   "end": 28.4,
+   "type": "word",
+   "p": 0.987
+  },
+  {
+   "text": "disponibles",
+   "start": 28.4,
+   "end": 28.88,
+   "type": "word",
+   "p": 0.775
+  },
+  {
+   "text": "para",
+   "start": 28.88,
+   "end": 29.1,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "vos.",
+   "start": 29.1,
+   "end": 29.28,
+   "type": "word",
+   "p": 0.997
+  }
+ ],
+ "source": "504c9e58.mp4",
+ "source_identity": {
+  "path": "/home/user/cafe-en-tu-casa/edit/capsulas/src/504c9e58.mp4",
+  "size": 9373254,
+  "mtime_ns": 1793825989993821784
+ },
+ "model": "faster-whisper medium int8",
+ "timeline": "video",
+ "audio_offset": 0.0
+}

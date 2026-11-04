@@ -1,0 +1,73 @@
+{
+ "language_code": "es",
+ "text": "así que si valoras tu tiempo y tu paladar",
+ "words": [
+  {
+   "text": "así",
+   "start": 0.267,
+   "end": 0.267,
+   "type": "word",
+   "p": 0.045
+  },
+  {
+   "text": "que",
+   "start": 0.267,
+   "end": 0.447,
+   "type": "word",
+   "p": 0.975
+  },
+  {
+   "text": "si",
+   "start": 0.447,
+   "end": 0.667,
+   "type": "word",
+   "p": 0.754
+  },
+  {
+   "text": "valoras",
+   "start": 0.667,
+   "end": 1.007,
+   "type": "word",
+   "p": 0.938
+  },
+  {
+   "text": "tu",
+   "start": 1.007,
+   "end": 1.107,
+   "type": "word",
+   "p": 0.989
+  },
+  {
+   "text": "tiempo",
+   "start": 1.107,
+   "end": 1.307,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "y",
+   "start": 1.307,
+   "end": 1.447,
+   "type": "word",
+   "p": 0.984
+  },
+  {
+   "text": "tu",
+   "start": 1.447,
+   "end": 1.567,
+   "type": "word",
+   "p": 0.965
+  },
+  {
+   "text": "paladar",
+   "start": 1.567,
+   "end": 1.967,
+   "type": "word",
+   "p": 0.97
+  }
+ ],
+ "source": "d43939a5.mp4",
+ "from": 0.267,
+ "to": 2.0,
+ "prompt": null
+}
