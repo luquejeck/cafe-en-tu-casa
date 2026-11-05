@@ -1,0 +1,433 @@
+{
+ "video": "capsulas-v4/video.mp4",
+ "captions": {
+  "duration": 8.8,
+  "segments": [
+   {
+    "i": 0,
+    "source": "s103",
+    "src_start": 4.5,
+    "src_end": 6.8,
+    "out_start": 0.0,
+    "out_dur": 1.933,
+    "speed": 1.18,
+    "beat": "gancho: estamos pagando por café viejo"
+   },
+   {
+    "i": 1,
+    "source": "s103",
+    "src_start": 7.033,
+    "src_end": 7.867,
+    "out_start": 1.933,
+    "out_dur": 0.7,
+    "speed": 1.18,
+    "beat": "gancho: pote de plástico"
+   },
+   {
+    "i": 2,
+    "source": "s60",
+    "src_start": 0.1,
+    "src_end": 2.4,
+    "out_start": 2.633,
+    "out_dur": 1.933,
+    "speed": 1.18,
+    "beat": "solución: un solo botón"
+   },
+   {
+    "i": 3,
+    "source": "s60",
+    "src_start": 2.767,
+    "src_end": 4.067,
+    "out_start": 4.567,
+    "out_dur": 1.1,
+    "speed": 1.18,
+    "beat": "solución: todo el trabajo por vos"
+   },
+   {
+    "i": 4,
+    "source": "eb_gag",
+    "src_start": 3.467,
+    "src_end": 3.867,
+    "out_start": 5.667,
+    "out_dur": 0.4,
+    "speed": 1.0,
+    "beat": "remate: arranca el tiro"
+   },
+   {
+    "i": 5,
+    "source": "eb_slow",
+    "src_start": 3.867,
+    "src_end": 4.867,
+    "out_start": 6.067,
+    "out_dur": 2.0,
+    "speed": 0.5,
+    "beat": "remate: cámara lenta del tiro"
+   },
+   {
+    "i": 6,
+    "source": "eb_hold",
+    "src_start": 4.867,
+    "src_end": 5.6,
+    "out_start": 8.067,
+    "out_dur": 0.733,
+    "speed": 1.0,
+    "beat": "remate: sonrisa + pregunta"
+   }
+  ],
+  "words": [
+   {
+    "text": "Estamos",
+    "src": 4.52,
+    "start": 0.017,
+    "end": 0.203,
+    "seg": 0
+   },
+   {
+    "text": "pagando",
+    "src": 4.74,
+    "start": 0.203,
+    "end": 0.525,
+    "seg": 0
+   },
+   {
+    "text": "por",
+    "src": 5.12,
+    "start": 0.525,
+    "end": 0.729,
+    "seg": 0
+   },
+   {
+    "text": "café",
+    "src": 5.36,
+    "start": 0.729,
+    "end": 0.915,
+    "seg": 0
+   },
+   {
+    "text": "viejo",
+    "src": 5.58,
+    "start": 0.915,
+    "end": 1.22,
+    "seg": 0
+   },
+   {
+    "text": "y",
+    "src": 5.94,
+    "start": 1.22,
+    "end": 1.373,
+    "seg": 0
+   },
+   {
+    "text": "encima",
+    "src": 6.12,
+    "start": 1.373,
+    "end": 1.508,
+    "seg": 0
+   },
+   {
+    "text": "guardado",
+    "src": 6.28,
+    "start": 1.508,
+    "end": 1.814,
+    "seg": 0
+   },
+   {
+    "text": "en",
+    "src": 6.64,
+    "start": 1.814,
+    "end": 1.949,
+    "seg": 0
+   },
+   {
+    "text": "un",
+    "src": 7.02,
+    "start": 1.933,
+    "end": 2.041,
+    "seg": 1
+   },
+   {
+    "text": "pote",
+    "src": 7.16,
+    "start": 2.041,
+    "end": 2.193,
+    "seg": 1
+   },
+   {
+    "text": "de",
+    "src": 7.34,
+    "start": 2.193,
+    "end": 2.363,
+    "seg": 1
+   },
+   {
+    "text": "plástico.",
+    "src": 7.54,
+    "start": 2.363,
+    "end": 2.583,
+    "seg": 1
+   },
+   {
+    "text": "Por",
+    "src": 0.0,
+    "start": 2.633,
+    "end": 2.786,
+    "seg": 2
+   },
+   {
+    "text": "eso,",
+    "src": 0.28,
+    "start": 2.786,
+    "end": 2.989,
+    "seg": 2
+   },
+   {
+    "text": "con",
+    "src": 0.7,
+    "start": 3.142,
+    "end": 3.21,
+    "seg": 2
+   },
+   {
+    "text": "una",
+    "src": 0.7,
+    "start": 3.142,
+    "end": 3.277,
+    "seg": 2
+   },
+   {
+    "text": "automática",
+    "src": 0.86,
+    "start": 3.277,
+    "end": 3.616,
+    "seg": 2
+   },
+   {
+    "text": "tocás",
+    "src": 1.26,
+    "start": 3.616,
+    "end": 3.955,
+    "seg": 2
+   },
+   {
+    "text": "un",
+    "src": 1.66,
+    "start": 3.955,
+    "end": 4.176,
+    "seg": 2
+   },
+   {
+    "text": "solo",
+    "src": 1.92,
+    "start": 4.176,
+    "end": 4.294,
+    "seg": 2
+   },
+   {
+    "text": "botón",
+    "src": 2.06,
+    "start": 4.294,
+    "end": 4.582,
+    "seg": 2
+   },
+   {
+    "text": "y",
+    "src": 2.66,
+    "start": 4.567,
+    "end": 4.731,
+    "seg": 3
+   },
+   {
+    "text": "te",
+    "src": 2.96,
+    "start": 4.731,
+    "end": 4.832,
+    "seg": 3
+   },
+   {
+    "text": "hace",
+    "src": 3.08,
+    "start": 4.832,
+    "end": 4.968,
+    "seg": 3
+   },
+   {
+    "text": "todo",
+    "src": 3.24,
+    "start": 4.968,
+    "end": 5.086,
+    "seg": 3
+   },
+   {
+    "text": "el",
+    "src": 3.38,
+    "start": 5.086,
+    "end": 5.222,
+    "seg": 3
+   },
+   {
+    "text": "trabajo",
+    "src": 3.54,
+    "start": 5.222,
+    "end": 5.341,
+    "seg": 3
+   },
+   {
+    "text": "por",
+    "src": 3.68,
+    "start": 5.341,
+    "end": 5.544,
+    "seg": 3
+   },
+   {
+    "text": "vos.",
+    "src": 3.92,
+    "start": 5.544,
+    "end": 5.668,
+    "seg": 3
+   }
+  ]
+ },
+ "brand": {
+  "slug": "cafe-en-tu-casa",
+  "name": "Café en tu Casa",
+  "tagline": "Café de cafetería, en tu casa.",
+  "colors": {
+   "primary": "#101012",
+   "accent": "#A3C26A",
+   "light": "#F5F5F7",
+   "text_on_primary": "#F5F5F7",
+   "text_on_accent": "#101012",
+   "extra": {
+    "c1": "#5B6E32"
+   }
+  },
+  "fonts": {
+   "heading": {
+    "family": "Inter",
+    "weights": [
+     600,
+     700,
+     800
+    ],
+    "source": "google"
+   },
+   "body": {
+    "family": "Inter",
+    "weights": [
+     500,
+     600,
+     700
+    ],
+    "source": "google"
+   }
+  },
+  "logos": {},
+  "motion": "lively",
+  "tone": {
+   "preset": "friendly",
+   "label": "Lively, friendly",
+   "loudness": "lively",
+   "overshoot": true,
+   "shake": false,
+   "scene_tone": "punchy",
+   "scene_tones": [
+    "punchy",
+    "feature",
+    "calm",
+    "deadpan"
+   ],
+   "full_scenes_max": 2,
+   "transitions": [
+    "cut",
+    "fade",
+    "whip",
+    "slide",
+    "flash"
+   ],
+   "flash_max": 2,
+   "whip_max": 4,
+   "sfx": "moderate"
+  },
+  "subtitles_default": "accent",
+  "style_default": "marker"
+ },
+ "inserts": [],
+ "subtitles": "typewriter",
+ "style": "marker",
+ "hideSubtitles": [
+  [
+   0.0,
+   2.633
+  ],
+  [
+   5.667,
+   8.8
+  ]
+ ],
+ "drift": false,
+ "hook": null,
+ "corner": false,
+ "endCard": null,
+ "camera": [
+  {
+   "t": 0.0,
+   "z": 1.0,
+   "cx": 540.0,
+   "cy": 960.0,
+   "drift": 0.03,
+   "whip": false
+  },
+  {
+   "t": 0.525,
+   "z": 1.0,
+   "cx": 540.0,
+   "cy": 960.0,
+   "drift": 0.03,
+   "whip": false
+  },
+  {
+   "t": 3.616,
+   "z": 1.12,
+   "cx": 540.0,
+   "cy": 1000.0,
+   "drift": 0.0,
+   "whip": false
+  },
+  {
+   "t": 4.567,
+   "z": 1.0,
+   "cx": 540.0,
+   "cy": 960.0,
+   "drift": 0.03,
+   "whip": false
+  },
+  {
+   "t": 5.667,
+   "z": 1.0,
+   "cx": 540.0,
+   "cy": 960.0,
+   "drift": 0.0,
+   "whip": false
+  },
+  {
+   "t": 6.067,
+   "z": 1.06,
+   "cx": 540.0,
+   "cy": 900.0,
+   "drift": 0.04,
+   "whip": false
+  },
+  {
+   "t": 8.067,
+   "z": 1.15,
+   "cx": 560.0,
+   "cy": 760.0,
+   "drift": 0.0,
+   "whip": false
+  }
+ ],
+ "subtitlesTop": 1390,
+ "subtitlesShade": 0.6,
+ "scenes": [],
+ "sceneTone": "feature"
+}

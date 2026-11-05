@@ -1,0 +1,211 @@
+{
+ "language_code": "es",
+ "text": "Por eso, con una automática tocas un solo botón y te hace todo el trabajo por vos. Y lo mejor de todo es que además se limpia sola.",
+ "words": [
+  {
+   "text": "Por",
+   "start": 0.0,
+   "end": 0.28,
+   "type": "word",
+   "p": 0.68
+  },
+  {
+   "text": "eso,",
+   "start": 0.28,
+   "end": 0.52,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "con",
+   "start": 0.7,
+   "end": 0.7,
+   "type": "word",
+   "p": 0.982
+  },
+  {
+   "text": "una",
+   "start": 0.7,
+   "end": 0.86,
+   "type": "word",
+   "p": 0.961
+  },
+  {
+   "text": "automática",
+   "start": 0.86,
+   "end": 1.26,
+   "type": "word",
+   "p": 0.768
+  },
+  {
+   "text": "tocas",
+   "start": 1.26,
+   "end": 1.66,
+   "type": "word",
+   "p": 0.712
+  },
+  {
+   "text": "un",
+   "start": 1.66,
+   "end": 1.92,
+   "type": "word",
+   "p": 0.941
+  },
+  {
+   "text": "solo",
+   "start": 1.92,
+   "end": 2.06,
+   "type": "word",
+   "p": 0.962
+  },
+  {
+   "text": "botón",
+   "start": 2.06,
+   "end": 2.66,
+   "type": "word",
+   "p": 0.968
+  },
+  {
+   "text": "y",
+   "start": 2.66,
+   "end": 2.96,
+   "type": "word",
+   "p": 0.845
+  },
+  {
+   "text": "te",
+   "start": 2.96,
+   "end": 3.08,
+   "type": "word",
+   "p": 0.984
+  },
+  {
+   "text": "hace",
+   "start": 3.08,
+   "end": 3.24,
+   "type": "word",
+   "p": 0.963
+  },
+  {
+   "text": "todo",
+   "start": 3.24,
+   "end": 3.38,
+   "type": "word",
+   "p": 0.994
+  },
+  {
+   "text": "el",
+   "start": 3.38,
+   "end": 3.54,
+   "type": "word",
+   "p": 0.997
+  },
+  {
+   "text": "trabajo",
+   "start": 3.54,
+   "end": 3.68,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "por",
+   "start": 3.68,
+   "end": 3.92,
+   "type": "word",
+   "p": 0.987
+  },
+  {
+   "text": "vos.",
+   "start": 3.92,
+   "end": 4.14,
+   "type": "word",
+   "p": 0.987
+  },
+  {
+   "text": "Y",
+   "start": 4.34,
+   "end": 4.4,
+   "type": "word",
+   "p": 0.774
+  },
+  {
+   "text": "lo",
+   "start": 4.4,
+   "end": 4.46,
+   "type": "word",
+   "p": 0.986
+  },
+  {
+   "text": "mejor",
+   "start": 4.46,
+   "end": 4.68,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "de",
+   "start": 4.68,
+   "end": 4.82,
+   "type": "word",
+   "p": 0.991
+  },
+  {
+   "text": "todo",
+   "start": 4.82,
+   "end": 5.14,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "es",
+   "start": 5.14,
+   "end": 5.5,
+   "type": "word",
+   "p": 0.674
+  },
+  {
+   "text": "que",
+   "start": 5.5,
+   "end": 5.58,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "además",
+   "start": 5.58,
+   "end": 5.72,
+   "type": "word",
+   "p": 0.842
+  },
+  {
+   "text": "se",
+   "start": 5.72,
+   "end": 5.88,
+   "type": "word",
+   "p": 0.914
+  },
+  {
+   "text": "limpia",
+   "start": 5.88,
+   "end": 6.06,
+   "type": "word",
+   "p": 0.989
+  },
+  {
+   "text": "sola.",
+   "start": 6.06,
+   "end": 6.26,
+   "type": "word",
+   "p": 0.984
+  }
+ ],
+ "source": "60d896c4.mp4",
+ "source_identity": {
+  "path": "/home/user/cafe-en-tu-casa/edit/capsulas/src/60d896c4.mp4",
+  "size": 10011146,
+  "mtime_ns": 1793825990021821786
+ },
+ "model": "faster-whisper medium int8",
+ "timeline": "video",
+ "audio_offset": 0.0
+}

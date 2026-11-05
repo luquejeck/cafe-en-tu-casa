@@ -1,0 +1,244 @@
+{
+ "schema": 1,
+ "id": "capsulas-v4",
+ "created": "2026-11-05T18:01",
+ "duration": 8.8,
+ "segments": [
+  {
+   "id": "s01",
+   "start": 0.0,
+   "end": 2.633,
+   "text": "Estamos pagando por café viejo y encima guardado en un pote de plástico.",
+   "cut_segs": [
+    0,
+    1
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "hook: the first 1.5 s decide whether people keep watching",
+    "scene:hook - a weak start (a filler word, or > 2 s without a number or a question) -> a hook scene"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s02",
+   "start": 2.633,
+   "end": 8.8,
+   "text": "Por eso, con una automática tocás un solo botón y te hace todo el trabajo por vos.",
+   "cut_segs": [
+    2,
+    3
+   ],
+   "main": "main shot",
+   "camera": "",
+   "graphics": "",
+   "hints": [
+    "a segment join at the start: B-roll will hide the cut",
+    "ending/CTA: no memes here"
+   ],
+   "notes": ""
+  }
+ ],
+ "inserts": [],
+ "keep_clear": [
+  {
+   "start": 0.0,
+   "end": 2.55,
+   "box": [
+    60,
+    270,
+    900,
+    210
+   ],
+   "what": "gancho",
+   "cam": [
+    1.0,
+    540.0,
+    960.0
+   ]
+  },
+  {
+   "start": 5.8,
+   "end": 7.2,
+   "box": [
+    60,
+    1230,
+    900,
+    140
+   ],
+   "what": "Chau, cápsulas.",
+   "cam": [
+    1.06,
+    540.0,
+    900.0
+   ]
+  },
+  {
+   "start": 7.25,
+   "end": 8.8,
+   "box": [
+    60,
+    1280,
+    900,
+    180
+   ],
+   "what": "¿Cápsula o grano?",
+   "cam": [
+    1.15,
+    560.0,
+    760.0
+   ]
+  }
+ ],
+ "captions_id": "8bcdfcfae5f2",
+ "brand": "cafe-en-tu-casa",
+ "settings": {
+  "brand": "cafe-en-tu-casa",
+  "style": "marker",
+  "subtitles": "typewriter",
+  "subtitles_shade": 0.6,
+  "intensity": "active",
+  "use_broll": false,
+  "use_project_footage": true,
+  "use_local_footage": false,
+  "use_generated_footage": false,
+  "use_memes": false,
+  "use_local_memes": true,
+  "broll_priority": [
+   "project",
+   "local",
+   "generated"
+  ],
+  "meme_priority": [
+   "local"
+  ],
+  "footage_dirs": [
+   "footage",
+   "broll"
+  ],
+  "memes_dirs": [
+   "memes"
+  ],
+  "generation_engines": [
+   "code"
+  ],
+  "library_dirs": [],
+  "meme_size": "m",
+  "scene_tone": "feature",
+  "use_scenes": false,
+  "brand_tone": {
+   "label": "Lively, friendly",
+   "for": "real estate, local business, lifestyle, communities",
+   "intensity": "moderate",
+   "motion": "lively",
+   "loudness": "lively",
+   "memes": {
+    "allowed": true,
+    "default": true,
+    "max": 2,
+    "size_max": "m",
+    "cutaway": false
+   },
+   "broll_default": true,
+   "transitions": [
+    "cut",
+    "fade",
+    "whip",
+    "slide",
+    "flash"
+   ],
+   "flash_max": 2,
+   "whip_max": 4,
+   "shake": false,
+   "overshoot": true,
+   "full_scenes_max": 2,
+   "scene_tones": [
+    "punchy",
+    "feature",
+    "calm",
+    "deadpan"
+   ],
+   "scene_tone": "punchy",
+   "sfx": "moderate",
+   "preset": "friendly"
+  }
+ },
+ "provenance": {
+  "brand": "reel.json",
+  "style": "reel.json",
+  "subtitles": "reel.json",
+  "subtitles_shade": "reel.json",
+  "intensity": "reel.json",
+  "use_broll": "reel.json",
+  "use_project_footage": "reel.json",
+  "use_local_footage": "reel.json",
+  "use_generated_footage": "reel.json",
+  "use_memes": "reel.json",
+  "use_local_memes": "defaults",
+  "broll_priority": "defaults",
+  "meme_priority": "defaults",
+  "footage_dirs": "defaults",
+  "memes_dirs": "defaults",
+  "generation_engines": "defaults",
+  "library_dirs": "defaults",
+  "meme_size": "tone:friendly",
+  "scene_tone": "reel.json",
+  "use_scenes": "reel.json",
+  "brand_tone": "brand:cafe-en-tu-casa"
+ },
+ "effective": {
+  "broll": false,
+  "project_footage": false,
+  "local_footage": false,
+  "generated_code": false,
+  "memes": false,
+  "local_memes": false,
+  "scenes": false,
+  "online_footage": false,
+  "generated_prompts": false,
+  "generate_now": false,
+  "online_memes": false,
+  "online_footage_providers": [],
+  "online_meme_providers": []
+ },
+ "fallback": {
+  "broll": "use_broll=false",
+  "project_footage": "off",
+  "local_footage": "off",
+  "generated_code": "off",
+  "memes": "use_memes=false",
+  "local_memes": "off",
+  "scenes": "use_scenes=false",
+  "online_footage": "off",
+  "generated_prompts": "off",
+  "generate_now": "off",
+  "online_memes": "off"
+ },
+ "budget": {
+  "label": "active",
+  "broll_per_30s": 6,
+  "memes_max": 4,
+  "coverage_max": 0.4,
+  "min_gap_s": 2.0,
+  "broll_max": 2,
+  "coverage_max_s": 3.52
+ },
+ "hide_subtitles": [
+  {
+   "start": 0.0,
+   "end": 2.633,
+   "why": "titular del gancho"
+  },
+  {
+   "start": 5.667,
+   "end": 8.8,
+   "why": "remate sin habla: textos propios"
+  }
+ ],
+ "subtitles_band": [
+  1390,
+  1500
+ ]
+}
