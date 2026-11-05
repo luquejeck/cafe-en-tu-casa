@@ -1,0 +1,106 @@
+{
+ "language_code": "es",
+ "text": "La verdad incomoda sobre esa cafetera de cápsula que tenés en tu cocina.",
+ "words": [
+  {
+   "text": "La",
+   "start": 0.0,
+   "end": 0.34,
+   "type": "word",
+   "p": 0.704
+  },
+  {
+   "text": "verdad",
+   "start": 0.34,
+   "end": 0.5,
+   "type": "word",
+   "p": 0.993
+  },
+  {
+   "text": "incomoda",
+   "start": 0.5,
+   "end": 1.02,
+   "type": "word",
+   "p": 0.566
+  },
+  {
+   "text": "sobre",
+   "start": 1.02,
+   "end": 1.3,
+   "type": "word",
+   "p": 0.551
+  },
+  {
+   "text": "esa",
+   "start": 1.3,
+   "end": 1.5,
+   "type": "word",
+   "p": 0.937
+  },
+  {
+   "text": "cafetera",
+   "start": 1.5,
+   "end": 1.88,
+   "type": "word",
+   "p": 0.815
+  },
+  {
+   "text": "de",
+   "start": 1.88,
+   "end": 2.0,
+   "type": "word",
+   "p": 0.874
+  },
+  {
+   "text": "cápsula",
+   "start": 2.0,
+   "end": 2.38,
+   "type": "word",
+   "p": 0.772
+  },
+  {
+   "text": "que",
+   "start": 2.38,
+   "end": 2.56,
+   "type": "word",
+   "p": 0.98
+  },
+  {
+   "text": "tenés",
+   "start": 2.56,
+   "end": 2.78,
+   "type": "word",
+   "p": 0.688
+  },
+  {
+   "text": "en",
+   "start": 2.78,
+   "end": 2.86,
+   "type": "word",
+   "p": 0.997
+  },
+  {
+   "text": "tu",
+   "start": 2.86,
+   "end": 3.02,
+   "type": "word",
+   "p": 0.984
+  },
+  {
+   "text": "cocina.",
+   "start": 3.02,
+   "end": 3.36,
+   "type": "word",
+   "p": 0.999
+  }
+ ],
+ "source": "eb5845be.mp4",
+ "source_identity": {
+  "path": "/home/user/cafe-en-tu-casa/edit/capsulas/src/eb5845be.mp4",
+  "size": 9149781,
+  "mtime_ns": 1793825990085821790
+ },
+ "model": "faster-whisper medium int8",
+ "timeline": "video",
+ "audio_offset": 0.0
+}

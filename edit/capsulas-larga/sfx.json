@@ -1,0 +1,29 @@
+{
+ "below_voice_db": 16,
+ "sounds": [
+  {
+   "file": "edit/capsulas-larga/sfx/grave.wav",
+   "at": 0.0,
+   "start": 0.0,
+   "what": "gancho en el cuadro 0"
+  },
+  {
+   "file": "edit/capsulas-larga/sfx/whoosh.wav",
+   "at": 15.263,
+   "start": 0.0,
+   "what": "vuela el bowl"
+  },
+  {
+   "file": "edit/capsulas-larga/sfx/tick.wav",
+   "at": 16.953,
+   "start": 0.0,
+   "what": "entra la pregunta"
+  },
+  {
+   "file": "edit/capsulas-larga/sfx/tick.wav",
+   "at": 2.787,
+   "start": 0.0,
+   "what": "Pagás premium"
+  }
+ ]
+}

@@ -1,0 +1,669 @@
+{
+ "duration": 18.467,
+ "segments": [
+  {
+   "i": 0,
+   "source": "s103",
+   "src_start": 0.033,
+   "src_end": 3.3,
+   "out_start": 0.0,
+   "out_dur": 2.767,
+   "speed": 1.18,
+   "beat": "gancho: nos convencieron"
+  },
+  {
+   "i": 1,
+   "source": "s103",
+   "src_start": 4.5,
+   "src_end": 6.8,
+   "out_start": 2.767,
+   "out_dur": 1.933,
+   "speed": 1.18,
+   "beat": "problema: estamos pagando por café viejo"
+  },
+  {
+   "i": 2,
+   "source": "s103",
+   "src_start": 7.033,
+   "src_end": 7.867,
+   "out_start": 4.7,
+   "out_dur": 0.7,
+   "speed": 1.18,
+   "beat": "problema: pote de plástico"
+  },
+  {
+   "i": 3,
+   "source": "s57",
+   "src_start": 0.9,
+   "src_end": 4.0,
+   "out_start": 5.4,
+   "out_dur": 2.633,
+   "speed": 1.18,
+   "beat": "giro: el verdadero lujo"
+  },
+  {
+   "i": 4,
+   "source": "s60",
+   "src_start": 0.1,
+   "src_end": 2.4,
+   "out_start": 8.033,
+   "out_dur": 1.933,
+   "speed": 1.18,
+   "beat": "solución: un solo botón"
+  },
+  {
+   "i": 5,
+   "source": "s60",
+   "src_start": 2.767,
+   "src_end": 4.067,
+   "out_start": 9.967,
+   "out_dur": 1.1,
+   "speed": 1.18,
+   "beat": "solución: todo el trabajo por vos"
+  },
+  {
+   "i": 6,
+   "source": "s60",
+   "src_start": 4.233,
+   "src_end": 5.033,
+   "out_start": 11.067,
+   "out_dur": 0.667,
+   "speed": 1.18,
+   "beat": "solución: y lo mejor de todo"
+  },
+  {
+   "i": 7,
+   "source": "s60",
+   "src_start": 5.3,
+   "src_end": 6.333,
+   "out_start": 11.733,
+   "out_dur": 0.867,
+   "speed": 1.18,
+   "beat": "solución: se limpia sola"
+  },
+  {
+   "i": 8,
+   "source": "d4",
+   "src_start": 0.0,
+   "src_end": 2.0,
+   "out_start": 12.6,
+   "out_dur": 1.7,
+   "speed": 1.18,
+   "beat": "cierre: si valorás tu tiempo"
+  },
+  {
+   "i": 9,
+   "source": "d4",
+   "src_start": 2.2,
+   "src_end": 3.433,
+   "out_start": 14.3,
+   "out_dur": 1.033,
+   "speed": 1.18,
+   "beat": "cierre: hacé el cambio ya"
+  },
+  {
+   "i": 10,
+   "source": "eb_gag",
+   "src_start": 3.467,
+   "src_end": 3.867,
+   "out_start": 15.333,
+   "out_dur": 0.4,
+   "speed": 1.0,
+   "beat": "remate: arranca el tiro"
+  },
+  {
+   "i": 11,
+   "source": "eb_slow",
+   "src_start": 3.867,
+   "src_end": 4.867,
+   "out_start": 15.733,
+   "out_dur": 2.0,
+   "speed": 0.5,
+   "beat": "remate: cámara lenta del tiro"
+  },
+  {
+   "i": 12,
+   "source": "eb_hold",
+   "src_start": 4.867,
+   "src_end": 5.6,
+   "out_start": 17.733,
+   "out_dur": 0.733,
+   "speed": 1.0,
+   "beat": "remate: sonrisa + pregunta"
+  }
+ ],
+ "words": [
+  {
+   "text": "Es",
+   "src": 0.0,
+   "start": 0.0,
+   "end": 0.175,
+   "seg": 0
+  },
+  {
+   "text": "que",
+   "src": 0.24,
+   "start": 0.175,
+   "end": 0.243,
+   "seg": 0
+  },
+  {
+   "text": "nos",
+   "src": 0.3,
+   "start": 0.226,
+   "end": 0.379,
+   "seg": 0
+  },
+  {
+   "text": "convencieron",
+   "src": 0.48,
+   "start": 0.379,
+   "end": 0.87,
+   "seg": 0
+  },
+  {
+   "text": "de",
+   "src": 1.06,
+   "start": 0.87,
+   "end": 1.056,
+   "seg": 0
+  },
+  {
+   "text": "que",
+   "src": 1.28,
+   "start": 1.056,
+   "end": 1.158,
+   "seg": 0
+  },
+  {
+   "text": "estábamos",
+   "src": 1.4,
+   "start": 1.158,
+   "end": 1.582,
+   "seg": 0
+  },
+  {
+   "text": "consumiendo",
+   "src": 1.9,
+   "start": 1.582,
+   "end": 2.141,
+   "seg": 0
+  },
+  {
+   "text": "café",
+   "src": 2.56,
+   "start": 2.141,
+   "end": 2.345,
+   "seg": 0
+  },
+  {
+   "text": "premium,",
+   "src": 2.8,
+   "start": 2.345,
+   "end": 2.718,
+   "seg": 0
+  },
+  {
+   "text": "estamos",
+   "src": 4.52,
+   "start": 2.784,
+   "end": 2.97,
+   "seg": 1
+  },
+  {
+   "text": "pagando",
+   "src": 4.74,
+   "start": 2.97,
+   "end": 3.292,
+   "seg": 1
+  },
+  {
+   "text": "por",
+   "src": 5.12,
+   "start": 3.292,
+   "end": 3.495,
+   "seg": 1
+  },
+  {
+   "text": "café",
+   "src": 5.36,
+   "start": 3.495,
+   "end": 3.682,
+   "seg": 1
+  },
+  {
+   "text": "viejo",
+   "src": 5.58,
+   "start": 3.682,
+   "end": 3.987,
+   "seg": 1
+  },
+  {
+   "text": "y",
+   "src": 5.94,
+   "start": 3.987,
+   "end": 4.14,
+   "seg": 1
+  },
+  {
+   "text": "encima",
+   "src": 6.12,
+   "start": 4.14,
+   "end": 4.275,
+   "seg": 1
+  },
+  {
+   "text": "guardado",
+   "src": 6.28,
+   "start": 4.275,
+   "end": 4.58,
+   "seg": 1
+  },
+  {
+   "text": "en",
+   "src": 6.64,
+   "start": 4.58,
+   "end": 4.716,
+   "seg": 1
+  },
+  {
+   "text": "un",
+   "src": 7.02,
+   "start": 4.7,
+   "end": 4.807,
+   "seg": 2
+  },
+  {
+   "text": "pote",
+   "src": 7.16,
+   "start": 4.807,
+   "end": 4.96,
+   "seg": 2
+  },
+  {
+   "text": "de",
+   "src": 7.34,
+   "start": 4.96,
+   "end": 5.129,
+   "seg": 2
+  },
+  {
+   "text": "plástico.",
+   "src": 7.54,
+   "start": 5.129,
+   "end": 5.35,
+   "seg": 2
+  },
+  {
+   "text": "El",
+   "src": 0.92,
+   "start": 5.417,
+   "end": 5.502,
+   "seg": 3
+  },
+  {
+   "text": "verdadero",
+   "src": 1.02,
+   "start": 5.502,
+   "end": 5.79,
+   "seg": 3
+  },
+  {
+   "text": "lujo",
+   "src": 1.36,
+   "start": 5.79,
+   "end": 6.078,
+   "seg": 3
+  },
+  {
+   "text": "es",
+   "src": 1.7,
+   "start": 6.078,
+   "end": 6.366,
+   "seg": 3
+  },
+  {
+   "text": "no",
+   "src": 2.04,
+   "start": 6.366,
+   "end": 6.502,
+   "seg": 3
+  },
+  {
+   "text": "perder",
+   "src": 2.2,
+   "start": 6.502,
+   "end": 6.705,
+   "seg": 3
+  },
+  {
+   "text": "ni",
+   "src": 2.44,
+   "start": 6.705,
+   "end": 6.841,
+   "seg": 3
+  },
+  {
+   "text": "un",
+   "src": 2.6,
+   "start": 6.841,
+   "end": 6.993,
+   "seg": 3
+  },
+  {
+   "text": "segundo",
+   "src": 2.78,
+   "start": 6.993,
+   "end": 7.383,
+   "seg": 3
+  },
+  {
+   "text": "de",
+   "src": 3.24,
+   "start": 7.383,
+   "end": 7.654,
+   "seg": 3
+  },
+  {
+   "text": "tu",
+   "src": 3.56,
+   "start": 7.654,
+   "end": 7.756,
+   "seg": 3
+  },
+  {
+   "text": "día",
+   "src": 3.68,
+   "start": 7.756,
+   "end": 8.027,
+   "seg": 3
+  },
+  {
+   "text": "Por",
+   "src": 0.0,
+   "start": 8.033,
+   "end": 8.186,
+   "seg": 4
+  },
+  {
+   "text": "eso,",
+   "src": 0.28,
+   "start": 8.186,
+   "end": 8.389,
+   "seg": 4
+  },
+  {
+   "text": "con",
+   "src": 0.7,
+   "start": 8.542,
+   "end": 8.61,
+   "seg": 4
+  },
+  {
+   "text": "una",
+   "src": 0.7,
+   "start": 8.542,
+   "end": 8.677,
+   "seg": 4
+  },
+  {
+   "text": "automática",
+   "src": 0.86,
+   "start": 8.677,
+   "end": 9.016,
+   "seg": 4
+  },
+  {
+   "text": "tocás",
+   "src": 1.26,
+   "start": 9.016,
+   "end": 9.355,
+   "seg": 4
+  },
+  {
+   "text": "un",
+   "src": 1.66,
+   "start": 9.355,
+   "end": 9.576,
+   "seg": 4
+  },
+  {
+   "text": "solo",
+   "src": 1.92,
+   "start": 9.576,
+   "end": 9.694,
+   "seg": 4
+  },
+  {
+   "text": "botón",
+   "src": 2.06,
+   "start": 9.694,
+   "end": 9.982,
+   "seg": 4
+  },
+  {
+   "text": "y",
+   "src": 2.66,
+   "start": 9.967,
+   "end": 10.131,
+   "seg": 5
+  },
+  {
+   "text": "te",
+   "src": 2.96,
+   "start": 10.131,
+   "end": 10.232,
+   "seg": 5
+  },
+  {
+   "text": "hace",
+   "src": 3.08,
+   "start": 10.232,
+   "end": 10.368,
+   "seg": 5
+  },
+  {
+   "text": "todo",
+   "src": 3.24,
+   "start": 10.368,
+   "end": 10.486,
+   "seg": 5
+  },
+  {
+   "text": "el",
+   "src": 3.38,
+   "start": 10.486,
+   "end": 10.622,
+   "seg": 5
+  },
+  {
+   "text": "trabajo",
+   "src": 3.54,
+   "start": 10.622,
+   "end": 10.741,
+   "seg": 5
+  },
+  {
+   "text": "por",
+   "src": 3.68,
+   "start": 10.741,
+   "end": 10.944,
+   "seg": 5
+  },
+  {
+   "text": "vos.",
+   "src": 3.92,
+   "start": 10.944,
+   "end": 11.068,
+   "seg": 5
+  },
+  {
+   "text": "Y",
+   "src": 4.34,
+   "start": 11.157,
+   "end": 11.225,
+   "seg": 6
+  },
+  {
+   "text": "lo",
+   "src": 4.4,
+   "start": 11.208,
+   "end": 11.276,
+   "seg": 6
+  },
+  {
+   "text": "mejor",
+   "src": 4.46,
+   "start": 11.259,
+   "end": 11.445,
+   "seg": 6
+  },
+  {
+   "text": "de",
+   "src": 4.68,
+   "start": 11.445,
+   "end": 11.564,
+   "seg": 6
+  },
+  {
+   "text": "todo",
+   "src": 4.82,
+   "start": 11.564,
+   "end": 11.745,
+   "seg": 6
+  },
+  {
+   "text": "es",
+   "src": 5.14,
+   "start": 11.733,
+   "end": 11.903,
+   "seg": 7
+  },
+  {
+   "text": "que",
+   "src": 5.5,
+   "start": 11.903,
+   "end": 11.971,
+   "seg": 7
+  },
+  {
+   "text": "además",
+   "src": 5.58,
+   "start": 11.971,
+   "end": 12.089,
+   "seg": 7
+  },
+  {
+   "text": "se",
+   "src": 5.72,
+   "start": 12.089,
+   "end": 12.225,
+   "seg": 7
+  },
+  {
+   "text": "limpia",
+   "src": 5.88,
+   "start": 12.225,
+   "end": 12.377,
+   "seg": 7
+  },
+  {
+   "text": "sola.",
+   "src": 6.06,
+   "start": 12.377,
+   "end": 12.547,
+   "seg": 7
+  },
+  {
+   "text": "Así",
+   "src": 0.0,
+   "start": 12.6,
+   "end": 12.82,
+   "seg": 8
+  },
+  {
+   "text": "que",
+   "src": 0.26,
+   "start": 12.82,
+   "end": 13.007,
+   "seg": 8
+  },
+  {
+   "text": "si",
+   "src": 0.48,
+   "start": 13.007,
+   "end": 13.142,
+   "seg": 8
+  },
+  {
+   "text": "valorás",
+   "src": 0.64,
+   "start": 13.142,
+   "end": 13.447,
+   "seg": 8
+  },
+  {
+   "text": "tu",
+   "src": 1.0,
+   "start": 13.447,
+   "end": 13.532,
+   "seg": 8
+  },
+  {
+   "text": "tiempo",
+   "src": 1.1,
+   "start": 13.532,
+   "end": 13.702,
+   "seg": 8
+  },
+  {
+   "text": "y",
+   "src": 1.3,
+   "start": 13.702,
+   "end": 13.803,
+   "seg": 8
+  },
+  {
+   "text": "tu",
+   "src": 1.42,
+   "start": 13.803,
+   "end": 13.922,
+   "seg": 8
+  },
+  {
+   "text": "paladar,",
+   "src": 1.56,
+   "start": 13.922,
+   "end": 14.295,
+   "seg": 8
+  },
+  {
+   "text": "hacé",
+   "src": 2.4,
+   "start": 14.469,
+   "end": 14.537,
+   "seg": 9
+  },
+  {
+   "text": "el",
+   "src": 2.48,
+   "start": 14.537,
+   "end": 14.639,
+   "seg": 9
+  },
+  {
+   "text": "cambio",
+   "src": 2.6,
+   "start": 14.639,
+   "end": 14.758,
+   "seg": 9
+  },
+  {
+   "text": "ya.",
+   "src": 2.74,
+   "start": 14.758,
+   "end": 14.927,
+   "seg": 9
+  }
+ ]
+}

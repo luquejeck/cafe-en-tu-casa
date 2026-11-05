@@ -1,0 +1,28 @@
+{
+ "look": "bold",
+ "cards": [
+  {
+   "from": "0",
+   "to": "2.633",
+   "small": "Tu cápsula:",
+   "a": "Café",
+   "b": "viejo.",
+   "y": 282,
+   "instant": true
+  },
+  {
+   "from": "4.717",
+   "to": "6.117",
+   "y": 1250,
+   "small": "",
+   "a": "Chau,",
+   "b": "cápsulas."
+  },
+  {
+   "from": "6.167",
+   "y": 1270,
+   "a": "¿Cápsula o",
+   "b": "grano?"
+  }
+ ]
+}

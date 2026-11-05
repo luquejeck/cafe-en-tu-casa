@@ -1,0 +1,221 @@
+{
+ "duration": 7.7,
+ "segments": [
+  {
+   "i": 0,
+   "source": "s103",
+   "src_start": 4.5,
+   "src_end": 6.8,
+   "out_start": 0.0,
+   "out_dur": 1.933,
+   "speed": 1.18,
+   "beat": "gancho: estamos pagando por café viejo"
+  },
+  {
+   "i": 1,
+   "source": "s103",
+   "src_start": 7.033,
+   "src_end": 7.867,
+   "out_start": 1.933,
+   "out_dur": 0.7,
+   "speed": 1.18,
+   "beat": "gancho: pote de plástico"
+  },
+  {
+   "i": 2,
+   "source": "s60",
+   "src_start": 0.1,
+   "src_end": 2.4,
+   "out_start": 2.633,
+   "out_dur": 1.933,
+   "speed": 1.18,
+   "beat": "solución: un solo botón"
+  },
+  {
+   "i": 3,
+   "source": "eb_gag",
+   "src_start": 3.467,
+   "src_end": 3.867,
+   "out_start": 4.567,
+   "out_dur": 0.4,
+   "speed": 1.0,
+   "beat": "remate: arranca el tiro"
+  },
+  {
+   "i": 4,
+   "source": "eb_slow",
+   "src_start": 3.867,
+   "src_end": 4.867,
+   "out_start": 4.967,
+   "out_dur": 2.0,
+   "speed": 0.5,
+   "beat": "remate: cámara lenta del tiro"
+  },
+  {
+   "i": 5,
+   "source": "eb_hold",
+   "src_start": 4.867,
+   "src_end": 5.6,
+   "out_start": 6.967,
+   "out_dur": 0.733,
+   "speed": 1.0,
+   "beat": "remate: sonrisa + pregunta"
+  }
+ ],
+ "words": [
+  {
+   "text": "Estamos",
+   "src": 4.52,
+   "start": 0.017,
+   "end": 0.203,
+   "seg": 0
+  },
+  {
+   "text": "pagando",
+   "src": 4.74,
+   "start": 0.203,
+   "end": 0.525,
+   "seg": 0
+  },
+  {
+   "text": "por",
+   "src": 5.12,
+   "start": 0.525,
+   "end": 0.729,
+   "seg": 0
+  },
+  {
+   "text": "café",
+   "src": 5.36,
+   "start": 0.729,
+   "end": 0.915,
+   "seg": 0
+  },
+  {
+   "text": "viejo",
+   "src": 5.58,
+   "start": 0.915,
+   "end": 1.22,
+   "seg": 0
+  },
+  {
+   "text": "y",
+   "src": 5.94,
+   "start": 1.22,
+   "end": 1.373,
+   "seg": 0
+  },
+  {
+   "text": "encima",
+   "src": 6.12,
+   "start": 1.373,
+   "end": 1.508,
+   "seg": 0
+  },
+  {
+   "text": "guardado",
+   "src": 6.28,
+   "start": 1.508,
+   "end": 1.814,
+   "seg": 0
+  },
+  {
+   "text": "en",
+   "src": 6.64,
+   "start": 1.814,
+   "end": 1.949,
+   "seg": 0
+  },
+  {
+   "text": "un",
+   "src": 7.02,
+   "start": 1.933,
+   "end": 2.041,
+   "seg": 1
+  },
+  {
+   "text": "pote",
+   "src": 7.16,
+   "start": 2.041,
+   "end": 2.193,
+   "seg": 1
+  },
+  {
+   "text": "de",
+   "src": 7.34,
+   "start": 2.193,
+   "end": 2.363,
+   "seg": 1
+  },
+  {
+   "text": "plástico.",
+   "src": 7.54,
+   "start": 2.363,
+   "end": 2.583,
+   "seg": 1
+  },
+  {
+   "text": "Por",
+   "src": 0.0,
+   "start": 2.633,
+   "end": 2.786,
+   "seg": 2
+  },
+  {
+   "text": "eso,",
+   "src": 0.28,
+   "start": 2.786,
+   "end": 2.989,
+   "seg": 2
+  },
+  {
+   "text": "con",
+   "src": 0.7,
+   "start": 3.142,
+   "end": 3.21,
+   "seg": 2
+  },
+  {
+   "text": "una",
+   "src": 0.7,
+   "start": 3.142,
+   "end": 3.277,
+   "seg": 2
+  },
+  {
+   "text": "automática",
+   "src": 0.86,
+   "start": 3.277,
+   "end": 3.616,
+   "seg": 2
+  },
+  {
+   "text": "tocás",
+   "src": 1.26,
+   "start": 3.616,
+   "end": 3.955,
+   "seg": 2
+  },
+  {
+   "text": "un",
+   "src": 1.66,
+   "start": 3.955,
+   "end": 4.176,
+   "seg": 2
+  },
+  {
+   "text": "solo",
+   "src": 1.92,
+   "start": 4.176,
+   "end": 4.294,
+   "seg": 2
+  },
+  {
+   "text": "botón",
+   "src": 2.06,
+   "start": 4.294,
+   "end": 4.582,
+   "seg": 2
+  }
+ ]
+}

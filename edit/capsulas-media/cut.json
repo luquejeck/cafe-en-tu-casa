@@ -1,0 +1,117 @@
+{
+ "fps": 30,
+ "speed": 1.18,
+ "sources": {
+  "s103": {
+   "file": "edit/capsulas/src/103d7c21.mp4",
+   "transcript": "edit/capsulas-media/transcripts/103d7c21.json"
+  },
+  "s60": {
+   "file": "edit/capsulas/src/60d896c4.mp4",
+   "transcript": "edit/capsulas-media/transcripts/60d896c4.json"
+  },
+  "eb_gag": {
+   "file": "edit/capsulas/src/eb5845be.mp4",
+   "transcript": "edit/capsulas-media/transcripts/eb5845be.json",
+   "speed": 1.0
+  },
+  "eb_slow": {
+   "file": "edit/capsulas/src/eb5845be.mp4",
+   "transcript": "edit/capsulas-media/transcripts/eb5845be.json",
+   "speed": 0.5
+  },
+  "eb_hold": {
+   "file": "edit/capsulas/src/eb5845be.mp4",
+   "transcript": "edit/capsulas-media/transcripts/eb5845be.json",
+   "speed": 1.0
+  },
+  "d4": {
+   "file": "edit/capsulas/src/d43939a5.mp4",
+   "transcript": "edit/capsulas-media/transcripts/d43939a5.json"
+  },
+  "s57": {
+   "file": "edit/capsulas/src/57ee6e8d.mp4",
+   "transcript": "edit/capsulas-media/transcripts/57ee6e8d.json"
+  }
+ },
+ "ranges": [
+  {
+   "source": "s103",
+   "start": 4.5,
+   "end": 6.8,
+   "beat": "gancho: estamos pagando por café viejo"
+  },
+  {
+   "source": "s103",
+   "start": 7.033,
+   "end": 7.867,
+   "beat": "gancho: pote de plástico"
+  },
+  {
+   "source": "s60",
+   "start": 0.1,
+   "end": 2.4,
+   "beat": "solución: un solo botón"
+  },
+  {
+   "source": "s60",
+   "start": 2.767,
+   "end": 4.067,
+   "beat": "solución: todo el trabajo por vos"
+  },
+  {
+   "source": "s60",
+   "start": 4.233,
+   "end": 5.033,
+   "beat": "solución: y lo mejor de todo"
+  },
+  {
+   "source": "s60",
+   "start": 5.3,
+   "end": 6.333,
+   "beat": "solución: se limpia sola"
+  },
+  {
+   "source": "d4",
+   "start": 0.0,
+   "end": 2.0,
+   "beat": "cierre: si valorás tu tiempo"
+  },
+  {
+   "source": "d4",
+   "start": 2.2,
+   "end": 3.433,
+   "beat": "cierre: hacé el cambio ya"
+  },
+  {
+   "source": "eb_gag",
+   "start": 3.48,
+   "end": 3.85,
+   "beat": "remate: arranca el tiro"
+  },
+  {
+   "source": "eb_slow",
+   "start": 3.85,
+   "end": 4.85,
+   "beat": "remate: cámara lenta del tiro"
+  },
+  {
+   "source": "eb_hold",
+   "start": 4.85,
+   "end": 5.6,
+   "beat": "remate: sonrisa + pregunta"
+  }
+ ],
+ "fix": {
+  "estamos": "Estamos",
+  "tocas": "tocás",
+  "haz": "hacé",
+  "valoras": "valorás",
+  "el": "el"
+ },
+ "look": {
+  "correct": "colorchannelmixer=rr=0.95:bb=1.06",
+  "grade": "eq=contrast=1.05:saturation=1.04"
+ },
+ "fix_at": []
+}

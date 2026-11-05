@@ -1,0 +1,113 @@
+{
+ "language_code": "es",
+ "text": "verdadero lujo es no perder ni un segundo en tomar un café recién molido.",
+ "words": [
+  {
+   "text": "verdadero",
+   "start": 0.0,
+   "end": 0.5,
+   "type": "word",
+   "p": 0.869
+  },
+  {
+   "text": "lujo",
+   "start": 0.5,
+   "end": 0.94,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "es",
+   "start": 0.94,
+   "end": 1.04,
+   "type": "word",
+   "p": 0.926
+  },
+  {
+   "text": "no",
+   "start": 1.04,
+   "end": 1.18,
+   "type": "word",
+   "p": 0.996
+  },
+  {
+   "text": "perder",
+   "start": 1.18,
+   "end": 1.54,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "ni",
+   "start": 1.54,
+   "end": 1.76,
+   "type": "word",
+   "p": 0.882
+  },
+  {
+   "text": "un",
+   "start": 1.76,
+   "end": 1.94,
+   "type": "word",
+   "p": 0.992
+  },
+  {
+   "text": "segundo",
+   "start": 1.94,
+   "end": 2.32,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "en",
+   "start": 2.32,
+   "end": 2.68,
+   "type": "word",
+   "p": 0.987
+  },
+  {
+   "text": "tomar",
+   "start": 2.68,
+   "end": 2.86,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "un",
+   "start": 2.86,
+   "end": 3.04,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "café",
+   "start": 3.04,
+   "end": 3.26,
+   "type": "word",
+   "p": 0.985
+  },
+  {
+   "text": "recién",
+   "start": 3.26,
+   "end": 3.6,
+   "type": "word",
+   "p": 0.997
+  },
+  {
+   "text": "molido.",
+   "start": 3.6,
+   "end": 4.0,
+   "type": "word",
+   "p": 0.999
+  }
+ ],
+ "source": "38a2542b.mp4",
+ "source_identity": {
+  "path": "/home/user/cafe-en-tu-casa/edit/capsulas/src/38a2542b.mp4",
+  "size": 6097965,
+  "mtime_ns": 1793825989984672530
+ },
+ "model": "faster-whisper medium int8",
+ "timeline": "video",
+ "audio_offset": 0.0
+}

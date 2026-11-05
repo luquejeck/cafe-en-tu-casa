@@ -1,0 +1,34 @@
+{
+ "look": "editorial",
+ "cards": [
+  {
+   "from": "0",
+   "to": "2.767",
+   "small": "Lo que nadie te dice",
+   "a": "Café de cápsula,",
+   "b": "molido hace meses.",
+   "y": 262,
+   "instant": true
+  },
+  {
+   "from": "2.767",
+   "to": "5.4",
+   "a": "Pagás premium.",
+   "b": "Tomás café viejo.",
+   "y": 300
+  },
+  {
+   "from": "15.483",
+   "to": "16.883",
+   "y": 1200,
+   "a": "Chau,",
+   "b": "cápsulas."
+  },
+  {
+   "from": "16.933",
+   "y": 1220,
+   "a": "¿Cápsula",
+   "b": "o grano?"
+  }
+ ]
+}

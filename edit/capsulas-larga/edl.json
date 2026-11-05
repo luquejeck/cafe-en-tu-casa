@@ -1,0 +1,117 @@
+{
+ "version": 1,
+ "sources": {
+  "s103": "/home/user/cafe-en-tu-casa/edit/capsulas/src/103d7c21.mp4",
+  "s60": "/home/user/cafe-en-tu-casa/edit/capsulas/src/60d896c4.mp4",
+  "eb_gag": "/home/user/cafe-en-tu-casa/edit/capsulas/src/eb5845be.mp4",
+  "eb_slow": "/home/user/cafe-en-tu-casa/edit/capsulas/src/eb5845be.mp4",
+  "eb_hold": "/home/user/cafe-en-tu-casa/edit/capsulas/src/eb5845be.mp4",
+  "d4": "/home/user/cafe-en-tu-casa/edit/capsulas/src/d43939a5.mp4",
+  "s57": "/home/user/cafe-en-tu-casa/edit/capsulas/src/57ee6e8d.mp4"
+ },
+ "speed": 1.18,
+ "speeds": {
+  "s103": 1.18,
+  "s60": 1.18,
+  "eb_gag": 1.0,
+  "eb_slow": 0.5,
+  "eb_hold": 1.0,
+  "d4": 1.18,
+  "s57": 1.18
+ },
+ "grade": "colorchannelmixer=rr=0.95:bb=1.06, eq=contrast=1.05:saturation=1.04",
+ "ranges": [
+  {
+   "source": "s103",
+   "start": 0.033,
+   "end": 3.3,
+   "speed": 1.18,
+   "beat": "gancho: nos convencieron"
+  },
+  {
+   "source": "s103",
+   "start": 4.5,
+   "end": 6.8,
+   "speed": 1.18,
+   "beat": "problema: estamos pagando por café viejo"
+  },
+  {
+   "source": "s103",
+   "start": 7.033,
+   "end": 7.867,
+   "speed": 1.18,
+   "beat": "problema: pote de plástico"
+  },
+  {
+   "source": "s57",
+   "start": 0.9,
+   "end": 4.0,
+   "speed": 1.18,
+   "beat": "giro: el verdadero lujo"
+  },
+  {
+   "source": "s60",
+   "start": 0.1,
+   "end": 2.4,
+   "speed": 1.18,
+   "beat": "solución: un solo botón"
+  },
+  {
+   "source": "s60",
+   "start": 2.767,
+   "end": 4.067,
+   "speed": 1.18,
+   "beat": "solución: todo el trabajo por vos"
+  },
+  {
+   "source": "s60",
+   "start": 4.233,
+   "end": 5.033,
+   "speed": 1.18,
+   "beat": "solución: y lo mejor de todo"
+  },
+  {
+   "source": "s60",
+   "start": 5.3,
+   "end": 6.333,
+   "speed": 1.18,
+   "beat": "solución: se limpia sola"
+  },
+  {
+   "source": "d4",
+   "start": 0.0,
+   "end": 2.0,
+   "speed": 1.18,
+   "beat": "cierre: si valorás tu tiempo"
+  },
+  {
+   "source": "d4",
+   "start": 2.2,
+   "end": 3.433,
+   "speed": 1.18,
+   "beat": "cierre: hacé el cambio ya"
+  },
+  {
+   "source": "eb_gag",
+   "start": 3.467,
+   "end": 3.867,
+   "speed": 1.0,
+   "beat": "remate: arranca el tiro"
+  },
+  {
+   "source": "eb_slow",
+   "start": 3.867,
+   "end": 4.867,
+   "speed": 0.5,
+   "beat": "remate: cámara lenta del tiro"
+  },
+  {
+   "source": "eb_hold",
+   "start": 4.867,
+   "end": 5.6,
+   "speed": 1.0,
+   "beat": "remate: sonrisa + pregunta"
+  }
+ ],
+ "total_duration_s": 18.467
+}

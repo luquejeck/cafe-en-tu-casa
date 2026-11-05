@@ -1,0 +1,23 @@
+{
+ "below_voice_db": 16,
+ "sounds": [
+  {
+   "file": "edit/capsulas-media/sfx/grave.wav",
+   "at": 0.0,
+   "start": 0.0,
+   "what": "gancho en el cuadro 0"
+  },
+  {
+   "file": "edit/capsulas-media/sfx/whoosh.wav",
+   "at": 9.863,
+   "start": 0.0,
+   "what": "vuela el bowl"
+  },
+  {
+   "file": "edit/capsulas-media/sfx/tick.wav",
+   "at": 11.552999999999999,
+   "start": 0.0,
+   "what": "entra la pregunta"
+  }
+ ]
+}

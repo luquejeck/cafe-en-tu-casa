@@ -1,0 +1,218 @@
+{
+ "language_code": "es",
+ "text": "la verdad es que el verdadero lujo es no perder ni un segundo de tu día por tomar un café bueno de calidad y únicamente tocando un solo botón",
+ "words": [
+  {
+   "text": "la",
+   "start": 0.0,
+   "end": 0.54,
+   "type": "word",
+   "p": 0.514
+  },
+  {
+   "text": "verdad",
+   "start": 0.54,
+   "end": 0.7,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "es",
+   "start": 0.7,
+   "end": 0.86,
+   "type": "word",
+   "p": 0.913
+  },
+  {
+   "text": "que",
+   "start": 0.86,
+   "end": 0.92,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "el",
+   "start": 0.92,
+   "end": 1.02,
+   "type": "word",
+   "p": 0.93
+  },
+  {
+   "text": "verdadero",
+   "start": 1.02,
+   "end": 1.36,
+   "type": "word",
+   "p": 1.0
+  },
+  {
+   "text": "lujo",
+   "start": 1.36,
+   "end": 1.7,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "es",
+   "start": 1.7,
+   "end": 2.04,
+   "type": "word",
+   "p": 0.983
+  },
+  {
+   "text": "no",
+   "start": 2.04,
+   "end": 2.2,
+   "type": "word",
+   "p": 0.974
+  },
+  {
+   "text": "perder",
+   "start": 2.2,
+   "end": 2.44,
+   "type": "word",
+   "p": 0.966
+  },
+  {
+   "text": "ni",
+   "start": 2.44,
+   "end": 2.6,
+   "type": "word",
+   "p": 0.951
+  },
+  {
+   "text": "un",
+   "start": 2.6,
+   "end": 2.78,
+   "type": "word",
+   "p": 0.992
+  },
+  {
+   "text": "segundo",
+   "start": 2.78,
+   "end": 3.24,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "de",
+   "start": 3.24,
+   "end": 3.56,
+   "type": "word",
+   "p": 0.995
+  },
+  {
+   "text": "tu",
+   "start": 3.56,
+   "end": 3.68,
+   "type": "word",
+   "p": 0.992
+  },
+  {
+   "text": "día",
+   "start": 3.68,
+   "end": 4.04,
+   "type": "word",
+   "p": 0.978
+  },
+  {
+   "text": "por",
+   "start": 4.04,
+   "end": 4.86,
+   "type": "word",
+   "p": 0.918
+  },
+  {
+   "text": "tomar",
+   "start": 4.86,
+   "end": 5.02,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "un",
+   "start": 5.02,
+   "end": 5.2,
+   "type": "word",
+   "p": 0.998
+  },
+  {
+   "text": "café",
+   "start": 5.2,
+   "end": 5.72,
+   "type": "word",
+   "p": 0.984
+  },
+  {
+   "text": "bueno",
+   "start": 5.72,
+   "end": 6.86,
+   "type": "word",
+   "p": 0.91
+  },
+  {
+   "text": "de",
+   "start": 6.86,
+   "end": 7.3,
+   "type": "word",
+   "p": 0.597
+  },
+  {
+   "text": "calidad",
+   "start": 7.3,
+   "end": 7.96,
+   "type": "word",
+   "p": 0.999
+  },
+  {
+   "text": "y",
+   "start": 7.96,
+   "end": 8.56,
+   "type": "word",
+   "p": 0.968
+  },
+  {
+   "text": "únicamente",
+   "start": 8.56,
+   "end": 9.56,
+   "type": "word",
+   "p": 0.993
+  },
+  {
+   "text": "tocando",
+   "start": 9.56,
+   "end": 10.12,
+   "type": "word",
+   "p": 0.992
+  },
+  {
+   "text": "un",
+   "start": 10.12,
+   "end": 10.3,
+   "type": "word",
+   "p": 0.702
+  },
+  {
+   "text": "solo",
+   "start": 10.3,
+   "end": 10.42,
+   "type": "word",
+   "p": 0.953
+  },
+  {
+   "text": "botón",
+   "start": 10.42,
+   "end": 10.82,
+   "type": "word",
+   "p": 0.987
+  }
+ ],
+ "source": "57ee6e8d.mp4",
+ "source_identity": {
+  "path": "/home/user/cafe-en-tu-casa/edit/capsulas/src/57ee6e8d.mp4",
+  "size": 17173246,
+  "mtime_ns": 1793825990009821785
+ },
+ "model": "faster-whisper medium int8",
+ "timeline": "video",
+ "audio_offset": 0.0
+}

@@ -1,0 +1,14 @@
+{
+ "brand": "cafe-en-tu-casa",
+ "style": "marker",
+ "subtitles": "plate",
+ "use_broll": false,
+ "use_project_footage": true,
+ "use_local_footage": false,
+ "use_generated_footage": false,
+ "use_scenes": false,
+ "use_memes": false,
+ "intensity": "active",
+ "subtitles_shade": 0.6,
+ "scene_tone": "feature"
+}

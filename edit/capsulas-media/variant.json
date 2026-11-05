@@ -1,0 +1,27 @@
+{
+ "look": "marker",
+ "cards": [
+  {
+   "from": "0",
+   "to": "2.633",
+   "small": "Café de cápsula:",
+   "a": "",
+   "b": "molido hace meses.",
+   "y": 282,
+   "instant": true
+  },
+  {
+   "from": "10.083",
+   "to": "11.483",
+   "y": 1250,
+   "a": "",
+   "b": "Chau, cápsulas."
+  },
+  {
+   "from": "11.533",
+   "y": 1230,
+   "a": "¿Cápsula",
+   "b": "o grano?"
+  }
+ ]
+}
