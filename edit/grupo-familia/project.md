@@ -56,3 +56,10 @@ Mecanismo viral: identificación («mi familia es así») + envío («mandáselo
 - Las voces de ElevenLabs no convencieron (no sonaban argentinas ni iban con el ritmo): se sacaron. Queda la música propia y los efectos.
 - 17,4 s con ritmo más ágil: «¿Qué?» 2,3 s · foto a pantalla completa 5,9–8,6 s · medialunas 13,2 s · reenviar 14,3 s · tarjeta final 15,2 s.
 - `sonido.py` sigue aceptando voces (`"voz": [archivo, segundo]` en cada mensaje) por si después se graban voces reales.
+
+## Versión 8 (pedido: mejores sonidos)
+- Efectos reales de la librería de Remotion (remotion.media, uso libre sin atribución), en `sfx/`: whoosh, mouse-click, switch, ding. Solo genéricos (nada de memes ni marcas).
+- Recibido = «gota» suave sintetizada; enviado = whoosh corto; tipeo = clics bajos con tono variable; reacciones = switch muy bajo; alguien se une = ding grave.
+- «¿Qué?»: whoosh al revés que sube y desemboca en un golpe grave de cine (sub con caída de tono), con silencio musical.
+- Foto a pantalla completa: whoosh lento al abrir y corto al volver; tic en cada nota. Cierre: whoosh + clic + switch; tarjeta final con ding grave.
+- Música más rica: piano eléctrico + pad + bajo + platillo suave con swing, todo con reverb. Efectos con reverb corta.
