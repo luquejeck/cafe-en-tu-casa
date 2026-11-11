@@ -39,3 +39,9 @@ Mecanismo viral: identificación («mi familia es así») + envío («mandáselo
 - Música: piano eléctrico cálido, 76 bpm (Cmaj9 – Am9 – Fmaj7 – G6).
 - Ganchos para Reels de prueba (`ganchos` en chat.json): **A** «Esperá a ver qué contesta mamá 👀» · **D** «Mi viejo en el grupo familiar». Medir retención a los 3 s y quedarse con el mejor.
   Render: `npx remotion render ReelGrupoFamilia out/gf-a.mp4 --props=out/props-a.json` (props = `{"gancho": "..."}`).
+
+## Versión 5 (pedido: más motion graphics, mismo estilo Apple)
+- La foto de Papá sale del chat a pantalla completa (4,6–6,45 s): transición de elemento compartido desde la burbuja, acercamiento lento, y dos notas en vidrio esmerilado con línea fina y punto que señalan la máquina: «Grano recién molido.» (tolva) y «Con un solo botón.» (panel). Vuelve exacto a su burbuja.
+- El «¿Qué?» ahora va sobre el chat desenfocado (vidrio oscuro) en lugar de negro plano.
+- Sonido: aire suave al abrir y cerrar la foto, tic de vidrio en cada nota.
+- Tiempos corridos: Mamá escribe desde 6,55 s, el resto del chat igual de rápido; cierre a 10,95 s.

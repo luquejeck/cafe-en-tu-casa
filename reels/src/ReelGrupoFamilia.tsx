@@ -178,7 +178,7 @@ const QueTakeover: React.FC<{ t: number }> = ({ t }) => {
   const linea = ease(t, t0 + 0.2, 0.4);
   const firma = ease(t, t0 + 0.28, 0.4);
   return (
-    <AbsoluteFill style={{ background: DARK, opacity: entra * (1 - sale), overflow: "hidden" }}>
+    <AbsoluteFill style={{ background: "rgba(16,16,18,.78)", backdropFilter: "blur(36px) saturate(1.2)", opacity: entra * (1 - sale), overflow: "hidden" }}>
       <AbsoluteFill style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", transform: `scale(${push})` }}>
         <div style={{ fontSize: 300, fontWeight: 200, color: LIGHT, letterSpacing: tracking, lineHeight: 1, opacity: ease(t, t0, 0.3), filter: `blur(${(1 - ease(t, t0, 0.35)) * 10}px)` }}>
           ¿Qué?
@@ -186,6 +186,50 @@ const QueTakeover: React.FC<{ t: number }> = ({ t }) => {
         <div style={{ width: 220 * linea, height: 3, background: GREEN, marginTop: 56, borderRadius: 2 }} />
         <div style={{ marginTop: 30, fontSize: 40, fontWeight: 300, color: LIGHT, letterSpacing: 2, opacity: firma * 0.85 }}>Mamá</div>
       </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+// La foto sale del chat a pantalla completa (transición de elemento compartido), aparecen dos notas
+// en vidrio esmerilado con una línea fina que señala la máquina, y la foto vuelve a su burbuja.
+type Nota = { t: number; texto: string; caja: number[]; punto: number[] };
+const FotoHero: React.FC<{ t: number }> = ({ t }) => {
+  const h = chat.hero;
+  if (t < h.t || t >= h.fin) return null;
+  const [rx, ry, rw, rh] = h.rect;
+  const abre = interpolate(t, [h.t, h.t + 0.55], [0, 1], { ...clamp, easing: SLOW });
+  const cierra = interpolate(t, [h.fin - 0.42, h.fin], [0, 1], { ...clamp, easing: SLOW });
+  const k = abre * (1 - cierra);
+  const x = rx * (1 - k), y = ry * (1 - k), w = rw + (1080 - rw) * k, hh = rh + (1920 - rh) * k;
+  const kb = interpolate(t, [h.t, h.fin], [1.0, 1.07], clamp); // acercamiento lento tipo Ken Burns
+  const notasOut = interpolate(t, [h.fin - 0.62, h.fin - 0.42], [1, 0], clamp);
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none" }}>
+      <AbsoluteFill style={{ background: `rgba(16,16,18,${0.5 * k})` }} />
+      <div style={{ position: "absolute", left: x, top: y, width: w, height: hh, borderRadius: 20 * (1 - k), overflow: "hidden", boxShadow: `0 30px 80px rgba(0,0,0,${0.35 * k})` }}>
+        <Img src={latte} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: `${50 - 32 * k}% ${70 - 20 * k}%`, transform: `scale(${kb})`, transformOrigin: "35% 45%" }} />
+        {/* Velo arriba para que se lea el texto */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(16,16,18,.35) 0%, rgba(16,16,18,0) 35%)", opacity: k }} />
+      </div>
+      {(h.notas as Nota[]).map((n, i) => {
+        const a = ease(t, n.t, 0.5) * notasOut;
+        const lineaK = ease(t, n.t - 0.1, 0.55) * notasOut;
+        const [bx, by] = n.caja;
+        const [px, py] = n.punto;
+        const cx = bx + 40, cy = py < by ? by : by + 110; // la línea sale del borde de la caja que mira al punto
+        return (
+          <div key={i}>
+            <svg width="1080" height="1920" style={{ position: "absolute", inset: 0 }}>
+              <line x1={cx} y1={cy} x2={cx + (px - cx) * lineaK} y2={cy + (py - cy) * lineaK} stroke="#fff" strokeWidth="3" strokeOpacity="0.9" />
+              <circle cx={px} cy={py} r={14 * ease(t, n.t + 0.3, 0.4) * notasOut} fill="none" stroke="#fff" strokeWidth="3" />
+              <circle cx={px} cy={py} r={5 * ease(t, n.t + 0.3, 0.4) * notasOut} fill="#fff" />
+            </svg>
+            <div style={{ position: "absolute", left: bx, top: by, opacity: a, transform: `translateY(${(1 - a) * 14}px)`, filter: `blur(${(1 - a) * 6}px)`, background: "rgba(255,255,255,.62)", backdropFilter: "blur(24px) saturate(1.4)", border: "1.5px solid rgba(255,255,255,.7)", borderRadius: 30, padding: "22px 34px", fontSize: 58, fontWeight: 600, letterSpacing: -1, color: DARK, boxShadow: "0 10px 30px rgba(0,0,0,.12)", whiteSpace: "nowrap" }}>
+              {n.texto}
+            </div>
+          </div>
+        );
+      })}
     </AbsoluteFill>
   );
 };
@@ -242,20 +286,17 @@ export const ReelGrupoFamilia: React.FC<GrupoFamiliaProps> = ({ gancho }) => {
   const marta = MSGS.find((m) => m.sistema)!;
   const miembros = t >= marta.t ? chat.miembrosDespues : chat.miembrosAntes;
   const sub = escribiendo ? `${escribiendo.de} está escribiendo…` : miembros;
-  const foto = MSGS.find((m) => m.foto)!;
 
   // Cámara: arranca cerca del primer mensaje (el gancho se lee grande en el cuadro 0) y se abre con calma
   const zoom = interpolate(t, [0, 1.0, 2.4], [1.3, 1.28, 1], { ...clamp, easing: SLOW });
   const lift = (zoom - 1) / 0.3;
-  // Se acerca a la foto despacio y se aleja cuando Mamá empieza a escribir
-  const push = interpolate(t, [foto.t + 0.1, foto.t + 1.4, 5.85, 6.35], [0, 1, 1, 0], { ...clamp, easing: SLOW });
 
   const textoGancho = gancho ?? chat.gancho;
   const ganchoOut = interpolate(t, [0.85, 1.1], [1, 0], { ...clamp, easing: SLOW });
 
   return (
     <AbsoluteFill style={{ background: WALL, fontFamily: FONT, color: TEXT, overflow: "hidden" }}>
-      <AbsoluteFill style={{ transformOrigin: "520px 760px", transform: `scale(${1 + 0.12 * push})` }}>
+      <AbsoluteFill>
         <AbsoluteFill style={{ transformOrigin: "40px 1400px", transform: `translateY(${-300 * lift}px) scale(${zoom})` }}>
           <Wallpaper />
           {/* Mensajes: anclados abajo; cada uno nuevo empuja al resto hacia arriba.
@@ -316,6 +357,7 @@ export const ReelGrupoFamilia: React.FC<GrupoFamiliaProps> = ({ gancho }) => {
         </div>
       )}
 
+      <FotoHero t={t} />
       <QueTakeover t={t} />
       <Reenviar t={t} />
     </AbsoluteFill>

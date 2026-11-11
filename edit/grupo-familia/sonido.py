@@ -74,6 +74,14 @@ poner(sfx, tono(70, 38, 1.2, d=0.45), que, 0.8)
 n = int(SR * 0.6)
 aire = np.convolve(rng.standard_normal(n), np.ones(40) / 40, "same") * np.sin(np.linspace(0, np.pi, n)) ** 2
 poner(sfx, aire, que - 0.12, 0.35)
+# Foto a pantalla completa: un aire que se abre al expandirse y otro más corto al volver
+h = chat["hero"]
+for at, dur, g in [(h["t"] - 0.05, 0.8, 0.4), (h["fin"] - 0.45, 0.5, 0.25)]:
+    n = int(SR * dur)
+    a = np.convolve(rng.standard_normal(n), np.ones(50) / 50, "same") * np.sin(np.linspace(0, np.pi, n)) ** 2
+    poner(sfx, a, at, g)
+for nota in h["notas"]:  # tic de vidrio en cada nota
+    poner(sfx, tono(2093, 2093, 0.3, d=0.06) + 0.4 * tono(3136, 3136, 0.3, d=0.04), nota["t"], 0.12)
 # Cierre: la hoja sube con un aire suave
 n = int(SR * 0.6)
 w = np.convolve(rng.standard_normal(n), np.ones(40) / 40, "same") * np.sin(np.linspace(0, np.pi, n)) ** 2
