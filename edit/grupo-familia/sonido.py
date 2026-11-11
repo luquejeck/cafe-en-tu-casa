@@ -1,10 +1,11 @@
 """Sonido del reel "El grupo de la familia": todo sintetizado acá, sin derechos de terceros.
 Lee los tiempos de chat.json y escribe:
-  sfx.wav     -> solo efectos (pops de mensajes, tipeo, golpe en el QUÉ, whoosh del cierre). Para sumar música en Edits.
-  mezcla.wav  -> efectos + base musical propia (piano eléctrico cálido, 76 bpm), bien abajo.
+  sfx.wav     -> voces + efectos, sin música. Para sumar un audio en Edits.
+  mezcla.wav  -> voces + efectos + base musical propia (piano eléctrico cálido, 76 bpm), que baja cuando alguien habla.
+Las voces (ElevenLabs, acento argentino) están en voces/; si falta alguna, se avisa y se sigue sin ella.
 Uso: python3 -I edit/grupo-familia/sonido.py
 """
-import json, os, wave
+import json, os, subprocess, wave
 import numpy as np
 
 SR = 48000
@@ -56,6 +57,31 @@ for m in chat["mensajes"]:
         poner(sfx, tono(880, 760, 0.09, d=0.035), t, 0.45)
         poner(sfx, tono(1175, 1100, 0.12, d=0.045), t + 0.045, 0.35)
 
+# Voces: cada mensaje con "voz": [archivo, segundo]. Se recorta el silencio del principio.
+def leer_voz(ruta):
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", ruta, "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True, check=True).stdout
+    x = np.frombuffer(raw, dtype=np.float32).astype(np.float64)
+    umbral = 10 ** (-40 / 20)
+    i = int(np.argmax(np.abs(x) > umbral))
+    x = x[max(0, i - int(0.02 * SR)):]
+    return x / (np.abs(x).max() + 1e-9) * 10 ** (-4 / 20)
+
+voces = np.zeros(N)
+faltan = []
+for m in chat["mensajes"]:
+    if "voz" not in m:
+        continue
+    archivo, at = m["voz"]
+    ruta = os.path.join(AQUI, "voces", archivo)
+    if not os.path.exists(ruta):
+        faltan.append(archivo)
+        continue
+    poner(voces, leer_voz(ruta), at)
+if faltan:
+    print("Faltan voces:", ", ".join(faltan))
+# Con voces los pops van más bajos para no competir
+sfx *= 0.55
+
 # Reacciones: un "blup" corto y agudo
 for m in chat["mensajes"]:
     for at, _ in m.get("reac", []):
@@ -82,6 +108,10 @@ for at, dur, g in [(h["t"] - 0.05, 0.8, 0.4), (h["fin"] - 0.45, 0.5, 0.25)]:
     poner(sfx, a, at, g)
 for nota in h["notas"]:  # tic de vidrio en cada nota
     poner(sfx, tono(2093, 2093, 0.3, d=0.06) + 0.4 * tono(3136, 3136, 0.3, d=0.04), nota["t"], 0.12)
+# Tarjeta final: acorde brillante y suave
+fin = chat["final"]["t"]
+for j, nota in enumerate([72, 76, 79, 84]):
+    poner(sfx, tono(440 * 2 ** ((nota - 69) / 12), 440 * 2 ** ((nota - 69) / 12), 1.6, d=0.6, forma="arm"), fin + 0.1 + j * 0.04, 0.12)
 # Cierre: la hoja sube con un aire suave
 n = int(SR * 0.6)
 w = np.convolve(rng.standard_normal(n), np.ones(40) / 40, "same") * np.sin(np.linspace(0, np.pi, n)) ** 2
@@ -129,7 +159,14 @@ def guardar(nombre, x):
         f.writeframes(est.tobytes())
 
 
-sfx = normal(sfx, -3)
-guardar("sfx.wav", sfx)
-guardar("mezcla.wav", normal(sfx + normal(mus, -12), -1.5))
+# Ducking: la música baja ~9 dB mientras alguien habla
+nivel = np.convolve(np.abs(voces), np.ones(int(0.05 * SR)) / int(0.05 * SR), "same")
+habla = np.clip(nivel / 0.02, 0, 1)
+k = int(0.25 * SR)
+habla = np.convolve(habla, np.ones(k) / k, "same")
+duck = 1 - 0.65 * np.clip(habla, 0, 1)
+
+sfx = normal(sfx, -9) + voces
+guardar("sfx.wav", normal(sfx, -1.5))
+guardar("mezcla.wav", normal(sfx + normal(mus, -15) * duck, -1.5))
 print("ok", DUR, "s")

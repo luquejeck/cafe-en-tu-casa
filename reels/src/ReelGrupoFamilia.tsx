@@ -9,6 +9,7 @@ import { AbsoluteFill, Easing, Img, interpolate, useCurrentFrame, useVideoConfig
 import { loadFont } from "@remotion/google-fonts/Inter";
 import chat from "../../edit/grupo-familia/chat.json";
 import latte from "../../assets/img/escenas/feed-magnifica-latte-art.jpg";
+import producto from "../../assets/img/magnifica-s-1.webp";
 
 const { fontFamily } = loadFont("normal", { weights: ["200", "300", "400", "500", "600", "700"], subsets: ["latin"] });
 const FONT = `${fontFamily}, "Noto Color Emoji", sans-serif`;
@@ -234,6 +235,37 @@ const FotoHero: React.FC<{ t: number }> = ({ t }) => {
   );
 };
 
+// Final: tarjeta de producto sobre blanco, al estilo de una presentación de Apple.
+// El título entra línea por línea, la cafetera se asienta con un acercamiento lento.
+const Final: React.FC<{ t: number }> = ({ t }) => {
+  const c = chat.final;
+  if (t < c.t - 0.05) return null;
+  const fondo = ease(t, c.t, 0.5);
+  const lineas = c.titulo.split("\n");
+  const prod = ease(t, c.t + 0.25, 0.9);
+  const zoom = interpolate(t, [c.t, c.t + 2.2], [1.06, 1.0], { ...clamp, easing: SLOW });
+  const pie = ease(t, c.t + 0.75, 0.5);
+  return (
+    <AbsoluteFill style={{ background: `rgba(255,255,255,${fondo})`, backdropFilter: `blur(${30 * fondo}px)` }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 300, textAlign: "center" }}>
+        {lineas.map((l, i) => {
+          const k = ease(t, c.t + 0.15 + i * 0.14, 0.6);
+          return (
+            <div key={i} style={{ fontSize: 84, fontWeight: 600, letterSpacing: -2.5, lineHeight: 1.08, color: DARK, opacity: k, transform: `translateY(${(1 - k) * 24}px)`, filter: `blur(${(1 - k) * 8}px)` }}>{l}</div>
+          );
+        })}
+      </div>
+      <div style={{ position: "absolute", left: 140, right: 140, top: 560, height: 800, display: "flex", alignItems: "center", justifyContent: "center", opacity: prod, transform: `translateY(${(1 - prod) * 30}px) scale(${zoom})` }}>
+        <Img src={producto} style={{ width: 800, height: 800, objectFit: "contain" }} />
+      </div>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 1360, display: "flex", flexDirection: "column", alignItems: "center", gap: 22, opacity: pie, transform: `translateY(${(1 - pie) * 12}px)` }}>
+        <div style={{ fontSize: 44, fontWeight: 500, color: "#6E6E73", letterSpacing: -0.3 }}>{c.producto}</div>
+        <div style={{ background: DARK, color: LIGHT, borderRadius: 40, padding: "16px 34px", fontSize: 36, fontWeight: 500 }}>{c.pie}</div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 // Cierre: la hoja de reenviar sube despacio y se elige «Familia»
 const Reenviar: React.FC<{ t: number }> = ({ t }) => {
   const c = chat.cierre;
@@ -241,15 +273,9 @@ const Reenviar: React.FC<{ t: number }> = ({ t }) => {
   const k = interpolate(t, [c.t, c.t + 0.6], [0, 1], { ...clamp, easing: SOFT });
   const dim = interpolate(t, [c.t, c.t + 0.5], [0, 0.42], clamp);
   const sel = ease(t, c.tap, 0.3);
-  const marca = ease(t, c.tap + 0.2, 0.5);
   return (
     <AbsoluteFill>
       <AbsoluteFill style={{ background: `rgba(16,16,18,${dim})` }} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 560, display: "flex", justifyContent: "center", opacity: marca, transform: `translateY(${(1 - marca) * 16}px)` }}>
-        <div style={{ background: "rgba(16,16,18,.82)", color: LIGHT, borderRadius: 40, padding: "16px 36px", fontSize: 36, fontWeight: 400, letterSpacing: 0.5 }}>
-          Café en tu Casa <span style={{ color: GREEN, fontWeight: 500 }}>@cafentucasa</span>
-        </div>
-      </div>
       <div style={{ position: "absolute", left: 0, right: 0, top: 700, bottom: 0, background: IN, borderTopLeftRadius: 48, borderTopRightRadius: 48, transform: `translateY(${(1 - k) * 1250}px)`, padding: "26px 56px 0", boxShadow: "0 -10px 40px rgba(0,0,0,.16)" }}>
         <div style={{ width: 110, height: 8, borderRadius: 4, background: "#D7DCDF", margin: "0 auto 44px" }} />
         <div style={{ fontSize: 56, fontWeight: 600, color: DARK, lineHeight: 1.15, letterSpacing: -0.5, marginBottom: 34 }}>{c.texto}</div>
@@ -288,11 +314,11 @@ export const ReelGrupoFamilia: React.FC<GrupoFamiliaProps> = ({ gancho }) => {
   const sub = escribiendo ? `${escribiendo.de} está escribiendo…` : miembros;
 
   // Cámara: arranca cerca del primer mensaje (el gancho se lee grande en el cuadro 0) y se abre con calma
-  const zoom = interpolate(t, [0, 1.0, 2.4], [1.3, 1.28, 1], { ...clamp, easing: SLOW });
+  const zoom = interpolate(t, [0, 1.5, 2.25], [1.3, 1.27, 1], { ...clamp, easing: SLOW });
   const lift = (zoom - 1) / 0.3;
 
   const textoGancho = gancho ?? chat.gancho;
-  const ganchoOut = interpolate(t, [0.85, 1.1], [1, 0], { ...clamp, easing: SLOW });
+  const ganchoOut = interpolate(t, [1.55, 1.85], [1, 0], { ...clamp, easing: SLOW });
 
   return (
     <AbsoluteFill style={{ background: WALL, fontFamily: FONT, color: TEXT, overflow: "hidden" }}>
@@ -360,6 +386,7 @@ export const ReelGrupoFamilia: React.FC<GrupoFamiliaProps> = ({ gancho }) => {
       <FotoHero t={t} />
       <QueTakeover t={t} />
       <Reenviar t={t} />
+      <Final t={t} />
     </AbsoluteFill>
   );
 };

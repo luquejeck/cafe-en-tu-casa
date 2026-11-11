@@ -45,3 +45,9 @@ Mecanismo viral: identificación («mi familia es así») + envío («mandáselo
 - El «¿Qué?» ahora va sobre el chat desenfocado (vidrio oscuro) en lugar de negro plano.
 - Sonido: aire suave al abrir y cerrar la foto, tic de vidrio en cada nota.
 - Tiempos corridos: Mamá escribe desde 6,55 s, el resto del chat igual de rápido; cierre a 10,95 s.
+
+## Versión 6 (pedido: 15 s o más, CTA o buen cierre, voces)
+- 22,8 s. Remate nuevo de Mamá: «y traé medialunas 🥐». Tía Marta: «¡yo también, querido!».
+- Cierre en dos tiempos: hoja de reenviar («Mandáselo a tu grupo familiar 👀», se elige Familia) y tarjeta final sobre blanco: «Café de cafetería, en tu casa.» + Magnifica S + «Link en la bio · @cafentucasa».
+- Voces ElevenLabs (eleven_v4), acento argentino: Papá = Franco, Mamá = Sol, Sofi = Cande, Vos = Renzo, Tía Marta = Nieve. Archivos en `voces/`; `chat.json` dice en qué segundo entra cada una (`voz`). La música baja ~9 dB cuando alguien habla.
+- Pendientes (el cupo gratuito de ElevenLabs estaba saturado): papa-compre, mama-que, sofi-crisis, mama-capuchino, vos-voy, papa-quieren, mama-medialunas.
