@@ -24,3 +24,9 @@ Mecanismo viral: identificación («mi familia es así») + envío («mandáselo
 
 ## Pendiente
 - Publicar solo con el «sí» de Lucas. Sugerido: como Reel de prueba (Trial Reel), a las 10:00 de un día hábil.
+
+## Versión 3 (pedido: más llamativo, motion graphics)
+- Un solo momento fuerte: el «QUÉ» de Mamá toma la pantalla (1,15–1,8 s): fondo #101012, letras Inter 900 a 400 px que golpean una por una, sacudón y signos «?» verdes y blancos que vuelan.
+- Gestos de chat: reacciones que saltan y cuentan (😱 ×3 en Papá, 😂 en Sofi, 😍❤️ en la foto), la foto se «descarga» (anillo verde + desenfoque que se aclara) mientras la cámara se acerca, golpecito de cámara con cada mensaje, corazones que suben con el «ahora sí me quieren».
+- Cierre: hoja de «reenviar» con el texto «Mandáselo a tu grupo familiar 👀»; se toca «Familia 🏠» (onda + check verde) y aparece la marca.
+- Sonido: blups de reacciones, ráfaga en los signos, destellos en los corazones, toque y check en el cierre.

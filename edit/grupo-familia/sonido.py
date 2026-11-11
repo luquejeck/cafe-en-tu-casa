@@ -56,9 +56,25 @@ for m in chat["mensajes"]:
         poner(sfx, tono(880, 760, 0.09, d=0.035), t, 0.45)
         poner(sfx, tono(1175, 1100, 0.12, d=0.045), t + 0.045, 0.35)
 
+# Reacciones: un "blup" corto y agudo
+for m in chat["mensajes"]:
+    for at, _ in m.get("reac", []):
+        poner(sfx, tono(1400, 1900, 0.07, d=0.025), at, 0.25)
+# Corazones: tres destellos
+for m in chat["mensajes"]:
+    if m.get("corazones"):
+        for j, fr in enumerate([1568, 1976, 2349]):
+            poner(sfx, tono(fr, fr, 0.4, d=0.12), m["t"] + 0.3 + j * 0.08, 0.15)
+# Toque en «Familia» y check
+poner(sfx, tono(300, 180, 0.05, d=0.012), chat["cierre"]["tap"], 0.6)
+poner(sfx, tono(990, 1320, 0.18, d=0.07), chat["cierre"]["tap"] + 0.06, 0.3)
 # Golpe grave en el «QUÉ» de Mamá
 que = chat["mensajes"][1]["t"]
 poner(sfx, tono(120, 45, 0.45, d=0.16), que, 0.9)
+# Ráfaga en los signos del QUÉ
+n = int(SR * 0.4)
+r = np.convolve(rng.standard_normal(n), np.ones(12) / 12, "same") * np.exp(-np.arange(n) / SR / 0.12)
+poner(sfx, r, que + 0.05, 0.6)
 # Whoosh del cierre
 n = int(SR * 0.5)
 w = rng.standard_normal(n)
