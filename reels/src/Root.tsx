@@ -39,7 +39,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="ReelCapsulasVar" component={ReelCapsulasVar} durationInFrames={90} fps={KIT_FPS} width={1080} height={1920}
         defaultProps={capsulasV4Props as any} calculateMetadata={reelKitMetadata as any} />
       {/* Video "El grupo de la familia": chat que se escribe solo, sin filmar (edit/grupo-familia/chat.json) */}
-      <Composition id="ReelGrupoFamilia" component={ReelGrupoFamilia} durationInFrames={Math.round(grupoChat.duracion * 30)} fps={30} width={1080} height={1920} />
+      <Composition id="ReelGrupoFamilia" component={ReelGrupoFamilia} defaultProps={{}} durationInFrames={Math.round(grupoChat.duracion * 30)} fps={30} width={1080} height={1920} />
       {/* Code scenes for B-roll (codescene.py scaffold / render) */}
       {GEN.map((g) => (
         <Composition key={g.id} id={g.id} component={g.component} durationInFrames={g.durationInFrames} fps={30} width={1080} height={1920} />

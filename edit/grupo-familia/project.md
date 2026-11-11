@@ -30,3 +30,12 @@ Mecanismo viral: identificación («mi familia es así») + envío («mandáselo
 - Gestos de chat: reacciones que saltan y cuentan (😱 ×3 en Papá, 😂 en Sofi, 😍❤️ en la foto), la foto se «descarga» (anillo verde + desenfoque que se aclara) mientras la cámara se acerca, golpecito de cámara con cada mensaje, corazones que suben con el «ahora sí me quieren».
 - Cierre: hoja de «reenviar» con el texto «Mandáselo a tu grupo familiar 👀»; se toca «Familia 🏠» (onda + check verde) y aparece la marca.
 - Sonido: blups de reacciones, ráfaga en los signos, destellos en los corazones, toque y check en el cierre.
+
+## Versión 4 (pedido: motion para público de 45–60 con gusto premium) + prueba de ganchos
+- Movimiento lento y preciso (curvas suaves, sin rebotes); sin sacudón, sin signos volando, sin corazones flotando, sin golpecito de cámara.
+- «¿Qué?» de Mamá en Inter 200 a 300 px: el espaciado se cierra, foco que se asienta, línea verde fina y «Mamá». Silencio musical debajo + golpe grave largo.
+- Foto: foco que se asienta y acercamiento lento (sin anillo de descarga). Reacciones con fundido. «ahora sí me quieren» con ❤️ 3.
+- Cierre: la hoja de reenviar sube despacio; «Familia 🏠» se marca con un check que se dibuja.
+- Música: piano eléctrico cálido, 76 bpm (Cmaj9 – Am9 – Fmaj7 – G6).
+- Ganchos para Reels de prueba (`ganchos` en chat.json): **A** «Esperá a ver qué contesta mamá 👀» · **D** «Mi viejo en el grupo familiar». Medir retención a los 3 s y quedarse con el mejor.
+  Render: `npx remotion render ReelGrupoFamilia out/gf-a.mp4 --props=out/props-a.json` (props = `{"gancho": "..."}`).

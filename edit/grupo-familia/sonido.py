@@ -1,7 +1,7 @@
 """Sonido del reel "El grupo de la familia": todo sintetizado acá, sin derechos de terceros.
 Lee los tiempos de chat.json y escribe:
   sfx.wav     -> solo efectos (pops de mensajes, tipeo, golpe en el QUÉ, whoosh del cierre). Para sumar música en Edits.
-  mezcla.wav  -> efectos + base musical propia (marimba liviana, 112 bpm), bien abajo.
+  mezcla.wav  -> efectos + base musical propia (piano eléctrico cálido, 76 bpm), bien abajo.
 Uso: python3 -I edit/grupo-familia/sonido.py
 """
 import json, os, wave
@@ -68,43 +68,43 @@ for m in chat["mensajes"]:
 # Toque en «Familia» y check
 poner(sfx, tono(300, 180, 0.05, d=0.012), chat["cierre"]["tap"], 0.6)
 poner(sfx, tono(990, 1320, 0.18, d=0.07), chat["cierre"]["tap"] + 0.06, 0.3)
-# Golpe grave en el «QUÉ» de Mamá
-que = chat["mensajes"][1]["t"]
-poner(sfx, tono(120, 45, 0.45, d=0.16), que, 0.9)
-# Ráfaga en los signos del QUÉ
-n = int(SR * 0.4)
-r = np.convolve(rng.standard_normal(n), np.ones(12) / 12, "same") * np.exp(-np.arange(n) / SR / 0.12)
-poner(sfx, r, que + 0.05, 0.6)
-# Whoosh del cierre
-n = int(SR * 0.5)
-w = rng.standard_normal(n)
-w = np.convolve(w, np.ones(30) / 30, "same") * np.sin(np.linspace(0, np.pi, n)) ** 2
-poner(sfx, w, chat["cierre"]["t"] - 0.15, 0.9)
-poner(sfx, tono(660, 990, 0.5, d=0.25, forma="arm"), chat["cierre"]["t"], 0.25)
+# «¿Qué?» de Mamá: golpe grave profundo y largo (cine, no caricatura) + un aire que se abre
+que = chat["que"]["t"]
+poner(sfx, tono(70, 38, 1.2, d=0.45), que, 0.8)
+n = int(SR * 0.6)
+aire = np.convolve(rng.standard_normal(n), np.ones(40) / 40, "same") * np.sin(np.linspace(0, np.pi, n)) ** 2
+poner(sfx, aire, que - 0.12, 0.35)
+# Cierre: la hoja sube con un aire suave
+n = int(SR * 0.6)
+w = np.convolve(rng.standard_normal(n), np.ones(40) / 40, "same") * np.sin(np.linspace(0, np.pi, n)) ** 2
+poner(sfx, w, chat["cierre"]["t"] - 0.1, 0.45)
 
-# Base: marimba en Do mayor, 112 bpm, I–vi–IV–V
-BPM = 112
-paso = 60 / BPM / 2  # corcheas
-acordes = [[60, 64, 67], [57, 60, 64], [53, 57, 60], [55, 59, 62]]
-patron = [0, 2, 1, 2, 0, 2, 1, 2]
-mus = np.zeros(N)
+# Base: piano eléctrico cálido, 76 bpm, acordes de cuatro notas (Cmaj9 – Am9 – Fmaj7 – G6), ataque suave
 hz = lambda nota: 440 * 2 ** ((nota - 69) / 12)
+def epiano(f, dur):
+    nn = int(SR * dur)
+    tt = np.arange(nn) / SR
+    w = np.sin(2 * np.pi * f * tt) + 0.18 * np.sin(2 * np.pi * 2 * f * tt) + 0.05 * np.sin(2 * np.pi * 3 * f * tt)
+    trem = 1 + 0.08 * np.sin(2 * np.pi * 4.2 * tt)
+    return w * trem * np.minimum(1, tt / 0.03) * np.exp(-tt / 1.4)
+BPM = 76
+compas = 4 * 60 / BPM
+acordes = [[48, 64, 67, 71, 74], [45, 60, 64, 67, 71], [41, 57, 60, 64, 69], [43, 59, 62, 64, 67]]
+mus = np.zeros(N)
 k = 0
 t = 0.0
 while t < DUR:
-    ac = acordes[(k // 8) % 4]
-    nota = ac[patron[k % 8]] + 12
-    poner(mus, tono(hz(nota), hz(nota), 0.35, d=0.11, forma="arm"), t, 0.5)
-    if k % 8 == 0:  # bajo
-        poner(mus, tono(hz(ac[0] - 24), hz(ac[0] - 24), 0.8, d=0.3), t, 0.7)
-    if k % 2 == 1:  # shaker
-        nn = int(SR * 0.04)
-        poner(mus, np.diff(rng.standard_normal(nn + 1)) * env(nn, a=0.002, d=0.01), t, 0.12)
+    ac = acordes[k % 4]
+    for j, nota in enumerate(ac):
+        poner(mus, epiano(hz(nota), compas + 0.6), t + j * 0.018, 0.9 if j == 0 else 0.45)
+    # una nota suelta arriba a mitad del compás
+    poner(mus, epiano(hz(ac[-1] + 12), compas / 2 + 0.6), t + compas / 2, 0.22)
     k += 1
-    t += paso
-# Entra con un fundido corto, se apaga en el cierre y deja solo el remate
+    t += compas
+# Se apaga bajo el «¿Qué?» (silencio dramático) y vuelve después
 tt = np.arange(N) / SR
-mus *= np.clip(tt / 0.3, 0, 1) * np.clip((DUR - tt) / 0.6, 0, 1)
+hueco = 1 - 0.85 * np.clip(1 - np.abs(tt - (que + 0.3)) / 0.45, 0, 1)
+mus *= np.clip(tt / 0.4, 0, 1) * np.clip((DUR - tt) / 0.8, 0, 1) * hueco
 
 
 def normal(x, pico_db):
@@ -123,5 +123,5 @@ def guardar(nombre, x):
 
 sfx = normal(sfx, -3)
 guardar("sfx.wav", sfx)
-guardar("mezcla.wav", normal(sfx + normal(mus, -14), -1.5))
+guardar("mezcla.wav", normal(sfx + normal(mus, -12), -1.5))
 print("ok", DUR, "s")

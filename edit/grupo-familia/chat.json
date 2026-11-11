@@ -3,21 +3,149 @@
   "duracion": 12.0,
   "miembrosAntes": "Papá, Mamá, Sofi, Vos",
   "miembrosDespues": "Papá, Mamá, Sofi, Tía Marta, Vos",
-  "gancho": "Mi viejo en el grupo familiar 💀",
-  "que": { "t": 1.15, "fin": 1.8 },
+  "gancho": "Esperá a ver qué contesta mamá 👀",
+  "que": {
+    "t": 1.15,
+    "fin": 1.8
+  },
   "mensajes": [
-    { "t": 0.0,  "de": "Papá", "texto": "Me compré una cafetera de un palo y medio ☕", "instant": true, "reac": [[2.0, "😱"], [2.25, "😱"], [2.5, "😱"]] },
-    { "t": 1.15, "de": "Mamá", "texto": "QUÉ" },
-    { "t": 1.85, "de": "Mamá", "texto": "??????????" },
-    { "t": 2.45, "de": "Vos",  "texto": "viejo estás bien?" },
-    { "t": 3.15, "de": "Sofi", "texto": "es la crisis de los 50? 😭", "reac": [[3.6, "😂"], [3.8, "😂"]] },
-    { "t": 4.25, "de": "Papá", "foto": true, "texto": "muele el grano en el momento. un botón.", "escribe": 0.45, "reac": [[5.5, "😍"], [5.75, "❤️"], [6.0, "😍"]] },
-    { "t": 6.9,  "de": "Mamá", "texto": "...haceme un capuchino", "escribe": 0.9 },
-    { "t": 7.55, "de": "Vos",  "texto": "voy para allá" },
-    { "t": 8.1,  "de": "Sofi", "texto": "yo también" },
-    { "t": 8.6,  "sistema": "Tía Marta se unió al grupo" },
-    { "t": 9.1,  "de": "Tía Marta", "texto": "yo también" },
-    { "t": 9.75, "de": "Papá", "texto": "ahora sí me quieren 🙄", "corazones": true }
+    {
+      "t": 0.0,
+      "de": "Papá",
+      "texto": "Me compré una cafetera de un palo y medio ☕",
+      "instant": true,
+      "reac": [
+        [
+          2.0,
+          "😱"
+        ],
+        [
+          2.25,
+          "😱"
+        ],
+        [
+          2.5,
+          "😱"
+        ]
+      ]
+    },
+    {
+      "t": 1.15,
+      "de": "Mamá",
+      "texto": "¿Qué?"
+    },
+    {
+      "t": 1.85,
+      "de": "Mamá",
+      "texto": "??????????"
+    },
+    {
+      "t": 2.45,
+      "de": "Vos",
+      "texto": "viejo estás bien?"
+    },
+    {
+      "t": 3.15,
+      "de": "Sofi",
+      "texto": "es la crisis de los 50? 😭",
+      "reac": [
+        [
+          3.6,
+          "😂"
+        ],
+        [
+          3.8,
+          "😂"
+        ]
+      ]
+    },
+    {
+      "t": 4.25,
+      "de": "Papá",
+      "foto": true,
+      "texto": "muele el grano en el momento. un botón.",
+      "escribe": 0.45,
+      "reac": [
+        [
+          5.5,
+          "😍"
+        ],
+        [
+          5.75,
+          "❤️"
+        ],
+        [
+          6.0,
+          "😍"
+        ]
+      ]
+    },
+    {
+      "t": 6.9,
+      "de": "Mamá",
+      "texto": "...haceme un capuchino",
+      "escribe": 0.9
+    },
+    {
+      "t": 7.55,
+      "de": "Vos",
+      "texto": "voy para allá"
+    },
+    {
+      "t": 8.1,
+      "de": "Sofi",
+      "texto": "yo también"
+    },
+    {
+      "t": 8.6,
+      "sistema": "Tía Marta se unió al grupo"
+    },
+    {
+      "t": 9.1,
+      "de": "Tía Marta",
+      "texto": "yo también"
+    },
+    {
+      "t": 9.75,
+      "de": "Papá",
+      "texto": "ahora sí me quieren 🙄",
+      "reac": [
+        [
+          10.4,
+          "❤️"
+        ],
+        [
+          10.55,
+          "❤️"
+        ],
+        [
+          10.7,
+          "❤️"
+        ]
+      ]
+    }
   ],
-  "cierre": { "t": 10.7, "tap": 11.25, "texto": "Mandáselo a tu grupo familiar 👀", "chats": [["🏠", "Familia 🏠"], ["🍻", "Los pibes"], ["☕", "Amigos del café"]] }
+  "cierre": {
+    "t": 10.95,
+    "tap": 11.45,
+    "texto": "Mandáselo a tu grupo familiar 👀",
+    "chats": [
+      [
+        "🏠",
+        "Familia 🏠"
+      ],
+      [
+        "🍻",
+        "Los pibes"
+      ],
+      [
+        "☕",
+        "Amigos del café"
+      ]
+    ]
+  },
+  "ganchos": {
+    "a": "Esperá a ver qué contesta mamá 👀",
+    "d": "Mi viejo en el grupo familiar"
+  }
 }
