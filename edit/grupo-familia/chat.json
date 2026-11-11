@@ -1,6 +1,6 @@
 {
   "titulo": "Familia 🏠",
-  "duracion": 24.2,
+  "duracion": 17.4,
   "miembrosAntes": "Papá, Mamá, Sofi, Vos",
   "miembrosDespues": "Papá, Mamá, Sofi, Tía Marta, Vos",
   "gancho": "Esperá a ver qué contesta mamá 👀",
@@ -16,31 +16,23 @@
       "instant": true,
       "reac": [
         [
+          3.3,
+          "😱"
+        ],
+        [
+          3.45,
+          "😱"
+        ],
+        [
           3.6,
           "😱"
-        ],
-        [
-          3.8,
-          "😱"
-        ],
-        [
-          4.0,
-          "😱"
         ]
-      ],
-      "voz": [
-        "papa-compre.mp3",
-        0.15
       ]
     },
     {
       "t": 2.3,
       "de": "Mamá",
-      "texto": "¿Qué?",
-      "voz": [
-        "mama-que.mp3",
-        2.3
-      ]
+      "texto": "¿Qué?"
     },
     {
       "t": 3.05,
@@ -48,149 +40,113 @@
       "texto": "??????????"
     },
     {
-      "t": 3.4,
+      "t": 3.6,
       "de": "Vos",
-      "texto": "viejo estás bien?",
-      "voz": [
-        "vos-estas-bien.mp3",
-        3.25
-      ]
+      "texto": "viejo estás bien?"
     },
     {
-      "t": 5.3,
+      "t": 4.4,
       "de": "Sofi",
       "texto": "es la crisis de los 50? 😭",
       "reac": [
         [
-          6.9,
+          4.95,
           "😂"
         ],
         [
-          7.1,
+          5.1,
           "😂"
         ]
-      ],
-      "voz": [
-        "sofi-crisis.mp3",
-        5.3
       ]
     },
     {
-      "t": 8.1,
+      "t": 5.6,
       "de": "Papá",
       "foto": true,
       "texto": "muele el grano en el momento. un botón.",
       "escribe": 0.45,
       "reac": [
         [
-          11.75,
+          8.9,
           "😍"
         ],
         [
-          11.9,
+          9.05,
           "❤️"
         ],
         [
-          12.05,
+          9.2,
           "😍"
         ]
-      ],
-      "voz": [
-        "papa-muele.mp3",
-        8.5
       ]
     },
     {
-      "t": 12.5,
+      "t": 9.45,
       "de": "Mamá",
       "texto": "...haceme un capuchino",
-      "escribe": 0.6,
-      "voz": [
-        "mama-capuchino.mp3",
-        12.45
-      ]
+      "escribe": 0.6
     },
     {
-      "t": 14.85,
+      "t": 10.1,
       "de": "Vos",
-      "texto": "voy para allá",
-      "voz": [
-        "vos-voy.mp3",
-        14.85
-      ]
+      "texto": "voy para allá"
     },
     {
-      "t": 15.7,
+      "t": 10.7,
       "de": "Sofi",
-      "texto": "yo también",
-      "voz": [
-        "sofi-yo-tambien.mp3",
-        15.7
-      ]
+      "texto": "yo también"
     },
     {
-      "t": 16.6,
+      "t": 11.2,
       "sistema": "Tía Marta se unió al grupo"
     },
     {
-      "t": 17.0,
+      "t": 11.6,
       "de": "Tía Marta",
-      "texto": "¡yo también, querido!",
-      "voz": [
-        "marta-yo-tambien.mp3",
-        17.0
-      ]
+      "texto": "¡yo también, querido!"
     },
     {
-      "t": 18.6,
+      "t": 12.3,
       "de": "Papá",
       "texto": "ahora sí me quieren 🙄",
       "reac": [
         [
-          19.3,
+          12.8,
           "❤️"
         ],
         [
-          19.45,
+          12.95,
           "❤️"
         ],
         [
-          19.6,
+          13.1,
           "❤️"
         ]
-      ],
-      "voz": [
-        "papa-quieren.mp3",
-        18.6
       ]
     },
     {
-      "t": 20.2,
+      "t": 13.2,
       "de": "Mamá",
       "texto": "y traé medialunas 🥐",
       "reac": [
         [
-          20.9,
+          13.7,
           "😂"
         ],
         [
-          21.05,
+          13.85,
           "😂"
         ],
         [
-          21.2,
+          14.0,
           "😂"
         ]
-      ],
-      "voz": [
-        "mama-medialunas.mp3",
-        20.2
       ]
     }
   ],
   "cierre": {
-    "t": 21.5,
-    "tap": 21.95,
+    "t": 14.3,
+    "tap": 14.75,
     "texto": "Mandáselo a tu grupo familiar 👀",
     "chats": [
       [
@@ -212,8 +168,8 @@
     "d": "Mi viejo en el grupo familiar"
   },
   "hero": {
-    "t": 8.4,
-    "fin": 11.5,
+    "t": 5.9,
+    "fin": 8.6,
     "rect": [
       66,
       429,
@@ -222,7 +178,7 @@
     ],
     "notas": [
       {
-        "t": 8.8,
+        "t": 6.3,
         "texto": "Grano recién molido.",
         "caja": [
           90,
@@ -234,7 +190,7 @@
         ]
       },
       {
-        "t": 10.25,
+        "t": 7.2,
         "texto": "Con un solo botón.",
         "caja": [
           430,
@@ -248,7 +204,7 @@
     ]
   },
   "final": {
-    "t": 22.4,
+    "t": 15.2,
     "titulo": "Café de cafetería,\nen tu casa.",
     "producto": "Magnifica S",
     "pie": "Link en la bio · @cafentucasa"

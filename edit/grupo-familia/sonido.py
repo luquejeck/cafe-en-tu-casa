@@ -80,7 +80,8 @@ for m in chat["mensajes"]:
 if faltan:
     print("Faltan voces:", ", ".join(faltan))
 # Con voces los pops van más bajos para no competir
-sfx *= 0.55
+if np.abs(voces).max() > 0:
+    sfx *= 0.55
 
 # Reacciones: un "blup" corto y agudo
 for m in chat["mensajes"]:

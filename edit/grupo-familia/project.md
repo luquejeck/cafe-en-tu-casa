@@ -51,3 +51,8 @@ Mecanismo viral: identificación («mi familia es así») + envío («mandáselo
 - Cierre en dos tiempos: hoja de reenviar («Mandáselo a tu grupo familiar 👀», se elige Familia) y tarjeta final sobre blanco: «Café de cafetería, en tu casa.» + Magnifica S + «Link en la bio · @cafentucasa».
 - Voces ElevenLabs (eleven_v4), acento argentino: Papá = Franco, Mamá = Sol, Sofi = Cande, Vos = Renzo, Tía Marta = Nieve. Archivos en `voces/`; `chat.json` dice en qué segundo entra cada una (`voz`). La música baja ~9 dB cuando alguien habla.
 - Pendientes (el cupo gratuito de ElevenLabs estaba saturado): papa-compre, mama-que, sofi-crisis, mama-capuchino, vos-voy, papa-quieren, mama-medialunas.
+
+## Versión 7 (sin voces)
+- Las voces de ElevenLabs no convencieron (no sonaban argentinas ni iban con el ritmo): se sacaron. Queda la música propia y los efectos.
+- 17,4 s con ritmo más ágil: «¿Qué?» 2,3 s · foto a pantalla completa 5,9–8,6 s · medialunas 13,2 s · reenviar 14,3 s · tarjeta final 15,2 s.
+- `sonido.py` sigue aceptando voces (`"voz": [archivo, segundo]` en cada mensaje) por si después se graban voces reales.
