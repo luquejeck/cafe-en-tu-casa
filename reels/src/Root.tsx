@@ -6,6 +6,8 @@ import capsulasProps from "../../edit/capsulas/reelkit-props.json";
 import { ReelCapsulasV4 } from "./ReelCapsulasV4";
 import { ReelCapsulasVar } from "./ReelCapsulasVar";
 import capsulasV4Props from "../../edit/capsulas-v4/reelkit-props.json";
+import { ReelGrupoFamilia } from "./ReelGrupoFamilia";
+import grupoChat from "../../edit/grupo-familia/chat.json";
 
 // Created by kit.py new. The kit (src/ReelKit.tsx, src/kit/) is updated by kit.py update; this file is yours.
 export const RemotionRoot: React.FC = () => {
@@ -36,6 +38,8 @@ export const RemotionRoot: React.FC = () => {
       {/* Tres versiones de prueba (corta / media / larga) con estilos distintos: props de edit/capsulas-<v>/reelkit-props.json */}
       <Composition id="ReelCapsulasVar" component={ReelCapsulasVar} durationInFrames={90} fps={KIT_FPS} width={1080} height={1920}
         defaultProps={capsulasV4Props as any} calculateMetadata={reelKitMetadata as any} />
+      {/* Video "El grupo de la familia": chat que se escribe solo, sin filmar (edit/grupo-familia/chat.json) */}
+      <Composition id="ReelGrupoFamilia" component={ReelGrupoFamilia} durationInFrames={Math.round(grupoChat.duracion * 30)} fps={30} width={1080} height={1920} />
       {/* Code scenes for B-roll (codescene.py scaffold / render) */}
       {GEN.map((g) => (
         <Composition key={g.id} id={g.id} component={g.component} durationInFrames={g.durationInFrames} fps={30} width={1080} height={1920} />

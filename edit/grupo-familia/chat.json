@@ -1,0 +1,21 @@
+{
+  "titulo": "Familia 🏠",
+  "duracion": 12.0,
+  "miembrosAntes": "Papá, Mamá, Sofi, Vos",
+  "miembrosDespues": "Papá, Mamá, Sofi, Tía Marta, Vos",
+  "mensajes": [
+    { "t": 0.0,  "de": "Papá", "texto": "Me compré una cafetera de un palo y medio ☕", "instant": true },
+    { "t": 1.15, "de": "Mamá", "texto": "QUÉ" },
+    { "t": 1.55, "de": "Mamá", "texto": "??????????" },
+    { "t": 2.25, "de": "Vos",  "texto": "viejo estás bien?" },
+    { "t": 3.05, "de": "Sofi", "texto": "es la crisis de los 50? 😭" },
+    { "t": 4.35, "de": "Papá", "foto": true, "texto": "muele el grano en el momento. un botón.", "escribe": 0.45 },
+    { "t": 7.0,  "de": "Mamá", "texto": "...haceme un capuchino", "escribe": 1.0 },
+    { "t": 7.7,  "de": "Vos",  "texto": "voy para allá" },
+    { "t": 8.25, "de": "Sofi", "texto": "yo también" },
+    { "t": 8.85, "sistema": "Tía Marta se unió al grupo" },
+    { "t": 9.4,  "de": "Tía Marta", "texto": "yo también" },
+    { "t": 10.1, "de": "Papá", "texto": "ahora sí me quieren 🙄" }
+  ],
+  "cierre": { "t": 10.9, "texto": "Mandáselo a tu grupo familiar 👀" }
+}
