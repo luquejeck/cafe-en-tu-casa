@@ -1,7 +1,7 @@
 # El grupo de la familia
 
 ## Idea
-Chat familiar que se escribe solo, sin filmar. Papá se compró una cafetera «de un palo y medio» (precio de la Magnifica S en ML ≈ $1,5 M), todos lo bardean, manda la foto del latte y al final todos quieren ir (hasta la Tía Marta, que se une al grupo).
+Chat familiar que se escribe solo, sin filmar. Versión 2: modo claro, estética de chat de mensajería (fondo con dibujos de café, colitas, hora, tildes), texto más grande, gancho en texto «Mi viejo en el grupo familiar 💀». Papá se compró una cafetera «de un palo y medio» (precio de la Magnifica S en ML ≈ $1,5 M), todos lo bardean, manda la foto del latte y al final todos quieren ir (hasta la Tía Marta, que se une al grupo).
 Mecanismo viral: identificación («mi familia es así») + envío («mandáselo a tu grupo familiar»).
 
 ## Reglas aplicadas (reportes/APRENDIZAJES.md)
