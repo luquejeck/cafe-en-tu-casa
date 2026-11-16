@@ -505,6 +505,30 @@ const PIEZAS = [
         sub: '¿Consultas? Escribinos por WhatsApp, también hoy.', boton: `WhatsApp ${TIENDA.whatsappVisible}` }
     ]
   }
+,
+  {
+    /* Carrusel de dudas reales (mismo formato que el FAQ del 11/11, 213 vistas).
+       Reporte del 16/11: para diciembre, en borrador hasta que haya crédito y
+       Lucas confirme la fecha límite de compra para que llegue en Navidad. */
+    id: 'dic-jue-carrusel-dudas-antes-de-comprar', semana: 0, dia: 'Jueves', tipo: 'carrusel', fecha: '2026-12-03',
+    titulo: 'Antes de comprar: las 4 dudas',
+    caption:
+      'Las 4 dudas antes de comprar, respondidas. 👇\n\n' +
+      '¿Llega para Navidad? Escribinos antes de comprar y te confirmamos la fecha de entrega.\n' +
+      '¿Puedo pagar la mitad en cuotas? No: el 20% OFF es por transferencia o efectivo y las cuotas sin interés son en Mercado Libre. No se combinan.\n' +
+      '¿Es original? Sí: De\'Longhi nueva, en su caja.\n' +
+      '¿Y si llega mal? Te cubre la política de Mercado Libre. Escribinos apenas la recibís.\n\n' +
+      'Mandáselo a quien está por comprar el regalo.\n\n' +
+      '¿Cuál de las cuatro era tu duda?\n\n#cafeencasa #cafetera #delonghi #navidad',
+    placas: [
+      { t: 'portada', ep: 'Antes de comprar', h: 'Las 4 dudas de siempre.', sub: 'Respondidas en cuatro placas.' },
+      { t: 'texto', tono: 'gris', ep: '¿Llega para Navidad?', h: 'Te confirmamos la fecha.', p: 'Escribinos por WhatsApp antes de comprar y te decimos cuándo llega a tu ciudad.' },
+      { t: 'texto', ep: '¿Puedo pagar la mitad en cuotas?', h: 'No: se elige una.', p: '20% OFF por transferencia o efectivo, o cuotas sin interés en Mercado Libre. No se combinan.' },
+      { t: 'texto', tono: 'gris', ep: '¿Es original?', h: 'Sí, De\'Longhi original.', p: 'Nueva, en su caja. Y cada compra tiene la protección de Mercado Libre.' },
+      { t: 'texto', ep: '¿Y si llega mal?', h: 'Te cubre Mercado Libre.', p: 'Según su política de devoluciones. Escribinos apenas la recibís y lo resolvemos.' },
+      { t: 'cta', tono: 'oscuro', ep: '¿Otra duda?', h: 'Escribinos.', sub: 'Contestamos en el día.', boton: 'WhatsApp · link en la bio' }
+    ]
+  }
 ];
 
 /* Para generar.ps1 (corre con Node): lista "id n ancho alto" */

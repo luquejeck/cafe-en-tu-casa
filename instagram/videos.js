@@ -301,6 +301,26 @@ const VIDEOS = [
       { d: 2.2, html: `${V.ep('Para regalar tranquilo')}${V.chips([`${VM.cuotas} cuotas sin interés`, 'Envío gratis', `${TIENDA.garantiaMeses} meses de garantía`], .3)}` },
       V.cierre({ ep: 'Día de la Madre', h: 'Compartilo con quien la va a regalar.', sub: '¿Para quién sería?', boton: 'Compartilo', d: 2.6 })
     ]
+  },
+  {
+    id: 'v12-black-friday-sin-sorpresas', titulo: 'Black Friday sin sorpresas', tema: 'Black Friday',
+    estilo: { fondo: 'bandas', entrada: 'cortina', alinea: 'centro' },
+    /* 9 s · gancho en el segundo 0; 20% OFF, cuotas y envío entre los 2,3 y los 2,8 s.
+       Sin montos en el video: los precios van en el texto, del sitio el mismo día. */
+    caption:
+      'Black Friday sin sorpresas. ☕\n\n' +
+      `El ${V_OFF}% OFF por transferencia o efectivo lo tenés todos los días, no solo este viernes. Y si preferís financiar, tenés cuotas sin interés en Mercado Libre.\n\n` +
+      `${VM.modelo}\n` + vPrecios(VM).split('\n').slice(0, 2).join('\n') + '\n\n' +
+      `${VD.modelo}\n` + vPrecios(VD).split('\n').slice(0, 2).join('\n') + '\n\n' +
+      `El ${V_OFF}% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan. Envío gratis a todo el país.\n\n` +
+      vCierre('Mandáselo a quien espera el Black Friday.', '¿Transferencia o cuotas?') +
+      '\n\n#blackfriday #cafeencasa #delonghi #cafetera',
+    escenas: [
+      { d: 2.0, tono: 'oscuro', html: `${V.ep('Black Friday')}${V.titulo('El 20% OFF ya lo tenés <em>todos los días.</em>', 'm')}` },
+      { d: 3.0, tono: 'gris', html: `${V.titulo('Sin esperar al viernes', 's')}${V.chips([`${V_OFF}% OFF por transferencia`, 'o cuotas sin interés en Mercado Libre', 'Envío gratis'], .3)}` },
+      { d: 1.6, tono: 'oliva', html: `${V.titulo('¿Transferencia <em>o cuotas?</em>')}` },
+      V.cierre({ ep: 'Black Friday', h: 'Mandáselo a quien espera el Black Friday', boton: 'Mandáselo', d: 2.4 })
+    ]
   }
 ];
 
