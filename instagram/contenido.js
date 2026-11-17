@@ -559,7 +559,7 @@ const PIEZAS = [
       '¿Sos A o B? Escribinos por WhatsApp desde el link de la bio y te ayudamos a elegir 👇\n\n#cafeencasa #regalodenavidad #delonghi #magnificas #dedica',
     placas: [
       { t: 'tapa', ep: 'Navidad · para vos', h: 'Este año, el regalo es <mark>para vos</mark>.',
-        sub: 'Test de 20 segundos: ¿qué cafetera va con tu mañana?', img: F + 'sofa-dedica.jpg', desliza: 'Hacé el test' },
+        sub: 'Test de 20 segundos: ¿qué cafetera va con tu mañana?', img: F + 'regalatela-magnifica.jpg', desliza: 'Hacé el test' },
       { t: 'chat', tono: 'gris', ep: '¿Te suena?', grupo: 'Hoy, 8:05',
         msjs: [['Vos', 'Un cortadito rápido en el bar y salgo.'], ['Tu billetera', 'Ayer dijiste lo mismo.'],
                ['Vos', 'Son $4.000 nomás.'], ['yo', 'Este año me regalo la cafetera.']], sigue: '¿Qué cafetero sos?' },
@@ -631,7 +631,7 @@ const PIEZAS = [
       '¿Cuál casi te pasa? Escribinos por WhatsApp antes de comprar y te ayudamos a medir y elegir 👇\n\n#cafeencasa #cafetera #espresso #delonghi',
     placas: [
       { t: 'tapa', ep: 'Antes de comprar', h: 'Llegó la cafetera. <mark>No entraba.</mark>',
-        sub: '5 errores con la primera cafetera, y cómo no cometerlos.', img: F + 'dedica-espresso-travertino.jpg', desliza: 'Ver los 5' },
+        sub: '5 errores con la primera cafetera, y cómo no cometerlos.', img: F + 'no-entraba-magnifica.jpg', desliza: 'Ver los 5' },
       { t: 'error', tono: 'gris', n: 1, de: 5, h: 'No medir la mesada.', p: 'Ni la altura bajo la alacena.',
         evitar: `Magnifica S: ${cm(M.medidas.ancho)} de ancho y ${cm(M.medidas.alto)} de alto. Dedica: ${cm(D.medidas.ancho)} y ${cm(D.medidas.alto)}.`, sigue: 'El 2 duele' },
       { t: 'error', n: 2, de: 5, h: 'Mirar solo el precio de la máquina.',

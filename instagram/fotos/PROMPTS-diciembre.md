@@ -24,7 +24,7 @@ importante va en la mitad de arriba y **el 40 % de abajo queda tranquilo** (mesa
 
 ---
 
-## Faltan (los carruseles ya las esperan)
+## Faltan: 2, 3 y 4 (las demás ya están generadas)
 
 ### 1. `dos-vecinos.jpg` · portada de "Dos vecinos" (10/12)
 
@@ -98,6 +98,9 @@ Vertical 4:5 editorial photo with gentle humor, soft natural window light. A bri
 ```
 
 ## Ya generadas (17/11)
+
+`regalatela-magnifica.jpg`, `dos-vecinos.jpg`, `no-entraba-magnifica.jpg`,
+`limpieza-magnifica.jpg`, `magnifica-sobremesa-noche.jpg` (segunda tanda), y
 
 `sofa-dedica.jpg`, `magnifica-latte-cenital.jpg`, `dedica-espresso-travertino.jpg`,
 `dedica-iced-latte.jpg`, `dedica-iced-latte-living.jpg`, más las de octubre
