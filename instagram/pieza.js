@@ -6,11 +6,12 @@ const ep  = t => t ? `<p class="ep">${t}</p>` : '';
 const sub = t => t ? `<p class="sub">${t}</p>` : '';
 const par = t => t ? `<p class="p">${t}</p>` : '';
 const pil = t => t ? `<p class="pildora">${t}</p>` : '';
+const chica = t => t ? `<p class="chica">${t}</p>` : '';
 
 const CUERPO = {
   portada: s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}${s.img ? `<div class="foto">${img(s.img)}</div>` : ''}${pil(s.pildora)}`,
-  foto:    s => `${ep(s.ep)}<h2>${s.h}</h2>${sub(s.sub)}<div class="foto ${s.llena ? 'llena' : ''}">${img(s.img)}</div>${pil(s.pildora)}`,
-  texto:   s => `${ep(s.ep)}<h2>${s.h}</h2>${par(s.p)}${pil(s.pildora)}`,
+  foto:    s => `${ep(s.ep)}<h2>${s.h}</h2>${sub(s.sub)}<div class="foto ${s.llena ? 'llena' : ''}">${img(s.img)}</div>${pil(s.pildora)}${chica(s.chica)}`,
+  texto:   s => `${ep(s.ep)}<h2>${s.h}</h2>${par(s.p)}${pil(s.pildora)}${chica(s.chica)}`,
   dato:    s => `${ep(s.ep)}<p class="num">${s.num}${s.unidad ? `<small>${s.unidad}</small>` : ''}</p>${sub(s.sub)}${par(s.p)}`,
   lista:   s => `${ep(s.ep)}<h2>${s.h}</h2><ul class="lista">${s.items.map((it, i) =>
              `<li><i>${s.numerada ? i + 1 : '✓'}</i><div><b>${it[0]}</b>${it[1] ? `<span>${it[1]}</span>` : ''}</div></li>`).join('')}</ul>`,
@@ -22,7 +23,18 @@ const CUERPO = {
              return `${ep(s.ep)}<h2>${s.h}</h2><div class="barras">${s.items.map(i =>
              `<div class="barra ${i[3] ? 'suave' : ''}"><div>${i[0]}<span>${i[1]}</span></div><u style="width:${Math.max(3, i[2] / max * 100)}%"></u></div>`).join('')}</div>${par(s.p)}`; },
   opciones:s => `${ep(s.ep)}<h2>${s.h}</h2><div class="opciones">${s.ops.map(o => `<div>${o}</div>`).join('')}</div>${par(s.p)}`,
-  cta:     s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}<p class="boton">${s.boton}</p>`
+  cta:     s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}<p class="boton">${s.boton}</p>${chica(s.chica)}`,
+
+  /* ---- Estilo "pop" (diciembre): juegos y ganchos ---- */
+  gancho:  s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}${s.img ? `<div class="foto">${img(s.img)}</div>` : ''}${s.sticker ? `<p class="sticker">${s.sticker}</p>` : ''}`,
+  quiz:    s => `${ep(s.ep)}<h2>${s.h}</h2><div class="quiz">${s.ops.map((o, i) =>
+             `<div class="${s.ok === i ? 'ok' : ''}"><i>${'ABCD'[i]}</i>${o}</div>`).join('')}</div>${par(s.p)}`,
+  revela:  s => `${ep(s.ep)}${s.tachado ? `<p class="tachado">${s.tachado}</p>` : ''}<p class="revela">${s.num}</p>${sub(s.sub)}${par(s.p)}`,
+  error:   s => `<p class="gigante">${s.n}<small>/${s.de}</small></p><h2>${s.h}</h2>${par(s.p)}${s.evitar ? `<div class="evitar"><b>${s.titEvitar || 'Cómo evitarlo'}</b>${s.evitar}</div>` : ''}`,
+  chat:    s => `${ep(s.ep)}${s.h ? `<h2>${s.h}</h2>` : ''}<div class="chat">${s.grupo ? `<p class="grupo">${s.grupo}</p>` : ''}${s.msjs.map(m =>
+             `<p class="${m[0] === 'yo' ? 'yo' : ''}">${m[0] === 'yo' ? '' : `<b>${m[0]}</b>`}${m[1]}</p>`).join('')}</div>`,
+  ticket:  s => `${ep(s.ep)}<h2>${s.h}</h2><div class="ticket"><p class="t">${s.titulo}</p>${s.lineas.map(l =>
+             `<p class="l"><span>${l[0]}</span><span>${l[1]}</span></p>`).join('')}<p class="l tot"><span>${s.total[0]}</span><span>${s.total[1]}</span></p></div>${chica(s.chica)}`
 };
 
 /** Una placa entera: el lienzo con la marca, el cuerpo y los puntitos del carrusel. */
@@ -32,6 +44,13 @@ function placaHTML(pieza, n) {
   const puntos = pieza.tipo === 'carrusel'
     ? `<div class="pie">${pieza.placas.map((_, i) => `<b class="${i === n ? 'on' : ''}"></b>`).join('')}${n === 0 ? '<span>Deslizá →</span>' : ''}</div>`
     : '';
+  if (pieza.estilo === 'pop') {
+    const total = pieza.placas.length;
+    const pie = `<div class="pie"><div class="puntos">${pieza.placas.map((_, i) => `<b class="${i === n ? 'on' : ''}"></b>`).join('')}</div>${
+      s.sigue ? `<span class="sigue">${s.sigue} →</span>` : ''}</div>`;
+    return `<div class="lienzo pop ${s.tono || 'crema'}">
+    <div class="marca"><i></i> Café en tu Casa</div><p class="contador">${n + 1}/${total}</p><main>${CUERPO[s.t](s)}</main>${pie}</div>`;
+  }
   return `<div class="lienzo ${vertical ? 'vertical' : ''} ${s.tono || ''}">
     <div class="marca"><i></i> Café en tu Casa</div><main>${CUERPO[s.t](s)}</main>${puntos}</div>`;
 }

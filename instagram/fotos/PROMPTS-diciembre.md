@@ -19,6 +19,8 @@ Cada foto nueva reemplaza la portada de un carrusel.
 (crema, madera clara, travertino, lino, toques de verde oliva como el de la marca),
 aspecto de película (Kodak Portra 400), composición limpia con aire arriba para el
 título y nada de texto inventado.
+Los carruseles usan la paleta "pop": crema #f4e9da, manteca #f7dd8a, caramelo
+#d9853b, oliva #5b6e32 y espresso #24160f. Las fotos 3 y 4 la usan de fondo.
 
 ---
 
@@ -38,20 +40,24 @@ Referencia: `magnifica-s-1.webp`
 Cinematic editorial photo, vertical 4:5. The upstairs hallway of a classic Buenos Aires apartment building: terrazzo floor, tall dark wooden doors with brass handles, a warm wall sconce. Two neighbors in their late 40s face each other across the hallway, a playful moment. On the left, a man in a navy overcoat on his way out, holding a paper takeaway coffee cup and keys, slightly rushed. On the right, his neighbor stands in his open doorway in a soft grey knit sweater, relaxed, smiling, holding a small white ceramic cup of espresso with thick crema. Behind him, through the door, his warm kitchen is visible with the black De'Longhi Magnifica S from the reference image on the counter, reproduced exactly (silver bean dial, steam wand on the left, chrome spouts), gently in focus. Morning light spilling from his kitchen into the cool hallway: warm vs cool contrast. Subtle humor, natural expressions, not posed. Calm empty wall above their heads for a headline. 35mm, f/2.8, Kodak Portra 400 look, soft grain, realistic skin. No text, no numbers on the doors, no other logos.
 ```
 
-## 3. `errores-mesada-dedica.jpg` · "5 errores con tu primera cafetera" (17/12)
-
-Referencia: `dedica.webp`
-
-```
-Clean editorial lifestyle photo, vertical 4:5, slightly top-down angle. A pair of hands with a simple ring pulls out a vintage yellow tape measure across an empty spot on a pale travertine kitchen counter, under a low oak upper cabinet, measuring the space. Right next to that spot stands the slim De'Longhi Dedica EC685 from the reference image, reproduced exactly (same shape, chrome portafilter, side steam wand, three round buttons on top front, colors and logo placement as in the reference), showing how narrow it is. Styling: a small ceramic cup and saucer, a glass jar of coffee beans, a linen towel. Background: matte white zellige tiles, a small olive branch in a vase. Bright, airy, soft daylight from a window on the right, gentle shadows. Practical but beautiful, Scandinavian-meets-Buenos-Aires kitchen. Empty tiles in the upper third for a headline. 50mm, f/3.5, natural colors with a subtle film look. No text, no readable numbers on the tape.
-```
-
-## 4. `magnifica-crema.jpg` · "Por dentro: un botón, cuatro pasos" (22/12)
+## 3. `no-entraba-magnifica.jpg` · "Llegó la cafetera. No entraba." (17/12)
 
 Referencias: `magnifica-s-1.webp` + `magnifica-s-4.webp`
 
+Va en la portada, debajo del gancho. Es el chiste del carrusel: la máquina que no entra.
+
 ```
-Moody, premium product photograph, vertical 4:5. Low, close angle on the black De'Longhi Magnifica S from the references, reproduced exactly: the two chrome coffee spouts, the drip tray and the lower part of the control panel with its silver bean dial visible at the top of the frame. Two thin streams of espresso fall from the spouts into two double-walled glass cups, the crema forming in rich golden-hazelnut and tiger-stripe swirls, a wisp of steam rising. A few whole roasted coffee beans rest on the drip tray. Dark, warm studio light: a soft key light from the upper left grazing the crema and the chrome, deep shadows, background fading from espresso brown to black. Rich, appetizing, sculptural, like a high-end coffee campaign. Keep the upper third dark and calm for a white headline. 100mm macro, f/5.6, crisp detail on the crema and droplets. No added text or logos beyond those on the machine.
+Playful, color-blocked editorial photo, vertical 4:5. A small Buenos Aires kitchen painted in warm caramel orange (#D9853B) with butter-yellow (#F7DD8A) upper cabinets. A man in his 40s in a cream sweater, seen from the side, is trying to slide the black De'Longhi Magnifica S from the reference images into the gap between the counter and a low upper cabinet: the top of the machine is stuck against the cabinet, tilted a few degrees, and he looks at it with a comic mix of surprise and resignation, eyebrows raised. Reproduce the machine exactly as in the references: shape, proportions, the silver bean dial in the center of the control panel, the steam wand on the left, the two chrome spouts and logo placement. On the counter: the open plain kraft box with crumpled paper, a yellow tape measure he clearly didn't use, a small cup. Bright, even, slightly hard daylight from the front-left with crisp short shadows, saturated warm colors, clean graphic composition like a magazine humor spread. Keep the upper third simple (cabinet fronts) for a headline. 35mm, f/5.6, everything sharp. No text, no other logos.
+```
+
+## 4. `boton-magnifica.jpg` · "Apretás un botón. Adentro pasan 4 cosas." (22/12)
+
+Referencias: `magnifica-s-4.webp` (panel) + `magnifica-s-1.webp`
+
+Reemplaza la foto de producto de la portada. Fondo espresso, como la placa.
+
+```
+Bold, graphic product photograph, vertical 4:5. Close-up of the black De'Longhi Magnifica S from the references, three-quarter front view, filling the lower two thirds of the frame, placed on a glossy butter-yellow (#F7DD8A) surface against a deep espresso-brown (#24160F) seamless background. A single finger with a short clean nail presses the double-cup button on the control panel, right next to the silver bean dial; at the same instant two thin streams of espresso fall from the two chrome spouts into a pair of double-walled glass cups, golden crema swirling, a soft wisp of steam rising. Reproduce the machine exactly as in the references: control panel layout, buttons, silver bean dial, steam wand on the left, spouts and logo placement. Lighting: one warm caramel-toned key light from the upper left, a thin warm rim light outlining the machine, deep soft shadows, a subtle reflection on the yellow surface. Dramatic, premium, energetic, like a launch campaign. Keep the upper third as clean dark brown background for a white headline. 85mm, f/8, crisp detail on the finger, the button and the crema. No added text or logos beyond those on the machine.
 ```
 
 ## 5. `primer-cafe-magnifica.jpg` · "Tu primer café, en 5 pasos" (28/12)
