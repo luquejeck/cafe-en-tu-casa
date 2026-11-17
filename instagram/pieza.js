@@ -12,10 +12,10 @@ const chica = t => t ? `<p class="chica">${t}</p>` : '';
 const CUERPO = {
   portada: s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}${s.img ? `<div class="foto">${img(s.img)}</div>` : ''}${pil(s.pildora)}`,
   foto:    s => `${ep(s.ep)}<h2>${s.h}</h2>${sub(s.sub)}<div class="foto ${s.llena ? 'llena' : ''}">${img(s.img)}</div>${pil(s.pildora)}${chica(s.chica)}`,
-  texto:   s => `${ep(s.ep)}<h2>${s.h}</h2>${par(s.p)}${pil(s.pildora)}${chica(s.chica)}${s.img ? `<div class="foto mini">${img(s.img)}</div>` : ''}`,
+  texto:   s => `${s.icono ? `<div class="icono-solo">${icono(s.icono)}</div>` : ''}${ep(s.ep)}<h2>${s.h}</h2>${par(s.p)}${pil(s.pildora)}${s.img ? `<div class="foto mini">${img(s.img)}</div>` : ''}${typeof grafico === 'function' ? grafico(s) : ''}${chica(s.chica)}`,
   dato:    s => `${ep(s.ep)}<p class="num">${s.num}${s.unidad ? `<small>${s.unidad}</small>` : ''}</p>${sub(s.sub)}${par(s.p)}`,
   lista:   s => `${ep(s.ep)}<h2>${s.h}</h2><ul class="lista">${s.items.map((it, i) =>
-             `<li><i>${s.numerada ? i + 1 : '✓'}</i><div><b>${it[0]}</b>${it[1] ? `<span>${it[1]}</span>` : ''}</div></li>`).join('')}</ul>${chica(s.chica)}`,
+             `<li><i>${s.numerada ? i + 1 : '✓'}</i><div><b>${it[0]}</b>${it[1] ? `<span>${it[1]}</span>` : ''}</div></li>`).join('')}</ul>${chica(s.chica)}${typeof grafico === 'function' ? grafico(s) : ''}`,
   trio:    s => `${ep(s.ep)}<h2>${s.h}</h2><div class="cols">${PRODUCTOS.map(p =>
              `<div class="col"><div class="mini">${img(p.imgs[0])}</div><p class="ep">${p.etiqueta}</p><h3>${p.modelo}</h3><p>${s.linea(p)}</p>${s.pie ? `<p class="g">${s.pie(p)}</p>` : ''}</div>`).join('')}</div>`,
   dos:     s => `${ep(s.ep)}<h2>${s.h}</h2><div class="cols dos">${s.cols.map(c =>
@@ -30,9 +30,9 @@ const CUERPO = {
   gancho:  s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}${s.img ? `<div class="foto ${s.llena ? 'llena' : ''}">${img(s.img)}</div>` : ''}${s.sticker ? `<p class="sticker">${s.sticker}</p>` : ''}`,
   quiz:    s => `${ep(s.ep)}<h2>${s.h}</h2><div class="quiz">${s.ops.map((o, i) =>
              `<div class="${s.ok === i ? 'ok' : ''}"><i>${'ABCD'[i]}</i>${o}</div>`).join('')}</div>${par(s.p)}`,
-  revela:  s => `${ep(s.ep)}${s.tachado ? `<p class="tachado">${s.tachado}</p>` : ''}<p class="revela">${s.num}</p>${sub(s.sub)}${par(s.p)}`,
-  error:   s => `<p class="gigante">${s.n}<small>/${s.de}</small></p><h2>${s.h}</h2>${par(s.p)}${s.evitar ? `<div class="evitar"><b>${s.titEvitar || 'Cómo evitarlo'}</b>${s.evitar}</div>` : ''}${s.img ? `<div class="foto mini">${img(s.img)}</div>` : ''}`,
-  mito:    s => `<p class="veredicto ${s.ok ? 'verdadero' : 'falso'}">${s.ok ? 'Verdadero' : 'Falso'}</p><p class="mito">“${s.mito}”</p><h2>${s.h}</h2>${par(s.p)}${s.img ? `<div class="foto mini">${img(s.img)}</div>` : ''}`,
+  revela:  s => `${ep(s.ep)}${s.tachado ? `<p class="tachado">${s.tachado}</p>` : ''}<p class="revela">${s.num}</p>${sub(s.sub)}${par(s.p)}${typeof grafico === 'function' ? grafico(s) : ''}`,
+  error:   s => `${s.icono ? `<div class="cabeza">${icono(s.icono)}<p class="gigante">${s.n}<small>/${s.de}</small></p></div>` : `<p class="gigante">${s.n}<small>/${s.de}</small></p>`}<h2>${s.h}</h2>${par(s.p)}${s.evitar ? `<div class="evitar"><b>${s.titEvitar || 'Cómo evitarlo'}</b>${s.evitar}</div>` : ''}${s.img ? `<div class="foto mini">${img(s.img)}</div>` : ''}${typeof grafico === 'function' ? grafico(s) : ''}`,
+  mito:    s => `${s.icono ? `<div class="icono-solo">${icono(s.icono)}</div>` : ''}<p class="veredicto ${s.ok ? 'verdadero' : 'falso'}">${s.ok ? 'Verdadero' : 'Falso'}</p><p class="mito">“${s.mito}”</p><h2>${s.h}</h2>${par(s.p)}${s.img ? `<div class="foto mini">${img(s.img)}</div>` : ''}${typeof grafico === 'function' ? grafico(s) : ''}`,
   receta:  s => `${ep(s.ep)}<h2>${s.h}</h2><div class="taza">${s.capas.map(c => `<div class="capa ${c[0]}" style="flex:${c[1]}">${c[2] || ''}</div>`).join('')}</div><p class="receta-pie">${s.p}</p>`,
   chat:    s => `${ep(s.ep)}${s.h ? `<h2>${s.h}</h2>` : ''}<div class="chat">${s.grupo ? `<p class="grupo">${s.grupo}</p>` : ''}${s.msjs.map(m =>
              `<p class="${m[0] === 'yo' ? 'yo' : ''}">${m[0] === 'yo' ? '' : `<b>${m[0]}</b>`}${m[1]}</p>`).join('')}</div>`,
