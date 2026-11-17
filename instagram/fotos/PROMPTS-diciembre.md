@@ -24,7 +24,7 @@ importante va en la mitad de arriba y **el 40 % de abajo queda tranquilo** (mesa
 
 ---
 
-## Faltan: 2, 3 y 4 (las demás ya están generadas)
+## Todas generadas (17/11)
 
 ### 1. `dos-vecinos.jpg` · portada de "Dos vecinos" (10/12)
 

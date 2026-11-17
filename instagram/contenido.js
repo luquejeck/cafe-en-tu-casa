@@ -784,7 +784,7 @@ const PIEZAS = [
       { t: 'receta', tono: 'gris', ep: '5 · El de moda', h: 'Flat white', capas: [['cafe', 2, 'Doble'], ['leche', 2, 'Leche'], ['espuma', 0.35, '']],
         p: 'Espresso doble y leche cremosa, casi sin espuma.', sigue: '¿Y en casa?' },
       { t: 'texto', ep: 'Con la Magnifica S', h: 'Salen los cinco: <mark>un botón y el vaporizador</mark>.',
-        p: 'El espresso sale solo; la leche la espumás vos, a tu gusto.', img: F + 'magnifica-latte-cenital.jpg', sigue: 'Última' },
+        p: 'El espresso sale solo; la leche la espumás vos, a tu gusto.', img: F + 'pedido-bar-tazas-2.jpg', sigue: 'Última' },
       { t: 'cta', tono: 'oscuro', ep: 'Guardalo para tu próximo café', h: '¿Cuál es el tuyo?',
         sub: 'Contestá en los comentarios. ¿Querés hacerlos en casa? Escribinos.', boton: 'Escribinos por WhatsApp',
         chica: `Magnifica S: ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF) o ${M.cuotas} cuotas sin interés en Mercado Libre. No se combinan.` }
