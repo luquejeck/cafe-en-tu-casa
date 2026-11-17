@@ -91,7 +91,9 @@ Firmeza: **señal** (1–2 piezas) · **probado** (3+ piezas o 3+ semanas) · **
 
 - 20 por mes, historias incluidas; se gastan al publicarse. Borradores y errores no cuentan. Cambiar texto, video u hora de algo ya programado no gasta.
 - Noviembre 2026: 20 de 20 (14 publicadas + 6 pendientes: 16, 17, 19, 23, 25 y 27). Las historias del finde de Black Friday se suben desde la app.
-- Diciembre 2026 (al 16/11): 9 programadas (1, 2, 7, 9, 11, 15, 18, 21 y 29/12), 11 libres. Reservar 2 para Reyes; el resto para Navidad.
+- Diciembre 2026 (al 17/11): 14 programadas (1, 2, 7, 8, 9, 10, 11, 15, 17, 18, 21, 22, 28 y 29/12) + el borrador del 3/12 = 15. Reservar 2 para Reyes: quedan 3 libres.
+- Enero 2027 (al 17/11): 5 carruseles programados (5, 7, 12, 14 y 19/1, a las 10:00). Quedan 15 libres.
+- Imágenes para Metricool: links públicos del repo en GitHub (raw.githubusercontent.com con el hash del commit). Metricool las copia a sus servidores al programar.
 
 ---
 Última actualización: 16/11/2026 (semana 9-15/11: 1.080 vistas, 531 alcanzadas, 24 interacciones, 813 seguidores; 0 guardados y compartidos). Anterior: 26/10/2026 (semana 19-25/10: 1.033 vistas, 435 alcanzadas, 28 interacciones, 812 seguidores; 0 guardados y compartidos por segunda semana).

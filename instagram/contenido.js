@@ -546,7 +546,7 @@ const PIEZAS = [
      Precio solo al final. Cierre: Escribinos por WhatsApp + pregunta fácil.
      Fotos de Flow (marcar como IA en Metricool): instagram/fotos/. */
   {
-    id: 'dic-lun-carrusel-regalatela', semana: 0, dia: 'Lunes', tipo: 'carrusel', fecha: '2026-12-07', estilo: 'pop',
+    id: 'dic-lun-carrusel-regalatela', semana: 0, dia: 'Martes', tipo: 'carrusel', fecha: '2026-12-08', estilo: 'pop',
     titulo: 'Este año, el regalo es para vos',
     caption:
       'Este año, el regalo es para vos. ☕🎄\n\n' +
