@@ -198,7 +198,7 @@ h2 { font-size: 72px; font-weight: 600; line-height: 1.07; letter-spacing: -.03e
 
 /* ---- Dibujos y gráficos (graficos.js) ---- */
 .pop .icono { width: 120px; height: 120px; color: var(--brand); stroke-width: 2.6; }
-.pop .mini { width: 40px; height: 40px; color: var(--brand); flex-shrink: 0; }
+.pop .ico-chico { width: 40px; height: 40px; color: var(--brand); flex-shrink: 0; }
 .cabeza { display: flex; align-items: center; gap: 34px; margin-bottom: 18px; }
 .cabeza .gigante { margin-bottom: 0; }
 .cabeza .icono { width: 150px; height: 150px; padding: 26px; border-radius: 50%; background: var(--suave); }

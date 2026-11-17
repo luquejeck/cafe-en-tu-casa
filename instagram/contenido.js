@@ -635,7 +635,7 @@ const PIEZAS = [
       { t: 'error', icono: 'bar', n: 2, de: 5, h: 'Mirar solo el precio de la máquina.',
         p: 'Lo caro es lo que gastás en café todos los meses.', graf: 'mes', sigue: 'Para los de cortado' },
       { t: 'error', tono: 'gris', icono: 'leche', n: 3, de: 5, h: 'Olvidarte de la leche.', p: 'Si sos de cortado, cappuccino o latte, el espumador no es un detalle.',
-        evitar: 'Fijate que tenga vaporizador. La Magnifica S y la Dedica lo traen.', img: F + 'magnifica-latte-cenital.jpg', sigue: 'El 4 está en tu alacena' },
+        evitar: 'Fijate que tenga vaporizador. La Magnifica S y la Dedica lo traen.', img: F + 'pedido-bar-tazas.jpg', sigue: 'El 4 está en tu alacena' },
       { t: 'error', icono: 'frasco', n: 4, de: 5, h: 'Comprar molido en paquetes gigantes.', p: 'El café pierde aroma apenas se muele. El kilo abierto en marzo… ya sabés.',
         evitar: 'Comprá de a poco, o en grano y molelo en el momento.', sigue: 'El último' },
       { t: 'error', tono: 'oscuro', icono: 'calendario', n: 5, de: 5, h: 'No preguntar cuándo llega.', p: 'Sobre todo en diciembre.',

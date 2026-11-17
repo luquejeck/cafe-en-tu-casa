@@ -65,8 +65,8 @@ const GRAFICOS = {
   mes: () => {
     const a = TIENDA.precioCafeAfuera * 2 * 30, b = TIENDA.precioKiloCafe / TIENDA.cafesPorKilo * 2 * 30;
     return `<div class="hbarras">
-      <div class="hb"><div class="hb-l">${icono('bar', 'mini')}En el bar</div><div class="hb-v">${plata(a)}</div><u style="width:100%"></u></div>
-      <div class="hb casa"><div class="hb-l">${icono('casa', 'mini')}En casa</div><div class="hb-v">${plata(b)}</div><u style="width:${Math.max(4, b / a * 100)}%"></u></div>
+      <div class="hb"><div class="hb-l">${icono('bar', 'ico-chico')}En el bar</div><div class="hb-v">${plata(a)}</div><u style="width:100%"></u></div>
+      <div class="hb casa"><div class="hb-l">${icono('casa', 'ico-chico')}En casa</div><div class="hb-v">${plata(b)}</div><u style="width:${Math.max(4, b / a * 100)}%"></u></div>
       <p class="g-pie">2 cafés por día, durante un mes. Valores aproximados.</p></div>`;
   },
 
@@ -141,7 +141,7 @@ const GRAFICOS = {
       ${[['boton', 'Cómo se prepara', 'Un botón', 'Vos, a mano'], ['molinillo', 'Molinillo', 'Integrado, 13 niveles', 'Usa café molido'],
          ['regla', 'Ancho', String(M.medidas.ancho).replace('.', ',') + ' cm', String(D.medidas.ancho).replace('.', ',') + ' cm'],
          ['leche', 'Leche', 'Vaporizador', 'Cappuccino System'], ['taza', 'Ideal para', 'Varios cafés por día', 'El que disfruta el ritual']]
-        .map(f => `<tr><th>${icono(f[0], 'mini')}${f[1]}</th><td>${f[2]}</td><td>${f[3]}</td></tr>`).join('')}</tbody></table>`,
+        .map(f => `<tr><th>${icono(f[0], 'ico-chico')}${f[1]}</th><td>${f[2]}</td><td>${f[3]}</td></tr>`).join('')}</tbody></table>`,
 
   /* El vaso del iced latte por capas */
   iced: () => `<svg class="grafico" viewBox="0 0 900 560" aria-hidden="true">
