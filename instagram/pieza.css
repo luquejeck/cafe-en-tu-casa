@@ -151,3 +151,47 @@ h2 { font-size: 72px; font-weight: 600; line-height: 1.07; letter-spacing: -.03e
 .ticket .t { text-align: center; font-weight: 700; letter-spacing: .1em; border-bottom: 2px dashed var(--linea); padding-bottom: 16px; margin-bottom: 16px; }
 .ticket .l { display: flex; justify-content: space-between; gap: 20px; }
 .ticket .tot { border-top: 2px dashed rgba(0,0,0,.2); margin-top: 16px; padding-top: 16px; font-weight: 700; font-size: 34px; }
+
+/* ---- Pop, versión 2 (17/11): más atractivo, misma marca ---- */
+/* barra de progreso oliva arriba */
+.progreso { position: absolute; top: 0; left: 0; height: 10px; background: var(--brand); }
+.progreso-fondo { position: absolute; top: 0; left: 0; right: 0; height: 10px; background: var(--linea); }
+
+/* portada con foto a sangre: la foto ocupa todo, el texto abajo sobre un velo oscuro */
+.lienzo.tapa { padding: 0; color: #fff; background: #101012; --ink-2: #e8e8ed; --ink-3: #d2d2d7; --brand: #c5dd96; --linea: rgba(255,255,255,.3); }
+.tapa .fondo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tapa .velo { position: absolute; left: 0; right: 0; bottom: 0; height: 68%; background: linear-gradient(rgba(16,16,18,0), rgba(16,16,18,.55) 35%, rgba(16,16,18,.88)); }
+.tapa .velo-arriba { position: absolute; left: 0; right: 0; top: 0; height: 200px; background: linear-gradient(rgba(16,16,18,.45), rgba(16,16,18,0)); }
+.tapa .marca { position: relative; margin-top: var(--aire-v); text-shadow: 0 1px 12px rgba(0,0,0,.35); }
+.tapa .marca i { background: #a3c26a; }
+.tapa .contador { color: rgba(255,255,255,.85); }
+.tapa main { position: relative; justify-content: flex-end; padding: 0 76px 30px; }
+.tapa h1 { font-size: 96px; text-shadow: 0 2px 24px rgba(0,0,0,.25); }
+.tapa mark { color: #c5dd96; }
+.tapa .sub { color: #f5f5f7; max-width: 24ch; }
+.tapa .pie { position: relative; padding: 0 76px; margin-bottom: var(--aire-v); }
+.desliza { display: inline-flex; align-items: center; gap: 12px; margin-top: 36px; background: #fff; color: #1d1d1f; border-radius: 980px; padding: 18px 34px; font-size: 30px; font-weight: 600; }
+.lienzo.tapa.sinfoto .fondo, .lienzo.tapa.sinfoto .velo, .lienzo.tapa.sinfoto .velo-arriba { display: none; }
+.lienzo.tapa.sinfoto main { justify-content: center; }
+
+/* foto chica en placas de pasos */
+.pop .foto.mini { flex: 0 0 auto; height: 330px; margin-top: 34px; border-radius: 34px; overflow: hidden; padding: 0; background: none; }
+.pop .foto.mini img { width: 100%; height: 100%; object-fit: cover; }
+
+/* verdadero / falso */
+.veredicto { display: inline-block; font-size: 30px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 14px 30px; border-radius: 980px; margin-bottom: 28px; }
+.veredicto.falso { background: rgba(198, 42, 29, .1); color: #c62a1d; }
+.veredicto.verdadero { background: var(--suave); color: var(--brand-dark); }
+.oscuro .veredicto.falso { background: rgba(255,138,128,.16); color: #ff8a80; }
+.oscuro .veredicto.verdadero { color: #c5dd96; }
+.mito { font-size: 30px; color: var(--ink-3); font-weight: 600; margin-bottom: 18px; }
+
+/* receta: proporciones en una taza dibujada */
+.taza { margin-top: 40px; width: 300px; height: 330px; border: 8px solid var(--ink); border-top: none; border-radius: 0 0 60px 60px; display: flex; flex-direction: column-reverse; overflow: hidden; position: relative; }
+.taza::after { content: ''; position: absolute; right: -70px; top: 60px; width: 60px; height: 120px; border: 8px solid var(--ink); border-left: none; border-radius: 0 50px 50px 0; }
+.taza { overflow: visible; }
+.taza .capa { display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.capa.cafe { background: #4a2c1d; color: #f5e9dd; border-radius: 0 0 52px 52px; }
+.capa.leche { background: #efe4d6; color: #6b4a36; }
+.capa.espuma { background: #fffaf2; color: #8a6a55; border-top: 2px dashed rgba(0,0,0,.08); }
+.receta-pie { margin-top: 34px; font-size: 32px; color: var(--ink-2); max-width: 26ch; line-height: 1.4; }

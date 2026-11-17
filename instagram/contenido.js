@@ -558,8 +558,8 @@ const PIEZAS = [
       `El ${OFF}% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan. Envío gratis a todo el país.\n\n` +
       '¿Sos A o B? Escribinos por WhatsApp desde el link de la bio y te ayudamos a elegir 👇\n\n#cafeencasa #regalodenavidad #delonghi #magnificas #dedica',
     placas: [
-      { t: 'gancho', ep: 'Navidad · para vos', h: 'Este año, el regalo es <mark>para vos</mark>.',
-        sub: 'Test de 20 segundos: ¿qué cafetera va con tu mañana?', img: F + 'sofa-dedica.jpg', llena: true, sigue: 'Hacé el test' },
+      { t: 'tapa', ep: 'Navidad · para vos', h: 'Este año, el regalo es <mark>para vos</mark>.',
+        sub: 'Test de 20 segundos: ¿qué cafetera va con tu mañana?', img: F + 'sofa-dedica.jpg', desliza: 'Hacé el test' },
       { t: 'chat', tono: 'gris', ep: '¿Te suena?', grupo: 'Hoy, 8:05',
         msjs: [['Vos', 'Un cortadito rápido en el bar y salgo.'], ['Tu billetera', 'Ayer dijiste lo mismo.'],
                ['Vos', 'Son $4.000 nomás.'], ['yo', 'Este año me regalo la cafetera.']], sigue: '¿Qué cafetero sos?' },
@@ -593,8 +593,8 @@ const PIEZAS = [
       'No se combinan. Envío gratis a todo el país.\n\n' +
       '¿Sos 5° B o 3° A? Escribinos por WhatsApp y te hacemos la cuenta con tus números 👇\n\n#cafeencasa #ahorro #delonghi #magnificas',
     placas: [
-      { t: 'gancho', tono: 'oscuro', ep: 'Dos vecinos · mismo edificio', h: `5° B gasta <mark>${fmt(ANIO_AFUERA)}</mark> por año en café.`,
-        sub: '3° A toma el mismo café. ¿Cuánto gasta él?', sticker: 'Adiviná antes de deslizar', sigue: 'Conocelos' },
+      { t: 'tapa', ep: 'Dos vecinos · mismo edificio', h: `5° B gasta <mark>${fmt(ANIO_AFUERA)}</mark> por año en café.`,
+        sub: '3° A toma el mismo café. Adiviná cuánto gasta él.', img: F + 'dos-vecinos.jpg', desliza: 'Adiviná' },
       { t: 'dos', tono: 'gris', h: 'El mismo café, todas las mañanas',
         cols: [
           { ep: '5° B', h: 'Baja al bar', items: [`${CAFES_DIA} cafés por día, a ${fmt(TIENDA.precioCafeAfuera)}`, 'El barista ya sabe su nombre'] },
@@ -630,15 +630,15 @@ const PIEZAS = [
       'Al final está la checklist: guardala para el día que compres.\n\n' +
       '¿Cuál casi te pasa? Escribinos por WhatsApp antes de comprar y te ayudamos a medir y elegir 👇\n\n#cafeencasa #cafetera #espresso #delonghi',
     placas: [
-      { t: 'gancho', ep: 'Antes de comprar', h: 'Llegó la cafetera. <mark>No entraba.</mark>',
-        sub: '5 errores con la primera cafetera, y cómo no cometerlos.', img: F + 'dedica-espresso-travertino.jpg', llena: true, sigue: 'Error 1' },
+      { t: 'tapa', ep: 'Antes de comprar', h: 'Llegó la cafetera. <mark>No entraba.</mark>',
+        sub: '5 errores con la primera cafetera, y cómo no cometerlos.', img: F + 'dedica-espresso-travertino.jpg', desliza: 'Ver los 5' },
       { t: 'error', tono: 'gris', n: 1, de: 5, h: 'No medir la mesada.', p: 'Ni la altura bajo la alacena.',
         evitar: `Magnifica S: ${cm(M.medidas.ancho)} de ancho y ${cm(M.medidas.alto)} de alto. Dedica: ${cm(D.medidas.ancho)} y ${cm(D.medidas.alto)}.`, sigue: 'El 2 duele' },
       { t: 'error', n: 2, de: 5, h: 'Mirar solo el precio de la máquina.',
         p: `Lo caro es el bar: ${CAFES_DIA} cafés por día son unos ${fmt(mesAfuera)} por mes.`,
         evitar: `Hacé la cuenta: en casa, los mismos cafés salen unos ${fmt(mesCasa)}.`, sigue: 'Para los de cortado' },
       { t: 'error', tono: 'gris', n: 3, de: 5, h: 'Olvidarte de la leche.', p: 'Si sos de cortado, cappuccino o latte, el espumador no es un detalle.',
-        evitar: 'Fijate que tenga vaporizador. La Magnifica S y la Dedica lo traen.', sigue: 'El 4 está en tu alacena' },
+        evitar: 'Fijate que tenga vaporizador. La Magnifica S y la Dedica lo traen.', img: F + 'magnifica-latte-cenital.jpg', sigue: 'El 4 está en tu alacena' },
       { t: 'error', n: 4, de: 5, h: 'Comprar molido en paquetes gigantes.', p: 'El café pierde aroma apenas se muele. El kilo abierto en marzo… ya sabés.',
         evitar: 'Comprá de a poco, o en grano y molelo en el momento.', sigue: 'El último' },
       { t: 'error', tono: 'oscuro', n: 5, de: 5, h: 'No preguntar cuándo llega.', p: 'Sobre todo en diciembre.',
@@ -667,8 +667,8 @@ const PIEZAS = [
       `El ${OFF}% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan. Envío gratis a todo el país.\n\n` +
       '¿Cuál de los 4 no sabías? Escribinos por WhatsApp y te contamos más 👇\n\n#cafeencasa #delonghi #magnificas #espresso #comofunciona',
     placas: [
-      { t: 'gancho', tono: 'gris', ep: 'Magnifica S · por dentro', h: 'Apretás un botón. Adentro pasan <mark>4 cosas</mark>.',
-        sub: 'En lo que tardás en buscar la taza.', img: F + 'magnifica-latte-cenital.jpg', llena: true, sigue: 'Paso 1' },
+      { t: 'tapa', ep: 'Magnifica S · por dentro', h: 'Apretás un botón. Adentro pasan <mark>4 cosas</mark>.',
+        sub: 'En lo que tardás en buscar la taza.', img: F + 'magnifica-latte-cenital.jpg', desliza: 'Paso 1' },
       { t: 'error', n: 1, de: 4, h: 'Muele.', p: 'Un molinillo cónico de acero muele el grano justo antes de cada taza.',
         titEvitar: 'Dato de sobremesa', evitar: '13 niveles: de más suave a más intenso.', sigue: 'Paso 2' },
       { t: 'error', tono: 'gris', n: 2, de: 4, h: 'Calienta.', p: 'El Thermoblock lleva el agua a unos 90 °C al instante.',
@@ -699,8 +699,8 @@ const PIEZAS = [
       'No se combinan. Envío gratis a todo el país.\n\n' +
       '¿Iced latte o espresso aunque haga 35°? Escribinos por WhatsApp desde el link de la bio 👇\n\n#icedlatte #cafeencasa #verano #delonghi #dedica',
     placas: [
-      { t: 'gancho', ep: 'Se viene el calor', h: 'Tu iced latte, <mark>en casa</mark>, en 3 pasos.',
-        sub: 'Sin fila y sin vasito de plástico.', img: F + 'dedica-iced-latte.jpg', llena: true, sigue: 'Primero, un quiz' },
+      { t: 'tapa', ep: 'Se viene el calor', h: 'Tu iced latte, <mark>en casa</mark>, en 3 pasos.',
+        sub: 'Sin fila y sin vasito de plástico.', img: F + 'dedica-iced-latte.jpg', desliza: 'Primero, un quiz' },
       { t: 'quiz', tono: 'gris', ep: 'Adiviná', h: '¿Qué va primero en el vaso?',
         ops: ['El espresso', 'La leche', 'El hielo'], sigue: 'La respuesta' },
       { t: 'revela', ep: 'Respuesta: C', num: 'El hielo', sub: 'hasta arriba, en un vaso alto.', p: 'Después la leche y, al final, el espresso.', sigue: 'Paso 1' },
@@ -709,14 +709,177 @@ const PIEZAS = [
       { t: 'error', n: 2, de: 3, h: 'Leche fría.', p: 'Unos 150 ml, o la vegetal que uses.',
         titEvitar: 'Tip', evitar: 'Si lo querés dulce, el azúcar va en el espresso caliente: en la leche fría no se disuelve.', sigue: 'Paso 3' },
       { t: 'error', tono: 'gris', n: 3, de: 3, h: 'Espresso doble, encima.', p: 'Recién hecho y despacio: vas a ver la mezcla bajando.',
-        titEvitar: 'Tip', evitar: 'Con la Magnifica S o la Dedica, un botón.', sigue: 'Así queda' },
+        titEvitar: 'Tip', evitar: 'Con la Magnifica S o la Dedica, un botón.', img: F + 'dedica-espresso-travertino.jpg', sigue: 'Así queda' },
       { t: 'foto', ep: 'Resultado', h: 'Así queda.', sub: 'Y el segundo te sale mejor.', img: F + 'dedica-iced-latte-living.jpg', llena: true, sigue: 'Con qué hacerlo' },
       { t: 'lista', tono: 'gris', ep: 'Con qué hacerlo', h: 'Por transferencia',
         items: [[`Magnifica S · ${fmt(P.transferencia(M))}`, `o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre.`],
                 [`Dedica EC685 · ${fmt(P.transferencia(D))}`, `o ${D.cuotas} cuotas sin interés de ${fmt(P.cuota(D))} en Mercado Libre.`]],
         chica: `El ${OFF}% OFF es por transferencia o efectivo; las cuotas, en Mercado Libre. No se combinan. Envío gratis a todo el país.`, sigue: 'Última' },
-      { t: 'cta', tono: 'oscuro', ep: 'Aunque haga 35°', h: '¿Iced latte o espresso?',
-        sub: 'Escribinos y te ayudamos a elegir la tuya.', boton: 'Escribinos por WhatsApp' }
+      { t: 'cta', tono: 'oscuro', ep: 'Guardalo para el primer día de calor', h: '¿Iced latte o espresso, aunque haga 35°?',
+        sub: 'Contestá en los comentarios. ¿Dudas con tu cafetera? Escribinos.', boton: 'Escribinos por WhatsApp' }
+    ]
+  }
+,
+
+  /* ================= ENERO 2027 · 5 carruseles más (17/11) =================
+     Misma estrategia y diseño que los de diciembre. Los de referencia (guía,
+     mitos, cuidado) cierran pidiendo guardar; los de producto, WhatsApp.
+     Las fotos que todavía no existen (prompts en instagram/fotos/PROMPTS-diciembre.md)
+     no rompen nada: la placa se arma sin ellas hasta que estén. */
+  {
+    id: 'ene-mar-carrusel-capsula-o-grano', semana: 0, dia: 'Martes', tipo: 'carrusel', fecha: '2027-01-05', estilo: 'pop',
+    titulo: 'Tu café de cápsula se molió hace meses',
+    caption:
+      'Tu café de cápsula se molió hace meses. ☕\n\n' +
+      'El café empieza a perder aroma apenas se muele. La cápsula se muele en fábrica y después viaja y espera en la alacena. El grano lo molés vos, taza por taza.\n\n' +
+      'La cápsula gana en algo: es rápida. Una superautomática también: apretás un botón y muele en el momento.\n\n' +
+      `Magnifica S\n💸 ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF)\n💳 o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre\n` +
+      'No se combinan. Envío gratis a todo el país.\n\n' +
+      '¿Cápsula o grano? Escribinos por WhatsApp y te ayudamos a pasarte al grano 👇\n\n#cafeengrano #capsulas #cafeencasa #delonghi #magnificas',
+    placas: [
+      { t: 'tapa', ep: 'Cápsula o grano', h: 'Tu café de cápsula <mark>se molió hace meses</mark>.',
+        sub: 'Qué cambia en la taza, en un minuto.', img: F + 'capsula-vs-grano.jpg', desliza: 'Primero, un quiz' },
+      { t: 'quiz', tono: 'gris', ep: 'Adiviná', h: '¿Cuándo empieza a perder aroma el café?',
+        ops: ['Cuando vence el paquete', 'Apenas se muele', 'Cuando se enfría la taza'], sigue: 'La respuesta' },
+      { t: 'revela', ep: 'Respuesta: B', num: 'Al molerlo', sub: 'el aroma empieza a irse.', p: 'Por eso importa cuándo se molió tu café, no solo cuál comprás.', sigue: 'Cápsula vs grano' },
+      { t: 'dos', tono: 'gris', h: 'Cuándo se muele',
+        cols: [
+          { ep: 'Cápsula', h: 'En la fábrica', items: ['Después viaja', 'Y espera en la alacena'] },
+          { destacada: true, ep: 'Grano', h: 'En tu cocina', items: ['Justo antes de la taza', 'Taza por taza'] }
+        ], sigue: 'Lo que ganás' },
+      { t: 'lista', ep: 'Con grano', h: 'Lo que ganás',
+        items: [['Aroma recién molido', 'En cada taza.'], ['Elegís tu café', 'Tostador, origen, intensidad.'],
+                ['Ajustás la molienda', '13 niveles en la Magnifica S.'], ['Menos cápsulas a la basura', '']], sigue: 'Lo justo' },
+      { t: 'texto', tono: 'gris', ep: 'Para ser justos', h: 'La cápsula gana en algo: <mark>es rápida</mark>.',
+        p: 'Una superautomática también: apretás un botón y muele el grano en el momento.', img: F + 'magnifica-latte-cenital.jpg', sigue: 'Cuánto sale' },
+      { t: 'cta', tono: 'oscuro', ep: `Magnifica S · ${fmt(P.transferencia(M))} por transferencia`, h: '¿Cápsula o grano?',
+        sub: 'Escribinos y te ayudamos a pasarte al grano.', boton: 'Escribinos por WhatsApp',
+        chica: `o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre. No se combinan. Envío gratis.` }
+    ]
+  },
+  {
+    id: 'ene-jue-carrusel-tu-pedido-del-bar', semana: 0, dia: 'Jueves', tipo: 'carrusel', fecha: '2027-01-07', estilo: 'pop',
+    titulo: 'Lo que pedís en el bar, en casa',
+    caption:
+      '¿Cortado, lágrima o flat white? Lo que pedís en el bar, en casa. ☕\n\n' +
+      'Cortado: espresso con un poco de leche.\n' +
+      'Lágrima: mucha leche y unas gotas de café.\n' +
+      'Cappuccino: espresso, leche y espuma en partes parecidas.\n' +
+      'Latte: espresso, mucha leche y una capa fina de espuma.\n' +
+      'Flat white: espresso doble y leche cremosa, casi sin espuma.\n\n' +
+      'Con la Magnifica S salen los cinco: el espresso con un botón y la leche con el vaporizador.\n\n' +
+      'Guardalo para tu próximo café.\n\n' +
+      '¿Cuál es el tuyo? Contestá en los comentarios 👇\n\n#cortado #cappuccino #flatwhite #cafeencasa #delonghi',
+    placas: [
+      { t: 'tapa', ep: 'Guía de bar', h: 'Lo que pedís en el bar, <mark>en casa</mark>.',
+        sub: '5 cafés y qué lleva cada uno.', img: F + 'pedido-bar-tazas.jpg', desliza: 'Ver la guía' },
+      { t: 'receta', tono: 'gris', ep: '1 · El clásico', h: 'Cortado', capas: [['cafe', 3, 'Espresso'], ['leche', 1, 'Leche']],
+        p: 'Espresso con un poco de leche caliente.', sigue: 'El del desayuno' },
+      { t: 'receta', ep: '2 · El del desayuno', h: 'Lágrima', capas: [['cafe', 0.6, ''], ['leche', 4, 'Leche']],
+        p: 'Mucha leche y unas gotas de café.', sigue: 'El de la espuma' },
+      { t: 'receta', tono: 'gris', ep: '3 · El de la espuma', h: 'Cappuccino', capas: [['cafe', 1, 'Espresso'], ['leche', 1, 'Leche'], ['espuma', 1, 'Espuma']],
+        p: 'Espresso, leche y espuma en partes parecidas.', sigue: 'El más suave' },
+      { t: 'receta', ep: '4 · El más suave', h: 'Latte', capas: [['cafe', 1, 'Espresso'], ['leche', 3, 'Leche'], ['espuma', 0.6, '']],
+        p: 'Espresso, mucha leche y una capa fina de espuma.', sigue: 'El de moda' },
+      { t: 'receta', tono: 'gris', ep: '5 · El de moda', h: 'Flat white', capas: [['cafe', 2, 'Doble'], ['leche', 2, 'Leche'], ['espuma', 0.35, '']],
+        p: 'Espresso doble y leche cremosa, casi sin espuma.', sigue: '¿Y en casa?' },
+      { t: 'texto', ep: 'Con la Magnifica S', h: 'Salen los cinco: <mark>un botón y el vaporizador</mark>.',
+        p: 'El espresso sale solo; la leche la espumás vos, a tu gusto.', img: F + 'magnifica-latte-cenital.jpg', sigue: 'Última' },
+      { t: 'cta', tono: 'oscuro', ep: 'Guardalo para tu próximo café', h: '¿Cuál es el tuyo?',
+        sub: 'Contestá en los comentarios. ¿Querés hacerlos en casa? Escribinos.', boton: 'Escribinos por WhatsApp',
+        chica: `Magnifica S: ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF) o ${M.cuotas} cuotas sin interés en Mercado Libre. No se combinan.` }
+    ]
+  },
+  {
+    id: 'ene-mar-carrusel-mitos-del-cafe', semana: 0, dia: 'Martes', tipo: 'carrusel', fecha: '2027-01-12', estilo: 'pop',
+    titulo: '5 cosas que creemos del café y no son así',
+    caption:
+      '5 cosas que creemos del café… y no son así. ☕🤔\n\n' +
+      '1. "Se guarda en la heladera." Falso: mejor en un frasco hermético, lejos de la luz y del calor.\n' +
+      '2. "Un espresso tiene más cafeína que un café de filtro." Falso, por taza: es más concentrado, pero es poquito.\n' +
+      '3. "Más oscuro, más fuerte." Falso: el tostado cambia el sabor, no la cafeína.\n' +
+      '4. "Se hace con agua hirviendo." Falso: unos 90 °C.\n' +
+      '5. "Recién molido sabe mejor." Verdadero.\n\n' +
+      'Guardalo para la próxima discusión de sobremesa.\n\n' +
+      '¿Cuál creías? Contestá con el número 👇\n\n#mitosdelcafe #cafeencasa #espresso #delonghi',
+    placas: [
+      { t: 'tapa', ep: 'Verdadero o falso', h: '5 cosas que creemos del café <mark>y no son así</mark>.',
+        sub: 'La 2 la discutimos en todas las sobremesas.', img: F + 'mitos-frasco.jpg', desliza: 'Empezá' },
+      { t: 'mito', tono: 'gris', mito: 'El café se guarda en la heladera.', h: 'Mejor en un frasco hermético.',
+        p: 'La heladera le pasa humedad y olores. Guardalo lejos de la luz y del calor.', sigue: 'La de la cafeína' },
+      { t: 'mito', mito: 'Un espresso tiene más cafeína que un café de filtro.', h: 'Por taza, tiene menos.',
+        p: 'Es más concentrado, pero es poquito: una taza de filtro suele tener más.', sigue: 'La del tostado' },
+      { t: 'mito', tono: 'gris', mito: 'Más oscuro, más fuerte.', h: 'Más tostado no es más cafeína.',
+        p: 'El tostado oscuro cambia el sabor, más amargo. No lo hace más fuerte.', sigue: 'La del agua' },
+      { t: 'mito', mito: 'El café se hace con agua hirviendo.', h: 'Un poco menos: unos 90 °C.',
+        p: 'El agua hirviendo quema el café y lo amarga. Las cafeteras ya la calientan justo.', sigue: 'Una verdadera' },
+      { t: 'mito', ok: true, tono: 'gris', mito: 'Recién molido sabe mejor.', h: 'Sí: el aroma se va al moler.',
+        p: 'Por eso la Magnifica S muele el grano en cada taza.', img: F + 'magnifica-latte-cenital.jpg', sigue: 'Última' },
+      { t: 'cta', tono: 'oscuro', ep: 'Guardalo para la próxima sobremesa', h: '¿Cuál creías?',
+        sub: 'Contestá con el número. ¿Querés café recién molido en casa? Escribinos.', boton: 'Escribinos por WhatsApp',
+        chica: `Magnifica S: ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF) o ${M.cuotas} cuotas sin interés en Mercado Libre. No se combinan.` }
+    ]
+  },
+  {
+    id: 'ene-jue-carrusel-cuidala', semana: 0, dia: 'Jueves', tipo: 'carrusel', fecha: '2027-01-14', estilo: 'pop',
+    titulo: 'Cuidala 5 minutos y te dura años',
+    caption:
+      'Cuidá tu cafetera 5 minutos y te dura años. ☕🧽\n\n' +
+      'Todos los días: vaciá el cajón de residuos y la bandeja.\n' +
+      'Después de cada leche: purgá y limpiá el vaporizador.\n' +
+      'Una vez por semana: enjuagá la unidad de infusión (en la Magnifica S se saca) o el portafiltro (en la Dedica).\n' +
+      'Cuando la máquina lo pida: descalcificá, con el producto que indica el manual.\n\n' +
+      'Guardalo y pegalo en la heladera.\n\n' +
+      '¿Cada cuánto la limpiás? Sin mentir 👇 ¿Dudas con tu máquina? Escribinos por WhatsApp.\n\n#cafeencasa #delonghi #magnificas #tipsdecafe',
+    placas: [
+      { t: 'tapa', ep: 'Mantenimiento', h: 'Cuidala 5 minutos y <mark>te dura años</mark>.',
+        sub: '4 hábitos: de todos los días a cuando ella te avise.', img: F + 'limpieza-magnifica.jpg', desliza: 'Hábito 1' },
+      { t: 'error', tono: 'gris', n: 1, de: 4, h: 'Vaciá el cajón y la bandeja.', p: 'Todos los días. Los restos húmedos son lo primero que cambia el sabor.',
+        titEvitar: 'Tip', evitar: 'Secalos bien antes de volver a ponerlos.', sigue: 'Para los de leche' },
+      { t: 'error', n: 2, de: 4, h: 'Purgá el vaporizador.', p: 'Después de cada leche: un chorrito de vapor y un paño húmedo.',
+        titEvitar: 'Tip', evitar: 'Si lo hacés en el momento, la leche no se seca adentro.', sigue: 'Una vez por semana' },
+      { t: 'error', tono: 'gris', n: 3, de: 4, h: 'Enjuagá la unidad de infusión.', p: 'Una vez por semana. En la Magnifica S se saca: agua tibia, sin detergente.',
+        titEvitar: 'En la Dedica', evitar: 'Lavá el portafiltro y pasale un paño a la ducha.', sigue: 'Cuando te avise' },
+      { t: 'error', n: 4, de: 4, h: 'Descalcificá.', p: 'Cuando la máquina lo pida. El sarro tapa los conductos y enfría el café.',
+        titEvitar: 'Tip', evitar: 'Usá el descalcificante que indica el manual y cambiá seguido el agua del depósito.', sigue: 'La rutina' },
+      { t: 'lista', tono: 'gris', ep: 'Para pegar en la heladera', h: 'Tu rutina',
+        items: [['Todos los días', 'Cajón de residuos y bandeja.'], ['Después de cada leche', 'Vaporizador.'],
+                ['Una vez por semana', 'Unidad de infusión o portafiltro.'], ['Cuando lo pida', 'Descalcificar.']], sigue: 'Última' },
+      { t: 'cta', tono: 'oscuro', ep: 'Guardalo y pegalo en la heladera', h: '¿Cada cuánto la limpiás?',
+        sub: 'Sin mentir. ¿Dudas con tu máquina? Escribinos.', boton: 'Escribinos por WhatsApp' }
+    ]
+  },
+  {
+    id: 'ene-mar-carrusel-un-dia-con-la-magnifica', semana: 0, dia: 'Martes', tipo: 'carrusel', fecha: '2027-01-19', estilo: 'pop',
+    titulo: 'Un día con la Magnifica S: 4 cafés, 0 filas',
+    caption:
+      'Un día con la Magnifica S: 4 cafés, 0 filas. ☕\n\n' +
+      '7:30 · Espresso, antes de despertarte del todo.\n' +
+      '11:00 · Cortado, entre reunión y reunión.\n' +
+      '17:00 · Cappuccino de merienda.\n' +
+      '22:00 · Uno corto, de sobremesa.\n\n' +
+      `En el bar serían unos ${fmt(TIENDA.precioCafeAfuera * 4)} por día. En casa, con grano, unos ${fmt(costoCasa * 4)}.\n` +
+      'Valores aproximados (precios al 26/10).\n\n' +
+      `Magnifica S\n💸 ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF)\n💳 o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre\n` +
+      'No se combinan. Envío gratis a todo el país.\n\n' +
+      '¿Cuántos cafés tomás por día? Escribinos por WhatsApp y te ayudamos a elegir 👇\n\n#cafeencasa #delonghi #magnificas #homeoffice',
+    placas: [
+      { t: 'tapa', ep: 'Un día con la Magnifica S', h: '4 cafés. <mark>0 filas.</mark>',
+        sub: 'De las 7:30 a las 22, sin salir de casa.', img: F + 'espresso-magnifica.jpg', desliza: 'Arranca el día' },
+      { t: 'foto', tono: 'gris', ep: '7:30', h: 'Espresso.', sub: 'Antes de despertarte del todo. Un botón.', img: F + 'pareja-magnifica.jpg', llena: true, sigue: '11:00' },
+      { t: 'foto', ep: '11:00', h: 'Cortado.', sub: 'Entre reunión y reunión.', img: F + 'home-office-magnifica.jpg', llena: true, sigue: '17:00' },
+      { t: 'foto', tono: 'gris', ep: '17:00', h: 'Cappuccino.', sub: 'De merienda, con la leche espumada por vos.', img: F + 'magnifica-latte-cenital.jpg', llena: true, sigue: '22:00' },
+      { t: 'foto', ep: '22:00', h: 'Uno corto.', sub: 'De sobremesa, sin salir a buscarlo.', img: F + 'magnifica-sobremesa-noche.jpg', llena: true, sigue: 'Si fueran del bar' },
+      { t: 'ticket', tono: 'oscuro', ep: 'Si los 4 fueran del bar…', h: 'El ticket del día', titulo: 'BAR DE LA ESQUINA',
+        lineas: [['Espresso', fmt(TIENDA.precioCafeAfuera)], ['Cortado', fmt(TIENDA.precioCafeAfuera)], ['Cappuccino', fmt(TIENDA.precioCafeAfuera)], ['Uno corto', fmt(TIENDA.precioCafeAfuera)]],
+        total: ['TOTAL', fmt(TIENDA.precioCafeAfuera * 4)],
+        chica: `En casa, con grano, los mismos 4: unos ${fmt(costoCasa * 4)}. Valores aproximados (precios al 26/10).`, sigue: 'Cuánto sale' },
+      { t: 'lista', tono: 'gris', ep: 'La que hace los 4', h: 'Magnifica S',
+        items: [[`${fmt(P.transferencia(M))} por transferencia`, `Con ${OFF}% OFF, pagando por transferencia o efectivo.`],
+                [`o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))}`, 'En Mercado Libre. No se combina con el descuento.']],
+        chica: 'Envío gratis a todo el país.', sigue: 'Última' },
+      { t: 'cta', tono: 'oscuro', ep: 'Contanos', h: '¿Cuántos cafés tomás por día?',
+        sub: 'Escribinos y te decimos si la Magnifica S va con tu ritmo.', boton: 'Escribinos por WhatsApp' }
     ]
   }
 ];

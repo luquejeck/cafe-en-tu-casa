@@ -1,69 +1,104 @@
-# Fotos de Google Flow para los carruseles de diciembre
+# Fotos de Google Flow para los 10 carruseles (diciembre y enero)
 
-Son opcionales: los 5 carruseles ya están listos con las fotos que tenemos.
-Cada foto nueva reemplaza la portada de un carrusel.
+## Cómo generarlas
 
-## Cómo generarlas con nuestras cafeteras
-
-1. En Flow, **subí la foto de referencia** que indica cada prompt, como imagen de
-   referencia o ingrediente. Así sale **nuestra** máquina y no una genérica.
+1. En Flow, **subí la foto de referencia** de la cafetera que indica cada prompt, así sale **nuestra** máquina:
    - Magnifica S: `assets/img/magnifica-s-1.webp` (frente) y `assets/img/magnifica-s-4.webp` (panel).
-   - Dedica EC685: `assets/img/dedica.webp`. Si la que vendemos es de otro color, subí una foto de esa.
-2. Formato **4:5 vertical**. Generá 4 variantes y elegí la que mejor respete la
-   máquina: forma, botones, el dial plateado de la Magnifica, el vaporizador.
-3. Guardala en `instagram/fotos/` con el nombre indicado y avisá: se cambia el
-   `img` de la portada en `instagram/contenido.js` y se regenera.
-4. En Metricool, marcala como contenido de IA.
+   - Dedica EC685: `assets/img/dedica.webp`.
+2. Formato **4:5 vertical**. Generá 4 variantes y quedate con la que mejor respete la máquina:
+   botones, el dial plateado de la Magnifica, el vaporizador. Si aparecen letras raras en la
+   máquina (como "HOT MILA"), regenerá o elegí otra variante.
+3. Guardala en `instagram/fotos/` **con el nombre exacto** y avisá: se regenera el carrusel.
+   Mientras una foto no exista, la placa se arma sin ella, así que nada se rompe.
+4. En Metricool, marcá la pieza como contenido de IA.
 
-**Dirección de arte común:** luz natural de costado, sombras suaves, paleta cálida
-(crema, madera clara, travertino, lino, toques de verde oliva como el de la marca),
-aspecto de película (Kodak Portra 400), composición limpia con aire arriba para el
-título y nada de texto inventado.
-Los carruseles usan la paleta "pop": crema #f4e9da, manteca #f7dd8a, caramelo
-#d9853b, oliva #5b6e32 y espresso #24160f. Las fotos 3 y 4 la usan de fondo.
+## Estética de la marca (la de tus fotos del 17/11)
+
+Luz natural suave de ventana, de costado. Neutros cálidos: beige, travertino, roble claro,
+lino crudo, cerámica artesanal. Un acento verde oliva (una rama de olivo, un sweater, una
+manta). Interiores luminosos, minimalistas, con aire. Tonos suaves de película, nada
+saturado ni brillante, sin rojos ni naranjas fuertes.
+
+**Las portadas llevan el título abajo, sobre un velo oscuro.** Por eso, en las portadas, lo
+importante va en la mitad de arriba y **el 40 % de abajo queda tranquilo** (mesada, tela, piso).
 
 ---
 
-## 1. `regalo-magnifica-dedica.jpg` · "¿Qué cafetera le regalo?" (7/12)
+## Faltan (los carruseles ya las esperan)
 
-Referencias: `magnifica-s-1.webp` + `dedica.webp`
-
-```
-Editorial still life, vertical 4:5. The two espresso machines from the reference images — the black De'Longhi Magnifica S super-automatic (silver bean dial in the center of the control panel, steam wand on the left, two chrome spouts) and the slim De'Longhi Dedica EC685 with its chrome portafilter and side steam wand — standing side by side on a pale travertine kitchen counter. Each one is tied with a thin olive-green silk ribbon in a loose, elegant bow. Reproduce both machines exactly as in the references: same shape, proportions, colors, buttons and logo placement. Styling: two small glass espresso cups with golden crema, a sprig of eucalyptus, a folded oatmeal linen napkin, a few coffee beans scattered naturally. Background: warm off-white plaster wall, a softly blurred pine branch with tiny warm fairy lights far behind. Soft golden late-afternoon window light from the left, long gentle shadows. Quiet, premium, minimal Christmas mood, no Santa, no snow, no glitter. Generous empty wall in the upper third for a headline. Shot on medium format, 50mm, f/4, Kodak Portra 400 color, fine grain, true-to-life textures.
-```
-
-## 2. `dos-vecinos.jpg` · "Dos vecinos" (10/12)
+### 1. `dos-vecinos.jpg` · portada de "Dos vecinos" (10/12)
 
 Referencia: `magnifica-s-1.webp`
 
 ```
-Cinematic editorial photo, vertical 4:5. The upstairs hallway of a classic Buenos Aires apartment building: terrazzo floor, tall dark wooden doors with brass handles, a warm wall sconce. Two neighbors in their late 40s face each other across the hallway, a playful moment. On the left, a man in a navy overcoat on his way out, holding a paper takeaway coffee cup and keys, slightly rushed. On the right, his neighbor stands in his open doorway in a soft grey knit sweater, relaxed, smiling, holding a small white ceramic cup of espresso with thick crema. Behind him, through the door, his warm kitchen is visible with the black De'Longhi Magnifica S from the reference image on the counter, reproduced exactly (silver bean dial, steam wand on the left, chrome spouts), gently in focus. Morning light spilling from his kitchen into the cool hallway: warm vs cool contrast. Subtle humor, natural expressions, not posed. Calm empty wall above their heads for a headline. 35mm, f/2.8, Kodak Portra 400 look, soft grain, realistic skin. No text, no numbers on the doors, no other logos.
+Vertical 4:5 editorial photo in soft natural light. The bright hallway of a classic Buenos Aires apartment building: pale terrazzo floor, two light oak apartment doors side by side, warm white walls. On the left, a man in his late 40s in a beige trench coat is leaving, holding a paper takeaway coffee cup and his keys, slightly rushed. On the right, his neighbor of similar age, in an olive-green knit sweater, leans relaxed in his open doorway, smiling, holding a small handmade ceramic cup of espresso with crema. Through his door you can see a warm, minimal kitchen with the black De'Longhi Magnifica S from the reference image on a travertine counter, reproduced exactly (silver bean dial, steam wand on the left, two chrome spouts). Gentle humor, natural expressions. Both people and the doors in the upper 60% of the frame; the lower 40% is calm terrazzo floor. Muted warm neutrals, soft film tones, 35mm, f/4. No text, no numbers on the doors, no other logos.
 ```
 
-## 3. `no-entraba-magnifica.jpg` · "Llegó la cafetera. No entraba." (17/12)
+### 2. `capsula-vs-grano.jpg` · portada de "Tu café de cápsula se molió hace meses" (5/1)
+
+Sin referencia de máquina.
+
+```
+Vertical 4:5 top-down still life on a pale travertine counter in soft window light from the left. Upper half of the frame: on the left, a small pile of plain unbranded aluminum coffee capsules in muted silver and beige tones; on the right, a handmade ceramic bowl full of glossy freshly roasted coffee beans, a few beans spilling out, a small olive branch beside it. Between them, a tiny brass scoop with freshly ground coffee. Clean, balanced, minimal, lots of air. The lower 40% of the frame is empty travertine with a folded raw linen napkin at the edge. Warm neutral palette, soft shadows, editorial food photography, 50mm, f/5.6. No text, no logos, no brand names on the capsules.
+```
+
+### 3. `pedido-bar-tazas.jpg` · portada de "Lo que pedís en el bar, en casa" (7/1)
+
+Referencia: `magnifica-s-1.webp`
+
+```
+Vertical 4:5 editorial photo, soft morning window light. On a light oak counter, five coffees lined up in a gentle arc, each in a different handmade ceramic or glass cup in beige, cream and olive tones: a small cortado in a glass, a tall lágrima with lots of milk, a cappuccino with thick foam, a latte with simple latte art, and a flat white with a thin glossy surface. Behind them, slightly out of focus, the black De'Longhi Magnifica S from the reference image, reproduced exactly (silver bean dial, steam wand on the left, chrome spouts). An olive branch in a ceramic vase at the edge. The cups and machine sit in the upper 60% of the frame; the lower 40% is calm oak counter. Warm neutrals, soft film tones, 50mm, f/3.5. No text, no logos besides the machine's own.
+```
+
+### 4. `mitos-frasco.jpg` · portada de "5 cosas que creemos del café" (12/1)
+
+Sin referencia de máquina.
+
+```
+Vertical 4:5 editorial still life in soft side window light. On a light oak shelf against a warm white wall: a glass jar with a wooden airtight lid full of roasted coffee beans, a small handmade ceramic cup of espresso with golden crema, a vintage brass kitchen thermometer lying next to it, and a small olive branch. Calm, curious, slightly playful arrangement with lots of air. The objects sit in the upper 60% of the frame; the lower 40% is the plain front edge of the shelf and soft shadow. Warm neutral palette (beige, oak, cream) with one olive-green accent, soft film tones, 50mm, f/4. No text, no labels, no logos.
+```
+
+### 5. `limpieza-magnifica.jpg` · portada de "Cuidala 5 minutos y te dura años" (14/1)
 
 Referencias: `magnifica-s-1.webp` + `magnifica-s-4.webp`
 
-Va en la portada, debajo del gancho. Es el chiste del carrusel: la máquina que no entra.
-
 ```
-Playful, color-blocked editorial photo, vertical 4:5. A small Buenos Aires kitchen painted in warm caramel orange (#D9853B) with butter-yellow (#F7DD8A) upper cabinets. A man in his 40s in a cream sweater, seen from the side, is trying to slide the black De'Longhi Magnifica S from the reference images into the gap between the counter and a low upper cabinet: the top of the machine is stuck against the cabinet, tilted a few degrees, and he looks at it with a comic mix of surprise and resignation, eyebrows raised. Reproduce the machine exactly as in the references: shape, proportions, the silver bean dial in the center of the control panel, the steam wand on the left, the two chrome spouts and logo placement. On the counter: the open plain kraft box with crumpled paper, a yellow tape measure he clearly didn't use, a small cup. Bright, even, slightly hard daylight from the front-left with crisp short shadows, saturated warm colors, clean graphic composition like a magazine humor spread. Keep the upper third simple (cabinet fronts) for a headline. 35mm, f/5.6, everything sharp. No text, no other logos.
+Vertical 4:5 calm editorial photo in soft morning window light. A bright, minimal kitchen with a travertine counter. The black De'Longhi Magnifica S from the references, reproduced exactly (control panel with the silver bean dial, steam wand on the left, two chrome spouts, drip tray), looks spotless. A pair of hands in a cream knit sweater gently wipes the chrome spouts with a raw linen cloth; beside the machine, the clean drip tray rests on a folded olive-green towel and a small glass of water. Quiet, caring, satisfying mood. Machine and hands in the upper 60% of the frame; the lower 40% is calm travertine counter. Warm neutrals, soft film tones, 50mm, f/4. No text, no extra logos.
 ```
 
-## 4. `boton-magnifica.jpg` · "Apretás un botón. Adentro pasan 4 cosas." (22/12)
-
-Referencias: `magnifica-s-4.webp` (panel) + `magnifica-s-1.webp`
-
-Reemplaza la foto de producto de la portada. Fondo espresso, como la placa.
-
-```
-Bold, graphic product photograph, vertical 4:5. Close-up of the black De'Longhi Magnifica S from the references, three-quarter front view, filling the lower two thirds of the frame, placed on a glossy butter-yellow (#F7DD8A) surface against a deep espresso-brown (#24160F) seamless background. A single finger with a short clean nail presses the double-cup button on the control panel, right next to the silver bean dial; at the same instant two thin streams of espresso fall from the two chrome spouts into a pair of double-walled glass cups, golden crema swirling, a soft wisp of steam rising. Reproduce the machine exactly as in the references: control panel layout, buttons, silver bean dial, steam wand on the left, spouts and logo placement. Lighting: one warm caramel-toned key light from the upper left, a thin warm rim light outlining the machine, deep soft shadows, a subtle reflection on the yellow surface. Dramatic, premium, energetic, like a launch campaign. Keep the upper third as clean dark brown background for a white headline. 85mm, f/8, crisp detail on the finger, the button and the crema. No added text or logos beyond those on the machine.
-```
-
-## 5. `primer-cafe-magnifica.jpg` · "Tu primer café, en 5 pasos" (28/12)
+### 6. `magnifica-sobremesa-noche.jpg` · placa "22:00 · Uno corto" de "Un día con la Magnifica S" (19/1)
 
 Referencia: `magnifica-s-1.webp`
 
 ```
-Warm editorial lifestyle photo, vertical 4:5. The morning after Christmas in a bright Buenos Aires apartment kitchen. A couple in their 40s in soft home clothes (oatmeal knit, white tee) share the first coffee from their new black De'Longhi Magnifica S, reproduced exactly as in the reference (silver bean dial, steam wand on the left, two chrome spouts). One presses the button while the other laughs, holding a small glass cup with golden crema. On the counter: the opened plain kraft cardboard box with some tissue paper, a loosened olive-green ribbon, a few coffee beans, a bowl of cherries. Background: warm white wall, oak shelves with ceramic cups, a small pine branch. Soft hazy morning light through sheer linen curtains from the right, gentle bloom and warm highlights. Candid, joyful, intimate, not posed. Empty wall in the upper third for a headline. 35mm, f/2.8, Kodak Portra 400 tones, fine grain. No text or logos on the box.
+Vertical 4:5 warm evening photo. A dining table after dinner in a cozy Buenos Aires apartment, lit by a low linen pendant lamp and a candle: two small handmade ceramic cups of espresso with crema, a few crumbs of dessert on a plate, a folded raw linen napkin, an olive branch in a small vase. In the background, on a light oak kitchen counter, the black De'Longhi Magnifica S from the reference image, reproduced exactly (silver bean dial, steam wand on the left, chrome spouts), softly lit and slightly out of focus. Intimate, relaxed sobremesa mood, warm amber light with soft shadows, muted neutrals with an olive accent. 35mm, f/2.8, soft film grain. Hands optional, no faces needed. No text, no other logos.
 ```
+
+---
+
+## Opcionales (para subir el nivel)
+
+### 7. `regalatela-magnifica.jpg` · portada alternativa de "Este año, el regalo es para vos" (7/12)
+
+Hoy la portada usa la foto del sillón con la Dedica. Como el foco de diciembre es la Magnifica S,
+esta versión la pone de protagonista. Si la generás, se cambia en la portada.
+
+Referencia: `magnifica-s-1.webp`
+
+```
+Vertical 4:5 editorial lifestyle photo in soft late-morning window light. A man in his late 40s in an olive-green knit sweater, relaxed, holding a small ceramic cup of espresso with both hands and smiling to himself, standing by a travertine kitchen counter. Next to him, the black De'Longhi Magnifica S from the reference image, reproduced exactly (silver bean dial, steam wand on the left, two chrome spouts), with a thin raw linen ribbon loosely tied around it, as if he had just unwrapped it for himself. Light oak shelves with handmade ceramics, a small pine branch and an olive branch in the background. Calm, quietly happy "a gift to myself" mood. Man and machine in the upper 60% of the frame; the lower 40% is calm counter and soft shadow. Warm neutrals, soft film tones, 50mm, f/3.5. No text, no other logos.
+```
+
+### 8. `no-entraba-magnifica.jpg` · portada alternativa de "Llegó la cafetera. No entraba." (17/12)
+
+Referencias: `magnifica-s-1.webp` + `magnifica-s-4.webp`
+
+```
+Vertical 4:5 editorial photo with gentle humor, soft natural window light. A bright minimal kitchen: travertine counter, light oak upper cabinets mounted quite low. A man in his 40s in a cream sweater, seen from the side, tries to slide the black De'Longhi Magnifica S from the references under the low cabinet: the top of the machine touches the cabinet, slightly tilted, and he looks at it with raised eyebrows, amused and resigned. Reproduce the machine exactly (silver bean dial, steam wand on the left, two chrome spouts). On the counter: an open plain kraft box, a yellow tape measure he didn't use, an olive branch in a small vase. Man, machine and cabinet in the upper 60% of the frame; the lower 40% is calm counter front and floor. Warm neutrals, soft film tones, 35mm, f/4. No text, no other logos.
+```
+
+## Ya generadas (17/11)
+
+`sofa-dedica.jpg`, `magnifica-latte-cenital.jpg`, `dedica-espresso-travertino.jpg`,
+`dedica-iced-latte.jpg`, `dedica-iced-latte-living.jpg`, más las de octubre
+(`espresso-magnifica.jpg`, `pareja-magnifica.jpg`, `home-office-magnifica.jpg`, `sobremesa-dedica.jpg`).

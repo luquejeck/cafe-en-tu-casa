@@ -1,7 +1,8 @@
 /* Cómo se dibuja cada tipo de placa. Lo usan pieza.html (imágenes) y
    reel.html (videos). Necesita productos.js y contenido.js cargados antes. */
 
-const img = src => `<img src="../${src}" alt="">`;
+/* si la foto todavía no existe (Flow pendiente), la placa se arma sin ella */
+const img = src => `<img src="../${src}" alt="" onerror="this.closest('.foto') ? this.closest('.foto').remove() : this.remove()">`;
 const ep  = t => t ? `<p class="ep">${t}</p>` : '';
 const sub = t => t ? `<p class="sub">${t}</p>` : '';
 const par = t => t ? `<p class="p">${t}</p>` : '';
@@ -11,7 +12,7 @@ const chica = t => t ? `<p class="chica">${t}</p>` : '';
 const CUERPO = {
   portada: s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}${s.img ? `<div class="foto">${img(s.img)}</div>` : ''}${pil(s.pildora)}`,
   foto:    s => `${ep(s.ep)}<h2>${s.h}</h2>${sub(s.sub)}<div class="foto ${s.llena ? 'llena' : ''}">${img(s.img)}</div>${pil(s.pildora)}${chica(s.chica)}`,
-  texto:   s => `${ep(s.ep)}<h2>${s.h}</h2>${par(s.p)}${pil(s.pildora)}${chica(s.chica)}`,
+  texto:   s => `${ep(s.ep)}<h2>${s.h}</h2>${par(s.p)}${pil(s.pildora)}${chica(s.chica)}${s.img ? `<div class="foto mini">${img(s.img)}</div>` : ''}`,
   dato:    s => `${ep(s.ep)}<p class="num">${s.num}${s.unidad ? `<small>${s.unidad}</small>` : ''}</p>${sub(s.sub)}${par(s.p)}`,
   lista:   s => `${ep(s.ep)}<h2>${s.h}</h2><ul class="lista">${s.items.map((it, i) =>
              `<li><i>${s.numerada ? i + 1 : '✓'}</i><div><b>${it[0]}</b>${it[1] ? `<span>${it[1]}</span>` : ''}</div></li>`).join('')}</ul>${chica(s.chica)}`,
@@ -30,7 +31,9 @@ const CUERPO = {
   quiz:    s => `${ep(s.ep)}<h2>${s.h}</h2><div class="quiz">${s.ops.map((o, i) =>
              `<div class="${s.ok === i ? 'ok' : ''}"><i>${'ABCD'[i]}</i>${o}</div>`).join('')}</div>${par(s.p)}`,
   revela:  s => `${ep(s.ep)}${s.tachado ? `<p class="tachado">${s.tachado}</p>` : ''}<p class="revela">${s.num}</p>${sub(s.sub)}${par(s.p)}`,
-  error:   s => `<p class="gigante">${s.n}<small>/${s.de}</small></p><h2>${s.h}</h2>${par(s.p)}${s.evitar ? `<div class="evitar"><b>${s.titEvitar || 'Cómo evitarlo'}</b>${s.evitar}</div>` : ''}`,
+  error:   s => `<p class="gigante">${s.n}<small>/${s.de}</small></p><h2>${s.h}</h2>${par(s.p)}${s.evitar ? `<div class="evitar"><b>${s.titEvitar || 'Cómo evitarlo'}</b>${s.evitar}</div>` : ''}${s.img ? `<div class="foto mini">${img(s.img)}</div>` : ''}`,
+  mito:    s => `<p class="veredicto ${s.ok ? 'verdadero' : 'falso'}">${s.ok ? 'Verdadero' : 'Falso'}</p><p class="mito">“${s.mito}”</p><h2>${s.h}</h2>${par(s.p)}${s.img ? `<div class="foto mini">${img(s.img)}</div>` : ''}`,
+  receta:  s => `${ep(s.ep)}<h2>${s.h}</h2><div class="taza">${s.capas.map(c => `<div class="capa ${c[0]}" style="flex:${c[1]}">${c[2] || ''}</div>`).join('')}</div><p class="receta-pie">${s.p}</p>`,
   chat:    s => `${ep(s.ep)}${s.h ? `<h2>${s.h}</h2>` : ''}<div class="chat">${s.grupo ? `<p class="grupo">${s.grupo}</p>` : ''}${s.msjs.map(m =>
              `<p class="${m[0] === 'yo' ? 'yo' : ''}">${m[0] === 'yo' ? '' : `<b>${m[0]}</b>`}${m[1]}</p>`).join('')}</div>`,
   ticket:  s => `${ep(s.ep)}<h2>${s.h}</h2><div class="ticket"><p class="t">${s.titulo}</p>${s.lineas.map(l =>
@@ -46,10 +49,17 @@ function placaHTML(pieza, n) {
     : '';
   if (pieza.estilo === 'pop') {
     const total = pieza.placas.length;
+    const barra = `<div class="progreso-fondo"></div><div class="progreso" style="width:${(n + 1) / total * 100}%"></div>`;
+    if (s.t === 'tapa') {
+      return `<div class="lienzo pop tapa">
+    <img class="fondo" src="../${s.img}" alt="" onerror="this.closest('.lienzo').classList.add('sinfoto')"><div class="velo-arriba"></div><div class="velo"></div>${barra}
+    <div class="marca"><i></i> Café en tu Casa</div><p class="contador">${n + 1}/${total}</p>
+    <main>${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}<p class="desliza">${s.desliza || 'Deslizá'} →</p></main></div>`;
+    }
     const pie = `<div class="pie"><div class="puntos">${pieza.placas.map((_, i) => `<b class="${i === n ? 'on' : ''}"></b>`).join('')}</div>${
       s.sigue ? `<span class="sigue">${s.sigue} →</span>` : ''}</div>`;
     return `<div class="lienzo pop ${s.tono || ''}">
-    <div class="marca"><i></i> Café en tu Casa</div><p class="contador">${n + 1}/${total}</p><main>${CUERPO[s.t](s)}</main>${pie}</div>`;
+    <div class="marca"><i></i> Café en tu Casa</div>${barra}<p class="contador">${n + 1}/${total}</p><main>${CUERPO[s.t](s)}</main>${pie}</div>`;
   }
   return `<div class="lienzo ${vertical ? 'vertical' : ''} ${s.tono || ''}">
     <div class="marca"><i></i> Café en tu Casa</div><main>${CUERPO[s.t](s)}</main>${puntos}</div>`;
