@@ -529,6 +529,156 @@ const PIEZAS = [
       { t: 'cta', tono: 'oscuro', ep: '¿Otra duda?', h: 'Escribinos.', sub: 'Contestamos en el día.', boton: 'WhatsApp · link en la bio' }
     ]
   }
+,
+
+  /* ================= DICIEMBRE · 5 carruseles nuevos (17/11) =================
+     Revisión del 17/11: los carruseles de dudas reales y los de plata/conflicto
+     son lo que más alcanza; los de producto con precio vienen bajando. Todos a
+     las 10:00, cierran con "Mandáselo a …" + pregunta A/B (nunca "Guardalo para
+     comparar") y no dicen garantía oficial, sellada ni 30 días. Solo modelos
+     con stock en el sitio de IG: Magnifica S y Dedica (Krups fuera).
+     Portadas: si llegan las fotos nuevas de Flow (prompts en
+     instagram/fotos/PROMPTS-diciembre.md), se cambia el img de la portada. */
+  {
+    id: 'dic-lun-carrusel-que-le-regalo', semana: 0, dia: 'Lunes', tipo: 'carrusel', fecha: '2026-12-07',
+    titulo: '¿Qué cafetera le regalo?',
+    caption:
+      '¿Qué cafetera le regalo? 🎄 Guía de un minuto.\n\n' +
+      `Si toma más de dos cafés por día o lo quiere con un botón: Magnifica S (${cm(M.medidas.ancho)} de ancho).\n` +
+      `Si vive en un depto chico o disfruta prepararlo: Dedica EC685 (${cm(D.medidas.ancho)}).\n\n` +
+      `Magnifica S\n💸 ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF)\n💳 o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre\n\n` +
+      `Dedica EC685\n💸 ${fmt(P.transferencia(D))} por transferencia (${OFF}% OFF)\n💳 o ${D.cuotas} cuotas sin interés de ${fmt(P.cuota(D))} en Mercado Libre\n\n` +
+      `El ${OFF}% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan. Envío gratis a todo el país.\n` +
+      'Si es para regalar, consultá por WhatsApp la fecha de entrega antes de comprar.\n\n' +
+      'Mandáselo a quien arma los regalos con vos.\n\n' +
+      '¿Es para tu viejo, tu pareja o para vos?\n\n#navidad #regalodenavidad #cafeencasa #delonghi #cafetera',
+    placas: [
+      { t: 'portada', ep: 'Navidad · guía rápida', h: '¿Qué cafetera le regalo?',
+        sub: `Desde ${fmt(P.transferencia(D))} por transferencia.`, img: 'instagram/fotos/pareja-magnifica.jpg' },
+      { t: 'lista', tono: 'gris', ep: 'Pensá en quien la va a usar', h: '4 preguntas',
+        items: [['¿Cuántos cafés toma por día?', 'Más de dos: conviene que sea con un botón.'],
+                ['¿Lo toma con leche?', 'Las dos espuman leche para cortado o cappuccino.'],
+                ['¿Cuánto lugar tiene en la mesada?', `${cm(M.medidas.ancho)} contra ${cm(D.medidas.ancho)} de ancho.`],
+                ['¿Le gusta prepararlo o apretar un botón?', 'No hay respuesta correcta.']] },
+      { t: 'foto', ep: 'Para el que quiere un botón', h: 'Magnifica S',
+        sub: `Muele el grano en el momento. ${fmt(P.transferencia(M))} por transferencia.`, img: M.imgs[0], pildora: `o ${M.cuotas} cuotas sin interés en Mercado Libre` },
+      { t: 'foto', ep: 'Para el que disfruta el ritual', h: 'Dedica EC685',
+        sub: `${cm(D.medidas.ancho)} de ancho. ${fmt(P.transferencia(D))} por transferencia.`, img: D.imgs[0], pildora: `o ${D.cuotas} cuotas sin interés en Mercado Libre` },
+      { t: 'texto', tono: 'gris', ep: 'Antes de comprar el regalo', h: 'Preguntanos la fecha de entrega.',
+        p: `Escribinos por WhatsApp y te decimos cuándo llega a tu ciudad. ${OFF}% OFF por transferencia o cuotas sin interés en Mercado Libre: no se combinan.` },
+      { t: 'cta', tono: 'oscuro', ep: 'Mandáselo a quien arma los regalos', h: '¿Para quién es?', sub: 'Tu viejo, tu pareja… o vos.', boton: 'WhatsApp · link en la bio' }
+    ]
+  },
+  {
+    /* La historia de plata que mejor anduvo ("Dos vecinos", 1.231 vistas), en carrusel.
+       Mismos números que la calculadora del sitio (TIENDA). */
+    id: 'dic-jue-carrusel-dos-vecinos', semana: 0, dia: 'Jueves', tipo: 'carrusel', fecha: '2026-12-10',
+    titulo: 'Dos vecinos: la cuenta del año',
+    caption:
+      'Dos vecinos. Mismo edificio, mismo café todas las mañanas. 🏢\n\n' +
+      `5° B baja al bar: ${CAFES_DIA} cafés por día a ${fmt(TIENDA.precioCafeAfuera)} son unos ${fmt(TIENDA.precioCafeAfuera * CAFES_DIA * 365)} al año.\n` +
+      `3° A tiene su cafetera: con grano a ${fmt(TIENDA.precioKiloCafe)} el kilo, los mismos cafés le salen unos ${fmt(costoCasa * CAFES_DIA * 365)} al año.\n\n` +
+      `Con esa diferencia, la Dedica se paga en unos ${Math.ceil(P.transferencia(D) / (mesAfuera - mesCasa))} meses y la Magnifica S en unos ${mesesAmort}.\n\n` +
+      'Valores aproximados, con precios de café relevados el 26/10. En el sitio tenés la calculadora para poner tus números.\n\n' +
+      'Mandáselo a tu vecino del bar.\n\n' +
+      '¿Vos sos 5° B o 3° A?\n\n#cafeencasa #ahorro #delonghi #cafetera',
+    placas: [
+      { t: 'portada', ep: 'Dos vecinos · mismo edificio', h: `${fmt(TIENDA.precioCafeAfuera * CAFES_DIA * 365)} contra ${fmt(costoCasa * CAFES_DIA * 365)}.`,
+        sub: 'Lo que gasta cada uno en café, en un año.' },
+      { t: 'dos', tono: 'gris', h: 'El mismo café, todas las mañanas',
+        cols: [
+          { ep: '5° B', h: 'Baja al bar', items: [`${CAFES_DIA} cafés por día`, `${fmt(TIENDA.precioCafeAfuera)} cada uno`] },
+          { destacada: true, ep: '3° A', h: 'Tiene su cafetera', items: ['Grano recién molido', `Unos ${fmt(costoCasa)} por taza`] }
+        ] },
+      { t: 'barras', h: 'En un año', items: [
+          ['5° B · en el bar', fmt(TIENDA.precioCafeAfuera * CAFES_DIA * 365), TIENDA.precioCafeAfuera * CAFES_DIA * 365, true],
+          ['3° A · en casa', fmt(costoCasa * CAFES_DIA * 365), costoCasa * CAFES_DIA * 365]],
+        p: `La diferencia: unos ${fmt(mesAfuera - mesCasa)} por mes.` },
+      { t: 'lista', tono: 'gris', ep: 'Con esa diferencia', h: 'La cafetera se paga sola',
+        items: [[`Dedica EC685 · ${fmt(P.transferencia(D))}`, `En unos ${Math.ceil(P.transferencia(D) / (mesAfuera - mesCasa))} meses.`],
+                [`Magnifica S · ${fmt(P.transferencia(M))}`, `En unos ${mesesAmort} meses.`]] },
+      { t: 'texto', ep: 'Los números', h: 'Valores aproximados.',
+        p: `Café en el bar a ${fmt(TIENDA.precioCafeAfuera)}, grano a ${fmt(TIENDA.precioKiloCafe)} el kilo y ${TIENDA.cafesPorKilo} tazas por kilo (precios al 26/10). Precios de las cafeteras por transferencia con ${OFF}% OFF.` },
+      { t: 'cta', tono: 'oscuro', ep: 'Mandáselo a tu vecino del bar', h: '¿Vos sos 5° B o 3° A?', sub: 'Hacé tu cuenta en la calculadora del sitio.', boton: 'Link en la bio' }
+    ]
+  },
+  {
+    id: 'dic-jue-carrusel-errores-primera-cafetera', semana: 0, dia: 'Jueves', tipo: 'carrusel', fecha: '2026-12-17',
+    titulo: '5 errores al comprar tu primera cafetera',
+    caption:
+      '5 errores al comprar tu primera cafetera. 👇\n\n' +
+      `1. No medir la mesada (y la altura bajo la alacena).\n` +
+      '2. Mirar solo el precio de la máquina y no lo que gastás en café.\n' +
+      '3. Olvidarte de la leche, si la tomás con leche.\n' +
+      '4. Comprar café molido en paquetes grandes.\n' +
+      '5. Si es un regalo, no preguntar cuándo llega.\n\n' +
+      'Mandáselo a quien está por comprar una.\n\n' +
+      '¿Cuál de los cinco casi te pasa?\n\n#cafeencasa #cafetera #espresso #delonghi',
+    placas: [
+      { t: 'portada', ep: 'Antes de comprar', h: '5 errores con tu primera cafetera.', sub: 'Y cómo evitarlos.' },
+      { t: 'texto', tono: 'gris', ep: 'Error 1', h: 'No medir la mesada.',
+        p: `Y la altura bajo la alacena. Magnifica S: ${cm(M.medidas.ancho)} de ancho y ${cm(M.medidas.alto)} de alto. Dedica: ${cm(D.medidas.ancho)} y ${cm(D.medidas.alto)}.` },
+      { t: 'texto', ep: 'Error 2', h: 'Mirar solo el precio de la máquina.',
+        p: `Lo caro es el café de afuera: ${CAFES_DIA} por día en el bar son unos ${fmt(mesAfuera)} por mes. En casa, unos ${fmt(mesCasa)}.` },
+      { t: 'texto', tono: 'gris', ep: 'Error 3', h: 'Olvidarte de la leche.',
+        p: 'Si tomás cortado, cappuccino o latte, fijate que tenga espumador. La Magnifica S y la Dedica lo traen.' },
+      { t: 'texto', ep: 'Error 4', h: 'Comprar molido en paquetes grandes.',
+        p: 'El café pierde aroma apenas se muele. Comprá de a poco, o en grano y molelo en el momento.' },
+      { t: 'texto', tono: 'gris', ep: 'Error 5', h: 'Si es regalo, no preguntar cuándo llega.',
+        p: 'Escribinos por WhatsApp antes de comprar y te confirmamos la fecha de entrega a tu ciudad.' },
+      { t: 'cta', tono: 'oscuro', ep: 'Mandáselo a quien está por comprar una', h: '¿Cuál casi te pasa?', sub: 'Contanos en los comentarios.', boton: 'WhatsApp · link en la bio' }
+    ]
+  },
+  {
+    /* El "por dentro" fue lo que más retuvo en reels (1.330 vistas, 28/10). */
+    id: 'dic-mar-carrusel-por-dentro', semana: 0, dia: 'Martes', tipo: 'carrusel', fecha: '2026-12-22',
+    titulo: 'Qué pasa adentro cuando apretás el botón',
+    caption:
+      '¿Qué pasa adentro de una Magnifica S cuando apretás el botón? 🤔\n\n' +
+      '1. Muele: molinillo cónico de acero, 13 niveles.\n' +
+      '2. Calienta: el Thermoblock lleva el agua a unos 90 °C al instante.\n' +
+      '3. Prensa: compacta el café como un barista.\n' +
+      '4. Extrae: la bomba empuja el agua con hasta 15 bares.\n\n' +
+      '¿Y la crema dorada? Son los aceites y el gas del grano recién molido, mezclados a presión.\n\n' +
+      `Magnifica S\n💸 ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF)\n💳 o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre\n\n` +
+      `El ${OFF}% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan. Envío gratis a todo el país.\n\n` +
+      'Mandáselo a quien todavía usa cápsulas.\n\n' +
+      '¿Cuál de los cuatro pasos no sabías?\n\n#cafeencasa #delonghi #magnificas #espresso #comofunciona',
+    placas: [
+      { t: 'portada', ep: 'Magnifica S · por dentro', h: 'Un botón. Cuatro pasos.', sub: 'Lo que pasa adentro en menos de un minuto.', img: M.imgs[0] },
+      { t: 'dato', tono: 'gris', ep: 'Paso 1 · Muele', num: '13', unidad: 'niveles', sub: 'Molinillo cónico de acero.', p: 'Muele el grano en el momento, en cada taza.' },
+      { t: 'dato', ep: 'Paso 2 · Calienta', num: '90', unidad: '°C', sub: 'Thermoblock.', p: 'Calienta el agua al instante, sin esperar una caldera.' },
+      { t: 'texto', tono: 'gris', ep: 'Paso 3 · Prensa', h: 'Compacta el café como un barista.', p: 'La unidad de infusión dosifica y prensa la molienda.' },
+      { t: 'dato', ep: 'Paso 4 · Extrae', num: '15', unidad: 'bares', sub: 'De presión.', p: 'La bomba empuja el agua a través del café.' },
+      { t: 'texto', tono: 'gris', ep: '¿Y la crema dorada?', h: 'Sale del grano recién molido.', p: 'Son sus aceites y su gas, mezclados a presión. Por eso moler en el momento hace la diferencia.' },
+      { t: 'cta', tono: 'oscuro', ep: `${fmt(P.transferencia(M))} por transferencia`, h: '¿Cuál no sabías?', sub: `o ${M.cuotas} cuotas sin interés en Mercado Libre. No se combinan.`, boton: 'Mandáselo a quien usa cápsulas' }
+    ]
+  },
+  {
+    /* Para los que la recibieron en Navidad: tip para guardar (los tips sirven
+       más para guardar y compartir que el "cómo se compra"). */
+    id: 'dic-lun-carrusel-primer-cafe', semana: 0, dia: 'Lunes', tipo: 'carrusel', fecha: '2026-12-28',
+    titulo: 'Te la regalaron: tu primer café',
+    caption:
+      '¿Te regalaron una cafetera? Tu primer café, en 5 pasos. ☕\n\n' +
+      '1. Lavá el depósito y llenalo con agua fresca.\n' +
+      '2. Cargá café fresco: grano en la Magnifica S, molido en la Dedica.\n' +
+      '3. Descartá los primeros cafés: la máquina se acomoda.\n' +
+      '4. Precalentá la taza.\n' +
+      '5. Ajustá la molienda de a un punto (en la Magnifica S, mientras muele).\n\n' +
+      'Guardalo: son los pasos del primer día.\n\n' +
+      '¿Cuál fue tu primer café: espresso o con leche?\n\n#cafeencasa #delonghi #tipsdecafe #espresso',
+    placas: [
+      { t: 'portada', ep: '¿Te la regalaron?', h: 'Tu primer café, en 5 pasos.', sub: 'Lo que conviene hacer el primer día.', img: 'instagram/fotos/espresso-magnifica.jpg' },
+      { t: 'lista', numerada: true, tono: 'gris', ep: 'Antes de empezar', h: 'Agua y café',
+        items: [['Lavá el depósito', 'Y llenalo con agua fresca.'],
+                ['Cargá café fresco', 'Grano en la Magnifica S; molido en la Dedica.']] },
+      { t: 'texto', ep: 'Paso 3', h: 'Descartá los primeros cafés.', p: 'Los primeros sirven para que la máquina se acomode. Después, sí: a la taza.' },
+      { t: 'texto', tono: 'gris', ep: 'Paso 4', h: 'Precalentá la taza.', p: 'El espresso es poquito y se enfría rápido. Un chorro de agua caliente alcanza.' },
+      { t: 'texto', ep: 'Paso 5', h: 'Ajustá la molienda de a un punto.', p: 'Más fina: más cuerpo. Más gruesa: más suave. En la Magnifica S, cambiala mientras muele.' },
+      { t: 'cta', tono: 'oscuro', ep: 'Guardalo: son los pasos del primer día', h: '¿Espresso o con leche?', sub: 'Contanos cómo te salió el primero.', boton: 'Mandáselo a quien la estrena' }
+    ]
+  }
 ];
 
 /* Para generar.ps1 (corre con Node): lista "id n ancho alto" */
