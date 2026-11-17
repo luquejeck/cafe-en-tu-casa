@@ -52,6 +52,21 @@ Firmeza: **señal** (1–2 piezas) · **probado** (3+ piezas o 3+ semanas) · **
 | Contar los créditos de Metricool antes de programar (20 por mes). | 26/10: el reel de las 10:00 figuró con error "límite de la cuenta" en Metricool. | regla |
 | Una pieza de feed por día, como máximo. | Que no compitan entre sí. | regla |
 
+## Estrategia de diciembre (definida con Lucas el 17/11)
+
+| Decisión | Elección |
+|---|---|
+| Objetivo | Alcance nuevo (gente que no nos sigue). |
+| Público | El que se la compra para sí ("Este año, el regalo es para vos"). |
+| Producto foco | Magnifica S (la Dedica acompaña). |
+| Tono | Mixto: humor en el gancho y el cierre, datos sobrios en el medio. |
+| Estética | **La de la marca, siempre**: blanco, gris claro, negro y un solo acento oliva. Se probó una paleta de colores de café y se descartó. |
+| Mecánicas | Contador 3/7, frase al pie que invita a seguir, quiz con la respuesta en la placa siguiente, chat y ticket. |
+| Precio | Solo al final del carrusel (penúltima o última placa). |
+| Cierre | "Escribinos por WhatsApp" + una pregunta fácil (reemplaza a "Mandáselo a …" en los carruseles de diciembre). |
+| Imágenes | Fotos de producto + escenas de Google Flow con nuestras cafeteras como referencia (marcar IA en Metricool). |
+| Fotos ya programadas | Se dejan y los 5 carruseles se suman (17 de 20 créditos con Reyes). |
+
 ## Audiencia
 
 - 56% hombres, 28% mujeres. 76% tiene entre 25 y 54 años; el grupo más grande es hombres de 45–54.

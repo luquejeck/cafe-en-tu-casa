@@ -98,79 +98,56 @@ h2 { font-size: 72px; font-weight: 600; line-height: 1.07; letter-spacing: -.03e
 .lienzo { position: relative; }
 
 /* =====================================================================
-   Estilo "pop" (carruseles de diciembre, 17/11): colores de café, ganchos
-   grandes con una palabra resaltada, contador de placas y una frase al pie
-   que invita a seguir deslizando. Solo se aplica a piezas con estilo: 'pop'.
-   Paleta: crema #f4e9da · espresso #24160f · caramelo #d9853b ·
-   manteca #f7dd8a · oliva (marca) #5b6e32.
+   Estilo "pop" (carruseles de diciembre): las mecánicas para que sigan
+   deslizando (contador, frase al pie, quiz, chat, ticket, número gigante)
+   con la estética de la marca: blanco, gris claro (.gris), negro (.oscuro)
+   y un solo acento oliva. Solo se aplica a piezas con estilo: 'pop'.
    ===================================================================== */
-.pop { --crema: #f4e9da; --espresso: #24160f; --caramelo: #d9853b; --manteca: #f7dd8a; --oliva: #5b6e32;
-  --ink: var(--espresso); --ink-2: #6b5446; --ink-3: #8a7262; --brand: var(--oliva); --linea: rgba(36, 22, 15, .14); }
-.pop.crema    { background: var(--crema); }
-.pop.manteca  { background: var(--manteca); --ink-2: #5c4630; }
-.pop.caramelo { background: var(--caramelo); color: #fff; --ink: #fff; --ink-2: #fff3e6; --ink-3: #ffe6cc; --brand: var(--espresso); --linea: rgba(255,255,255,.35); }
-.pop.espresso { background: var(--espresso); color: var(--crema); --ink: var(--crema); --ink-2: #d9c6b3; --ink-3: #b29a85; --brand: var(--manteca); --linea: rgba(244,233,218,.18); }
-.pop.oliva    { background: var(--oliva); color: #fff; --ink: #fff; --ink-2: #eef3e2; --ink-3: #d6e2bd; --brand: var(--manteca); --linea: rgba(255,255,255,.3); }
-.pop .marca i { background: var(--caramelo); }
-.pop.caramelo .marca i { background: var(--espresso); }
-.pop .ep { color: var(--brand); }
-.pop h1, .pop h2 { font-weight: 800; letter-spacing: -.04em; }
-.pop h1 { font-size: 100px; line-height: 1.14; }
-.pop h2 { line-height: 1.16; }
-.pop mark { background: var(--manteca); color: var(--espresso); padding: 0 .12em; border-radius: .12em; line-height: 1; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-.pop.manteca mark { background: var(--caramelo); color: #fff; }
-.pop.espresso mark, .pop.oliva mark { background: var(--caramelo); color: #fff; }
-.pop.caramelo mark { background: var(--espresso); color: var(--manteca); }
-.pop .boton { background: var(--espresso); color: var(--crema); }
-.pop.espresso .boton, .pop.oliva .boton, .pop.caramelo .boton { background: var(--manteca); color: var(--espresso); }
-.pop .pildora { background: rgba(36,22,15,.08); color: var(--espresso); }
-.pop.espresso .pildora, .pop.oliva .pildora, .pop.caramelo .pildora { background: rgba(255,255,255,.14); color: inherit; }
-.pop .foto { background: #fff; border-radius: 44px; padding: 34px; box-shadow: 0 30px 60px -36px rgba(36,22,15,.5); }
-.pop .chica { margin-top: 26px; font-size: 24px; line-height: 1.4; color: var(--ink-3); max-width: 34ch; }
+.pop { --suave: rgba(91, 110, 50, .12); --tarjeta: var(--bg-2); }
+.pop.gris   { --tarjeta: #fff; }
+.pop.oscuro { --suave: rgba(163, 194, 106, .16); --tarjeta: #1c1c1f; }
+.pop h1 { line-height: 1.08; }
+.pop h2 { line-height: 1.1; }
+.pop mark { background: none; color: var(--brand); }
+.pop .chica { margin-top: 26px; font-size: 25px; line-height: 1.4; color: var(--ink-3); max-width: 34ch; }
+.pop .foto { margin-top: 34px; }
+.pop .foto.llena { background: none; padding: 0; }
 
 /* contador y frase al pie */
-.contador { position: absolute; top: calc(var(--aire-v) + 4px); right: 76px; font-size: 24px; font-weight: 700; letter-spacing: .02em; color: var(--ink-3); }
+.contador { position: absolute; top: calc(var(--aire-v) + 4px); right: 76px; font-size: 24px; font-weight: 600; color: var(--ink-3); }
 .pop .pie { justify-content: space-between; }
 .pop .pie span { position: static; }
-.sigue { font-size: 28px; font-weight: 700; color: var(--ink); background: rgba(255,255,255,.55); border-radius: 999px; padding: 12px 26px; letter-spacing: -.01em; }
-.pop.espresso .sigue, .pop.oliva .sigue, .pop.caramelo .sigue { background: rgba(255,255,255,.14); }
 .puntos { display: flex; gap: 10px; }
+.sigue { font-size: 26px; font-weight: 600; color: var(--brand); letter-spacing: -.01em; }
 
-/* sticker inclinado */
-.sticker { display: inline-block; margin-top: 40px; transform: rotate(-3deg); background: var(--caramelo); color: #fff; font-size: 32px; font-weight: 800; letter-spacing: -.01em; padding: 18px 34px; border-radius: 20px; box-shadow: 0 14px 30px -16px rgba(36,22,15,.6); }
-.pop.caramelo .sticker { background: var(--espresso); color: var(--manteca); }
-.pop.manteca .sticker { background: var(--espresso); color: var(--manteca); }
+/* sticker: píldora oliva */
+.sticker { display: inline-block; margin-top: 38px; background: var(--suave); color: var(--brand-dark); border-radius: 980px; padding: 18px 38px; font-size: 30px; font-weight: 600; letter-spacing: -.01em; }
+.oscuro .sticker { color: #c5dd96; }
 
-/* número de error / paso gigante */
-.gigante { font-size: 220px; font-weight: 800; line-height: .9; letter-spacing: -.06em; color: var(--caramelo); }
-.pop.caramelo .gigante { color: var(--manteca); }
-.gigante small { font-size: 70px; color: var(--ink-3); letter-spacing: -.03em; }
-.evitar { margin-top: 34px; width: 100%; text-align: left; background: rgba(255,255,255,.6); border-radius: 30px; padding: 28px 34px; font-size: 32px; line-height: 1.35; }
-.pop.espresso .evitar, .pop.oliva .evitar, .pop.caramelo .evitar { background: rgba(255,255,255,.12); }
-.evitar b { display: block; font-size: 22px; letter-spacing: .09em; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; }
+/* número de error / paso */
+.gigante { font-size: 200px; font-weight: 600; line-height: .9; letter-spacing: -.06em; color: var(--brand); margin-bottom: 20px; }
+.gigante small { font-size: 60px; color: var(--ink-3); letter-spacing: -.03em; }
+.evitar { margin-top: 36px; width: 100%; text-align: left; background: var(--tarjeta); border-radius: 30px; padding: 30px 36px; font-size: 32px; line-height: 1.38; }
+.evitar b { display: block; font-size: 22px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; }
 
 /* quiz */
-.quiz { margin-top: 46px; width: 100%; display: flex; flex-direction: column; gap: 20px; }
-.quiz div { display: flex; align-items: center; gap: 26px; text-align: left; background: #fff; border-radius: 28px; padding: 26px 30px; font-size: 36px; font-weight: 600; letter-spacing: -.015em; box-shadow: 0 16px 34px -26px rgba(36,22,15,.55); color: var(--espresso); }
-.quiz i { font-style: normal; flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%; background: var(--manteca); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 30px; }
-.quiz div.ok { outline: 6px solid var(--oliva); }
-.quiz div.ok i { background: var(--oliva); color: #fff; }
+.quiz { margin-top: 46px; width: 100%; display: flex; flex-direction: column; gap: 18px; }
+.quiz div { display: flex; align-items: center; gap: 26px; text-align: left; background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 28px; padding: 26px 30px; font-size: 36px; font-weight: 600; letter-spacing: -.015em; }
+.quiz i { font-style: normal; flex-shrink: 0; width: 60px; height: 60px; border-radius: 50%; background: var(--suave); color: var(--brand); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 28px; }
 
 /* respuesta revelada */
-.revela { font-size: 150px; font-weight: 800; letter-spacing: -.055em; line-height: 1; margin-top: 10px; }
-.tachado { font-size: 44px; font-weight: 700; color: var(--ink-3); text-decoration: line-through; text-decoration-thickness: 5px; margin-bottom: 18px; }
+.revela { font-size: 150px; font-weight: 600; letter-spacing: -.055em; line-height: 1; margin-top: 6px; color: var(--brand); }
 
 /* chat */
 .chat { margin-top: 40px; width: 100%; display: flex; flex-direction: column; gap: 16px; text-align: left; }
-.chat p { max-width: 80%; padding: 20px 28px; border-radius: 30px; font-size: 32px; line-height: 1.32; background: #fff; color: var(--espresso); box-shadow: 0 10px 24px -20px rgba(36,22,15,.6); }
-.chat p b { display: block; font-size: 21px; color: var(--caramelo); margin-bottom: 4px; letter-spacing: .02em; }
-.chat p.yo { align-self: flex-end; background: #dcf3c8; border-bottom-right-radius: 8px; }
-.chat p:not(.yo) { border-bottom-left-radius: 8px; }
-.chat .grupo { align-self: center; font-size: 22px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); background: none; box-shadow: none; padding: 0; }
+.chat p { max-width: 80%; padding: 20px 28px; border-radius: 30px; font-size: 32px; line-height: 1.32; background: var(--tarjeta); border-bottom-left-radius: 8px; }
+.chat p b { display: block; font-size: 21px; font-weight: 600; color: var(--brand); margin-bottom: 4px; }
+.chat p.yo { align-self: flex-end; background: var(--suave); border-bottom-left-radius: 30px; border-bottom-right-radius: 8px; }
+.chat .grupo { align-self: center; font-size: 22px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); background: none; padding: 0; }
 
 /* ticket */
-.ticket { margin-top: 40px; width: 82%; background: #fffdf8; color: var(--espresso); padding: 40px 46px 50px; text-align: left; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 29px; line-height: 1.5; transform: rotate(1.5deg); box-shadow: 0 30px 50px -30px rgba(0,0,0,.6);
+.ticket { margin-top: 40px; width: 82%; background: #fff; color: var(--ink); padding: 40px 46px 50px; text-align: left; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 29px; line-height: 1.5; box-shadow: 0 24px 50px -30px rgba(0,0,0,.45);
   -webkit-mask: radial-gradient(14px at 50% 100%, #0000 98%, #000) 50% / 40px 100%; }
-.ticket .t { text-align: center; font-weight: 800; letter-spacing: .1em; border-bottom: 3px dashed rgba(36,22,15,.3); padding-bottom: 16px; margin-bottom: 16px; }
+.ticket .t { text-align: center; font-weight: 700; letter-spacing: .1em; border-bottom: 2px dashed var(--linea); padding-bottom: 16px; margin-bottom: 16px; }
 .ticket .l { display: flex; justify-content: space-between; gap: 20px; }
-.ticket .tot { border-top: 3px dashed rgba(36,22,15,.3); margin-top: 16px; padding-top: 16px; font-weight: 800; font-size: 34px; }
+.ticket .tot { border-top: 2px dashed rgba(0,0,0,.2); margin-top: 16px; padding-top: 16px; font-weight: 700; font-size: 34px; }

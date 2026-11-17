@@ -39,6 +39,7 @@ const mesesAmort  = Math.ceil(P.transferencia(M) / (mesAfuera - mesCasa));
 const MESES_DEDICA = Math.ceil(P.transferencia(D) / (mesAfuera - mesCasa));
 const ANIO_AFUERA  = TIENDA.precioCafeAfuera * CAFES_DIA * 365;
 const ANIO_CASA    = costoCasa * CAFES_DIA * 365;
+const F = 'instagram/fotos/';   // fotos de Google Flow
 
 const PIEZAS = [
 
@@ -533,49 +534,47 @@ const PIEZAS = [
     ]
   }
 
+
 ,
 
-  /* ================= DICIEMBRE · 5 carruseles (estilo "pop", 17/11) =================
-     Hechos para retener: gancho con número o tensión en la placa 1, un juego en
-     el medio (quiz con la respuesta en la placa siguiente, chat, ticket), una
-     frase al pie de cada placa que invita a seguir ("sigue") y el cierre con
-     "Mandáselo a …" + pregunta de una letra o un número.
-     Colores de café (pieza.css, .pop): crema, manteca, caramelo, oliva, espresso.
-     Reglas que se mantienen: precio por transferencia aclara que no se combina
-     con cuotas; sin garantía oficial, sellada ni 30 días; sin Krups.
-     Fotos de Flow opcionales: instagram/fotos/PROMPTS-diciembre.md */
+  /* ================= DICIEMBRE · 5 carruseles (estrategia del 17/11) =================
+     Objetivo: alcance nuevo. Público: el que se la compra para sí. Foco: Magnifica S.
+     Tono mixto: humor en el gancho y el cierre, datos sobrios en el medio.
+     Mecánicas: contador, frase al pie ("sigue"), quiz con la respuesta en la
+     placa siguiente, chat y ticket. Estética de la marca (estilo 'pop' en
+     pieza.css: blanco, gris, oscuro y un solo acento oliva).
+     Precio solo al final. Cierre: Escribinos por WhatsApp + pregunta fácil.
+     Fotos de Flow (marcar como IA en Metricool): instagram/fotos/. */
   {
-    id: 'dic-lun-carrusel-que-le-regalo', semana: 0, dia: 'Lunes', tipo: 'carrusel', fecha: '2026-12-07', estilo: 'pop',
-    titulo: 'Este año, no le regales otra taza',
+    id: 'dic-lun-carrusel-regalatela', semana: 0, dia: 'Lunes', tipo: 'carrusel', fecha: '2026-12-07', estilo: 'pop',
+    titulo: 'Este año, el regalo es para vos',
     caption:
-      'Este año, no le regales otra taza. ☕🎄\n\n' +
-      'Test de 20 segundos: ¿cómo es su mañana?\n' +
-      'A) Abre un ojo y quiere el café YA → Magnifica S: aprieta un botón y muele el grano en el momento.\n' +
-      `B) Hace del café una ceremonia → Dedica EC685: ${cm(D.medidas.ancho)} de ancho y todo el ritual.\n\n` +
+      'Este año, el regalo es para vos. ☕🎄\n\n' +
+      'Test de 20 segundos: ¿cómo es tu mañana?\n' +
+      'A) Abrís un ojo y querés el café YA → Magnifica S: apretás un botón y muele el grano en el momento.\n' +
+      `B) El café es tu ceremonia → Dedica EC685: ${cm(D.medidas.ancho)} de ancho y todo el ritual.\n\n` +
       `Magnifica S\n💸 ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF)\n💳 o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre\n\n` +
       `Dedica EC685\n💸 ${fmt(P.transferencia(D))} por transferencia (${OFF}% OFF)\n💳 o ${D.cuotas} cuotas sin interés de ${fmt(P.cuota(D))} en Mercado Libre\n\n` +
-      `El ${OFF}% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan. Envío gratis a todo el país.\n` +
-      'Antes de envolverla, preguntanos por WhatsApp cuándo llega a tu ciudad.\n\n' +
-      'Mandáselo a quien pone la mitad del regalo.\n\n' +
-      '¿Es A o es B? Contestá con la letra 👇\n\n#navidad #regalodenavidad #cafeencasa #delonghi #cafetera',
+      `El ${OFF}% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan. Envío gratis a todo el país.\n\n` +
+      '¿Sos A o B? Escribinos por WhatsApp desde el link de la bio y te ayudamos a elegir 👇\n\n#cafeencasa #regalodenavidad #delonghi #magnificas #dedica',
     placas: [
-      { t: 'gancho', tono: 'manteca', ep: 'Regalos de Navidad', h: 'Este año, no le regales <mark>otra taza</mark>.',
-        sub: 'Test de 20 segundos para saber qué cafetera va con quien te toca.', sticker: `Desde ${fmt(P.transferencia(D))}`, sigue: 'Hacé el test' },
-      { t: 'chat', tono: 'crema', ep: '¿Te suena?', grupo: 'Familia · Navidad',
-        msjs: [['Tía Marta', '¿Qué le regalamos a papá este año?'], ['Tu hermano', '¿Otra corbata?'],
-               ['Papá', 'Yo solo quiero un café como el del bar.'], ['yo', 'Dejen, ya sé qué le regalamos.']], sigue: '¿Qué cafetero es?' },
-      { t: 'quiz', tono: 'caramelo', ep: 'El test', h: '¿Cómo es su mañana?',
-        ops: ['Abre un ojo y quiere el café YA', 'Hace del café una ceremonia'], sigue: 'Si es A' },
-      { t: 'foto', tono: 'crema', ep: 'Si es A · el del botón', h: 'Magnifica S', sub: 'Aprieta un botón y muele el grano en el momento.',
-        img: M.imgs[0], pildora: `${fmt(P.transferencia(M))} por transferencia`,
-        chica: `o ${M.cuotas} cuotas sin interés en Mercado Libre. No se combinan.`, sigue: 'Si es B' },
-      { t: 'foto', tono: 'oliva', ep: 'Si es B · el del ritual', h: 'Dedica EC685', sub: `${cm(D.medidas.ancho)} de ancho. Dosifica, prepara y se agranda.`,
-        img: D.imgs[0], pildora: `${fmt(P.transferencia(D))} por transferencia`,
-        chica: `o ${D.cuotas} cuotas sin interés en Mercado Libre. No se combinan.`, sigue: 'Un dato antes' },
-      { t: 'texto', tono: 'manteca', ep: 'Antes de envolverla', h: 'Preguntanos <mark>cuándo llega</mark>.',
-        p: 'Escribinos por WhatsApp antes de comprar y te confirmamos la fecha de entrega a tu ciudad.', sigue: 'Última' },
-      { t: 'cta', tono: 'espresso', ep: 'Mandáselo a quien pone la mitad', h: '¿Es A o es B?',
-        sub: 'Contestá con la letra y a quién le toca.', boton: 'WhatsApp · link en la bio' }
+      { t: 'gancho', ep: 'Navidad · para vos', h: 'Este año, el regalo es <mark>para vos</mark>.',
+        sub: 'Test de 20 segundos: ¿qué cafetera va con tu mañana?', img: F + 'sofa-dedica.jpg', llena: true, sigue: 'Hacé el test' },
+      { t: 'chat', tono: 'gris', ep: '¿Te suena?', grupo: 'Hoy, 8:05',
+        msjs: [['Vos', 'Un cortadito rápido en el bar y salgo.'], ['Tu billetera', 'Ayer dijiste lo mismo.'],
+               ['Vos', 'Son $4.000 nomás.'], ['yo', 'Este año me regalo la cafetera.']], sigue: '¿Qué cafetero sos?' },
+      { t: 'quiz', ep: 'El test', h: '¿Cómo es tu mañana?',
+        ops: ['Abrís un ojo y querés el café YA', 'El café es tu ceremonia'], sigue: 'Si sos A' },
+      { t: 'foto', tono: 'gris', ep: 'Si sos A · el del botón', h: 'Magnifica S', sub: 'Apretás un botón y muele el grano en el momento.',
+        img: F + 'magnifica-latte-cenital.jpg', llena: true, sigue: 'Si sos B' },
+      { t: 'foto', ep: 'Si sos B · el del ritual', h: 'Dedica EC685', sub: `${cm(D.medidas.ancho)} de ancho. Vos dosificás, vos preparás.`,
+        img: F + 'dedica-espresso-travertino.jpg', llena: true, sigue: 'Cuánto salen' },
+      { t: 'lista', tono: 'gris', ep: 'Cuánto salen', h: 'Por transferencia',
+        items: [[`Magnifica S · ${fmt(P.transferencia(M))}`, `o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre.`],
+                [`Dedica EC685 · ${fmt(P.transferencia(D))}`, `o ${D.cuotas} cuotas sin interés de ${fmt(P.cuota(D))} en Mercado Libre.`]],
+        chica: `El ${OFF}% OFF es por transferencia o efectivo; las cuotas, en Mercado Libre. No se combinan. Envío gratis a todo el país.`, sigue: 'Última' },
+      { t: 'cta', tono: 'oscuro', ep: '¿Sos A o B?', h: 'Contanos y te asesoramos.',
+        sub: 'Escribinos con la letra: te decimos cuál va con vos.', boton: 'Escribinos por WhatsApp' }
     ]
   },
   {
@@ -587,32 +586,34 @@ const PIEZAS = [
       `5° B gasta ${fmt(ANIO_AFUERA)} por año en café. ¿Y 3° A? 🏢☕\n\n` +
       'Mismo edificio, mismos 2 cafés por día. Uno baja al bar; el otro baja en pantuflas… a su cocina.\n\n' +
       'Adiviná antes de deslizar: ¿A, B o C? La respuesta está en la placa 4.\n\n' +
-      `Spoiler para los apurados: con la diferencia, la Dedica se paga en unos ${MESES_DEDICA} meses y la Magnifica S en unos ${mesesAmort}.\n\n` +
+      `Con la diferencia, la Magnifica S se paga en unos ${mesesAmort} meses y la Dedica en unos ${MESES_DEDICA}.\n` +
       'Valores aproximados, con precios de café relevados el 26/10. En el sitio tenés la calculadora para hacer tu cuenta.\n\n' +
-      'Mandáselo a tu 5° B.\n\n' +
-      '¿Vos sos 5° B o 3° A? 👇\n\n#cafeencasa #ahorro #delonghi #cafetera',
+      `Magnifica S: ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF) o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre.\n` +
+      `Dedica EC685: ${fmt(P.transferencia(D))} por transferencia (${OFF}% OFF) o ${D.cuotas} cuotas sin interés de ${fmt(P.cuota(D))} en Mercado Libre.\n` +
+      'No se combinan. Envío gratis a todo el país.\n\n' +
+      '¿Sos 5° B o 3° A? Escribinos por WhatsApp y te hacemos la cuenta con tus números 👇\n\n#cafeencasa #ahorro #delonghi #magnificas',
     placas: [
-      { t: 'gancho', tono: 'espresso', ep: 'Dos vecinos · mismo edificio', h: `5° B gasta <mark>${fmt(ANIO_AFUERA)}</mark> por año en café.`,
+      { t: 'gancho', tono: 'oscuro', ep: 'Dos vecinos · mismo edificio', h: `5° B gasta <mark>${fmt(ANIO_AFUERA)}</mark> por año en café.`,
         sub: '3° A toma el mismo café. ¿Cuánto gasta él?', sticker: 'Adiviná antes de deslizar', sigue: 'Conocelos' },
-      { t: 'dos', tono: 'crema', h: 'El mismo café, todas las mañanas',
+      { t: 'dos', tono: 'gris', h: 'El mismo café, todas las mañanas',
         cols: [
           { ep: '5° B', h: 'Baja al bar', items: [`${CAFES_DIA} cafés por día, a ${fmt(TIENDA.precioCafeAfuera)}`, 'El barista ya sabe su nombre'] },
           { destacada: true, ep: '3° A', h: 'Baja en pantuflas', items: [`Los mismos ${CAFES_DIA} cafés`, 'A su propia cocina'] }
         ], sigue: 'Tu turno' },
-      { t: 'quiz', tono: 'manteca', ep: 'Adiviná', h: '¿Cuánto gasta 3° A por año?',
+      { t: 'quiz', ep: 'Adiviná', h: '¿Cuánto gasta 3° A por año?',
         ops: ['Más de $1.000.000', 'Unos $600.000', 'Menos de $350.000'], sigue: 'La respuesta' },
-      { t: 'revela', tono: 'oliva', ep: 'Respuesta: C', num: fmt(ANIO_CASA), sub: 'por año, con grano recién molido.',
+      { t: 'revela', tono: 'gris', ep: 'Respuesta: C', num: fmt(ANIO_CASA), sub: 'por año, con grano recién molido.',
         p: `Unos ${fmt(costoCasa)} por taza, contra ${fmt(TIENDA.precioCafeAfuera)} en el bar.`, sigue: 'El ticket de 5° B' },
-      { t: 'ticket', tono: 'caramelo', ep: 'Mientras tanto, en 5° B…', h: 'El ticket del año', titulo: 'BAR DE LA ESQUINA',
+      { t: 'ticket', tono: 'oscuro', ep: 'Mientras tanto, en 5° B…', h: 'El ticket del año', titulo: 'BAR DE LA ESQUINA',
         lineas: [[`${CAFES_DIA * 365} cafés × ${fmt(TIENDA.precioCafeAfuera)}`, fmt(ANIO_AFUERA)], ['Medialunas "solo por hoy"', 'sin contar'], ['Paraguas olvidados', 'varios']],
         total: ['TOTAL', fmt(ANIO_AFUERA)], sigue: 'Plot twist' },
-      { t: 'lista', tono: 'crema', ep: 'Plot twist', h: 'La cafetera <mark>se paga sola</mark>',
-        items: [[`Dedica EC685 · ${fmt(P.transferencia(D))}`, `En unos ${MESES_DEDICA} meses de lo que 5° B deja en el bar.`],
-                [`Magnifica S · ${fmt(P.transferencia(M))}`, `En unos ${mesesAmort} meses.`]],
-        chica: `Valores aproximados: café a ${fmt(TIENDA.precioCafeAfuera)}, grano a ${fmt(TIENDA.precioKiloCafe)} el kilo y ${TIENDA.cafesPorKilo} tazas por kilo (precios al 26/10). Cafeteras por transferencia con ${OFF}% OFF; no se combina con cuotas.`,
+      { t: 'lista', ep: 'Plot twist', h: 'La cafetera <mark>se paga sola</mark>',
+        items: [[`Magnifica S · ${fmt(P.transferencia(M))}`, `En unos ${mesesAmort} meses de lo que 5° B deja en el bar.`],
+                [`Dedica EC685 · ${fmt(P.transferencia(D))}`, `En unos ${MESES_DEDICA} meses.`]],
+        chica: `Valores aproximados: café a ${fmt(TIENDA.precioCafeAfuera)}, grano a ${fmt(TIENDA.precioKiloCafe)} el kilo, ${TIENDA.cafesPorKilo} tazas por kilo (precios al 26/10). Cafeteras por transferencia con ${OFF}% OFF, o en cuotas sin interés en Mercado Libre; no se combinan.`,
         sigue: 'Última pregunta' },
-      { t: 'cta', tono: 'espresso', ep: 'Mandáselo a tu 5° B', h: '¿Sos 5° B o 3° A?',
-        sub: 'Contestá con el piso. Sin juzgar (bueno, un poco).', boton: 'Hacé tu cuenta · link en la bio' }
+      { t: 'cta', tono: 'oscuro', ep: 'Sin juzgar (bueno, un poco)', h: '¿Sos 5° B o 3° A?',
+        sub: 'Escribinos y te hacemos la cuenta con tus números.', boton: 'Escribinos por WhatsApp' }
     ]
   },
   {
@@ -625,30 +626,30 @@ const PIEZAS = [
       '2. Mirar solo el precio de la máquina y no lo que gastás en el bar.\n' +
       '3. Olvidarte de la leche, si sos de cortado.\n' +
       '4. Comprar molido en paquetes gigantes.\n' +
-      '5. Si es regalo, no preguntar cuándo llega.\n\n' +
+      '5. No preguntar cuándo llega.\n\n' +
       'Al final está la checklist: guardala para el día que compres.\n\n' +
-      'Mandáselo a quien está por comprar una.\n\n' +
-      '¿Cuál casi te pasa? Contestá con el número 👇\n\n#cafeencasa #cafetera #espresso #delonghi',
+      '¿Cuál casi te pasa? Escribinos por WhatsApp antes de comprar y te ayudamos a medir y elegir 👇\n\n#cafeencasa #cafetera #espresso #delonghi',
     placas: [
-      { t: 'gancho', tono: 'caramelo', ep: 'Antes de comprar', h: 'Llegó la cafetera. <mark>No entraba.</mark>',
-        sub: '5 errores con la primera cafetera, y cómo no cometerlos.', sticker: 'El 2 duele en el bolsillo', sigue: 'Error 1' },
-      { t: 'error', tono: 'crema', n: 1, de: 5, h: 'No medir la mesada.', p: 'Ni la altura bajo la alacena.',
+      { t: 'gancho', ep: 'Antes de comprar', h: 'Llegó la cafetera. <mark>No entraba.</mark>',
+        sub: '5 errores con la primera cafetera, y cómo no cometerlos.', img: F + 'dedica-espresso-travertino.jpg', llena: true, sigue: 'Error 1' },
+      { t: 'error', tono: 'gris', n: 1, de: 5, h: 'No medir la mesada.', p: 'Ni la altura bajo la alacena.',
         evitar: `Magnifica S: ${cm(M.medidas.ancho)} de ancho y ${cm(M.medidas.alto)} de alto. Dedica: ${cm(D.medidas.ancho)} y ${cm(D.medidas.alto)}.`, sigue: 'El 2 duele' },
-      { t: 'error', tono: 'manteca', n: 2, de: 5, h: 'Mirar solo el precio de la máquina.',
+      { t: 'error', n: 2, de: 5, h: 'Mirar solo el precio de la máquina.',
         p: `Lo caro es el bar: ${CAFES_DIA} cafés por día son unos ${fmt(mesAfuera)} por mes.`,
         evitar: `Hacé la cuenta: en casa, los mismos cafés salen unos ${fmt(mesCasa)}.`, sigue: 'Para los de cortado' },
-      { t: 'error', tono: 'oliva', n: 3, de: 5, h: 'Olvidarte de la leche.', p: 'Si sos de cortado, cappuccino o latte, el espumador no es un detalle.',
+      { t: 'error', tono: 'gris', n: 3, de: 5, h: 'Olvidarte de la leche.', p: 'Si sos de cortado, cappuccino o latte, el espumador no es un detalle.',
         evitar: 'Fijate que tenga vaporizador. La Magnifica S y la Dedica lo traen.', sigue: 'El 4 está en tu alacena' },
-      { t: 'error', tono: 'crema', n: 4, de: 5, h: 'Comprar molido en paquetes gigantes.', p: 'El café pierde aroma apenas se muele. El kilo abierto en marzo… ya sabés.',
-        evitar: 'Comprá de a poco, o en grano y molelo en el momento.', sigue: 'El más caro en diciembre' },
-      { t: 'error', tono: 'espresso', n: 5, de: 5, h: 'Si es regalo, no preguntar cuándo llega.', p: 'Nada peor que un regalo de Navidad que llega el 27.',
+      { t: 'error', n: 4, de: 5, h: 'Comprar molido en paquetes gigantes.', p: 'El café pierde aroma apenas se muele. El kilo abierto en marzo… ya sabés.',
+        evitar: 'Comprá de a poco, o en grano y molelo en el momento.', sigue: 'El último' },
+      { t: 'error', tono: 'oscuro', n: 5, de: 5, h: 'No preguntar cuándo llega.', p: 'Sobre todo en diciembre.',
         evitar: 'Escribinos por WhatsApp antes de comprar y te confirmamos la fecha de entrega.', sigue: 'La checklist' },
-      { t: 'lista', tono: 'manteca', ep: 'Guardala para el día que compres', h: 'La checklist',
+      { t: 'lista', tono: 'gris', ep: 'Guardala para el día que compres', h: 'La checklist',
         items: [['Medí ancho y alto', 'Bajo la alacena también.'], ['Hacé la cuenta del bar', `${CAFES_DIA} cafés por día suman.`],
-                ['¿Con leche? Que tenga espumador', ''], ['Café fresco, de a poco', ''], ['Si es regalo, fecha de entrega', 'Preguntá antes de comprar.']],
+                ['¿Con leche? Que tenga espumador', ''], ['Café fresco, de a poco', ''], ['Fecha de entrega', 'Preguntá antes de comprar.']],
         sigue: 'Una pregunta' },
-      { t: 'cta', tono: 'caramelo', ep: 'Mandáselo a quien está por comprar una', h: '¿Cuál casi te pasa?',
-        sub: 'Contestá con el número. El 4 no cuenta: lo hicimos todos.', boton: 'WhatsApp · link en la bio' }
+      { t: 'cta', tono: 'oscuro', ep: 'El 4 no cuenta: lo hicimos todos', h: '¿Cuál casi te pasa?',
+        sub: 'Escribinos antes de comprar: te ayudamos a medir y elegir.', boton: 'Escribinos por WhatsApp',
+        chica: `Magnifica S ${fmt(P.transferencia(M))} · Dedica ${fmt(P.transferencia(D))} por transferencia (${OFF}% OFF), o cuotas sin interés en Mercado Libre. No se combinan.` }
     ]
   },
   {
@@ -664,54 +665,58 @@ const PIEZAS = [
       '¿Y la crema dorada? Son los aceites y el gas del grano recién molido, mezclados a presión.\n\n' +
       `Magnifica S\n💸 ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF)\n💳 o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre\n\n` +
       `El ${OFF}% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan. Envío gratis a todo el país.\n\n` +
-      'Mandáselo a quien sigue con cápsulas.\n\n' +
-      '¿Cuál de los 4 no sabías? Contestá con el número 👇\n\n#cafeencasa #delonghi #magnificas #espresso #comofunciona',
+      '¿Cuál de los 4 no sabías? Escribinos por WhatsApp y te contamos más 👇\n\n#cafeencasa #delonghi #magnificas #espresso #comofunciona',
     placas: [
-      { t: 'gancho', tono: 'espresso', ep: 'Magnifica S · por dentro', h: 'Apretás un botón. Adentro pasan <mark>4 cosas</mark>.',
-        sub: 'En lo que tardás en buscar la taza.', img: M.imgs[1], sigue: 'Paso 1' },
-      { t: 'error', tono: 'crema', n: 1, de: 4, h: 'Muele.', p: 'Un molinillo cónico de acero muele el grano justo antes de cada taza.',
+      { t: 'gancho', tono: 'gris', ep: 'Magnifica S · por dentro', h: 'Apretás un botón. Adentro pasan <mark>4 cosas</mark>.',
+        sub: 'En lo que tardás en buscar la taza.', img: F + 'magnifica-latte-cenital.jpg', llena: true, sigue: 'Paso 1' },
+      { t: 'error', n: 1, de: 4, h: 'Muele.', p: 'Un molinillo cónico de acero muele el grano justo antes de cada taza.',
         titEvitar: 'Dato de sobremesa', evitar: '13 niveles: de más suave a más intenso.', sigue: 'Paso 2' },
-      { t: 'error', tono: 'manteca', n: 2, de: 4, h: 'Calienta.', p: 'El Thermoblock lleva el agua a unos 90 °C al instante.',
+      { t: 'error', tono: 'gris', n: 2, de: 4, h: 'Calienta.', p: 'El Thermoblock lleva el agua a unos 90 °C al instante.',
         titEvitar: 'Dato de sobremesa', evitar: 'Sin esperar, como con la pava.', sigue: 'Paso 3' },
-      { t: 'error', tono: 'oliva', n: 3, de: 4, h: 'Prensa.', p: 'Compacta el café molido, como el barista con el tamper.',
+      { t: 'error', n: 3, de: 4, h: 'Prensa.', p: 'Compacta el café molido, como el barista con el tamper.',
         titEvitar: 'Dato de sobremesa', evitar: 'Como un barista, pero no te pide propina.', sigue: 'Paso 4' },
-      { t: 'error', tono: 'caramelo', n: 4, de: 4, h: 'Extrae.', p: 'La bomba empuja el agua a través del café con hasta 15 bares.',
+      { t: 'error', tono: 'gris', n: 4, de: 4, h: 'Extrae.', p: 'La bomba empuja el agua a través del café con hasta 15 bares.',
         titEvitar: 'Dato de sobremesa', evitar: 'Una rueda de auto anda por los 2 bares.', sigue: '¿Y la crema?' },
-      { t: 'texto', tono: 'crema', ep: '¿Y la crema dorada?', h: 'Sale del grano <mark>recién molido</mark>.',
+      { t: 'texto', ep: '¿Y la crema dorada?', h: 'Sale del grano <mark>recién molido</mark>.',
         p: 'Son sus aceites y su gas, mezclados a presión. Por eso moler en el momento hace la diferencia.', sigue: 'Cuánto sale' },
-      { t: 'cta', tono: 'espresso', ep: `Magnifica S · ${fmt(P.transferencia(M))} por transferencia`, h: '¿Cuál de los 4 no sabías?',
-        sub: 'Contestá con el número.', boton: 'Mandáselo a quien sigue con cápsulas',
-        chica: `o ${M.cuotas} cuotas sin interés en Mercado Libre. No se combinan.` }
+      { t: 'cta', tono: 'oscuro', ep: `Magnifica S · ${fmt(P.transferencia(M))} por transferencia`, h: '¿Cuál de los 4 no sabías?',
+        sub: 'Escribinos y te contamos más.', boton: 'Escribinos por WhatsApp',
+        chica: `o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre. No se combinan. Envío gratis.` }
     ]
   },
   {
-    /* Para los que la recibieron en Navidad: tip para guardar. */
-    id: 'dic-lun-carrusel-primer-cafe', semana: 0, dia: 'Lunes', tipo: 'carrusel', fecha: '2026-12-28', estilo: 'pop',
-    titulo: 'Primer día con la cafetera: no la arruines',
+    /* Verano: café frío en casa. Fotos de Flow con la Dedica (17/11). */
+    id: 'dic-lun-carrusel-iced-latte', semana: 0, dia: 'Lunes', tipo: 'carrusel', fecha: '2026-12-28', estilo: 'pop',
+    titulo: 'Tu iced latte en casa, en 3 pasos',
     caption:
-      '¿Te regalaron una cafetera? Primer día: no la arruines. ☕🎁\n\n' +
-      '1. Lavá el depósito y llenalo con agua fresca.\n' +
-      '2. Cargá café fresco: grano en la Magnifica S, molido en la Dedica.\n' +
-      '3. Descartá los primeros cafés: es el ensayo general.\n' +
-      '4. Precalentá la taza.\n' +
-      '5. Ajustá la molienda de a un punto (en la Magnifica S, mientras muele).\n\n' +
-      'Guardalo: son los pasos del primer día.\n\n' +
-      '¿Tu primer café fue espresso o con leche? 👇\n\n#cafeencasa #delonghi #tipsdecafe #espresso',
+      'Se viene el calor: tu iced latte en casa, en 3 pasos. 🧊☕\n\n' +
+      '1. Vaso alto con hielo hasta arriba.\n' +
+      '2. Leche fría, unos 150 ml.\n' +
+      '3. Espresso doble recién hecho, despacio y por encima.\n\n' +
+      'Si lo querés dulce, el azúcar va en el espresso caliente: en la leche fría no se disuelve.\n\n' +
+      `Magnifica S: ${fmt(P.transferencia(M))} por transferencia (${OFF}% OFF) o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre.\n` +
+      `Dedica EC685: ${fmt(P.transferencia(D))} por transferencia (${OFF}% OFF) o ${D.cuotas} cuotas sin interés de ${fmt(P.cuota(D))} en Mercado Libre.\n` +
+      'No se combinan. Envío gratis a todo el país.\n\n' +
+      '¿Iced latte o espresso aunque haga 35°? Escribinos por WhatsApp desde el link de la bio 👇\n\n#icedlatte #cafeencasa #verano #delonghi #dedica',
     placas: [
-      { t: 'gancho', tono: 'oliva', ep: '¿Te la regalaron?', h: 'Primer día con la cafetera: <mark>no la arruines</mark>.',
-        sub: '5 pasos para que el primer café salga bien.', sticker: '5 pasos · 2 minutos', sigue: 'Paso 1' },
-      { t: 'error', tono: 'crema', n: 1, de: 5, h: 'Lavá el depósito.', p: 'Viajó en una caja. Enjuagalo y llenalo con agua fresca.',
-        titEvitar: 'Tip', evitar: 'Si tenés agua filtrada, mejor: el café lo nota.', sigue: 'Paso 2' },
-      { t: 'error', tono: 'manteca', n: 2, de: 5, h: 'Cargá café fresco.', p: 'Grano en la Magnifica S. Molido en la Dedica.',
-        titEvitar: 'Tip', evitar: 'Ese paquete abierto desde el invierno… mejor no.', sigue: 'Paso 3' },
-      { t: 'error', tono: 'caramelo', n: 3, de: 5, h: 'Descartá los primeros.', p: 'Los primeros cafés sirven para que la máquina se acomode.',
-        titEvitar: 'Tip', evitar: 'No es desperdicio: es el ensayo general.', sigue: 'Paso 4' },
-      { t: 'error', tono: 'crema', n: 4, de: 5, h: 'Precalentá la taza.', p: 'El espresso es poquito y se enfría rápido.',
-        titEvitar: 'Tip', evitar: 'Un chorro de agua caliente y listo.', sigue: 'Paso 5' },
-      { t: 'error', tono: 'oliva', n: 5, de: 5, h: 'Ajustá la molienda de a un punto.', p: 'Más fina: más cuerpo. Más gruesa: más suave.',
-        titEvitar: 'Tip', evitar: 'En la Magnifica S, cambiala mientras muele.', sigue: 'Último' },
-      { t: 'cta', tono: 'espresso', ep: 'Guardalo: son los pasos del primer día', h: '¿Espresso o con leche?',
-        sub: 'Contanos cómo te salió el primero (sin filtro).', boton: 'Mandáselo a quien la estrena' }
+      { t: 'gancho', ep: 'Se viene el calor', h: 'Tu iced latte, <mark>en casa</mark>, en 3 pasos.',
+        sub: 'Sin fila y sin vasito de plástico.', img: F + 'dedica-iced-latte.jpg', llena: true, sigue: 'Primero, un quiz' },
+      { t: 'quiz', tono: 'gris', ep: 'Adiviná', h: '¿Qué va primero en el vaso?',
+        ops: ['El espresso', 'La leche', 'El hielo'], sigue: 'La respuesta' },
+      { t: 'revela', ep: 'Respuesta: C', num: 'El hielo', sub: 'hasta arriba, en un vaso alto.', p: 'Después la leche y, al final, el espresso.', sigue: 'Paso 1' },
+      { t: 'error', tono: 'gris', n: 1, de: 3, h: 'Hielo hasta arriba.', p: 'En un vaso alto.',
+        titEvitar: 'Tip', evitar: 'Vaso 10 minutos en el freezer y dura más frío.', sigue: 'Paso 2' },
+      { t: 'error', n: 2, de: 3, h: 'Leche fría.', p: 'Unos 150 ml, o la vegetal que uses.',
+        titEvitar: 'Tip', evitar: 'Si lo querés dulce, el azúcar va en el espresso caliente: en la leche fría no se disuelve.', sigue: 'Paso 3' },
+      { t: 'error', tono: 'gris', n: 3, de: 3, h: 'Espresso doble, encima.', p: 'Recién hecho y despacio: vas a ver la mezcla bajando.',
+        titEvitar: 'Tip', evitar: 'Con la Magnifica S o la Dedica, un botón.', sigue: 'Así queda' },
+      { t: 'foto', ep: 'Resultado', h: 'Así queda.', sub: 'Y el segundo te sale mejor.', img: F + 'dedica-iced-latte-living.jpg', llena: true, sigue: 'Con qué hacerlo' },
+      { t: 'lista', tono: 'gris', ep: 'Con qué hacerlo', h: 'Por transferencia',
+        items: [[`Magnifica S · ${fmt(P.transferencia(M))}`, `o ${M.cuotas} cuotas sin interés de ${fmt(P.cuota(M))} en Mercado Libre.`],
+                [`Dedica EC685 · ${fmt(P.transferencia(D))}`, `o ${D.cuotas} cuotas sin interés de ${fmt(P.cuota(D))} en Mercado Libre.`]],
+        chica: `El ${OFF}% OFF es por transferencia o efectivo; las cuotas, en Mercado Libre. No se combinan. Envío gratis a todo el país.`, sigue: 'Última' },
+      { t: 'cta', tono: 'oscuro', ep: 'Aunque haga 35°', h: '¿Iced latte o espresso?',
+        sub: 'Escribinos y te ayudamos a elegir la tuya.', boton: 'Escribinos por WhatsApp' }
     ]
   }
 ];

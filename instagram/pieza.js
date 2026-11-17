@@ -14,7 +14,7 @@ const CUERPO = {
   texto:   s => `${ep(s.ep)}<h2>${s.h}</h2>${par(s.p)}${pil(s.pildora)}${chica(s.chica)}`,
   dato:    s => `${ep(s.ep)}<p class="num">${s.num}${s.unidad ? `<small>${s.unidad}</small>` : ''}</p>${sub(s.sub)}${par(s.p)}`,
   lista:   s => `${ep(s.ep)}<h2>${s.h}</h2><ul class="lista">${s.items.map((it, i) =>
-             `<li><i>${s.numerada ? i + 1 : '✓'}</i><div><b>${it[0]}</b>${it[1] ? `<span>${it[1]}</span>` : ''}</div></li>`).join('')}</ul>`,
+             `<li><i>${s.numerada ? i + 1 : '✓'}</i><div><b>${it[0]}</b>${it[1] ? `<span>${it[1]}</span>` : ''}</div></li>`).join('')}</ul>${chica(s.chica)}`,
   trio:    s => `${ep(s.ep)}<h2>${s.h}</h2><div class="cols">${PRODUCTOS.map(p =>
              `<div class="col"><div class="mini">${img(p.imgs[0])}</div><p class="ep">${p.etiqueta}</p><h3>${p.modelo}</h3><p>${s.linea(p)}</p>${s.pie ? `<p class="g">${s.pie(p)}</p>` : ''}</div>`).join('')}</div>`,
   dos:     s => `${ep(s.ep)}<h2>${s.h}</h2><div class="cols dos">${s.cols.map(c =>
@@ -26,7 +26,7 @@ const CUERPO = {
   cta:     s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}<p class="boton">${s.boton}</p>${chica(s.chica)}`,
 
   /* ---- Estilo "pop" (diciembre): juegos y ganchos ---- */
-  gancho:  s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}${s.img ? `<div class="foto">${img(s.img)}</div>` : ''}${s.sticker ? `<p class="sticker">${s.sticker}</p>` : ''}`,
+  gancho:  s => `${ep(s.ep)}<h1>${s.h}</h1>${sub(s.sub)}${s.img ? `<div class="foto ${s.llena ? 'llena' : ''}">${img(s.img)}</div>` : ''}${s.sticker ? `<p class="sticker">${s.sticker}</p>` : ''}`,
   quiz:    s => `${ep(s.ep)}<h2>${s.h}</h2><div class="quiz">${s.ops.map((o, i) =>
              `<div class="${s.ok === i ? 'ok' : ''}"><i>${'ABCD'[i]}</i>${o}</div>`).join('')}</div>${par(s.p)}`,
   revela:  s => `${ep(s.ep)}${s.tachado ? `<p class="tachado">${s.tachado}</p>` : ''}<p class="revela">${s.num}</p>${sub(s.sub)}${par(s.p)}`,
@@ -48,7 +48,7 @@ function placaHTML(pieza, n) {
     const total = pieza.placas.length;
     const pie = `<div class="pie"><div class="puntos">${pieza.placas.map((_, i) => `<b class="${i === n ? 'on' : ''}"></b>`).join('')}</div>${
       s.sigue ? `<span class="sigue">${s.sigue} →</span>` : ''}</div>`;
-    return `<div class="lienzo pop ${s.tono || 'crema'}">
+    return `<div class="lienzo pop ${s.tono || ''}">
     <div class="marca"><i></i> Café en tu Casa</div><p class="contador">${n + 1}/${total}</p><main>${CUERPO[s.t](s)}</main>${pie}</div>`;
   }
   return `<div class="lienzo ${vertical ? 'vertical' : ''} ${s.tono || ''}">
