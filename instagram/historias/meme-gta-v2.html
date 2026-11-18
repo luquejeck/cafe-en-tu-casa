@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es-AR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Historia 1080 x 1920. Zonas seguras: 250 px arriba y abajo. */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; font-family: 'Inter', -apple-system, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+.fondo { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+.pill { position: absolute; display: inline-flex; align-items: center; gap: 14px; background: rgba(255,255,255,.94); color: #1d1d1f;
+  border-radius: 999px; padding: 18px 32px; font-size: 34px; font-weight: 700; letter-spacing: -.02em; box-shadow: 0 16px 40px -18px rgba(0,0,0,.45); }
+.pill i { width: 14px; height: 14px; border-radius: 50%; background: #9a9a9e; flex-shrink: 0; }
+.pill.ok i { background: #5b6e32; }
+.pill small { font-size: 26px; font-weight: 500; color: #6e6e73; }
+.pill.dos { border-radius: 28px; padding: 16px 26px; }
+.pill.dos span { display: flex; flex-direction: column; line-height: 1.15; }
+.pill.dos small { font-size: 24px; }
+.costura { position: absolute; left: 50%; top: 960px; transform: translate(-50%, -50%); background: #1d1d1f; color: #f5f5f7;
+  border-radius: 28px; padding: 26px 40px; text-align: center; box-shadow: 0 24px 50px -20px rgba(0,0,0,.55); white-space: nowrap; }
+.costura p { font-size: 46px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+.costura p em { font-style: normal; color: #a3c26a; }
+.costura span { display: block; margin-top: 8px; font-size: 26px; font-weight: 500; color: #a1a1a6; }
+.marca { position: absolute; right: 48px; top: 270px; display: flex; align-items: center; gap: 10px; color: #1d1d1f; font-size: 26px; font-weight: 600; }
+.marca i { width: 11px; height: 11px; border-radius: 50%; background: #5b6e32; }
+</style></head>
+<body>
+<img class="fondo" src="meme-gta-base.jpg" alt="">
+<div class="costura"><p>¿Todavía en <em>el 5</em>?</p></div>
+<p class="marca"><i></i>Café en tu Casa</p>
+</body></html>
