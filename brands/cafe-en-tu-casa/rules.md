@@ -13,7 +13,13 @@
 - Logo: no file: the brand name is typeset on the card.
 
 ## Voice and bans
-- (to fill in: tone, forbidden imagery, words the brand does not use)
+- Full strategy: `marca/ESTRATEGIA.md` (read it before writing hooks, scripts or captions).
+- Concept: "El lujo de todos los días". Emotional purchase first (me lo merezco, lo quiero, puedo), the fact (price, payment, spec) second, as the rational excuse.
+- Audience: people aged 40-60. Two personas: the one who treats themselves, and the one who buys a gift.
+- Tone: rioplatense Spanish, "vos", short sentences; a friend who knows coffee, never a pushy seller. Never apologize for the price, never fake urgency.
+- Main differentiator: "cápsulas no". Freshly ground beans vs. coffee ground months ago. Cost-per-cup numbers only from real prices of the day.
+- Imagery for content: real morning scenes, hands, cup, grinder sound, steam, people of the target age at home. Product-only shots stay for the site and Mercado Libre.
+- Banned: "garantía oficial", "servicio técnico", "sellada de fábrica", "¡¡imperdible!!", "últimas unidades", invented numbers or testimonials, bashing other brands.
 
 ## Rules from revisions
 <!-- revisions: brand.py rule adds dated rules at the end of this section; the heading may be in any language -->
