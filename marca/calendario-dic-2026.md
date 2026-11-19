@@ -1,0 +1,73 @@
+# Calendario 24/11 al 5/1: revisión con la estrategia nueva
+
+> Revisado el 19/11/2026 contra `ESTRATEGIA.md`. En Metricool ya hay 17 publicaciones programadas
+> (salen solas a las 10:00). Esta revisión dice qué se queda, qué conviene retocar y qué se suma en los
+> días libres. **No se tocó nada en Metricool:** los cambios se hacen cuando los apruebes.
+
+## El mes completo
+
+Los cuatro tipos de contenido: **E** educativo · **C** comparación · **Ca** características · **X** experiencia.
+En **negrita**, las 5 piezas nuevas (ya generadas en `assets/img/ig/e1*.jpg`).
+
+| Fecha | Pieza | Tipo | Estado |
+|---|---|---|---|
+| Dom 23/11 18:00 | Reel Black Friday sin sorpresas | Ca | Programada · queda |
+| **Lun 24/11** | **El lujo de todos los días** (carrusel) | X | **Nueva** |
+| Mié 25/11 21:00 | Dedica: Tu rincón, tu ritual | X | Programada · queda |
+| Vie 27/11 | Black Friday: 20% OFF todos los días | Ca | Programada · queda |
+| **Lun 30/11** | **Tu casa merece café de verdad. Vos también.** (post) | X | **Nueva** |
+| Mar 1/12 | El regalo que se usa todos los días | X | Programada · retoque menor |
+| Mié 2/12 | Magnifica S: último sprint del año | Ca | Programada · **retocar** |
+| Jue 3/12 | Las 4 dudas antes de comprar | E | **Está en borrador**: si la querés, hay que aprobarla en Metricool |
+| **Vie 4/12** | **Una buena mañana no viene en cápsulas** (carrusel) | C | **Nueva** |
+| Lun 7/12 | Dedica: espresso de verdad | Ca | Programada · queda |
+| Mar 8/12 | Este año, el regalo es para vos (test A/B) | X | Programada · queda, ya va con el concepto |
+| Mié 9/12 | Magnifica S, home office | Ca | Programada · queda |
+| Jue 10/12 | 5° B gasta $2.920.000 por año en café | C | Programada · **revisar números** |
+| Vie 11/12 | Dedica: la espuma, en casa | Ca | Programada · queda |
+| **Lun 14/12** | **Te das el gusto porque podés** (post) | X | **Nueva** |
+| Mar 15/12 | Faltan 10 días para Navidad | X | Programada · queda |
+| Jue 17/12 | 5 errores con la primera cafetera | E | Programada · queda |
+| Vie 18/12 | Regalátela | X | Programada · retoque menor |
+| Lun 21/12 | Última semana para regalar | X | Programada · queda |
+| Mar 22/12 | Qué pasa adentro de la Magnifica S | E | Programada · queda |
+| **Mié 23/12** | **Cada mañana arranca distinto** (carrusel) | X | **Nueva** |
+| Lun 28/12 | Iced latte en 3 pasos | E | Programada · queda |
+| Mar 29/12 | Para arrancar el 2027 con buen café | X | Programada · queda |
+| Mar 5/1 | Tu café de cápsula se molió hace meses | C | Programada · queda |
+
+Con las nuevas, el mes queda así: 11 de experiencia, 6 de características, 4 educativas y 3 de comparación.
+Las de experiencia son las que más pesan, que es lo que pide la estrategia en fechas de regalo.
+
+## Retoques sugeridos (solo el texto, las imágenes quedan)
+
+**Mié 2/12 · "Último sprint del año"**
+Hoy le habla a alguien que estudia, y el público tiene entre 40 y 60 años. Propuesta:
+> Último sprint del año. ☕
+> Diciembre se hace largo. Que por lo menos el café de la mañana sea bueno. La De'Longhi Magnifica S muele
+> el grano en el momento y te deja el espresso con un botón. Te lo merecés.
+> …precios igual…
+> ¿Vos llegás a fin de año con café o con mate?
+
+**Mar 1/12 · "El regalo que se usa todos los días"**
+Agregar una línea emocional después del gancho:
+> Cada mañana, un café. Y cada café, un poco de quien lo regaló.
+
+**Vie 18/12 · "Regalátela"**
+Cambiar "Después de un año largo, el café de cafetería en tu casa" por:
+> Después de un año largo, te das el gusto porque podés. El café de cafetería, en tu casa, todas las
+> mañanas.
+
+**Jue 10/12 · "5° B gasta $2.920.000 por año"**
+Esos números se calcularon con los precios de café del 26/10. El kilo de grano se actualizó a $45.000
+(antes $18.000): **antes de que salga, hay que rehacer la cuenta.** Ver "Lo que falta" abajo.
+
+## Lo que falta
+
+- **Subir las 5 piezas nuevas a Metricool.** Las imágenes tienen que estar online: primero se publica esta
+  rama en el sitio y después se programan desde ahí. Avisame y lo hago.
+- **El precio del café afuera** (`precioCafeAfuera` en `productos.js`) sigue en $3.500. Si hoy un café
+  en el bar sale más, actualizalo. Cambia la calculadora del sitio y la cuenta del 10/12.
+- **El precio de la cápsula.** No encontré un precio actual y confiable para Argentina, así que por ahora
+  ninguna pieza compara el costo por taza contra la cápsula. Si me pasás cuánto sale hoy una caja,
+  sumo esa placa.

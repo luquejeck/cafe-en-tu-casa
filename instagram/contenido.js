@@ -645,7 +645,50 @@ const PIEZAS = [
       pieza('f1229-post-magnifica-noche', 'post', 'Magnifica S, fin de año',
         texto('Para arrancar el 2027 con buen café. ☕', `La ${P.nombre(M)} muele el grano en el momento: el café de cafetería, todos los días del año que viene.`,
           [M], 'Guardalo para comparar.', '¿El año que viene: más cafés o mejores cafés?', '#añonuevo #delonghi #magnificas #cafeencasa'),
-        [tarjeta('magnifica-estudio-noche', 'Fin de año', 'El 2027 arranca<br><em>con buen café.</em>')])
+        [tarjeta('magnifica-estudio-noche', 'Fin de año', 'El 2027 arranca<br><em>con buen café.</em>')]),
+
+      /* ---- Estrategia emocional (marca/ESTRATEGIA.md): "El lujo de todos los días" ---- */
+      pieza('e1124-carrusel-lujo-de-todos-los-dias', 'carrusel', 'El lujo de todos los días',
+        texto('El lujo de todos los días. ☕',
+          'El lujo no es algo que se guarda para una ocasión especial. Es el primer café de la mañana, hecho como te gusta, en tu casa.\n\nGanás tiempo, sabor y buen humor. Todos los días.',
+          DISP, 'Guardalo para la próxima vez que pienses "algún día".', '¿Cuál es tu primer café del día?', '#cafeencasa #delonghi #buenamañana #cafetera'),
+        [tarjeta('magnifica-desayuno', 'Café en tu Casa', 'El lujo<br><em>de todos los días.</em>'),
+         { t: 'lista', tono: 'gris', ep: 'Lo que ganás', h: 'Cada mañana',
+           items: [['Tiempo', 'No salís a buscarlo. Apretás un botón.'],
+                   ['Sabor', 'El grano se muele en el momento, para cada taza.'],
+                   ['Buen humor', 'El día arranca bien. Y se nota.']] },
+         foto('magnifica-latte-art'), ...DISP.map(placaPrecio), cierre('¿Cuál es tu primer café?')]),
+      pieza('e1130-post-vos-tambien', 'post', 'Tu casa merece café de verdad',
+        texto('Tu casa merece café de verdad. Vos también. ☕',
+          `Trabajaste todo el año. Una buena mañana empieza con un buen café, y ese café lo podés tener en tu cocina. La ${P.nombre(M)} muele el grano en el momento y te lo sirve con un botón.`,
+          [M], 'Guardalo para comparar.', '¿Hace cuánto que te debés un buen café en casa?', '#cafeencasa #delonghi #magnificas #telomereces'),
+        [tarjeta('magnifica-desayuno-pareja', 'Café de cafetería, en tu casa', 'Tu casa merece café de verdad.<br><em>Vos también.</em>')]),
+      pieza('e1204-carrusel-no-viene-en-capsulas', 'carrusel', 'Una buena mañana no viene en cápsulas',
+        texto('Una buena mañana no viene en cápsulas. ☕',
+          `No es otra cafetera. Es otro café.\n\nLa cápsula trae café que se molió en la fábrica. En una superautomática el grano se muele segundos antes de cada taza. Vos elegís el grano, la molienda y si va con leche. Y no te queda una cápsula por cada café.\n\nCon un kilo de grano a ${fmt(TIENDA.precioKiloCafe)}, cada taza te sale unos ${fmt(costoCasa)}.`,
+          DISP, 'Mandáselo a quien todavía toma de cápsula.', '¿Cápsula o grano?', '#cafeengrano #capsulas #cafeencasa #delonghi'),
+        [tarjeta('magnifica-latte-art', 'La diferencia', 'Una buena mañana<br><em>no viene en cápsulas.</em>'),
+         { t: 'dos', tono: 'gris', h: 'No es otra cafetera. Es otro café.',
+           cols: [
+             { ep: 'Cápsula', h: 'Molido hace meses', items: ['Siempre el mismo sabor', 'Una cápsula por taza'] },
+             { destacada: true, ep: 'Grano', h: 'Molido en el momento', items: ['Vos elegís grano y molienda', 'Queda borra, para las plantas'] }
+           ] },
+         { t: 'dato', tono: 'oscuro', ep: 'Cada taza de grano, aprox.', num: fmt(costoCasa),
+           sub: `Con un kilo a ${fmt(TIENDA.precioKiloCafe)} y ${TIENDA.cafesPorKilo} tazas por kilo.`, p: 'Valor aproximado, con precio de grano de noviembre 2026.' },
+         ...DISP.map(placaPrecio), cierre('¿Cápsula o grano?')]),
+      pieza('e1214-post-te-das-el-gusto', 'post', 'Te das el gusto porque podés',
+        texto('Te das el gusto porque podés. ☕',
+          `Este año el regalo es para vos. Es de los que se usan todas las mañanas, durante años. La ${P.nombre(M)}: un botón, grano recién molido, el café de cafetería en tu casa.`,
+          [M], 'Guardalo para cuando decidas regalártela.', '¿Te la regalás o te la regalan?', '#cafeencasa #delonghi #magnificas #regalo #telomereces'),
+        [tarjeta('magnifica-sillon', 'Esto es para vos', 'Te das el gusto<br><em>porque podés.</em>')]),
+      pieza('e1223-carrusel-cada-manana-distinta', 'carrusel', 'Cada mañana arranca distinto',
+        texto('Cada mañana arranca distinto. ☕',
+          'El lunes, un espresso corto para arrancar. El miércoles, un latte sin apuro. El domingo, un cortado para dos.\n\nCon la cápsula es siempre lo mismo. Con tu cafetera, elegís cada mañana.',
+          DISP, 'Guardalo para tu próxima mañana libre.', '¿Cuál es tu café del domingo?', '#cafeencasa #delonghi #espresso #latte #buenamañana'),
+        [tarjeta('dedica-negra-espresso', 'Lunes', 'Un espresso corto<br><em>para arrancar.</em>'),
+         tarjeta('dedica-blanca-espumando', 'Miércoles', 'Un latte<br><em>sin apuro.</em>'),
+         tarjeta('magnifica-desayuno-familia', 'Domingo', 'Un cortado<br><em>para compartir.</em>'),
+         ...DISP.map(placaPrecio), cierre('¿Cuál es tu café del domingo?')])
     ];
   })()
 ];
