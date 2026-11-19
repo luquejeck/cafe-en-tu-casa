@@ -730,7 +730,7 @@ const PIEZAS = [
          foto('magnifica-latte-art'), ...DISP.map(placaPrecio), cierreE('Mandáselo a quien', 'arranca el día con café.', '¿Cuál es tu primer café?')]),
       pieza('e1130-post-vos-tambien', 'post', 'Tu casa merece café de verdad',
         texto('Tu casa merece café de verdad. Vos también. ☕',
-          `Trabajaste todo el año. Una buena mañana empieza con un buen café, y ese café lo podés tener en tu cocina. La ${P.nombre(M)} muele el grano en el momento y te lo sirve con un botón.`,
+          `Arrancá el año como te merecés. Una buena mañana empieza con un buen café, y ese café lo podés tener en tu cocina. La ${P.nombre(M)} muele el grano en el momento y te lo sirve con un botón.`,
           [M], 'Mandáselo a quien se merece un buen café este año.', '¿Hace cuánto que te debés un buen café en casa?', '#cafeencasa #delonghi #magnificas #telomereces'),
         [tarjeta('magnifica-desayuno-pareja', 'Café de cafetería, en tu casa', 'Tu casa merece café de verdad.<br><em>Vos también.</em>')]),
       pieza('e1204-carrusel-no-viene-en-capsulas', 'carrusel', 'Una buena mañana no viene en cápsulas',

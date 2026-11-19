@@ -12,10 +12,8 @@ En **negrita**, las 5 piezas nuevas (ya generadas en `assets/img/ig/e1*.jpg`).
 | Fecha | Pieza | Tipo | Estado |
 |---|---|---|---|
 | Dom 23/11 18:00 | Reel Black Friday sin sorpresas | Ca | Programada · queda |
-| **Mar 24/11** | **El lujo de todos los días** (carrusel) | X | **Nueva · sin crédito: subir a mano desde la app o pasar a enero** |
 | Mié 25/11 21:00 | Dedica: Tu rincón, tu ritual | X | Programada · queda |
 | Vie 27/11 | Black Friday: 20% OFF todos los días | Ca | Programada · queda |
-| **Lun 30/11** | **Tu casa merece café de verdad. Vos también.** (post) | X | **Nueva · sin crédito: subir a mano desde la app o pasar a enero** |
 | Mar 1/12 | El regalo que se usa todos los días | X | Programada · retoque menor |
 | Mié 2/12 | Magnifica S: último sprint del año | Ca | Programada · **retocar** |
 | Jue 3/12 | Las 4 dudas antes de comprar | E | **Está en borrador**: si la querés, hay que aprobarla en Metricool |
@@ -35,6 +33,17 @@ En **negrita**, las 5 piezas nuevas (ya generadas en `assets/img/ig/e1*.jpg`).
 | Lun 28/12 | Iced latte en 3 pasos | E | Programada · queda |
 | Mar 29/12 | Para arrancar el 2027 con buen café | X | Programada · queda |
 | Mar 5/1 | Tu café de cápsula se molió hace meses | C | Programada · queda |
+| **Mié 6/1** | **El lujo de todos los días** (carrusel, foto de escena) | X | **Nueva · movida desde el 24/11** |
+| Jue 7/1 | Lo que pedís en el bar, en casa | E | Programada · queda |
+| **Vie 8/1 18:00** | **Reel: 1 kilo de grano = más de 160 cápsulas (20 s)** | C | **Nuevo · prueba A/B** |
+| Mar 12/1 | 5 cosas que creemos del café y no son así | E | Programada · queda |
+| **Mié 13/1** | **Tu casa merece café de verdad. Vos también.** (post, foto de escena) | X | **Nueva · movida desde el 30/11, texto adaptado a enero** |
+| Jue 14/1 | Cuidala 5 minutos y te dura años | E | Programada · queda |
+| **Vie 15/1 18:00** | **Reel: 1 kilo de grano = más de 160 cápsulas (9 s)** | C | **Nuevo · prueba A/B** |
+| Mar 19/1 | Un día con la Magnifica S: 4 cafés, 0 filas | X | Programada · queda |
+
+**Enero mezcla estilos:** los carruseles "pop" se alternan con fotos de escena y reels, sin dos del mismo
+estilo seguidos (regla de `APRENDIZAJES.md`).
 
 Con las nuevas, el mes queda así: 11 de experiencia, 6 de características, 4 educativas y 3 de comparación.
 Las de experiencia son las que más pesan, que es lo que pide la estrategia en fechas de regalo.
@@ -65,7 +74,7 @@ taza. Si cambian, se actualizan en `productos.js` y se regenera todo.
 ## Lo que falta
 
 - **Programar en Metricool las 3 de diciembre** (4, 14 y 23/12). Con eso diciembre queda en 20 de 20.
-- **Decidir qué hacer con las 2 de noviembre**: subirlas a mano desde la app el 24 y el 30, o pasarlas a enero.
+- **Programar en Metricool las 4 de enero** (6, 8, 13 y 15/1). Enero queda en 9 de 20 créditos.
 - **El precio de la cápsula.** No encontré un precio actual y confiable para Argentina, así que por ahora
   ninguna pieza compara el costo por taza contra la cápsula. Si me pasás cuánto sale hoy una caja,
   sumo esa placa.

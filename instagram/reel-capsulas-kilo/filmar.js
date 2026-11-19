@@ -16,7 +16,7 @@ const aqui = __dirname;
 const raiz = path.join(aqui, '..', '..');
 const VERSIONES = {
   '9':  { html: 'reel.html',    salida: 'k1-capsulas-en-un-kilo.mp4',     portada: 4.6 },
-  '20': { html: 'reel-20.html', salida: 'k2-capsulas-en-un-kilo-20s.mp4', portada: 10.2 },
+  '20': { html: 'reel-20.html', salida: 'k2-capsulas-en-un-kilo-20s.mp4', portada: 9.6 },
 };
 const V = VERSIONES[process.argv.includes('--20') ? '20' : '9'];
 const destino = path.join(raiz, 'assets', 'img', 'ig', V.salida);

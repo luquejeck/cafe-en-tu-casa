@@ -102,8 +102,8 @@ de acá.
 - 20 por mes, historias incluidas; se gastan al publicarse. Borradores y errores no cuentan. Cambiar texto, video u hora de algo ya programado no gasta.
 - Noviembre 2026: 20 de 20 (14 publicadas + 6 pendientes: 16, 17, 19, 23, 25 y 27). Las historias del finde de Black Friday se suben desde la app.
 - Diciembre 2026 (al 19/11): 14 programadas (1, 2, 7, 8, 9, 10, 11, 15, 17, 18, 21, 22, 28 y 29/12) + el borrador del 3/12 = 15. Se suman 3 de la estrategia de marca (4, 14 y 23/12) = 18, más 2 reservados para Reyes = 20. **Diciembre queda lleno.**
-- Las 2 piezas de noviembre de la estrategia de marca (24 y 30/11) no tienen crédito: se suben a mano desde la app de Instagram, o pasan a enero.
-- Enero 2027 (al 17/11): 5 carruseles programados (5, 7, 12, 14 y 19/1, a las 10:00). Quedan 15 libres.
+- Las 2 piezas de noviembre de la estrategia de marca pasaron a enero (6 y 13/1) para mezclar estilos con los carruseles pop.
+- Enero 2027 (al 19/11): 5 carruseles programados (5, 7, 12, 14 y 19/1, a las 10:00) + 4 nuevos para programar: fotos de escena el 6 y el 13/1 a las 10:00 y los reels de las cápsulas el 8/1 (20 s) y el 15/1 (9 s) a las 18:00 = 9. Quedan 11 libres.
 - Imágenes para Metricool: links públicos del repo en GitHub (raw.githubusercontent.com con el hash del commit). Metricool las copia a sus servidores al programar.
 
 ---
