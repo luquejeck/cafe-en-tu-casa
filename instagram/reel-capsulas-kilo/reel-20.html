@@ -12,12 +12,12 @@
 * { box-sizing:border-box; margin:0; }
 html, body { width:1080px; height:1920px; overflow:hidden; background:var(--negro); }
 body { font-family:Inter, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
-.escena { position:absolute; inset:0; padding:300px 90px 0; display:flex; flex-direction:column; align-items:center; text-align:center; opacity:0; }
-.marca { position:absolute; top:150px; left:0; right:0; display:flex; justify-content:center; align-items:center; gap:14px; font-size:34px; font-weight:600; letter-spacing:-.01em; z-index:5; }
+.escena { position:absolute; inset:0; padding:400px 150px 0; display:flex; flex-direction:column; align-items:center; text-align:center; opacity:0; }
+.marca { position:absolute; top:285px; left:0; right:0; display:flex; justify-content:center; align-items:center; gap:14px; font-size:34px; font-weight:600; letter-spacing:-.01em; z-index:5; }
 .marca i { width:15px; height:15px; border-radius:50%; background:var(--oliva-claro); }
 .ep { font-size:32px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; }
-h1 { font-size:118px; font-weight:600; line-height:1.04; letter-spacing:-.045em; }
-h2 { font-size:84px; font-weight:600; line-height:1.06; letter-spacing:-.04em; }
+h1 { font-size:104px; font-weight:600; line-height:1.04; letter-spacing:-.045em; }
+h2 { font-size:76px; font-weight:600; line-height:1.06; letter-spacing:-.04em; }
 .palabra { display:inline-block; }
 
 /* 1 · gancho */
@@ -35,8 +35,8 @@ h2 { font-size:84px; font-weight:600; line-height:1.06; letter-spacing:-.04em; }
 #eq { background:var(--negro); color:#f5f5f7; }
 #eq .ep { color:var(--oliva-claro); }
 #eq h2 { margin-top:26px; }
-.ops { margin-top:70px; width:100%; display:flex; flex-direction:column; gap:26px; }
-.op { display:flex; align-items:center; gap:34px; background:#1c1c1f; border:2px solid rgba(255,255,255,.12); border-radius:34px; padding:34px 40px; font-size:56px; font-weight:600; letter-spacing:-.02em; text-align:left; }
+.ops { margin-top:60px; width:100%; display:flex; flex-direction:column; gap:26px; }
+.op { display:flex; align-items:center; gap:30px; background:#1c1c1f; border:2px solid rgba(255,255,255,.12); border-radius:34px; padding:30px 36px; font-size:52px; font-weight:600; letter-spacing:-.02em; text-align:left; }
 .op i { font-style:normal; width:86px; height:86px; flex:none; border-radius:50%; background:rgba(163,194,106,.16); color:var(--oliva-suave); display:flex; align-items:center; justify-content:center; font-size:44px; font-weight:700; }
 .reloj { margin-top:70px; width:100%; height:16px; border-radius:99px; background:rgba(255,255,255,.12); overflow:hidden; }
 .reloj u { display:block; height:100%; background:var(--oliva-claro); border-radius:99px; }
@@ -46,48 +46,48 @@ h2 { font-size:84px; font-weight:600; line-height:1.06; letter-spacing:-.04em; }
 #em { background:#fff; color:var(--ink); justify-content:center; padding-top:0; }
 #em .paso { font-size:42px; }
 #em h2 { margin-top:26px; }
-.via { margin-top:70px; width:100%; display:flex; flex-direction:column; gap:20px; text-align:left; }
+.via { margin-top:56px; width:100%; display:flex; flex-direction:column; gap:20px; text-align:left; }
 .via b { font-size:30px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink2); }
-.pasos { display:flex; align-items:center; gap:14px; flex-wrap:nowrap; }
+.pasos { display:flex; flex-direction:column; align-items:flex-start; gap:8px; }
 .paso { background:var(--gris); border-radius:24px; padding:22px 26px; font-size:38px; font-weight:600; letter-spacing:-.02em; white-space:nowrap; }
-.flecha { font-size:40px; color:var(--ink2); }
+.flecha { font-size:34px; color:var(--ink2); padding-left:28px; line-height:1; }
 .paso.final { background:#e9e9ee; color:#8e8e93; }
 .via.grano .paso { background:var(--negro); color:#f5f5f7; }
 .via.grano .paso.final { background:var(--oliva); color:#fff; }
-.nota-aroma { margin-top:80px; font-size:46px; font-weight:600; letter-spacing:-.02em; color:var(--oliva); }
+.nota-aroma { margin-top:64px; font-size:46px; font-weight:600; letter-spacing:-.02em; color:var(--oliva); }
 
 /* 2 · la cuenta */
 #e2 { background:var(--gris); color:var(--ink); }
-#e2 .fila { display:flex; align-items:center; gap:46px; margin-top:20px; }
+#e2 .fila { display:flex; align-items:center; gap:36px; margin-top:20px; }
 #e2 .igual { font-size:110px; font-weight:600; color:var(--ink2); }
-.contador { font-size:250px; font-weight:600; letter-spacing:-.06em; line-height:.9; color:var(--oliva); font-variant-numeric:tabular-nums; }
+.contador { font-size:220px; font-weight:600; letter-spacing:-.06em; line-height:.9; color:var(--oliva); font-variant-numeric:tabular-nums; }
 .contador small { font-size:120px; }
 .leyenda { font-size:46px; font-weight:600; letter-spacing:-.02em; margin-top:10px; }
-.grilla { margin-top:56px; display:grid; grid-template-columns:repeat(16, 52px); gap:6px 6px; }
-.grilla svg { width:52px; height:52px; display:block; }
-.aclara { position:absolute; bottom:300px; left:0; right:0; font-size:28px; color:var(--ink2); }
+.grilla { margin-top:56px; display:grid; grid-template-columns:repeat(16, 42px); gap:6px 5px; }
+.grilla svg { width:42px; height:42px; display:block; }
+.aclara { position:absolute; bottom:400px; left:150px; right:150px; font-size:28px; color:var(--ink2); }
 
 /* 3 · la diferencia */
 #e3 { background:#fff; color:var(--ink); }
 #e3 h2 { margin-top:30px; }
 #e3 .duo { display:grid; grid-template-columns:1fr 1fr; gap:30px; width:100%; margin-top:70px; }
-#e3 .lado { border-radius:40px; padding:46px 30px 50px; display:flex; flex-direction:column; align-items:center; gap:22px; }
+#e3 .lado { border-radius:36px; padding:40px 24px 44px; display:flex; flex-direction:column; align-items:center; gap:22px; }
 #e3 .lado.mal { background:var(--gris); }
 #e3 .lado.bien { background:var(--negro); color:#f5f5f7; }
 #e3 .lado b { font-size:30px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink2); }
 #e3 .lado.bien b { color:var(--oliva-claro); }
-#e3 .lado p { font-size:44px; font-weight:600; line-height:1.15; letter-spacing:-.02em; }
-#e3 .lado svg { width:190px; height:190px; }
+#e3 .lado p { font-size:38px; font-weight:600; line-height:1.15; letter-spacing:-.02em; }
+#e3 .lado svg { width:170px; height:170px; }
 #e3 .extra { margin-top:60px; font-size:46px; font-weight:600; letter-spacing:-.02em; color:var(--oliva); }
 
 /* 4 · cierre */
 #e4 { background:var(--negro); color:#f5f5f7; justify-content:center; padding-top:0; }
-#e4 h1 { font-size:104px; }
+#e4 h1 { font-size:96px; }
 #e4 h1 em { font-style:normal; color:var(--oliva-suave); }
-#e4 .accion { margin-top:56px; font-size:44px; font-weight:600; color:#f5f5f7; }
+#e4 .accion { margin-top:56px; font-size:40px; font-weight:600; color:#f5f5f7; }
 #e4 .pregunta { margin-top:18px; font-size:40px; color:#a1a1a6; }
 #e4 .accion, #e4 .pregunta, #e4 .boton, #e4 .volver { position:relative; }
-#e4 .volver { position:absolute; bottom:420px; left:0; right:0; font-size:34px; color:#6e6e73; opacity:0; }
+#e4 .volver { position:absolute; bottom:420px; left:150px; right:150px; font-size:34px; color:#6e6e73; opacity:0; }
 #e4 .boton { margin-top:56px; background:#fff; color:var(--ink); border-radius:999px; padding:24px 52px; font-size:38px; font-weight:600; }
 </style>
 </head>
@@ -135,15 +135,15 @@ h2 { font-size:84px; font-weight:600; line-height:1.06; letter-spacing:-.04em; }
   <div class="via">
     <b data-entra="0.5">Cápsula</b>
     <div class="pasos">
-      <span class="paso" data-entra="0.6">Se muele en fábrica</span><span class="flecha" data-entra="0.75">→</span>
-      <span class="paso" data-entra="0.85">viaja</span><span class="flecha" data-entra="1.0">→</span>
+      <span class="paso" data-entra="0.6">Se muele en fábrica</span><span class="flecha" data-entra="0.75">↓</span>
+      <span class="paso" data-entra="0.85">viaja</span><span class="flecha" data-entra="1.0">↓</span>
       <span class="paso final" data-entra="1.1">espera meses</span>
     </div>
   </div>
   <div class="via grano">
     <b data-entra="1.5">Grano</b>
     <div class="pasos">
-      <span class="paso" data-entra="1.6">Se muele</span><span class="flecha" data-entra="1.75">→</span>
+      <span class="paso" data-entra="1.6">Se muele</span><span class="flecha" data-entra="1.75">↓</span>
       <span class="paso final" data-entra="1.85">segundos antes de tu taza</span>
     </div>
   </div>
@@ -169,7 +169,7 @@ h2 { font-size:84px; font-weight:600; line-height:1.06; letter-spacing:-.04em; }
       <p>Una bolsa, y la borra va a las plantas</p>
     </div>
   </div>
-  <p class="extra" data-entra="1.15">Y se muele en el momento, taza por taza.</p>
+  <p class="extra" data-entra="1.15">Y se muele en el momento,<br>taza por taza.</p>
 </section>
 
 <section class="escena" id="e4">
@@ -237,7 +237,7 @@ function cuadro(f) {
     // empuje: la nueva entra opaca desde abajo y empuja a la anterior hacia arriba
     el.style.opacity = visible ? 1 : 0;
     el.style.zIndex = visible ? 1 + k : 0;
-    const zoom = 1 + 0.035 * clamp(lt / dur);
+    const zoom = 1 + 0.015 * clamp(lt / dur);
     el.style.transform = `translateY(${(1 - entra) * 1920 - sale * 1920}px) scale(${zoom})`;
     if (visible) animar(el, id, Math.max(lt, 0), dur);
     ini += dur;
@@ -265,7 +265,7 @@ function animar(el, id, lt, dur) {
       g.style.left = d.x + 'px'; g.style.top = (d.y0 + lt * d.v * 1.6) + 'px'; g.style.transform = `rotate(${d.r + lt * 40}deg)`; });
   }
   if (id === 'e1') {
-    const p = 1 + 0.05 * Math.sin(Math.PI * clamp(lt / 3));
+    const p = 1 + 0.03 * Math.sin(Math.PI * clamp(lt / 3));
     document.getElementById('gancho').style.transform = `scale(${p})`;
   }
   if (id === 'eq') {
