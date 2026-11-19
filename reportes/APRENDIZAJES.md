@@ -18,6 +18,7 @@ Firmeza: **señal** (1–2 piezas) · **probado** (3+ piezas o 3+ semanas) · **
 | Los reels con **historia y voz** (personajes, un conflicto con números) retienen mucho más que los de producto: ir por ahí. Arrancar con el conflicto en movimiento, no con un plano quieto. | "Dos vecinos" (plano, voz de Valeria, 31 s, 27-28/10): pierde 30 % en el primer segundo y queda en 47 % a los 5 s, pero después baja muy poco: 42 % a los 9 s, 33 % a los 19 s, 27 % a los 27 s. El 88 % de las vistas vino de la pestaña Reels (gente que no sigue la cuenta). La caída final es en el cierre "Comentá CAFÉ". | prueba |
 | Los reels llevan música de fondo: lo-fi de `instagram/musica.py` (sin derechos), alternando los temas mañana, tarde y sobremesa. `filmar.mjs` la agrega sola. | Pedido de Lucas, 23/10: sin sonido son aburridos. El catálogo de Instagram vía Metricool da error. | regla |
 | Sin montos en videos, salvo el reel de "la cuenta", que lleva los números en pantalla con fecha ("precios del sitio al 27/10") y "valores aproximados". | Los videos quedan viejos; la cuenta es el gancho que funciona. | regla |
+| **Prueba de duración (19/11):** reel de las cápsulas en 9 s contra 20 s con quiz, re-gancho a mitad y final que empalma con el principio (`instagram/reel-capsulas-kilo/`). Mismo texto y horario; se mide a las 72 h. Gana la de 20 s si duplica el tiempo medio sin perder más del 30 % a los 3 s. | Pedido de Lucas, 19/11. La skill `reels-script` pone el punto justo entre 15 y 35 s; nuestros datos dicen 9 s. | prueba |
 
 ## Carruseles
 
