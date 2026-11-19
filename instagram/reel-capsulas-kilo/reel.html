@@ -25,6 +25,12 @@ h2 { font-size:84px; font-weight:600; line-height:1.06; letter-spacing:-.04em; }
 #e1 .ep { color:var(--oliva-claro); margin-bottom:34px; }
 #e1 h1 em { font-style:normal; color:var(--oliva-suave); }
 
+.lluvia { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.lluvia svg { position:absolute; width:90px; height:90px; opacity:.16; }
+#e1 .ep, #e1 h1 { position:relative; }
+.escena > * { will-change:transform, opacity; }
+.grilla svg path, .grilla svg rect { transition:none; }
+
 /* 2 · la cuenta */
 #e2 { background:var(--gris); color:var(--ink); }
 #e2 .fila { display:flex; align-items:center; gap:46px; margin-top:20px; }
@@ -62,6 +68,7 @@ h2 { font-size:84px; font-weight:600; line-height:1.06; letter-spacing:-.04em; }
 <div class="marca" id="marca"><i></i><span>Café en tu Casa</span></div>
 
 <section class="escena" id="e1">
+  <div class="lluvia" id="lluvia"></div>
   <p class="ep" data-entra="0.05">Hacé la cuenta</p>
   <h1 data-palabras="0.15">1 kilo de café<br>en grano:<br><em>¿cuántas cápsulas son?</em></h1>
 </section>
@@ -117,23 +124,31 @@ const FPS = 30;
 // duración de cada escena en segundos (total 9 s): el dato aparece antes del segundo 6
 const ESCENAS = [['e1', 1.7], ['e2', 3.5], ['e3', 2.2], ['e4', 1.6]];
 const TOTAL = Math.round(ESCENAS.reduce((s, e) => s + e[1], 0) * FPS);
-const META = 160;
+const META = 160, T_MAS = 2.6;           // segundos dentro de la escena 2 en que aparece el "+"
+const PASE = 0.22;                         // transición entre escenas, en segundos
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const suave = x => { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
 const rebote = x => { x = clamp(x); const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const inicio = id => { let t = 0; for (const [i, d] of ESCENAS) { if (i === id) return t; t += d; } };
 
 // cápsula de aluminio (gris) vista de costado
-const capsula = (fill = '#c7c7cc', borde = '#8e8e93') =>
-  `<svg viewBox="0 0 52 52"><path d="M10 14 H42 L36 44 Q26 48 16 44 Z" fill="${fill}" stroke="${borde}" stroke-width="2"/><rect x="6" y="9" width="40" height="7" rx="3.5" fill="${borde}"/></svg>`;
+const CAP = (fill = '#c7c7cc', borde = '#8e8e93', g = 2) =>
+  `<path d="M10 14 H42 L36 44 Q26 48 16 44 Z" fill="${fill}" stroke="${borde}" stroke-width="${g}"/><rect x="6" y="9" width="40" height="7" rx="3.5" fill="${borde}"/>`;
 const grilla = document.getElementById('grilla');
-grilla.innerHTML = Array.from({ length: META }, () => capsula()).join('');
+grilla.innerHTML = Array.from({ length: META }, () => `<svg viewBox="0 0 52 52">${CAP()}</svg>`).join('');
 const celdas = [...grilla.children];
-// pila de cápsulas para la escena 3
-document.getElementById('pila').innerHTML = Array.from({ length: 21 }, (_, i) => {
-  const fila = [0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,3,3,3,4,4,5][i], pos = [0,1,2,3,4,5,0,1,2,3,4,0,1,2,3,0,1,2,0,1,0][i];
-  const x = 10 + fila * 15 + pos * 30, y = 168 - fila * 28;
-  return `<g transform="translate(${x} ${y - 20}) scale(.62)"><path d="M10 14 H42 L36 44 Q26 48 16 44 Z" fill="#c7c7cc" stroke="#8e8e93" stroke-width="3"/><rect x="6" y="9" width="40" height="7" rx="3.5" fill="#8e8e93"/></g>`;
-}).join('');
+
+// lluvia de cápsulas de fondo en el gancho (posiciones fijas: el video sale igual siempre)
+const GOTAS = Array.from({ length: 14 }, (_, i) => ({ x: (i * 137) % 1000 - 20, y0: -200 - (i * 211) % 900, v: 260 + (i * 53) % 220, r: (i * 47) % 60 - 30 }));
+document.getElementById('lluvia').innerHTML = GOTAS.map(() => `<svg viewBox="0 0 52 52">${CAP('#f5f5f7', '#a3c26a', 2)}</svg>`).join('');
+const gotas = [...document.getElementById('lluvia').children];
+
+// pila de cápsulas para la escena 3: se arma de a una
+const PILA = [0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,3,3,3,4,4,5].map((fila, i) => ({ fila, pos: [0,1,2,3,4,5,0,1,2,3,4,0,1,2,3,0,1,2,0,1,0][i] }));
+document.getElementById('pila').innerHTML = PILA.map(({ fila, pos }) =>
+  `<g transform="translate(${10 + fila * 15 + pos * 30} ${148 - fila * 28}) scale(.62)"><g>${CAP('#c7c7cc', '#8e8e93', 3)}</g></g>`).join('');
+const piezasPila = [...document.getElementById('pila').children].map(g => g.firstElementChild);
+const T_PILA = i => 0.45 + i * 0.045;      // segundo (dentro de la escena 3) en que cae cada cápsula de la pila
 
 // separa los títulos en palabras para que entren de a una
 document.querySelectorAll('[data-palabras]').forEach(h => {
@@ -141,24 +156,33 @@ document.querySelectorAll('[data-palabras]').forEach(h => {
     t.split(' ').filter(Boolean).map(w => `<span class="palabra">${w}</span>`).join(' ')).join('');
 });
 
+// cuántas cápsulas hay en la grilla en el segundo lt de la escena 2 (v incluye 14 de margen para que caigan las últimas)
+const avance = lt => suave(clamp((lt - 0.25) / 2.5)) * (META + 14);
+
 function cuadro(f) {
   const t = f / FPS;
   let ini = 0;
-  for (const [id, dur] of ESCENAS) {
+  ESCENAS.forEach(([id, dur], k) => {
     const el = document.getElementById(id), lt = t - ini;
-    const activa = lt >= 0 && lt < dur;
-    el.style.opacity = activa ? 1 : 0;
-    if (activa) animar(el, id, lt, dur);
+    const ultima = k === ESCENAS.length - 1;
+    // entra deslizando desde abajo y sale empujada hacia arriba
+    const entra = k === 0 ? 1 : suave((lt + PASE / 2) / PASE);
+    const sale = ultima ? 0 : suave((lt - dur + PASE / 2) / PASE);
+    const visible = lt > -PASE / 2 && (ultima ? lt <= dur + 1 : lt < dur + PASE / 2);
+    // empuje: la nueva entra opaca desde abajo y empuja a la anterior hacia arriba
+    el.style.opacity = visible ? 1 : 0;
+    el.style.zIndex = visible ? 1 + k : 0;
+    const zoom = 1 + 0.035 * clamp(lt / dur);
+    el.style.transform = `translateY(${(1 - entra) * 1920 - sale * 1920}px) scale(${zoom})`;
+    if (visible) animar(el, id, Math.max(lt, 0), dur);
     ini += dur;
-  }
-  // la marca cambia de color según el fondo
-  const claro = document.getElementById('e2').style.opacity == 1 || document.getElementById('e3').style.opacity == 1;
+  });
+  const claro = t >= inicio('e2') && t < inicio('e4');
   document.getElementById('marca').style.color = claro ? '#1d1d1f' : '#f5f5f7';
   document.querySelector('#marca i').style.background = claro ? '#5b6e32' : '#a3c26a';
 }
 
 function animar(el, id, lt, dur) {
-  // entradas: suben y aparecen
   el.querySelectorAll('[data-entra]').forEach(n => {
     const p = suave((lt - +n.dataset.entra) / 0.35);
     n.style.opacity = p; n.style.transform = `translateY(${(1 - p) * 40}px)`;
@@ -170,21 +194,34 @@ function animar(el, id, lt, dur) {
       w.style.opacity = p; w.style.transform = `translateY(${(1 - p) * 50}px)`;
     });
   });
+  if (id === 'e1') {
+    gotas.forEach((g, i) => { const d = GOTAS[i];
+      g.style.left = d.x + 'px'; g.style.top = (d.y0 + lt * d.v * 1.6) + 'px'; g.style.transform = `rotate(${d.r + lt * 40}deg)`; });
+  }
   if (id === 'e2') {
-    // las cápsulas caen en 2,3 s y el contador las sigue; al final aparece el "+"
-    const v = suave(clamp((lt - 0.25) / 2.5)) * (META + 14);   // 14 de margen para que caigan las últimas
-    const cuantas = Math.min(META, Math.round(v));
-    document.getElementById('n').textContent = cuantas;
-    document.getElementById('mas').textContent = lt > 2.6 ? '+' : '';
-    document.getElementById('ley').textContent = lt > 2.6 ? 'cápsulas, por lo menos' : 'cápsulas';
+    const v = avance(lt), cuantas = Math.min(META, Math.round(v));
+    const n = document.getElementById('n');
+    n.textContent = cuantas;
+    document.getElementById('mas').textContent = lt > T_MAS ? '+' : '';
+    document.getElementById('ley').textContent = lt > T_MAS ? 'cápsulas, por lo menos' : 'cápsulas';
+    // destello oliva que recorre la grilla cuando aparece el "+"
+    const ola = (lt - T_MAS) / 0.5;
     celdas.forEach((c, i) => {
-      const q = rebote((v - i) / 14);   // cada cápsula cae mientras entran las 14 siguientes
-      const ve = i < cuantas;
+      const q = rebote((v - i) / 14), ve = i < cuantas;
       c.style.opacity = ve ? 1 : 0;
       c.style.transform = ve ? `translateY(${(1 - clamp(q)) * -60}px) scale(${0.6 + 0.4 * q})` : 'none';
+      const fila = Math.floor(i / 16), luz = clamp(1 - Math.abs(ola * 12 - fila) / 2.2);
+      c.firstElementChild.setAttribute('fill', luz > 0 ? `rgb(${Math.round(199 - 36 * luz)},${Math.round(199 - 5 * luz)},${Math.round(204 - 98 * luz)})` : '#c7c7cc');
     });
-    const zoom = 1 + 0.04 * suave((lt - 2.6) / 0.6);
-    document.getElementById('n').parentElement.style.transform = `scale(${zoom})`;
+    const pop = lt > T_MAS ? rebote((lt - T_MAS) / 0.35) : 0;
+    n.parentElement.style.transform = `scale(${1 + 0.08 * Math.sin(Math.PI * clamp(pop, 0, 1))})`;
+    // la bolsa se sacude cuando se completa la cuenta
+    const sac = lt > T_MAS && lt < T_MAS + 0.45 ? Math.sin((lt - T_MAS) * 40) * 6 * (1 - (lt - T_MAS) / 0.45) : 0;
+    el.querySelector('.fila svg').style.transform = `rotate(${sac}deg)`;
+  }
+  if (id === 'e3') {
+    piezasPila.forEach((g, i) => { const p = rebote((lt - T_PILA(i)) / 0.2);
+      g.style.opacity = lt > T_PILA(i) ? 1 : 0; g.setAttribute('transform', `translate(0 ${(1 - clamp(p)) * -60})`); });
   }
   if (id === 'e4') {
     const b = el.querySelector('.boton'); const p = rebote((lt - 1.2) / 0.3);
@@ -192,8 +229,28 @@ function animar(el, id, lt, dur) {
   }
 }
 
+// Eventos de sonido, sincronizados con la animación (los lee sonido.py)
+function eventos() {
+  const ev = [], e2 = inicio('e2'), e3 = inicio('e3'), e4 = inicio('e4');
+  ev.push({ t: 0, tipo: 'golpe' });
+  ESCENAS.slice(1).forEach(([id]) => ev.push({ t: inicio(id) - PASE / 2, tipo: 'whoosh' }));
+  let antes = 0;                            // un tic cada 4 cápsulas nuevas, más agudo a medida que se llena
+  for (let f = 0; f < 3.5 * FPS; f++) {
+    const c = Math.min(META, Math.round(avance(f / FPS)));
+    for (let k = antes + 1; k <= c; k++) if (k % 4 === 0) ev.push({ t: e2 + f / FPS, tipo: 'tic', altura: k / META });
+    antes = c;
+  }
+  ev.push({ t: e2 + T_MAS, tipo: 'campana' });
+  PILA.forEach((_, i) => ev.push({ t: e3 + T_PILA(i), tipo: 'tic', altura: 0.3, suave: true }));
+  ev.push({ t: e3 + 0.75, tipo: 'pop' });
+  ev.push({ t: e4 + 0.05, tipo: 'acorde' });
+  ev.push({ t: e4 + 1.2, tipo: 'pop' });
+  return ev;
+}
+
 window.TOTAL = TOTAL;
 window.cuadro = cuadro;
+window.EVENTOS = eventos();
 cuadro(0);
 </script>
 </body>

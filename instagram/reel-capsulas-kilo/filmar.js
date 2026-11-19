@@ -1,4 +1,4 @@
-// Filma reel.html cuadro por cuadro y lo pasa a MP4 1080x1920 a 30 cuadros, con música de musica.py.
+// Filma reel.html cuadro por cuadro y lo pasa a MP4 1080x1920 a 30 cuadros, con música y efectos (sonido.py).
 // Salida: assets/img/ig/k1-capsulas-en-un-kilo.mp4 y su portada (-portada.jpg).
 //
 //   node instagram/reel-capsulas-kilo/filmar.js          con música
@@ -47,11 +47,15 @@ try { ffmpeg = require('ffmpeg-static'); } catch {}
   // Portada: el contador ya completo (segundo 4,6), donde está el dato que vende
   await page.evaluate(f => window.cuadro(f), Math.round(4.6 * 30));
   await page.screenshot({ path: destino.replace('.mp4', '-portada.jpg'), type: 'jpeg', quality: 92 });
+  const eventos = await page.evaluate(() => window.EVENTOS);
   await browser.close();
 
   if (!process.argv.includes('--mudo')) {
-    const r = spawnSync('python3', [path.join(raiz, 'instagram', 'musica.py'), '--video', destino, 'manana'], { stdio: 'inherit' });
-    if (r.status) throw new Error('musica.py falló');
+    // música + efectos sincronizados con la animación (los eventos salen de reel.html)
+    const ev = path.join(aqui, 'eventos.json');
+    fs.writeFileSync(ev, JSON.stringify(eventos));
+    const r = spawnSync('python3', [path.join(aqui, 'sonido.py'), ev, destino], { stdio: 'inherit' });
+    if (r.status) throw new Error('sonido.py falló');
   }
   console.log('Listo:', path.relative(raiz, destino));
 })();

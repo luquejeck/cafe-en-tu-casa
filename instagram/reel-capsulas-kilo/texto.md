@@ -1,6 +1,6 @@
 # Reel: 1 kilo de grano = más de 160 cápsulas
 
-- **Video:** `assets/img/ig/k1-capsulas-en-un-kilo.mp4` (9 s, 1080×1920, con música lo-fi sin derechos)
+- **Video:** `assets/img/ig/k1-capsulas-en-un-kilo.mp4` (9 s, 1080×1920, música lo-fi y efectos sincronizados, todo sin derechos, a −14 LUFS)
 - **Portada:** `assets/img/ig/k1-capsulas-en-un-kilo-portada.jpg` (el contador en 160+)
 - **Para volver a filmarlo:** `node instagram/reel-capsulas-kilo/filmar.js`
 - **Horario sugerido:** 18:00, dentro de la prueba de reels a esa hora (17/11 al 4/12). Diciembre ya no
