@@ -12,7 +12,7 @@ En **negrita**, las 5 piezas nuevas (ya generadas en `assets/img/ig/e1*.jpg`).
 | Fecha | Pieza | Tipo | Estado |
 |---|---|---|---|
 | Dom 23/11 18:00 | Reel Black Friday sin sorpresas | Ca | Programada · queda |
-| **Lun 24/11** | **El lujo de todos los días** (carrusel) | X | **Nueva · sin crédito: subir a mano desde la app o pasar a enero** |
+| **Mar 24/11** | **El lujo de todos los días** (carrusel) | X | **Nueva · sin crédito: subir a mano desde la app o pasar a enero** |
 | Mié 25/11 21:00 | Dedica: Tu rincón, tu ritual | X | Programada · queda |
 | Vie 27/11 | Black Friday: 20% OFF todos los días | Ca | Programada · queda |
 | **Lun 30/11** | **Tu casa merece café de verdad. Vos también.** (post) | X | **Nueva · sin crédito: subir a mano desde la app o pasar a enero** |
