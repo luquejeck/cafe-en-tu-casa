@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Reel — 5° B vs 3° A (alta retención)</title>
+<style>
+/* "5° B vs 3° A": versión de "Dos vecinos" pensada para retener (28/10).
+   Lo que mostró la curva del reel anterior: 30 % se iba en el primer segundo
+   y el medio retenía bien. Acá:
+   - pantalla partida todo el video: arriba el 5° B, abajo el 3° A, cada uno con
+     su contador de plata corriendo desde el primer cuadro;
+   - guion nuevo de 27 s con el conflicto en la primera frase, una pregunta
+     abierta ("la diferencia es una sola"), un dato sorpresa al final ("se pagó
+     sola y le sobra más de un millón") y una pregunta para comentar;
+   - subtítulos grandes al centro, un cambio de plano cada 1,5 a 2 s;
+   - el último cuadro es igual al primero, para que el reel empalme en loop.
+   Cuentas estimadas (precios al 27/10): 2 cafés por día a $4.000 = $2.920.000;
+   grano a $50.000 el kilo, ~120 tazas = ~$417 la taza, $304.000 al año;
+   Magnifica S $1.506.901 en Mercado Libre: se paga en ~7 meses y sobran
+   ~$1.109.000 en el año. Voz: Valeria (ElevenLabs), voz-retencion.mp3. */
+:root { --oliva: #5b6e32; --olc: #a3c26a; --ink: #1d1d1f; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); color: var(--ink); font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+canvas { position: absolute; left: 0; top: 0; }
+.pil { position: absolute; display: flex; align-items: center; gap: 12px; border-radius: 999px; font-weight: 700; white-space: nowrap; letter-spacing: -.01em; }
+#subs { position: absolute; left: 30px; right: 30px; top: 892px; height: 136px; display: flex; justify-content: center; align-items: center; gap: 18px; font-size: 76px; font-weight: 800; letter-spacing: -.04em; color: #fff; }
+#subs span { display: inline-block; }
+#subs span.o { color: var(--olc); }
+#nota { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; font-size: 22px; color: rgba(255,255,255,.85); }
+#marca { position: absolute; left: 0; right: 0; top: 0; height: 88px; display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 30px; font-weight: 600; color: #fff; letter-spacing: -.01em; }
+#marca i { width: 12px; height: 12px; border-radius: 50%; background: var(--olc); }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div id="subs"></div>
+<div id="nota">Estimado · precios al 27/10 · grano $50.000/kg, ~120 tazas · Magnifica S $1.506.901 en Mercado Libre</div>
+<script src="../reel-prueba/comun3.js"></script>
+<script src="palabras.js"></script>
+<script>
+const OFF = .08, VOZ = 27.36;
+window.TOTAL = Math.round((OFF + 27.5) * FPS);
+window.VOZ = ["../reel-retencion/voz-retencion.mp3", OFF];
+window.MEZCLA = "../reel-magnifica/mezclar-maquina.py";
+// momentos de la voz
+const T = { tres: 1.24, este2: 3.74, trescientos: 4.58, mismo: 5.92, edificio: 7.02, diferencia: 8.3, quinto: 10.38, bar: 11.34, dos: 11.62,
+  cuatro: 12.86, cada: 13.7, tercero: 14.58, boton: 15.96, grano: 16.7, cuarenta: 18.04, cuatrocientos: 19.62, anio: 21.36, pago: 23.3,
+  sobra: 24.3, millon: 25.34, piso: 26.16, fin: 27.2 };
+window.SFX = [[0, "beat"], [0, "tic"], [T.este2, "tic"], [T.edificio - .2, "whoosh"], [T.diferencia, "whoosh"], [T.quinto, "whoosh"], [T.bar, "pop"],
+  [T.cuatro, "pop"], [T.cada, "pop"], [T.tercero, "whoosh"], [T.boton, "click"], [T.grano, "molienda"], [T.cuarenta, "goteo"], [T.cuatrocientos, "pop"],
+  [T.anio, "subida"], [T.pago, "golpe"], [T.millon, "golpe"], [T.piso, "whoosh"], [T.fin, "tic"]].map(([t, x]) => [t + OFF, x]);
+
+const c = $("c").getContext("2d");
+const W = 1080, PH = 890, ARR = 0, ABA = 1030;   // alto de cada panel y dónde empieza
+const OL = "#5b6e32", OLC = "#a3c26a", TINTA = "#1d1d1f", MAD = "#d9c3a0";
+function rr(x, y, w, h, r, col, l) { c.beginPath(); c.roundRect(x, y, w, h, r); if (col) { c.fillStyle = col; c.fill(); } if (l) { c.strokeStyle = l; c.lineWidth = 3; c.stroke(); } }
+function circ(x, y, r, col, l) { c.beginPath(); c.arc(x, y, r, 0, 7); if (col) { c.fillStyle = col; c.fill(); } if (l) { c.strokeStyle = l; c.lineWidth = 3; c.stroke(); } }
+function txt(s, x, y, tam, col, peso = 700, al = "center") { c.fillStyle = col; c.font = `${peso} ${tam}px Inter`; c.textAlign = al; c.textBaseline = "middle"; c.fillText(s, x, y); }
+const fmtP = (n) => "$" + fmt(n);
+
+// ---------- personajes y objetos (coordenadas en px del panel)
+function persona(x, y, col, t, camina = false, s = 1, conVaso = false) {
+  const p = camina ? Math.sin(t * 13) : 0;
+  rr(x - 22 * s + p * 8, y - 80 * s, 18 * s, 80 * s, 6, "#3a3a3c"); rr(x + 4 * s - p * 8, y - 80 * s, 18 * s, 80 * s, 6, "#3a3a3c");
+  rr(x - 32 * s, y - 175 * s, 64 * s, 100 * s, 22 * s, col);
+  circ(x, y - 205 * s, 28 * s, "#e3c4a8"); c.beginPath(); c.arc(x, y - 212 * s, 29 * s, Math.PI, 0); c.fillStyle = "#3a332d"; c.fill();
+  if (conVaso === true) { rr(x + 30 * s, y - 145 * s, 26 * s, 36 * s, 4, "#f4f1ea", TINTA); rr(x + 28 * s, y - 150 * s, 30 * s, 8 * s, 3, "#8b6b4a"); }
+  if (conVaso === "taza") { rr(x + 30 * s, y - 140 * s, 30 * s, 26 * s, 5, "#fff", TINTA); c.strokeStyle = TINTA; c.lineWidth = 3; c.beginPath(); c.arc(x + 62 * s, y - 127 * s, 8 * s, -1.4, 1.4); c.stroke(); humo(x + 45 * s, y - 145 * s, s, t); }
+}
+function humo(x, y, s, t) { c.strokeStyle = "rgba(255,255,255,.9)"; c.lineWidth = 3 * s; c.lineCap = "round"; for (let i = 0; i < 2; i++) { c.beginPath(); for (let k = 0; k <= 10; k++) { const px = x + (i - .5) * 10 * s + Math.sin(k * .7 + t * 4 + i * 2) * 5 * s, py = y - k * 5 * s; k ? c.lineTo(px, py) : c.moveTo(px, py); } c.stroke(); } }
+/** billetes o granos que caen mientras corre un contador */
+function lluvia(oy, t, a, b, tipo) {
+  const k = tramo(t, a, b); if (k <= 0 || k >= 1) return;
+  for (let i = 0; i < 26; i++) {
+    const x = (i * 97) % 1000 + 40, f = ((t - a) * (1.4 + (i % 5) * .25) + i * .137) % 1, y = oy + f * PH, r = (i % 7) * .4 + t * (i % 2 ? 2 : -2);
+    c.save(); c.translate(x, y); c.rotate(r); c.globalAlpha = Math.sin(Math.PI * k) * .95;
+    if (tipo === "plata") { rr(-34, -18, 68, 36, 5, "#7f9a5a", "#4a5c27"); txt("$", 0, 1, 26, "#fff", 800); }
+    else { c.fillStyle = "#5a3a22"; c.beginPath(); c.ellipse(0, 0, 14, 9, 0, 0, 7); c.fill(); }
+    c.restore();
+  }
+  c.globalAlpha = 1;
+}
+function cocina(oy, pared, t) {
+  c.fillStyle = pared; c.fillRect(0, oy, W, PH);
+  c.fillStyle = MAD; c.fillRect(0, oy + PH - 150, W, 150);                                   // piso
+  for (let i = 0; i < 9; i++) { c.fillStyle = "rgba(120,90,60,.15)"; c.fillRect(i * 130, oy + PH - 150, 3, 150); }
+  rr(620, oy + 170, 300, 240, 10, "#dfe6ea", TINTA); c.fillStyle = TINTA; c.fillRect(768, oy + 170, 3, 240);   // ventana
+  rr(80, oy + PH - 330, 470, 180, 6, "#e2dfd8", TINTA); rr(70, oy + PH - 345, 490, 22, 6, "#fbfaf8", TINTA);  // mesada
+  rr(80, oy + 150, 470, 110, 6, "#f4f3f0", TINTA);                                                             // alacena
+  rr(960, oy + PH - 270, 70, 120, 8, "#b9b5ad", TINTA); circ(995, oy + PH - 300, 52, "#7d9150", TINTA); circ(975, oy + PH - 318, 30, "#94a868");   // planta
+  rr(640, oy + 450, 120, 90, 4, "#e3b98d", TINTA);                                                              // cuadro
+}
+/** De'Longhi Magnifica S de frente, con alto h (px), apoyada en (x, y). */
+function magnifica(x, y, h, t, prende, llena, granos) {
+  const w = h * .66;
+  c.strokeStyle = "#b9bcc0"; c.lineWidth = h * .025; c.lineCap = "round"; c.beginPath(); c.moveTo(x - w * .08, y - h * .66); c.lineTo(x - w * .08, y - h * .26); c.stroke();
+  rr(x, y - h, w, h, h * .05, "#1f1f21");
+  rr(x + w * .05, y - h, w * .9, h * .07, h * .02, "#333336");
+  if (granos > 0) for (let i = 0; i < 8; i++) { const k = (t * 2.4 + i * .13) % 1; c.fillStyle = "#5a3a22"; c.beginPath(); c.ellipse(x + w * (.25 + (i % 4) * .15), y - h - h * .25 + k * h * .25, h * .02, h * .013, i, 0, 7); c.fill(); }
+  rr(x + w * .06, y - h * .77, w * .88, h * .22, h * .02, "#2b2b2e");
+  circ(x + w / 2, y - h * .66, w * .1, "#c9ccd0"); circ(x + w / 2, y - h * .66, w * .045, "#8c8f93");
+  [[.17, .72], [.17, .66], [.17, .6], [.83, .72], [.83, .66], [.83, .6]].forEach(([bx, by], i) => rr(x + w * bx - h * .022, y - h * by - h * .016, h * .044, h * .03, 2, i === 3 && prende ? OLC : "#d9dbde"));
+  if (prende) { const r = (t * 2) % 1; c.strokeStyle = `rgba(163,194,106,${.8 * (1 - r)})`; c.lineWidth = 4; c.beginPath(); c.arc(x + w * .83, y - h * .66, h * (.03 + r * .08), 0, 7); c.stroke(); }
+  rr(x + w * .4, y - h * .52, w * .2, h * .025, 2, "#b9bcc0");
+  rr(x + w * .18, y - h * .44, w * .64, h * .34, 4, "#111113");
+  rr(x + w * .4, y - h * .44, w * .2, h * .08, 3, "#b9bcc0");
+  [.3, .54].forEach((cx) => {
+    const tx = x + w * cx, ty = y - h * .1, tw = w * .16, th = h * .15;
+    if (llena > 0) { c.fillStyle = "#7a4f2c"; c.fillRect(tx + 2, ty - th * .85 * llena, tw - 4, th * .85 * llena); c.fillStyle = "#c99a5c"; c.fillRect(tx + 2, ty - th * .85 * llena, tw - 4, h * .012); }
+    if (llena > 0 && llena < 1) { c.strokeStyle = "#6e4526"; c.lineWidth = h * .008; c.beginPath(); c.moveTo(tx + tw / 2, y - h * .36); c.lineTo(tx + tw / 2, ty - th * .85 * llena); c.stroke(); }
+    rr(tx, ty - th, tw, th, 3, "rgba(225,232,236,.35)", "rgba(230,236,240,.9)");
+  });
+  rr(x - h * .01, y - h * .1, w + h * .02, h * .1, 4, "#18181a");
+}
+function bar(oy, t) {
+  c.fillStyle = "#efe9df"; c.fillRect(0, oy, W, PH);
+  c.fillStyle = MAD; c.fillRect(0, oy + PH - 150, W, 150);
+  for (let i = 0; i < 12; i++) { c.fillStyle = i % 2 ? "#fff" : TINTA; c.fillRect(i * 90, oy + 120, 90, 60); }                  // toldo por dentro
+  rr(340, oy + 200, 400, 70, 12, TINTA); txt("BAR", 540, oy + 236, 44, "#fff");
+  rr(60, oy + PH - 360, 960, 210, 8, "#8b6b4a", TINTA); rr(50, oy + PH - 372, 980, 24, 6, "#5e4630");                         // barra
+  rr(140, oy + PH - 520, 220, 150, 10, "#9a9da1", TINTA); rr(170, oy + PH - 400, 40, 30, 4, "#5e5e60"); rr(290, oy + PH - 400, 40, 30, 4, "#5e5e60");   // la máquina del bar
+  rr(720, oy + PH - 470, 180, 100, 10, "#2c2c2e"); txt("$4.000", 810, oy + PH - 420, 40, OLC);                                  // caja
+}
+function sello(x, y, s, col, txtC, k) {
+  if (k <= 0) return; const e = .5 + .5 * rebote(k, 1.6);
+  c.save(); c.translate(x, y); c.rotate(-.08); c.scale(e, e);
+  rr(-s * 2.4, -s * .7, s * 4.8, s * 1.4, s * .7, col); txt(txtC, 0, 3, s * .8, col === OLC ? TINTA : "#fff", 800);
+  c.restore();
+}
+
+// ---------- paneles
+function etiqueta(x, y, s, col, texto) { rr(x, y, s * 3.2, s * 1.25, s * .62, col); txt(texto, x + s * 1.6, y + s * .64, s * .72, "#fff", 800); }
+function contador(x, y, s, col, val, sub) {
+  c.save(); c.textAlign = "right"; c.font = `800 ${s}px Inter`; const w = c.measureText(fmtP(val)).width + s * .8; c.restore();
+  rr(x - w, y, w, s * 1.45, s * .72, col); txt(fmtP(val), x - w / 2, y + s * .62, s, "#fff", 800);
+  if (sub) txt(sub, x - w / 2, y + s * 1.75, s * .34, "rgba(29,29,31,.75)", 700);
+}
+// valores de los contadores en cada momento
+function valores(t) {
+  const loop = t >= T.fin ? 0 : 1;
+  let a = 2920000 * salida(tramo(t, .05, T.tres + 1.0)), b = 304000 * salida(tramo(t, T.este2, T.trescientos + .8));
+  if (t >= T.quinto) a = t < T.cuatro ? 0 : t < T.cada ? 4000 : 8000;
+  if (t >= T.tercero) b = t < T.cuatrocientos ? 0 : 417;
+  if (t >= T.anio) { const k = salida(tramo(t, T.anio, T.pago - .1)); a = 8000 + (2920000 - 8000) * k; b = 417 + (304000 - 417) * k; }
+  return [a * loop, b * loop];
+}
+function panelArriba(t, foco) {
+  const oy = ARR;
+  const enBar = t >= T.bar - .15 && t < T.tercero;
+  if (enBar) bar(oy, t); else cocina(oy, "#f1efe9", t);
+  if (!enBar) {
+    // el del 5° con su vaso del bar; con "baja al bar" sale por la puerta
+    const sale = suave(tramo(t, T.quinto + .1, T.bar - .2)) * (t < T.anio ? 1 : 0);   // en "en un año" vuelve a su cocina
+    rr(30, oy + PH - 520, 110, 370, 6, "#8b6b4a", TINTA);
+    persona(400 - 330 * sale, oy + PH - 150, TINTA, t, sale > 0 && sale < 1, 1.6, true);
+  } else {
+    persona(560, oy + PH - 150, TINTA, t, false, 1.6, false);
+    // dos veces por día: los relojes
+    [[T.dos, "8:15", 360], [T.dos + .45, "16:30", 720]].forEach(([a, h, x]) => sello(x, oy + 360, 44, TINTA, "🕗 " + h, tramo(t, a, a + .3)));
+    sello(320, oy + 520, 52, OLC, "$4.000", tramo(t, T.cuatro, T.cuatro + .3));
+    sello(760, oy + 520, 52, OLC, "$4.000", tramo(t, T.cada, T.cada + .3));
+  }
+  lluvia(oy, t, .05, T.tres + 1.2, "plata"); lluvia(oy, t, T.anio, T.pago, "plata");
+  etiqueta(36, oy + 110, 52, TINTA, "5° B");
+  const [a] = valores(t);
+  contador(1044, oy + 110, 62, TINTA, a, t < T.quinto || t >= T.anio ? "en café, por año" : "hoy");
+  if (foco < 1) { c.fillStyle = `rgba(29,29,31,${.62 * (1 - foco)})`; c.fillRect(0, oy, W, PH); }
+}
+function panelAbajo(t, foco) {
+  const oy = ABA;
+  cocina(oy, "#eef0e6", t);
+  // la Magnifica S: de lejos, y de cerca cuando aprieta el botón
+  const cerca = suave(tramo(t, T.boton - .35, T.boton + .2)) * (1 - suave(tramo(t, T.anio - .2, T.anio + .3)));
+  const h = 150 + 470 * cerca, mx = 150 + 140 * cerca, my = oy + PH - 345 + 150 * cerca;
+  const llena = tramo(t, T.cuarenta, T.cuatrocientos - .1);
+  persona(760 + 200 * cerca, oy + PH - 150, OL, t, false, 1.6, (t < T.tercero || t > T.cuatrocientos) ? "taza" : false);
+  magnifica(mx, my, h, t, t >= T.boton && t < T.anio, t >= T.anio ? 1 : llena, t >= T.grano && t < T.cuarenta ? 1 : 0);
+  if (t >= T.cuarenta && t < T.anio) { const s = Math.round(40 * salida(tramo(t, T.cuarenta, T.cuatrocientos - .2))); rr(700, oy + 300, 230, 96, 48, t > T.cuatrocientos - .3 ? OL : TINTA); txt("0:" + String(s).padStart(2, "0"), 815, oy + 348, 54, "#fff", 800); }
+  sello(780, oy + 520, 52, OLC, "~$417", tramo(t, T.cuatrocientos, T.cuatrocientos + .3) * (t < T.anio ? 1 : 0));
+  // se pagó sola · le sobra más de un millón
+  sello(420, oy + 360, 56, OLC, "PAGADA ✓", tramo(t, T.pago, T.pago + .3) * (t < T.piso ? 1 : 0));
+  if (t >= T.sobra && t < T.piso) {
+    const k = rebote(tramo(t, T.sobra, T.sobra + .35), 1.5);
+    c.save(); c.translate(540, oy + 600); c.scale(.5 + .5 * k, .5 + .5 * k);
+    rr(-380, -95, 760, 190, 95, OL); txt("+ $" + fmt(1109000 * salida(tramo(t, T.sobra, T.millon + .3))), 0, -10, 96, "#fff", 800); txt("le sobra en el año", 0, 60, 30, "rgba(255,255,255,.85)", 600);
+    c.restore();
+  }
+  lluvia(oy, t, T.este2, T.trescientos + 1, "granos");
+  etiqueta(36, oy + 110, 52, OL, "3° A");
+  const [, b] = valores(t);
+  contador(1044, oy + 110, 62, OL, b, t < T.tercero || t >= T.anio ? "en café, por año" : "esta taza");
+  if (foco < 1) { c.fillStyle = `rgba(29,29,31,${.62 * (1 - foco)})`; c.fillRect(0, oy, W, PH); }
+}
+/** "Mismo edificio": los dos paneles resultan ser dos pisos del mismo edificio */
+function edificio(t, k) {
+  if (k <= 0) return;
+  c.globalAlpha = k;
+  c.fillStyle = "#f3f1ec"; c.fillRect(0, 0, W, 1920);
+  c.fillStyle = "#d3d1cc"; c.fillRect(0, 1700, W, 220);
+  const x0 = 290, w = 500, fh = 200, base = 1700;
+  rr(x0, base - fh * 7 - 20, w, fh * 7 + 20, 4, "#fbfaf8", TINTA); rr(x0 - 16, base - fh * 7 - 36, w + 32, 24, 4, "#e2dfd8", TINTA);
+  for (let f = 0; f < 7; f++) for (let i = 0; i < 3; i++) {
+    const luz = (f === 5 || f === 3) && i < 2, x = x0 + 40 + i * 150, y = base - (f + 1) * fh + 50;
+    rr(x, y, 120, 110, 4, luz ? "#f6d68c" : "#d9dee2", TINTA);
+  }
+  [[5, TINTA, "5° B"], [3, OL, "3° A"]].forEach(([f, col, n]) => { const y = base - (f + 1) * fh + 40; c.strokeStyle = col; c.lineWidth = 8; c.strokeRect(x0 + 28, y, 294, 130); etiqueta(x0 + w + 20, y + 30, 40, col, n); });
+  rr(x0 + 210, base - 150, 80, 150, 6, OL, TINTA);
+  c.globalAlpha = 1;
+}
+
+// ---------- subtítulos en bloques de 1 a 3 palabras
+const BLOQ = []; { let b = []; PALABRAS.forEach((p, i) => { b.push(p); if (/[.,:?!]$/.test(p.text) || b.length === 3 || i === PALABRAS.length - 1) { BLOQ.push(b); b = []; } }); }
+const CLAVE = /^(tres|millones|trescientos|mil|edificio|sola|quinto|bar|cuatro|tercero|botón|grano|cuarenta|cuatrocientos|pagó|millón|piso)/i;
+let bActual = -2;
+function subs(t) {
+  const i = BLOQ.findIndex((b, k) => t >= b[0].start - .04 && (k === BLOQ.length - 1 || t < BLOQ[k + 1][0].start - .04));
+  if (i !== bActual) { bActual = i; $("subs").innerHTML = i < 0 || t >= T.fin ? "" : BLOQ[i].map((p) => `<span class="${CLAVE.test(p.text.replace(/[¿¡]/g, "")) ? "o" : ""}">${p.text.replace(/[,.:]$/, "")}</span>`).join(""); }
+  if (i < 0) return;
+  [...$("subs").children].forEach((s, k) => { const p = BLOQ[i][k], e = rebote(tramo(t, p.start - .05, p.start + .18), 1.5); s.style.opacity = clamp(tramo(t, p.start - .06, p.start)); s.style.transform = `scale(${.5 + .5 * e})`; });
+}
+
+window.cuadro = (f) => {
+  const t = f / FPS - OFF;
+  c.fillStyle = TINTA; c.fillRect(0, 0, W, 1920);
+  // quién está en foco: los dos, o uno solo mientras se cuenta su historia
+  let fa = 1, fb = 1;
+  if (t >= T.este2 - .1 && t < T.mismo) fa = .35;
+  if (t < T.este2 - .1 && t > .1) fb = .35;
+  if (t >= T.quinto && t < T.tercero) fb = 0;
+  if (t >= T.tercero && t < T.anio) fa = 0;
+  // empujón de cámara en cada cambio de foco
+  const golpe = [T.tres, T.trescientos, T.quinto, T.bar, T.cuatro, T.cada, T.tercero, T.boton, T.cuatrocientos, T.pago, T.millon].reduce((m, g) => Math.max(m, t >= g && t < g + .25 ? 1 - (t - g) / .25 : 0), 0);
+  c.save(); c.translate(540, 960); c.scale(1 + .025 * golpe, 1 + .025 * golpe); c.translate(-540, -960);
+  c.save(); c.beginPath(); c.rect(0, ARR, W, PH); c.clip(); panelArriba(t, fa); c.restore();
+  c.save(); c.beginPath(); c.rect(0, ABA, W, PH); c.clip(); panelAbajo(t, fb); c.restore();
+  c.restore();
+  // VS en el medio, salvo cuando hay subtítulos largos
+  edificio(t, suave(tramo(t, T.edificio - .25, T.edificio + .2)) * (1 - suave(tramo(t, T.diferencia + .2, T.diferencia + .6))));
+  subs(t);
+  $("subs").style.display = t >= T.edificio && t < T.diferencia + .4 ? "none" : "flex";
+  $("nota").style.opacity = t >= T.anio && t < T.piso ? 1 : 0;
+  // "¿Vos de qué piso sos?": las etiquetas crecen como opciones de encuesta
+  if (t >= T.piso && t < T.fin) {
+    const k = rebote(tramo(t, T.piso, T.piso + .4), 1.4);
+    [[ARR + 300, TINTA, "5° B"], [ABA + 300, OL, "3° A"]].forEach(([y, col, n]) => { c.save(); c.translate(540, y + 120); c.scale(.4 + .6 * k, .4 + .6 * k); rr(-260, -110, 520, 220, 110, col); txt(n, 0, 6, 150, "#fff", 800); c.restore(); });
+  }
+};
+</script>
+</body>
+</html>

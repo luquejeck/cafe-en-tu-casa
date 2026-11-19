@@ -20,8 +20,10 @@ const TIENDA = {
   garantiaMeses: 12,
 
   // Para la calculadora de amortizacion. Actualizalos cuando cambien.
-  precioCafeAfuera: 3500,   // lo que sale un cafe en un bar, en pesos
-  precioKiloCafe: 18000,    // lo que te sale 1 kg de cafe en grano
+  // Relevamiento 26/10/2026: cafe en bar $3.000-5.400 (cortado/cafe con leche);
+  // grano de especialidad $40.000-60.000 el kilo (Bonafide ~$56.600, tostadores ~$49.000-59.000).
+  precioCafeAfuera: 4000,   // lo que sale un cafe en un bar, en pesos
+  precioKiloCafe: 60000,    // lo que te sale 1 kg de cafe en grano (Lucas: entre 40.000 y 80.000)
   cafesPorKilo: 130,        // tazas que salen de 1 kg (aprox 7,5 g por taza)
 
   url: 'https://cafe-en-tu-casa.vercel.app'
@@ -36,7 +38,7 @@ const PRODUCTOS = [
     tipo: 'Superautomática',
     etiqueta: 'Más vendida',
     tagline: 'Café en grano, recién molido, con un botón.',
-    resumen: 'La compañera perfecta para llevar la experiencia del barista a tu casa. Diseñada en Italia, extrae el máximo aroma del grano apretando un solo botón.',
+    resumen: 'Para el que quiere el café de cafetería todas las mañanas sin complicarse. Muele el grano en el momento y te lo sirve con un solo botón.',
     precioLista: 1586212,
     precioML:    1506901,
     cuotas: 9,
@@ -72,7 +74,7 @@ const PRODUCTOS = [
       ['Surtidor', 'Altura regulable'],
       ['Tensión', '220 V']
     ],
-    descripcion: 'La Magnifica S es la superautomática más vendida de De’Longhi y la puerta de entrada natural al café de especialidad en casa. El molinillo cónico de acero muele el grano justo antes de cada extracción, así que el aroma no se pierde esperando en un paquete abierto. Con el dial regulás el grosor de molienda entre 13 posiciones y ajustás el cuerpo de la taza a tu gusto.\n\nEl panel es 100% analógico: sin menús ni pantallas. Apretás el botón de la taza que querés y listo. El vaporizador manual te deja texturizar la leche como en una cafetería, para cappuccinos y flat whites con espuma real.\n\nSi alguna vez querés usar café ya molido, tiene una boca aparte para hacerlo sin vaciar el contenedor de granos.'
+    descripcion: 'Es para el que se merece un buen café cada mañana y no quiere aprender barismo para tenerlo. Apretás un botón y el día arranca bien.\n\nLa Magnifica S es la superautomática más vendida de De’Longhi y la puerta de entrada natural al café de especialidad en casa. El molinillo cónico de acero muele el grano justo antes de cada extracción, así que el aroma no se pierde esperando en un paquete abierto. Con el dial regulás el grosor de molienda entre 13 posiciones y ajustás el cuerpo de la taza a tu gusto.\n\nEl panel es 100% analógico: sin menús ni pantallas. Apretás el botón de la taza que querés y listo. El vaporizador manual te deja texturizar la leche como en una cafetería, para cappuccinos y flat whites con espuma real.\n\nSi alguna vez querés usar café ya molido, tiene una boca aparte para hacerlo sin vaciar el contenedor de granos.'
   },
   {
     id: 'krups-roma',
@@ -82,7 +84,7 @@ const PRODUCTOS = [
     tipo: 'Superautomática',
     etiqueta: 'Mejor precio',
     tagline: 'Superautomática, compacta, sin vueltas.',
-    resumen: 'Elegancia compacta y rendimiento superior, diseñada en Francia para los que buscan un espresso intenso y equilibrado todos los días.',
+    resumen: 'Para el que quiere dejar las cápsulas y pasarse al café en grano sin ocupar media mesada. Compacta, simple y con espresso intenso todos los días.',
     precioLista: 1145299,
     precioML:    1145299,
     cuotas: 6,
@@ -111,7 +113,7 @@ const PRODUCTOS = [
       ['Extras', 'Calientatazas superior'],
       ['Tensión', '220 V']
     ],
-    descripcion: 'La Krups Roma EA8105 es la forma más directa de pasar del café instantáneo al espresso de grano sin resignar espacio en la mesada. Es una superautomática completa: cargás granos, apretás un botón y la máquina muele, compacta y extrae sola.\n\nEl sistema Thermoblock compacto calienta el agua al instante, así que no hay que esperar a que levante temperatura: la primera taza sale igual de bien que la quinta. Con el selector regulás el volumen en tazas de 20 a 220 ml.\n\nLa boquilla de vapor lateral gira y te permite espumar leche directamente en la jarra para cappuccinos, y la bandeja superior mantiene las tazas tibias para que el café no se enfríe al servirlo.'
+    descripcion: 'Es para el que ya sabe que el café de su casa podría ser mucho mejor, y decidió que se lo merece.\n\nLa Krups Roma EA8105 es la forma más directa de pasar del café instantáneo al espresso de grano sin resignar espacio en la mesada. Es una superautomática completa: cargás granos, apretás un botón y la máquina muele, compacta y extrae sola.\n\nEl sistema Thermoblock compacto calienta el agua al instante, así que no hay que esperar a que levante temperatura: la primera taza sale igual de bien que la quinta. Con el selector regulás el volumen en tazas de 20 a 220 ml.\n\nLa boquilla de vapor lateral gira y te permite espumar leche directamente en la jarra para cappuccinos, y la bandeja superior mantiene las tazas tibias para que el café no se enfríe al servirlo.'
   },
   {
     id: 'dedica',
@@ -121,7 +123,7 @@ const PRODUCTOS = [
     tipo: 'Espresso manual',
     etiqueta: 'Ultracompacta',
     tagline: 'Solo 15 cm de ancho. Todo el ritual.',
-    resumen: 'El estándar en diseño ultracompacto para quienes disfrutan el ritual manual del café de especialidad.',
+    resumen: 'Para el que disfruta el ritual: dosificar, tampear y ver caer el espresso. Ocupa solo 15 cm de mesada.',
     precioLista: 790000,
     precioML:    790000,
     cuotas: 9,
@@ -148,7 +150,7 @@ const PRODUCTOS = [
       ['Programación', '3 botones: espresso, doble y vapor'],
       ['Tensión', '220 V']
     ],
-    descripcion: 'La Dedica EC685 es para el que disfruta el proceso: dosificar, tampear, colocar el portafiltro y ver caer el espresso. Con 15 cm de ancho es una de las espresso más finas del mercado.\n\nEl Thermoblock la deja lista en unos 40 segundos, sin la espera larga de las máquinas con caldera. Los tres botones frontales manejan espresso simple, doble y vapor, y las dos primeras se pueden reprogramar al volumen exacto que te guste.\n\nEl Cappuccino System se regula entre leche caliente y cappuccino, así que podés hacer microespuma para cortados y lattes sin técnica de barista. Acepta café molido y también cápsulas E.S.E. si querés la vía rápida.'
+    descripcion: 'Hay mañanas que piden su tiempo. La Dedica es para hacer el café con tus manos y disfrutarlo desde antes de la primera taza.\n\nLa Dedica EC685 es para el que disfruta el proceso: dosificar, tampear, colocar el portafiltro y ver caer el espresso. Con 15 cm de ancho es una de las espresso más finas del mercado.\n\nEl Thermoblock la deja lista en unos 40 segundos, sin la espera larga de las máquinas con caldera. Los tres botones frontales manejan espresso simple, doble y vapor, y las dos primeras se pueden reprogramar al volumen exacto que te guste.\n\nEl Cappuccino System se regula entre leche caliente y cappuccino, así que podés hacer microespuma para cortados y lattes sin técnica de barista. Acepta café molido y también cápsulas E.S.E. si querés la vía rápida.'
   }
 ];
 

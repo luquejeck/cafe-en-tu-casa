@@ -1,0 +1,18 @@
+{
+  "titulo": "Expectativa vs. realidad (versión 2, 40 s)",
+  "nota": "t = segundo en que empieza la frase, d = cuánto dura. La voz la graba Lucas siguiendo estos tiempos; los subtítulos salen de acá.",
+  "frases": [
+    {"t": 0.4,  "d": 3.0, "dice": "Lo que pedís a las nueve de la mañana: un cortadito de cafetería."},
+    {"t": 3.9,  "d": 1.9, "dice": "Lo que te dan en la oficina…"},
+    {"t": 6.1,  "d": 1.5, "dice": "agua marrón. Tibia."},
+    {"t": 8.1,  "d": 5.4, "dice": "Y el pobre café aguanta: reunión de las nueve y media, reunión de las diez… reunión para hablar de la reunión."},
+    {"t": 14.0, "d": 2.0, "dice": "¿Y si la realidad fuera esta?"},
+    {"t": 16.6, "d": 6.3, "dice": "Grano recién molido, apretás un botón, y en cuarenta segundos tenés tu espresso. En tu casa."},
+    {"t": 23.5, "d": 4.6, "dice": "Expectativa… realidad. ¿Ves la diferencia? Exacto: no hay."},
+    {"t": 28.6, "d": 2.6, "dice": "El café de la oficina viendo esto:"},
+    {"t": 32.0, "d": 3.0, "dice": "No era tu culpa. Era la cafetera."},
+    {"t": 35.6, "d": 4.0, "dice": "Café de cafetería, en tu casa. Elegí la tuya en el link."}
+  ],
+  "golpes": [6.1, 8.6, 10.1, 11.7, 14.0, 16.6, 26.6, 34.0, 35.6],
+  "total": 41.5
+}

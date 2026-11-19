@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Reel — Cómo funciona la Magnifica S por dentro</title>
+<style>
+/* Video explicativo (estilo "cómo funciona", con capítulos) de la De'Longhi
+   Magnifica S por dentro: muele, calienta, prensa y extrae, y de dónde sale la
+   crema. Diseño de la marca: fondo gris claro, tinta, oliva como único acento,
+   Inter 600 y el punto oliva del logo como punto final de cada título.
+   Datos de la ficha (assets/js/productos.js): molinillo cónico de acero con
+   13 niveles, Thermoblock, bomba de 15 bares, contenedor de 250 g de grano.
+   Voz: Valeria (ElevenLabs), voz-magnifica.mp3; subtítulos con los tiempos de
+   cada palabra (palabras.js). */
+:root { --oliva: #5b6e32; --ink: #1d1d1f; --ink2: #6e6e73; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: #f5f5f7; color: var(--ink); font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+canvas { position: absolute; left: 0; top: 0; }
+.banda { position: absolute; left: 0; right: 0; background: #f5f5f7; }   /* el dibujo nunca pasa por debajo de títulos ni subtítulos */
+/* capítulos */
+#caps { position: absolute; left: 60px; right: 60px; top: 70px; display: flex; gap: 14px; }
+.cap { flex: 1; }
+.cap .barra { height: 6px; border-radius: 3px; background: rgba(29,29,31,.12); overflow: hidden; }
+.cap .barra b { display: block; height: 100%; width: 0; background: var(--oliva); }
+.cap .nom { margin-top: 10px; font-size: 22px; font-weight: 600; color: var(--ink2); letter-spacing: .01em; }
+.cap.on .nom { color: var(--ink); }
+.ep { position: absolute; left: 0; right: 0; top: 150px; text-align: center; font-size: 26px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--oliva); }
+.tit { position: absolute; left: 60px; right: 60px; top: 200px; text-align: center; font-weight: 600; font-size: 128px; letter-spacing: -.045em; line-height: 1; }
+.tit i { display: inline-block; width: .17em; height: .17em; border-radius: 50%; background: var(--oliva); margin-left: .05em; }
+.sub { position: absolute; left: 0; right: 0; top: 345px; text-align: center; font-size: 36px; font-weight: 500; color: var(--ink2); letter-spacing: -.01em; }
+/* datos y notas */
+.dato { position: absolute; background: #fff; border-radius: 22px; padding: 18px 30px; text-align: center; box-shadow: 0 18px 40px -22px rgba(0,0,0,.35); border: 2px solid rgba(91,110,50,.35); }
+.dato b { display: block; font-size: 64px; font-weight: 600; letter-spacing: -.035em; line-height: 1.05; }
+.dato small { font-size: 22px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--ink2); }
+.nota { position: absolute; white-space: nowrap; }
+.nota .n { font-size: 40px; font-weight: 600; letter-spacing: -.02em; }
+.nota .d { font-size: 26px; color: var(--ink2); margin-top: 4px; }
+/* subtítulos palabra por palabra */
+#subs { position: absolute; left: 70px; right: 70px; top: 1560px; text-align: center; font-size: 56px; font-weight: 600; letter-spacing: -.02em; line-height: 1.22; }
+#subs span { color: rgba(29,29,31,.22); transition: none; }
+#subs span.dicha { color: var(--ink); }
+#subs span.ahora { color: var(--oliva); }
+#marca { position: absolute; left: 0; right: 0; top: 1500px; display: flex; flex-direction: column; align-items: center; }
+#marca .logo { display: flex; align-items: center; gap: 20px; font-size: 76px; font-weight: 600; letter-spacing: -.035em; }
+#marca .logo i { width: 28px; height: 28px; border-radius: 50%; background: var(--oliva); }
+#marca .bajada { margin-top: 14px; font-size: 34px; color: var(--ink2); }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div class="banda" style="top:0;height:420px"></div><div class="banda" style="top:1520px;height:400px"></div>
+<div id="caps">
+  <div class="cap" id="c1"><div class="barra"><b></b></div><div class="nom">01 · Muele</div></div>
+  <div class="cap" id="c2"><div class="barra"><b></b></div><div class="nom">02 · Calienta</div></div>
+  <div class="cap" id="c3"><div class="barra"><b></b></div><div class="nom">03 · Prensa</div></div>
+  <div class="cap" id="c4"><div class="barra"><b></b></div><div class="nom">04 · Extrae</div></div>
+</div>
+<div class="ep" id="ep">Cómo funciona por dentro</div>
+<div class="tit" id="tit"></div>
+<div class="sub" id="sub"></div>
+<div id="notas"></div>
+<div class="dato" id="dato"><b id="datoN"></b><small id="datoE"></small></div>
+<div id="subs"></div>
+<div id="marca"><div class="logo"><i></i>Café en tu Casa</div><div class="bajada">De'Longhi Magnifica S · un botón, un minuto</div></div>
+
+<script src="../reel-prueba/comun3.js"></script>
+<script src="palabras.js"></script>
+<script>
+const OFF = .25, VOZ = 41.76;
+window.TOTAL = Math.round((OFF + VOZ + 1.5) * FPS);
+window.VOZ = ["../reel-magnifica/voz-magnifica.mp3", OFF];
+
+// ---------- tiempos de la voz (silencios + transcripción)
+const T = { boton: 3.7, rayos: 4.1, muele: 4.54, molinillo: 6.24, niveles: 9.78, calienta: 12.02, thermo: 13.84, noventa: 16.5,
+  prensa: 17.86, compacta: 20.3, extrae: 23.12, bomba: 24.48, quince: 25.26, crema: 28.26, aceites: 30.18, gas: 30.88, moler: 34.42,
+  minuto: 36.88, cierre: 39.78 };
+window.SFX = [[T.boton, "pop"], [T.rayos, "whoosh"], [T.muele, "whoosh"], [T.molinillo, "tic"], [T.calienta, "whoosh"], [T.thermo, "subida"],
+  [T.prensa, "whoosh"], [T.compacta + .8, "golpe"], [T.extrae, "whoosh"], [T.quince, "tic"], [T.crema, "whoosh"], [T.minuto, "pop"], [T.cierre, "golpe"]]
+  .map(([t, x]) => [t + OFF, x]);
+
+// ---------- dibujo en milímetros: la máquina mide 240 x 360 (frente), y hacia arriba
+const c = $("c").getContext("2d");
+let CAM = { x: 120, y: 190, z: 3 };
+const CY = 980;
+const X = (x) => (x - CAM.x) * CAM.z + 540, Y = (y) => CY - (y - CAM.y) * CAM.z;
+const TINTA = "#1d1d1f";
+function rect(x, y, w, h, col, l = null, r = 0, g = 1.2) {
+  c.beginPath(); c.roundRect(X(x), Y(y + h), w * CAM.z, h * CAM.z, Math.max(0, r * CAM.z));
+  if (col) { c.fillStyle = col; c.fill(); } if (l) { c.strokeStyle = l; c.lineWidth = Math.max(1, g * CAM.z * .5); c.stroke(); }
+}
+function linea(pts, col, g = 1, dash = null) { c.beginPath(); pts.forEach(([x, y], i) => (i ? c.lineTo(X(x), Y(y)) : c.moveTo(X(x), Y(y)))); c.strokeStyle = col; c.lineWidth = Math.max(1, g * CAM.z * .5); c.setLineDash(dash ? dash.map((d) => d * CAM.z) : []); c.stroke(); c.setLineDash([]); }
+function circ(x, y, r, col, l = null, g = 1) { c.beginPath(); c.arc(X(x), Y(y), Math.max(.5, r * CAM.z), 0, 7); if (col) { c.fillStyle = col; c.fill(); } if (l) { c.strokeStyle = l; c.lineWidth = Math.max(1, g * CAM.z * .5); c.stroke(); } }
+function poli(pts, col, l = null, g = 1) { c.beginPath(); pts.forEach(([x, y], i) => (i ? c.lineTo(X(x), Y(y)) : c.moveTo(X(x), Y(y)))); c.closePath(); if (col) { c.fillStyle = col; c.fill(); } if (l) { c.strokeStyle = l; c.lineWidth = Math.max(1, g * CAM.z * .5); c.stroke(); } }
+
+// piezas por dentro (coordenadas en mm)
+const PZ = {
+  tolva: [22, 292, 104, 58], molino: [46, 246, 56, 44], bajada: [66, 200, 16, 46],
+  infusor: [52, 128, 74, 74], deposito: [176, 70, 52, 250], bomba: [150, 70, 22, 34], thermo: [140, 214, 30, 66],
+  picos: [98, 104, 44, 16], tazas: [[86, 26], [130, 26]] };
+const AGUA = "#9fc3d9", CAFE = "#6e4526", OLIVA = "#5b6e32";
+
+/** La Magnifica S de frente (exterior): negra, panel con perilla y botones. */
+function exterior(alfa) {
+  if (alfa <= 0) return;
+  c.globalAlpha = alfa;
+  rect(0, 0, 240, 360, "#1f1f21", "#000", 10);
+  rect(10, 340, 220, 14, "#2c2c2e", null, 4);                                  // tapa de la tolva
+  rect(16, 208, 208, 84, "#2a2a2d", null, 6);                                  // panel
+  circ(120, 250, 24, "#c9ccd0"); circ(120, 250, 11, "#8c8f93");
+  [[44, 270], [44, 250], [44, 230], [196, 270], [196, 250], [196, 230]].forEach(([bx, by], i) => rect(bx - 9, by - 6, 18, 12, i === 3 && boton > 0 ? "#a3c26a" : "#dadcdf", null, 3));
+  rect(96, 186, 48, 8, "#b9bcc0", null, 2);                                    // placa
+  rect(44, 36, 152, 140, "#111113", null, 6);                                  // hueco de las tazas
+  rect(98, 120, 44, 22, "#b9bcc0", null, 4);                                   // doble pico
+  rect(-4, 0, 248, 30, "#18181a", null, 5);
+  for (let i = 1; i < 12; i++) linea([[i * 20, 22], [i * 20, 30]], "#9a9da1", .6);
+  linea([[-8, 230], [-8, 120]], "#b9bcc0", 2.4);                                // espumador
+  c.globalAlpha = 1;
+}
+let boton = 0;
+/** Por dentro: el cuerpo en línea fina y las piezas en color. */
+function interior(t, alfa) {
+  if (alfa <= 0) return;
+  c.globalAlpha = alfa;
+  rect(0, 0, 240, 360, "rgba(255,255,255,.65)", "rgba(29,29,31,.55)", 10, 1.4);
+  rect(-4, 0, 248, 30, "rgba(29,29,31,.08)", "rgba(29,29,31,.35)", 5);
+  // depósito de agua
+  const [dx, dy, dw, dh] = PZ.deposito, nivel = 1 - .18 * tramo(t, T.bomba, 30);
+  rect(dx, dy, dw, dh, "rgba(255,255,255,.6)", "rgba(29,29,31,.5)", 6);
+  rect(dx + 3, dy + 3, dw - 6, (dh - 30) * nivel, "rgba(159,195,217,.55)", null, 4);
+  // tolva con granos
+  const [tx, ty, tw, th] = PZ.tolva;
+  poli([[tx, ty + th], [tx + tw, ty + th], [tx + tw - 26, ty], [tx + 26, ty]], "rgba(255,255,255,.7)", "rgba(29,29,31,.55)");
+  const quedan = 1 - .25 * tramo(t, T.muele, T.calienta);
+  for (let i = 0; i < 46; i++) { const fx = (i * 37) % 100 / 100, fy = Math.floor(i / 10) / 5; if (fy > quedan) continue; grano(tx + 30 + fx * (tw - 60) + Math.sin(i) * 4 + fy * 6, ty + 6 + fy * (th - 14) * .9, i); }
+  // molinillo cónico
+  molinillo(t);
+  // bajada del molido
+  const [bx, by, bw, bh] = PZ.bajada;
+  rect(bx, by, bw, bh, "rgba(255,255,255,.7)", "rgba(29,29,31,.5)", 3);
+  if (t > T.molinillo && t < T.prensa + .6) for (let i = 0; i < 10; i++) { const k = (t * 1.6 + i * .1) % 1; circ(bx + 5 + (i % 3) * 3, by + bh - k * bh, 1.4, CAFE); }
+  // thermoblock
+  thermoblock(t);
+  // bomba
+  const [px, py, pw, ph] = PZ.bomba;
+  rect(px, py, pw, ph, "#c9ccd0", "rgba(29,29,31,.6)", 4);
+  linea([[px + 4, py + ph / 2], [px + pw - 4, py + ph / 2]], "rgba(29,29,31,.5)", 1);
+  // caños: depósito → bomba → thermoblock → infusor
+  const flujo = t > T.thermo - .5;
+  caño([[dx, 84], [px + pw, 84]], flujo, t);
+  caño([[px + pw / 2, py + ph], [px + pw / 2, 214]], flujo, t);
+  caño([[PZ.thermo[0], 270], [100, 270], [100, 204]], t > T.extrae - .3, t, "#e9a46a");
+  // unidad de infusión
+  infusor(t);
+  // picos y tazas
+  const [qx, qy, qw, qh] = PZ.picos;
+  rect(qx, qy, qw, qh, "#c9ccd0", "rgba(29,29,31,.6)", 3);
+  caño([[89, 128], [89, 116], [120, 116]], t > T.bomba, t, CAFE);
+  tazas(t);
+  c.globalAlpha = 1;
+}
+function grano(x, y, i) {
+  c.save(); c.translate(X(x), Y(y)); c.rotate(i); c.fillStyle = "#6b4325"; c.beginPath(); c.ellipse(0, 0, 4.2 * CAM.z, 2.8 * CAM.z, 0, 0, 7); c.fill();
+  c.strokeStyle = "#3e2614"; c.lineWidth = Math.max(.8, CAM.z * .4); c.beginPath(); c.moveTo(-3 * CAM.z, 0); c.quadraticCurveTo(0, 1.2 * CAM.z, 3 * CAM.z, 0); c.stroke(); c.restore();
+}
+function molinillo(t) {
+  const [mx, my, mw, mh] = PZ.molino, cx = mx + mw / 2;
+  rect(mx, my, mw, mh, "#e3e5e8", "rgba(29,29,31,.6)", 6);
+  // cono interior que gira: dientes que se corren
+  poli([[cx - 16, my + mh - 6], [cx + 16, my + mh - 6], [cx + 6, my + 6], [cx - 6, my + 6]], "#9a9da1", "rgba(29,29,31,.6)");
+  const gira = t > T.molinillo - .3 && t < T.calienta ? t * 9 : T.calienta * 9;
+  for (let i = 0; i < 6; i++) { const f = ((i / 6 + gira / 6) % 1); const y = my + 8 + f * (mh - 16), half = 6 + 10 * f; linea([[cx - half, y], [cx + half, y - 3]], "rgba(29,29,31,.55)", .8); }
+  if (t > T.molinillo && t < T.calienta) for (let i = 0; i < 14; i++) { const k = (t * 2.2 + i * .07) % 1; circ(cx - 12 + (i % 7) * 4, my + 4 - k * 6, 1.1, CAFE); }
+}
+function thermoblock(t) {
+  const [hx, hy, hw, hh] = PZ.thermo, calor = clamp(tramo(t, T.thermo, T.noventa));
+  rect(hx, hy, hw, hh, `rgb(${Math.round(201 + 30 * calor)},${Math.round(204 - 40 * calor)},${Math.round(208 - 80 * calor)})`, "rgba(29,29,31,.6)", 5);
+  const zz = []; for (let i = 0; i <= 8; i++) zz.push([hx + (i % 2 ? hw - 6 : 6), hy + 6 + i * (hh - 12) / 8]);
+  linea(zz, calor > .1 ? `rgba(226,120,60,${.5 + .5 * calor})` : "rgba(29,29,31,.45)", 2.2);
+  if (t > T.thermo && t < T.extrae + 4) for (let i = 0; i < 6; i++) { const k = (t * .9 + i / 6) % 1, idx = k * 8, a = Math.floor(idx), f = idx - a; if (a >= 8) continue; const p0 = zz[a], p1 = zz[a + 1]; circ(p0[0] + (p1[0] - p0[0]) * f, p0[1] + (p1[1] - p0[1]) * f, 2.2, calor > .5 ? "#e9a46a" : AGUA); }
+}
+function caño(pts, activo, t, col = AGUA) {
+  linea(pts, "rgba(29,29,31,.35)", 3.2); linea(pts, "#ffffff", 1.8);
+  if (!activo) return;
+  let L = 0; const seg = []; for (let i = 1; i < pts.length; i++) { const d = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seg.push(d); L += d; }
+  for (let k = 0; k < L; k += 9) {
+    let s = (k + t * 40) % L, i = 0; while (s > seg[i]) { s -= seg[i]; i++; }
+    const f = s / seg[i], a = pts[i], b = pts[i + 1]; circ(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, 1.6, col);
+  }
+}
+function infusor(t) {
+  const [ix, iy, iw, ih] = PZ.infusor;
+  rect(ix, iy, iw, ih, "rgba(227,229,232,.9)", "rgba(29,29,31,.6)", 6);
+  // café molido que llena la cámara y el pistón que lo compacta
+  const lleno = clamp(tramo(t, T.molinillo + 1, T.calienta)), baja = suave(tramo(t, T.compacta + .2, T.compacta + 1.0));
+  const alto = 30 * lleno * (1 - .35 * baja), base = iy + 8;
+  if (lleno > 0) rect(ix + 8, base, iw - 16, alto, t > T.extrae + .5 ? "#4f3018" : "#7a5233", null, 3);
+  const pis = iy + ih - 8 - (ih - 16 - alto - 4) * baja;
+  rect(ix + 6, pis - 6, iw - 12, 8, "#9a9da1", "rgba(29,29,31,.6)", 2);
+  rect(ix + iw / 2 - 5, pis + 2, 10, iy + ih - pis + 2, "#b9bcc0", null, 2);
+  // el agua a presión atraviesa la pastilla
+  if (t > T.bomba && t < T.crema + 2) for (let i = 0; i < 8; i++) { const k = (t * 1.4 + i / 8) % 1; circ(ix + 12 + (i % 4) * 16, base + alto + 10 - k * (alto + 10), 1.7, k > .6 ? "#e9a46a" : CAFE); }
+}
+function tazas(t) {
+  const llena = tramo(t, T.bomba + .4, T.crema + .4);
+  PZ.tazas.forEach(([tx, ty]) => {
+    if (llena > 0 && llena < 1) linea([[tx + 12, 104], [tx + 12, ty + 2 + 28 * llena]], CAFE, 1.2);
+    rect(tx, ty, 24, 30, "rgba(225,232,236,.45)", "rgba(29,29,31,.45)", 3);
+    if (llena > 0) { rect(tx + 2, ty + 2, 20, 26 * llena, CAFE, null, 2); rect(tx + 2, ty + 2 + 26 * llena - 4, 20, 4, "#c99a5c", null, 1); }
+  });
+}
+/** Primer plano de la crema: capa dorada con burbujas y gotas de aceite. */
+function crema(t, alfa) {
+  if (alfa <= 0) return;
+  c.globalAlpha = alfa;
+  c.fillStyle = "#f5f5f7"; c.fillRect(0, 480, 1080, 1060);
+  const cx = 540, cy = 1040, R = 330;
+  c.fillStyle = "#ffffff"; c.beginPath(); c.ellipse(cx, cy + 40, R + 60, 120, 0, 0, 7); c.fill();                     // plato
+  c.strokeStyle = "rgba(29,29,31,.2)"; c.lineWidth = 3; c.stroke();
+  c.fillStyle = "#fbfbfb"; c.beginPath(); c.moveTo(cx - R, cy - 170); c.lineTo(cx - R * .78, cy + 40); c.quadraticCurveTo(cx, cy + 110, cx + R * .78, cy + 40); c.lineTo(cx + R, cy - 170); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle = "#c08a4e"; c.beginPath(); c.ellipse(cx, cy - 170, R - 14, 70, 0, 0, 7); c.fill();
+  c.fillStyle = "#d6a868"; c.beginPath(); c.ellipse(cx, cy - 172, R - 60, 48, 0, 0, 7); c.fill();
+  // burbujas de gas y gotas de aceite
+  for (let i = 0; i < 60; i++) {
+    const a = (i * 2.4) % 6.28, r = (i * 37 % 100) / 100, x = cx + Math.cos(a) * r * (R - 40), y = cy - 172 + Math.sin(a) * r * 55;
+    const k = clamp(tramo(t, T.crema + i * .02, T.crema + .3 + i * .02));
+    c.globalAlpha = alfa * k;
+    if (i % 3) { c.strokeStyle = "rgba(255,255,255,.85)"; c.lineWidth = 2; c.beginPath(); c.arc(x, y, 3 + (i % 5), 0, 7); c.stroke(); }
+    else { c.fillStyle = "rgba(120,72,30,.7)"; c.beginPath(); c.ellipse(x, y, 7, 4, 0, 0, 7); c.fill(); }
+  }
+  c.globalAlpha = 1;
+}
+
+// ---------- cámara por capítulo: [segundo, x, y, zoom]
+const TOMAS = [
+  [-.3, 120, 175, 2.15], [2.6, 120, 200, 2.3], [3.6, 120, 185, 2.25],
+  [T.muele - .2, 70, 275, 5.2], [T.calienta - .4, 72, 268, 5.4],
+  [T.calienta, 160, 240, 5.0], [T.prensa - .4, 160, 240, 5.2],
+  [T.prensa, 92, 165, 5.4], [T.extrae - .4, 92, 165, 5.6],
+  [T.extrae, 130, 150, 2.8], [T.crema - .3, 120, 140, 3.0],
+  [T.minuto - .2, 120, 185, 2.15], [45, 120, 185, 2.05]];
+function camara(t) {
+  let i = TOMAS.findIndex((k) => k[0] > t); if (i < 0) i = TOMAS.length - 1; if (i === 0) i = 1;
+  const a = TOMAS[i - 1], b = TOMAS[i], k = suave(tramo(t, a[0], b[0]));
+  CAM = { x: a[1] + (b[1] - a[1]) * k, y: a[2] + (b[2] - a[2]) * k, z: a[3] * Math.pow(b[3] / a[3], k) };
+}
+
+// ---------- títulos, notas y datos por capítulo
+const CAPS = [
+  { a: -1, tit: "Un botón", sub: "¿Qué pasa adentro?", ep: "Cómo funciona por dentro" },
+  { a: T.muele, tit: "Muele", sub: "Grano entero, en el momento", cap: 1 },
+  { a: T.calienta, tit: "Calienta", sub: "Agua a ≈ 90 °C", cap: 2 },
+  { a: T.prensa, tit: "Prensa", sub: "Compacta el café molido", cap: 3 },
+  { a: T.extrae, tit: "Extrae", sub: "Agua a presión, hasta 15 bar", cap: 4 },
+  { a: T.crema, tit: "La crema", sub: "Aceites + gas del grano fresco", cap: 4, ep: "Por qué es rica" },
+  { a: T.minuto, tit: "1 minuto", sub: "Del grano a la taza", cap: 4, ep: "Magnifica S" },
+];
+const NOTAS = [   // [título, detalle, x, y (mm), lado, entra, sale]
+  ["Molinillo cónico", "De acero, muele en el momento", 74, 268, 1, T.molinillo, T.calienta - .3],
+  ["Tolva", "250 g de grano", 74, 330, -1, T.muele + .3, T.calienta - .3],
+  ["Thermoblock", "Calienta al instante", 155, 247, 1, T.thermo, T.prensa - .3],
+  ["Unidad de infusión", "Compacta como un barista", 89, 170, 1, T.compacta, T.extrae - .3],
+  ["Bomba", "Hasta 15 bar", 161, 87, 1, T.bomba, T.crema - .4],
+].map(([n, d, x, y, lado, a, b]) => { const el = document.createElement("div"); el.className = "nota"; el.innerHTML = `<div class="n">${n}</div><div class="d">${d}</div>`; $("notas").append(el); return { el, x, y, lado, a, b }; });
+const DATOS = [   // [entra, sale, valor(t), etiqueta, x, y en pantalla]
+  [T.niveles, T.calienta - .2, () => "13", "niveles de molienda", 540, 1300],
+  [T.noventa - 1.4, T.prensa - .2, (t) => "≈ " + Math.round(20 + 70 * salida(tramo(t, T.noventa - 1.4, T.noventa))) + " °C", "agua", 540, 1300],
+  [T.quince - .4, T.crema - .3, (t) => Math.round(15 * salida(tramo(t, T.quince - .4, T.quince + .6))) + " bar", "presión máxima", 540, 1350],
+  [T.moler, T.minuto - .2, () => "Recién molido", "más aroma, más crema", 540, 1330],
+  [T.minuto, 45, (t) => { const s = Math.round(60 * salida(tramo(t, T.minuto, T.minuto + 1.6))); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }, "del botón a la taza", 540, 1330],
+];
+
+// subtítulos: frases de la transcripción, palabra por palabra
+const FRASES = []; { let f = []; PALABRAS.forEach((p, i) => { f.push(p); if (/[.?!]$/.test(p.text) || i === PALABRAS.length - 1) { FRASES.push(f); f = []; } }); }
+let fraseActual = -1;
+function subtitulos(t) {
+  const i = FRASES.findIndex((f, k) => t >= f[0].start - .15 && (k === FRASES.length - 1 || t < FRASES[k + 1][0].start - .15));
+  if (i !== fraseActual) { fraseActual = i; $("subs").innerHTML = i < 0 ? "" : FRASES[i].map((p) => `<span>${p.text}</span>`).join(" "); }
+  if (i < 0) return;
+  [...$("subs").children].forEach((s, k) => { const p = FRASES[i][k]; s.className = t >= p.end ? "dicha" : t >= p.start ? "ahora" : ""; });
+  $("subs").style.opacity = t > T.cierre - .1 ? 0 : 1;
+}
+
+window.cuadro = (f) => {
+  const t = f / FPS - OFF;
+  boton = t >= T.boton ? 1 : 0;
+  camara(t);
+  c.fillStyle = "#f5f5f7"; c.fillRect(0, 0, 1080, 1920);
+  const rayos = suave(tramo(t, T.rayos, T.rayos + .8)) * (1 - suave(tramo(t, T.minuto - .2, T.minuto + .5)));
+  exterior(1 - rayos); interior(t, rayos);
+  if (t >= T.boton && t < T.rayos + .5) { const r = (t - T.boton) * 1.6; c.strokeStyle = `rgba(163,194,106,${Math.max(0, 1 - r)})`; c.lineWidth = 6; c.beginPath(); c.arc(X(196), Y(270), 20 + r * 120, 0, 7); c.stroke(); }
+  // al final, las dos tazas llenas sobre la bandeja (exterior)
+  if (t > T.minuto) PZ.tazas.forEach(([tx, ty]) => { rect(tx, ty, 24, 30, "rgba(225,232,236,.5)", "rgba(240,240,240,.8)", 3); rect(tx + 2, ty + 2, 20, 26, CAFE, null, 2); rect(tx + 2, ty + 24, 20, 4, "#c99a5c", null, 1); });
+  const cr = suave(tramo(t, T.crema, T.crema + .6)) * (1 - suave(tramo(t, T.minuto - .4, T.minuto)));
+  crema(t, cr);
+  // capítulos
+  const cap = [...CAPS].reverse().find((k) => t >= k.a) || CAPS[0];
+  [1, 2, 3, 4].forEach((n) => {
+    const ini = CAPS.find((k) => k.cap === n).a, fin = n < 4 ? CAPS.find((k) => k.cap === n + 1).a : T.minuto;
+    $("c" + n).querySelector("b").style.width = (100 * clamp(tramo(t, ini, fin))) + "%";
+    $("c" + n).className = "cap" + (cap.cap === n ? " on" : "");
+  });
+  if ($("tit").dataset.a != cap.a) { $("tit").dataset.a = cap.a; $("tit").innerHTML = cap.tit + "<i></i>"; $("sub").textContent = cap.sub; $("ep").textContent = cap.ep || "Cómo funciona por dentro"; }
+  const k = salida(tramo(t, cap.a, cap.a + .4));
+  $("tit").style.opacity = cap.a < 0 ? 1 : k; $("tit").style.transform = `translateY(${(1 - (cap.a < 0 ? 1 : k)) * 30}px)`;
+  $("sub").style.opacity = cap.a < 0 ? 1 : salida(tramo(t, cap.a + .2, cap.a + .6));
+  $("ep").style.opacity = 1;
+  // notas con línea guía
+  NOTAS.forEach((n) => {
+    const vis = t >= n.a && t < n.b + .3 && rayos > .5; n.el.style.display = vis ? "block" : "none"; if (!vis) return;
+    const px = X(n.x), py = Y(n.y), kk = salida(tramo(t, n.a, n.a + .45)), fuera = tramo(t, n.b, n.b + .3);
+    const ex = px + n.lado * 150 * kk, ey = py - 70 * kk;
+    c.globalAlpha = 1 - fuera; c.strokeStyle = TINTA; c.lineWidth = 2.5; c.beginPath(); c.moveTo(px, py); c.lineTo(ex, ey); c.lineTo(ex + n.lado * 230 * kk, ey); c.stroke();
+    c.fillStyle = "#fff"; c.strokeStyle = OLIVA; c.lineWidth = 4; c.beginPath(); c.arc(px, py, 10, 0, 7); c.fill(); c.stroke(); c.globalAlpha = 1;
+    const r = n.el.getBoundingClientRect();
+    n.el.style.left = Math.max(30, Math.min(1050 - r.width, n.lado > 0 ? ex + 10 : ex - r.width - 10)) + "px"; n.el.style.top = (ey - r.height - 6) + "px";
+    n.el.style.opacity = clamp(tramo(t, n.a + .25, n.a + .5)) * (1 - fuera);
+  });
+  // dato grande
+  const d = DATOS.find(([a, b]) => t >= a && t < b + .3);
+  $("dato").style.display = d ? "block" : "none";
+  if (d) { const [a, b, val, et, x, y] = d, kk = rebote(tramo(t, a, a + .4)); $("datoN").textContent = val(t); $("datoE").textContent = et; const r = $("dato").getBoundingClientRect(); $("dato").style.left = (x - r.width / 2) + "px"; $("dato").style.top = y + "px"; $("dato").style.transform = `scale(${.6 + .4 * kk})`; $("dato").style.opacity = clamp(tramo(t, a, a + .1)) * (1 - tramo(t, b, b + .3)); }
+  // crema: notas propias sobre la taza
+  subtitulos(t);
+  const mk = salida(tramo(t, T.cierre, T.cierre + .5));
+  $("marca").style.opacity = mk; $("marca").style.transform = `translateY(${(1 - mk) * 30}px)`;
+  if (cr > .5) {
+    [["Aceites", "del grano tostado", 380, 860, T.aceites], ["Gas (CO₂)", "del grano recién molido", 700, 850, T.gas]].forEach(([n, dd, x, y, a]) => {
+      if (t < a) return; const kk = salida(tramo(t, a, a + .4));
+      c.globalAlpha = kk * cr; c.strokeStyle = TINTA; c.lineWidth = 2.5; c.beginPath(); c.moveTo(x, y); c.lineTo(x, y - 160 * kk); c.stroke();
+      c.fillStyle = "#fff"; c.strokeStyle = OLIVA; c.lineWidth = 4; c.beginPath(); c.arc(x, y, 10, 0, 7); c.fill(); c.stroke();
+      c.fillStyle = TINTA; c.font = "600 40px Inter"; c.textAlign = "center"; c.fillText(n, x, y - 200); c.fillStyle = "#6e6e73"; c.font = "500 26px Inter"; c.fillText(dd, x, y - 168);
+      c.globalAlpha = 1;
+    });
+  }
+};
+</script>
+</body>
+</html>

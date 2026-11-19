@@ -136,3 +136,181 @@ h2 { font-size: 72px; font-weight: 600; line-height: 1.07; letter-spacing: -.03e
 .escena.tarjeta .pildora { margin-top: 22px; font-size: 24px; padding: 14px 28px; }
 .escena.abajo > main { margin-top: auto; }
 .escena.limpia > .marca, .escena.limpia > main, .escena.limpia .pie { display: none; }
+
+/* =====================================================================
+   Estilo "pop" (carruseles de diciembre): las mecánicas para que sigan
+   deslizando (contador, frase al pie, quiz, chat, ticket, número gigante)
+   con la estética de la marca: blanco, gris claro (.gris), negro (.oscuro)
+   y un solo acento oliva. Solo se aplica a piezas con estilo: 'pop'.
+   ===================================================================== */
+.pop { --suave: rgba(91, 110, 50, .12); --tarjeta: var(--bg-2); }
+.pop.gris   { --tarjeta: #fff; }
+.pop.oscuro { --suave: rgba(163, 194, 106, .16); --tarjeta: #1c1c1f; }
+.pop h1 { line-height: 1.08; }
+.pop h2 { line-height: 1.1; }
+.pop mark { background: none; color: var(--brand); }
+.pop .chica { margin-top: 26px; font-size: 25px; line-height: 1.4; color: var(--ink-3); max-width: 34ch; }
+.pop .foto { margin-top: 34px; }
+.pop .foto.llena { background: none; padding: 0; }
+
+/* contador y frase al pie */
+.contador { position: absolute; top: calc(var(--aire-v) + 4px); right: 76px; font-size: 24px; font-weight: 600; color: var(--ink-3); }
+.pop .pie { justify-content: space-between; }
+.pop .pie span { position: static; }
+.puntos { display: flex; gap: 10px; }
+.sigue { font-size: 26px; font-weight: 600; color: var(--brand); letter-spacing: -.01em; }
+
+/* sticker: píldora oliva */
+.sticker { display: inline-block; margin-top: 38px; background: var(--suave); color: var(--brand-dark); border-radius: 980px; padding: 18px 38px; font-size: 30px; font-weight: 600; letter-spacing: -.01em; }
+.oscuro .sticker { color: #c5dd96; }
+
+/* número de error / paso */
+.gigante { font-size: 200px; font-weight: 600; line-height: .9; letter-spacing: -.06em; color: var(--brand); margin-bottom: 20px; }
+.gigante small { font-size: 60px; color: var(--ink-3); letter-spacing: -.03em; }
+.evitar { margin-top: 36px; width: 100%; text-align: left; background: var(--tarjeta); border-radius: 30px; padding: 30px 36px; font-size: 32px; line-height: 1.38; }
+.evitar b { display: block; font-size: 22px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; }
+
+/* quiz */
+.quiz { margin-top: 46px; width: 100%; display: flex; flex-direction: column; gap: 18px; }
+.quiz div { display: flex; align-items: center; gap: 26px; text-align: left; background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 28px; padding: 26px 30px; font-size: 36px; font-weight: 600; letter-spacing: -.015em; }
+.quiz i { font-style: normal; flex-shrink: 0; width: 60px; height: 60px; border-radius: 50%; background: var(--suave); color: var(--brand); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 28px; }
+
+/* respuesta revelada */
+.revela { font-size: 150px; font-weight: 600; letter-spacing: -.055em; line-height: 1; margin-top: 6px; color: var(--brand); }
+
+/* chat */
+.chat { margin-top: 40px; width: 100%; display: flex; flex-direction: column; gap: 16px; text-align: left; }
+.chat p { max-width: 80%; padding: 20px 28px; border-radius: 30px; font-size: 32px; line-height: 1.32; background: var(--tarjeta); border-bottom-left-radius: 8px; }
+.chat p b { display: block; font-size: 21px; font-weight: 600; color: var(--brand); margin-bottom: 4px; }
+.chat p.yo { align-self: flex-end; background: var(--suave); border-bottom-left-radius: 30px; border-bottom-right-radius: 8px; }
+.chat .grupo { align-self: center; font-size: 22px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); background: none; padding: 0; }
+
+/* ticket */
+.ticket { margin-top: 40px; width: 82%; background: #fff; color: var(--ink); padding: 40px 46px 50px; text-align: left; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 29px; line-height: 1.5; box-shadow: 0 24px 50px -30px rgba(0,0,0,.45);
+  -webkit-mask: radial-gradient(14px at 50% 100%, #0000 98%, #000) 50% / 40px 100%; }
+.ticket .t { text-align: center; font-weight: 700; letter-spacing: .1em; border-bottom: 2px dashed var(--linea); padding-bottom: 16px; margin-bottom: 16px; }
+.ticket .l { display: flex; justify-content: space-between; gap: 20px; }
+.ticket .tot { border-top: 2px dashed rgba(0,0,0,.2); margin-top: 16px; padding-top: 16px; font-weight: 700; font-size: 34px; }
+
+/* ---- Pop, versión 2 (17/11): más atractivo, misma marca ---- */
+/* barra de progreso oliva arriba */
+.progreso { position: absolute; top: 0; left: 0; height: 10px; background: var(--brand); }
+.progreso-fondo { position: absolute; top: 0; left: 0; right: 0; height: 10px; background: var(--linea); }
+
+/* portada con foto a sangre: la foto ocupa todo, el texto abajo sobre un velo oscuro */
+.lienzo.tapa { padding: 0; color: #fff; background: #101012; --ink-2: #e8e8ed; --ink-3: #d2d2d7; --brand: #c5dd96; --linea: rgba(255,255,255,.3); }
+.tapa .fondo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tapa .velo { position: absolute; left: 0; right: 0; bottom: 0; height: 68%; background: linear-gradient(rgba(16,16,18,0), rgba(16,16,18,.55) 35%, rgba(16,16,18,.88)); }
+.tapa .velo-arriba { position: absolute; left: 0; right: 0; top: 0; height: 200px; background: linear-gradient(rgba(16,16,18,.45), rgba(16,16,18,0)); }
+.tapa .marca { position: relative; margin-top: var(--aire-v); text-shadow: 0 1px 12px rgba(0,0,0,.35); }
+.tapa .marca i { background: #a3c26a; }
+.tapa .contador { color: rgba(255,255,255,.85); }
+.tapa main { position: relative; justify-content: flex-end; padding: 0 76px 30px; }
+.tapa h1 { font-size: 96px; text-shadow: 0 2px 24px rgba(0,0,0,.25); }
+.tapa mark { color: #c5dd96; }
+.tapa .sub { color: #f5f5f7; max-width: 24ch; }
+.tapa .pie { position: relative; padding: 0 76px; margin-bottom: var(--aire-v); }
+.desliza { display: inline-flex; align-items: center; gap: 12px; margin-top: 36px; background: #fff; color: #1d1d1f; border-radius: 980px; padding: 18px 34px; font-size: 30px; font-weight: 600; }
+.lienzo.tapa.sinfoto .fondo, .lienzo.tapa.sinfoto .velo, .lienzo.tapa.sinfoto .velo-arriba { display: none; }
+.lienzo.tapa.sinfoto main { justify-content: center; }
+
+/* foto chica en placas de pasos */
+.pop .foto.mini { flex: 0 0 auto; height: 330px; margin-top: 34px; border-radius: 34px; overflow: hidden; padding: 0; background: none; }
+.pop .foto.mini img { width: 100%; height: 100%; object-fit: cover; }
+
+/* verdadero / falso */
+.veredicto { display: inline-block; font-size: 30px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 14px 30px; border-radius: 980px; margin-bottom: 28px; }
+.veredicto.falso { background: rgba(198, 42, 29, .1); color: #c62a1d; }
+.veredicto.verdadero { background: var(--suave); color: var(--brand-dark); }
+.oscuro .veredicto.falso { background: rgba(255,138,128,.16); color: #ff8a80; }
+.oscuro .veredicto.verdadero { color: #c5dd96; }
+.mito { font-size: 30px; color: var(--ink-3); font-weight: 600; margin-bottom: 18px; }
+
+/* receta: proporciones en una taza dibujada */
+.taza { margin-top: 40px; width: 300px; height: 330px; border: 8px solid var(--ink); border-top: none; border-radius: 0 0 60px 60px; display: flex; flex-direction: column-reverse; overflow: hidden; position: relative; }
+.taza::after { content: ''; position: absolute; right: -70px; top: 60px; width: 60px; height: 120px; border: 8px solid var(--ink); border-left: none; border-radius: 0 50px 50px 0; }
+.taza { overflow: visible; }
+.taza .capa { display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.capa.cafe { background: #4a2c1d; color: #f5e9dd; border-radius: 0 0 52px 52px; }
+.capa.leche { background: #efe4d6; color: #6b4a36; }
+.capa.espuma { background: #fffaf2; color: #8a6a55; border-top: 2px dashed rgba(0,0,0,.08); }
+.receta-pie { margin-top: 34px; font-size: 32px; color: var(--ink-2); max-width: 26ch; line-height: 1.4; }
+
+/* ---- Dibujos y gráficos (graficos.js) ---- */
+.pop .icono { width: 120px; height: 120px; color: var(--brand); stroke-width: 2.6; }
+.pop .ico-chico { width: 40px; height: 40px; color: var(--brand); flex-shrink: 0; }
+.cabeza { display: flex; align-items: center; gap: 34px; margin-bottom: 18px; }
+.cabeza .gigante { margin-bottom: 0; }
+.cabeza .icono { width: 150px; height: 150px; padding: 26px; border-radius: 50%; background: var(--suave); }
+.icono-solo { margin-bottom: 26px; }
+.icono-solo .icono { width: 130px; height: 130px; padding: 22px; border-radius: 50%; background: var(--suave); }
+.graf { width: 100%; margin-top: 34px; }
+.grafico { width: 100%; height: auto; display: block; font-family: inherit; overflow: visible; }
+.grafico text { fill: var(--ink); font-weight: 600; }
+.g-eje { font-size: 26px; fill: var(--ink-3) !important; font-weight: 500 !important; }
+.g-chica { font-size: 22px; fill: var(--ink-3) !important; font-weight: 500 !important; }
+.g-grilla { stroke: var(--linea); stroke-width: 2; }
+.g-piso { stroke: var(--ink); stroke-width: 3; }
+.g-bar { fill: none; stroke: var(--ink-3); stroke-width: 7; stroke-dasharray: 2 14; stroke-linecap: round; }
+.g-casa { fill: none; stroke: var(--brand); stroke-width: 8; stroke-linecap: round; }
+.g-zona { fill: var(--suave); }
+.g-punto { fill: var(--brand); stroke: var(--bg, #fff); stroke-width: 5; }
+.g-punto-gris { fill: var(--ink-3); }
+.g-guia { stroke: var(--brand); stroke-width: 3; stroke-dasharray: 6 8; }
+.g-nota { font-size: 32px; fill: var(--brand) !important; font-weight: 700 !important; }
+.g-nota-gris { fill: var(--ink-3) !important; }
+.g-rot { font-size: 28px; }
+.g-rot-bar { fill: var(--ink-3) !important; }
+.g-rot-casa { fill: var(--brand) !important; }
+.g-maq rect, .g-maq path, .g-maq circle { stroke: var(--ink); stroke-width: 4; fill: none; }
+.g-maq > rect:first-child { fill: var(--suave); }
+.g-cota { stroke: var(--brand); stroke-width: 3; fill: none; }
+.g-cotat { font-size: 34px; fill: var(--brand) !important; font-weight: 700 !important; }
+.g-cotas { font-size: 26px; fill: var(--ink-3) !important; }
+.g-nom { font-size: 30px; }
+.g-val { font-size: 40px; fill: var(--brand) !important; font-weight: 700 !important; }
+.g-barra { fill: var(--brand); }
+.g-barra-gris { fill: var(--ink-3); opacity: .55; }
+.g-tubo { fill: none; stroke: var(--ink); stroke-width: 4; }
+.g-bulbo, .g-nivel { fill: var(--brand); }
+.g-zonaideal { fill: var(--suave); stroke: var(--brand); stroke-width: 3; stroke-dasharray: 6 6; }
+.g-vaso { fill: none; stroke: var(--ink); stroke-width: 5; }
+.g-leche { fill: #efe7dc; }
+.g-espresso { fill: #5a3b28; }
+.g-hielo { fill: rgba(255,255,255,.55); stroke: var(--ink-3); stroke-width: 3; }
+.oscuro .g-hielo { fill: rgba(255,255,255,.15); }
+
+/* barras horizontales */
+.hbarras { width: 100%; text-align: left; display: flex; flex-direction: column; gap: 26px; }
+.hb { display: grid; grid-template-columns: 1fr auto; gap: 10px 20px; align-items: center; }
+.hb-l { display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 600; }
+.hb-v { font-size: 38px; font-weight: 700; letter-spacing: -.02em; }
+.hb u { grid-column: 1 / -1; display: block; height: 40px; border-radius: 12px; background: var(--ink-3); opacity: .45; }
+.hb.casa u { background: var(--brand); opacity: 1; }
+.hb.casa .hb-v { color: var(--brand); }
+.g-pie { margin: 0; font-size: 24px; color: var(--ink-3); }
+
+/* flujo */
+.flujo { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; }
+.fl { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.fl .icono { width: 112px; height: 112px; padding: 20px; border-radius: 50%; background: var(--tarjeta); }
+.fl.fin .icono { background: var(--brand); color: #fff; }
+.oscuro .fl.fin .icono { color: #101012; }
+.fl span { font-size: 24px; font-weight: 600; }
+.fl-flecha { font-style: normal; font-size: 30px; color: var(--ink-3); margin-bottom: 40px; }
+
+/* rutina */
+.rutina { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
+.ru { background: var(--tarjeta); border-radius: 28px; padding: 30px 26px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; text-align: left; }
+.ru .icono { width: 84px; height: 84px; margin-bottom: 6px; }
+.ru b { font-size: 22px; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); }
+.ru span { font-size: 32px; font-weight: 600; line-height: 1.2; }
+
+/* comparativa */
+.compa { width: 100%; border-collapse: collapse; text-align: left; font-size: 28px; }
+.compa thead th { font-size: 30px; font-weight: 700; padding: 0 0 18px; color: var(--ink); }
+.compa thead th:nth-child(2) { color: var(--brand); }
+.compa tbody th { font-weight: 500; color: var(--ink-2); padding: 20px 14px 20px 0; display: flex; align-items: center; gap: 12px; font-size: 25px; }
+.compa td { padding: 20px 14px; font-weight: 600; border-top: 1px solid var(--linea); line-height: 1.25; }
+.compa tbody th { border-top: 1px solid var(--linea); }
+.compa td:nth-child(2) { color: var(--brand); }

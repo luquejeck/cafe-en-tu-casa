@@ -1,0 +1,36 @@
+{
+  "titulo": "Antes / después: el café de la oficina",
+  "frases": [
+    {
+      "id": "gancho",
+      "dice": "¿Seguís tomando este café?",
+      "dur": 1.63
+    },
+    {
+      "id": "antes",
+      "dice": "Nueve de la mañana. Café de la oficina: tibio, aguado, y con gusto a reunión.",
+      "dur": 4.31
+    },
+    {
+      "id": "despues",
+      "dice": "La misma mañana, en tu casa.",
+      "dur": 1.75
+    },
+    {
+      "id": "pasos",
+      "dice": "Molés el grano, apretás un botón, y en cuarenta segundos tenés un espresso con crema.",
+      "dur": 4.76
+    },
+    {
+      "id": "remate",
+      "dice": "El problema nunca fuiste vos. Era la cafetera.",
+      "dur": 2.56
+    },
+    {
+      "id": "cierre",
+      "dice": "Café de cafetería, en tu casa. Elegí la tuya en el link.",
+      "dur": 3.2
+    }
+  ],
+  "voz": "em_alex"
+}

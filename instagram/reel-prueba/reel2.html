@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Reel de prueba v2 — Expectativa vs. realidad</title>
+<style>
+/* Reel de prueba v2 (no va al perfil): meme "Expectativa vs. realidad", 41 s.
+   Personaje: la taza de la oficina, con cara, que se va poniendo triste.
+   Tiempos: guion2.json (filmar2.mjs llama a armar(G) y después a cuadro(f)).
+   Subtítulos tipo TikTok, palabra por palabra, entre los 1380 y 1580 px. */
+:root { --oliva: #5b6e32; --oliva-claro: #a3c26a; --negro: #101012; --tinta: #1d1d1f; --gris: #f5f5f7; --rojo: #e5484d; --taza: #a7a7ad; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1920px; overflow: hidden; background: var(--negro); font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #fff; -webkit-font-smoothing: antialiased; }
+#mundo { position: absolute; inset: 0; transform-origin: 50% 45%; }
+.esc { position: absolute; inset: 0; overflow: hidden; display: none; }
+.foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.titulo { position: absolute; left: 60px; right: 60px; text-align: center; font-weight: 800; letter-spacing: -.045em; line-height: 1; }
+.etiqueta { position: absolute; left: 50%; transform: translateX(-50%); padding: 16px 40px; border-radius: 999px; font-size: 46px; font-weight: 900; letter-spacing: .14em; white-space: nowrap; }
+.polaroid { position: absolute; background: #fff; padding: 28px 28px 110px; border-radius: 10px; box-shadow: 0 40px 90px -30px rgba(0,0,0,.7); }
+.polaroid img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+.polaroid p { position: absolute; left: 0; right: 0; bottom: 26px; text-align: center; color: var(--tinta); font-size: 46px; font-weight: 700; letter-spacing: -.02em; }
+/* la taza con cara */
+.taza { position: absolute; width: 520px; height: 470px; transform-origin: 50% 100%; }
+.taza .cuerpo { position: absolute; left: 0; bottom: 0; width: 420px; height: 400px; background: var(--taza); border-radius: 18px 18px 130px 130px; overflow: hidden; }
+.taza .asa { position: absolute; right: 0; bottom: 110px; width: 150px; height: 200px; border: 44px solid var(--taza); border-left: 0; border-radius: 0 110px 110px 0; }
+.taza .borde { position: absolute; left: 0; bottom: 360px; width: 420px; height: 70px; background: #8f8f95; border-radius: 50%; }
+.taza .cafe { position: absolute; left: 24px; bottom: 372px; width: 372px; height: 46px; background: #b8a184; border-radius: 50%; }
+.ojo { position: absolute; top: 120px; width: 46px; height: 58px; background: #1d1d1f; border-radius: 50%; }
+.ojo::after { content: ""; position: absolute; top: 9px; left: 11px; width: 14px; height: 14px; background: #fff; border-radius: 50%; }
+.ceja { position: absolute; top: 88px; width: 70px; height: 12px; background: #1d1d1f; border-radius: 6px; }
+.boca { position: absolute; left: 160px; top: 230px; width: 100px; height: 50px; border: 11px solid #1d1d1f; border-color: #1d1d1f transparent transparent transparent; border-radius: 50%; }
+.lagrima { position: absolute; width: 26px; height: 36px; background: #6ec3ff; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; opacity: 0; }
+.vapor { position: absolute; left: 150px; bottom: 470px; width: 120px; height: 120px; }
+.vapor i { position: absolute; bottom: 0; width: 18px; height: 90px; border-radius: 9px; background: rgba(255,255,255,.35); }
+/* notificaciones de calendario */
+.noti { position: absolute; left: 70px; right: 70px; display: flex; align-items: center; gap: 24px; background: rgba(245,245,247,.96); color: var(--tinta); border-radius: 34px; padding: 26px 30px; box-shadow: 0 24px 60px -24px rgba(0,0,0,.6); }
+.noti .ico { flex: none; width: 76px; height: 76px; border-radius: 18px; background: #fff; border: 2px solid #ddd; display: grid; grid-template-rows: 22px 1fr; overflow: hidden; text-align: center; }
+.noti .ico span:first-child { background: var(--rojo); color: #fff; font-size: 14px; font-weight: 800; line-height: 22px; letter-spacing: .08em; }
+.noti .ico span:last-child { font-size: 34px; font-weight: 700; line-height: 52px; }
+.noti b { display: block; font-size: 38px; letter-spacing: -.02em; }
+.noti small { font-size: 28px; color: #6e6e73; }
+.chip { position: absolute; left: 50%; transform: translateX(-50%); background: #fff; color: var(--tinta); border-radius: 999px; padding: 20px 44px; font-size: 52px; font-weight: 800; letter-spacing: -.03em; white-space: nowrap; box-shadow: 0 24px 60px -24px rgba(0,0,0,.7); }
+.chip i { font-style: normal; color: var(--oliva); }
+.sello { position: absolute; padding: 14px 30px; border: 7px solid var(--rojo); color: var(--rojo); border-radius: 18px; font-size: 60px; font-weight: 900; background: rgba(255,255,255,.92); white-space: nowrap; }
+.tarjeta { position: absolute; left: 50%; width: 560px; height: 560px; margin-left: -280px; background: #fff; border-radius: 48px; display: grid; place-items: center; box-shadow: 0 50px 100px -40px rgba(0,0,0,.8); }
+.tarjeta img { width: 82%; height: 82%; object-fit: contain; }
+.url { position: absolute; left: 50%; background: var(--oliva); color: #fff; border-radius: 999px; padding: 30px 56px; font-size: 46px; font-weight: 700; white-space: nowrap; }
+.marca { position: absolute; top: 250px; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 14px; font-size: 34px; font-weight: 600; }
+.marca i { width: 14px; height: 14px; border-radius: 50%; background: var(--oliva); }
+/* subtítulos */
+#subs { position: absolute; left: 70px; right: 70px; top: 1400px; text-align: center; font-size: 64px; font-weight: 900; line-height: 1.12; letter-spacing: -.02em; text-shadow: 0 4px 0 #000, 0 0 24px rgba(0,0,0,.6); -webkit-text-stroke: 3px #000; paint-order: stroke fill; }
+#subs span { display: inline-block; white-space: pre; transition: none; }
+#subs span.ya { color: #fff; }
+#subs span.ahora { color: #111; background: var(--oliva-claro); border-radius: 14px; padding: 0 10px; -webkit-text-stroke: 0; text-shadow: none; }
+#flash { position: absolute; inset: 0; background: #fff; pointer-events: none; opacity: 0; }
+</style>
+</head>
+<body>
+<div id="mundo">
+  <!-- A · expectativa -->
+  <div class="esc" id="A" style="background:linear-gradient(#1c2614,#101012)">
+    <div class="titulo" style="top:260px; font-size:76px">Lo que pedís<br>a las 9:</div>
+    <div class="polaroid" id="polA" style="left:150px; top:500px; width:780px; height:880px"><img src="../fotos/espresso-magnifica.jpg" alt=""><p>un cortadito de cafetería ✨</p></div>
+    <div class="etiqueta" id="etA" style="top:460px; background:var(--oliva-claro); color:#10140a">EXPECTATIVA</div>
+  </div>
+  <!-- B y C · realidad: la taza de la oficina -->
+  <div class="esc" id="B" style="background:#3a3a40">
+    <div class="titulo" id="tB" style="top:260px; font-size:76px">Lo que te dan<br>en la oficina:</div>
+    <div class="etiqueta" id="etB" style="top:500px; background:var(--rojo); color:#fff">REALIDAD</div>
+    <div class="taza" id="taza" style="left:280px; top:720px">
+      <div class="borde"></div><div class="cafe"></div>
+      <div class="cuerpo">
+        <div class="ceja" id="cejaI" style="left:96px"></div><div class="ceja" id="cejaD" style="left:256px"></div>
+        <div class="ojo" style="left:110px"></div><div class="ojo" style="left:266px"></div>
+        <div class="boca" id="boca"></div>
+        <div class="lagrima" id="lag1" style="left:118px; top:180px"></div><div class="lagrima" id="lag2" style="left:276px; top:180px"></div>
+      </div>
+      <div class="asa"></div>
+    </div>
+    <div class="sello" id="selloB" style="left:200px; top:1180px; transform:rotate(-6deg)">agua marrón tibia</div>
+    <div class="noti" id="n1" style="top:250px"><div class="ico"><span>OCT</span><span>27</span></div><div><b>Reunión</b><small>9:30 · Sala 2</small></div></div>
+    <div class="noti" id="n2" style="top:400px"><div class="ico"><span>OCT</span><span>27</span></div><div><b>Reunión</b><small>10:00 · Zoom</small></div></div>
+    <div class="noti" id="n3" style="top:550px"><div class="ico"><span>OCT</span><span>27</span></div><div><b>Reunión para hablar de la reunión</b><small>10:30 · Sala 2</small></div></div>
+  </div>
+  <!-- D · ¿y si la realidad fuera esta? -->
+  <div class="esc" id="D">
+    <div class="titulo" id="tD" style="top:640px; font-size:118px">¿Y si la<br>realidad fuera<br><span style="color:var(--oliva-claro)">esta?</span></div>
+  </div>
+  <!-- E · fotos de Flow -->
+  <div class="esc" id="E">
+    <img class="foto" id="e1" src="../fotos/pareja-magnifica.jpg" alt="">
+    <img class="foto" id="e2" src="../fotos/home-office-magnifica.jpg" alt="">
+    <img class="foto" id="e3" src="../fotos/espresso-magnifica.jpg" alt="">
+    <div class="esc" style="display:block; background:linear-gradient(rgba(16,16,18,.45), rgba(16,16,18,0) 35%, rgba(16,16,18,0) 60%, rgba(16,16,18,.6))"></div>
+    <div class="chip" id="c1" style="top:300px">Grano <i>recién molido</i></div>
+    <div class="chip" id="c2" style="top:300px">Un <i>botón</i></div>
+    <div class="chip" id="c3" style="top:300px"><i>40 segundos</i></div>
+  </div>
+  <!-- F · expectativa / realidad, la misma foto -->
+  <div class="esc" id="F" style="background:#fff">
+    <div style="position:absolute; left:0; right:0; top:0; height:960px; overflow:hidden"><img class="foto" src="../fotos/espresso-magnifica.jpg" alt="" id="f1"></div>
+    <div style="position:absolute; left:0; right:0; top:960px; height:960px; overflow:hidden"><img class="foto" src="../fotos/espresso-magnifica.jpg" alt="" id="f2"></div>
+    <div class="etiqueta" style="top:270px; background:var(--oliva-claro); color:#10140a">EXPECTATIVA</div>
+    <div class="etiqueta" id="etF2" style="top:1000px; background:var(--oliva-claro); color:#10140a">REALIDAD</div>
+    <div class="sello" id="selloF" style="left:150px; top:820px; transform:rotate(-4deg); border-color:var(--oliva); color:var(--oliva)">EXACTO: NO HAY</div>
+  </div>
+  <!-- G · la taza viendo esto -->
+  <div class="esc" id="G" style="background:#3a3a40">
+    <div class="titulo" style="top:260px; font-size:70px">El café de la oficina<br>viendo esto:</div>
+    <div class="polaroid" id="polG" style="left:560px; top:520px; width:440px; height:520px; transform:rotate(6deg); padding:18px 18px 18px"><img src="../fotos/pareja-magnifica.jpg" alt=""></div>
+    <div id="tazaG" style="position:absolute; inset:0"></div>
+  </div>
+  <!-- H · remate -->
+  <div class="esc" id="H">
+    <div class="titulo" id="tH1" style="top:420px; font-size:100px; color:#c7c7cc">No era<br>tu culpa.</div>
+    <div class="titulo" id="tH2" style="top:700px; font-size:150px; color:var(--oliva-claro)">Era la<br>cafetera.</div>
+    <div class="tarjeta" id="mq" style="top:980px; width:360px; height:360px; margin-left:-180px"><img src="../../assets/img/magnifica-s.webp" alt=""></div>
+  </div>
+  <!-- I · cierre -->
+  <div class="esc" id="I" style="background:#fff; color:var(--tinta)">
+    <div class="marca"><i></i> Café en tu Casa</div>
+    <div class="titulo" id="tI" style="top:420px; font-size:116px">Café de cafetería,<br><span style="color:var(--oliva)">en tu casa.</span></div>
+    <div class="tarjeta" id="mq2" style="top:700px; width:440px; height:440px; margin-left:-220px; background:var(--gris); box-shadow:none"><img src="../../assets/img/magnifica-s.webp" alt=""></div>
+    <div class="url" id="url" style="top:1190px">cafe-en-tu-casa.vercel.app</div>
+  </div>
+</div>
+<div id="subs"></div>
+<div id="flash"></div>
+<script>
+const FPS = 30;
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const tramo = (t, a, b) => clamp((t - a) / (b - a));
+const suave = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const golpe = (x) => { x = clamp(x); const c = 1.9; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const ruido = (t, s) => Math.sin(t * 91.7 + s) * Math.sin(t * 57.3 + s * 2);   // temblor determinístico
+
+let G = null, TOTAL = 0;
+window.armar = (g) => { G = g; TOTAL = Math.round(g.total * FPS); return TOTAL; };
+
+// la taza G es un clon de la de la oficina (llorando)
+$("tazaG").innerHTML = $("taza").outerHTML.replace(/id="/g, 'id="g_');
+
+function mostrar(id, a, b, t) { $(id).style.display = t >= a && t < b ? "block" : "none"; }
+function entra(el, t, a, d = .4) { const k = golpe(tramo(t, a, a + d)); el.style.opacity = clamp(tramo(t, a, a + d * .4)); return k; }
+
+function cara(pre, tristeza, llanto, t) {
+  // tristeza 0..1: cejas que caen, boca que se da vuelta; llanto: lágrimas que caen
+  const q = (id) => $(pre + id);
+  q("cejaI").style.transform = `rotate(${-20 * tristeza}deg) translateY(${8 * tristeza}px)`;
+  q("cejaD").style.transform = `rotate(${20 * tristeza}deg) translateY(${8 * tristeza}px)`;
+  q("boca").style.transform = `rotate(${180 * clamp(tristeza * 1.4)}deg) translateY(${-30 * tristeza}px)`;
+  ["lag1", "lag2"].forEach((id, i) => {
+    const ciclo = ((t * 1.6 + i * .5) % 1);
+    q(id).style.opacity = llanto * (1 - ciclo);
+    q(id).style.transform = `translateY(${ciclo * 160}px)`;
+  });
+}
+
+window.cuadro = (f) => {
+  const t = f / FPS;
+  // escenas
+  mostrar("A", 0, 3.9, t); mostrar("B", 3.9, 14.0, t); mostrar("D", 14.0, 16.6, t); mostrar("E", 16.6, 23.5, t);
+  mostrar("F", 23.5, 28.6, t); mostrar("G", 28.6, 32.0, t); mostrar("H", 32.0, 35.6, t); mostrar("I", 35.6, 99, t);
+
+  // A · expectativa: la polaroid cae girando, con brillo
+  const pa = golpe(tramo(t, .2, .8));
+  $("polA").style.transform = `translateY(${(1 - pa) * -900}px) rotate(${-4 + (1 - pa) * -18}deg) scale(${1 + .04 * tramo(t, .8, 3.9)})`;
+  $("etA").style.transform = `translateX(-50%) scale(${entra($("etA"), t, 1.3)})`;
+
+  // B · realidad: corte seco, la taza aparece con zoom de meme en "agua marrón"
+  $("etB").style.transform = `translateX(-50%) scale(${entra($("etB"), t, 4.1)})`;
+  $("tB").style.opacity = 1 - tramo(t, 8.0, 8.3);
+  if (t > 8.0) $("etB").style.opacity = 1 - tramo(t, 8.0, 8.3);
+  const sello = entra($("selloB"), t, 6.2, .35);
+  $("selloB").style.transform = `rotate(-6deg) scale(${2.2 - 1.2 * sello})`;
+  if (t > 8.0) $("selloB").style.opacity = 1 - tramo(t, 8.0, 8.3);
+  // tristeza: sube con cada notificación de reunión; la taza se "derrite"
+  const nivel = clamp(tramo(t, 6.1, 6.6) * .35 + tramo(t, 8.6, 9.0) * .2 + tramo(t, 10.1, 10.5) * .2 + tramo(t, 11.7, 12.1) * .25);
+  const llanto = tramo(t, 11.7, 12.2);
+  cara("", nivel, llanto, t);
+  const aplasta = 1 - .22 * tramo(t, 8.6, 13.5);
+  const meme = t > 6.1 && t < 7.9 ? 1 + .3 * suave(tramo(t, 6.1, 6.35)) : 1;
+  $("taza").style.transform = `scale(${meme}) scaleY(${aplasta}) scaleX(${2 - aplasta}) translateY(${t > 8 ? 200 * tramo(t, 8.0, 8.5) : 0}px)`;
+  [["n1", 8.6], ["n2", 10.1], ["n3", 11.7]].forEach(([id, a]) => {
+    const k = golpe(tramo(t, a, a + .4));
+    $(id).style.opacity = clamp(tramo(t, a, a + .1));
+    $(id).style.transform = `translateY(${(1 - k) * -260}px)`;
+  });
+
+  // D · la pregunta, con zoom lento
+  $("tD").style.transform = `scale(${.8 + .3 * golpe(tramo(t, 14.0, 14.5)) + .05 * tramo(t, 14.5, 16.6)})`;
+
+  // E · fotos de Flow con zoom lento y chips
+  [["e1", 16.6, 18.8], ["e2", 18.8, 21.0], ["e3", 21.0, 23.5]].forEach(([id, a, b]) => {
+    $(id).style.opacity = t >= a && t < b + .01 ? 1 : 0;
+    $(id).style.transform = `scale(${1.18 - .14 * tramo(t, a, b)})`;
+  });
+  [["c1", 16.9, 18.8], ["c2", 19.1, 21.0], ["c3", 21.3, 23.5]].forEach(([id, a, b]) => {
+    const k = golpe(tramo(t, a, a + .35));
+    $(id).style.opacity = t < b ? clamp(tramo(t, a, a + .1)) : 0;
+    $(id).style.transform = `translateX(-50%) scale(${.5 + .5 * k})`;
+  });
+
+  // F · la misma foto arriba y abajo; "EXACTO: NO HAY" con temblor
+  $("etF2").style.opacity = clamp(tramo(t, 24.6, 24.8));
+  $("f1").style.transform = `scale(${1.05 + .03 * tramo(t, 23.5, 28.6)})`;
+  $("f2").style.transform = `scale(${1.05 + .03 * tramo(t, 23.5, 28.6)})`;
+  const ex = entra($("selloF"), t, 26.6, .35);
+  $("selloF").style.transform = `rotate(-4deg) scale(${2.4 - 1.4 * ex})`;
+
+  // G · la taza llorando mirando la foto, zoom dramático de meme
+  cara("g_", 1, 1, t);
+  $("g_taza").style.transform = `scale(.8) translate(-240px, 260px)`;
+  $("G").style.transform = `scale(${1 + .18 * suave(tramo(t, 29.4, 31.9))})`;
+  $("G").style.transformOrigin = "35% 62%";
+
+  // H · remate
+  const h1 = entra($("tH1"), t, 32.0, .35), h2 = entra($("tH2"), t, 33.9, .35);
+  $("tH1").style.transform = `scale(${1.6 - .6 * h1})`;
+  $("tH2").style.transform = `scale(${1.8 - .8 * h2})`;
+  const m = entra($("mq"), t, 34.2, .45);
+  $("mq").style.transform = `scale(${.3 + .7 * m}) rotate(${(1 - m) * -14}deg)`;
+
+  // I · cierre
+  $("tI").style.transform = `scale(${.6 + .4 * entra($("tI"), t, 35.6)})`;
+  const m2 = entra($("mq2"), t, 36.2, .45);
+  $("mq2").style.transform = `scale(${.6 + .4 * m2 + .02 * Math.sin(t * 3)})`;
+  const u = entra($("url"), t, 37.6, .4);
+  $("url").style.transform = `translateX(-50%) scale(${.6 + .4 * u + .04 * Math.max(0, Math.sin((t - 38) * 5))})`;
+
+  // temblor de meme en los golpes
+  const temblor = Math.max(...G.golpes.map((g) => clamp(1 - (t - g) / .35) * (t >= g ? 1 : 0)));
+  $("mundo").style.transform = temblor ? `translate(${ruido(t, 1) * 22 * temblor}px, ${ruido(t, 2) * 22 * temblor}px) rotate(${ruido(t, 3) * 1.4 * temblor}deg)` : "none";
+  $("flash").style.opacity = Math.max(...[3.9, 14.0, 16.6, 23.5, 32.0, 35.6].map((c) => clamp(1 - Math.abs(t - c) / .08) * .6));
+
+  // subtítulos: la frase que suena, palabra por palabra, con la actual resaltada
+  const fr = G.frases.find((x) => t >= x.t && t < x.t + x.d + .25);
+  const subs = $("subs");
+  if (!fr) { subs.innerHTML = ""; return; }
+  const palabras = fr.dice.split(" ");
+  const pesos = palabras.map((w) => w.length + 2), totalPeso = pesos.reduce((a, b) => a + b, 0);
+  let acum = 0, html = "";
+  palabras.forEach((w, i) => {
+    const ini = fr.t + fr.d * acum / totalPeso; acum += pesos[i];
+    const fin = fr.t + fr.d * acum / totalPeso;
+    if (t < ini) return;
+    const pop = golpe(tramo(t, ini, ini + .18));
+    html += `<span class="${t < fin ? "ahora" : "ya"}" style="transform:scale(${.7 + .3 * pop})">${w}</span> `;
+  });
+  subs.innerHTML = html;
+};
+window.listo = Promise.all([...document.images].map((i) => i.decode().catch(() => {})));
+</script>
+</body>
+</html>

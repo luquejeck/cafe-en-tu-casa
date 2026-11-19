@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Reel: 1 kilo de grano = más de 160 cápsulas</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Reel 1080x1920, 9 s a 30 cuadros. Cada cuadro se dibuja con cuadro(f): nada depende del reloj,
+   así que el video sale igual cada vez. Marca: blanco, gris claro, negro y un solo acento oliva. */
+:root { --negro:#101012; --gris:#f5f5f7; --ink:#1d1d1f; --ink2:#6e6e73; --oliva:#5b6e32; --oliva-claro:#a3c26a; --oliva-suave:#c5dd96; }
+* { box-sizing:border-box; margin:0; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:var(--negro); }
+body { font-family:Inter, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+.escena { position:absolute; inset:0; padding:400px 150px 0; display:flex; flex-direction:column; align-items:center; text-align:center; opacity:0; }
+.marca { position:absolute; top:285px; left:0; right:0; display:flex; justify-content:center; align-items:center; gap:14px; font-size:34px; font-weight:600; letter-spacing:-.01em; z-index:5; }
+.marca i { width:15px; height:15px; border-radius:50%; background:var(--oliva-claro); }
+.ep { font-size:32px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; }
+h1 { font-size:104px; font-weight:600; line-height:1.04; letter-spacing:-.045em; }
+h2 { font-size:76px; font-weight:600; line-height:1.06; letter-spacing:-.04em; }
+.palabra { display:inline-block; }
+
+/* 1 · gancho */
+#e1 { background:var(--negro); color:#f5f5f7; justify-content:center; padding-top:0; }
+#e1 .ep { color:var(--oliva-claro); margin-bottom:34px; }
+#e1 h1 em { font-style:normal; color:var(--oliva-suave); }
+
+.lluvia { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.lluvia svg { position:absolute; width:90px; height:90px; opacity:.16; }
+#e1 .ep, #e1 h1 { position:relative; }
+.escena > * { will-change:transform, opacity; }
+.grilla svg path, .grilla svg rect { transition:none; }
+
+/* 2 · la cuenta */
+#e2 { background:var(--gris); color:var(--ink); }
+#e2 .fila { display:flex; align-items:center; gap:36px; margin-top:20px; }
+#e2 .igual { font-size:110px; font-weight:600; color:var(--ink2); }
+.contador { font-size:220px; font-weight:600; letter-spacing:-.06em; line-height:.9; color:var(--oliva); font-variant-numeric:tabular-nums; }
+.contador small { font-size:120px; }
+.leyenda { font-size:46px; font-weight:600; letter-spacing:-.02em; margin-top:10px; }
+.grilla { margin-top:56px; display:grid; grid-template-columns:repeat(16, 42px); gap:6px 5px; }
+.grilla svg { width:42px; height:42px; display:block; }
+.aclara { position:absolute; bottom:400px; left:150px; right:150px; font-size:28px; color:var(--ink2); }
+
+/* 3 · la diferencia */
+#e3 { background:#fff; color:var(--ink); }
+#e3 h2 { margin-top:30px; }
+#e3 .duo { display:grid; grid-template-columns:1fr 1fr; gap:30px; width:100%; margin-top:70px; }
+#e3 .lado { border-radius:36px; padding:40px 24px 44px; display:flex; flex-direction:column; align-items:center; gap:22px; }
+#e3 .lado.mal { background:var(--gris); }
+#e3 .lado.bien { background:var(--negro); color:#f5f5f7; }
+#e3 .lado b { font-size:30px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink2); }
+#e3 .lado.bien b { color:var(--oliva-claro); }
+#e3 .lado p { font-size:38px; font-weight:600; line-height:1.15; letter-spacing:-.02em; }
+#e3 .lado svg { width:170px; height:170px; }
+#e3 .extra { margin-top:60px; font-size:46px; font-weight:600; letter-spacing:-.02em; color:var(--oliva); }
+
+/* 4 · cierre */
+#e4 { background:var(--negro); color:#f5f5f7; justify-content:center; padding-top:0; }
+#e4 h1 { font-size:96px; }
+#e4 h1 em { font-style:normal; color:var(--oliva-suave); }
+#e4 .accion { margin-top:56px; font-size:40px; font-weight:600; color:#f5f5f7; }
+#e4 .pregunta { margin-top:18px; font-size:40px; color:#a1a1a6; }
+#e4 .boton { margin-top:56px; background:#fff; color:var(--ink); border-radius:999px; padding:24px 52px; font-size:38px; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="marca" id="marca"><i></i><span>Café en tu Casa</span></div>
+
+<section class="escena" id="e1">
+  <div class="lluvia" id="lluvia"></div>
+  <p class="ep" data-entra="0.05">Hacé la cuenta</p>
+  <h1 data-palabras="0.15">1 kilo de café<br>en grano:<br><em>¿cuántas cápsulas son?</em></h1>
+</section>
+
+<section class="escena" id="e2">
+  <p class="ep" style="color:var(--oliva)" data-entra="0">1 kilo de café en grano</p>
+  <div class="fila">
+    <svg data-entra="0.05" viewBox="0 0 200 260" width="190" height="247" aria-hidden="true">
+      <path d="M40 40 L160 40 L178 240 Q100 256 22 240 Z" fill="#101012"/>
+      <path d="M40 40 L60 18 L140 18 L160 40" fill="#2a2a2e"/>
+      <rect x="62" y="110" width="76" height="76" rx="14" fill="#a3c26a"/>
+      <text x="100" y="161" text-anchor="middle" font-family="Inter, Arial" font-weight="700" font-size="36" fill="#101012">1 kg</text>
+    </svg>
+    <span class="igual">=</span>
+    <p class="contador"><span id="n">0</span><small id="mas"></small></p>
+  </div>
+  <p class="leyenda" id="ley">cápsulas</p>
+  <div class="grilla" id="grilla"></div>
+  <p class="aclara">Cápsulas de 5 a 6 g de café molido. Valor aproximado.</p>
+</section>
+
+<section class="escena" id="e3">
+  <p class="ep" style="color:var(--oliva)" data-entra="0">La diferencia</p>
+  <h2 data-palabras="0.1">Mismo café.<br>Distinta basura.</h2>
+  <div class="duo">
+    <div class="lado mal" data-entra="0.45">
+      <b>Cápsulas</b>
+      <svg viewBox="0 0 200 200" aria-hidden="true"><g id="pila"></g></svg>
+      <p>Más de 160 cápsulas a la basura</p>
+    </div>
+    <div class="lado bien" data-entra="0.75">
+      <b>Grano</b>
+      <svg viewBox="0 0 200 260" aria-hidden="true" style="height:190px">
+        <path d="M40 40 L160 40 L178 240 Q100 256 22 240 Z" fill="#f5f5f7"/>
+        <path d="M40 40 L60 18 L140 18 L160 40" fill="#d2d2d7"/>
+        <rect x="62" y="110" width="76" height="76" rx="14" fill="#a3c26a"/>
+      </svg>
+      <p>Una bolsa, y la borra va a las plantas</p>
+    </div>
+  </div>
+  <p class="extra" data-entra="1.15">Y se muele en el momento,<br>taza por taza.</p>
+</section>
+
+<section class="escena" id="e4">
+  <h1 data-palabras="0.05">Una buena mañana<br><em>no viene en cápsulas.</em></h1>
+  <p class="accion" data-entra="0.8">Mandáselo a quien todavía toma de cápsula.</p>
+  <p class="pregunta" data-entra="1.0">¿Cápsula o grano?</p>
+  <p class="boton" data-entra="1.2">Link en la bio</p>
+</section>
+
+<script>
+const FPS = 30;
+// duración de cada escena en segundos (total 9 s): el dato aparece antes del segundo 6
+const ESCENAS = [['e1', 1.7], ['e2', 3.5], ['e3', 2.2], ['e4', 1.6]];
+const TOTAL = Math.round(ESCENAS.reduce((s, e) => s + e[1], 0) * FPS);
+const META = 160, T_MAS = 2.6;           // segundos dentro de la escena 2 en que aparece el "+"
+const PASE = 0.22;                         // transición entre escenas, en segundos
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const suave = x => { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+const rebote = x => { x = clamp(x); const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const inicio = id => { let t = 0; for (const [i, d] of ESCENAS) { if (i === id) return t; t += d; } };
+
+// cápsula de aluminio (gris) vista de costado
+const CAP = (fill = '#c7c7cc', borde = '#8e8e93', g = 2) =>
+  `<path d="M10 14 H42 L36 44 Q26 48 16 44 Z" fill="${fill}" stroke="${borde}" stroke-width="${g}"/><rect x="6" y="9" width="40" height="7" rx="3.5" fill="${borde}"/>`;
+const grilla = document.getElementById('grilla');
+grilla.innerHTML = Array.from({ length: META }, () => `<svg viewBox="0 0 52 52">${CAP()}</svg>`).join('');
+const celdas = [...grilla.children];
+
+// lluvia de cápsulas de fondo en el gancho (posiciones fijas: el video sale igual siempre)
+const GOTAS = Array.from({ length: 14 }, (_, i) => ({ x: (i * 137) % 1000 - 20, y0: -200 - (i * 211) % 900, v: 260 + (i * 53) % 220, r: (i * 47) % 60 - 30 }));
+document.getElementById('lluvia').innerHTML = GOTAS.map(() => `<svg viewBox="0 0 52 52">${CAP('#f5f5f7', '#a3c26a', 2)}</svg>`).join('');
+const gotas = [...document.getElementById('lluvia').children];
+
+// pila de cápsulas para la escena 3: se arma de a una
+const PILA = [0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,3,3,3,4,4,5].map((fila, i) => ({ fila, pos: [0,1,2,3,4,5,0,1,2,3,4,0,1,2,3,0,1,2,0,1,0][i] }));
+document.getElementById('pila').innerHTML = PILA.map(({ fila, pos }) =>
+  `<g transform="translate(${10 + fila * 15 + pos * 30} ${148 - fila * 28}) scale(.62)"><g>${CAP('#c7c7cc', '#8e8e93', 3)}</g></g>`).join('');
+const piezasPila = [...document.getElementById('pila').children].map(g => g.firstElementChild);
+const T_PILA = i => 0.45 + i * 0.045;      // segundo (dentro de la escena 3) en que cae cada cápsula de la pila
+
+// separa los títulos en palabras para que entren de a una
+document.querySelectorAll('[data-palabras]').forEach(h => {
+  h.innerHTML = h.innerHTML.split(/(<br>|<em>|<\/em>)/).map(t => /^</.test(t) ? t :
+    t.split(' ').filter(Boolean).map(w => `<span class="palabra">${w}</span>`).join(' ')).join('');
+});
+
+// cuántas cápsulas hay en la grilla en el segundo lt de la escena 2 (v incluye 14 de margen para que caigan las últimas)
+const avance = lt => suave(clamp((lt - 0.25) / 2.5)) * (META + 14);
+
+function cuadro(f) {
+  const t = f / FPS;
+  let ini = 0;
+  ESCENAS.forEach(([id, dur], k) => {
+    const el = document.getElementById(id), lt = t - ini;
+    const ultima = k === ESCENAS.length - 1;
+    // entra deslizando desde abajo y sale empujada hacia arriba
+    const entra = k === 0 ? 1 : suave((lt + PASE / 2) / PASE);
+    const sale = ultima ? 0 : suave((lt - dur + PASE / 2) / PASE);
+    const visible = lt > -PASE / 2 && (ultima ? lt <= dur + 1 : lt < dur + PASE / 2);
+    // empuje: la nueva entra opaca desde abajo y empuja a la anterior hacia arriba
+    el.style.opacity = visible ? 1 : 0;
+    el.style.zIndex = visible ? 1 + k : 0;
+    const zoom = 1 + 0.015 * clamp(lt / dur);
+    el.style.transform = `translateY(${(1 - entra) * 1920 - sale * 1920}px) scale(${zoom})`;
+    if (visible) animar(el, id, Math.max(lt, 0), dur);
+    ini += dur;
+  });
+  const claro = t >= inicio('e2') && t < inicio('e4');
+  document.getElementById('marca').style.color = claro ? '#1d1d1f' : '#f5f5f7';
+  document.querySelector('#marca i').style.background = claro ? '#5b6e32' : '#a3c26a';
+}
+
+function animar(el, id, lt, dur) {
+  el.querySelectorAll('[data-entra]').forEach(n => {
+    const p = suave((lt - +n.dataset.entra) / 0.35);
+    n.style.opacity = p; n.style.transform = `translateY(${(1 - p) * 40}px)`;
+  });
+  el.querySelectorAll('[data-palabras]').forEach(h => {
+    const t0 = +h.dataset.palabras;
+    h.querySelectorAll('.palabra').forEach((w, i) => {
+      const p = suave((lt - t0 - i * 0.07) / 0.3);
+      w.style.opacity = p; w.style.transform = `translateY(${(1 - p) * 50}px)`;
+    });
+  });
+  if (id === 'e1') {
+    gotas.forEach((g, i) => { const d = GOTAS[i];
+      g.style.left = d.x + 'px'; g.style.top = (d.y0 + lt * d.v * 1.6) + 'px'; g.style.transform = `rotate(${d.r + lt * 40}deg)`; });
+  }
+  if (id === 'e2') {
+    const v = avance(lt), cuantas = Math.min(META, Math.round(v));
+    const n = document.getElementById('n');
+    n.textContent = cuantas;
+    document.getElementById('mas').textContent = lt > T_MAS ? '+' : '';
+    document.getElementById('ley').textContent = lt > T_MAS ? 'cápsulas, por lo menos' : 'cápsulas';
+    // destello oliva que recorre la grilla cuando aparece el "+"
+    const ola = (lt - T_MAS) / 0.5;
+    celdas.forEach((c, i) => {
+      const q = rebote((v - i) / 14), ve = i < cuantas;
+      c.style.opacity = ve ? 1 : 0;
+      c.style.transform = ve ? `translateY(${(1 - clamp(q)) * -60}px) scale(${0.6 + 0.4 * q})` : 'none';
+      const fila = Math.floor(i / 16), luz = clamp(1 - Math.abs(ola * 12 - fila) / 2.2);
+      c.firstElementChild.setAttribute('fill', luz > 0 ? `rgb(${Math.round(199 - 36 * luz)},${Math.round(199 - 5 * luz)},${Math.round(204 - 98 * luz)})` : '#c7c7cc');
+    });
+    const pop = lt > T_MAS ? rebote((lt - T_MAS) / 0.35) : 0;
+    n.parentElement.style.transform = `scale(${1 + 0.08 * Math.sin(Math.PI * clamp(pop, 0, 1))})`;
+    // la bolsa se sacude cuando se completa la cuenta
+    const sac = lt > T_MAS && lt < T_MAS + 0.45 ? Math.sin((lt - T_MAS) * 40) * 6 * (1 - (lt - T_MAS) / 0.45) : 0;
+    el.querySelector('.fila svg').style.transform = `rotate(${sac}deg)`;
+  }
+  if (id === 'e3') {
+    piezasPila.forEach((g, i) => { const p = rebote((lt - T_PILA(i)) / 0.2);
+      g.style.opacity = lt > T_PILA(i) ? 1 : 0; g.setAttribute('transform', `translate(0 ${(1 - clamp(p)) * -60})`); });
+  }
+  if (id === 'e4') {
+    const b = el.querySelector('.boton'); const p = rebote((lt - 1.2) / 0.3);
+    b.style.transform = `scale(${0.7 + 0.3 * clamp(p, 0, 1.2)})`;
+  }
+}
+
+// Eventos de sonido, sincronizados con la animación (los lee sonido.py)
+function eventos() {
+  const ev = [], e2 = inicio('e2'), e3 = inicio('e3'), e4 = inicio('e4');
+  ev.push({ t: 0, tipo: 'golpe' });
+  ESCENAS.slice(1).forEach(([id]) => ev.push({ t: inicio(id) - PASE / 2, tipo: 'whoosh' }));
+  let antes = 0;                            // un tic cada 4 cápsulas nuevas, más agudo a medida que se llena
+  for (let f = 0; f < 3.5 * FPS; f++) {
+    const c = Math.min(META, Math.round(avance(f / FPS)));
+    for (let k = antes + 1; k <= c; k++) if (k % 4 === 0) ev.push({ t: e2 + f / FPS, tipo: 'tic', altura: k / META });
+    antes = c;
+  }
+  ev.push({ t: e2 + T_MAS, tipo: 'campana' });
+  PILA.forEach((_, i) => ev.push({ t: e3 + T_PILA(i), tipo: 'tic', altura: 0.3, suave: true }));
+  ev.push({ t: e3 + 0.75, tipo: 'pop' });
+  ev.push({ t: e4 + 0.05, tipo: 'acorde' });
+  ev.push({ t: e4 + 1.2, tipo: 'pop' });
+  return ev;
+}
+
+window.TOTAL = TOTAL;
+window.cuadro = cuadro;
+window.EVENTOS = eventos();
+cuadro(0);
+</script>
+</body>
+</html>
