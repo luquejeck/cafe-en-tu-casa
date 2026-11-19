@@ -1,0 +1,84 @@
+[
+ {
+  "variante": 1,
+  "palabras": 64,
+  "lecturabilidad_FH": 74,
+  "palabras_antes_del_pedido": 43,
+  "qr_opinar_mm2": 4753,
+  "qr_opinar_pct_hoja": 7.6,
+  "qr_centro_vertical_pct": 59,
+  "titulo_mm": 17,
+  "acciones": [
+   "opinar",
+   "instagram"
+  ],
+  "pasos_explicados": false,
+  "ruta_escrita": true
+ },
+ {
+  "variante": 2,
+  "palabras": 68,
+  "lecturabilidad_FH": 79,
+  "palabras_antes_del_pedido": 38,
+  "qr_opinar_mm2": 2968,
+  "qr_opinar_pct_hoja": 4.8,
+  "qr_centro_vertical_pct": 69,
+  "titulo_mm": 21,
+  "acciones": [
+   "opinar",
+   "instagram",
+   "doblar"
+  ],
+  "pasos_explicados": false,
+  "ruta_escrita": true
+ },
+ {
+  "variante": 3,
+  "palabras": 82,
+  "lecturabilidad_FH": 79,
+  "palabras_antes_del_pedido": 54,
+  "qr_opinar_mm2": 1978,
+  "qr_opinar_pct_hoja": 3.2,
+  "qr_centro_vertical_pct": 70,
+  "titulo_mm": 19,
+  "acciones": [
+   "opinar",
+   "instagram"
+  ],
+  "pasos_explicados": false,
+  "ruta_escrita": true
+ },
+ {
+  "variante": 4,
+  "palabras": 81,
+  "lecturabilidad_FH": 77,
+  "palabras_antes_del_pedido": 20,
+  "qr_opinar_mm2": 3019,
+  "qr_opinar_pct_hoja": 4.8,
+  "qr_centro_vertical_pct": 57,
+  "titulo_mm": 18,
+  "acciones": [
+   "opinar",
+   "instagram"
+  ],
+  "pasos_explicados": true,
+  "ruta_escrita": false
+ },
+ {
+  "variante": 5,
+  "palabras": 99,
+  "lecturabilidad_FH": 82,
+  "palabras_antes_del_pedido": 34,
+  "qr_opinar_mm2": 1978,
+  "qr_opinar_pct_hoja": 3.2,
+  "qr_centro_vertical_pct": 59,
+  "titulo_mm": 47,
+  "acciones": [
+   "opinar",
+   "instagram",
+   "recortar"
+  ],
+  "pasos_explicados": false,
+  "ruta_escrita": true
+ }
+]

@@ -197,7 +197,26 @@ Notas para que encaje con lo que ya sabemos de Instagram:
 
 ---
 
-## 9. Próximos pasos
+## 9. Cómo se cruza con lo que ya probamos
+
+Esta estrategia dice **qué sentir**. `reportes/APRENDIZAJES.md` dice **qué funcionó**. Cuando hablan de lo
+mismo, se aplican las dos así:
+
+| Tema | Criterio unificado |
+|---|---|
+| Público | 40 a 60 años (la audiencia real: el grupo más grande son hombres de 45 a 54). En diciembre, la persona foco es **el que se da el gusto** ("Este año, el regalo es para vos", decidido el 17/11), con la Magnifica S como protagonista. |
+| Tono | Emocional en el gancho y el cierre, datos sobrios en el medio. Humor sí, siempre que no le quite deseo al producto. |
+| Estética | La de la marca, siempre: blanco, gris claro, negro y un solo acento oliva. Escenas cálidas con luz de ventana (Google Flow, con nuestras cafeteras como referencia, marcadas como IA en Metricool) hasta tener tomas propias (`marca/lista-de-tomas.md`). |
+| Reels | Lo que retiene es una historia con plata o conflicto, o la máquina por dentro. 9 s, gancho con número en el primer segundo, el dato antes del segundo 6, música de fondo. La parte emocional va en la escena y el sonido, no en texto largo. |
+| Carruseles | Dudas reales y comparaciones alcanzan más que el producto con precio. Precio en las últimas placas. |
+| Cierres | Nunca "Guardalo para comparar". "Mandáselo a …" o "Guardalo: es …" con un motivo; en los carruseles de diciembre, una pregunta fácil + "Escribinos por WhatsApp". |
+| Números | Los del relevamiento del 26/10: café en el bar $4.000, kilo de grano $60.000, 130 tazas por kilo (unos $462 por taza). Viven en `assets/js/productos.js`. |
+| Promesas | Solo las políticas de Mercado Libre: nada de garantía oficial, servicio técnico, sellada de fábrica ni fechas de entrega prometidas. Solo modelos con stock. |
+| Volumen | 20 créditos de Metricool por mes: la estrategia se mete en ese cupo, no lo agranda. |
+
+---
+
+## 10. Próximos pasos
 
 1. **Elegir el concepto.** Confirmar "El lujo de todos los días" o ajustarlo. A partir de ahí todo lo
    demás se ordena solo.
@@ -209,4 +228,4 @@ Notas para que encaje con lo que ya sabemos de Instagram:
    Lo que funcione pasa a `APRENDIZAJES.md`.
 
 ---
-Última actualización: 19/11/2026.
+Última actualización: 19/11/2026 (unificada con `APRENDIZAJES.md` y la estrategia de diciembre del 17/11).

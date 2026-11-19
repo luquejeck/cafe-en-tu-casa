@@ -1,8 +1,8 @@
 # Calendario 24/11 al 5/1: revisión con la estrategia nueva
 
-> Revisado el 19/11/2026 contra `ESTRATEGIA.md`. En Metricool ya hay 17 publicaciones programadas
-> (salen solas a las 10:00). Esta revisión dice qué se queda, qué conviene retocar y qué se suma en los
-> días libres. **No se tocó nada en Metricool:** los cambios se hacen cuando los apruebes.
+> Revisado el 19/11/2026 contra `ESTRATEGIA.md`, unificado con `reportes/APRENDIZAJES.md` y la
+> estrategia de diciembre del 17/11. Metricool da **20 créditos por mes**: noviembre ya está lleno y
+> en diciembre quedaban 3 libres (los otros 2 son para Reyes).
 
 ## El mes completo
 
@@ -12,10 +12,10 @@ En **negrita**, las 5 piezas nuevas (ya generadas en `assets/img/ig/e1*.jpg`).
 | Fecha | Pieza | Tipo | Estado |
 |---|---|---|---|
 | Dom 23/11 18:00 | Reel Black Friday sin sorpresas | Ca | Programada · queda |
-| **Lun 24/11** | **El lujo de todos los días** (carrusel) | X | **Nueva** |
+| **Lun 24/11** | **El lujo de todos los días** (carrusel) | X | **Nueva · sin crédito: subir a mano desde la app o pasar a enero** |
 | Mié 25/11 21:00 | Dedica: Tu rincón, tu ritual | X | Programada · queda |
 | Vie 27/11 | Black Friday: 20% OFF todos los días | Ca | Programada · queda |
-| **Lun 30/11** | **Tu casa merece café de verdad. Vos también.** (post) | X | **Nueva** |
+| **Lun 30/11** | **Tu casa merece café de verdad. Vos también.** (post) | X | **Nueva · sin crédito: subir a mano desde la app o pasar a enero** |
 | Mar 1/12 | El regalo que se usa todos los días | X | Programada · retoque menor |
 | Mié 2/12 | Magnifica S: último sprint del año | Ca | Programada · **retocar** |
 | Jue 3/12 | Las 4 dudas antes de comprar | E | **Está en borrador**: si la querés, hay que aprobarla en Metricool |
@@ -64,8 +64,8 @@ taza. Si cambian, se actualizan en `productos.js` y se regenera todo.
 
 ## Lo que falta
 
-- **Subir las 5 piezas nuevas a Metricool.** Las imágenes tienen que estar online: primero se publica esta
-  rama en el sitio y después se programan desde ahí. Avisame y lo hago.
+- **Programar en Metricool las 3 de diciembre** (4, 14 y 23/12). Con eso diciembre queda en 20 de 20.
+- **Decidir qué hacer con las 2 de noviembre**: subirlas a mano desde la app el 24 y el 30, o pasarlas a enero.
 - **El precio de la cápsula.** No encontré un precio actual y confiable para Argentina, así que por ahora
   ninguna pieza compara el costo por taza contra la cápsula. Si me pasás cuánto sale hoy una caja,
   sumo esa placa.
