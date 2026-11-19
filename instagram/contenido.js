@@ -582,6 +582,8 @@ const PIEZAS = [
     const foto = n => ({ t: 'escena', estilo: 'limpia', img: E(n) });
     const tarjeta = (n, ep, h, extra = {}) => ({ t: 'escena', estilo: 'tarjeta', img: E(n), ep, h, ...extra });
     const cierre = sub => ({ t: 'cta', tono: 'oscuro', ep: 'Para decidir tranquilo', h: 'Guardalo para comparar.', sub, boton: 'Link en la bio' });
+    // Cierre con un motivo concreto (regla del calendario: nada de "Guardalo para comparar")
+    const cierreE = (accion, motivo, sub) => ({ t: 'cta', tono: 'oscuro', ep: 'Antes de irte', h: `${accion}<br>${motivo}`, sub, boton: 'Link en la bio' });
     const pago = ps => ps.map(preciosCortos).join('\n\n') + '\n\n' + COMO_PAGAR + ' Envío gratis a todo el país.';
     const texto = (gancho, cuerpo, ps, accion, pregunta, tags) =>
       `${gancho}\n\n${cuerpo}\n\n${pago(ps)}\n\n${accion}\n\n${pregunta}\n\n${tags}`;
@@ -657,11 +659,11 @@ const PIEZAS = [
            items: [['Tiempo', 'No salís a buscarlo. Apretás un botón.'],
                    ['Sabor', 'El grano se muele en el momento, para cada taza.'],
                    ['Buen humor', 'El día arranca bien. Y se nota.']] },
-         foto('magnifica-latte-art'), ...DISP.map(placaPrecio), cierre('¿Cuál es tu primer café?')]),
+         foto('magnifica-latte-art'), ...DISP.map(placaPrecio), cierreE('Mandáselo a quien', 'arranca el día con café.', '¿Cuál es tu primer café?')]),
       pieza('e1130-post-vos-tambien', 'post', 'Tu casa merece café de verdad',
         texto('Tu casa merece café de verdad. Vos también. ☕',
           `Trabajaste todo el año. Una buena mañana empieza con un buen café, y ese café lo podés tener en tu cocina. La ${P.nombre(M)} muele el grano en el momento y te lo sirve con un botón.`,
-          [M], 'Guardalo para comparar.', '¿Hace cuánto que te debés un buen café en casa?', '#cafeencasa #delonghi #magnificas #telomereces'),
+          [M], 'Mandáselo a quien se merece un buen café este año.', '¿Hace cuánto que te debés un buen café en casa?', '#cafeencasa #delonghi #magnificas #telomereces'),
         [tarjeta('magnifica-desayuno-pareja', 'Café de cafetería, en tu casa', 'Tu casa merece café de verdad.<br><em>Vos también.</em>')]),
       pieza('e1204-carrusel-no-viene-en-capsulas', 'carrusel', 'Una buena mañana no viene en cápsulas',
         texto('Una buena mañana no viene en cápsulas. ☕',
@@ -674,8 +676,8 @@ const PIEZAS = [
              { destacada: true, ep: 'Grano', h: 'Molido en el momento', items: ['Vos elegís grano y molienda', 'Queda borra, para las plantas'] }
            ] },
          { t: 'dato', tono: 'oscuro', ep: 'Cada taza de grano, aprox.', num: fmt(costoCasa),
-           sub: `Con un kilo a ${fmt(TIENDA.precioKiloCafe)} y ${TIENDA.cafesPorKilo} tazas por kilo.`, p: 'Valor aproximado, con precio de grano de noviembre 2026.' },
-         ...DISP.map(placaPrecio), cierre('¿Cápsula o grano?')]),
+           sub: `Con un kilo a ${fmt(TIENDA.precioKiloCafe)} y ${TIENDA.cafesPorKilo} tazas por kilo.`, p: 'Valor aproximado, con precio de grano relevado el 26/10.' },
+         ...DISP.map(placaPrecio), cierreE('Mandáselo a quien', 'todavía toma de cápsula.', '¿Cápsula o grano?')]),
       pieza('e1214-post-te-das-el-gusto', 'post', 'Te das el gusto porque podés',
         texto('Te das el gusto porque podés. ☕',
           `Este año el regalo es para vos. Es de los que se usan todas las mañanas, durante años. La ${P.nombre(M)}: un botón, grano recién molido, el café de cafetería en tu casa.`,
@@ -688,7 +690,7 @@ const PIEZAS = [
         [tarjeta('dedica-negra-espresso', 'Lunes', 'Un espresso corto<br><em>para arrancar.</em>'),
          tarjeta('dedica-blanca-espumando', 'Miércoles', 'Un latte<br><em>sin apuro.</em>'),
          tarjeta('magnifica-desayuno-familia', 'Domingo', 'Un cortado<br><em>para compartir.</em>'),
-         ...DISP.map(placaPrecio), cierre('¿Cuál es tu café del domingo?')])
+         ...DISP.map(placaPrecio), cierreE('Guardalo:', 'es tu menú de la semana.', '¿Cuál es tu café del domingo?')])
     ];
   })()
 ];

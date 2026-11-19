@@ -21,9 +21,9 @@ En **negrita**, las 5 piezas nuevas (ya generadas en `assets/img/ig/e1*.jpg`).
 | Jue 3/12 | Las 4 dudas antes de comprar | E | **Está en borrador**: si la querés, hay que aprobarla en Metricool |
 | **Vie 4/12** | **Una buena mañana no viene en cápsulas** (carrusel) | C | **Nueva** |
 | Lun 7/12 | Dedica: espresso de verdad | Ca | Programada · queda |
-| Mar 8/12 | Este año, el regalo es para vos (test A/B) | X | Programada · queda, ya va con el concepto |
+| Mar 8/12 | Este año, el regalo es para vos (test A/B) | X | Programada · queda, ya va con el concepto. (En el artifact "Carruseles de verano" figura el lunes 7; en Metricool está el martes 8.) |
 | Mié 9/12 | Magnifica S, home office | Ca | Programada · queda |
-| Jue 10/12 | 5° B gasta $2.920.000 por año en café | C | Programada · **revisar números** |
+| Jue 10/12 | 5° B gasta $2.920.000 por año en café | C | Programada · queda (números del 26/10, coherentes con el sitio) |
 | Vie 11/12 | Dedica: la espuma, en casa | Ca | Programada · queda |
 | **Lun 14/12** | **Te das el gusto porque podés** (post) | X | **Nueva** |
 | Mar 15/12 | Faltan 10 días para Navidad | X | Programada · queda |
@@ -58,16 +58,14 @@ Cambiar "Después de un año largo, el café de cafetería en tu casa" por:
 > Después de un año largo, te das el gusto porque podés. El café de cafetería, en tu casa, todas las
 > mañanas.
 
-**Jue 10/12 · "5° B gasta $2.920.000 por año"**
-Esos números se calcularon con los precios de café del 26/10. El kilo de grano se actualizó a $45.000
-(antes $18.000): **antes de que salga, hay que rehacer la cuenta.** Ver "Lo que falta" abajo.
+**Precios del café.** El sitio y las piezas nuevas usan los mismos valores que los carruseles de
+diciembre y enero (relevados el 26/10): café en el bar a $4.000 y kilo de grano a $60.000, unos $462 por
+taza. Si cambian, se actualizan en `productos.js` y se regenera todo.
 
 ## Lo que falta
 
 - **Subir las 5 piezas nuevas a Metricool.** Las imágenes tienen que estar online: primero se publica esta
   rama en el sitio y después se programan desde ahí. Avisame y lo hago.
-- **El precio del café afuera** (`precioCafeAfuera` en `productos.js`) sigue en $3.500. Si hoy un café
-  en el bar sale más, actualizalo. Cambia la calculadora del sitio y la cuenta del 10/12.
 - **El precio de la cápsula.** No encontré un precio actual y confiable para Argentina, así que por ahora
   ninguna pieza compara el costo por taza contra la cápsula. Si me pasás cuánto sale hoy una caja,
   sumo esa placa.

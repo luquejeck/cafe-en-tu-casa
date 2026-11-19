@@ -20,8 +20,8 @@ const TIENDA = {
   garantiaMeses: 12,
 
   // Para la calculadora de amortizacion. Actualizalos cuando cambien.
-  precioCafeAfuera: 3500,   // lo que sale un cafe en un bar, en pesos
-  precioKiloCafe: 45000,    // lo que te sale 1 kg de cafe en grano (Causa Tostadores, 1 kg especialidad, nov 2026)
+  precioCafeAfuera: 4000,   // lo que sale un cafe en un bar, en pesos (relevado el 26/10/2026)
+  precioKiloCafe: 60000,    // lo que te sale 1 kg de cafe en grano (relevado el 26/10/2026; mismo valor que los carruseles)
   cafesPorKilo: 130,        // tazas que salen de 1 kg (aprox 7,5 g por taza)
 
   url: 'https://cafe-en-tu-casa.vercel.app'

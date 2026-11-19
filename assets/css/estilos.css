@@ -600,6 +600,12 @@ h1, h2, h3, h4 {
 .gris .franja-item { background: #fff; }
 .negro .franja-item { background: #1c1c1f; border-color: rgba(255, 255, 255, .12); }
 .negro .franja-item p { color: #a1a1a6; }
+/* Franja sin tarjetas: corta la seguidilla de cajas entre secciones */
+.franja-plana .franja-item { background: none; border: 0; border-top: 2px solid var(--brand); border-radius: 0; padding: 22px 4px 0; }
+.franja-plana .franja-item h3 { font-size: 1.25rem; }
+/* Palabras clave visibles arriba del título principal (SEO) */
+.h1-clave { display: block; font-size: .8125rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--brand); margin-bottom: 18px; line-height: 1.4; }
 .franja-item svg { width: 26px; height: 26px; stroke: var(--brand); fill: none; stroke-width: 1.6; margin-bottom: 14px; }
 .franja-item h3 { font-size: 1.0625rem; margin-bottom: 7px; }
 .franja-item p { font-size: .9375rem; color: var(--ink-2); }

@@ -44,7 +44,7 @@ Si la más barata le sirve más, decíselo:
 
 **"Es cara."**
 > Te entiendo. Hacé esta cuenta: un café afuera sale [precio café afuera]. Uno hecho en casa con buen
-> grano sale unos $350. Si tomás un par por día, la cafetera se paga sola, y en el sitio tenés la cuenta
+> grano sale unos $460. Si tomás un par por día, la cafetera se paga sola, y en el sitio tenés la cuenta
 > exacta para tu caso: [link a elegir.html]. Y la vas a usar todos los días durante años. Te la merecés.
 
 **"Ya tengo una de cápsulas."**
