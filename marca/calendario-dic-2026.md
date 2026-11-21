@@ -69,3 +69,22 @@ taza. Si cambian, se actualizan en `productos.js` y se regenera todo.
 - **El precio de la cápsula.** No encontré un precio actual y confiable para Argentina, así que por ahora
   ninguna pieza compara el costo por taza contra la cápsula. Si me pasás cuánto sale hoy una caja,
   sumo esa placa.
+
+## Ajustes por el diagnóstico del 21/11
+
+Ver la sección "Volumen y mezcla" de `reportes/APRENDIZAJES.md`.
+
+- **Hecho el 21/11 en Metricool:** se cambió el cierre "Guardalo para comparar" (prohibido desde el 16/11)
+  en 2/12, 7/12, 11/12 y 18/12. Solo esa línea; imágenes, horarios y el resto del texto quedan igual.
+- **Falta video.** Diciembre tiene como objetivo alcance nuevo, pero lo programado son casi todo fotos y
+  carruseles, y lo único que trajo gente nueva en noviembre fueron reels de historia o de la máquina por
+  dentro. Propuesta: usar los créditos de 3 fotos sueltas para 3 reels, sin gastar créditos de más.
+  | Hoy | Pasa a ser | Necesita |
+  |---|---|---|
+  | Lun 7/12 · foto Dedica espresso | Reel Lo-Fi: la mañana real | Video grabado con el celular |
+  | Mié 9/12 · foto home office | Reel "Dos vecinos", segunda parte | Video (se arma con `instagram/reel-iso/`) |
+  | Vie 11/12 · foto Dedica espuma | Reel detrás de escena con Lucas | Video grabado con el celular |
+  Cuando estén los videos se reemplazan en Metricool (cambiar algo ya programado no gasta crédito).
+- **Fotos sueltas:** en diciembre hay al menos 6 (2, 7, 9, 11, 18 y 21/12). La regla nueva es como mucho 1 por semana; las que no se
+  reemplacen por reels quedan, pero no se suman más.
+- **Reels de lista o información:** no se programan más; esa info va a carruseles e historias destacadas.
