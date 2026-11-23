@@ -43,7 +43,7 @@ function pagosHTML(p) {
   <div class="pagos pagos-2">
 
     <article class="pago pago-destacado">
-      <span class="pago-tag">${off}% OFF</span>
+      <span class="pago-tag">${BF_ACTIVO ? 'Black Friday · ' : ''}${off}% OFF</span>
       <h3 class="pago-titulo">${ICO.banco} Transferencia o efectivo</h3>
       <div class="pago-tachado">${fmt(p.precioML)}</div>
       <div class="pago-monto">${fmt(transf)}</div>
@@ -84,7 +84,7 @@ function renderTiles(cont) {
   cont.innerHTML = PRODUCTOS.map((p, i) => {
     const ancho = i === 0 ? ' tile-ancho' : '';
     const cinta = p.stock
-      ? `<span class="tile-cinta">${TIENDA.descuentoTransferencia * 100}% OFF transferencia</span>`
+      ? `<span class="tile-cinta">${BF_ACTIVO ? 'Black Friday · ' : ''}${TIENDA.descuentoTransferencia * 100}% OFF transferencia</span>`
       : `<span class="tile-cinta tile-cinta-agotado">Sin stock</span>`;
     const accion = p.stock
       ? `<a class="enlace" href="${waProducto(p)}" target="_blank" rel="noopener"
@@ -365,8 +365,41 @@ function initComunes() {
   });
 }
 
+/* ---------- Black Friday ----------
+   Solo corre si BF_ACTIVO (ver productos.js). Cambia la barra de anuncio
+   por una negra con cuenta regresiva y marca el body con .bf para los estilos. */
+function initBlackFriday() {
+  if (!BF_ACTIVO) return;
+  document.body.classList.add('bf');
+
+  const off = TIENDA.descuentoTransferencia * 100;
+  document.querySelectorAll('.anuncio').forEach(a => {
+    a.classList.add('anuncio-bf');
+    a.innerHTML = `
+      <span class="bf-chip">Black Friday</span>
+      <b>${off}% OFF</b> pagando por transferencia<span class="punto">·</span>
+      Envío gratis<span class="punto">·</span>
+      <span class="bf-cuenta">Termina en <b data-slot="bf-cuenta">—</b></span>`;
+  });
+
+  const fin = Date.parse(BLACK_FRIDAY.hasta);
+  const dos = n => String(n).padStart(2, '0');
+  const tick = () => {
+    let s = Math.max(0, Math.floor((fin - Date.now()) / 1000));
+    const d = Math.floor(s / 86400); s %= 86400;
+    const h = Math.floor(s / 3600);  s %= 3600;
+    const m = Math.floor(s / 60);    s %= 60;
+    const txt = (d ? `${d}d ` : '') + `${dos(h)}:${dos(m)}:${dos(s)}`;
+    document.querySelectorAll('[data-slot="bf-cuenta"]').forEach(el => el.textContent = txt);
+  };
+  // Con ?bf=1 antes de la fecha, la cuenta mostraría más días de lo real; igual sirve para ver el diseño.
+  tick();
+  setInterval(tick, 1000);
+}
+
 /* ---------- Arranque ---------- */
 document.addEventListener('DOMContentLoaded', () => {
+  initBlackFriday();
   initComunes();
 
   const tiles = document.querySelector('[data-slot="tiles"]');

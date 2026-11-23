@@ -50,6 +50,12 @@ whatsappVisible: '+54 11 3656-7560',
 email: 'stokedstay@gmail.com',
 ```
 
+### Black Friday
+
+En `productos.js`, bloque `BLACK_FRIDAY`: fechas `desde` / `hasta` y el % por transferencia
+durante la promo. Se prende y se apaga solo (barra negra con cuenta regresiva, cintas
+"Black Friday" y mensaje de WhatsApp). Para verlo antes: agregá `?bf=1` al link.
+
 ### Marcar un producto sin stock
 
 ```js

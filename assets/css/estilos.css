@@ -181,6 +181,30 @@ h1, h2, h3, h4 {
 .anuncio b { color: #fff; font-weight: 600; }
 .anuncio .punto { color: var(--ink-3); margin-inline: 8px; }
 
+/* Black Friday: solo aparece con body.bf (lo prende app.js según las fechas) */
+.anuncio-bf {
+  background: #000;
+  padding-block: 11px;
+  border-bottom: 2px solid #ffd60a;
+}
+.bf-chip {
+  display: inline-block;
+  background: #ffd60a; color: #000;
+  font-weight: 800; font-size: .6875rem; letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 3px 9px; border-radius: 5px;
+  margin-right: 10px; vertical-align: 1px;
+}
+.bf-cuenta b { color: #ffd60a; font-variant-numeric: tabular-nums; }
+.bf .tile-cinta:not(.tile-cinta-agotado) {
+  background: #000; color: #ffd60a;
+  box-shadow: inset 0 0 0 1px #ffd60a;
+}
+.bf .pago-destacado .pago-tag { background: #000; color: #ffd60a; }
+@media (max-width: 600px) {
+  .anuncio-bf { font-size: .75rem; line-height: 1.7; }
+}
+
 /* ---------- 7. Navegación (glass Apple) ---------- */
 .nav {
   position: sticky;
