@@ -382,6 +382,12 @@ function initBlackFriday() {
       <span class="bf-cuenta">Termina en <b data-slot="bf-cuenta">—</b></span>`;
   });
 
+  const pildora = document.querySelector('[data-slot="hero-pildora"]');
+  if (pildora) {
+    pildora.className = 'pildora pildora-bf';
+    pildora.innerHTML = `<span class="bf-chip">Black Friday</span> <span>${off}% OFF por transferencia</span>`;
+  }
+
   const fin = Date.parse(BLACK_FRIDAY.hasta);
   const dos = n => String(n).padStart(2, '0');
   const tick = () => {
