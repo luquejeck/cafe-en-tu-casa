@@ -301,7 +301,7 @@ h1, h2, h3, h4 {
   background: var(--bg-2);
 }
 .hero-texto { padding: clamp(48px, 6vw, 80px) clamp(28px, 6vw, 90px); }
-.hero-texto h1 { margin: 18px 0 22px; }
+.hero-texto h1 { margin: 18px 0 22px; font-size: clamp(2.5rem, 4.4vw, 4rem); line-height: 1.04; }
 .hero-texto .plomo { max-width: 44ch; margin-bottom: 34px; }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 26px; align-items: center; }
 .hero-img { position: relative; height: 100%; min-height: 420px; }
