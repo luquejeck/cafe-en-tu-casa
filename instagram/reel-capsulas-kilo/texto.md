@@ -21,8 +21,8 @@ Una cápsula trae entre 5 y 6 gramos de café molido. Un kilo de grano rinde lo 
 Además, el grano se muele en el momento, taza por taza. La cápsula se molió hace meses.
 
 Magnifica S
-💸 $1.205.521 por transferencia (20% OFF)
-💳 o 9 cuotas sin interés de $167.433 en Mercado Libre
+💸 $1.199.494 por transferencia (20% OFF)
+💳 o 9 cuotas sin interés de $166.596 en Mercado Libre
 
 El 20% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan. Envío gratis a todo el país.
 
@@ -73,8 +73,8 @@ La imagen cambia cada 2 a 4 segundos. Todo se entiende sin sonido.
 Una cápsula trae entre 5 y 6 gramos de café molido: un kilo de grano rinde más de 160. Y hay algo más: la cápsula se muele en fábrica y espera meses; el grano se muele segundos antes de tu taza.
 
 Magnifica S
-💸 $1.205.521 por transferencia (20% OFF)
-💳 o 9 cuotas sin interés de $167.433 en Mercado Libre
+💸 $1.199.494 por transferencia (20% OFF)
+💳 o 9 cuotas sin interés de $166.596 en Mercado Libre
 
 El 20% OFF es pagando por transferencia o efectivo; las cuotas son en Mercado Libre. No se combinan. Envío gratis a todo el país.
 

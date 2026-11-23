@@ -29,6 +29,30 @@ const TIENDA = {
   url: 'https://cafe-en-tu-casa.vercel.app'
 };
 
+/* ---------- BLACK FRIDAY ----------
+   Se prende y se apaga SOLO según las fechas (hora de Argentina).
+   Fuera de esas fechas el sitio queda exactamente como siempre.
+   Para verlo antes de que empiece: agregá ?bf=1 al final del link
+   (ej: cafe-en-tu-casa.vercel.app/?bf=1). Con ?bf=0 lo forzás apagado.
+
+   descuentoTransferencia: el % por transferencia DURANTE Black Friday.
+   Si lo dejás igual que el de TIENDA, no cambia el precio, solo la estética. */
+const BLACK_FRIDAY = {
+  desde: '2026-11-27T00:00:00-03:00',   // viernes 27/11, 00:00
+  hasta: '2026-12-01T00:00:00-03:00',   // hasta el lunes 30/11 (Cyber Monday) a la medianoche
+  descuentoTransferencia: 0.20
+};
+
+const BF_ACTIVO = (() => {
+  const forzado = typeof location !== 'undefined' && new URLSearchParams(location.search).get('bf');
+  if (forzado === '1') return true;
+  if (forzado === '0') return false;
+  const ahora = Date.now();
+  return ahora >= Date.parse(BLACK_FRIDAY.desde) && ahora < Date.parse(BLACK_FRIDAY.hasta);
+})();
+
+if (BF_ACTIVO) TIENDA.descuentoTransferencia = BLACK_FRIDAY.descuentoTransferencia;
+
 const PRODUCTOS = [
   {
     id: 'magnifica-s',
@@ -39,8 +63,8 @@ const PRODUCTOS = [
     etiqueta: 'Más vendida',
     tagline: 'Café en grano, recién molido, con un botón.',
     resumen: 'Para el que quiere el café de cafetería todas las mañanas sin complicarse. Muele el grano en el momento y te lo sirve con un solo botón.',
-    precioLista: 1586212,
-    precioML:    1506901,
+    precioLista: 1578281,
+    precioML:    1499367,
     cuotas: 9,
     stock: true,
     color: 'Negro',
@@ -171,6 +195,7 @@ const waLink = texto => `https://wa.me/${TIENDA.whatsapp}?text=${encodeURICompon
 
 const waProducto = p => waLink(
   `Hola! Quiero comprar la ${P.nombre(p)} por transferencia con el ` +
+  (BF_ACTIVO ? 'precio de Black Friday: ' : '') +
   `${TIENDA.descuentoTransferencia * 100}% OFF (${fmt(P.transferencia(p))}). ¿Me pasás los datos?`
 );
 

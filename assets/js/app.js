@@ -24,11 +24,11 @@ function pagosHTML(p) {
   if (!p.stock) return `
   <div class="pagos pagos-2 sin-stock">
     <article class="pago pago-destacado">
-      <h3 class="pago-titulo">${ICO.banco} Transferencia o efectivo</h3>
+      <h2 class="pago-titulo">${ICO.banco} Transferencia o efectivo</h2>
       <div class="pago-monto">${fmt(transf)}</div>
     </article>
     <article class="pago">
-      <h3 class="pago-titulo">${ICO.tarjeta} Tarjeta en Mercado Libre</h3>
+      <h2 class="pago-titulo">${ICO.tarjeta} Tarjeta en Mercado Libre</h2>
       <div class="pago-monto">${fmt(p.precioML)}</div>
       <p class="pago-sub">${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))}</p>
     </article>
@@ -43,8 +43,8 @@ function pagosHTML(p) {
   <div class="pagos pagos-2">
 
     <article class="pago pago-destacado">
-      <span class="pago-tag">${off}% OFF</span>
-      <h3 class="pago-titulo">${ICO.banco} Transferencia o efectivo</h3>
+      <span class="pago-tag">${BF_ACTIVO ? 'Black Friday · ' : ''}${off}% OFF</span>
+      <h2 class="pago-titulo">${ICO.banco} Transferencia o efectivo</h2>
       <div class="pago-tachado">${fmt(p.precioML)}</div>
       <div class="pago-monto">${fmt(transf)}</div>
       <div class="pago-ahorro">Ahorrás ${fmt(P.ahorro(p))}</div>
@@ -61,7 +61,7 @@ function pagosHTML(p) {
 
     <article class="pago">
       <span class="pago-tag pago-tag-ml">Cuotas</span>
-      <h3 class="pago-titulo">${ICO.tarjeta} Tarjeta en Mercado Libre</h3>
+      <h2 class="pago-titulo">${ICO.tarjeta} Tarjeta en Mercado Libre</h2>
       ${P.tieneOferta(p) ? `<div class="pago-tachado">${fmt(p.precioLista)}</div>` : ''}
       <div class="pago-monto">${fmt(p.precioML)}</div>
       <p class="pago-sub"><span class="verde">${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))}</span></p>
@@ -81,10 +81,12 @@ function pagosHTML(p) {
 
 /* ---------- Tiles del home ---------- */
 function renderTiles(cont) {
-  cont.innerHTML = PRODUCTOS.map((p, i) => {
+  // Los que no tienen stock van al final: primero lo que se puede comprar hoy
+  const orden = [...PRODUCTOS].sort((a, b) => b.stock - a.stock);
+  cont.innerHTML = orden.map((p, i) => {
     const ancho = i === 0 ? ' tile-ancho' : '';
     const cinta = p.stock
-      ? `<span class="tile-cinta">${TIENDA.descuentoTransferencia * 100}% OFF transferencia</span>`
+      ? `<span class="tile-cinta">${BF_ACTIVO ? 'Black Friday · ' : ''}${TIENDA.descuentoTransferencia * 100}% OFF transferencia</span>`
       : `<span class="tile-cinta tile-cinta-agotado">Sin stock</span>`;
     const accion = p.stock
       ? `<a class="enlace" href="${waProducto(p)}" target="_blank" rel="noopener"
@@ -142,7 +144,7 @@ function renderComparativa(tabla) {
           ${PRODUCTOS.map(p => `<td>${fn(p)}</td>`).join('')}
         </tr>`).join('')}
       <tr>
-        <th scope="row"></th>
+        <td></td>
         ${PRODUCTOS.map(p => `<td><a class="enlace" href="${P.url(p)}">Ver ficha</a></td>`).join('')}
       </tr>
     </tbody>`;
@@ -365,8 +367,47 @@ function initComunes() {
   });
 }
 
+/* ---------- Black Friday ----------
+   Solo corre si BF_ACTIVO (ver productos.js). Cambia la barra de anuncio
+   por una negra con cuenta regresiva y marca el body con .bf para los estilos. */
+function initBlackFriday() {
+  if (!BF_ACTIVO) return;
+  document.body.classList.add('bf');
+
+  const off = TIENDA.descuentoTransferencia * 100;
+  document.querySelectorAll('.anuncio').forEach(a => {
+    a.classList.add('anuncio-bf');
+    a.innerHTML = `
+      <span class="bf-chip">Black Friday</span>
+      <b>${off}% OFF</b> pagando por transferencia<span class="punto">·</span>
+      Envío gratis<span class="punto">·</span>
+      <span class="bf-cuenta">Termina en <b data-slot="bf-cuenta">—</b></span>`;
+  });
+
+  const pildora = document.querySelector('[data-slot="hero-pildora"]');
+  if (pildora) {
+    pildora.className = 'pildora pildora-bf';
+    pildora.innerHTML = `<span class="bf-chip">Black Friday</span> <span>${off}% OFF por transferencia</span>`;
+  }
+
+  const fin = Date.parse(BLACK_FRIDAY.hasta);
+  const dos = n => String(n).padStart(2, '0');
+  const tick = () => {
+    let s = Math.max(0, Math.floor((fin - Date.now()) / 1000));
+    const d = Math.floor(s / 86400); s %= 86400;
+    const h = Math.floor(s / 3600);  s %= 3600;
+    const m = Math.floor(s / 60);    s %= 60;
+    const txt = (d ? `${d}d ` : '') + `${dos(h)}:${dos(m)}:${dos(s)}`;
+    document.querySelectorAll('[data-slot="bf-cuenta"]').forEach(el => el.textContent = txt);
+  };
+  // Con ?bf=1 antes de la fecha, la cuenta mostraría más días de lo real; igual sirve para ver el diseño.
+  tick();
+  setInterval(tick, 1000);
+}
+
 /* ---------- Arranque ---------- */
 document.addEventListener('DOMContentLoaded', () => {
+  initBlackFriday();
   initComunes();
 
   const tiles = document.querySelector('[data-slot="tiles"]');
