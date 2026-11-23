@@ -112,7 +112,7 @@ function pintarPregunta() {
   const elegida = elegidas[paso];
 
   $('#quiz').innerHTML = `
-    <div class="quiz-progreso" role="progressbar" aria-valuemin="1"
+    <div class="quiz-progreso" role="progressbar" aria-label="Progreso del test" aria-valuemin="1"
          aria-valuemax="${PREGUNTAS.length}" aria-valuenow="${paso + 1}">
       ${PREGUNTAS.map((_, i) =>
         `<span class="${i < paso ? 'hecho' : i === paso ? 'activo' : ''}"></span>`).join('')}

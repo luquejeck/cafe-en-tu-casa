@@ -29,11 +29,11 @@
 <body>
 
 <!-- ============ Barra de anuncio ============ -->
-<div class="anuncio">
+<aside class="anuncio" aria-label="Promociones">
   <b>Envío gratis a todo el país</b><span class="punto">·</span>
   <b><span data-slot="off">20%</span> OFF</b> pagando por transferencia<span class="punto">·</span>
   Hasta 9 cuotas sin interés
-</div>
+</aside>
 
 <!-- ============ Navegación ============ -->
 <header class="nav">
@@ -50,7 +50,7 @@
       <a href="#faq">Preguntas</a>
     </nav>
 
-    <a class="nav-wa" href="#" data-wa-general="Hola! Quiero asesoramiento para elegir una cafetera."
+    <a class="nav-wa" aria-label="Escribinos por WhatsApp" href="#" data-wa-general="Hola! Quiero asesoramiento para elegir una cafetera."
        target="_blank" rel="noopener">
       <span data-ico="wa"></span> <span data-slot="wa-visible">+54 11 3656-7560</span>
     </a>
@@ -105,8 +105,9 @@
   </section>
 
   <!-- ============ Beneficios ============ -->
-  <section class="seccion-chica">
+  <section class="seccion-chica" aria-labelledby="titulo-beneficios">
     <div class="envoltorio">
+      <h2 class="solo-lectores" id="titulo-beneficios">Formas de pago y beneficios</h2>
       <div class="franja">
         <article class="franja-item aparece">
           <span data-ico="banco"></span>
@@ -413,7 +414,7 @@
         <p>Café de cafetería, en tu casa. Cafeteras espresso y superautomáticas De'Longhi y Krups, con envío a todo el país.</p>
       </div>
       <div>
-        <h4>Cafeteras</h4>
+        <h2>Cafeteras</h2>
         <ul>
           <li><a href="magnifica-s.html">De'Longhi Magnifica S</a></li>
           <li><a href="krups-roma.html">Krups Roma EA8105</a></li>
@@ -421,7 +422,7 @@
         </ul>
       </div>
       <div>
-        <h4>Tienda</h4>
+        <h2>Tienda</h2>
         <ul>
           <li><a href="#comparar">Comparar modelos</a></li>
           <li><a href="#comprar">Cómo comprar</a></li>
@@ -429,7 +430,7 @@
         </ul>
       </div>
       <div>
-        <h4>Contacto</h4>
+        <h2>Contacto</h2>
         <ul>
           <li><a href="#" data-wa-general="Hola! Tengo una consulta." target="_blank" rel="noopener">WhatsApp <span data-slot="wa-visible"></span></a></li>
           <li><a href="#" data-slot="email"></a></li>

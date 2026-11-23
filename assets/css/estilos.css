@@ -8,7 +8,7 @@
 :root {
   --ink:        #1d1d1f;   /* casi negro Apple */
   --ink-2:      #6e6e73;   /* gris secundario  */
-  --ink-3:      #86868b;   /* gris terciario   */
+  --ink-3:      #6e6e73;   /* gris terciario (mismo tono que --ink-2 para que se lea: contraste 5:1) */
   --bg:         #ffffff;
   --bg-2:       #f5f5f7;   /* gris claro Apple */
   --bg-3:       #fafafa;
@@ -22,7 +22,9 @@
   --wa-dark:    #1eb457;
   --ml:         #3483fa;   /* azul Mercado Libre */
   --ml-dark:    #2968c8;
-  --verde:      #00a650;   /* verde "sin interés" de ML */
+  --verde:      #00a650;   /* verde "sin interés" de ML (puntos y barras) */
+  --verde-texto:#00843f;   /* el mismo verde, un tono más oscuro para texto (contraste 4,8:1) */
+  --oliva-claro:#a3c26a;   /* el oliva sobre negro (manual de marca) */
   --rojo:       #d92d20;
 
   --r-sm: 10px;
@@ -69,8 +71,9 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 ul, ol { list-style: none; }
 
+/* Anillo de foco en oliva oscuro (sobre negro, oliva claro) */
 :focus-visible {
-  outline: 2px solid var(--ml);
+  outline: 2px solid var(--brand-dark);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -101,7 +104,7 @@ h1, h2, h3, h4 {
 }
 
 .epigrafe {
-  font-size: .8125rem;
+  font-size: .875rem;
   font-weight: 600;
   letter-spacing: .09em;
   text-transform: uppercase;
@@ -109,7 +112,7 @@ h1, h2, h3, h4 {
 }
 
 .chico  { font-size: .875rem; color: var(--ink-2); }
-.mini   { font-size: .75rem;  color: var(--ink-3); }
+.mini   { font-size: .8125rem; color: var(--ink-3); }
 .centro { text-align: center; }
 
 /* ---------- 4. Layout ---------- */
@@ -147,25 +150,28 @@ h1, h2, h3, h4 {
 .btn-fantasma  { background: transparent; color: var(--ink); border: 1px solid rgba(0, 0, 0, .22); }
 .btn-fantasma:hover { border-color: var(--ink); background: rgba(0, 0, 0, .03); }
 
-.btn-wa { background: var(--wa); color: #fff; }
+.btn-wa { background: var(--wa); color: var(--ink); }   /* texto oscuro: el blanco sobre este verde no se lee (2:1) */
 .btn-wa:hover { background: var(--wa-dark); box-shadow: 0 6px 20px rgba(37, 211, 102, .32); }
 
-.btn-ml { background: var(--ml); color: #fff; }
-.btn-ml:hover { background: var(--ml-dark); box-shadow: 0 6px 20px rgba(52, 131, 250, .28); }
+.btn-ml { background: var(--ml-dark); color: #fff; }   /* un tono más oscuro que #3483fa para que el blanco se lea (5,4:1) */
+.btn-ml:hover { background: #1f5fbf; box-shadow: 0 6px 20px rgba(52, 131, 250, .28); }
 
 .btn-bloque { width: 100%; padding-block: 16px; font-size: 1rem; }
 .btn-lg     { padding: 17px 34px; font-size: 1.0625rem; }
 
-/* Link azul estilo Apple */
+/* Link en oliva oscuro: el azul queda solo para el botón de cuotas (manual de marca) */
 .enlace {
-  color: var(--ml);
+  color: var(--brand-dark);
+  font-weight: 500;
+  min-height: 44px;
   font-size: 1.0625rem;
-  font-weight: 400;
   display: inline-flex;
   align-items: center;
   gap: 4px;
 }
-.enlace:hover { text-decoration: underline; }
+.enlace:hover { text-decoration: underline; text-decoration-color: rgba(69, 84, 38, .4); text-underline-offset: 4px; }
+.negro .enlace { color: var(--oliva-claro); }
+.negro :focus-visible { outline-color: var(--oliva-claro); }
 .enlace::after { content: '›'; font-size: 1.25em; line-height: 1; transition: transform .2s var(--ease); }
 .enlace:hover::after { transform: translateX(3px); }
 
@@ -174,37 +180,36 @@ h1, h2, h3, h4 {
   background: var(--dark);
   color: #f5f5f7;
   text-align: center;
-  font-size: .8125rem;
+  font-size: .875rem;
   padding: 10px 20px;
   letter-spacing: -.01em;
 }
 .anuncio b { color: #fff; font-weight: 600; }
-.anuncio .punto { color: var(--ink-3); margin-inline: 8px; }
+.anuncio .punto { color: #86868b; margin-inline: 8px; }
 
 /* Black Friday: solo aparece con body.bf (lo prende app.js según las fechas) */
 .anuncio-bf {
   background: #000;
   padding-block: 11px;
-  border-bottom: 2px solid #ffd60a;
+  border-bottom: 2px solid var(--oliva-claro);
 }
 .bf-chip {
   display: inline-block;
-  background: #ffd60a; color: #000;
-  font-weight: 800; font-size: .6875rem; letter-spacing: .08em;
+  background: var(--oliva-claro); color: var(--dark);
+  font-weight: 700; font-size: .75rem; letter-spacing: .08em;
   text-transform: uppercase;
   padding: 3px 9px; border-radius: 5px;
   margin-right: 10px; vertical-align: 1px;
 }
-.bf-cuenta b { color: #ffd60a; font-variant-numeric: tabular-nums; }
+.bf-cuenta b { color: var(--oliva-claro); font-variant-numeric: tabular-nums; }
 .bf .tile-cinta:not(.tile-cinta-agotado) {
-  background: #000; color: #ffd60a;
-  box-shadow: inset 0 0 0 1px #ffd60a;
+  background: var(--dark); color: var(--oliva-claro);
 }
 .pildora.pildora-bf { background: #000; color: #fff; padding-left: 6px; }
 .pildora-bf .bf-chip { margin-right: 0; }
-.bf .pago-destacado .pago-tag { background: #000; color: #ffd60a; }
+.bf .pago-destacado .pago-tag { background: var(--dark); color: var(--oliva-claro); }
 @media (max-width: 600px) {
-  .anuncio-bf { font-size: .75rem; line-height: 1.7; }
+  .anuncio-bf { font-size: .8125rem; line-height: 1.8; }
 }
 
 /* ---------- 7. Navegación (glass Apple) ---------- */
@@ -229,6 +234,7 @@ h1, h2, h3, h4 {
   gap: 20px;
 }
 .marca {
+  min-height: 44px;
   font-size: 1.0625rem;
   font-weight: 600;
   letter-spacing: -.02em;
@@ -242,18 +248,19 @@ h1, h2, h3, h4 {
 }
 .nav-links { display: flex; align-items: center; gap: 30px; }
 .nav-links a {
-  font-size: .8125rem;
+  font-size: .875rem;
   color: var(--ink);
   opacity: .82;
   transition: opacity .2s var(--ease);
 }
 .nav-links a:hover { opacity: 1; }
 .nav-wa {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: .8125rem; font-weight: 500; color: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 44px; min-width: 44px;
+  font-size: .875rem; font-weight: 500; color: var(--ink);
 }
 .nav-wa svg { width: 15px; height: 15px; fill: var(--wa); }
-.nav-burger { display: none; padding: 6px; }
+.nav-burger { display: none; padding: 13px; margin-right: -13px; }
 .nav-burger span {
   display: block; width: 18px; height: 1.5px;
   background: var(--ink); border-radius: 2px;
@@ -312,7 +319,7 @@ h1, h2, h3, h4 {
   margin-top: 36px; padding-top: 26px;
   border-top: 1px solid var(--line);
 }
-.sello { display: flex; align-items: center; gap: 7px; font-size: .8125rem; color: var(--ink-2); }
+.sello { display: flex; align-items: center; gap: 7px; font-size: .875rem; color: var(--ink-2); }
 .sello svg { width: 16px; height: 16px; stroke: var(--brand); fill: none; stroke-width: 1.8; }
 
 /* ---------- 9. Píldora de descuento ---------- */
@@ -322,11 +329,11 @@ h1, h2, h3, h4 {
   color: var(--brand-dark);
   border-radius: 980px;
   padding: 6px 14px;
-  font-size: .8125rem;
+  font-size: .875rem;
   font-weight: 600;
   letter-spacing: -.01em;
 }
-.pildora-wa { background: rgba(37, 211, 102, .12); color: #128c43; }
+.pildora-wa { background: rgba(37, 211, 102, .12); color: #0d6b33; }
 
 /* ---------- 10. Tiles de producto (grilla Apple) ---------- */
 .tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -346,9 +353,10 @@ h1, h2, h3, h4 {
 .tile:hover { transform: translateY(-4px); box-shadow: var(--sombra-lg); }
 .tile-oscuro { background: var(--dark); color: #f5f5f7; }
 
-.tile-cab { padding: clamp(32px, 4vw, 48px) clamp(28px, 4vw, 48px) 0; text-align: center; }
+/* Arriba deja lugar para la cinta (20% OFF / Sin stock) así no tapa el epígrafe */
+.tile-cab { padding: 66px clamp(28px, 4vw, 48px) 0; text-align: center; }
 .tile-etiqueta {
-  font-size: .75rem; font-weight: 600; letter-spacing: .08em;
+  font-size: .8125rem; font-weight: 600; letter-spacing: .08em;
   text-transform: uppercase; color: var(--brand); margin-bottom: 10px;
 }
 .tile-oscuro .tile-etiqueta { color: #a3c26a; }
@@ -360,9 +368,9 @@ h1, h2, h3, h4 {
 .tile-precio b { color: var(--ink); font-weight: 600; }
 .tile-oscuro .tile-precio { color: #a1a1a6; }
 .tile-oscuro .tile-precio b { color: #fff; }
-.tile-precio .cuota { color: var(--verde); font-weight: 600; }
+.tile-precio .cuota { color: var(--verde-texto); font-weight: 600; }
 
-.tile-acciones { display: flex; justify-content: center; gap: 24px; margin-top: 18px; flex-wrap: wrap; }
+.tile-acciones { display: flex; justify-content: center; gap: 0 24px; margin-top: 10px; flex-wrap: wrap; }
 .tile-oscuro .enlace { color: #4aa3ff; }
 
 .tile-img {
@@ -385,16 +393,16 @@ h1, h2, h3, h4 {
 
 .tile-cinta {
   position: absolute; top: 20px; left: 20px;
-  background: var(--rojo); color: #fff;
-  font-size: .6875rem; font-weight: 700; letter-spacing: .06em;
+  background: var(--brand); color: #fff;
+  font-size: .75rem; font-weight: 700; letter-spacing: .06em;
   text-transform: uppercase;
   padding: 5px 11px; border-radius: 6px;
 }
 
 /* Sin stock: se ve con transparencia */
 .tile-cinta-agotado { background: var(--ink); z-index: 1; }
+/* En la tarjeta solo se apaga la foto: el texto queda legible y la cinta dice "Sin stock" */
 .tile.sin-stock .tile-img,
-.tile.sin-stock .tile-cab > :not(.tile-acciones),
 .galeria-marco.sin-stock img,
 .pagos.sin-stock { opacity: .45; }
 .pagos.sin-stock + .pago-cta { margin-top: 14px; }
@@ -421,23 +429,23 @@ h1, h2, h3, h4 {
 .pago:hover { border-color: rgba(0, 0, 0, .25); }
 
 .pago-destacado {
-  border-color: var(--wa);
-  box-shadow: 0 0 0 4px rgba(37, 211, 102, .1);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px rgba(91, 110, 50, .1);
 }
-.pago-destacado:hover { border-color: var(--wa-dark); }
+.pago-destacado:hover { border-color: var(--brand-dark); }
 
 .pago-tag {
   position: absolute; top: -11px; left: 20px;
-  background: var(--wa); color: #fff;
-  font-size: .6875rem; font-weight: 700; letter-spacing: .05em;
+  background: var(--brand); color: #fff;
+  font-size: .75rem; font-weight: 700; letter-spacing: .05em;
   text-transform: uppercase;
   padding: 4px 11px; border-radius: 980px;
 }
-.pago-tag-ml { background: var(--ml); }
+.pago-tag-ml { background: var(--ml-dark); }
 
 .pago-titulo {
   display: flex; align-items: center; gap: 8px;
-  font-size: .8125rem; font-weight: 600;
+  font-size: .875rem; font-weight: 600;
   text-transform: uppercase; letter-spacing: .06em;
   color: var(--ink-2); margin-bottom: 12px;
 }
@@ -454,14 +462,14 @@ h1, h2, h3, h4 {
   text-decoration: line-through; margin-bottom: 2px;
 }
 .pago-sub { font-size: .875rem; color: var(--ink-2); margin-top: 6px; }
-.pago-sub .verde { color: var(--verde); font-weight: 600; }
+.pago-sub .verde { color: var(--verde-texto); font-weight: 600; }
 .pago-ahorro {
   display: inline-block; margin-top: 10px;
   background: rgba(0, 166, 80, .1); color: #04794b;
-  font-size: .8125rem; font-weight: 600;
+  font-size: .875rem; font-weight: 600;
   padding: 4px 10px; border-radius: 8px;
 }
-.pago-detalle { margin-top: 12px; font-size: .8125rem; color: var(--ink-2); line-height: 1.5; }
+.pago-detalle { margin-top: 12px; font-size: .875rem; color: var(--ink-2); line-height: 1.5; }
 
 /* Viñetas cortas en lugar de un párrafo: se leen de un vistazo */
 /* El margen de abajo es el que separa la ultima viñeta del boton: el
@@ -470,7 +478,7 @@ h1, h2, h3, h4 {
 .pago-lista { display: grid; gap: 9px; margin-top: 16px; margin-bottom: 26px; }
 .pago-lista li {
   display: flex; gap: 9px; align-items: flex-start;
-  font-size: .875rem; color: var(--ink-2); line-height: 1.4;
+  font-size: .9375rem; color: var(--ink-2); line-height: 1.4;
 }
 .pago-lista li::before {
   content: '✓';
@@ -479,18 +487,20 @@ h1, h2, h3, h4 {
   flex-shrink: 0;
   line-height: 1.4;
 }
-.pago-destacado .pago-lista li::before { color: var(--wa-dark); }
+
 .pago .btn { margin-top: auto; }
 .pago-cta { margin-top: 18px; }
 
 /* ---------- 12. Buy box / ficha de producto (estilo ML) ---------- */
 .miga {
   display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
-  font-size: .8125rem; color: var(--ink-3);
-  padding-block: 18px;
+  font-size: .875rem; color: var(--ink-3);
+  padding-block: 10px;
 }
+.miga a { display: inline-flex; align-items: center; min-height: 44px; }
 .miga a:hover { color: var(--ink); text-decoration: underline; }
 .miga span { opacity: .5; }
+.miga [data-slot='nombre'] { opacity: 1; color: var(--ink); font-weight: 500; }
 
 .pdp {
   display: grid;
@@ -515,9 +525,10 @@ h1, h2, h3, h4 {
   transition: transform .5s var(--ease);
 }
 .galeria-marco:hover img { transform: scale(1.04); }
-.galeria-miniaturas { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+.galeria-miniaturas { display: flex; gap: 10px; margin-top: 12px; overflow-x: auto; scrollbar-width: none; }
+.galeria-miniaturas::-webkit-scrollbar { display: none; }
 .galeria-miniaturas button {
-  width: 66px; height: 66px;
+  width: 66px; height: 66px; flex-shrink: 0;
   border-radius: var(--r-sm);
   background: #fff;
   border: 1.5px solid var(--line-2);
@@ -535,13 +546,13 @@ h1, h2, h3, h4 {
   background: #fff;
   box-shadow: var(--sombra);
 }
-.compra-tipo { font-size: .8125rem; color: var(--ink-3); margin-bottom: 6px; }
+.compra-tipo { font-size: .875rem; color: var(--ink-3); margin-bottom: 6px; }
 .compra-caja h1 { font-size: 1.75rem; letter-spacing: -.03em; margin-bottom: 6px; }
 .compra-tagline { font-size: .9375rem; color: var(--ink-2); margin-bottom: 18px; }
 
 .estado-stock {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: .8125rem; font-weight: 600; color: var(--verde);
+  font-size: .9375rem; font-weight: 600; color: var(--verde-texto);
   margin-bottom: 16px;
 }
 .estado-stock::before {
@@ -552,8 +563,8 @@ h1, h2, h3, h4 {
 .estado-stock.agotado::before { background: var(--rojo); }
 
 .beneficios-lista { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line-2); display: grid; gap: 11px; }
-.beneficio { display: flex; gap: 10px; align-items: flex-start; font-size: .875rem; }
-.beneficio svg { width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px; stroke: var(--verde); fill: none; stroke-width: 1.9; }
+.beneficio { display: flex; gap: 10px; align-items: flex-start; font-size: .9375rem; }
+.beneficio svg { width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px; stroke: var(--brand); fill: none; stroke-width: 1.9; }
 .beneficio b { font-weight: 600; }
 .beneficio span { color: var(--ink-2); }
 
@@ -588,8 +599,8 @@ h1, h2, h3, h4 {
 }
 .barra-movil-precio { flex-shrink: 0; line-height: 1.2; }
 .barra-movil-precio b { display: block; font-size: 1.125rem; font-weight: 600; letter-spacing: -.02em; }
-.barra-movil-precio small { font-size: .6875rem; color: var(--verde); font-weight: 600; }
-.barra-movil .btn { flex: 1; padding: 12px 16px; font-size: .875rem; }
+.barra-movil-precio small { font-size: .75rem; color: var(--verde-texto); font-weight: 600; }
+.barra-movil .btn { flex: 1; min-height: 46px; padding: 12px 14px; font-size: .9375rem; }
 
 /* ---------- 13. Comparativa ---------- */
 .comparativa-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
@@ -608,12 +619,12 @@ h1, h2, h3, h4 {
   border-bottom: 1px solid var(--line);
   vertical-align: bottom;
 }
-.comparativa thead th:first-child { color: var(--ink-3); font-size: .8125rem; font-weight: 500; }
+.comparativa thead th:first-child { color: var(--ink-3); font-size: .875rem; font-weight: 500; }
 .comparativa tbody th { font-weight: 400; color: var(--ink-2); width: 26%; }
 .comparativa td { font-weight: 500; }
 .comparativa .fila-precio td { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; }
 .comparativa tr:last-child td, .comparativa tr:last-child th { border-bottom: 0; }
-.comparativa-mini { display: block; font-size: .75rem; color: var(--ink-3); font-weight: 400; margin-top: 2px; }
+.comparativa-mini { display: block; font-size: .8125rem; color: var(--ink-3); font-weight: 400; margin-top: 2px; }
 
 /* ---------- 14. Beneficios en franja ---------- */
 .franja { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -630,7 +641,7 @@ h1, h2, h3, h4 {
 .franja-plana .franja-item { background: none; border: 0; border-top: 2px solid var(--brand); border-radius: 0; padding: 22px 4px 0; }
 .franja-plana .franja-item h3 { font-size: 1.25rem; }
 /* Palabras clave visibles arriba del título principal (SEO) */
-.h1-clave { display: block; font-size: .8125rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+.h1-clave { display: block; font-size: .875rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
   color: var(--brand); margin-bottom: 18px; line-height: 1.4; }
 .franja-item svg { width: 26px; height: 26px; stroke: var(--brand); fill: none; stroke-width: 1.6; margin-bottom: 14px; }
 .franja-item h3 { font-size: 1.0625rem; margin-bottom: 7px; }
@@ -684,10 +695,11 @@ h1, h2, h3, h4 {
 .cta-botones { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
 /* ---------- 18. Footer ---------- */
-.pie { background: var(--bg-2); font-size: .8125rem; color: var(--ink-2); padding-block: 44px 30px; }
+.pie { background: var(--bg-2); font-size: .9375rem; color: var(--ink-2); padding-block: 44px 30px; }
 .pie-cols { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 32px; padding-bottom: 30px; }
-.pie h4 { font-size: .8125rem; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
-.pie ul { display: grid; gap: 9px; }
+.pie h4, .pie h2 { font-size: .9375rem; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+.pie ul { display: grid; gap: 2px; }
+.pie ul a { display: inline-flex; align-items: center; min-height: 40px; }
 .pie a:hover { color: var(--ink); text-decoration: underline; }
 .pie-marca { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
 .pie-legal {
@@ -695,7 +707,7 @@ h1, h2, h3, h4 {
   padding-top: 22px;
   display: flex; flex-wrap: wrap; gap: 10px 24px;
   justify-content: space-between;
-  font-size: .75rem; color: var(--ink-3);
+  font-size: .8125rem; color: var(--ink-3);
 }
 
 /* ---------- 19. Botón flotante WhatsApp ---------- */
@@ -780,7 +792,7 @@ h1, h2, h3, h4 {
 .quiz-progreso .hecho  { background: var(--brand); }
 .quiz-progreso .activo { background: var(--ink); }
 
-.quiz-paso   { font-size: .8125rem; color: var(--ink-3); margin-bottom: 10px; }
+.quiz-paso   { font-size: .875rem; color: var(--ink-3); margin-bottom: 10px; }
 .quiz-titulo { margin-bottom: 8px; }
 .quiz-ayuda  { font-size: .9375rem; color: var(--ink-2); margin-bottom: 28px; }
 
@@ -943,7 +955,7 @@ h1, h2, h3, h4 {
 }
 .opinion-estrellas { color: #f5a623; font-size: .9375rem; letter-spacing: 2px; margin-bottom: 8px; }
 .opinion p { font-size: 1.0625rem; letter-spacing: -.01em; margin-bottom: 8px; }
-.opinion-pie { font-size: .8125rem; color: var(--ink-3); }
+.opinion-pie { font-size: .875rem; color: var(--ink-3); }
 
 @media (max-width: 760px) {
   .ganadora { grid-template-columns: 1fr; padding: 22px; }
@@ -958,3 +970,7 @@ h1, h2, h3, h4 {
   .nav, .anuncio, .barra-movil, .wa-flotante, .menu-movil { display: none !important; }
   .aparece { opacity: 1; transform: none; }
 }
+
+/* ---------- Ajustes de la auditoría (noviembre 2026) ---------- */
+/* La franja gris de la calculadora no se muestra hasta que hay resultado */
+.seccion-chica:has(> .envoltorio > .calculadora[hidden]) { display: none; }

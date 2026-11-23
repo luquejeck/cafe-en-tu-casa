@@ -24,11 +24,11 @@ function pagosHTML(p) {
   if (!p.stock) return `
   <div class="pagos pagos-2 sin-stock">
     <article class="pago pago-destacado">
-      <h3 class="pago-titulo">${ICO.banco} Transferencia o efectivo</h3>
+      <h2 class="pago-titulo">${ICO.banco} Transferencia o efectivo</h2>
       <div class="pago-monto">${fmt(transf)}</div>
     </article>
     <article class="pago">
-      <h3 class="pago-titulo">${ICO.tarjeta} Tarjeta en Mercado Libre</h3>
+      <h2 class="pago-titulo">${ICO.tarjeta} Tarjeta en Mercado Libre</h2>
       <div class="pago-monto">${fmt(p.precioML)}</div>
       <p class="pago-sub">${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))}</p>
     </article>
@@ -44,7 +44,7 @@ function pagosHTML(p) {
 
     <article class="pago pago-destacado">
       <span class="pago-tag">${BF_ACTIVO ? 'Black Friday · ' : ''}${off}% OFF</span>
-      <h3 class="pago-titulo">${ICO.banco} Transferencia o efectivo</h3>
+      <h2 class="pago-titulo">${ICO.banco} Transferencia o efectivo</h2>
       <div class="pago-tachado">${fmt(p.precioML)}</div>
       <div class="pago-monto">${fmt(transf)}</div>
       <div class="pago-ahorro">Ahorrás ${fmt(P.ahorro(p))}</div>
@@ -61,7 +61,7 @@ function pagosHTML(p) {
 
     <article class="pago">
       <span class="pago-tag pago-tag-ml">Cuotas</span>
-      <h3 class="pago-titulo">${ICO.tarjeta} Tarjeta en Mercado Libre</h3>
+      <h2 class="pago-titulo">${ICO.tarjeta} Tarjeta en Mercado Libre</h2>
       ${P.tieneOferta(p) ? `<div class="pago-tachado">${fmt(p.precioLista)}</div>` : ''}
       <div class="pago-monto">${fmt(p.precioML)}</div>
       <p class="pago-sub"><span class="verde">${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))}</span></p>
@@ -81,7 +81,9 @@ function pagosHTML(p) {
 
 /* ---------- Tiles del home ---------- */
 function renderTiles(cont) {
-  cont.innerHTML = PRODUCTOS.map((p, i) => {
+  // Los que no tienen stock van al final: primero lo que se puede comprar hoy
+  const orden = [...PRODUCTOS].sort((a, b) => b.stock - a.stock);
+  cont.innerHTML = orden.map((p, i) => {
     const ancho = i === 0 ? ' tile-ancho' : '';
     const cinta = p.stock
       ? `<span class="tile-cinta">${BF_ACTIVO ? 'Black Friday · ' : ''}${TIENDA.descuentoTransferencia * 100}% OFF transferencia</span>`
@@ -142,7 +144,7 @@ function renderComparativa(tabla) {
           ${PRODUCTOS.map(p => `<td>${fn(p)}</td>`).join('')}
         </tr>`).join('')}
       <tr>
-        <th scope="row"></th>
+        <td></td>
         ${PRODUCTOS.map(p => `<td><a class="enlace" href="${P.url(p)}">Ver ficha</a></td>`).join('')}
       </tr>
     </tbody>`;
