@@ -201,6 +201,7 @@ h1, h2, h3, h4 {
   padding: 3px 9px; border-radius: 5px;
   margin-right: 10px; vertical-align: 1px;
 }
+.bf-cuenta { white-space: nowrap; }
 .bf-cuenta b { color: var(--oliva-claro); font-variant-numeric: tabular-nums; }
 .bf .tile-cinta:not(.tile-cinta-agotado) {
   background: var(--dark); color: var(--oliva-claro);
@@ -260,7 +261,7 @@ h1, h2, h3, h4 {
   font-size: .875rem; font-weight: 500; color: var(--ink);
 }
 .nav-wa svg { width: 15px; height: 15px; fill: var(--wa); }
-.nav-burger { display: none; padding: 13px; margin-right: -13px; }
+.nav-burger { display: none; padding: 14px 13px; margin-right: -13px; }
 .nav-burger span {
   display: block; width: 18px; height: 1.5px;
   background: var(--ink); border-radius: 2px;
@@ -350,7 +351,9 @@ h1, h2, h3, h4 {
   min-height: 520px;
   transition: transform .5s var(--ease), box-shadow .5s var(--ease);
 }
-.tile:hover { transform: translateY(-4px); box-shadow: var(--sombra-lg); }
+@media (hover: hover) {
+  .tile:hover { transform: translateY(-4px); box-shadow: var(--sombra-lg); }
+}
 .tile-oscuro { background: var(--dark); color: #f5f5f7; }
 
 /* Arriba deja lugar para la cinta (20% OFF / Sin stock) así no tapa el epígrafe */
@@ -387,7 +390,7 @@ h1, h2, h3, h4 {
   object-fit: contain;
   transition: transform .6s var(--ease);
 }
-.tile:hover .tile-img img { transform: scale(1.035); }
+@media (hover: hover) { .tile:hover .tile-img img { transform: scale(1.035); } }
 .tile-ancho .tile-img { min-height: 300px; }
 .tile-ancho .tile-img img { max-height: 400px; }
 
@@ -524,7 +527,7 @@ h1, h2, h3, h4 {
   max-height: 100%; width: auto; object-fit: contain;
   transition: transform .5s var(--ease);
 }
-.galeria-marco:hover img { transform: scale(1.04); }
+@media (hover: hover) { .galeria-marco:hover img { transform: scale(1.04); } }
 .galeria-miniaturas { display: flex; gap: 10px; margin-top: 12px; overflow-x: auto; scrollbar-width: none; }
 .galeria-miniaturas::-webkit-scrollbar { display: none; }
 .galeria-miniaturas button {
@@ -699,7 +702,7 @@ h1, h2, h3, h4 {
 .pie-cols { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 32px; padding-bottom: 30px; }
 .pie h4, .pie h2 { font-size: .9375rem; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
 .pie ul { display: grid; gap: 2px; }
-.pie ul a { display: inline-flex; align-items: center; min-height: 40px; }
+.pie ul a { display: inline-block; padding-block: 10px; }
 .pie a:hover { color: var(--ink); text-decoration: underline; }
 .pie-marca { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
 .pie-legal {
@@ -764,7 +767,7 @@ h1, h2, h3, h4 {
   .franja, .pasos { grid-template-columns: 1fr; }
   .pie-cols { grid-template-columns: 1fr 1fr; gap: 26px; }
   .barra-movil { display: flex; }
-  .wa-flotante { display: none; }
+  body.tiene-barra .wa-flotante { display: none; }
   body.tiene-barra { padding-bottom: 78px; }
 }
 
@@ -880,7 +883,7 @@ h1, h2, h3, h4 {
   background: #fff; color: var(--ink);
   width: 100%;
 }
-.calc-campo input:focus { outline: none; border-color: var(--ink); }
+.calc-campo input:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(69, 84, 38, .25); }
 
 .calc-resultado {
   display: grid; gap: 18px;
@@ -974,3 +977,118 @@ h1, h2, h3, h4 {
 /* ---------- Ajustes de la auditoría (noviembre 2026) ---------- */
 /* La franja gris de la calculadora no se muestra hasta que hay resultado */
 .seccion-chica:has(> .envoltorio > .calculadora[hidden]) { display: none; }
+
+/* ============================================================
+   CELULAR PRIMERO (noviembre 2026)
+   La mayoría entra desde el teléfono: acá se compacta todo para que
+   en la primera pantalla se vea qué vendemos, cuánto sale y cómo comprar.
+   ============================================================ */
+html { -webkit-text-size-adjust: 100%; }
+body { -webkit-tap-highlight-color: transparent; }
+.enlace:active { opacity: .6; }
+.solo-compu { }
+
+/* Barra de compra de la ficha: se esconde mientras se ven las opciones de pago */
+.barra-movil { transition: transform .3s var(--ease); }
+.barra-movil.oculta { transform: translateY(110%); }
+
+@media (max-width: 900px) {
+  /* En el celular el botón flotante aparece recién después del hero, para no tapar el botón principal */
+  .wa-flotante {
+    right: 16px; bottom: calc(16px + env(safe-area-inset-bottom));
+    width: 56px; height: 56px;
+    opacity: 0; transform: scale(.8); pointer-events: none;
+    transition: opacity .25s var(--ease), transform .25s var(--ease);
+  }
+  .wa-flotante.mostrar { opacity: 1; transform: none; pointer-events: auto; }
+}
+
+@media (max-width: 620px) {
+  .solo-compu { display: none; }
+
+  /* Anuncio en una sola línea */
+  .anuncio { padding: 9px 14px; font-size: .8125rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .anuncio .punto { margin-inline: 6px; }
+  .anuncio-bf { white-space: normal; padding-block: 8px; }
+  .anuncio-bf .bf-chip { margin-right: 6px; }
+
+  /* Secciones más compactas */
+  .seccion       { padding-block: 56px; }
+  .seccion-chica { padding-block: 32px; }
+  .t-1 { font-size: 2rem; }
+  .plomo { font-size: 1.0625rem; }
+
+  /* Hero: foto más baja para que el título y el botón entren en la primera pantalla */
+  .hero-img { min-height: 200px; height: 30svh; max-height: 260px; }
+  .hero-texto > .pildora { display: none; }   /* el 20% OFF ya está en la barra de arriba */
+  .hero-texto { padding: 22px 18px 30px; }
+  .hero-texto h1 { margin: 12px 0 12px; }
+  .h1-clave { font-size: .75rem; margin-bottom: 10px; }
+  .hero-texto .plomo { margin-bottom: 20px; }
+  .hero-ctas { flex-direction: column; align-items: stretch; gap: 4px; }
+  .hero-ctas .enlace { justify-content: center; }
+  .hero-sellos { margin-top: 18px; padding-top: 16px; gap: 8px 18px; }
+
+  /* Beneficios: filas compactas con el ícono a la izquierda */
+  .franja { gap: 10px; }
+  .franja-item { padding: 20px; }
+  .franja-item:has(> [data-ico]) {
+    display: grid; grid-template-columns: 24px 1fr; column-gap: 14px; padding: 16px 18px;
+  }
+  .franja-item > [data-ico] { grid-row: span 2; align-self: start; }
+  .franja-item:has(> [data-ico]) svg { width: 24px; height: 24px; margin-bottom: 0; }
+  .franja-item h3 { margin-bottom: 4px; }
+
+  /* Cafeteras: tarjeta horizontal, foto a la izquierda y datos a la derecha */
+  .tiles { gap: 12px; }
+  .tile, .tile-ancho {
+    display: grid;
+    grid-template-columns: 108px 1fr;
+    grid-template-areas: "img cinta" "img cab";
+    grid-template-rows: auto 1fr;
+    column-gap: 16px;
+    min-height: 0;
+    padding: 18px 16px 12px 14px;
+    border-radius: var(--r-lg);
+  }
+  .tile-cinta { grid-area: cinta; position: static; justify-self: start; margin-bottom: 8px; }
+  .tile-cab { grid-area: cab; padding: 0; text-align: left; }
+  .tile-etiqueta { font-size: .75rem; letter-spacing: .06em; margin-bottom: 4px; }
+  .tile-cab h3 { font-size: 1.1875rem; margin-bottom: 2px; text-wrap: balance; }
+  .tile-cab > p:not(.tile-etiqueta):not(.tile-precio) { display: none; }
+  .tile-precio { margin-top: 8px; font-size: .875rem; line-height: 1.4; }
+  .tile-precio .tile-monto { display: block; font-size: 1.375rem; letter-spacing: -.02em; line-height: 1.15; }
+  .tile-precio br { display: none; }
+  .tile-precio .cuota { display: block; margin-top: 4px; }
+  /* Toda la tarjeta abre la ficha; el link de WhatsApp queda por encima */
+  .tile-link::before { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+  .tile-acciones .enlace:not(.tile-link) { position: relative; z-index: 1; }
+  .tile-acciones { justify-content: flex-start; gap: 0 18px; margin-top: 2px; }
+  .tile-acciones .enlace { font-size: 1rem; }
+  .tile-img, .tile-ancho .tile-img { grid-area: img; padding: 0; min-height: 0; align-items: center; }
+  .tile-img img, .tile-ancho .tile-img img { max-height: 150px; width: 100%; }
+
+  /* Comparativa: sin deslizar de costado. Cada fila muestra el dato y abajo los tres modelos */
+  .comparativa-scroll { overflow: visible; }
+  .comparativa, .comparativa thead, .comparativa tbody { display: block; min-width: 0; }
+  .comparativa thead { position: sticky; top: var(--nav-h); z-index: 2; background: #fff; }
+  .comparativa tr { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line-2); }
+  .comparativa th, .comparativa td { padding: 0; border: 0; font-size: .875rem; }
+  .comparativa thead th { font-size: .875rem; line-height: 1.25; }
+  .comparativa thead th:first-child, .comparativa td:empty { display: none; }
+  .comparativa tbody th[scope="row"] {
+    grid-column: 1 / -1; width: auto; margin-bottom: 6px;
+    font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3);
+  }
+  .comparativa .fila-precio td { font-size: 1rem; }
+  .comparativa tr:last-child { border-bottom: 0; }
+  .comparativa td .enlace { font-size: .9375rem; }
+
+  /* Ficha de producto */
+  .compra-caja { padding: 0; border: 0; box-shadow: none; }
+  .compra-caja h1 { font-size: 1.625rem; }
+
+  /* Pie en dos columnas */
+  .pie-cols { grid-template-columns: 1fr 1fr; gap: 22px 16px; }
+  .pie-cols > :first-child { grid-column: 1 / -1; }
+}

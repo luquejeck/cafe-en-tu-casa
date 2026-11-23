@@ -98,15 +98,15 @@ function renderTiles(cont) {
     <article class="tile${ancho}${p.stock ? '' : ' sin-stock'} aparece" data-retraso="${Math.min(i, 3)}">
       ${cinta}
       <div class="tile-cab">
-        <p class="tile-etiqueta">${p.etiqueta} · ${p.tipo}</p>
+        <p class="tile-etiqueta">${p.etiqueta}<span class="solo-compu"> · ${p.tipo}</span></p>
         <h3>${p.marca} ${p.modelo}</h3>
         <p>${p.tagline}</p>
         <p class="tile-precio">
-          Desde <b>${fmt(P.transferencia(p))}</b> con transferencia
+          <span class="solo-compu">Desde </span><b class="tile-monto">${fmt(P.transferencia(p))}</b> con transferencia
           <br><span class="cuota">o ${p.cuotas} cuotas sin interés de ${fmt(P.cuota(p))}</span>
         </p>
         <div class="tile-acciones">
-          <a class="enlace" href="${P.url(p)}">Ver detalle</a>
+          <a class="enlace tile-link" href="${P.url(p)}">Ver detalle</a>
           ${accion}
         </div>
       </div>
@@ -229,8 +229,8 @@ function renderPDP(id) {
           <p class="tile-etiqueta">${o.tipo}</p>
           <h3>${o.marca} ${o.modelo}</h3>
           <p>${o.tagline}</p>
-          <p class="tile-precio">Desde <b>${fmt(P.transferencia(o))}</b> con transferencia</p>
-          <div class="tile-acciones"><a class="enlace" href="${P.url(o)}">Ver detalle</a></div>
+          <p class="tile-precio"><span class="solo-compu">Desde </span><b class="tile-monto">${fmt(P.transferencia(o))}</b> con transferencia</p>
+          <div class="tile-acciones"><a class="enlace tile-link" href="${P.url(o)}">Ver detalle</a></div>
         </div>
         <div class="tile-img">
           <img src="${o.imgs[0]}" alt="${P.nombre(o)}" loading="lazy" width="600" height="600">
@@ -257,6 +257,13 @@ function renderPDP(id) {
       <a class="btn btn-ml" href="${p.linkML}" target="_blank" rel="noopener"
          data-evento="ml-barra" data-producto="${p.id}">Cuotas</a>`;
     document.body.classList.add('tiene-barra');
+
+    // Mientras las opciones de pago están a la vista, la barra sobra: se esconde
+    const pagos = document.querySelector('[data-slot="compra"] .pagos');
+    if (pagos && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => barra.classList.toggle('oculta', e.isIntersecting))
+        .observe(pagos);
+    }
   }
 
   /* SEO: meta descripción y datos estructurados (el <title> ya viene en el HTML) */
@@ -379,9 +386,9 @@ function initBlackFriday() {
     a.classList.add('anuncio-bf');
     a.innerHTML = `
       <span class="bf-chip">Black Friday</span>
-      <b>${off}% OFF</b> pagando por transferencia<span class="punto">·</span>
-      Envío gratis<span class="punto">·</span>
-      <span class="bf-cuenta">Termina en <b data-slot="bf-cuenta">—</b></span>`;
+      <b>${off}% OFF</b> <span class="solo-compu">pagando por </span>transferencia<span class="punto">·</span>
+      <span class="solo-compu">Envío gratis<span class="punto">·</span></span>
+      <span class="bf-cuenta"><span class="solo-compu">Termina en </span><b data-slot="bf-cuenta">—</b></span>`;
   });
 
   const pildora = document.querySelector('[data-slot="hero-pildora"]');
@@ -405,6 +412,16 @@ function initBlackFriday() {
   setInterval(tick, 1000);
 }
 
+/* ---------- Botón flotante de WhatsApp ----------
+   En el celular aparece cuando ya se pasó la primera pantalla. */
+function initFlotante() {
+  const b = document.querySelector('.wa-flotante');
+  if (!b) return;
+  const revisar = () => b.classList.toggle('mostrar', window.scrollY > window.innerHeight * 0.6);
+  window.addEventListener('scroll', revisar, { passive: true });
+  revisar();
+}
+
 /* ---------- Arranque ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   initBlackFriday();
@@ -421,4 +438,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initNav();
   initScroll();
+  initFlotante();
 });
