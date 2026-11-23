@@ -42,5 +42,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/o/:maquina",
+      "destination": "/o/:maquina.html"
+    }
   ]
 }
