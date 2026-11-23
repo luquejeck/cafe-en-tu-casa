@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<title>Cartas Dedica — 5 opciones</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* 5 opciones de carta para la Dedica EC685, con el estilo del manual de marca:
+   Inter sola, tinta #1d1d1f, oliva #5B6E32 solo como acento (punto, etiquetas,
+   números), subrayado gris al imprimir, logo «C·» con aro oliva. Sin fondos
+   llenos grandes (tinta). Texto nunca menor a 3,9 mm (≈11 pt): el público
+   tiene 40-60 años. Todas usan el QR medible /o/dedica. Sin beneficios a
+   cambio de opinar ni pedir opiniones positivas (reglas de Mercado Libre). */
+:root { --ink: #1d1d1f; --ink-2: #4a4a4f; --oliva: #5b6e32; --linea: #b9b9be; --sub: #d4d4d4; }
+@page { size: A4; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: #fff; -webkit-font-smoothing: antialiased; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.hoja { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; background: #fff; padding: 18mm 20mm; }
+.hoja:last-child { page-break-after: auto; }
+.marca { display: flex; align-items: center; gap: 2.6mm; font-size: 6mm; font-weight: 600; letter-spacing: -.02em; }
+.marca i { width: 2.8mm; height: 2.8mm; border-radius: 50%; background: var(--oliva); }
+.arriba { display: flex; justify-content: space-between; align-items: center; }
+.sello { width: 13mm; height: 13mm; border-radius: 50%; border: .5mm solid var(--oliva); padding: .7mm; }
+.sello div { width: 100%; height: 100%; border-radius: 50%; background: #111113; color: #fff; display: flex; align-items: center; justify-content: center; gap: .5mm; font-weight: 700; font-size: 4.6mm; }
+.sello div i { width: 1.2mm; height: 1.2mm; border-radius: 50%; background: #a3c26a; margin-top: .4mm; }
+.ep { font-size: 3.9mm; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--oliva); }
+em { font-style: normal; box-shadow: inset 0 -.28em 0 var(--sub); }
+.gris { color: var(--ink-2); }
+h1, h2, h3 { font-weight: 600; letter-spacing: -.035em; line-height: 1.05; }
+.qr { background: #fff; border: .6mm solid var(--ink); border-radius: 5mm; padding: 4mm; text-align: center; }
+.qr img { width: 100%; display: block; }
+.qr small { display: block; margin-top: 2mm; font-size: 3.9mm; font-weight: 600; color: var(--ink-2); line-height: 1.25; }
+.pasos { display: grid; gap: 2.6mm; }
+.paso { display: flex; gap: 4mm; align-items: center; border: .35mm solid var(--linea); border-radius: 4mm; padding: 3.2mm 4.5mm; }
+.paso i { flex: none; width: 9mm; height: 9mm; border-radius: 50%; background: var(--oliva); color: #fff; font-style: normal; font-weight: 700; font-size: 4.6mm; display: flex; align-items: center; justify-content: center; }
+.paso b { display: block; font-size: 4.8mm; letter-spacing: -.01em; }
+.paso span { display: block; font-size: 3.9mm; color: var(--ink-2); margin-top: .5mm; }
+.ruta { display: flex; flex-wrap: wrap; align-items: center; gap: 2mm; font-size: 4.2mm; font-weight: 600; }
+.ruta span { border: .4mm solid var(--ink); border-radius: 99mm; padding: 1.4mm 3.6mm; }
+.ruta b { color: var(--oliva); }
+.corte { position: absolute; left: 0; right: 0; border-top: .35mm dashed #999; }
+.corte span { position: absolute; right: 12mm; top: -2.4mm; background: #fff; padding: 0 2mm; font-size: 3mm; color: #777; letter-spacing: .08em; text-transform: uppercase; }
+.tips { list-style: none; display: grid; gap: 1.6mm; font-size: 3.9mm; line-height: 1.35; }
+.tips li { display: flex; gap: 2.5mm; } .tips li b { flex: none; width: 4mm; color: var(--oliva); }
+.pie { position: absolute; left: 20mm; right: 20mm; bottom: 16mm; display: flex; justify-content: space-between; align-items: flex-end; border-top: .35mm solid var(--linea); padding-top: 5mm; font-size: 4mm; color: var(--ink-2); line-height: 1.4; }
+.pie b { color: var(--ink); }
+.pie .der { text-align: right; }
+.linea-mano { display: inline-block; border-bottom: .4mm solid var(--ink); }
+
+/* ===== 1 · El quinto café ===== */
+.o1 .gigante { margin-top: 10mm; font-size: 34mm; font-weight: 700; letter-spacing: -.06em; line-height: .88; }
+.o1 .sub { margin-top: 5mm; font-size: 8.2mm; font-weight: 600; letter-spacing: -.03em; }
+.o1 .bloque { margin-top: 9mm; display: grid; grid-template-columns: 1fr 58mm; gap: 8mm; align-items: start; }
+.o1 h2 { font-size: 7.6mm; margin: 2.5mm 0 4mm; }
+.o1 .alcanza { margin-top: 3mm; font-size: 4.4mm; font-weight: 600; text-align: center; }
+.o1 .nota { margin-top: 5mm; font-size: 4.2mm; line-height: 1.4; }
+.o1 .corte { top: 203mm; }
+.o1 .tarjeta { position: absolute; left: 20mm; right: 20mm; top: 210mm; bottom: 12mm; display: grid; grid-template-columns: 1fr 38mm; gap: 7mm; align-items: center; }
+.o1 .tarjeta .marca { font-size: 4.6mm; }
+.o1 .tarjeta h3 { font-size: 6mm; margin: 2mm 0 1mm; }
+.tazas { display: flex; gap: 2.4mm; margin: 2.5mm 0 3.5mm; align-items: center; }
+.tazas span { width: 10mm; height: 10mm; border: .45mm solid var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3.9mm; font-weight: 700; }
+.tazas span.q { width: auto; border: 0; border-radius: 99mm; padding: 0 3.5mm; background: var(--oliva); color: #fff; }
+.o1 .mini .qr { padding: 2.6mm; border-width: .45mm; }
+.o1 .mini p { margin-top: 1.5mm; font-size: 3.9mm; font-weight: 600; text-align: center; line-height: 1.25; }
+
+/* ===== 2 · Nota personal ===== */
+.o2 .hola { margin-top: 20mm; font-size: 15mm; font-weight: 600; letter-spacing: -.04em; display: flex; align-items: baseline; gap: 4mm; }
+.o2 .hola .linea-mano { width: 110mm; height: 12mm; }
+.o2 .corte { top: 214mm; }
+.o2 .tarjeta { position: absolute; left: 20mm; right: 20mm; top: 222mm; bottom: 14mm; display: grid; grid-template-columns: 1fr 34mm; gap: 7mm; align-items: center; }
+.o2 .tarjeta .marca { font-size: 4.6mm; } .o2 .tarjeta h3 { font-size: 6mm; margin: 2mm 0 2.5mm; }
+.o2 .tarjeta .mini .qr { padding: 2.4mm; border-width: .45mm; } .o2 .tarjeta .mini p { margin-top: 1.5mm; font-size: 3.9mm; font-weight: 600; text-align: center; line-height: 1.25; }
+.o2 .cuerpo { margin-top: 10mm; font-size: 5.6mm; line-height: 1.5; max-width: 150mm; }
+.o2 .firma { margin-top: 10mm; font-size: 4.4mm; color: var(--ink-2); display: flex; align-items: baseline; gap: 3mm; }
+.o2 .firma .linea-mano { width: 70mm; height: 8mm; }
+.o2 .caja { margin-top: 12mm; border: .6mm solid var(--ink); border-radius: 7mm; padding: 8mm; display: grid; grid-template-columns: 52mm 1fr; gap: 9mm; align-items: center; }
+.o2 .caja .qr { border: .35mm solid var(--linea); padding: 3.5mm; }
+.o2 .caja h2 { font-size: 8.6mm; }
+.o2 .caja p { margin: 3mm 0 5mm; font-size: 4.6mm; line-height: 1.45; color: var(--ink-2); }
+
+/* ===== 3 · Tu primer espresso ===== */
+.o3 h1 { margin-top: 5mm; font-size: 15mm; letter-spacing: -.045em; }
+.o3 .bajada { margin-top: 5mm; font-size: 5.2mm; line-height: 1.45; max-width: 150mm; }
+.o3 .receta { margin-top: 8mm; display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.o3 .receta div { border: .35mm solid var(--linea); border-radius: 5mm; padding: 5mm; min-height: 30mm; }
+.o3 .receta i { font-style: normal; font-size: 9mm; font-weight: 700; color: var(--oliva); letter-spacing: -.04em; display: block; line-height: 1; }
+.o3 .receta p { margin-top: 2.5mm; font-size: 4.6mm; line-height: 1.38; }
+.o3 .caja { margin-top: 9mm; display: grid; grid-template-columns: 1fr 46mm; gap: 9mm; align-items: center; border-top: .6mm solid var(--ink); padding-top: 8mm; }
+.o3 .caja h2 { font-size: 8.4mm; }
+.o3 .caja p { margin: 3mm 0 5mm; font-size: 4.6mm; line-height: 1.45; color: var(--ink-2); }
+
+/* ===== 4 · Qué escribir ===== */
+.o4 .gigante { margin-top: 16mm; font-size: 30mm; font-weight: 700; letter-spacing: -.06em; line-height: .9; }
+.o4 .sub { margin-top: 4mm; font-size: 7mm; font-weight: 600; letter-spacing: -.03em; }
+.o4 .bloque { margin-top: 16mm; display: grid; grid-template-columns: 64mm 1fr; gap: 10mm; align-items: start; }
+.o4 h2 { font-size: 8.6mm; margin: 2mm 0 5mm; }
+.o4 .chips { display: grid; gap: 3.4mm; }
+.o4 .chips span { display: block; border: .35mm solid var(--linea); border-radius: 99mm; padding: 3.2mm 5mm; font-size: 4.6mm; font-weight: 500; }
+.o4 .chips span::before { content: '·'; color: var(--oliva); font-weight: 800; margin-right: 2.5mm; }
+.o4 .verdad { margin-top: 5mm; font-size: 4.4mm; line-height: 1.45; color: var(--ink-2); }
+.o4 .ruta { margin-top: 16mm; font-size: 4.8mm; }
+.o4 .nota { margin-top: 6mm; font-size: 4.2mm; line-height: 1.45; color: var(--ink-2); }
+
+/* ===== 5 · El lujo de todos los días ===== */
+.o5 > .ep { margin-top: 24mm; }
+.o5 h1 { margin-top: 6mm; font-size: 16.5mm; letter-spacing: -.05em; line-height: 1.0; }
+.o5 .cuerpo { margin-top: 12mm; font-size: 5.8mm; line-height: 1.5; max-width: 152mm; color: var(--ink-2); }
+.o5 .cuerpo b { color: var(--ink); font-weight: 600; }
+.o5 .caja { margin-top: 16mm; border: .6mm solid var(--ink); border-radius: 7mm; padding: 9mm; display: grid; grid-template-columns: 1fr 56mm; gap: 9mm; align-items: center; }
+.o5 .caja h2 { font-size: 8.4mm; }
+.o5 .caja p { margin: 3mm 0 5mm; font-size: 4.6mm; line-height: 1.45; color: var(--ink-2); }
+.o5 .caja .qr { border: .35mm solid var(--linea); padding: 3.5mm; }
+</style>
+</head>
+<body>
+
+<!-- 1 · EL QUINTO CAFÉ -->
+<section class="hoja o1" id="o1">
+  <div class="arriba"><div class="marca"><i></i> Café en tu Casa</div><div class="sello"><div>C<i></i></div></div></div>
+  <p class="gigante">Gracias.</p>
+  <p class="sub">Que tu Dedica te dé <em>muchos espressos.</em></p>
+  <div class="bloque">
+    <div>
+      <p class="ep">En tu quinto café</p>
+      <h2>¿Nos contás qué te pareció?</h2>
+      <div class="pasos">
+        <div class="paso"><i>1</i><div><b>Escaneá el código</b><span>Te lleva a Mis compras.</span></div></div>
+        <div class="paso"><i>2</i><div><b>Elegí tu Dedica</b><span>Tocá «Opinar».</span></div></div>
+        <div class="paso"><i>3</i><div><b>Contanos cómo te fue</b><span>Con una o dos líneas alcanza.</span></div></div>
+      </div>
+    </div>
+    <div><div class="qr"><img src="qr-opinar-dedica.svg" alt=""><small>Escaneá acá</small></div></div>
+  </div>
+  <p class="nota"><b>¿Fue un regalo?</b> Mostrale esta carta a quien la compró: la opinión se deja desde su cuenta.</p>
+  <div class="corte"><span>✂ Recortá y dejala junto a la Dedica</span></div>
+  <div class="tarjeta">
+    <div>
+      <div class="marca"><i></i> Café en tu Casa</div>
+      <h3>Tus primeros cinco cafés</h3>
+      <div class="tazas"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span class="q">Opiná</span></div>
+      <ol class="tips">
+        <li><b>1</b>Dejá el portafiltro puesto mientras calienta.</li>
+        <li><b>2</b>Llená el filtro al ras y compactá parejo.</li>
+        <li><b>3</b>Después de espumar, limpiá el vaporizador.</li>
+      </ol>
+    </div>
+    <div class="mini"><div class="qr"><img src="qr-opinar-dedica.svg" alt=""></div><p>¿Ya vas por el quinto?</p></div>
+  </div>
+</section>
+
+<!-- 2 · NOTA PERSONAL -->
+<section class="hoja o2" id="o2">
+  <div class="arriba"><div class="marca"><i></i> Café en tu Casa</div><div class="sello"><div>C<i></i></div></div></div>
+  <p class="hola">Hola <span class="linea-mano"></span>,</p>
+  <p class="cuerpo">Gracias por elegirnos. Esperamos que tu Dedica te acompañe muchas mañanas, con el café <em>como te gusta.</em></p>
+  <p class="firma">Te la preparó <span class="linea-mano"></span></p>
+  <div class="caja">
+    <div class="qr"><img src="qr-opinar-dedica.svg" alt=""><small>Escaneá acá</small></div>
+    <div>
+      <p class="ep">Cuando ya la hayas usado unos días</p>
+      <h2>¿Nos contás cómo te fue?</h2>
+      <p>Tu opinión en Mercado Libre ayuda a que más gente nos encuentre.</p>
+      <div class="ruta"><span>Mis compras</span><b>→</b><span>Opinar</span></div>
+    </div>
+  </div>
+  <div class="corte"><span>✂ Recortá y dejala junto a la Dedica</span></div>
+  <div class="tarjeta">
+    <div>
+      <div class="marca"><i></i> Café en tu Casa</div>
+      <h3>Tu Dedica, como el primer día</h3>
+      <ol class="tips">
+        <li><b>1</b>Dejá el portafiltro puesto mientras calienta.</li>
+        <li><b>2</b>Llená el filtro al ras y compactá parejo.</li>
+        <li><b>3</b>Después de espumar, limpiá el vaporizador con un trapo húmedo.</li>
+      </ol>
+    </div>
+    <div class="mini"><div class="qr"><img src="qr-opinar-dedica.svg" alt=""></div><p>Opiná acá</p></div>
+  </div>
+</section>
+
+<!-- 3 · TU PRIMER ESPRESSO -->
+<section class="hoja o3" id="o3">
+  <div class="arriba"><div class="marca"><i></i> Café en tu Casa</div><div class="sello"><div>C<i></i></div></div></div>
+  <p class="ep" style="margin-top:10mm">Gracias por tu compra</p>
+  <h1>Tu primer espresso,<br><em>en cuatro pasos.</em></h1>
+  <p class="bajada gris">Sin vueltas: así sale rico desde el primer día.</p>
+  <div class="receta">
+    <div><i>1</i><p>Encendela y esperá a que las luces queden fijas.</p></div>
+    <div><i>2</i><p>Pasá agua caliente por la taza para entibiarla.</p></div>
+    <div><i>3</i><p>Café molido para espresso: llená el filtro al ras y compactá parejo.</p></div>
+    <div><i>4</i><p>Calzá el portafiltro y tocá el botón de una o dos tazas.</p></div>
+  </div>
+  <div class="caja">
+    <div>
+      <p class="ep">Después de unos días</p>
+      <h2>¿Cómo te salió? Contanos.</h2>
+      <p>Escaneá el código, elegí tu Dedica y tocá «Opinar». Con una o dos líneas alcanza.</p>
+    </div>
+    <div class="qr"><img src="qr-opinar-dedica.svg" alt=""><small>Escaneá acá</small></div>
+  </div>
+  <div class="pie"><p>Más recetas en <b>@cafentucasa</b></p><p class="der">Con cariño,<br><b>el equipo de Café en tu Casa</b></p></div>
+</section>
+
+<!-- 4 · QUÉ ESCRIBIR -->
+<section class="hoja o4" id="o4">
+  <div class="arriba"><div class="marca"><i></i> Café en tu Casa</div><div class="sello"><div>C<i></i></div></div></div>
+  <p class="gigante">Gracias.</p>
+  <p class="sub">Que la disfrutes, <em>taza a taza.</em></p>
+  <div class="bloque">
+    <div class="qr"><img src="qr-opinar-dedica.svg" alt=""><small>Escaneá acá · te lleva a Mercado Libre</small></div>
+    <div>
+      <p class="ep">Cuando ya la hayas probado</p>
+      <h2>¿Nos dejás tu opinión?</h2>
+      <p class="gris" style="font-size:4.6mm;margin-bottom:3mm">¿No sabés qué poner? Elegí una:</p>
+      <div class="chips"><span>Cómo sale el espresso</span><span>Si es fácil de usar</span><span>Cómo llegó el envío</span><span>A quién se la recomendarías</span></div>
+      <p class="verdad">Contanos lo que pienses de verdad: todo nos sirve.</p>
+    </div>
+  </div>
+  <div class="ruta"><span>Escaneá</span><b>→</b><span>Elegí tu Dedica</span><b>→</b><span>Opinar</span></div>
+  <p class="nota"><b style="color:var(--ink)">¿Fue un regalo?</b> Mostrale esta carta a quien la compró: la opinión se deja desde su cuenta.</p>
+  <div class="pie"><p>Tips y recetas en <b>@cafentucasa</b></p><p class="der">Con cariño,<br><b>el equipo de Café en tu Casa</b></p></div>
+</section>
+
+<!-- 5 · EL LUJO DE TODOS LOS DÍAS -->
+<section class="hoja o5" id="o5">
+  <div class="arriba"><div class="marca"><i></i> Café en tu Casa</div><div class="sello"><div>C<i></i></div></div></div>
+  <p class="ep">Gracias por tu compra</p>
+  <h1>El lujo de todos los días<br><em>ya está en tu casa.</em></h1>
+  <p class="cuerpo">Elegimos pocas cafeteras: <b>las que de verdad recomendaríamos.</b> Esperamos que tu Dedica te dé muchas mañanas con el café como te gusta.</p>
+  <div class="caja">
+    <div>
+      <p class="ep">Cuando ya la hayas probado</p>
+      <h2>¿Nos contás qué te pareció?</h2>
+      <p>Tu opinión en Mercado Libre ayuda a que más gente nos encuentre.</p>
+      <div class="ruta"><span>Mis compras</span><b>→</b><span>Opinar</span></div>
+    </div>
+    <div class="qr"><img src="qr-opinar-dedica.svg" alt=""><small>Escaneá acá</small></div>
+  </div>
+  <div class="pie"><p>Tips y recetas en <b>@cafentucasa</b></p><p class="der">Con cariño,<br><b>el equipo de Café en tu Casa</b></p></div>
+</section>
+
+</body>
+</html>
